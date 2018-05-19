@@ -6,6 +6,15 @@
 // Declares variables that are universally used in other .scss files.
 
 
+// To reference this outside of the CAE_Home app, use:
+// @import '../../../../../cae_home/static/cae_home/css/sass/_variables';
+//
+// On the off chance that you need additional variables specific to a given app:
+//  * Create a new "_variables" in that app's "css/sass" folder.
+//  * Reference this file from the app-specific variables file.
+//  * From then on, access both by importing the app-specific variables file in
+//    all further app-specific sass files.
+
 //================================================================================//
 //==================================== Colors ====================================//
 //================================================================================//
@@ -14,17 +23,17 @@
 //==== START GreyScale Block ====//
 //===============================//
 
-$color-grey-00: #000000;
-$color-grey-10: #191919;
-$color-grey-20: #333333;
-$color-grey-30: #4c4c4c;
-$color-grey-40: #666666;
-$color-grey-50: #7f7f7f;
-$color-grey-60: #999999;
-$color-grey-70: #b2b2b2;
-$color-grey-80: #cccccc;
-$color-grey-90: #e5e5e5;
-$color-grey-100: #ffffff;
+$color-grey-00: #000000;    // Black
+$color-grey-10: #191919;    //  ^
+$color-grey-20: #333333;    //  |
+$color-grey-30: #4c4c4c;    //  | Darker
+$color-grey-40: #666666;    //  |
+$color-grey-50: #7f7f7f;    //  Scaling by 10% gradients.
+$color-grey-60: #999999;    //  |
+$color-grey-70: #b2b2b2;    //  | Ligher
+$color-grey-80: #cccccc;    //  |
+$color-grey-90: #e5e5e5;    //  v
+$color-grey-100: #ffffff;   // White
 
 //===============================//
 //===== END GreyScale Block =====//
@@ -84,44 +93,38 @@ $wmu-metallic-silver: #8a8d8f;
 //==================================== Themes ====================================//
 //================================================================================//
 
+// Theme is the actual pallet used on the site.
+//
+// Ideally, add variables here (prefixed with "theme") and then reference
+// said variable later on. Allows for changing of the entire site coloring with
+// a single line or two, instead of having to dig through all of the css files.
+
 //================================//
 //==== START Base Theme Block ====//
 //================================//
 
 //== Main Elements ==//
 
-$theme-background-main: $color-grey-30;
-$theme-background-main-accent: $color-grey-40;
-
-$theme-border-main: $color-grey-10;
-$theme-border-main-invert: $color-grey-90;
-
-$theme-text-main: $color-grey-100;
+$theme-header-background: $color-grey-90;
+$theme-border: $color-grey-80;
+$theme-footer-background: $color-grey-90;
+$theme-text: $color-grey-00;
 
 
-//== Extra Nav Elements ==//
+//== Nav Elements ==//
 
-$theme-background-nav: $color-grey-90;
-$theme-background-nav-accent: $color-grey-100;
-
-$theme-text-nav: $color-grey-00;
+$theme-nav-background: $theme-header-background;
+$theme-nav-text: $theme-text;
 
 
 //== Content Areas ==//
 
-$theme-background-content: $color-grey-100;
-$theme-background-content-accent: $color-grey-90;
+$theme-content-background: $color-grey-100;
+$theme-content-text-subtle: $color-grey-50;
 
-$theme-border-content: $color-grey-10;
-$theme-border-content-accent: $color-grey-30;
-$theme-border-content-invert: $color-grey-80;
-
-$theme-text-content: $color-grey-00;
-$theme-text-subtle: $color-grey-50;
-
-//================================//
-//==== START Base Theme Block ====//
-//================================//
+//==============================//
+//==== End Base Theme Block ====//
+//==============================//
 
 
 //================================================================================//
