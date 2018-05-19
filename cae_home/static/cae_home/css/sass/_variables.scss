@@ -14,17 +14,17 @@
 //==== START GreyScale Block ====//
 //===============================//
 
-$color_grey_00: #000000;
-$color_grey_10: #191919;
-$color_grey_20: #333333;
-$color_grey_30: #4C4C4C;
-$color_grey_40: #666666;
-$color_grey_50: #7F7F7F;
-$color_grey_60: #999999;
-$color_grey_70: #B2B2B2;
-$color_grey_80: #CCCCCC;
-$color_grey_90: #E5E5E5;
-$color_grey_100: #FFFFFF;
+$color-grey-00: #000000;
+$color-grey-10: #191919;
+$color-grey-20: #333333;
+$color-grey-30: #4c4c4c;
+$color-grey-40: #666666;
+$color-grey-50: #7f7f7f;
+$color-grey-60: #999999;
+$color-grey-70: #b2b2b2;
+$color-grey-80: #cccccc;
+$color-grey-90: #e5e5e5;
+$color-grey-100: #ffffff;
 
 //===============================//
 //===== END GreyScale Block =====//
@@ -35,11 +35,50 @@ $color_grey_100: #FFFFFF;
 //==== START "WMU Approved" Colors Block ====//
 //===========================================//
 
-// To be added.
+// WMU's official guidelines say these "must be used on all materials to
+// ensure proper color combinations". Realistically, that's overkill.
+
+// Provided as reference anyway, in case such information is ever helpful.
+// At the end of the day, just be consistent and try to make it look good.
+
+// "Primary" WMU Colors.
+$wmu-gold: #ffae00;
+$wmu-brown: #442416;
+
+// "Secondary" WMU Colors.
+$wmu-chocolate: #7c5826;
+$wmu-khaki: #c0aa71;
+$wmu-sienna: #a9431e;
+$wmu-tangerine: #d87c21;
+$wmu-light-tan: #ede1aa;
+
+// "Accent" WMU Colors.
+$wmu-teal: #0b645d;
+$wmu-red: #b91233;
+$wmu-plum: #865f7f;
+$wmu-sky-blue: #0091c1;
+$wmu-green-apple: #7ab700;
+$wmu-black: #000000;
+$wmu-dark-grey: #816f5f;
+$wmu-warm-grey: #bdb1a7;
+$wmu-metallic-gold: #8b6f4e;
+$wmu-metallic-brown: #594839;
+$wmu-metallic-silver: #8a8d8f;
 
 //=========================================//
 //==== END "WMU Approved" Colors Block ====//
 //=========================================//
+
+
+//==================================//
+//==== START Other Colors Block ====//
+//==================================//
+
+
+
+//================================//
+//==== END Other Colors Block ====//
+//================================//
 
 //================================================================================//
 //==================================== Themes ====================================//
@@ -51,34 +90,34 @@ $color_grey_100: #FFFFFF;
 
 //== Main Elements ==//
 
-$theme_background_main: $color_grey_30;
-$theme_background_main_accent: $color_grey_40;
+$theme-background-main: $color-grey-30;
+$theme-background-main-accent: $color-grey-40;
 
-$theme_border_main: $color_grey_10;
-$theme_border_main_invert: $color_grey_90;
+$theme-border-main: $color-grey-10;
+$theme-border-main-invert: $color-grey-90;
 
-$theme_text_main: $color_grey_100;
+$theme-text-main: $color-grey-100;
 
 
 //== Extra Nav Elements ==//
 
-$theme_background_nav: $color_grey_90;
-$theme_background_nav_accent: $color_grey_100;
+$theme-background-nav: $color-grey-90;
+$theme-background-nav-accent: $color-grey-100;
 
-$theme_text_nav: $color_grey_00;
+$theme-text-nav: $color-grey-00;
 
 
 //== Content Areas ==//
 
-$theme_background_content: $color_grey_100;
-$theme_background_content_accent: $color_grey_90;
+$theme-background-content: $color-grey-100;
+$theme-background-content-accent: $color-grey-90;
 
-$theme_border_content: $color_grey_10;
-$theme_border_content_accent: $color_grey_30;
-$theme_border_content_invert: $color_grey_80;
+$theme-border-content: $color-grey-10;
+$theme-border-content-accent: $color-grey-30;
+$theme-border-content-invert: $color-grey-80;
 
-$theme_text_content: $color_grey_00;
-$theme_text_subtle: $color_grey_50;
+$theme-text-content: $color-grey-00;
+$theme-text-subtle: $color-grey-50;
 
 //================================//
 //==== START Base Theme Block ====//
@@ -90,24 +129,24 @@ $theme_text_subtle: $color_grey_50;
 //================================================================================//
 
 // Phone
-$screen_phone_small: 475px;
-$screen_phone_mid: 550px;
-$screen_phone_max: 699px;
+$screen-phone-small: 475px;
+$screen-phone-mid: 550px;
+$screen-phone-max: 699px;
 
 // Tablet
-$screen_tablet_min: 700px;
-$screen_tablet_mid: 869px;
-$screen_tablet_max: 1024px;
+$screen-tablet-min: 700px;
+$screen-tablet-mid: 869px;
+$screen-tablet-max: 1024px;
 
 // Laptop
-$screen_laptop_min: 1025px;
-$screen_laptop_mid: 1350px;
-$screen_laptop_max: 1600px;
+$screen-laptop-min: 1025px;
+$screen-laptop-mid: 1350px;
+$screen-laptop-max: 1600px;
 
 // Desktop
-$screen_desktop_min: 1601px;
-$screen_desktop_mid: 2000px;
-$screen_desktop_max: 3839px;
+$screen-desktop-min: 1601px;
+$screen-desktop-mid: 2000px;
+$screen-desktop-max: 3839px;
 
 // 4k
-$screen_4k_min: 3840px;
+$screen-4k-min: 3840px;

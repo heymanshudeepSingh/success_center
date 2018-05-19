@@ -78,35 +78,35 @@ div, span, p, img, a,
 {
     font-size: 4.5vw;
 
-    @media only screen and (min-width: 400px) and (max-width: $screen_phone_small) {
+    @media only screen and (min-width: 400px) and (max-width: $screen-phone-small) {
         font-size: 3.8vw;
     }
 
-    @media only screen and (min-width: $screen_phone_small) and (max-width: $screen_phone_mid) {
+    @media only screen and (min-width: $screen-phone-small) and (max-width: $screen-phone-mid) {
         font-size: 3.4vw;
     }
 
-    @media only screen and (min-width: $screen_phone_mid) and (max-width: $screen_phone_max) {
+    @media only screen and (min-width: $screen-phone-mid) and (max-width: $screen-phone-max) {
         font-size: 2.7vw;
     }
 
-    @media only screen and (min-width: $screen_tablet_min) and (max-width: $screen_tablet_max) {
+    @media only screen and (min-width: $screen-tablet-min) and (max-width: $screen-tablet-max) {
         font-size: 2.1vw;
     }
 
-    @media only screen and (min-width: $screen_tablet_mid) and (max-width: $screen_tablet_max) {
+    @media only screen and (min-width: $screen-tablet-mid) and (max-width: $screen-tablet-max) {
         font-size: 1.8vw;
     }
 
-    @media only screen and (min-width: $screen_laptop_min) and (max-width: $screen_laptop_mid) {
+    @media only screen and (min-width: $screen-laptop-min) and (max-width: $screen-laptop-mid) {
         font-size: 1.4vw;
     }
 
-    @media only screen and (min-width: $screen_laptop_mid) and (max-width: $screen_laptop_max) {
+    @media only screen and (min-width: $screen-laptop-mid) and (max-width: $screen-laptop-max) {
         font-size: 1.1vw;
     }
 
-    @media only screen and (min-width: $screen_desktop_min) {
+    @media only screen and (min-width: $screen-desktop-min) {
         font-size: 0.9vw;
     }
 }
