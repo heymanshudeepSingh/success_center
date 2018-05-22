@@ -55,6 +55,10 @@ body {
 
     main {
 
+        .placeholder {
+            min-width: 2vw
+        }
+
         #content-container {
             @include display-flex;
             @include flex-direction(row);
