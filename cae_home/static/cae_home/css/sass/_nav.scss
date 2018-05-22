@@ -27,27 +27,39 @@
 // overflow, overflow-x, overflow-y, clip, clear                                  //
 //================================================================================//
 
-//================================//
-//==== START Header Nav Block ====//
-//================================//
+//========================================//
+//==== START General Header Nav Block ====//
+//========================================//
 
 header {
 
     nav {
         @include display-flex;
         @include flex-direction(row);
-        @include justify-content(space-evenly);
+        @include justify-content(flex-end);
         @include flex(1);
+
+        min-height: 28px;
+
+        // Change alignment on larger screens.
+        @media only screen and (min-width: $screen-tablet-mid) {
+            @include justify-content(space-evenly);
+        }
     }
 
     nav {
 
         // Main-nav properties.
         ul {
-            @include display-flex;
+            display: none;
             @include flex-direction(row);
             @include justify-content(flex-end);
             @include flex(1);
+
+            // Show on larger screens.
+            @media only screen and (min-width: $screen-tablet-mid) {
+                @include display-flex;
+            }
         }
 
         ul > li {
@@ -88,20 +100,106 @@ header {
     }
 }
 
-//===============================//
-//===== END HeaderNav Block =====//
-//===============================//
+//========================================//
+//===== END General Header Nav Block =====//
+//========================================//
 
 
-//===========================//
-//==== START ----- Block ====//
-//===========================//
+//=====================================//
+//==== START Mobile Nav Icon Block ====//
+//=====================================//
+
+.mobile-nav-icon {
+    @include display-flex;
+    @include flex-direction(column);
+    @include justify-content(center);
+
+    width: 32px;
+    margin-right: 2vw;
+    margin-left: 2vw;
+
+    // Hide on larger screens.
+    @media only screen and (min-width: $screen-tablet-mid) {
+        display: none;
+    }
+}
+
+.mobile-nav-icon {
+    hr {
+        width: 100%;
+        margin-top: auto;
+        margin-bottom: auto;
+        padding: 0;
+    }
+}
+
+//=====================================//
+//===== END Mobile Nav Icon Block =====//
+//=====================================//
 
 
+//========================================//
+//==== START Mobile Nav Overlay Block ====//
+//========================================//
 
-//===========================//
-//===== END ----- Block =====//
-//===========================//
+.mobile-nav-overlay {
+    position: absolute;
+
+    @include display-flex;
+    @include flex-direction(column);
+    @include justify-content(center);
+    @include align-items(center);
+
+    min-width: 100vw;
+    min-height: 100vh;
+}
+
+.mobile-nav-overlay {
+
+    nav {
+        @include display-flex;
+        @include flex-direction(column);
+        @include justify-content(center);
+        @include align-items(center);
+
+        width: 75vw;
+        height: 75vh;
+    }
+
+    nav {
+
+        ul {
+            @include display-flex;
+            @include flex-direction(column);
+            @include justify-content(center);
+            @include align-items(center);
+        }
+
+        > ul {
+            width: 90%;
+        }
+
+        li {
+            @include display-flex;
+            @include flex-direction(column);
+            @include justify-content(center);
+            @include align-items(center);
+
+            width: 100%;
+        }
+
+        a {
+            padding-top: 1vh;
+            padding-bottom: 1vh;
+
+            width: 100%;
+        }
+    }
+}
+
+//========================================//
+//===== END Mobile Nav Overlay Block =====//
+//========================================//
 
 
 //================================================================================//
@@ -122,13 +220,14 @@ header {
 //==== START Header Nav Block ====//
 //================================//
 
-header {
+header, .mobile-nav-overlay {
 
     nav {
 
         a {
             font-weight: bold;
             color: $theme-nav-text;
+            text-align: center;
             text-decoration: none;
         }
     }
@@ -139,15 +238,31 @@ header {
 //===============================//
 
 
-//===========================//
-//==== START ----- Block ====//
-//===========================//
+//========================================//
+//==== START Mobile Nav Overlay Block ====//
+//========================================//
 
+.mobile-nav-overlay {
 
+    nav {
 
-//===========================//
-//===== END ----- Block =====//
-//===========================//
+        a {
+            font-size: 150%;
+            font-weight: bold;
+            color: $theme-nav-text;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        ul > li > ul a {
+            font-size: 125%;
+        }
+    }
+}
+
+//========================================//
+//===== END Mobile Nav Overlay Block =====//
+//========================================//
 
 
 //================================================================================//
@@ -199,15 +314,39 @@ header {
 //===============================//
 
 
-//===========================//
-//==== START ----- Block ====//
-//===========================//
+//========================================//
+//==== START Mobile Nav Overlay Block ====//
+//========================================//
 
+.mobile-nav-overlay {
+    background-color: $theme-nav-overlay-background;
+}
 
+.mobile-nav-overlay {
 
-//===========================//
-//===== END ----- Block =====//
-//===========================//
+    nav {
+        background-color: $theme-nav-overlay-foreground;
+    }
+
+    nav {
+
+        ul {
+            list-style-type: none;
+        }
+
+        > ul > li {
+            border-bottom: 1px solid $theme-nav-overlay-background;
+        }
+
+        > ul > li:first-child {
+            border-top: 1px solid $theme-nav-overlay-background;
+        }
+    }
+}
+
+//========================================//
+//===== END Mobile Nav Overlay Block =====//
+//========================================//
 
 
 //================================================================================//
@@ -229,12 +368,14 @@ header {
 // speak                                                                          //
 //================================================================================//
 
-//===========================//
-//==== START ----- Block ====//
-//===========================//
+//=====================================//
+//==== START Mobile Nav Icon Block ====//
+//=====================================//
 
+.mobile-nav-icon {
+    cursor: pointer;
+}
 
-
-//===========================//
-//===== END ----- Block =====//
-//===========================//
+//=====================================//
+//===== END Mobile Nav Icon Block =====//
+//=====================================//

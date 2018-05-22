@@ -115,7 +115,8 @@ $theme-text: $color-grey-00;
 
 $theme-nav-background: $theme-header-background;
 $theme-nav-text: $theme-text;
-
+$theme-nav-overlay-background: rgba(204, 204, 204, 0.8); // grey-80 with alpha
+$theme-nav-overlay-foreground: rgba(255, 255, 255, 0.9); // grey-100 with alpha
 
 //== Content Areas ==//
 
