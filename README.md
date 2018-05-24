@@ -44,3 +44,42 @@ Intended to be as general as possible.
     * The user model is split into two parts:
         * **User** - Contains fields relevant to authentication.
         * **Profile** - A one-to-one (User-correlated) model, which contains all other non-auth values.
+
+
+## Deployment and Hosting
+
+To deploy, you will likely want to do the following on your host/server:
+
+### Using MySQL
+
+* Install required packages on machine:
+    * **sudo apt-get install python3-dev libmysqlclient-dev mysql-server**
+* Install required packages on desired Python environment:
+    * **pip install mysqlclient**
+* Create the proper database inside MySQL
+    
+### Establishing Production Settings in Settings.py
+
+* Make sure to set the appropriate database info.
+* Update static media urls.
+* Set the proper "Allowed Host" addresses.
+* Set security settings:
+    * TODO: List security settings.
+* You can doublecheck validity of these settings with **manage.py check --deploy**.
+        
+### Setting Up Apache
+
+* Check if Apache is currently installed:
+    * **dpkg --get-selections | grep apache**
+* Install Apache (For Ubuntu Systems):
+    * **sudo apt install apache2 apache2-dev libapache2-mod-wsgi-py3**
+* Install wsgi packages on desired Python environment:
+    * **pip install mod_wsgi**
+* Set either project owner or group permissions to Apache's:
+    * **sudo chown www-data ./myProjectRootDirectory**
+        * OR
+    * **sudo chown :www-data ./myProjectRootDirectory**
+* Configure Apache settings:
+    * TODO: List apache settings. https://www.digitalocean.com/community/tutorials/how-to-serve-django-applications-with-apache-and-mod_wsgi-on-ubuntu-14-04 is currently good reference.
+* Reload Apache:
+    * **sudo service apache2 reload**
