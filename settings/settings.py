@@ -20,9 +20,6 @@ from settings.reusable_settings import *
 debug_print("===== Base Settings =====")
 
 
-from settings.core_settings import *
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -101,6 +98,11 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+
+# Import "extra" settings.
+# Includes things like logging and local settings.
+from settings.extra_settings import *
 
 
 # Force additional blank line for debug printing.

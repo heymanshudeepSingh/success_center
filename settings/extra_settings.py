@@ -1,6 +1,5 @@
 """
-Core/reusable settings for project.
-Will be imported by multiple files.
+Extra settings for project, including logging and importing of local environment.
 """
 
 # System Imports.
@@ -11,24 +10,13 @@ import logging.config, string
 from settings.reusable_settings import *
 
 
-# Local environment setup.
-local_settings = os.path.join(BASE_DIR, 'settings/local_env/env.py')
-if os.path.exists(local_settings):
-    from settings.local_env.env import *
-    if DEBUG:
-        debug_print('Successfully imported development environment settings.')
-    else:
-        debug_print('Successfully imported production environment settings.')
-else:
-    debug_print('Invalid local env file.')
-    sys.exit(1)
-
-
 # Set up logging directories.
 log_dir = os.path.join(BASE_DIR, 'settings/local_env/logs/')
-if not os.path.exists(log_dir):
-    debug_print('Creating logging folder.')
+try:
     os.makedirs(log_dir)
+    debug_print('Logging folder created.')
+except FileExistsError:
+    debug_print('Logging folder found.')
 
 # Set up logging configuration.
 LOGGING = {
@@ -148,3 +136,18 @@ except:
 
 # Login url.
 LOGIN_REDIRECT_URL = '/'
+
+
+# from settings.local_env.env import *
+
+# Local environment setup.
+try:
+    from settings.local_env.env import *
+    if DEBUG:
+        debug_print('Successfully imported development environment settings.')
+    else:
+        debug_print('Successfully imported production environment settings.')
+except Exception:
+    debug_print('Invalid local env file.')
+    debug_print(sys.exc_info())
+    sys.exit(1)
