@@ -10,9 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
-# System Imports.
-# import os
-
 # User Class Imports.
 from settings.reusable_settings import *
 
@@ -22,15 +19,7 @@ debug_print("===== Base Settings =====")
 
 # Application definition
 
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'cae_home.apps.CaeHomeConfig',
-]
+from settings.allowed_apps import INSTALLED_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

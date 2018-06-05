@@ -10,3 +10,6 @@ DEBUG
 # Do not track local environment settings.
 settings/local_env/*
 .venv/
+
+# Do not track other projects within the apps folder.
+apps/*
