@@ -39,6 +39,18 @@ ALLOWED_CAE_APPS = {
     #         'example_project_app_2': {},
     #     }
     # },
+
+    'CAE_Web': {
+        'url-prefix': 'caeweb',
+        'site': {
+            'index': 'cae_web:index',
+            'name': 'CAE Web',
+        },
+        'related_apps': {
+
+        },
+    },
+
 }
 
 
