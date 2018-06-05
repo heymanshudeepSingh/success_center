@@ -7,5 +7,12 @@
 {% block content %}
   <article id="content">
     <h1>CAE Home Index Page</h1>
+    <ul>
+      {% for site in sub_project_sites %}
+        <li><a href="{% url site.index %}">{{ site.name }}</a></li>
+      {% empty %}
+        <p>No projects yet.</p>
+      {% endfor %}
+    </ul>
   </article>
 {% endblock content %}

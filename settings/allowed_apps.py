@@ -28,23 +28,35 @@ INSTALLED_APPS = [
 # List of allowed apps to automatically install.
 # Formatted as a dictionary of sub-dictionary values.
 ALLOWED_CAE_APPS = {
-    
+    # 'Example_Project': {
+    #     'url-prefix': 'root_url',
+    #     'site': {
+    #         'index': 'example:index',
+    #         'name': 'Example',
+    #     },
+    #     'related_apps': {
+    #         'example_project_app_1': {},
+    #         'example_project_app_2': {},
+    #     }
+    # },
 }
 
 
 # Automatically populated for automatic url generation on home page. Do not edit.
-INSTALLED_CAE_APPS = {}
+INSTALLED_CAE_PROJECTS = {}
 
 # Logic to automatically install a given allowed app, if found.
 # First iterate through list of all project folders within the apps folder.
 debug_print('Automatically Installed Apps:')
-project_folder_list = [x for x in os.listdir(APP_DIR) if os.path.isdir(os.path.join(APP_DIR, x))]
+project_folder_list = [
+    x for x in os.listdir(APP_DIR) if os.path.isdir(os.path.join(APP_DIR, x)) and not x.startswith('__')
+]
 excluded_project_list = []
 for project_name in project_folder_list:
 
     # Check that project is defined through settings.
     if project_name in ALLOWED_CAE_APPS.keys():
-        debug_print('   Included Project{0}'.format(project_name))
+        debug_print('   Included Project {0}'.format(project_name))
 
         # Grab all app folders within given project.
         project_folder = os.path.join(APP_DIR, project_name)
@@ -58,10 +70,18 @@ for project_name in project_folder_list:
         for app_name in app_folder_list:
 
             # Check that app is defined through settings.
-            if app_name in ALLOWED_CAE_APPS[project_name]['related_apps']:
-                debug_print('      Included App {0}'.format(app_name))
-            else:
-                # App not allowed through settings.
+            try:
+                if app_name in ALLOWED_CAE_APPS[project_name]['related_apps']:
+                    app = 'apps.{0}.{1}'.format(project_name, app_name)
+                    INSTALLED_APPS.insert(0, app)
+                    INSTALLED_CAE_PROJECTS[project_name] = ALLOWED_CAE_APPS[project_name]
+                    INSTALLED_CAE_PROJECTS[project_name]['related_apps'][app_name] = app
+                    debug_print('      Included App {0}'.format(app_name))
+                else:
+                    # App not allowed through settings.
+                    excluded_app_list.append(app_name)
+            except KeyError:
+                # No related apps key. All apps automatically excluded.
                 excluded_app_list.append(app_name)
 
         for app_name in excluded_app_list:

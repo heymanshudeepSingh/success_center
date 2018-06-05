@@ -19,7 +19,7 @@ debug_print("===== Base Settings =====")
 
 # Application definition
 
-from settings.allowed_apps import INSTALLED_APPS
+from settings.allowed_apps import INSTALLED_APPS, INSTALLED_CAE_PROJECTS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
