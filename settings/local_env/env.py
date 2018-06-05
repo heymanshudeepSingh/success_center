@@ -1,8 +1,8 @@
 """
-Example .env file.
-Copy as "env.py" and edit values.
+Local settings .env file.
 
-Provided values are just an example and may not necessarily work as is.
+Commited values should just be example or "expected default" values.
+Modify per local environment needs.
 """
 
 
@@ -31,7 +31,7 @@ ALLOWED_HOSTS = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'), # In MySQL, this is the name of database to use.
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'), # SQlite: File Location. MySQL: Database Name.
         'USER': '',
         'PASSWORD': '',
         'HOST': '',

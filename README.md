@@ -10,10 +10,10 @@ Intended to be as general as possible.
 
 ### Initial Set Up
 
-* On first time use, you will need to go into **settings/local_env** and copy **env.example.py** to **env.py**.
-    * **Dev Mode** - Can probably leave file as is, if using SQLite. Otherwise, edit env file as desired.
-    * **Production Mode** - Default env definitely isn't production ready. Will require modificaitons for stability
-    and security.
+* On first time use, you may want to go into **settings/local_env** and modify **env.py**.
+    * **Development** - Can probably leave file as is, if using SQLite. Otherwise, edit env file as desired.
+    * **Production** - Default env definitely isn't production ready. Will require modificaitons for stability and
+    security.
 * Make sure to run migrations to set up initial database schema.
 
 ### Front End
