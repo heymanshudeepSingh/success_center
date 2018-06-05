@@ -13,7 +13,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 def debug_print(*args, **kwargs):
     """
-    Method to print debug statements if using runserver command.
+    Method to print debug statements if using essential manage.py commands.
     :param args:
     :param kwargs:
     :return:
@@ -34,3 +34,15 @@ DEBUG_FILE = os.path.join(BASE_DIR, 'DEBUG')
 DEV_MODE = os.path.exists(DEBUG_FILE)
 DEBUG = DEV_MODE
 # debug_print("DEBUG = " + str(DEBUG))
+
+
+class ConsoleColors:
+    """
+    Escape codes to change console output colors when debugging.
+
+    Full explanation can be found at http://ozzmaker.com/add-colour-to-text-in-python/ and
+    https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
+    """
+    bold_red = '\033[1;31;0m'
+    bold_blue = '\033[1;34;0m'
+    reset = '\033[0m'

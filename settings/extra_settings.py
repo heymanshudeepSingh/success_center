@@ -144,9 +144,11 @@ LOGIN_REDIRECT_URL = '/'
 try:
     from settings.local_env.env import *
     if DEBUG:
-        debug_print('Successfully imported development environment settings.')
+        debug_print('Successfully imported {0}development{1} environment settings.'
+                    .format(ConsoleColors.bold_blue, ConsoleColors.reset))
     else:
-        debug_print('Successfully imported production environment settings.')
+        debug_print('Successfully imported {0}production{1} environment settings.'
+                    .format(ConsoleColors.bold_blue, ConsoleColors.reset))
 except Exception:
     debug_print('Invalid local env file.')
     debug_print(sys.exc_info())

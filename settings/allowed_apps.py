@@ -85,7 +85,7 @@ for project_name in project_folder_list:
                 excluded_app_list.append(app_name)
 
         for app_name in excluded_app_list:
-            debug_print('      Excluded App {0}'.format(app_name))
+            debug_print('{0}      Excluded App {1}{2}'.format(ConsoleColors.bold_red, app_name, ConsoleColors.reset))
 
     else:
         # Project folder not allowed through settings.
@@ -93,7 +93,7 @@ for project_name in project_folder_list:
 
 
 for project_name in excluded_project_list:
-    debug_print('   Excluded Project {0}'.format(project_name))
+    debug_print('{0}   Excluded Project {1}{2}'.format(ConsoleColors.bold_red, project_name, ConsoleColors.reset))
 
 
 debug_print('')
