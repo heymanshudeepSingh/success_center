@@ -23,5 +23,3 @@ for project, project_settings in settings.INSTALLED_CAE_PROJECTS.items():
         urlpatterns.append(
             url(r'^{0}/'.format(url_prefix), include('{0}.urls'.format(app_name))),
         )
-
-print('Urls: {0}'.format(urlpatterns))
