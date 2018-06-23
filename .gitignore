@@ -11,3 +11,9 @@ settings/local_env/*
 
 # Do not track other projects within the apps folder.
 apps/*
+
+# Do not track python cache files
+*.pyc
+
+# Do not track vscode files
+.vscode/
