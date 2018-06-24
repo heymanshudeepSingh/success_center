@@ -8,12 +8,10 @@ DEBUG
 # Do not track local environment settings.
 settings/local_env/*
 .venv/
+.vscode/
 
 # Do not track other projects within the apps folder.
 apps/*
 
 # Do not track python cache files
 *.pyc
-
-# Do not track vscode files
-.vscode/

@@ -1,8 +1,9 @@
 """
-Local settings .env file.
+Local settings .env example file.
+
+Move to 'env.py' and movidfy to provide local overrides.
 
 Commited values should just be example or "expected default" values.
-Modify per local environment needs.
 """
 
 
