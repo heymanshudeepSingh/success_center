@@ -2,19 +2,32 @@
 
 ## Description
 
-A group of Django Apps to function as the "core" for future CAE Center projects.
+A Django "workspace" to function as the core for future CAE Center projects.
 
 Intended to be as general as possible.
 
-## Usage Notes
-
-### Initial Set Up
+## Initial Set Up
 
 * On first time use, you may want to go into **settings/local_env** and modify **env.py**.
     * **Development** - Can probably leave file as is, if using SQLite. Otherwise, edit env file as desired.
     * **Production** - Default env definitely isn't production ready. Will require modificaitons for stability and
     security.
 * Make sure to run migrations to set up initial database schema.
+* If developing on a local machine, create a new file called "DEBUG" in the project's root folder. Otherwise, project
+will yell about "Allowed Hosts".
+
+## Adding a New Project/App
+
+This project essentially just acts as a core/workspace to house all other CAE Center Django projects.
+
+To make usage easier, a system has been implemented to automatically import recognized sub-projects and apps. To add a
+new one:
+* Open up **settings/allowed_apps.py**.
+* Scroll down to **ALLOWED_CAE_APPS** and follow the example provided.
+* Once a new sub-project or app is added, it will automatically be imported from then on out.
+    * Note: Settings will only search for sub-projects and apps inside the **apps** folder.
+
+## Development Notes
 
 ### Front End
 
