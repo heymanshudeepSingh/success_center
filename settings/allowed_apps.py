@@ -40,14 +40,23 @@ ALLOWED_CAE_APPS = {
     #     }
     # },
 
+    'CAE_Home': {
+        'url-prefix': '',
+        'site': {
+            'index': 'cae_home:index',
+            'name': 'CAE Home',
+        },
+        'related_apps': {},
+    },
     'CAE_Web': {
         'url-prefix': 'caeweb',
         'site': {
-            'index': 'cae_web:index',
+            'index': 'cae_web_core:index',
             'name': 'CAE Web',
         },
         'related_apps': {
-
+            'cae_web_core': {},
+            'cae_web_audio_visual': {},
         },
     },
 
