@@ -16,6 +16,18 @@ class ProfileInline(admin.StackedInline):
 class UserAdmin(BaseUserAdmin):
     inlines = (ProfileInline, )
 
+    # Fields to display in admin list view.
+    BaseUserAdmin.list_display = ('username', 'first_name', 'last_name', 'user_type')
+
+    def user_type(self, obj):
+        """
+        Return list of user-associated group(s).
+        """
+        groups = []
+        for group in obj.groups.all():
+            groups.append(group.name)
+        return ', '.join(groups)
+
 
 class ProfileAdmin(admin.ModelAdmin):
     form = forms.ProfileAdminForm
@@ -99,11 +111,6 @@ class PhoneNumberAdmin(admin.ModelAdmin):
     search_fields = [
         'phone_number',
     ]
-
-    # Fields to filter by in admin list view.
-    list_filter = (
-
-    )
 
     # Read only fields for admin detail view.
     readonly_fields = (
