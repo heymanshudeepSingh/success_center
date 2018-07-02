@@ -19,6 +19,14 @@ class UserAdmin(BaseUserAdmin):
     # Fields to display in admin list view.
     BaseUserAdmin.list_display = ('username', 'first_name', 'last_name', 'user_type')
 
+    # Remove individual permission list from admin detail view. Should only ever use groups.
+    old_list = BaseUserAdmin.fieldsets[2][1]['fields']
+    new_list = ()
+    for item in old_list:
+        if item is not 'user_permissions':
+            new_list += (item,)
+    BaseUserAdmin.fieldsets[2][1]['fields'] = new_list
+
     def user_type(self, obj):
         """
         Return list of user-associated group(s).
