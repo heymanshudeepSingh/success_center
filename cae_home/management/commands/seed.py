@@ -13,12 +13,30 @@ from cae_home import models
 class Command(BaseCommand):
     help = 'Seed database models with randomized data.'
 
+    def add_arguments(self, parser):
+        # Optional arguments.
+        parser.add_argument(
+            'model_count',
+            type=int,
+            nargs='?',
+            default=100,
+            help='Number of randomized models to create. Defaults to 100. Cannot exceed 10,000.',
+        )
+
     def handle(self, *args, **kwargs):
         print('Seed command has been called.')
+
+        model_count = kwargs['model_count']
+        if model_count < 1:
+            model_count = 100
+        elif model_count > 10000:
+            model_count = 100
+        print('Initializing with {0} randomized models.'.format(model_count))
         self.create_groups()
         self.create_users()
-        self.create_addresses()
-        self.create_phone_numbers()
+        self.create_addresses(model_count)
+        self.create_phone_numbers(model_count)
+        print('Seeding complete.')
 
     def create_groups(self):
         """
@@ -79,13 +97,13 @@ class Command(BaseCommand):
         models.User.objects.create_superuser('jbn6294', '', 'temppass2')
         print('Populated user models.')
 
-    def create_addresses(self):
+    def create_addresses(self, model_count):
         """
         Creates address models.
         """
         faker_factory = Faker()
 
-        for index in range(100):
+        for index in range(model_count):
             street = faker_factory.building_number() + ' ' + faker_factory.street_address()
             city = faker_factory.city()
             state = faker_factory.state()
@@ -99,14 +117,14 @@ class Command(BaseCommand):
 
         print('Populated address models.')
 
-    def create_phone_numbers(self):
+    def create_phone_numbers(self, model_count):
         """
         Creates phone number models.
         """
         # Generate random data.
         faker_factory = Faker()
 
-        for i in range(100):
+        for i in range(model_count):
             phone_number = faker_factory.msisdn()
             models.PhoneNumber.objects.create(phone_number=phone_number)
 
