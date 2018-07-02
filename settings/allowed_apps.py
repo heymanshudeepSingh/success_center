@@ -27,7 +27,7 @@ INSTALLED_APPS = [
 
 # List of allowed apps to automatically install.
 # Formatted as a dictionary of sub-dictionary values.
-ALLOWED_CAE_APPS = {
+ALLOWED_CAE_PROJECTS = {
     # 'Example_Project': {
     #     'url-prefix': 'root_url',
     #     'site': {
@@ -40,14 +40,6 @@ ALLOWED_CAE_APPS = {
     #     }
     # },
 
-    'CAE_Home': {
-        'url-prefix': '',
-        'site': {
-            'index': 'cae_home:index',
-            'name': 'CAE Home',
-        },
-        'related_apps': {},
-    },
     'CAE_Web': {
         'url-prefix': 'caeweb',
         'site': {
@@ -76,7 +68,7 @@ excluded_project_list = []
 for project_name in project_folder_list:
 
     # Check that project is defined through settings.
-    if project_name in ALLOWED_CAE_APPS.keys():
+    if project_name in ALLOWED_CAE_PROJECTS.keys():
         debug_print('   Included Project {0}'.format(project_name))
 
         # Grab all app folders within given project.
@@ -92,10 +84,10 @@ for project_name in project_folder_list:
 
             # Check that app is defined through settings.
             try:
-                if app_name in ALLOWED_CAE_APPS[project_name]['related_apps']:
+                if app_name in ALLOWED_CAE_PROJECTS[project_name]['related_apps']:
                     app = 'apps.{0}.{1}'.format(project_name, app_name)
                     INSTALLED_APPS.insert(0, app)
-                    INSTALLED_CAE_PROJECTS[project_name] = ALLOWED_CAE_APPS[project_name]
+                    INSTALLED_CAE_PROJECTS[project_name] = ALLOWED_CAE_PROJECTS[project_name]
                     INSTALLED_CAE_PROJECTS[project_name]['related_apps'][app_name] = app
                     debug_print('      Included App {0}'.format(app_name))
                 else:
