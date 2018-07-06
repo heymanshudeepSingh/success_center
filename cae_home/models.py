@@ -3,6 +3,7 @@ Models for CAE_Home App.
 
 Should really only include core user models which universally apply to all projects.
 """
+import pytz
 
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
@@ -33,6 +34,9 @@ class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     address = models.ForeignKey('Address', on_delete=models.CASCADE, blank=True, null=True)
     phone_number = models.ForeignKey('PhoneNumber', on_delete=models.CASCADE, blank=True, null=True)
+    user_timezone = models.CharField(
+        choices=[(x, x) for x in pytz.common_timezones], default="America/Detroit",
+        max_length=255)
 
     # Self-setting/Non-user-editable fields.
     date_created = models.DateTimeField(auto_now_add=True)

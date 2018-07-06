@@ -27,6 +27,7 @@ INSTALLED_APPS = [
 
 # List of allowed apps to automatically install.
 # Formatted as a dictionary of sub-dictionary values.
+# If a third party app is already installed, it will safely be ignored.
 ALLOWED_CAE_PROJECTS = {
     # 'Example_Project': {
     #     'url-prefix': 'root_url',
@@ -37,7 +38,10 @@ ALLOWED_CAE_PROJECTS = {
     #     'related_apps': {
     #         'example_project_app_1': {},
     #         'example_project_app_2': {},
-    #     }
+    #     },
+    #     'third_party_apps': [
+    #         'example-third-party',
+    #     ],
     # },
 
     'CAE_Web': {
@@ -50,6 +54,9 @@ ALLOWED_CAE_PROJECTS = {
             'cae_web_core': {},
             'cae_web_audio_visual': {},
         },
+        'third_party_apps': [
+            'schedule', # django-scheduler
+        ],
     },
 
 }
@@ -99,6 +106,14 @@ for project_name in project_folder_list:
 
         for app_name in excluded_app_list:
             debug_print('{0}      Excluded App {1}{2}'.format(ConsoleColors.bold_red, app_name, ConsoleColors.reset))
+
+        # Add any third party apps
+        for third_party_app in ALLOWED_CAE_PROJECTS[project_name].get('third_party_apps', []):
+            if third_party_app in INSTALLED_APPS:
+                debug_print('      Ignoring Third Party App {0} because already installed.'.format(third_party_app))
+                continue
+            INSTALLED_APPS.insert(0, third_party_app)
+            debug_print('      Included Third Party App {0}'.format(third_party_app))
 
     else:
         # Project folder not allowed through settings.

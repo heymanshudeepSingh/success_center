@@ -31,6 +31,7 @@
       {% block base_scripts %}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       {% endblock base_scripts %}
+      {% block extra_scripts %}{% endblock extra_scripts %}
     </head>
   {% endblock head %}
 
@@ -49,7 +50,7 @@
       {% block base_scripts_body %}
         <script src="{% static 'cae_home/js/mobile_nav.js' %}"></script>
       {% endblock base_scripts_body %}
-      {% block extra_scripts %}{% endblock extra_scripts %}
+      {% block extra_scripts_body %}{% endblock extra_scripts_body %}
     </body>
   {% endblock body %}
 

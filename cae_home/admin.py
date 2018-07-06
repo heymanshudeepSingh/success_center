@@ -63,7 +63,7 @@ class ProfileAdmin(admin.ModelAdmin):
     # Fieldset organization for admin detail view.
     fieldsets = (
         (None, {
-            'fields': ('user', 'address', 'phone_number', )
+            'fields': ('user', 'address', 'phone_number', 'user_timezone')
         }),
         ('Advanced', {
             'classes': ('collapse', ),

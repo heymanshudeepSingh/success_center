@@ -3,6 +3,7 @@
 set -e
 
 # Remove migrations
+rm -f apps/cae_home/migrations/0*.py
 rm -f apps/CAE_Web/cae_web_core/migrations/0*.py
 rm -f apps/CAE_Web/cae_web_autio_visual/migrations/0*.py
 
@@ -20,3 +21,4 @@ python ./manage.py migrate
 
 # Load example data
 python ./manage.py loaddata users
+python ./manage.py loaddata calendars
