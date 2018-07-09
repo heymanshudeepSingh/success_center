@@ -55,7 +55,7 @@ ALLOWED_CAE_PROJECTS = {
             'cae_web_audio_visual': {},
         },
         'third_party_apps': [
-            'schedule', # django-scheduler
+            'schedule',     # django-scheduler
         ],
     },
 
@@ -96,7 +96,7 @@ for project_name in project_folder_list:
                     INSTALLED_APPS.insert(0, app)
                     INSTALLED_CAE_PROJECTS[project_name] = ALLOWED_CAE_PROJECTS[project_name]
                     INSTALLED_CAE_PROJECTS[project_name]['related_apps'][app_name] = app
-                    debug_print('      Included App {0}'.format(app_name))
+                    debug_print('      Included App: {0}'.format(app_name))
                 else:
                     # App not allowed through settings.
                     excluded_app_list.append(app_name)
@@ -105,15 +105,15 @@ for project_name in project_folder_list:
                 excluded_app_list.append(app_name)
 
         for app_name in excluded_app_list:
-            debug_print('{0}      Excluded App {1}{2}'.format(ConsoleColors.bold_red, app_name, ConsoleColors.reset))
+            debug_print('{0}      Excluded App: {1}{2}'.format(ConsoleColors.bold_red, app_name, ConsoleColors.reset))
 
         # Add any third party apps
         for third_party_app in ALLOWED_CAE_PROJECTS[project_name].get('third_party_apps', []):
             if third_party_app in INSTALLED_APPS:
-                debug_print('      Ignoring Third Party App {0} because already installed.'.format(third_party_app))
+                debug_print('      Ignoring Third Party App: {0}  -  Already Installed.'.format(third_party_app))
                 continue
             INSTALLED_APPS.insert(0, third_party_app)
-            debug_print('      Included Third Party App {0}'.format(third_party_app))
+            debug_print('      Included Third Party App: {0}'.format(third_party_app))
 
     else:
         # Project folder not allowed through settings.
@@ -121,7 +121,7 @@ for project_name in project_folder_list:
 
 
 for project_name in excluded_project_list:
-    debug_print('{0}   Excluded Project {1}{2}'.format(ConsoleColors.bold_red, project_name, ConsoleColors.reset))
+    debug_print('{0}   Excluded Project: {1}{2}'.format(ConsoleColors.bold_red, project_name, ConsoleColors.reset))
 
 
 debug_print('')
