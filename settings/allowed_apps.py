@@ -61,6 +61,29 @@ ALLOWED_CAE_PROJECTS = {
         ],
     },
 
+    'CICO': {
+        'url-prefix': 'cico',
+        'site': {
+            'index': '',
+            'name': 'Check In Check Out',
+        },
+        'related_apps': {
+            'cico_core': {},
+        },
+        'third_party_apps': {},
+    },
+
+    'CAEMon_Web': {
+        'url-prefix': 'caemon',
+        'site': {
+            'index': '',
+            'name': 'CAEMon Web',
+        },
+        'related_apps': {
+            'caemon_web_core': {},
+        },
+        'third_party_apps': {},
+    },
 }
 
 
