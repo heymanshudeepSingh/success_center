@@ -14,14 +14,14 @@ debug_print('')
 # Django base apps, any 3rd party add-on apps, and CAE_Home app.
 # All other CAE Apps should be defined under the "Allowed_CAE_Apps" setting.
 INSTALLED_APPS = [
+    'cae_home.apps.CaeHomeConfig',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    'cae_home.apps.CaeHomeConfig',
 ]
 
 
@@ -40,7 +40,7 @@ ALLOWED_CAE_PROJECTS = {
     #         'example_project_app_2': {},
     #     },
     #     'third_party_apps': [
-    #         'example-third-party',
+    #         'example_third_party',
     #     ],
     # },
 
@@ -73,12 +73,13 @@ debug_print('Automatically Installed Apps:')
 project_folder_list = [
     x for x in os.listdir(APP_DIR) if os.path.isdir(os.path.join(APP_DIR, x)) and not x.startswith('__')
 ]
+installed_app_count = 1
 excluded_project_list = []
 for project_name in project_folder_list:
 
     # Check that project is defined through settings.
     if project_name in ALLOWED_CAE_PROJECTS.keys():
-        debug_print('   Included Project {0}'.format(project_name))
+        debug_print('   {0}Included Project{1}: {2}'.format(ConsoleColors.bold_blue, ConsoleColors.reset, project_name))
 
         # Grab all app folders within given project.
         project_folder = os.path.join(APP_DIR, project_name)
@@ -95,10 +96,16 @@ for project_name in project_folder_list:
             try:
                 if app_name in ALLOWED_CAE_PROJECTS[project_name]['related_apps']:
                     app = 'apps.{0}.{1}'.format(project_name, app_name)
-                    INSTALLED_APPS.insert(0, app)
+                    INSTALLED_APPS.insert(1, app)
                     INSTALLED_CAE_PROJECTS[project_name] = ALLOWED_CAE_PROJECTS[project_name]
                     INSTALLED_CAE_PROJECTS[project_name]['related_apps'][app_name] = app
-                    debug_print('      Included App: {0}'.format(app_name))
+                    debug_print('       {0}Included App{1}: {2:<25}   {0}Url{1}: .../{3}/{2}/'.format(
+                        ConsoleColors.bold_blue,
+                        ConsoleColors.reset,
+                        app_name,
+                        INSTALLED_CAE_PROJECTS[project_name]['url-prefix']
+                    ))
+                    installed_app_count += 1
                 else:
                     # App not allowed through settings.
                     excluded_app_list.append(app_name)
@@ -107,15 +114,19 @@ for project_name in project_folder_list:
                 excluded_app_list.append(app_name)
 
         for app_name in excluded_app_list:
-            debug_print('{0}      Excluded App: {1}{2}'.format(ConsoleColors.bold_red, app_name, ConsoleColors.reset))
+            debug_print('       {0}Excluded App{1}: {2}'.format(ConsoleColors.bold_red, ConsoleColors.reset, app_name))
 
-        # Add any third party apps
+        # Add any third party apps.
         for third_party_app in ALLOWED_CAE_PROJECTS[project_name].get('third_party_apps', []):
             if third_party_app in INSTALLED_APPS:
-                debug_print('      Ignoring Third Party App: {0}  -  Already Installed.'.format(third_party_app))
+                debug_print('       Ignoring Third Party App: {0:<14}  Already Installed.'.format(third_party_app))
                 continue
-            INSTALLED_APPS.insert(0, third_party_app)
-            debug_print('      Included Third Party App: {0}'.format(third_party_app))
+            INSTALLED_APPS.insert(installed_app_count, third_party_app)
+            debug_print('       {0}Included Third Party App{1}: {2}'.format(
+                ConsoleColors.bold_blue,
+                ConsoleColors.reset,
+                third_party_app
+            ))
 
     else:
         # Project folder not allowed through settings.
@@ -123,7 +134,7 @@ for project_name in project_folder_list:
 
 
 for project_name in excluded_project_list:
-    debug_print('{0}   Excluded Project: {1}{2}'.format(ConsoleColors.bold_red, project_name, ConsoleColors.reset))
+    debug_print('   {0}Excluded Project{1}: {2}'.format(ConsoleColors.bold_red, ConsoleColors.reset, project_name))
 
 
 debug_print('')
