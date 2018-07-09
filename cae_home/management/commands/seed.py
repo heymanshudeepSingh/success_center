@@ -2,9 +2,11 @@
 Seeder command that initializes user models.
 """
 
+from django.conf import settings
 from django.contrib.auth.models import Group, Permission
 from django.contrib.contenttypes.models import ContentType
-from django.core.management.base import BaseCommand
+from django.core.management import call_command
+from django.core.management.base import BaseCommand, CommandError
 from faker import Faker
 
 from cae_home import models
@@ -14,6 +16,9 @@ class Command(BaseCommand):
     help = 'Seed database models with randomized data.'
 
     def add_arguments(self, parser):
+        """
+        Parser for command.
+        """
         # Optional arguments.
         parser.add_argument(
             'model_count',
@@ -24,19 +29,26 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **kwargs):
-        print('Seed command has been called.')
-
+        """
+        The logic of the command.
+        """
         model_count = kwargs['model_count']
         if model_count < 1:
             model_count = 100
         elif model_count > 10000:
             model_count = 100
-        print('Initializing with {0} randomized models.'.format(model_count))
+        print('Initializing seeder with {0} randomized models.\n'.format(model_count))
+
+        print('CAE_HOME: Seed command has been called.')
         self.create_groups()
         self.create_users()
         self.create_addresses(model_count)
         self.create_phone_numbers(model_count)
-        print('Seeding complete.')
+
+        print('CAE_HOME: Seeding complete. Attempting to call imported apps.')
+        self.call_imported_app_seeders(model_count)
+
+        print('\nSeeding complete.')
 
     def create_groups(self):
         """
@@ -56,11 +68,11 @@ class Command(BaseCommand):
         app_permissions = self.get_app_specific_permissions()
         admin_group.permissions.set(app_permissions)
 
-        # Set attendant permissions. Want only add privileges.
+        # Set attendant permissions. Want only add privileges, minus user account adding.
         attendant_group = Group.objects.get(name='CAE Attendant')
         filtered_permissions = []
         for permission in app_permissions:
-            if 'Can add' in permission.name:
+            if 'Can add' in permission.name and not 'user' in permission.name:
                 filtered_permissions.append(permission)
         attendant_group.permissions.set(filtered_permissions)
 
@@ -72,7 +84,7 @@ class Command(BaseCommand):
         :return: A list of all permission models for current app.
         """
         # First find all content types with the app's name.
-        app_content_types = ContentType.objects.filter(app_label__contains='cae_home')
+        app_content_types = ContentType.objects.filter(app_label__contains='cae')
 
         # Get all id's of found content types.
         app_content_ids = []
@@ -129,3 +141,20 @@ class Command(BaseCommand):
             models.PhoneNumber.objects.create(phone_number=phone_number)
 
         print('Populated phone number models.')
+
+    def call_imported_app_seeders(self, model_count):
+        """
+        Attempts to locate and call seeders from imported apps.
+        On failure to call, simply skips, under the assumption that seeder does not exist.
+
+        Called seeders should be in the format of "<app_name>_seed.py".
+        For example, a "super_awesome_app" would have a seeder name of "super_awesome_app_seed.py".
+        """
+        for project, project_settings in settings.INSTALLED_CAE_PROJECTS.items():
+            for app in project_settings['related_apps']:
+                try:
+                    command = '{0}_seed'.format(app)
+                    call_command(command, model_count)
+                except CommandError:
+                    # Could not find seeder in app. Skipping.
+                    pass
