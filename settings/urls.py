@@ -20,6 +20,10 @@ urlpatterns = [
 for project, project_settings in settings.INSTALLED_CAE_PROJECTS.items():
     url_prefix = project_settings['url-prefix']
     for app, app_name in project_settings['related_apps'].items():
-        urlpatterns.append(
-            url(r'^{0}/'.format(url_prefix), include('{0}.urls'.format(app_name))),
-        )
+        try:
+            urlpatterns.append(
+                url(r'^{0}/'.format(url_prefix), include('{0}.urls'.format(app_name))),
+            )
+        except ImportError:
+            # No valid app urls. Skipping.
+            pass
