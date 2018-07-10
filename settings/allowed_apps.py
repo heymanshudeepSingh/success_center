@@ -30,11 +30,9 @@ INSTALLED_APPS = [
 # If a third party app is already installed, it will safely be ignored.
 ALLOWED_CAE_PROJECTS = {
     # 'Example_Project': {
+    #     'name': 'Example',
+    #     'index': 'example:index',
     #     'url-prefix': 'root_url',
-    #     'site': {
-    #         'index': 'example:index',
-    #         'name': 'Example',
-    #     },
     #     'related_apps': {
     #         'example_project_app_1': {},
     #         'example_project_app_2': {},
@@ -45,11 +43,9 @@ ALLOWED_CAE_PROJECTS = {
     # },
 
     'CAE_Web': {
+        'name': 'CAE Web',
+        'index': 'cae_web_core:index',
         'url-prefix': 'caeweb',
-        'site': {
-            'index': 'cae_web_core:index',
-            'name': 'CAE Web',
-        },
         'related_apps': {
             'cae_web_core': {},
             'cae_web_audio_visual': {},
@@ -62,11 +58,9 @@ ALLOWED_CAE_PROJECTS = {
     },
 
     'CICO': {
+        'name': 'Check In Check Out',
+        'index': '',
         'url-prefix': 'cico',
-        'site': {
-            'index': '',
-            'name': 'Check In Check Out',
-        },
         'related_apps': {
             'cico_core': {},
         },
@@ -74,11 +68,9 @@ ALLOWED_CAE_PROJECTS = {
     },
 
     'CAEMon_Web': {
+        'name': 'CAEMon Web',
+        'index': '',
         'url-prefix': 'caemon',
-        'site': {
-            'index': '',
-            'name': 'CAEMon Web',
-        },
         'related_apps': {
             'caemon_web_core': {},
         },
