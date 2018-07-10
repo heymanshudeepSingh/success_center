@@ -9,7 +9,7 @@
     <h1>CAE Home Index Page</h1>
     <ul>
       {% for project in imported_projects %}
-        {% if project.index != '' %}
+        {% if project.index and project.index != '' %}
           <li><a href="{% url project.index %}">{{ project.name }}</a></li>
         {% else %}
           <li><a href="{% url 'cae_home:index' %}">{{ project.name }} &nbsp (No index set)</a></li>

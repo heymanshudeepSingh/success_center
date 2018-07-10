@@ -19,7 +19,7 @@ debug_print("===== Base Settings =====")
 
 # Application definition
 
-from settings.allowed_apps import INSTALLED_APPS, INSTALLED_CAE_PROJECTS
+from settings.allowed_apps import INSTALLED_APPS, INSTALLED_CAE_PROJECTS, INSTALLED_APP_DETAILS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -29,6 +29,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'cae_home.middleware.GetProjectDetailMiddleware',
     'cae_home.middleware.TimezoneMiddleware',
 ]
 

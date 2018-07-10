@@ -42,7 +42,7 @@ new one:
     <li><a href="">Main Item 1</a></li>
     <li><a href="">Main Item 2</a></li>
     <li>
-        <a href="">Main Item 3</a></li>
+        <a href="">Main Item 3</a>
         <ul>
             <li><a href="">SubItem Item 1</a></li>
             <li><a href="">SubItem Item 2</a></li>

@@ -152,4 +152,11 @@ for project_name in excluded_project_list:
     debug_print('   {0}Excluded Project{1}: {2}'.format(ConsoleColors.bold_red, ConsoleColors.reset, project_name))
 
 
+# Create list of urls, formatted in way templating can understand (For some reason, above implementations resulted
+# in templates only recognizing project_name keys, but nothing further).
+INSTALLED_APP_DETAILS = []
+for project, project_settings in INSTALLED_CAE_PROJECTS.items():
+    INSTALLED_APP_DETAILS.append(project_settings)
+
+
 debug_print('')
