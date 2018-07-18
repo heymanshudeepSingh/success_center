@@ -100,7 +100,7 @@ for project_name in project_folder_list:
         project_folder = os.path.join(APP_DIR, project_name)
         app_folder_list = [
             x for x in os.listdir(project_folder)
-            if os.path.isdir(os.path.join(project_folder, x)) and not x.startswith('.git')
+            if os.path.isdir(os.path.join(project_folder, x)) and not x.startswith('.git') and not x.startswith('_')
         ]
         excluded_app_list = []
 
