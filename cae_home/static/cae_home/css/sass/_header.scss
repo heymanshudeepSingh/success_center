@@ -27,9 +27,9 @@
 // overflow, overflow-x, overflow-y, clip, clear                                  //
 //================================================================================//
 
-//===========================//
-//==== START ----- Block ====//
-//===========================//
+//=============================//
+//==== START General Block ====//
+//=============================//
 
 header {
     @include display-flex;
@@ -38,6 +38,7 @@ header {
 }
 
 header {
+
     .header-top {
         @include display-flex;
         @include flex-direction(row);
@@ -49,9 +50,53 @@ header {
     }
 }
 
-//===========================//
-//===== END ----- Block =====//
-//===========================//
+//=============================//
+//===== END General Block =====//
+//=============================//
+
+
+//==========================//
+//==== START Logo Block ====//
+//==========================//
+
+header .site-logo {
+
+    > nav {
+        height: 100%;
+    }
+
+    > nav > ul {
+        @include display-flex;
+
+        height: 100%;
+    }
+
+    nav > ul > li > div {
+        @include display-flex;
+        @include flex-direction(column);
+        @include justify-content(center);
+
+        width: 100%;
+        height: 100%;
+    }
+
+    img {
+        max-width: 100px;
+        max-height: 26px;
+
+        margin-right: 10px;
+        margin-left: 10px;
+
+        @media only screen and (min-width: $screen-tablet-mid) {
+            max-width: 100px;
+            max-height: 22px;
+        }
+    }
+}
+
+//==========================//
+//===== END Logo Block =====//
+//==========================//
 
 
 //================================================================================//
@@ -108,7 +153,7 @@ header {
 //================================================================================//
 
 //===========================//
-//==== START ----- Block ====//
+//==== START General Block ====//
 //===========================//
 
 header {
@@ -116,14 +161,37 @@ header {
 }
 
 header {
+
     .header-bottom {
         border-top: 1px solid $theme-border;
     }
 }
 
-//===========================//
-//===== END ----- Block =====//
-//===========================//
+//=============================//
+//===== END General Block =====//
+//=============================//
+
+
+//==========================//
+//==== START Logo Block ====//
+//==========================//
+
+header .site-logo {
+
+    nav > ul > li > ul > li {
+        border: 1px solid $theme-border;
+        border-top: 0;
+    }
+
+    nav > ul > li > ul > li:last-child {
+        border-bottom-right-radius: 3px;
+        border-bottom-left-radius: 3px;
+    }
+}
+
+//==========================//
+//===== END Logo Block =====//
+//==========================//
 
 
 //================================================================================//

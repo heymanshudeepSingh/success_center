@@ -1,6 +1,12 @@
+
+{% load staticfiles %}
+
 <nav>
   <ul>
-    <li>CAE Center
+    <li>
+      <div>
+        <img src="{% static 'cae_home/images/cae_icons/brown_small.png' %}" alt="CAE Center">
+      </div>
       <ul>
         {% for project in imported_projects %}
           {% if project.index and project.index != '' %}

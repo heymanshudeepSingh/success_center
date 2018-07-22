@@ -353,15 +353,26 @@ header, .mobile-nav-overlay {
 
 header {
 
-    nav {
+    nav ul {
+        list-style-type: none;
+    }
 
-        ul {
-            list-style-type: none;
-            background-color: $theme-nav-background;
-        }
+    nav li {
+        background-color: $theme-nav-background;
     }
 }
 
+header .header-top {
+    nav > ul > li > ul > li {
+        border: 1px solid $theme-border;
+        border-top: 0;
+    }
+
+    nav > ul > li > ul > li:last-child {
+        border-bottom-right-radius: 3px;
+        border-bottom-left-radius: 3px;
+    }
+}
 
 //===============================//
 //===== END HeaderNav Block =====//
