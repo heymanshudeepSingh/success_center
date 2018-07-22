@@ -5,18 +5,18 @@
 
 // Wait for full page load.
 $(document).ready(function() {
-    console.log("Loaded mobile_nav.js file.");
+    // console.log("Loaded mobile_nav.js file.");
 
     var mobile_icon = $('.mobile-nav-icon');
     var main_nav = $('.nav-header-main > ul').clone();
 
-    console.log(mobile_icon);
-    console.log(main_nav);
+    // console.log(mobile_icon);
+    // console.log(main_nav);
 
 
     // Hide mobile nav menu.
     function hide_mobile_nav() {
-        console.log("Hiding mobile nav.");
+        // console.log("Hiding mobile nav.");
 
         $(".header-bottom").css("display", "none");
         $(".header-bottom").empty();
@@ -26,11 +26,10 @@ $(document).ready(function() {
 
     // Mobile Icon click handling.
     mobile_icon.on("click", function() {
-        console.log("Mobile icon clicked.");
+        // console.log("Mobile icon clicked.");
 
-        console.log($(".header-bottom").css("display"));
         if ($(".header-bottom").css("display") == "none") {
-            console.log("Showing movile nav.");
+            // console.log("Showing movile nav.");
 
             $(".header-bottom").append("<nav></nav>");
             $(".header-bottom nav").append(main_nav);
