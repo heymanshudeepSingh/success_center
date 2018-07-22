@@ -13,23 +13,41 @@ $(document).ready(function() {
     console.log(mobile_icon);
     console.log(main_nav);
 
+
+    // Hide mobile nav menu.
+    function hide_mobile_nav() {
+        console.log("Hiding mobile nav.");
+
+        $(".header-bottom").css("display", "none");
+        $(".header-bottom").empty();
+
+    }
+
+
     // Mobile Icon click handling.
     mobile_icon.on("click", function() {
         console.log("Mobile icon clicked.");
-        var mobile_nav_overlay = "<div class='mobile-nav-overlay'><nav></nav></div>";
-        $("body").prepend(mobile_nav_overlay);
-        $("body .mobile-nav-overlay nav").append(main_nav);
+
+        console.log($(".header-bottom").css("display"));
+        if ($(".header-bottom").css("display") == "none") {
+            console.log("Showing movile nav.");
+
+            $(".header-bottom").append("<nav></nav>");
+            $(".header-bottom nav").append(main_nav);
+            $(".header-bottom").css("display", "flex");
+        } else {
+            hide_mobile_nav();
+        }
     });
 
 
-    // Nav overlay click handling.
-    $(document).on("click", ".mobile-nav-overlay", function() {
-        console.log("Overlay Clicked.");
-        $(this).remove(".mobile-nav-overlay");
+    // Hide nav on other element clicks.
+    $("main").on("click", function(event) {
+        hide_mobile_nav();
     });
 
-    $(document).on("click", ".mobile-nav-overlay nav", function(event) {
-        event.stopPropagation();
+    $("footer").on("click", function(event) {
+        hide_mobile_nav();
     });
 
 });

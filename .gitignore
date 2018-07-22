@@ -14,8 +14,11 @@ settings/local_env/
 # Do not track other projects within the apps folder.
 apps/
 
-# Do not track migrations for now.
-*/migrations/0*.py
-
 # Do not track python cache files.
 *.pyc
+
+# Do not track css/sass map files.
+*.css.map
+
+# Do not track migrations for now.
+*/migrations/0*.py

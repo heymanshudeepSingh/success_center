@@ -33,8 +33,20 @@
 
 header {
     @include display-flex;
-    @include flex-direction(row);
+    @include flex-direction(column);
     @include justify-content(space-between);
+}
+
+header {
+    .header-top {
+        @include display-flex;
+        @include flex-direction(row);
+        @include justify-content(space-between);
+    }
+
+    .header-bottom {
+        display: none;
+    }
 }
 
 //===========================//
@@ -101,6 +113,12 @@ header {
 
 header {
     background-color: $theme-header-background;
+}
+
+header {
+    .header-bottom {
+        border-top: 1px solid $theme-border;
+    }
 }
 
 //===========================//
