@@ -21,4 +21,7 @@ python ./manage.py migrate
 
 # Load example data
 python ./manage.py loaddata users
+python ./manage.py loaddata room_types
 python ./manage.py loaddata calendars
+python ./manage.py loaddata rooms
+python ./manage.py loaddata room_events
