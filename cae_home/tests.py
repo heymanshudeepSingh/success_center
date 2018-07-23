@@ -178,7 +178,49 @@ class RoomModelTests(TestCase):
 
 #region CAE Model Tests
 
+class AssetModelTests(TestCase):
+    """
+    Tests to ensure valid Room model creation/logic.
+    """
+    @classmethod
+    def setUpTestData(cls):
+        cls.room_type = models.RoomType.objects.create(name="Test Room Type")
+        cls.department = models.Department.objects.create(name='Department')
+        cls.room = models.Room.objects.create(
+            name='Test Room',
+            room_type=cls.room_type,
+            department=cls.department,
+            capacity=30,
+        )
 
+    def setUp(self):
+        self.test_asset = models.Asset.objects.create(
+            room=self.room,
+            serial_number='Test Serial',
+            asset_tag='Test Tag',
+            brand_name='Test Brand',
+            mac_address='F0:E1:D2:C3:B4:A5',
+            ip_address='192.168.0.1',
+            device_name='Test Name',
+            description='Test Description',
+        )
+
+    def test_model_creation(self):
+        self.assertEqual(self.test_asset.room, self.room)
+        self.assertEqual(self.test_asset.serial_number, 'Test Serial')
+        self.assertEqual(self.test_asset.asset_tag, 'Test Tag')
+        self.assertEqual(self.test_asset.brand_name, 'Test Brand')
+        self.assertEqual(self.test_asset.mac_address, 'F0:E1:D2:C3:B4:A5')
+        self.assertEqual(self.test_asset.ip_address, '192.168.0.1')
+        self.assertEqual(self.test_asset.device_name, 'Test Name')
+        self.assertEqual(self.test_asset.description, 'Test Description')
+
+    def test_string_representation(self):
+        self.assertEqual(str(self.test_asset), 'Test Room Test Brand - Test Tag - Test Serial')
+
+    def test_plural_representation(self):
+        self.assertEqual(str(self.test_asset._meta.verbose_name), 'Asset')
+        self.assertEqual(str(self.test_asset._meta.verbose_name_plural), 'Assets')
 
 #endregion CAE Model Tests
 

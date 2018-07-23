@@ -213,13 +213,37 @@ class RoomAdmin(admin.ModelAdmin):
         }),
     )
 
-
 #endregion WMU Model Admin
 
 
 #region CAE Model Admin
 
+class AssetAdmin(admin.ModelAdmin):
+    # Fields to display in admin list view.
+    list_display = ('room', 'brand_name', 'asset_tag', 'serial_number', 'mac_address', 'ip_address')
 
+    # Fields to filter by in admin list view.
+    list_filter = ('room', 'brand_name',)
+
+    # Fields to search in admin list view.
+    search_fields = ['asset_tag', 'serial_number', 'mac_address', 'ip_address',]
+
+    # Read only fields for admin detail view.
+    readonly_fields = ('date_created', 'date_modified')
+
+    # Organize fieldsets for admin detail view.
+    fieldsets = (
+        (None, {
+            'fields': (
+                'room', 'brand_name', 'asset_tag', 'serial_number', 'mac_address', 'ip_address', 'device_name',
+                'description',
+            )
+        }),
+        ('Advanced', {
+            'classes': ('collapse',),
+            'fields': ('date_created', 'date_modified',),
+        }),
+    )
 
 #endregion CAE Model Admin
 
@@ -236,3 +260,4 @@ admin.site.register(models.RoomType, RoomTypeAdmin)
 admin.site.register(models.Room, RoomAdmin)
 
 # CAE Model Registration
+admin.site.register(models.Asset, AssetAdmin)

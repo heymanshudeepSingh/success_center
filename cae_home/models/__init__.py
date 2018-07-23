@@ -17,4 +17,4 @@ from .wmu import Department
 from .wmu import Room
 
 # Models related to the CAE Center.
-# from .cae import Asset
+from .cae import Asset
