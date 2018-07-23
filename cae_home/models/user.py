@@ -1,10 +1,8 @@
 """
-Models for CAE_Home App.
-
-Should really only include core user models which universally apply to all projects.
+User models for CAE_Home App.
 """
-import pytz
 
+import pytz
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
 from django.conf import settings
