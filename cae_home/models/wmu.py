@@ -96,3 +96,94 @@ class Room(models.Model):
         # Save model.
         self.full_clean()
         super(Room, self).save(*args, **kwargs)
+
+
+class Major(models.Model):
+    """
+    A major available at WMU.
+    """
+    # Model fields.
+    code = models.CharField(max_length=MAX_LENGTH)
+    name = models.CharField(max_length=MAX_LENGTH)
+    undergrad = models.BooleanField(default=True)
+    active = models.BooleanField(default=True)
+
+    # Self-setting/Non-user-editable fields.
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Major"
+        verbose_name_plural = "Majors"
+
+    def __str__(self):
+        return '{0} - {1}'.format(self.code, self.name)
+
+    def save(self, *args, **kwargs):
+        """
+        Modify model save behavior.
+        """
+        # Save model.
+        self.full_clean()
+        super(Major, self).save(*args, **kwargs)
+
+
+class Student(models.Model):
+    """
+    A student (or person with WMU ldap credentials) attending WMU.
+    """
+    # Relationship keys.
+    major = models.ForeignKey(Major, on_delete=models.CASCADE)
+    phone_number = models.ForeignKey('PhoneNumber', blank=True, null=True)
+
+    # Model fields.
+    winno = models.CharField(max_length=MAX_LENGTH)
+    first_name = models.CharField(max_length=MAX_LENGTH)
+    last_name = models.CharField(max_length=MAX_LENGTH)
+
+    # Self-setting/Non-user-editable fields.
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Student"
+        verbose_name_plural = "Students"
+
+    def __str__(self):
+        return '{0} {1}'.format(self.first_name, self.last_name)
+
+    def save(self, *args, **kwargs):
+        """
+        Modify model save behavior.
+        """
+        # Save model.
+        self.full_clean()
+        super(Student, self).save(*args, **kwargs)
+
+
+class SemesterDate(models.Model):
+    """
+    The start and end dates for a semester.
+    """
+    # Model fields.
+    start_date = models.DateField()
+    end_date = models.DateField()
+
+    # Self-setting/Non-user-editable fields.
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Semester Date"
+        verbose_name_plural = "Semester Dates"
+
+    def __str__(self):
+        return '{0} - {1}'.format(self.start_date, self.end_date)
+
+    def save(self, *args, **kwargs):
+        """
+        Modify model save behavior.
+        """
+        # Save model.
+        self.full_clean()
+        super(SemesterDate, self).save(*args, **kwargs)

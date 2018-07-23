@@ -5,6 +5,7 @@ Tests for CAE_Home App.
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.test import TestCase
+from django.utils import timezone
 
 from . import models
 
@@ -106,7 +107,6 @@ class PhoneNumberModelTests(TestCase):
 
 #region WMU Model Tests
 
-
 class DepartmentModelTests(TestCase):
     """
     Tests to ensure valid Department model creation/logic.
@@ -172,6 +172,99 @@ class RoomModelTests(TestCase):
     def test_plural_representation(self):
         self.assertEqual(str(self.test_room._meta.verbose_name), 'Room')
         self.assertEqual(str(self.test_room._meta.verbose_name_plural), 'Rooms')
+
+
+class MajorTests(TestCase):
+    """
+    Tests to ensure valid Major model creation/logic.
+    """
+    def setUp(self):
+        self.test_major = models.Major.objects.create(
+            code='Test Code',
+            name='Test Name',
+            undergrad=False,
+            active=False,
+        )
+
+    def test_model_creation(self):
+        self.assertEqual(self.test_major.code, 'Test Code')
+        self.assertEqual(self.test_major.name, 'Test Name')
+        self.assertEqual(self.test_major.undergrad, False)
+        self.assertEqual(self.test_major.active, False)
+
+    def test_string_representation(self):
+        self.assertEqual(str(self.test_major), 'Test Code - Test Name')
+
+    def test_plural_representation(self):
+        self.assertEqual(str(self.test_major._meta.verbose_name), 'Major')
+        self.assertEqual(str(self.test_major._meta.verbose_name_plural), 'Majors')
+
+
+class StudentTests(TestCase):
+    """
+    Tests to ensure valid Student model creation/logic.
+    """
+    @classmethod
+    def setUpTestData(cls):
+        cls.major = models.Major.objects.create(
+            code='Test Code',
+            name='Test Name',
+            undergrad=False,
+            active=False,
+        )
+        cls.phone_number = models.PhoneNumber.objects.create(
+            phone_number='1234567890',
+        )
+
+    def setUp(self):
+        self.test_student = models.Student.objects.create(
+            winno='123456789',
+            first_name='Test First',
+            last_name='Test Last',
+            major=self.major,
+            phone_number=self.phone_number,
+        )
+
+    def test_model_creation(self):
+        self.assertEqual(self.test_student.winno, '123456789')
+        self.assertEqual(self.test_student.first_name, 'Test First')
+        self.assertEqual(self.test_student.last_name, 'Test Last')
+        self.assertEqual(self.test_student.major, self.major)
+        self.assertEqual(self.test_student.phone_number, self.phone_number)
+
+    def test_string_representation(self):
+        self.assertEqual(str(self.test_student), 'Test First Test Last')
+
+    def test_plural_representation(self):
+        self.assertEqual(str(self.test_student._meta.verbose_name), 'Student')
+        self.assertEqual(str(self.test_student._meta.verbose_name_plural), 'Students')
+
+
+class SemesterDateModelTests(TestCase):
+    """
+    Tests to ensure valid Semester Date model creation/logic.
+    """
+    @classmethod
+    def setUpTestData(cls):
+        cls.end_date = timezone.now().date()
+        cls.start_date = cls.end_date - timezone.timedelta(days=90)
+
+    def setUp(self):
+        self.test_semester_date = models.SemesterDate.objects.create(
+            start_date=self.start_date,
+            end_date=self.end_date,
+        )
+
+    def test_model_creation(self):
+        self.assertEqual(self.test_semester_date.start_date, self.start_date)
+        self.assertEqual(self.test_semester_date.end_date, self.end_date)
+
+    def test_string_representation(self):
+        self.assertEqual(str(self.test_semester_date), str(self.start_date) + ' - ' + str(self.end_date))
+
+    def test_plural_representation(self):
+        self.assertEqual(str(self.test_semester_date._meta.verbose_name), 'Semester Date')
+        self.assertEqual(str(self.test_semester_date._meta.verbose_name_plural), 'Semester Dates')
 
 #endregion WMU Model Tests
 

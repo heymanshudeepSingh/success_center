@@ -12,9 +12,12 @@ from .user import Address
 from .user import PhoneNumber
 
 # Models related to WMU in general.
-from .wmu import RoomType
 from .wmu import Department
+from .wmu import RoomType
 from .wmu import Room
+from .wmu import Major
+from .wmu import Student
+from .wmu import SemesterDate
 
 # Models related to the CAE Center.
 from .cae import Asset
