@@ -8,6 +8,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.management import call_command
 from django.core.management.base import BaseCommand, CommandError
 from faker import Faker
+from random import randint
 
 from cae_home import models
 
@@ -40,15 +41,27 @@ class Command(BaseCommand):
         print('Initializing seeder with {0} randomized models.\n'.format(model_count))
 
         print('CAE_HOME: Seed command has been called.')
+        print('SEEDING User Model Group.')
         self.create_groups()
         self.create_users()
         self.create_addresses(model_count)
         self.create_phone_numbers(model_count)
 
+        print('SEEDING WMU Model Group.')
+        self.create_room_types()
+        self.create_departments(model_count)
+        self.create_rooms(model_count)
+
+        print('SEEDING CAE Model Group.')
+        self.create_assets(model_count)
+
         print('CAE_HOME: Seeding complete. Attempting to call imported apps.')
         self.call_imported_app_seeders(model_count)
 
         print('\nSeeding complete.')
+
+
+    #region User Model Seeding
 
     def create_groups(self):
         """
@@ -141,6 +154,102 @@ class Command(BaseCommand):
             models.PhoneNumber.objects.create(phone_number=phone_number)
 
         print('Populated phone number models.')
+
+    #endregion User Model Seeding
+
+
+    #region WMU Model Seeding
+
+    def create_room_types(self):
+        """
+        Create Room Type models.
+        """
+        models.RoomType.objects.create(name="Classroom")
+        models.RoomType.objects.create(name="Computer Classroom")
+        models.RoomType.objects.create(name="Breakout Room")
+        models.RoomType.objects.create(name="Special Room")
+        print('Populated room type models.')
+
+    def create_departments(self, model_count):
+        """
+        Create Department models.
+        """
+        # Generate random data.
+        faker_factory = Faker()
+
+        for i in range(model_count):
+            models.Department.objects.create(name=faker_factory.job())
+        print('Populated department models.')
+
+    def create_rooms(self, model_count):
+        """
+        Create Room models.
+        """
+        # Generate random data.
+        faker_factory = Faker()
+
+        room_types = models.RoomType.objects.all()
+        departments = models.Department.objects.all()
+
+        for i in range(model_count):
+            # Get Room Type.
+            index = randint(0, len(room_types) - 1)
+            room_type = room_types[index]
+
+            # Get Department.
+            index = randint(0, len(departments) - 1)
+            department = departments[index]
+
+            # Generate room name.
+            name = '{0}-{1}'.format(chr(randint(65, 90)), randint(100, 299))
+
+            models.Room.objects.create(
+                name=name,
+                capacity=randint(15, 200),
+                room_type=room_type,
+                department=department,
+            )
+        print('Populated room models.')
+
+    #endregion WMU Model Seeding
+
+
+    #region CAE Model Seeding
+
+    def create_assets(self, model_count):
+        """
+        Create Asset models.
+        """
+        # Generate random data.
+        faker_factory = Faker()
+
+        rooms = models.Room.objects.all()
+
+        for i in range(model_count):
+            # Get Room.
+            index = randint(0, len(rooms) - 1)
+            room = rooms[index]
+
+            # Generate Ip address. 50/50 chance of being ipv4 or ipv6
+            if randint(0, 1) == 1:
+                ip_address = faker_factory.ipv4()
+            else:
+                ip_address = faker_factory.ipv6()
+
+            models.Asset.objects.create(
+                room=room,
+                serial_number=faker_factory.isbn13(),
+                asset_tag=faker_factory.ean8(),
+                brand_name=faker_factory.domain_word(),
+                mac_address=faker_factory.mac_address(),
+                ip_address=ip_address,
+                device_name=faker_factory.last_name(),
+                description=faker_factory.sentence(),
+            )
+        print('Populated asset models.')
+
+    #endregion CAE Model Seeding
+
 
     def call_imported_app_seeders(self, model_count):
         """
