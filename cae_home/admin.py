@@ -2,10 +2,19 @@
 Admin view for CAE_Home App.
 """
 
+from django.conf import settings
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 from . import forms, models
+
+
+# Attempt to import RoomEvent Inline.
+try:
+    from apps.CAE_Web.cae_web_core.admin import RoomEventInline
+except ImportError:
+    # Assume that CAE_Web project isn't present.
+    RoomEventInline = None
 
 
 #region User Model Admin
@@ -51,11 +60,6 @@ class ProfileAdmin(admin.ModelAdmin):
     search_fields = [
         'user',
     ]
-
-    # Fields to filter by in admin list view.
-    list_filter = (
-
-    )
 
     # Read only fields for admin detail view.
     readonly_fields = (
@@ -188,6 +192,10 @@ class RoomTypeAdmin(admin.ModelAdmin):
 
 
 class RoomAdmin(admin.ModelAdmin):
+    # Check that the inline import succeeded.
+    if RoomEventInline is not None:
+        inlines = [RoomEventInline]
+
     # Fields to display in admin list view.
     list_display = ('name', 'capacity', 'room_type',)
 
