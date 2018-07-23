@@ -59,6 +59,8 @@ header {
             // Show on larger screens.
             @media only screen and (min-width: $screen-tablet-mid) {
                 @include display-flex;
+
+                margin-right: 1vw;
             }
         }
 
@@ -86,7 +88,7 @@ header {
         }
 
         // Nav link properties.
-        a {
+        a, p {
             @include display-flex;
             @include flex-direction(row);
             @include justify-content(space-around);
@@ -259,7 +261,7 @@ header, .mobile-nav-overlay {
 
     nav {
 
-        a {
+        a, p {
             font-weight: bold;
             color: $theme-nav-text;
             text-align: center;

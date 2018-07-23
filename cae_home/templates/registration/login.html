@@ -1,0 +1,16 @@
+{% extends 'cae_home/main.html' %}
+
+
+{% block title_page_name %} | Login{% endblock title_page_name %}
+
+
+{% block content %}
+  <article id="content">
+    <h1>Login Page</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+      </form>
+  </article>
+{% endblock content %}
