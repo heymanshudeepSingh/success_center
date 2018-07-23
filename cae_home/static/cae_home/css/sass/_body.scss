@@ -43,17 +43,11 @@ body {
     @include display-flex;
     @include flex-direction(column);
     @include flex(1);
-}
-
-body {
 
     main {
         @include display-flex;
         @include flex-direction(column);
         @include flex(1);
-    }
-
-    main {
 
         .placeholder {
             min-width: 2vw

@@ -3,7 +3,8 @@
   <ul>
     <li><a href="{% url 'cae_home:index' %}">Home</a></li>
     {% if user.is_authenticated %}
-      <li><p>{{ user.get_username }}</p>
+      <li>
+        <p href="">{{ user.get_username }}</p>
         <ul>
           {% if user.is_staff %}
             <li><a href="{% url 'admin:index' %}">Django Admin</a></li>
