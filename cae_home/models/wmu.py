@@ -2,6 +2,7 @@
 General WMU models for CAE_Home App.
 """
 
+from django.core.exceptions import ValidationError
 from django.db import models
 
 
@@ -115,6 +116,7 @@ class Major(models.Model):
     class Meta:
         verbose_name = "Major"
         verbose_name_plural = "Majors"
+        ordering = ('pk',)
 
     def __str__(self):
         return '{0} - {1}'.format(self.code, self.name)
@@ -137,6 +139,7 @@ class Student(models.Model):
     phone_number = models.ForeignKey('PhoneNumber', blank=True, null=True)
 
     # Model fields.
+    bronco_net = models.CharField(max_length=MAX_LENGTH)
     winno = models.CharField(max_length=MAX_LENGTH)
     first_name = models.CharField(max_length=MAX_LENGTH)
     last_name = models.CharField(max_length=MAX_LENGTH)
@@ -160,12 +163,19 @@ class Student(models.Model):
         self.full_clean()
         super(Student, self).save(*args, **kwargs)
 
+    def official_email(self):
+        """
+        Returns a string of student's official email.
+        """
+        return '{0}@wmich.edu'.format(self.bronco_net)
+
 
 class SemesterDate(models.Model):
     """
     The start and end dates for a semester.
     """
     # Model fields.
+    name = models.CharField(max_length=MAX_LENGTH, blank=True, null=True)
     start_date = models.DateField()
     end_date = models.DateField()
 
@@ -179,6 +189,33 @@ class SemesterDate(models.Model):
 
     def __str__(self):
         return '{0} - {1}'.format(self.start_date, self.end_date)
+
+    def clean(self, *args, **kwargs):
+        """
+        Custom cleaning implementation. Includes validation, setting fields, etc.
+        """
+        # First check that dates exist at all.
+        if self.start_date is not None and self.end_date is not None:
+
+            # Calculate name based off of date fields.
+            # Only set if model is new (in case of name calculation errors from abnormal semester dates).
+            if self.pk is None:
+                start_month = self.start_date.month
+                if start_month < 4:
+                    season = 'Spring_'
+                elif start_month < 6:
+                    season = 'Summer_I_'
+                elif start_month < 8:
+                    season = 'Summer_II_'
+                else:
+                    season = 'Fall_'
+
+                self.name = '{0}{1}'.format(season, self.end_date.year)
+
+            # Ensure that start date is not after end date.
+            if self.start_date >= self.end_date:
+                raise ValidationError('Start date must be before end date.')
+
 
     def save(self, *args, **kwargs):
         """

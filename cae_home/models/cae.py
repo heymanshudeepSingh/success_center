@@ -31,6 +31,7 @@ class Asset(models.Model):
     class Meta:
         verbose_name = "Asset"
         verbose_name_plural = "Assets"
+        ordering = ('asset_tag',)
 
     def __str__(self):
         return '{0} {1} - {2} - {3}'.format(self.room, self.brand_name, self.asset_tag, self.serial_number)

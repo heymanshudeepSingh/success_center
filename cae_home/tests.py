@@ -4,6 +4,7 @@ Tests for CAE_Home App.
 
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
+from django.db import transaction
 from django.test import TestCase
 from django.utils import timezone
 
@@ -218,6 +219,7 @@ class StudentTests(TestCase):
 
     def setUp(self):
         self.test_student = models.Student.objects.create(
+            bronco_net='abc1234',
             winno='123456789',
             first_name='Test First',
             last_name='Test Last',
@@ -226,6 +228,7 @@ class StudentTests(TestCase):
         )
 
     def test_model_creation(self):
+        self.assertEqual(self.test_student.bronco_net, 'abc1234')
         self.assertEqual(self.test_student.winno, '123456789')
         self.assertEqual(self.test_student.first_name, 'Test First')
         self.assertEqual(self.test_student.last_name, 'Test Last')
@@ -265,6 +268,47 @@ class SemesterDateModelTests(TestCase):
     def test_plural_representation(self):
         self.assertEqual(str(self.test_semester_date._meta.verbose_name), 'Semester Date')
         self.assertEqual(str(self.test_semester_date._meta.verbose_name_plural), 'Semester Dates')
+
+    def test_name_generation(self):
+        # Test Spring.
+        semester_date = models.SemesterDate.objects.create(
+            start_date=timezone.datetime(2017, 1, 1),
+            end_date=timezone.datetime(2017, 1, 2)
+        )
+        self.assertEqual(semester_date.name, 'Spring_2017')
+
+        # Test Summer 1.
+        semester_date = models.SemesterDate.objects.create(
+            start_date=timezone.datetime(2018, 4, 1),
+            end_date=timezone.datetime(2018, 4, 2)
+        )
+        self.assertEqual(semester_date.name, 'Summer_I_2018')
+
+        # Test Summer 2.
+        semester_date = models.SemesterDate.objects.create(
+            start_date=timezone.datetime(2019, 6, 1),
+            end_date=timezone.datetime(2019, 6, 2)
+        )
+        self.assertEqual(semester_date.name, 'Summer_II_2019')
+
+        # Test Fall.
+        semester_date = models.SemesterDate.objects.create(
+            start_date=timezone.datetime(2020, 8, 1),
+            end_date=timezone.datetime(2020, 8, 2)
+        )
+        self.assertEqual(semester_date.name, 'Fall_2020')
+
+    def test_start_date_before_end_date(self):
+        with self.assertRaises(ValidationError):
+            with transaction.atomic():
+                models.SemesterDate.objects.create(start_date=self.start_date, end_date=self.start_date)
+
+        with self.assertRaises(ValidationError):
+            with transaction.atomic():
+                models.SemesterDate.objects.create(
+                    start_date=self.start_date,
+                    end_date=self.start_date - timezone.timedelta(days=1)
+                )
 
 #endregion WMU Model Tests
 

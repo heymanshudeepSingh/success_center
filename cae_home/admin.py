@@ -221,6 +221,87 @@ class RoomAdmin(admin.ModelAdmin):
         }),
     )
 
+
+class MajorAdmin(admin.ModelAdmin):
+    # Fields to display in admin list view.
+    list_display = ('code', 'name', 'undergrad', 'active',)
+
+    # Fields to filter by in admin list view.
+    list_filter = ('undergrad', 'active',)
+
+    # Fields to search in admin list view.
+    search_fields = ['code', 'name',]
+
+    # Read only fields for admin detail view.
+    readonly_fields = ('date_created', 'date_modified')
+
+    # Organize fieldsets for admin detail view.
+    fieldsets = (
+        (None, {
+            'fields': (
+                'code', 'name', 'undergrad', 'active',
+            )
+        }),
+        ('Advanced', {
+            'classes': ('collapse',),
+            'fields': ('date_created', 'date_modified',),
+        }),
+    )
+
+
+class StudentAdmin(admin.ModelAdmin):
+
+    # Fields to display in admin list view.
+    list_display = ('bronco_net', 'winno', 'first_name', 'last_name', 'major')
+
+    # Fields to filter by in admin list view.
+    list_filter = ('major',)
+
+    # Fields to search in admin list view.
+    search_fields = ['bronco_net', 'winno', 'first_name', 'last_name',]
+
+    # Read only fields for admin detail view.
+    readonly_fields = ('date_created', 'date_modified', 'official_email')
+
+    # Organize fieldsets for admin detail view.
+    fieldsets = (
+        (None, {
+            'fields': (
+                'bronco_net', 'winno', 'first_name', 'last_name', 'major',
+            )}),
+        ('Contact Info', {
+            'fields': ('official_email', 'phone_number',)
+        }),
+        ('Advanced', {
+            'classes': ('collapse',),
+            'fields': ('date_created', 'date_modified',),
+        }),
+    )
+
+
+class SemesterDateAdmin(admin.ModelAdmin):
+    # Fields to display in admin list view.
+    list_display = ('name', 'start_date', 'end_date',)
+
+    # Fields to search in admin list view.
+    search_fields = ['name', 'start_date', 'end_date',]
+
+    # Read only fields for admin detail view.
+    readonly_fields = ('date_created', 'date_modified')
+
+    # Organize fieldsets for admin detail view.
+    fieldsets = (
+        (None, {
+            'fields': (
+                'name', 'start_date', 'end_date',
+            )
+        }),
+        ('Advanced', {
+            'classes': ('collapse',),
+            'fields': ('date_created', 'date_modified',),
+        }),
+    )
+
 #endregion WMU Model Admin
 
 
@@ -266,6 +347,9 @@ admin.site.register(models.PhoneNumber, PhoneNumberAdmin)
 admin.site.register(models.Department, DepartmentAdmin)
 admin.site.register(models.RoomType, RoomTypeAdmin)
 admin.site.register(models.Room, RoomAdmin)
+admin.site.register(models.Major, MajorAdmin)
+admin.site.register(models.Student, StudentAdmin)
+admin.site.register(models.SemesterDate, SemesterDateAdmin)
 
 # CAE Model Registration
 admin.site.register(models.Asset, AssetAdmin)

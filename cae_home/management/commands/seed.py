@@ -7,6 +7,7 @@ from django.contrib.auth.models import Group, Permission
 from django.contrib.contenttypes.models import ContentType
 from django.core.management import call_command
 from django.core.management.base import BaseCommand, CommandError
+from django.utils import timezone
 from faker import Faker
 from random import randint
 
@@ -51,6 +52,9 @@ class Command(BaseCommand):
         self.create_room_types()
         self.create_departments(model_count)
         self.create_rooms(model_count)
+        self.create_majors()
+        self.create_students(model_count)
+        self.create_semester_dates()
 
         print('SEEDING CAE Model Group.')
         self.create_assets(model_count)
@@ -120,14 +124,17 @@ class Command(BaseCommand):
         models.User.objects.create_superuser('brodriguez8774', '', 'temppass2')
         models.User.objects.create_superuser('skd6970', '', 'temppass2')
         models.User.objects.create_superuser('jbn6294', '', 'temppass2')
+
         print('Populated user models.')
 
     def create_addresses(self, model_count):
         """
         Creates address models.
         """
+        # Create random data generator.
         faker_factory = Faker()
 
+        # Generate models equal to model count.
         for index in range(model_count):
             street = faker_factory.building_number() + ' ' + faker_factory.street_address()
             city = faker_factory.city()
@@ -146,9 +153,10 @@ class Command(BaseCommand):
         """
         Creates phone number models.
         """
-        # Generate random data.
+        # Create random data generator.
         faker_factory = Faker()
 
+        # Generate models equal to model count.
         for i in range(model_count):
             phone_number = faker_factory.msisdn()
             models.PhoneNumber.objects.create(phone_number=phone_number)
@@ -168,29 +176,34 @@ class Command(BaseCommand):
         models.RoomType.objects.create(name="Computer Classroom")
         models.RoomType.objects.create(name="Breakout Room")
         models.RoomType.objects.create(name="Special Room")
+
         print('Populated room type models.')
 
     def create_departments(self, model_count):
         """
         Create Department models.
         """
-        # Generate random data.
+        # Create random data generator.
         faker_factory = Faker()
 
+        # Generate models equal to model count.
         for i in range(model_count):
             models.Department.objects.create(name=faker_factory.job())
+
         print('Populated department models.')
 
     def create_rooms(self, model_count):
         """
         Create Room models.
         """
-        # Generate random data.
+        # Create random data generator.
         faker_factory = Faker()
 
+        # Get all related models.
         room_types = models.RoomType.objects.all()
         departments = models.Department.objects.all()
 
+        # Generate models equal to model count.
         for i in range(model_count):
             # Get Room Type.
             index = randint(0, len(room_types) - 1)
@@ -211,6 +224,124 @@ class Command(BaseCommand):
             )
         print('Populated room models.')
 
+
+    def create_majors(self):
+        """
+        Create Major models.
+        """
+        # Create random data generator.
+        faker_factory = Faker()
+
+        models.Major.objects.create(code='UND', name='Undecided')
+        models.Major.objects.create(code='UNK', name='Unknown (New or Prospective Student)')
+        models.Major.objects.create(code='AERJ', name='Aeronautical Engineering')
+        models.Major.objects.create(code='CEGJ', name='Computer Engineering')
+        models.Major.objects.create(code='CENJ', name='Construction Engineering')
+        models.Major.objects.create(code='CHGJ', name='Chemical Engineering')
+        models.Major.objects.create(code='CIVJ', name='Civil Engineering')
+        models.Major.objects.create(code='CSGJ', name='Computer Science - General')
+        models.Major.objects.create(code='CSTJ', name='Computer Science Theory and Analysis')
+        models.Major.objects.create(code='EDTJ', name='Engineering Design Technology')
+        models.Major.objects.create(code='EENJ', name='Electrical Engineering')
+        models.Major.objects.create(code='IDNJ', name='Industrial Design')
+        models.Major.objects.create(code='IENJ', name='Industrial Engineering')
+        models.Major.objects.create(code='IMGJ', name='Imaging/Graphic and Printing Science')
+        models.Major.objects.create(code='MEGJ', name='Mechanical Engineering')
+        models.Major.objects.create(code='MFNJ', name='Manufacturing Engineering')
+        models.Major.objects.create(code='PENJ', name='Paper Engineering')
+        models.Major.objects.create(code='PREJ', name='Pre-Engineering Undecided')
+        models.Major.objects.create(code='PSCJ', name='Paper Science')
+        models.Major.objects.create(code='UEMJ', name='Engineering Management Technology')
+
+        print('Populated major models.')
+
+
+    def create_students(self, model_count):
+        """
+        Create Student models.
+        """
+        # Create random data generator.
+        faker_factory = Faker()
+
+        # Get all related models.
+        majors = models.Major.objects.all()
+        phone_numbers = models.PhoneNumber.objects.all()
+
+        # Generate models equal to model count.
+        for i in range(model_count):
+            # Get Major.
+            index = randint(0, len(majors) - 1)
+            major = majors[index]
+
+            # Get Phone Number.
+            index = randint(0, len(phone_numbers) - 1)
+            phone_number = phone_numbers[index]
+
+            # Generate bronco net.
+            bronco_net = '{0}{1}{2}{3}'.format(
+                chr(randint(97, 122)),
+                chr(randint(97, 122)),
+                chr(randint(97, 122)),
+                randint(1000, 9999)
+            )
+
+            # Generate win number.
+            winno = '{0}{1}'.format(randint(1000, 9999), randint(10000, 99999))
+
+            models.Student.objects.create(
+                bronco_net=bronco_net,
+                winno=winno,
+                first_name=faker_factory.first_name(),
+                last_name=faker_factory.last_name(),
+                major=major,
+                phone_number=phone_number,
+            )
+        print('Populated student models.')
+
+
+    def create_semester_dates(self):
+        """
+        Create Semester Date models.
+        """
+        # Create random data generator.
+        faker_factory = Faker()
+
+        models.SemesterDate.objects.create(start_date=timezone.datetime(2013, 1, 7), end_date=timezone.datetime(2013, 4, 27))
+        models.SemesterDate.objects.create(start_date=timezone.datetime(2013, 5, 6), end_date=timezone.datetime(2013, 6, 26))
+        models.SemesterDate.objects.create(start_date=timezone.datetime(2013, 6, 27), end_date=timezone.datetime(2013, 8, 16))
+        models.SemesterDate.objects.create(start_date=timezone.datetime(2013, 9, 3), end_date=timezone.datetime(2013, 12, 14))
+
+        models.SemesterDate.objects.create(start_date=timezone.datetime(2014, 1, 6), end_date=timezone.datetime(2014, 4, 26))
+        models.SemesterDate.objects.create(start_date=timezone.datetime(2014, 5, 5), end_date=timezone.datetime(2014, 6, 25))
+        models.SemesterDate.objects.create(start_date=timezone.datetime(2014, 6, 26), end_date=timezone.datetime(2014, 8, 15))
+        models.SemesterDate.objects.create(start_date=timezone.datetime(2014, 9, 2), end_date=timezone.datetime(2014, 12, 13))
+
+        models.SemesterDate.objects.create(start_date=timezone.datetime(2015, 1, 1), end_date=timezone.datetime(2015, 4, 30))
+        models.SemesterDate.objects.create(start_date=timezone.datetime(2015, 5, 11), end_date=timezone.datetime(2015, 7, 1))
+        models.SemesterDate.objects.create(start_date=timezone.datetime(2015, 7, 6), end_date=timezone.datetime(2015, 8, 21))
+        models.SemesterDate.objects.create(start_date=timezone.datetime(2015, 9, 8), end_date=timezone.datetime(2015, 12, 19))
+
+        models.SemesterDate.objects.create(start_date=timezone.datetime(2016, 1, 11), end_date=timezone.datetime(2016, 4, 30))
+        models.SemesterDate.objects.create(start_date=timezone.datetime(2016, 5, 9), end_date=timezone.datetime(2016, 6, 29))
+        models.SemesterDate.objects.create(start_date=timezone.datetime(2016, 6, 30), end_date=timezone.datetime(2016, 8, 19))
+        models.SemesterDate.objects.create(start_date=timezone.datetime(2016, 9, 6), end_date=timezone.datetime(2016, 12, 17))
+
+        models.SemesterDate.objects.create(start_date=timezone.datetime(2017, 1, 9), end_date=timezone.datetime(2017, 4, 29))
+        models.SemesterDate.objects.create(start_date=timezone.datetime(2017, 5, 8), end_date=timezone.datetime(2017, 6, 28))
+        models.SemesterDate.objects.create(start_date=timezone.datetime(2017, 6, 29), end_date=timezone.datetime(2017, 8, 18))
+        models.SemesterDate.objects.create(start_date=timezone.datetime(2017, 9, 5), end_date=timezone.datetime(2017, 12, 16))
+
+        models.SemesterDate.objects.create(start_date=timezone.datetime(2018, 1, 8), end_date=timezone.datetime(2018, 4, 28))
+        models.SemesterDate.objects.create(start_date=timezone.datetime(2018, 5, 7), end_date=timezone.datetime(2018, 6, 27))
+        models.SemesterDate.objects.create(start_date=timezone.datetime(2018, 6, 28), end_date=timezone.datetime(2018, 8, 17))
+        models.SemesterDate.objects.create(start_date=timezone.datetime(2018, 8, 29), end_date=timezone.datetime(2018, 12, 15))
+
+        models.SemesterDate.objects.create(start_date=timezone.datetime(2019, 1, 7), end_date=timezone.datetime(2019, 4, 27))
+        models.SemesterDate.objects.create(start_date=timezone.datetime(2019, 5, 6), end_date=timezone.datetime(2019, 6, 26))
+        models.SemesterDate.objects.create(start_date=timezone.datetime(2019, 6, 27), end_date=timezone.datetime(2019, 8, 16))
+
+        print('Populated semester date models.')
+
     #endregion WMU Model Seeding
 
 
@@ -220,11 +351,13 @@ class Command(BaseCommand):
         """
         Create Asset models.
         """
-        # Generate random data.
+        # Create random data generator.
         faker_factory = Faker()
 
+        # Get all related models.
         rooms = models.Room.objects.all()
 
+        # Generate models equal to model count.
         for i in range(model_count):
             # Get Room.
             index = randint(0, len(rooms) - 1)
