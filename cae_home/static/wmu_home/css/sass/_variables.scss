@@ -1,0 +1,145 @@
+
+//=======================//
+//==== Variables CSS ====//
+//=======================//
+
+// Declares variables that are universally used in other .scss files.
+
+
+// To reference this outside of the CAE_Home app, use:
+// @import '../../../../../cae_home/static/wmu_home/css/sass/_variables';
+//
+// On the off chance that you need additional variables specific to a given app:
+//  * Create a new "_variables" in that app's "css/sass" folder.
+//  * Reference this file from the app-specific variables file.
+//  * From then on, access both by importing the app-specific variables file in
+//    all further app-specific sass files.
+
+//================================================================================//
+//==================================== Colors ====================================//
+//================================================================================//
+
+//===============================//
+//==== START GreyScale Block ====//
+//===============================//
+
+$color-grey-00: #000000;    // Black
+$color-grey-10: #191919;    //  ^
+$color-grey-20: #333333;    //  |
+$color-grey-30: #4c4c4c;    //  | Darker
+$color-grey-40: #666666;    //  |
+$color-grey-50: #7f7f7f;    //  Scaling by 10% gradients.
+$color-grey-60: #999999;    //  |
+$color-grey-70: #b2b2b2;    //  | Ligher
+$color-grey-80: #cccccc;    //  |
+$color-grey-90: #e5e5e5;    //  v
+$color-grey-100: #ffffff;   // White
+
+//===============================//
+//===== END GreyScale Block =====//
+//===============================//
+
+
+//===========================================//
+//==== START "WMU Approved" Colors Block ====//
+//===========================================//
+
+// WMU's official guidelines say these "must be used on all materials to
+// ensure proper color combinations". Realistically, that's overkill.
+
+// Provided as reference anyway, in case such information is ever helpful.
+// At the end of the day, just be consistent and try to make it look good.
+
+// "Primary" WMU Colors.
+$wmu-gold: #ffae00;
+$wmu-brown: #442416;
+
+// "Secondary" WMU Colors.
+$wmu-chocolate: #7c5826;
+$wmu-khaki: #c0aa71;
+$wmu-sienna: #a9431e;
+$wmu-tangerine: #d87c21;
+$wmu-light-tan: #ede1aa;
+
+// "Accent" WMU Colors.
+$wmu-teal: #0b645d;
+$wmu-red: #b91233;
+$wmu-plum: #865f7f;
+$wmu-sky-blue: #0091c1;
+$wmu-green-apple: #7ab700;
+$wmu-black: #000000;
+$wmu-dark-grey: #816f5f;
+$wmu-warm-grey: #bdb1a7;
+$wmu-metallic-gold: #8b6f4e;
+$wmu-metallic-brown: #594839;
+$wmu-metallic-silver: #8a8d8f;
+
+//=========================================//
+//==== END "WMU Approved" Colors Block ====//
+//=========================================//
+
+
+//==================================//
+//==== START Other Colors Block ====//
+//==================================//
+
+
+
+//================================//
+//==== END Other Colors Block ====//
+//================================//
+
+//================================================================================//
+//==================================== Themes ====================================//
+//================================================================================//
+
+// Theme is the actual pallet used on the site.
+//
+// Ideally, add variables here (prefixed with "theme") and then reference
+// said variable later on. Allows for changing of the entire site coloring with
+// a single line or two, instead of having to dig through all of the css files.
+
+//================================//
+//==== START Base Theme Block ====//
+//================================//
+
+//== Main Elements ==//
+
+
+//== Nav Elements ==//
+
+
+//== Content Areas ==//
+
+
+//==============================//
+//==== End Base Theme Block ====//
+//==============================//
+
+
+//================================================================================//
+//================================== ScreenSize ==================================//
+//================================================================================//
+
+// Phone
+$screen-phone-small: 475px;
+$screen-phone-mid: 550px;
+$screen-phone-max: 699px;
+
+// Tablet
+$screen-tablet-min: 700px;
+$screen-tablet-mid: 869px;
+$screen-tablet-max: 1024px;
+
+// Laptop
+$screen-laptop-min: 1025px;
+$screen-laptop-mid: 1350px;
+$screen-laptop-max: 1600px;
+
+// Desktop
+$screen-desktop-min: 1601px;
+$screen-desktop-mid: 2000px;
+$screen-desktop-max: 3839px;
+
+// 4k
+$screen-4k-min: 3840px;

@@ -1,0 +1,55 @@
+
+//==================//
+//==== Base CSS ====//
+//==================//
+
+// This is essentially a "parent" file that gathers all other .scss files using
+// the precompiler called SASS.
+
+
+//================================================================================//
+//================================== Commenting ==================================//
+//================================================================================//
+// Use "//" comments in most circumstances. These will only be visible in the     //
+// .scss files.                                                                   //
+//                                                                                //
+// Block "/*  */" comments are reserved for when you want to ensure the comments  //
+// stays even after being compiled to .css files.                                 //
+//================================================================================//
+
+
+//================================================================================//
+//================================= Organization =================================//
+//================================================================================//
+// CSS is split up into four main sections of function:                           //
+//    Positioning                                                                 //
+//    Typography                                                                  //
+//    Visual                                                                      //
+//    Other                                                                       //
+//                                                                                //
+// The css is divided into sections in an attempt to simplify and consolidate     //
+// what each chunk of code is doing. The goal is to prevent having one single,    //
+// massive css file and hopefully make code easier to read.                       //
+//================================================================================//
+
+
+//================================================================================//
+//================================ Z-Index Order =================================//
+//================================================================================//
+// 1-20: Background/Main Body Elements                                            //
+// 21-40: Content Elements                                                        //
+// 41-60: Nav Elements                                                            //
+// 61-80: Other Elements (likely unneeded, but defined anyway)                    //
+//================================================================================//
+
+
+//================================================================================//
+//============================== Import Statements ===============================//
+//================================================================================//
+@import '_reset';                                                                 //
+@import '_body';                                                                  //
+@import '_header';                                                                //
+@import '_footer';                                                                //
+@import '_nav';                                                                   //
+@import '_content';                                                               //
+//================================================================================//

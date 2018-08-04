@@ -1,0 +1,239 @@
+
+//===================//
+//==== Reset CSS ====//
+//===================//
+
+// Import statements
+@import '_variables';
+@import '_mixins';
+
+// "Resets" standard html elements to predictable values for all browsers.
+
+
+//================================================================================//
+//================================= Positioning ==================================//
+//================================== Includes: ===================================//
+//================================================================================//
+// position, top, right, bottom, left, z-index, display, float                    //
+//                                                                                //
+// flex-direction, flex-wrap, justify-content, align-items, align-content, order, //
+// flex-grow, flex-shrink, flex-basis, flex, align-self,                          //
+//                                                                                //
+// width, height, max-width, max-height, min-width, min-height,                   //
+// padding, padding-top, padding-right, padding-bottom, padding-left,             //
+// margin, margin-top, margin-right, margin-bottom, margin-left,                  //
+//                                                                                //
+// margin-collapse, margin-top-collapse, margin-right-collapse,                   //
+// margin-bottom-collapse, margin-left-collapse,                                  //
+//                                                                                //
+// overflow, overflow-x, overflow-y, clip, clear                                  //
+//================================================================================//
+
+//===========================//
+//==== START ----- Block ====//
+//===========================//
+
+html, body, hgroup, header, footer, nav,
+article, section, aside, figure, figcaption,
+h1, h2, h3, h4, h5, h6,
+ol, ul, li,
+div, span, p, img, a,
+{
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    padding-top: 10px;
+}
+
+//===========================//
+//===== END ----- Block =====//
+//===========================//
+
+
+//================================================================================//
+//================================== Typography ==================================//
+//================================== Includes: ===================================//
+//================================================================================//
+// font, font-family, font-size, font-smoothing, osx-font-smoothing, font-style,  //
+// font-weight,                                                                   //
+//                                                                                //
+// hyphens, src, line-height, letter-spacing, word-spacing, color, text-align,    //
+// text-decoration, text-indent, text-overflow, text-rendering, text-size-adjust, //
+// text-shadow, text-transform,                                                   //
+//                                                                                //
+// word-break, word-wrap, white-space                                             //
+//================================================================================//
+
+//==================================//
+//==== START Font Styling Block ====//
+//==================================//
+
+html {
+    font-family: 'Source Sans Pro', 'Open Sans', 'Lato', sans-serif;
+}
+
+p {
+    font-family: 'Open Sans', 'Lato', 'Source Sans Pro', sans-serif;
+}
+
+//==================================//
+//===== END Font Styling Block =====//
+//==================================//
+
+
+//===============================//
+//==== START Font Size Block ====//
+//===============================//
+
+html, body, hgroup, header, footer, nav,
+article, section, aside, figure, figcaption,
+h1, h2, h3, h4, h5, h6,
+ol, ul, li,
+div, span, p, img, a,
+{
+    font-size: 4.5vw;
+
+    @media only screen and (min-width: 400px) and (max-width: $screen-phone-small) {
+        font-size: 3.8vw;
+    }
+
+    @media only screen and (min-width: $screen-phone-small) and (max-width: $screen-phone-mid) {
+        font-size: 3.4vw;
+    }
+
+    @media only screen and (min-width: $screen-phone-mid) and (max-width: $screen-phone-max) {
+        font-size: 2.7vw;
+    }
+
+    @media only screen and (min-width: $screen-tablet-min) and (max-width: $screen-tablet-max) {
+        font-size: 2.1vw;
+    }
+
+    @media only screen and (min-width: $screen-tablet-mid) and (max-width: $screen-tablet-max) {
+        font-size: 1.8vw;
+    }
+
+    @media only screen and (min-width: $screen-laptop-min) and (max-width: $screen-laptop-mid) {
+        font-size: 1.4vw;
+    }
+
+    @media only screen and (min-width: $screen-laptop-mid) and (max-width: $screen-laptop-max) {
+        font-size: 1.1vw;
+    }
+
+    @media only screen and (min-width: $screen-desktop-min) {
+        font-size: 0.9vw;
+    }
+}
+
+h1, h2, h3, h4, h5, h6 {
+    text-align: center;
+}
+
+h1 {
+    font-size: 200%;
+}
+
+h2 {
+    font-size: 174%;
+}
+
+h3 {
+    font-size: 151%;
+}
+
+h4 {
+    font-size: 132%;
+}
+
+h5 {
+    font-size: 115%;
+}
+
+h6 {
+    font-size: 100%;
+}
+
+//===============================//
+//===== END Font Size Block =====//
+//===============================//
+
+
+//================================================================================//
+//==================================== Visual ====================================//
+//================================== Includes: ===================================//
+//================================================================================//
+// vertical-align,                                                                //
+//                                                                                //
+// list-style, list-style-type, list-style-position, list-style-image,            //
+//                                                                                //
+// pointer-events, cursor,                                                        //
+//                                                                                //
+// background, background-attatchment, background-color, background-image,        //
+// background-position, background-repeat, background-size,                       //
+//                                                                                //
+// border, border-collapse, border-top, border-right, border-bottom, border-left, //
+// border-color, border-image, border-top-color, border-right-color,              //
+// border-bottom-color, border-left-color, border-spacing, border-style,          //
+// border-top-style, border-right-style, border-bottom-style, border-left-style,  //
+// border-width, border-top-width, border-right-width, border-bottom-width,       //
+// border-left-width,                                                             //
+//                                                                                //
+// border-radius, border-top-right-radius, border-bottom-right-radius,            //
+// border-bottom-left-radius, border-top-left-radius, border-radius-topright,     //
+// border-radius-bottomright, border-radius-bottomleft, border-radius-topleft,    //
+//                                                                                //
+// content, quotes, outline, outline-offset, opacity, filter, visibility, size,   //
+// zoom                                                                           //
+//================================================================================//
+
+//===========================//
+//==== START ----- Block ====//
+//===========================//
+
+html, body, hgroup, header, footer, nav,
+article, section, aside, figure, figcaption,
+h1, h2, h3, h4, h5, h6,
+ol, ul, li,
+div, span, p, img, a,
+{
+    vertical-align: baseline;
+
+    border: 0;
+}
+
+//===========================//
+//===== END ----- Block =====//
+//===========================//
+
+
+//================================================================================//
+//==================================== Other =====================================//
+//================================== Includes: ===================================//
+//================================================================================//
+// transform, box-align, box-flex, box-orient, box-pack, box-shadow, box-sizing,  //
+// table-layout,                                                                  //
+//                                                                                //
+// animation, animation-delay, animation-duration, animation-iteration-count,     //
+// animation-name, animation-play-state, animation-timing-function,               //
+// animation-fill-mode,                                                           //
+//                                                                                //
+// transition, transition-delay, transition-duration, transition-property,        //
+// transition-timing-function,                                                    //
+//                                                                                //
+// background-clip, backface-visibility, resize, appearance, user-select,         //
+// interpolation-mode, direction, marks, page, set-link-source, unicode-bidi,     //
+// speak                                                                          //
+//================================================================================//
+
+//===========================//
+//==== START ----- Block ====//
+//===========================//
+
+
+
+//===========================//
+//===== END ----- Block =====//
+//===========================//

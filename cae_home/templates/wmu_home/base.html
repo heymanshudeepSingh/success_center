@@ -1,0 +1,57 @@
+
+<!doctype html>
+{% load staticfiles %}
+<html lang="en">
+
+  {% block head %}
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      {% block title %}
+        <title>
+          {% block title_page_name %}{% endblock title_page_name %}
+          {% block title_app_name %}{% endblock title_app_name %}
+          {% block title_site_name %}{% endblock title_site_name %}
+        </title>
+      {% endblock title %}
+
+      {% block base_fonts %}
+        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet" type="text/css">
+      {% endblock base_fonts %}
+      {% block extra_fonts %}{% endblock extra_fonts %}
+
+      {% block base_styles %}
+        <link rel="stylesheet" type="text/css" href="{% static 'wmu_home/css/base.css' %}">
+      {% endblock base_styles %}
+      {% block extra_styles %}{% endblock extra_styles %}
+
+      {% block base_scripts %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      {% endblock base_scripts %}
+      {% block extra_scripts %}{% endblock extra_scripts %}
+    </head>
+  {% endblock head %}
+
+  {% block body %}
+    <body>
+      {% block header %}
+        {% include 'wmu_home/header.html' %}
+      {% endblock header %}
+
+      {% block main %}{% endblock main %}
+
+      {% block footer %}
+        {% include 'wmu_home/footer.html' %}
+      {% endblock footer %}
+
+      {% block base_scripts_body %}
+        <script src="{% static 'wmu_home/js/mobile_nav.js' %}"></script>
+      {% endblock base_scripts_body %}
+      {% block extra_scripts_body %}{% endblock extra_scripts_body %}
+    </body>
+  {% endblock body %}
+
+</html>
