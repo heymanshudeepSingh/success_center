@@ -121,9 +121,11 @@ class Command(BaseCommand):
         """
         Creates base user models.
         """
-        models.User.objects.create_superuser('brodriguez8774', '', 'temppass2')
-        models.User.objects.create_superuser('skd6970', '', 'temppass2')
-        models.User.objects.create_superuser('jbn6294', '', 'temppass2')
+        models.User.objects.create_superuser('brodriguez8774', '', 'temppass2') # Brandon
+        models.User.objects.create_superuser('ngf9321', '', 'temppass2')    # Nick
+        models.User.objects.create_superuser('cjg2152', '', 'temppass2')    # Cade
+        models.User.objects.create_superuser('skd6970', '', 'temppass2')    # Steven (Senior Design)
+        models.User.objects.create_superuser('jbn6294', '', 'temppass2')    # Josh (Senior Design)
 
         print('Populated user models.')
 
