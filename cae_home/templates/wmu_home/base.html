@@ -1,57 +1,117 @@
+<!DOCTYPE html>
+<!-- Sorry no IE7 support! -->
+<!-- @see http://foundation.zurb.com/docs/index.html#basicHTMLMarkup -->
 
-<!doctype html>
-{% load staticfiles %}
-<html lang="en">
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" dir="ltr"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" dir="ltr"> <!--<![endif]-->
 
   {% block head %}
     <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
       {% block title %}
         <title>
-          {% block title_page_name %}{% endblock title_page_name %}
-          {% block title_app_name %}{% endblock title_app_name %}
-          {% block title_site_name %}{% endblock title_site_name %}
-        </title>
+        {% block title_page_name %}{% endblock title_page_name %}
+        {% block title_app_name %}CAE Center | {% endblock title_app_name %}
+        {% block title_site_name %}College of Engineering and Applied Sciences | Western Michigan University {% endblock title_site_name %}
+      </title>
       {% endblock title %}
 
+      <link rel="shortcut icon" href="http://wmich.edu/sites/all/themes/wmu/wmu_andalusian/favicon.ico" />
+      <link rel="apple-touch-icon" href="http://wmich.edu/sites/all/themes/wmu/wmu_andalusian/apple-touch-icon.png" />
+      <link rel="apple-touch-icon-precomposed" href="http://wmich.edu/sites/all/themes/wmu/wmu_andalusian/apple-touch-icon-precomposed.png" />
+
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta http-equiv="ImageToolbar" content="false" />
+      <meta name="Generator" content="Drupal 7 (http://drupal.org)" />
+      <link rel="canonical" href="/engineer/academics" />
+      <link rel="shortlink" href="/node/25130" />
+
+      <!-- Google Tag Manager -->
+      <!-- <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-M5LZPXV');</script> -->
+      <!-- End Google Tag Manager -->
+
       {% block base_fonts %}
-        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,600,700,900,regular&amp;subset=latin" />
       {% endblock base_fonts %}
       {% block extra_fonts %}{% endblock extra_fonts %}
 
       {% block base_styles %}
-        <link rel="stylesheet" type="text/css" href="{% static 'wmu_home/css/base.css' %}">
+        <link rel="stylesheet" href="http://wmich.edu/sites/default/files/css/css_kShW4RPmRstZ3SpIC-ZvVGNFVAi0WEMuCnI0ZkYIaFw.css" />
+        <link rel="stylesheet" href="http://wmich.edu/sites/default/files/css/css_nsWbAMP9uI-Hf6Mev6oweOFEOowtQ-l2gDmPjPnfAqc.css" />
+        <link rel="stylesheet" href="http://wmich.edu/sites/default/files/css/css_xJo_TY5sFlQWT0D977fCYu991PvqZv0egWHXbNp9SYg.css" />
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="http://wmich.edu/sites/default/files/css/css__l58fjJZyzgENd82faHXiW3VU73Pk9Fp0pho0Q66dfM.css" />
+        <link rel="stylesheet" href="http://wmich.edu/sites/default/files/css/css_s9lBKsuB7cqBCVWn-oGvJGmz0LLEwwUUn9dCQ0mah08.css" />
       {% endblock base_styles %}
       {% block extra_styles %}{% endblock extra_styles %}
 
       {% block base_scripts %}
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!-- <script src="http://wmich.edu/sites/all/libraries/respondjs/respond.min.js?pcu6v5"></script> -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+        <!-- <script>window.jQuery || document.write("<script src='/sites/all/modules/contrib/jquery_update/replace/jquery/1.7/jquery.min.js'>\x3C/script>")</script> -->
+        <script src="http://wmich.edu/sites/default/files/js/js_vSmhpx_T-AShyt_WMW5_TcwwxJP1imoVOa8jvwL_mxE.js"></script>
+        <!-- <script>document.createElement( "picture" );</script> -->
+        <!-- <script src="http://wmich.edu/sites/default/files/js/js_IJ151ck29DJxhU_GqXFyLgb7xU3Pbx8roa3I_04eATU.js"></script> -->
+        <!-- <script src="http://wmich.edu/sites/default/files/js/js_3wQOXLx3aFIGUgx3c_7XeuTTYLhTz2P6aFcmsVi4Lsw.js"></script> -->
+        <script src="http://wmich.edu/sites/default/files/js/js_ok7Glsk5GQKxrYnudN-nEzsTDIurzpSN-Pj4gneqZF0.js"></script>
+        <!-- <script>
+          jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"wmu_andalusian","theme_token":"FCF8CyE1pIVZaL7lNhEmJHG-5kbaP5Uwi-UfajOuZI8","js":{"sites\/all\/modules\/contrib\/picture\/picturefill2\/picturefill.min.js":1,"sites\/all\/modules\/contrib\/picture\/picture.min.js":1,"sites\/all\/modules\/contrib\/flexslider\/assets\/js\/flexslider.load.js":1,"sites\/all\/modules\/contrib\/addthis\/addthis.js":1,"sites\/all\/libraries\/respondjs\/respond.min.js":1,"\/\/ajax.googleapis.com\/ajax\/libs\/jquery\/1.7.2\/jquery.min.js":1,"0":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"1":1,"sites\/all\/modules\/contrib\/caption_filter\/js\/caption-filter.js":1,"sites\/all\/libraries\/flexslider\/jquery.flexslider-min.js":1,"sites\/all\/modules\/contrib\/hide_submit\/hide_submit.js":1,"sites\/all\/themes\/contrib\/zurb_foundation\/js\/vendor\/modernizr.js":1,"sites\/all\/themes\/wmu\/wmu_andalusian\/js\/foundation.min.js":1,"sites\/all\/themes\/wmu\/wmu_andalusian\/js\/libs.min.js":1,"sites\/all\/themes\/wmu\/wmu_andalusian\/js\/app.min.js":1},"css":{"modules\/system\/system.base.css":1,"modules\/system\/system.messages.css":1,"modules\/system\/system.theme.css":1,"sites\/all\/modules\/contrib\/date\/date_api\/date.css":1,"sites\/all\/modules\/contrib\/date\/date_popup\/themes\/datepicker.1.7.css":1,"modules\/field\/theme\/field.css":1,"modules\/node\/node.css":1,"sites\/all\/modules\/contrib\/picture\/picture_wysiwyg.css":1,"modules\/user\/user.css":1,"sites\/all\/modules\/wmu\/wmu_directories\/wmu-directories.css":1,"sites\/all\/modules\/wmu\/wmu_spotlights\/wmu_spotlights.css":1,"sites\/all\/modules\/contrib\/views\/css\/views.css":1,"sites\/all\/modules\/contrib\/caption_filter\/caption-filter.css":1,"sites\/all\/modules\/contrib\/ctools\/css\/ctools.css":1,"sites\/all\/modules\/contrib\/panels\/css\/panels.css":1,"sites\/all\/modules\/contrib\/flexslider\/assets\/css\/flexslider_img.css":1,"sites\/all\/libraries\/flexslider\/flexslider.css":1,"\/\/maxcdn.bootstrapcdn.com\/font-awesome\/4.6.3\/css\/font-awesome.min.css":1,"sites\/all\/modules\/contrib\/hide_submit\/hide_submit.css":1,"sites\/all\/themes\/wmu\/wmu_andalusian\/css\/normalize.css":1,"sites\/all\/themes\/wmu\/wmu_andalusian\/css\/foundation.min.css":1,"sites\/all\/themes\/wmu\/wmu_andalusian\/css\/wmu_andalusian.css":1,"sites\/all\/themes\/wmu\/wmu_andalusian\/css\/font-awesome.css":1,"sites\/all\/themes\/wmu\/wmu_andalusian\/css\/workbench.block.css":1,"sites\/all\/themes\/wmu\/wmu_andalusian\/css\/webform.css":1,"sites\/all\/themes\/wmu\/wmu_andalusian\/css\/ad-page.css":1,"http:\/\/fonts.googleapis.com\/css?family=Source+Sans+Pro:300,600,700,900,regular\u0026subset=latin":1}},"flexslider":{"optionsets":{"slideshow":{"namespace":"flex-","selector":".slides \u003E li","easing":"swing","direction":"horizontal","reverse":false,"smoothHeight":false,"startAt":0,"animationSpeed":600,"initDelay":0,"useCSS":true,"touch":true,"video":false,"keyboard":true,"multipleKeyboard":false,"mousewheel":0,"controlsContainer":".flex-nav-container","sync":"","asNavFor":"","itemWidth":0,"itemMargin":0,"minItems":0,"maxItems":0,"move":0,"animation":"fade","slideshow":true,"slideshowSpeed":"7000","directionNav":true,"controlNav":true,"prevText":"Previous","nextText":"Next","pausePlay":false,"pauseText":"Pause","playText":"Play","randomize":false,"thumbCaptions":false,"thumbCaptionsBoth":false,"animationLoop":true,"pauseOnAction":true,"pauseOnHover":true,"manualControls":""}},"instances":{"flexslider-node-39674":"slideshow"}},"urlIsAjaxTrusted":{"https:\/\/search.wmich.edu\/search":true}});
+        </script> -->
+        <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
       {% endblock base_scripts %}
       {% block extra_scripts %}{% endblock extra_scripts %}
     </head>
   {% endblock head %}
 
+
   {% block body %}
-    <body>
-      {% block header %}
+    <body class="html not-front not-logged-in two-sidebars page-node page-node- page-node-25130 node-type-page section-engineer" >
+      <div class="skip-link">
+        <a href="#main-content" class="element-invisible element-focusable">Skip to main content</a>
+      </div>
+      <!-- Google Tag Manager (noscript) -->
+      <!-- <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M5LZPXV" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+      </noscript> -->
+      <!-- End Google Tag Manager (noscript) -->
+      <!--.page -->
+
+      <div role="document" class="page">
         {% include 'wmu_home/header.html' %}
-      {% endblock header %}
-
-      {% block main %}{% endblock main %}
-
-      {% block footer %}
+        {% block main %}{% endblock main %}
         {% include 'wmu_home/footer.html' %}
-      {% endblock footer %}
+      </div>
+
+      <!--/.page -->
 
       {% block base_scripts_body %}
-        <script src="{% static 'wmu_home/js/mobile_nav.js' %}"></script>
+        <!-- <script src="http://wmich.edu/sites/default/files/js/js_7Ukqb3ierdBEL0eowfOKzTkNu-Le97OPm-UqTS5NENU.js"></script> -->
+        <!-- <script src="http://wmich.edu/sites/default/files/js/js_vOUiiV0S64XkAXHi2p6Jj-IA1IUlN8hJ-pmMXZ37dug.js"></script> -->
+        <script>
+          (function ($, Drupal, window, document, undefined) {
+          $(document).foundation();
+          })(jQuery, Drupal, this, this.document);
+        </script>
+        <!-- Begin Siteimprove Priority -->
+        <!-- <script type="text/javascript">
+          /*<![CDATA[*/
+          (function() {
+          var sz = document.createElement('script'); sz.type = 'text/javascript'; sz.async = true;
+          sz.src = '//siteimproveanalytics.com/js/siteanalyze_66357310.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(sz, s);
+          })();
+          /*]]>*/
+        </script> -->
+        <!-- End Siteimprove Priority -->
       {% endblock base_scripts_body %}
-      {% block extra_scripts_body %}{% endblock extra_scripts_body %}
     </body>
   {% endblock body %}
-
 </html>
