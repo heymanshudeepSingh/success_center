@@ -1,30 +1,39 @@
+{% load staticfiles %}
+
 <!--.l-header -->
 <header role="banner" class="l-header">
   <!--.top-bar -->
   <div class="contain-to-grid hide-for-large-up">
-    <nav class="top-bar global-nav" role="navigation" data-topbar data-options="is_hover:false; mobile_show_parent_link:true">
+    <nav class="top-bar global-nav" role="navigation" data-topbar="" data-options="is_hover:false; mobile_show_parent_link:true" style="">
       <ul class="title-area">
         <li class="name">
-          <h2 id="site-name-topbar"><a href="/" rel="home" title="Back to Western Michigan University home page"><img class="logo" src="http://wmich.edu/sites/all/themes/wmu/wmu_andalusian/images/w.svg" alt="W logo" /><img class="site-name" src="http://wmich.edu/sites/all/themes/wmu/wmu_andalusian/images/name.svg" alt="Western Michigan University" /></a></h2>
+          <h2 id="site-name-topbar">
+            <a href="http://wmich.edu/" rel="home" title="Back to Western Michigan University home page">
+              <img class="logo" src="{% static 'wmu_home/images/wmu_logos/w.svg' %}" alt="W logo"><img class="site-name" src="{% static 'wmu_home/images/wmu_logos/name.svg' %}" alt="Western Michigan University">
+            </a>
+          </h2>
         </li>
-        <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
+        <li class="toggle-topbar menu-icon">
+          <a href="#"><span></span></a>
+        </li>
       </ul>
       <section class="top-bar-section">
         <!--.l-header-region -->
         <div class="l-header-region">
           <div class="block block-wmu-google-search block-wmu-google-search-mobile">
-            <form action="https://search.wmich.edu/search" method="get" id="wmu-google-search-form--2" accept-charset="UTF-8">
+            <form action="https://search.wmich.edu/search" method="get" id="wmu-google-search-form--2" accept-charset="UTF-8" class="hideSubmitButton-processed">
               <div>
                 <h2 class="element-invisible">Search form</h2>
                 <div class="row collapse">
                   <div class="large-12 columns">
                     <div class="row collapse">
                       <div class="small-10 medium-11 large-10 columns">
-                        <input title="Search WMU" type="search" id="edit-q--2" name="q" value="" size="15" maxlength="128" placeholder="Search WMU" class="form-text form-search" />
+                        <input title="Search WMU" id="edit-q--2" name="q" size="15" maxlength="128" placeholder="Search WMU" class="form-text form-search" type="search">
                       </div>
                       <div class="small-2 medium-1 large-2 columns">
                         <button type="submit" class="button postfix" title="Search" aria-label="submit form">
-                          <i class="fa fa-search"></i><span class="element-invisible">Search</span>
+                          <i class="fa fa-search"></i>
+                          <span class="element-invisible">Search</span>
                         </button>
                       </div>
                     </div>
@@ -36,20 +45,20 @@
         </div>
         <!--/.l-header-region -->
         <ul id="main-menu" class="main-nav left">
-          <li class="first leaf" title=""><a href="/academics" title="">Academics</a></li>
-          <li class="leaf" title=""><a href="/admissions" title="">Admissions</a></li>
-          <li class="leaf" title=""><a href="/finaid" title="">Financial Aid</a></li>
-          <li class="leaf" title=""><a href="/students" title="">Student Life</a></li>
+          <li class="first leaf" title=""><a href="http://wmich.edu/academics" title="">Academics</a></li>
+          <li class="leaf" title=""><a href="http://wmich.edu/admissions" title="">Admissions</a></li>
+          <li class="leaf" title=""><a href="http://wmich.edu/finaid" title="">Financial Aid</a></li>
+          <li class="leaf" title=""><a href="http://wmich.edu/students" title="">Student Life</a></li>
           <li class="leaf" title=""><a href="http://wmubroncos.com/" title="">Athletics</a></li>
-          <li class="last leaf" title=""><a href="/research" title="">Research</a></li>
+          <li class="last leaf" title=""><a href="http://wmich.edu/research" title="">Research</a></li>
         </ul>
         <ul id="secondary-menu" class="secondary link-list right">
-          <li class="first leaf" title=""><a href="/about" title="">About</a></li>
+          <li class="first leaf" title=""><a href="http://wmich.edu/about" title="">About</a></li>
           <li class="leaf"><a href="http://wmich.edu/directories">A–Z</a></li>
-          <li class="leaf" title=""><a href="/contact" title="">Contact</a></li>
+          <li class="leaf" title=""><a href="http://wmich.edu/contact" title="">Contact</a></li>
           <li class="leaf" title=""><a href="http://www.wmich.edu/peoplesearch/" title="">Find People</a></li>
           <li class="leaf" title=""><a href="http://gowmu.wmich.edu/" title="">GoWMU</a></li>
-          <li class="last leaf" title=""><a href="/visit" title="">Visit</a></li>
+          <li class="last leaf" title=""><a href="http://wmich.edu/visit" title="">Visit</a></li>
         </ul>
       </section>
     </nav>
@@ -58,14 +67,14 @@
 
   <!-- Title and menu -->
   <section id="alt-header" class="row  show-for-large-up">
-
     <!-- Site name -->
     <div class="columns large-3">
       <h2 id="site-name">
-        <a href="/" rel="home" title="Back to Western Michigan University home page"><img class="logo" src="http://wmich.edu/sites/all/themes/wmu/wmu_andalusian/images/w.svg" alt="W logo" /><img class="site-name" src="http://wmich.edu/sites/all/themes/wmu/wmu_andalusian/images/name-stacked.svg" alt="Western Michigan University" /></a>
+        <a href="http://wmich.edu/" rel="home" title="Back to Western Michigan University home page">
+          <img class="logo" src="{% static 'wmu_home/images/wmu_logos/w.svg' %}" alt="W logo"><img class="site-name" src="{% static 'wmu_home/images/wmu_logos/name-stacked.svg' %}" alt="Western Michigan University">
+        </a>
       </h2>
     </div>
-
     <!-- Navigation -->
     <div class="columns large-9">
       <!-- Secondary nav and search -->
@@ -74,26 +83,26 @@
           <nav class="navigation" role="navigation">
             <h2 class="element-invisible">Secondary menu</h2>
             <ul id="secondary-menu-links" class="links inline-list clearfix">
-              <li class="menu-9083 first"><a href="/about" title="">About</a></li>
+              <li class="menu-9083 first"><a href="http://wmich.edu/about" title="">About</a></li>
               <li class="menu-9084"><a href="http://wmich.edu/directories">A–Z</a></li>
-              <li class="menu-407"><a href="/contact" title="">Contact</a></li>
+              <li class="menu-407"><a href="http://wmich.edu/contact" title="">Contact</a></li>
               <li class="menu-409"><a href="http://www.wmich.edu/peoplesearch/" title="">Find People</a></li>
               <li class="menu-9143"><a href="http://gowmu.wmich.edu/" title="">GoWMU</a></li>
-              <li class="menu-9085 last"><a href="/visit" title="">Visit</a></li>
+              <li class="menu-9085 last"><a href="http://wmich.edu/visit" title="">Visit</a></li>
             </ul>
           </nav>
         </div>
         <!--.l-header-region -->
         <div class="l-header-region columns large-4">
           <div class="block block-wmu-google-search block-wmu-google-search-global header">
-            <form action="https://search.wmich.edu/search" method="get" id="wmu-google-search-form" accept-charset="UTF-8">
+            <form action="https://search.wmich.edu/search" method="get" id="wmu-google-search-form" accept-charset="UTF-8" class="hideSubmitButton-processed">
               <div>
                 <h2 class="element-invisible">Search form</h2>
                 <div class="row collapse">
                   <div class="large-12 columns">
                     <div class="row collapse">
                       <div class="small-10 medium-11 large-10 columns">
-                        <input title="Search WMU" type="search" id="edit-q" name="q" value="" size="15" maxlength="128" placeholder="Search WMU" class="form-text form-search" />
+                        <input title="Search WMU" id="edit-q" name="q" size="15" maxlength="128" placeholder="Search WMU" class="form-text form-search" type="search">
                       </div>
                       <div class="small-2 medium-1 large-2 columns">
                         <button type="submit" class="button postfix" title="Search" aria-label="submit form">
@@ -114,12 +123,13 @@
         <div class="columns">
           <nav class="navigation" role="navigation">
             <h2 class="element-invisible">Main menu</h2>
-            <ul id="main-menu-links" class="links inline-list clearfix"><li class="menu-2069 first"><a href="/academics" title="">Academics</a></li>
-              <li class="menu-5280"><a href="/admissions" title="">Admissions</a></li>
-              <li class="menu-9081"><a href="/finaid" title="">Financial Aid</a></li>
-              <li class="menu-392"><a href="/students" title="">Student Life</a></li>
+            <ul id="main-menu-links" class="links inline-list clearfix">
+              <li class="menu-2069 first"><a href="http://wmich.edu/academics" title="">Academics</a></li>
+              <li class="menu-5280"><a href="http://wmich.edu/admissions" title="">Admissions</a></li>
+              <li class="menu-9081"><a href="http://wmich.edu/finaid" title="">Financial Aid</a></li>
+              <li class="menu-392"><a href="http://wmich.edu/students" title="">Student Life</a></li>
               <li class="menu-393"><a href="http://wmubroncos.com/" title="">Athletics</a></li>
-              <li class="menu-9082 last"><a href="/research" title="">Research</a></li>
+              <li class="menu-9082 last"><a href="http://wmich.edu/research" title="">Research</a></li>
             </ul>
           </nav>
         </div>
@@ -130,27 +140,30 @@
 
   <!-- Section topbar -->
   <div class="contain-to-grid hide-for-large-up">
-    <nav class="top-bar section-nav block block-menu-block block-menu-block-wmu-cms-sections-topbar" data-topbar data-options="is_hover:false; mobile_show_parent_link:true">
+    <nav class="top-bar section-nav block block-menu-block block-menu-block-wmu-cms-sections-topbar" data-topbar="" data-options="is_hover:false; mobile_show_parent_link:true" style="">
       <ul class="title-area">
-        <li class="name"><h2 class="block-title long-title"><a href="/engineer" title="" class="active-trail">College of Engineering and Applied Sciences</a></h2></li>
-        <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
+        <li class="name"><h2 class="block-title long-title"><a href="http://wmich.edu/engineer" title="" class="active-trail">College of Engineering and Applied Sciences</a></h2></li>
+        <li class="toggle-topbar menu-icon">
+          <a href="#"><span></span></a>
+        </li>
       </ul>
+
       <section class="top-bar-section">
         <div class="menu-block-wrapper menu-block-wmu_cms-sections-topbar menu-name-sections parent-mlid-0 menu-level-2">
           <ul class="menu">
-            <li class="first leaf active"><a href="/engineer" title="" class="active-trail active">Home</a></li>
-            <li class="collapsed menu-mlid-8759"><a href="/engineer/about" title="">About</a></li>
-            <li class="collapsed menu-mlid-8760"><a href="/engineer/academics" title="">Academics</a></li>
-            <li class="collapsed menu-mlid-8761"><a href="/engineer/advising" title="">Advising</a></li>
-            <li class="collapsed menu-mlid-8886"><a href="/engineer/alumni" title="">Alumni</a></li>
-            <li class="collapsed menu-mlid-8764"><a href="/engineer/news" title="">Events and News</a></li>
-            <li class="collapsed menu-mlid-8765"><a href="/engineer/current" title="">For Current Students</a></li>
-            <li class="collapsed menu-mlid-8766"><a href="/engineer/future" title="">For Future Students</a></li>
-            <li class="leaf menu-mlid-14202"><a href="/engineer/giving" title="">Giving</a></li>
-            <li class="collapsed menu-mlid-9319"><a href="/engineer/researchcenters" title="">Research</a></li>
-            <li class="leaf menu-mlid-8769"><a href="/engineer/scholarships" title="">Scholarships</a></li>
-            <li class="collapsed menu-mlid-8772"><a href="/engineer/directory" title="">Directory</a></li>
-            <li class="last leaf menu-mlid-8773"><a href="/engineer/contact" title="">Contact Us</a></li>
+            <li class="first leaf active"><a href="http://wmich.edu/engineer" title="" class="active-trail">Home</a></li>
+            <li class="collapsed menu-mlid-8759"><a href="http://wmich.edu/engineer/about" title="">About</a></li>
+            <li class="collapsed menu-mlid-8760"><a href="http://wmich.edu/engineer/academics" title="">Academics</a></li>
+            <li class="collapsed menu-mlid-8761"><a href="http://wmich.edu/engineer/advising" title="">Advising</a></li>
+            <li class="collapsed menu-mlid-8886"><a href="http://wmich.edu/engineer/alumni" title="">Alumni</a></li>
+            <li class="collapsed menu-mlid-8764"><a href="http://wmich.edu/engineer/news" title="">Events and News</a></li>
+            <li class="collapsed menu-mlid-8765"><a href="http://wmich.edu/engineer/current" title="">For Current Students</a></li>
+            <li class="collapsed menu-mlid-8766"><a href="http://wmich.edu/engineer/future" title="">For Future Students</a></li>
+            <li class="leaf menu-mlid-14202"><a href="http://wmich.edu/engineer/giving" title="">Giving</a></li>
+            <li class="collapsed menu-mlid-9319"><a href="http://wmich.edu/engineer/researchcenters" title="">Research</a></li>
+            <li class="leaf menu-mlid-8769"><a href="http://wmich.edu/engineer/scholarships" title="">Scholarships</a></li>
+            <li class="collapsed menu-mlid-8772"><a href="http://wmich.edu/engineer/directory" title="">Directory</a></li>
+            <li class="last leaf menu-mlid-8773"><a href="http://wmich.edu/engineer/contact" title="">Contact Us</a></li>
           </ul>
         </div>
       </section>
@@ -159,11 +172,12 @@
   <!-- End section topbar -->
 
   <!-- Section name -->
-  <section class="l-section-name panel  show-for-large-up">
+  <section class="l-section-name panel show-for-large-up">
     <div class="row">
-      <h2 id="section-name" class="columns"><a href="/engineer" title="College of Engineering and Applied Sciences Home">College of Engineering and Applied Sciences</a></h2>
+      <h2 id="section-name" class="columns"><a href="http://wmich.edu/engineer" title="College of Engineering and Applied Sciences Home">College of Engineering and Applied Sciences</a></h2>
     </div>
   </section>
   <!-- End section name -->
+
 </header>
 <!--/.l-header -->
