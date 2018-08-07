@@ -1,12 +1,7 @@
+
 <!DOCTYPE html>
-
 {% load staticfiles %}
-
-<!-- Sorry no IE7 support! -->
-<!-- @see http://foundation.zurb.com/docs/index.html#basicHTMLMarkup -->
-
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" dir="ltr"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" dir="ltr"> <!--<![endif]-->
+<html lang="en">
 
   {% block head %}
     <head>
@@ -43,12 +38,12 @@
       {% block extra_fonts %}{% endblock extra_fonts %}
 
       {% block base_styles %}
-        <link rel="stylesheet" href="http://wmich.edu/sites/default/files/css/css_kShW4RPmRstZ3SpIC-ZvVGNFVAi0WEMuCnI0ZkYIaFw.css" />
-        <link rel="stylesheet" href="http://wmich.edu/sites/default/files/css/css_nsWbAMP9uI-Hf6Mev6oweOFEOowtQ-l2gDmPjPnfAqc.css" />
-        <link rel="stylesheet" href="http://wmich.edu/sites/default/files/css/css_xJo_TY5sFlQWT0D977fCYu991PvqZv0egWHXbNp9SYg.css" />
+        <link rel="stylesheet" href="{% static 'wmu_home/css/wmu_css/css_kShW4RPmRstZ3SpIC-ZvVGNFVAi0WEMuCnI0ZkYIaFw.css' %}" />
+        <!--<link rel="stylesheet" href="http://wmich.edu/sites/default/files/css/css_nsWbAMP9uI-Hf6Mev6oweOFEOowtQ-l2gDmPjPnfAqc.css" />-->
+        <!--<link rel="stylesheet" href="http://wmich.edu/sites/default/files/css/css_xJo_TY5sFlQWT0D977fCYu991PvqZv0egWHXbNp9SYg.css" />-->
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
-        <link rel="stylesheet" href="http://wmich.edu/sites/default/files/css/css__l58fjJZyzgENd82faHXiW3VU73Pk9Fp0pho0Q66dfM.css" />
-        <link rel="stylesheet" href="http://wmich.edu/sites/default/files/css/css_s9lBKsuB7cqBCVWn-oGvJGmz0LLEwwUUn9dCQ0mah08.css" />
+        <!--<link rel="stylesheet" href="http://wmich.edu/sites/default/files/css/css__l58fjJZyzgENd82faHXiW3VU73Pk9Fp0pho0Q66dfM.css" />-->
+        <link rel="stylesheet" href="{% static 'wmu_home/css/wmu_css/css_s9lBKsuB7cqBCVWn-oGvJGmz0LLEwwUUn9dCQ0mah08.css' %}" />
       {% endblock base_styles %}
       {% block extra_styles %}{% endblock extra_styles %}
 
@@ -57,11 +52,11 @@
         <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <!-- <script>window.jQuery || document.write("<script src='/sites/all/modules/contrib/jquery_update/replace/jquery/1.7/jquery.min.js'>\x3C/script>")</script> -->
-        <script src="http://wmich.edu/sites/default/files/js/js_vSmhpx_T-AShyt_WMW5_TcwwxJP1imoVOa8jvwL_mxE.js"></script>
+        <script src="{% static 'wmu_home/js/wmu_js/js_vSmhpx_T-AShyt_WMW5_TcwwxJP1imoVOa8jvwL_mxE.js' %}"></script>
         <!-- <script>document.createElement( "picture" );</script> -->
         <!-- <script src="http://wmich.edu/sites/default/files/js/js_IJ151ck29DJxhU_GqXFyLgb7xU3Pbx8roa3I_04eATU.js"></script> -->
         <!-- <script src="http://wmich.edu/sites/default/files/js/js_3wQOXLx3aFIGUgx3c_7XeuTTYLhTz2P6aFcmsVi4Lsw.js"></script> -->
-        <script src="http://wmich.edu/sites/default/files/js/js_ok7Glsk5GQKxrYnudN-nEzsTDIurzpSN-Pj4gneqZF0.js"></script>
+        <script src="{% static 'wmu_home/js/wmu_js/js_ok7Glsk5GQKxrYnudN-nEzsTDIurzpSN-Pj4gneqZF0.js' %}"></script>
         <!-- <script>
           jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"wmu_andalusian","theme_token":"FCF8CyE1pIVZaL7lNhEmJHG-5kbaP5Uwi-UfajOuZI8","js":{"sites\/all\/modules\/contrib\/picture\/picturefill2\/picturefill.min.js":1,"sites\/all\/modules\/contrib\/picture\/picture.min.js":1,"sites\/all\/modules\/contrib\/flexslider\/assets\/js\/flexslider.load.js":1,"sites\/all\/modules\/contrib\/addthis\/addthis.js":1,"sites\/all\/libraries\/respondjs\/respond.min.js":1,"\/\/ajax.googleapis.com\/ajax\/libs\/jquery\/1.7.2\/jquery.min.js":1,"0":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"1":1,"sites\/all\/modules\/contrib\/caption_filter\/js\/caption-filter.js":1,"sites\/all\/libraries\/flexslider\/jquery.flexslider-min.js":1,"sites\/all\/modules\/contrib\/hide_submit\/hide_submit.js":1,"sites\/all\/themes\/contrib\/zurb_foundation\/js\/vendor\/modernizr.js":1,"sites\/all\/themes\/wmu\/wmu_andalusian\/js\/foundation.min.js":1,"sites\/all\/themes\/wmu\/wmu_andalusian\/js\/libs.min.js":1,"sites\/all\/themes\/wmu\/wmu_andalusian\/js\/app.min.js":1},"css":{"modules\/system\/system.base.css":1,"modules\/system\/system.messages.css":1,"modules\/system\/system.theme.css":1,"sites\/all\/modules\/contrib\/date\/date_api\/date.css":1,"sites\/all\/modules\/contrib\/date\/date_popup\/themes\/datepicker.1.7.css":1,"modules\/field\/theme\/field.css":1,"modules\/node\/node.css":1,"sites\/all\/modules\/contrib\/picture\/picture_wysiwyg.css":1,"modules\/user\/user.css":1,"sites\/all\/modules\/wmu\/wmu_directories\/wmu-directories.css":1,"sites\/all\/modules\/wmu\/wmu_spotlights\/wmu_spotlights.css":1,"sites\/all\/modules\/contrib\/views\/css\/views.css":1,"sites\/all\/modules\/contrib\/caption_filter\/caption-filter.css":1,"sites\/all\/modules\/contrib\/ctools\/css\/ctools.css":1,"sites\/all\/modules\/contrib\/panels\/css\/panels.css":1,"sites\/all\/modules\/contrib\/flexslider\/assets\/css\/flexslider_img.css":1,"sites\/all\/libraries\/flexslider\/flexslider.css":1,"\/\/maxcdn.bootstrapcdn.com\/font-awesome\/4.6.3\/css\/font-awesome.min.css":1,"sites\/all\/modules\/contrib\/hide_submit\/hide_submit.css":1,"sites\/all\/themes\/wmu\/wmu_andalusian\/css\/normalize.css":1,"sites\/all\/themes\/wmu\/wmu_andalusian\/css\/foundation.min.css":1,"sites\/all\/themes\/wmu\/wmu_andalusian\/css\/wmu_andalusian.css":1,"sites\/all\/themes\/wmu\/wmu_andalusian\/css\/font-awesome.css":1,"sites\/all\/themes\/wmu\/wmu_andalusian\/css\/workbench.block.css":1,"sites\/all\/themes\/wmu\/wmu_andalusian\/css\/webform.css":1,"sites\/all\/themes\/wmu\/wmu_andalusian\/css\/ad-page.css":1,"http:\/\/fonts.googleapis.com\/css?family=Source+Sans+Pro:300,600,700,900,regular\u0026subset=latin":1}},"flexslider":{"optionsets":{"slideshow":{"namespace":"flex-","selector":".slides \u003E li","easing":"swing","direction":"horizontal","reverse":false,"smoothHeight":false,"startAt":0,"animationSpeed":600,"initDelay":0,"useCSS":true,"touch":true,"video":false,"keyboard":true,"multipleKeyboard":false,"mousewheel":0,"controlsContainer":".flex-nav-container","sync":"","asNavFor":"","itemWidth":0,"itemMargin":0,"minItems":0,"maxItems":0,"move":0,"animation":"fade","slideshow":true,"slideshowSpeed":"7000","directionNav":true,"controlNav":true,"prevText":"Previous","nextText":"Next","pausePlay":false,"pauseText":"Pause","playText":"Play","randomize":false,"thumbCaptions":false,"thumbCaptionsBoth":false,"animationLoop":true,"pauseOnAction":true,"pauseOnHover":true,"manualControls":""}},"instances":{"flexslider-node-39674":"slideshow"}},"urlIsAjaxTrusted":{"https:\/\/search.wmich.edu\/search":true}});
         </script> -->
@@ -72,7 +67,6 @@
       {% block extra_scripts %}{% endblock extra_scripts %}
     </head>
   {% endblock head %}
-
 
   {% block body %}
     <body class="html not-front not-logged-in two-sidebars page-node page-node- page-node-25130 node-type-page section-engineer" >
@@ -116,4 +110,5 @@
       {% endblock base_scripts_body %}
     </body>
   {% endblock body %}
+
 </html>
