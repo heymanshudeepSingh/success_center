@@ -38,9 +38,13 @@
       {% block extra_fonts %}{% endblock extra_fonts %}
 
       {% block base_styles %}
+        <!--WMU Provided Styles-->
         <link rel="stylesheet" href="{% static 'wmu_home/css/wmu_css/base.css' %}" />
         <link rel="stylesheet" href="{% static 'wmu_home/css/wmu_css/extra.css' %}" />
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
+
+        <!--CAE Center Styles-->
+        <link rel="stylesheet" href="{% static 'wmu_home/css/base.css' %}" />
       {% endblock base_styles %}
       {% block extra_styles %}{% endblock extra_styles %}
 
