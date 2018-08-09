@@ -105,6 +105,7 @@ LOGGING = {
 
 
 # Initialize logging.
+LOGGING_CONFIG = None # Prevent django from initializing logging again
 logging.config.dictConfig(LOGGING)
 logger = logging.getLogger(__name__)
 
