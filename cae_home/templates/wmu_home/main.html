@@ -1,0 +1,50 @@
+{% extends 'wmu_home/base.html' %}
+
+
+{% block main %}
+  <!--.l-main -->
+  <main role="main" class="row l-main">
+    <!-- .l-main region -->
+    <div id="content" class="large-9 large-push-3 main columns">
+      <a id="main-content"></a>
+      <!-- <h1 id="page-title" class="title">Academics</h1> -->
+      <!-- <article id="node-25130" class="node node-page view-mode-full">
+        <div class="button-bar node-links"></div> -->
+
+        {% block content %}{% endblock content %}
+
+    </div>
+    <!--/.l-main region -->
+    {% include 'wmu_home/nav/side_nav.html' %}
+  </main>
+  <!--/.l-main -->
+
+  <!-- .l-spotlights -->
+  <!-- <aside role="complementary" class="l-spotlights panel callout">
+    <div class="row collapse">
+      <div class="small-12 sidebar-second columns">
+        <section class="block block-wmu-spotlights block-wmu-spotlights-related block-odd clearfix">
+          <div class="view view-wmu-spotlights view-id-wmu_spotlights view-display-id-section clearfix">
+            <div class="view-content">
+              <ul class="large-block-grid-4 small-block-grid-2">
+                <li class="views-row views-row-1 views-row-odd views-row-first">
+                  <a href="http://wmich.edu/engineer/news/calendar17-18" class="spotlight" title="Read more"><img class="no-border" src="Academics%20|%20College%20of%20Engineering%20and%20Applied%20Sciences%20|%20Western%20Michigan%20University_files/calendar.jpg" alt="" width="135" height="175"><span class="spotlight-title">College Calendar</span></a>
+                </li>
+                <li class="views-row views-row-2 views-row-even">
+                  <a href="http://wmich.edu/engineer/news/inspire" class="spotlight" title="Read more"><img class="no-border" src="Academics%20|%20College%20of%20Engineering%20and%20Applied%20Sciences%20|%20Western%20Michigan%20University_files/newsletter.jpg" alt="" width="135" height="175"><span class="spotlight-title">College Newsletter</span></a>
+                </li>
+                <li class="views-row views-row-3 views-row-odd">
+                  <a href="http://wmich.edu/step" class="spotlight" title="Read more"><img class="no-border" src="Academics%20|%20College%20of%20Engineering%20and%20Applied%20Sciences%20|%20Western%20Michigan%20University_files/step.jpg" alt="" width="135" height="175"><span class="spotlight-title">Student Success</span></a>
+                </li>
+                <li class="views-row views-row-4 views-row-even views-row-last">
+                  <a href="http://wmich.edu/global" class="spotlight" title="Read more"><img src="Academics%20|%20College%20of%20Engineering%20and%20Applied%20Sciences%20|%20Western%20Michigan%20University_files/global-engaged.jpg" alt="" width="135" height="175"><span class="spotlight-title">Get Globally Engaged</span></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </aside> -->
+  <!--/.l-spotlights -->
+{% endblock main %}
