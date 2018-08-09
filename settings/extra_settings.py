@@ -97,7 +97,11 @@ LOGGING = {
             'propagate': True,
         },
         # Request logging.
-        # TODO: Set up request logging.
+        'django.request': {
+            'handlers': ['console', 'file_warn', 'file_error'],
+            'level': 'WARNING',
+            'propagate': True,
+        },
         # Logging to admin email.
         # TODO: Set up error emailing.
     },
