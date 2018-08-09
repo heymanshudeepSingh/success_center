@@ -3,8 +3,16 @@ Forms for CAE_Home App.
 """
 
 from django import forms
+from django.contrib.auth.forms import AuthenticationForm as auth_form
 
 from . import models
+
+
+class AuthenticationForm(auth_form):
+    """
+    Modified login page form.
+    """
+    remember_me = forms.BooleanField(required=False)
 
 
 class ProfileAdminForm(forms.ModelForm):

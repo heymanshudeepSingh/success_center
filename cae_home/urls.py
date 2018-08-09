@@ -13,7 +13,7 @@ app_name = 'cae_home'
 urlpatterns = [
 
     # Auth pages.
-    url(r'^user/login/$', auth_views.LoginView.as_view(redirect_authenticated_user=True), name='login'),
+    url(r'^user/login/$', views.login, name='login'),
     url(r'^user/logout/$', auth_views.logout, name='logout', kwargs={'next_page': '/',}),
 
     # CAE Home/Index page.
