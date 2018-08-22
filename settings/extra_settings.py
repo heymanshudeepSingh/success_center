@@ -92,7 +92,7 @@ LOGGING = {
     'loggers': {
         # All basic logging to console/log files.
         '': {
-            'handlers': ['console', 'file_info', 'file_warn', 'file_error'],
+            'handlers': ['console', 'file_info', 'file_warn', 'file_error', 'mail_error',],
             'level': 'INFO',
             'propagate': True,
         },
@@ -102,8 +102,6 @@ LOGGING = {
             'level': 'WARNING',
             'propagate': True,
         },
-        # Logging to admin email.
-        # TODO: Set up error emailing.
     },
 }
 
