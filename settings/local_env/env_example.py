@@ -42,6 +42,21 @@ DATABASES = {
 }
 
 
+# Email settings.
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'    # For SMTP, use 'backends.smtp.EmailBackend'.
+EMAIL_HOST = ''                             # Ip address for SMTP email server.
+EMAIL_HOST_USER = ''                        # Name for SMTP user.
+EMAIL_HOST_PASSWORD = ''                    # Password for SMTP user.
+EMAIL_PORT = ''                             # Port for SMTP email server.
+EMAIL_USE_TLS = True                        # Explicitly uses TLS for SMTP communication.
+DEFAULT_FROM_EMAIL = 'webmaster@localhost'  # Default email address for standard emails.
+SERVER_EMAIL = 'root@localhost'             # Default email address for admin error emails.
+
+
+# Admins to send emails to on error (Only sends if debug = False).
+ADMINS = []
+
+
 # # HTTPS/Security Settings. Used in production.
 # SECURE_SSL_HOST = ""
 # SECURE_SSL_REDIRECT = True

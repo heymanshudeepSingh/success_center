@@ -26,4 +26,8 @@ if settings.DEBUG:
     urlpatterns += [
         # "WMU Clone" test page. Only use for layout and css development.
         url(r'^wmu/$', views.wmu_test, name='wmu_test'),
+
+        # Email Testing.
+        url(r'^test_single_email/$', views.test_single_email, name='test_single_email'),
+        url(r'^test_mass_email/$', views.test_mass_email, name='test_mass_email'),
     ]
