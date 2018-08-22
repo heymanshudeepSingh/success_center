@@ -20,7 +20,17 @@ class User(AbstractUser):
     Contains user authentication related information.
     """
     # TODO: LDAP Authentication here. Likely need to change to AbstractBaseUser inheritance.
-    pass
+
+    @staticmethod
+    def get_or_create_superuser(username, email, password):
+        """
+        Attempts to either get or create user with the given information.
+        """
+        try:
+            new_user = User.objects.get(username=username, email=email)
+        except User.DoesNotExist:
+            new_user = User.objects.create_superuser(username, email, password)
+        return new_user
 
 
 class Profile(models.Model):
