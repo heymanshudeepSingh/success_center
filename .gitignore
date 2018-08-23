@@ -10,6 +10,7 @@ settings/local_env/
 .venv/
 .vscode/
 .idea/
+.vs/
 
 # Do not track other projects within the apps folder.
 apps/
@@ -22,3 +23,10 @@ apps/
 
 # Do not track migrations for now.
 */migrations/0*.py
+
+#Do not track the solution
+CICO.pyproj
+CICO.sln
+env/
+node_modules/
+package-lock.json
