@@ -59,7 +59,7 @@ ALLOWED_CAE_PROJECTS = {
 
     'CICO': {
         'name': 'Check In Check Out',
-        'index': '',
+        'index': 'cico_core:index',
         'url-prefix': 'cico',
         'related_apps': {
             'cico_core': {},
