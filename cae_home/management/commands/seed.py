@@ -53,8 +53,8 @@ class Command(BaseCommand):
         self.create_departments(model_count)
         self.create_rooms(model_count)
         self.create_majors()
-        self.create_students(model_count)
         self.create_semester_dates()
+        self.create_wmu_users(model_count)
 
         print('SEEDING CAE Model Group.')
         self.create_assets(model_count)
@@ -269,52 +269,6 @@ class Command(BaseCommand):
         print('Populated major models.')
 
 
-    def create_students(self, model_count):
-        """
-        Create Student models.
-        """
-        # Create random data generator.
-        faker_factory = Faker()
-
-        # Count number of models already created.
-        pre_initialized_count = len(models.Student.objects.all())
-
-        # Get all related models.
-        majors = models.Major.objects.all()
-        phone_numbers = models.PhoneNumber.objects.all()
-
-        # Generate models equal to model count.
-        for i in range(model_count - pre_initialized_count):
-            # Get Major.
-            index = randint(0, len(majors) - 1)
-            major = majors[index]
-
-            # Get Phone Number.
-            index = randint(0, len(phone_numbers) - 1)
-            phone_number = phone_numbers[index]
-
-            # Generate bronco net.
-            bronco_net = '{0}{1}{2}{3}'.format(
-                chr(randint(97, 122)),
-                chr(randint(97, 122)),
-                chr(randint(97, 122)),
-                randint(1000, 9999)
-            )
-
-            # Generate win number.
-            winno = '{0}{1}'.format(randint(1000, 9999), randint(10000, 99999))
-
-            models.Student.objects.create(
-                bronco_net=bronco_net,
-                winno=winno,
-                first_name=faker_factory.first_name(),
-                last_name=faker_factory.last_name(),
-                major=major,
-                phone_number=phone_number,
-            )
-        print('Populated student models.')
-
-
     def create_semester_dates(self):
         """
         Create Semester Date models.
@@ -357,6 +311,70 @@ class Command(BaseCommand):
         models.SemesterDate.objects.get_or_create(start_date=timezone.datetime(2019, 6, 27), end_date=timezone.datetime(2019, 8, 16))
 
         print('Populated semester date models.')
+
+
+    def create_wmu_users(self, model_count):
+        """
+        Create WMU User models.
+        """
+        # Create random data generator.
+        faker_factory = Faker()
+
+        # Count number of models already created.
+        pre_initialized_count = len(models.WmuUser.objects.all())
+
+        # Get all related models.
+        departments = models.Department.objects.all()
+        majors = models.Major.objects.all()
+        phone_numbers = models.PhoneNumber.objects.all()
+
+        # Generate models equal to model count.
+        for i in range(model_count - pre_initialized_count):
+            # Get Department.
+            index = randint(0, len(departments) - 1)
+            department = departments[index]
+
+            # Get Major.
+            index = randint(0, len(majors) - 1)
+            major = majors[index]
+
+            # Get Phone Number.
+            index = randint(0, len(phone_numbers) - 1)
+            phone_number = phone_numbers[index]
+
+            # Generate bronco net.
+            bronco_net = '{0}{1}{2}{3}'.format(
+                chr(randint(97, 122)),
+                chr(randint(97, 122)),
+                chr(randint(97, 122)),
+                randint(1000, 9999)
+            )
+
+            # Generate win number.
+            winno = '{0}{1}'.format(randint(1000, 9999), randint(10000, 99999))
+
+            # Generate user type.
+            user_type = randint(0, (len(models.WmuUser.USER_TYPE_CHOICES) - 1))
+
+            # Determine if active. 70% change of being true.
+            if randint(0, 9) < 7:
+                active = True
+            else:
+                active = False
+
+            models.WmuUser.objects.create(
+                department=department,
+                major=major,
+                phone_number=phone_number,
+                bronco_net=bronco_net,
+                winno=winno,
+                first_name=faker_factory.first_name(),
+                last_name=faker_factory.last_name(),
+                user_type=user_type,
+                active=active,
+
+            )
+        print('Populated wmu user models.')
 
     #endregion WMU Model Seeding
 

@@ -16,8 +16,8 @@ from .wmu import Department
 from .wmu import RoomType
 from .wmu import Room
 from .wmu import Major
-from .wmu import Student
 from .wmu import SemesterDate
+from .wmu import WmuUser
 
 # Models related to the CAE Center.
 from .cae import Asset

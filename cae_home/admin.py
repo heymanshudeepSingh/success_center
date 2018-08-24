@@ -249,36 +249,6 @@ class MajorAdmin(admin.ModelAdmin):
     )
 
 
-class StudentAdmin(admin.ModelAdmin):
-
-    # Fields to display in admin list view.
-    list_display = ('bronco_net', 'winno', 'first_name', 'last_name', 'major')
-
-    # Fields to filter by in admin list view.
-    list_filter = ('major',)
-
-    # Fields to search in admin list view.
-    search_fields = ['bronco_net', 'winno', 'first_name', 'last_name',]
-
-    # Read only fields for admin detail view.
-    readonly_fields = ('date_created', 'date_modified', 'official_email')
-
-    # Organize fieldsets for admin detail view.
-    fieldsets = (
-        (None, {
-            'fields': (
-                'bronco_net', 'winno', 'first_name', 'last_name', 'major',
-            )}),
-        ('Contact Info', {
-            'fields': ('official_email', 'phone_number',)
-        }),
-        ('Advanced', {
-            'classes': ('collapse',),
-            'fields': ('date_created', 'date_modified',),
-        }),
-    )
-
-
 class SemesterDateAdmin(admin.ModelAdmin):
     # Fields to display in admin list view.
     list_display = ('name', 'start_date', 'end_date',)
@@ -299,6 +269,35 @@ class SemesterDateAdmin(admin.ModelAdmin):
         ('Advanced', {
             'classes': ('collapse',),
             'fields': ('date_created', 'date_modified',),
+        }),
+    )
+
+
+class WmuUserAdmin(admin.ModelAdmin):
+    # Fields to display in admin list view.
+    list_display = ('bronco_net', 'winno', 'first_name', 'last_name', 'department',)
+
+    # Fields to filter by in admin list view.
+    list_filter = ('active', 'major',)
+
+    # Fields to search in admin list view.
+    search_fields = ['bronco_net', 'winno', 'first_name', 'last_name',]
+
+    # Read only fields for admin detail view.
+    readonly_fields = ('date_created', 'date_modified', 'official_email')
+
+    # Organize fieldsets for admin detail view.
+    fieldsets = (
+        (None, {
+            'fields': (
+                'user_type', 'bronco_net', 'winno', 'first_name', 'last_name', 'major', 'department',
+            )}),
+        ('Contact Info', {
+            'fields': ('official_email', 'phone_number',)
+        }),
+        ('Advanced', {
+            'classes': ('collapse',),
+            'fields': ('active', 'date_created', 'date_modified',),
         }),
     )
 
@@ -348,8 +347,8 @@ admin.site.register(models.Department, DepartmentAdmin)
 admin.site.register(models.RoomType, RoomTypeAdmin)
 admin.site.register(models.Room, RoomAdmin)
 admin.site.register(models.Major, MajorAdmin)
-admin.site.register(models.Student, StudentAdmin)
 admin.site.register(models.SemesterDate, SemesterDateAdmin)
+admin.site.register(models.WmuUser, WmuUserAdmin)
 
 # CAE Model Registration
 admin.site.register(models.Asset, AssetAdmin)

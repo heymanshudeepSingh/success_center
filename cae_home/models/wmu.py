@@ -71,8 +71,8 @@ class Room(models.Model):
     A standard university room.
     """
     # Relationship keys.
-    room_type = models.ForeignKey(RoomType, on_delete=models.CASCADE)
-    department = models.ForeignKey(Department, on_delete=models.CASCADE, blank=True, null=True)
+    room_type = models.ForeignKey('RoomType', on_delete=models.CASCADE)
+    department = models.ForeignKey('Department', on_delete=models.CASCADE, blank=True, null=True)
 
     # Model fields.
     name = models.CharField(max_length=MAX_LENGTH)
@@ -130,12 +130,23 @@ class Major(models.Model):
         super(Major, self).save(*args, **kwargs)
 
 
-class Student(models.Model):
+class WmuUser(models.Model):
     """
-    A student (or person with WMU ldap credentials) attending WMU.
+    An entity with WMU ldap credentials. Generally will be a student, professor, or faculty.
     """
+    # Preset field choices.
+    STUDENT = 0
+    PROFESSOR = 1
+    FACULTY = 2
+    USER_TYPE_CHOICES = (
+        (STUDENT, 'Student'),
+        (PROFESSOR, 'Professor'),
+        (FACULTY, 'Faculty'),
+    )
+
     # Relationship keys.
-    major = models.ForeignKey(Major, on_delete=models.CASCADE)
+    department = models.ForeignKey('Department', on_delete=models.CASCADE)
+    major = models.ForeignKey('Major', on_delete=models.CASCADE, blank=True)
     phone_number = models.ForeignKey('PhoneNumber', blank=True, null=True)
 
     # Model fields.
@@ -143,17 +154,19 @@ class Student(models.Model):
     winno = models.CharField(max_length=MAX_LENGTH)
     first_name = models.CharField(max_length=MAX_LENGTH)
     last_name = models.CharField(max_length=MAX_LENGTH)
+    user_type = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES, default=0)
+    active = models.BooleanField(default=True)
 
     # Self-setting/Non-user-editable fields.
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
 
     class Meta:
-        verbose_name = "Student"
-        verbose_name_plural = "Students"
+        verbose_name = "WMU User"
+        verbose_name_plural = "WMU Users"
 
     def __str__(self):
-        return '{0} {1}'.format(self.first_name, self.last_name)
+        return '{0}: {1} {2}'.format(self.bronco_net, self.first_name, self.last_name)
 
     def save(self, *args, **kwargs):
         """
@@ -161,7 +174,7 @@ class Student(models.Model):
         """
         # Save model.
         self.full_clean()
-        super(Student, self).save(*args, **kwargs)
+        super(WmuUser, self).save(*args, **kwargs)
 
     def official_email(self):
         """
@@ -215,7 +228,6 @@ class SemesterDate(models.Model):
             # Ensure that start date is not after end date.
             if self.start_date >= self.end_date:
                 raise ValidationError('Start date must be before end date.')
-
 
     def save(self, *args, **kwargs):
         """
