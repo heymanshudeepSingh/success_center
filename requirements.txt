@@ -3,7 +3,7 @@
 
 
 # Python Libraries.
-django==1.11        # Core Django framework.
+django~=1.11.0      # Core Django framework.
 faker               # Faker library for automatic model seeding.
 
 
