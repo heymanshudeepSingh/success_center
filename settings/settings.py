@@ -52,6 +52,8 @@ TEMPLATES = [
     },
 ]
 
+
+ASGI_APPLICATION = 'settings.routing.application'
 WSGI_APPLICATION = 'settings.wsgi.application'
 
 
