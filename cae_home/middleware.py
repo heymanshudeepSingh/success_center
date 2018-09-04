@@ -5,6 +5,7 @@ CAE Workspace Middleware.
 import pytz
 
 from django.conf import settings
+from django.contrib.sites.shortcuts import get_current_site
 from django.utils import timezone
 from django.utils.deprecation import MiddlewareMixin
 
@@ -36,5 +37,10 @@ class GetProjectDetailMiddleware(object):
         return response
 
     def process_template_response(self, request, response):
+        # Get site domain.
+        response.context_data['domain'] = get_current_site(request)
+
+        # Get installed project/app details.
         response.context_data['imported_projects'] = settings.INSTALLED_APP_DETAILS
+
         return response
