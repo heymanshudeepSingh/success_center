@@ -1,5 +1,7 @@
 """
-Site-wide URL Configuration
+Site-wide URL Configuration.
+
+Note: Urls will automatically be prefixed with "<url-prefix>/" as defined in allowed_apps.py.
 """
 
 from django.conf import settings
@@ -16,11 +18,12 @@ urlpatterns = [
 ]
 
 
-# Add dynamically generated root urls.
+# Dynamically grab app urls for urlpatterns variable. Essentially the same logic as routing.py.
 for project, project_settings in settings.INSTALLED_CAE_PROJECTS.items():
     url_prefix = project_settings['url-prefix']
     for app, app_name in project_settings['related_apps'].items():
         try:
+            # Add app's urls to urlpatterns variable.
             urlpatterns.append(
                 url(r'^{0}/'.format(url_prefix), include('{0}.urls'.format(app_name))),
             )
