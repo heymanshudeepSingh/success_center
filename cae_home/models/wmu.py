@@ -1,5 +1,5 @@
 """
-General WMU models for CAE_Home App.
+Definitions of "WMU" related Core Models.
 """
 
 from django.core.exceptions import ValidationError

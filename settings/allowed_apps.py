@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'admin_reorder',
     'channels',
 ]
 
@@ -159,6 +160,47 @@ for project_name in excluded_project_list:
 INSTALLED_APP_DETAILS = []
 for project, project_settings in INSTALLED_CAE_PROJECTS.items():
     INSTALLED_APP_DETAILS.append(project_settings)
+
+
+# Define Admin_Reorder variable for third party "admin customization" app.
+ADMIN_REORDER = (
+    {
+        'app': 'cae_home',
+        'label': 'Core User Models',
+        'models': (
+            'auth.Group',
+            'cae_home.User',
+            'cae_home.Profile',
+            'cae_home.Address',
+            'cae_home.PhoneNumber',
+        ),
+    },
+    {
+        'app': 'cae_home',
+        'label': 'Core WMU Models',
+        'models': (
+            'cae_home.Department',
+            'cae_home.Major',
+            'cae_home.RoomType',
+            'cae_home.Room',
+            'cae_home.SemesterDate',
+            'cae_home.WmuUser',
+        ),
+    },
+    {
+        'app': 'cae_home',
+        'label': 'Core CAE Models',
+        'models': (
+            'cae_home.Asset',
+        ),
+    },
+)
+
+# Add installed apps into Admin_Reorder value. Logic specific to apps would go here.
+for project, project_settings in INSTALLED_CAE_PROJECTS.items():
+    for app, app_name in project_settings['related_apps'].items():
+        formatted_name = app.replace('_', ' ').title().replace('Cae', 'CAE')
+        ADMIN_REORDER += ({'app': app, 'label': formatted_name},)
 
 
 debug_print('')

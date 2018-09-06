@@ -10,6 +10,7 @@ faker               # Faker library for automatic model seeding.
 
 # Third Party Django Apps.
 django-scheduler==0.8.8 # Third party Django app for calendar scheduling.
+django-modeladmin-reorder   # Third party Django app for admin view customization.
 
 
 # Optional imports.

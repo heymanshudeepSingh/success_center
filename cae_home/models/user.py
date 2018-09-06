@@ -1,5 +1,5 @@
 """
-User models for CAE_Home App.
+Definitions of "User" related Core Models.
 """
 
 import pytz

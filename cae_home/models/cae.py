@@ -1,5 +1,5 @@
 """
-CAE models for CAE_Home App.
+Definitions of "CAE Center" related Core Models.
 """
 
 from django.db import models
