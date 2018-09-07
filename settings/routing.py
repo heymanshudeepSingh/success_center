@@ -8,13 +8,14 @@ from channels.auth import AuthMiddlewareStack
 from channels.routing import ProtocolTypeRouter, URLRouter
 from django.conf import settings
 from django.conf.urls import url
+from importlib import import_module
 
-from cae_home import routing
+from cae_home import routing as cae_home_routing
 
 
 # Variable to gather all app routing.
 url_routes = [
-    url('^ws/cae_home/', URLRouter(routing.websocket_urlpatterns)),
+    url('^ws/cae_home/', URLRouter(cae_home_routing.websocket_urlpatterns)),
 ]
 
 
@@ -23,23 +24,19 @@ for project, project_settings in settings.INSTALLED_CAE_PROJECTS.items():
     url_prefix = project_settings['url-prefix']
     for app, app_name in project_settings['related_apps'].items():
         try:
-            # Slight magic here.
-            # First, we grab a string of the expected route file path.
-            get_string = '{0}.{1}'.format(project, app)
-            # Next, exec us execute a string as part of an import statement. We specifically
-            # import onto an already defined variable so that we don't get compilation errors.
-            exec('from apps.{0} import routing'.format(get_string, app))
-            # Finally, we add the new, overridden routing variable to url_routes.
+            # First, we dynamically import the new routes via the import_module function.
+            # Then, add the new routing to url_routes.
+            app_routing = import_module('apps.{0}.{1}.routing'.format(project, app))
             url_routes.append(
-                url(r'^ws/{0}/'.format(url_prefix), URLRouter(routing.websocket_urlpatterns))
+                url(r'^ws/{0}/'.format(url_prefix), URLRouter(app_routing.websocket_urlpatterns))
             )
         except ImportError:
             # No valid app routes. Skipping.
             pass
 
+
 # Create actual routes, with authentication.
 application = ProtocolTypeRouter({
-    # Note, django views are "added by default".
     'websocket': AuthMiddlewareStack(
         URLRouter(
             url_routes
