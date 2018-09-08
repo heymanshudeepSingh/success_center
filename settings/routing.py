@@ -3,6 +3,7 @@ Site-wide route handling for channels websockets.
 
 Note: Routes will automatically be prefixed with "ws/<url-prefix>/" as defined in allowed_apps.py.
 """
+import logging
 
 from channels.auth import AuthMiddlewareStack
 from channels.routing import ProtocolTypeRouter, URLRouter
@@ -11,6 +12,8 @@ from django.conf.urls import url
 from importlib import import_module
 
 from cae_home import routing as cae_home_routing
+
+logger = logging.getLogger(__name__)
 
 
 # Variable to gather all app routing.
@@ -30,9 +33,13 @@ for project, project_settings in settings.INSTALLED_CAE_PROJECTS.items():
             url_routes.append(
                 url(r'^ws/{0}/'.format(url_prefix), URLRouter(app_routing.websocket_urlpatterns))
             )
-        except ImportError:
+        except ModuleNotFoundError:
+            logger.info("Assuming no routing to import for %s.%s", project, app)
+        except:
             # No valid app routes. Skipping.
-            pass
+            logger.exception(
+                "Error importing routing for %s.%s", project, app,
+                exc_info=True)
 
 
 # Create actual routes, with authentication.
