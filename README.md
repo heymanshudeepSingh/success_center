@@ -16,6 +16,59 @@ Intended to be as general as possible.
 * If developing on a local machine, create a new file called "DEBUG" in the project's root folder. Otherwise, project
 will yell about "Allowed Hosts".
 
+## React Notes
+
+Unfortunately, React seems to prefer a syntax that browsers do not fully understand, out of the gate. To correct for
+this, you will need to install "npm", and then use "browserify" to compile the code into a browser-friendly format.
+
+(It's actually similar to how sass files compile into standard css. You write code that's easier to handle and far more
+human-friendly. Then you use the console to run a compiler, changing the code into a format the browser understands.)
+
+### Installing NPM
+
+Npm is "the world's largest software registry" and what most front end libraries now seem to install through.
+
+Npm now installs as part of NodeJS. The simplest way to install is to visit:
+* https://nodejs.org/
+
+### Install Required Packages
+
+Npm will install the required development packages specified in ```packages.json```. This also handles installing the versions of each
+package without conflicts.
+
+From the project's root directory, run:
+* ```npm install```
+
+* To run local npm binaries you should add the following to your ```~/.bashrc```:
+
+```bash
+# From user hkly at https://dev.to/hkly/running-local-npm-executables-cle
+# Run a local npm binary with 'npm-run COMMAND'
+npm-run() {
+    $(npm bin)/$*
+}
+```
+
+* Reopen a terminal or run ```source ~/.bashrc``` to reload it.
+
+### Compiling React Files through Browserify
+
+From the project's root directory, run:
+* ```npm-run browserify -t [ babelify --presets [env react] ] <sourceFile> -o <destinationFile>```
+    * Where ```\<sourceFile>``` is the original react file.
+    * And ```\<destinationFile>``` is where the browser-friendly file is compiled to.
+
+### Compiling React Files through Browserify Automatically
+
+Watchify can detect changes to source files and automatically run browserfiy
+for you. You can pass the same arguments that you would use for browserify.
+
+From the project's root directory, run:
+* ```npm-run watchify -v -t [ babelify --presets [env react] ] <sourceFile> -o <destinationFile>```
+    * Where ```<sourceFile>``` is the original react file.
+    * And ```<destinationFile>``` is where the browser-friendly file is compiled to.
+    * The ```-v``` will notify you each time a change is detected.
+
 ## Adding a New Project/App
 
 This project essentially just acts as a core/workspace to house all other CAE Center Django projects.
@@ -70,7 +123,7 @@ To deploy, you will likely want to do the following on your host/server:
 * Install required packages on desired Python environment:
     * **pip install mysqlclient**
 * Create the proper database inside MySQL
-    
+
 ### Establishing Production Settings in Settings.py
 
 * Make sure to set the appropriate database info.
@@ -79,7 +132,7 @@ To deploy, you will likely want to do the following on your host/server:
 * Set security settings:
     * TODO: List security settings.
 * You can doublecheck validity of these settings with **manage.py check --deploy**.
-        
+
 ### Setting Up Apache
 
 * Check if Apache is currently installed:
