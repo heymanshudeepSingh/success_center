@@ -1,4 +1,4 @@
-
+#!/bin/bash
 # Abort on error
 set -e
 
@@ -22,6 +22,13 @@ python ./manage.py migrate
 # Load example data
 python ./manage.py loaddata users
 python ./manage.py loaddata room_types
-python ./manage.py loaddata calendars
 python ./manage.py loaddata rooms
-python ./manage.py loaddata room_events
+
+# Load CAE_Web data if installed
+if [ -d apps/CAE_Web ]; then
+    echo "Loading CAE_Web Fixtures..."
+    python ./manage.py loaddata calendars
+    python ./manage.py loaddata room_events
+else
+    echo "CAE_Web not found. Not loading its fixtures."
+fi
