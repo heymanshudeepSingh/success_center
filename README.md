@@ -69,6 +69,13 @@ From the project's root directory, run:
     * And ```<destinationFile>``` is where the browser-friendly file is compiled to.
     * The ```-v``` will notify you each time a change is detected.
 
+### Live Updates through Web Sockets
+
+In order to have live updates, you need to run ```redis``` which handles
+messaging for ```django-channels```.
+
+* Run ```sudo apt-get install redis```
+
 ## Adding a New Project/App
 
 This project essentially just acts as a core/workspace to house all other CAE Center Django projects.

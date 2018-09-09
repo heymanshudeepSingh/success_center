@@ -58,6 +58,15 @@ TEMPLATES = [
 ASGI_APPLICATION = 'settings.routing.application'
 WSGI_APPLICATION = 'settings.wsgi.application'
 
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [('127.0.0.1', 6379)],
+        }
+    }
+}
+
 
 # User Model.
 AUTH_USER_MODEL = 'cae_home.User'
