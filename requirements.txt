@@ -5,7 +5,7 @@
 # Python Libraries.
 django~=1.11.0      # Core Django framework.
 channels            # Support for websocket connections.
-channels-redis
+channels-redis      # Additional channels support for live updates between sockets.
 faker               # Faker library for automatic model seeding.
 
 
