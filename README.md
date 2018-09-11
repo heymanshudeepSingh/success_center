@@ -33,8 +33,8 @@ Npm now installs as part of NodeJS. The simplest way to install is to visit:
 
 ### Install Required Packages
 
-Npm will install the required development packages specified in ```packages.json```. This also handles installing the versions of each
-package without conflicts.
+Npm will install the required development packages specified in ```packages.json```. This also handles installing the
+versions of each package without conflicts.
 
 From the project's root directory, run:
 * ```npm install```
@@ -60,8 +60,8 @@ From the project's root directory, run:
 
 ### Compiling React Files through Browserify Automatically
 
-Watchify can detect changes to source files and automatically run browserfiy
-for you. You can pass the same arguments that you would use for browserify.
+Watchify can detect changes to source files and automatically run browserfiy for you. You can pass the same arguments
+that you would use for browserify.
 
 From the project's root directory, run:
 * ```npm-run watchify -v -t [ babelify --presets [env react] ] <sourceFile> -o <destinationFile>```
@@ -71,10 +71,9 @@ From the project's root directory, run:
 
 ### Live Updates through Web Sockets
 
-In order to have live updates, you need to run ```redis``` which handles
-messaging for ```django-channels```.
+In order to have live updates, you need to run ```redis``` which handles messaging for ```django-channels```.
 
-* Run ```sudo apt-get install redis```
+* Run ```sudo apt-get install redis-server```
 
 ## Adding a New Project/App
 
