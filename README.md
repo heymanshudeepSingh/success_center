@@ -8,6 +8,18 @@ Intended to be as general as possible.
 
 ## Initial Set Up
 
+### Python Setup
+
+Requires Python version 3.6 or higher.
+
+If using ubuntu, you will need to run:
+* ```sudo apt install python<version>-dev```
+    * Where <version> is the version of Python used in your environment.
+    * Ex, Python3.6 would be:
+        * ```sudo apt install python3.6-dev```
+
+### Project Setup
+
 * On first time use, you may want to go into **settings/local_env** and modify **env.py**.
     * **Development** - Can probably leave file as is, if using SQLite. Otherwise, edit env file as desired.
     * **Production** - Default env definitely isn't production ready. Will require modificaitons for stability and
