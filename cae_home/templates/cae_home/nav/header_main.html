@@ -1,7 +1,13 @@
 <nav class="nav-header-main">
 
   <ul>
+    {% block project_nav %}
     <li><a href="{% url 'cae_home:index' %}">Home</a></li>
+    <li><a href="{% url 'cae_home:login' %}">Login</a></li>
+    <li><a href="{% url 'cae_home:logout' %}">Logout</a></li>
+    {% endblock project_nav %}
+    |
+
     {% if user.is_authenticated %}
       <li>
         <p href="">{{ user.get_username }}</p>
