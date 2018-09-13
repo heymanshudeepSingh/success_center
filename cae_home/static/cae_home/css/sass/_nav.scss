@@ -40,8 +40,6 @@ header nav {
     @include justify-content(flex-end);
     @include flex(1);
 
-    min-height: 28px;
-
     // Change alignment on larger screens.
     @media only screen and (min-width: $screen-tablet-mid) {
         @include justify-content(space-evenly);
@@ -50,6 +48,7 @@ header nav {
     // Main-nav properties.
     ul {
         display: none;
+
         @include flex-direction(row);
         @include justify-content(flex-end);
         @include flex(1);
@@ -80,10 +79,14 @@ header nav {
     // Sub-nav properties.
     ul > li > ul {
         position: absolute;
-
         display: none;
+
         @include flex-direction(column);
         @include justify-content(space-around);
+
+        @media only screen and (min-width: $screen-tablet-mid) {
+            top: 40px;
+        }
     }
 
     ul > li > ul > li {
@@ -153,20 +156,27 @@ header nav {
 //==== START Mobile Nav Dropdown Block ====//
 //=========================================//
 
-.header-bottom nav {
-    @include display-flex;
+.header-bottom {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    left: 0;
 
-    ul {
+    nav {
         @include display-flex;
-        @include flex-direction(column);
-    }
 
-    ul > li > ul {
-        position: relative;
+        ul {
+            @include display-flex;
+            @include flex-direction(column);
+        }
 
-        display: none;
-        @include flex-direction(row);
-        @include flex-wrap(wrap);
+        ul > li > ul {
+            position: relative;
+
+            display: none;
+            @include flex-direction(row);
+            @include flex-wrap(wrap);
+        }
     }
 }
 
