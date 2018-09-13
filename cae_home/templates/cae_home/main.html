@@ -5,19 +5,7 @@
 
 
 {% block main %}
-  <main>
-    <div id="content-container">
-
-      {% block placeholder_left %}
-        <div class="placeholder"></div>
-      {% endblock placeholder_left %}
-
-      {% block content %}{% endblock content %}
-
-      {% block placeholder_right %}
-        <div class="placeholder"></div>
-      {% endblock placeholder_right %}
-
-    </div>
+  <main id="content" class="cae_home">
+    {% block content %}{% endblock content %}
   </main>
 {% endblock %}

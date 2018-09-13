@@ -50,7 +50,15 @@
         {% include 'cae_home/header.html' %}
       {% endblock header %}
 
+      {% block placeholder_left %}
+        <div id="main_placeholder_left"></div>
+      {% endblock placeholder_left %}
+
       {% block main %}{% endblock main %}
+
+      {% block placeholder_right %}
+        <div id="main_placeholder_right"></div>
+      {% endblock placeholder_right %}
 
       {% block footer %}
         {% include 'cae_home/footer.html' %}

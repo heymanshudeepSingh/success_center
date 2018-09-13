@@ -14,6 +14,9 @@
 //================================================================================//
 // position, top, right, bottom, left, z-index, display, float                    //
 //                                                                                //
+// grid-template-columns, grid-template-rows, grid-template-areas, grid-template, //
+// grid-gap, place-items, grid, grid-column, grid-row, grid-area, place-self,     //
+//                                                                                //
 // flex-direction, flex-wrap, justify-content, align-items, align-content, order, //
 // flex-grow, flex-shrink, flex-basis, flex, align-self,                          //
 //                                                                                //
@@ -40,30 +43,60 @@ html {
 }
 
 body {
-    @include display-flex;
-    @include flex-direction(column);
-    @include flex(1);
+    position: relative;
+    display: grid;
+
+    grid-template-columns: 5% 45% 45% 5%;
+    grid-template-rows: 40px auto auto 35px;
+    grid-template-areas:
+        "header header header header"
+        "main_placeholder_left main main main_placeholder_right"
+        "main_placeholder_left main main main_placeholder_right"
+        "footer footer footer footer";
+
+    min-height:100vh;
+
+    // Show on larger screens.
+    @media only screen and (min-width: $screen-tablet-mid) {
+        grid-template-columns: 15% 35% 35% 15%;
+        grid-template-rows: 35px auto auto 35px;
+    }
+
+    header {
+        position: relative;
+        z-index: 10;
+
+        grid-area: header;
+    }
 
     main {
-        @include display-flex;
-        @include flex-direction(column);
-        @include flex(1);
+        position: relative;
+        z-index: 5;
 
-        .placeholder {
-            min-width: 2vw
-        }
+        grid-area: main;
+    }
 
-        #content-container {
-            @include display-flex;
-            @include flex-direction(row);
-            @include flex(1);
-        }
+    #main_placeholder_left {
+        position: relative;
+        z-index: 5;
 
-        #content {
-            @include display-flex;
-            @include flex-direction(column);
-            @include flex(1);
-        }
+        grid-area: main_placeholder_left;
+    }
+
+    #main_placeholder_right {
+        position: relative;
+        z-index: 5;
+
+        grid-area: main_placeholder_right;
+    }
+
+    footer {
+        position: relative;
+        z-index: 10;
+
+        margin-top: 10px;
+
+        grid-area: footer;
     }
 }
 
