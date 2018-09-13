@@ -47,7 +47,7 @@
   {% block body %}
     <body>
       {% block header %}
-        {% include 'cae_home/header.html' %}
+        {% include 'cae_home/header.html' with app_nav='cae_home/nav/default_app_nav.html' %}
       {% endblock header %}
 
       {% block placeholder_left %}
