@@ -13,13 +13,6 @@
     by hovering over the "cae" icon in the upper topleft of the page.</p>
   <h2>Installed Projects</h2>
   <ul>
-    <li>Test</li>
-    <ul>
-      <li>Test</li>
-      <ul>
-        <li>Test</li>
-      </ul>
-    </ul>
     {% for project in imported_projects %}
       {% if project.index and project.index != '' %}
         <li><a href="{% url project.index %}">{{ project.name }}</a></li>
