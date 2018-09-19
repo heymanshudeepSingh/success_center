@@ -22,12 +22,12 @@ apps/
 *.css.map
 *.sass-cache/
 
-# Do not track migrations for now.
-*/migrations/0*.py
-
-#Do not track the solution
+# Do not track the solution
 CICO.pyproj
 CICO.sln
 env/
 node_modules/
 package-lock.json
+
+# Do not track migrations for now.
+*/migrations/0*.py
