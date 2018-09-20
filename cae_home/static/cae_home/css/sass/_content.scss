@@ -43,13 +43,45 @@
 //=====================================//
 
 #content {
+
     ul {
         padding-left: 20px
+    }
+
+    table {
+        border: 1px solid $theme-border;
+        border-collapse: collapse;
+    }
+
+    td {
+        padding-top: 5px;
+        padding-right: 8px;
+        padding-bottom: 5px;
+        padding-left: 8px;
+
+        border: 1px solid $theme-border;
     }
 }
 
 //=====================================//
 //===== END Generic Content Block =====//
+//=====================================//
+
+
+//=====================================//
+//==== START Generic Class Block ====//
+//=====================================//
+
+#content {
+    .center {
+        @include flex-direction(center);
+        @include align-items(center);
+        text-align: center;
+    }
+}
+
+//=====================================//
+//===== END Generic Class Block =====//
 //=====================================//
 
 
