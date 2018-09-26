@@ -25,7 +25,6 @@ def create_groups():
     Creates django "auth_group" models and allocates proper permissions.
     """
     # Create base groups.
-    inactive = Group.objects.get_or_create(name='Inactive')
     attendant_group = Group.objects.get_or_create(name='CAE Attendant')
     admin_group = Group.objects.get_or_create(name='CAE Admin')
     programmer_group = Group.objects.get_or_create(name='CAE Programmer')
