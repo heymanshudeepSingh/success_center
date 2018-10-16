@@ -67,7 +67,7 @@ ALLOWED_CAE_PROJECTS = {
         'related_apps': {
             'cico_core': {},
         },
-        'third_party_apps': {},
+        'third_party_apps': [],
     },
 
     'CAEMon_Web': {
@@ -77,7 +77,7 @@ ALLOWED_CAE_PROJECTS = {
         'related_apps': {
             'caemon_web_core': {},
         },
-        'third_party_apps': {},
+        'third_party_apps': [],
     },
 }
 
