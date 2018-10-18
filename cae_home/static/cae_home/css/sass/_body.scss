@@ -55,8 +55,8 @@ body {
     grid-template-rows: 40px auto auto 35px;
     grid-template-areas:
         "header header header header"
-        "main_placeholder_left main main main_placeholder_right"
-        "main_placeholder_left main main main_placeholder_right"
+        "main-placeholder-left main main main-placeholder-right"
+        "main-placeholder-left main main main-placeholder-right"
         "footer footer footer footer";
 
     min-height:100vh;
@@ -97,11 +97,11 @@ body {
         }
     }
 
-    #main_placeholder_left {
+    #main-placeholder-left {
         position: relative;
         z-index: 5;
 
-        grid-area: main_placeholder_left;
+        grid-area: main-placeholder-left;
 
         // Printer layout.
         @media only print {
@@ -109,11 +109,11 @@ body {
         }
     }
 
-    #main_placeholder_right {
+    #main-placeholder-right {
         position: relative;
         z-index: 5;
 
-        grid-area: main_placeholder_right;
+        grid-area: main-placeholder-right;
 
         // Printer layout.
         @media only print {
