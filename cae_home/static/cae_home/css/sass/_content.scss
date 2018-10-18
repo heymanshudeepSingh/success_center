@@ -72,12 +72,28 @@
 
 #content {
 
+    // Hide on print viewing.
+    .display-only-web {
+        @media only print {
+            display: none !important;
+        }
+    }
+
+    // Hide on web viewing.
+    .display-only-print {
+        @media only screen {
+            display: none !important;
+        }
+    }
+
+    // Attempt to center as much as possible.
     .center {
         @include flex-direction(center);
         @include align-items(center);
         text-align: center;
     }
 
+    // Warning for javascript requirement.
     .javascript-warn {
         margin-right: auto;
         margin-top: 25px;

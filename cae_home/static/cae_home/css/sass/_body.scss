@@ -40,6 +40,11 @@ html {
     @include flex(1);
 
     min-height: 100vh;
+
+    // Printer layout.
+    @media only print {
+        display: block;
+    }
 }
 
 body {
@@ -55,6 +60,7 @@ body {
         "footer footer footer footer";
 
     min-height:100vh;
+    height: auto;
 
     // Show on larger screens.
     @media only screen and (min-width: $screen-tablet-mid) {
@@ -62,11 +68,21 @@ body {
         grid-template-rows: 35px auto auto 35px;
     }
 
+    // Printer layout.
+    @media only print {
+        display: block;
+    }
+
     header {
         position: relative;
         z-index: 10;
 
         grid-area: header;
+
+        // Printer layout.
+        @media only print {
+            display: none;
+        }
     }
 
     main {
@@ -74,6 +90,11 @@ body {
         z-index: 5;
 
         grid-area: main;
+
+        // Printer layout.
+        @media only print {
+            display: block;
+        }
     }
 
     #main_placeholder_left {
@@ -81,6 +102,11 @@ body {
         z-index: 5;
 
         grid-area: main_placeholder_left;
+
+        // Printer layout.
+        @media only print {
+            display: none;
+        }
     }
 
     #main_placeholder_right {
@@ -88,6 +114,11 @@ body {
         z-index: 5;
 
         grid-area: main_placeholder_right;
+
+        // Printer layout.
+        @media only print {
+            display: none;
+        }
     }
 
     footer {
@@ -97,6 +128,11 @@ body {
         margin-top: 10px;
 
         grid-area: footer;
+
+        // Printer layout.
+        @media only print {
+            display: none;
+        }
     }
 }
 

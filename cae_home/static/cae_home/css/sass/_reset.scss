@@ -32,9 +32,9 @@
 // overflow, overflow-x, overflow-y, clip, clear                                  //
 //================================================================================//
 
-//===========================//
-//==== START ----- Block ====//
-//===========================//
+//=====================================//
+//==== START General Element Block ====//
+//=====================================//
 
 html, body, hgroup, header, footer, nav,
 article, section, aside, figure, figcaption,
@@ -50,9 +50,22 @@ h1, h2, h3, h4, h5, h6 {
     padding-top: 10px;
 }
 
-//===========================//
-//===== END ----- Block =====//
-//===========================//
+//=====================================//
+//===== END General Element Block =====//
+//=====================================//
+
+
+//====================================//
+//==== START Printer Styles Block ====//
+//====================================//
+
+@page {
+    margin: 1.5cm;
+}
+
+//====================================//
+//===== END Printer Styles Block =====//
+//====================================//
 
 
 //================================================================================//
@@ -73,12 +86,20 @@ h1, h2, h3, h4, h5, h6 {
 //==== START Font Styling Block ====//
 //==================================//
 
-html {
-    font-family: 'Source Sans Pro', 'Open Sans', 'Lato', sans-serif;
+@media only screen {
+    html {
+        font-family: 'Source Sans Pro', 'Open Sans', 'Lato', sans-serif;
+    }
+
+    p {
+        font-family: 'Open Sans', 'Lato', 'Source Sans Pro', sans-serif;
+    }
 }
 
-p {
-    font-family: 'Open Sans', 'Lato', 'Source Sans Pro', sans-serif;
+@media only print {
+    html {
+        font-family: 'Lora', 'PT Serif', serif;
+    }
 }
 
 //==================================//
@@ -96,7 +117,9 @@ h1, h2, h3, h4, h5, h6,
 ol, ul, li,
 div, span, p, img, a,
 {
-    font-size: 4.5vw;
+    @media only screen {
+        font-size: 4.5vw;
+    }
 
     @media only screen and (min-width: 400px) and (max-width: $screen-phone-small) {
         font-size: 3.8vw;
@@ -128,6 +151,10 @@ div, span, p, img, a,
 
     @media only screen and (min-width: $screen-desktop-min) {
         font-size: 0.9vw;
+    }
+
+    @media only print {
+        font-size: 11px;
     }
 }
 
