@@ -78,6 +78,7 @@ def create_users():
     """
     models.User.get_or_create_superuser('brodriguez8774', '', 'temppass2')  # Brandon
     models.User.get_or_create_superuser('ngf9321', '', 'temppass2')  # Nick
+    models.User.get_or_create_superuser('jdc4014', '', 'temppass2')  # Jessie
     models.User.get_or_create_superuser('skd6970', '', 'temppass2')  # Steven (Senior Design)
     models.User.get_or_create_superuser('jbn6294', '', 'temppass2')  # Josh (Senior Design)
 
