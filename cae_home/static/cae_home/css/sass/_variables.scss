@@ -33,6 +33,7 @@ $color-grey-60: #999999;    //  |
 $color-grey-70: #b2b2b2;    //  | Ligher
 $color-grey-80: #cccccc;    //  |
 $color-grey-90: #e5e5e5;    //  v
+$color-grey-95: #f2f2f2;
 $color-grey-100: #ffffff;   // White
 
 //===============================//
@@ -106,6 +107,7 @@ $wmu-metallic-silver: #8a8d8f;
 //== Main Elements ==//
 
 $theme-header-background: $color-grey-90;
+$theme-header-highlight: $color-grey-95;
 $theme-border: $color-grey-80;
 $theme-footer-background: $color-grey-90;
 $theme-text: $color-grey-00;

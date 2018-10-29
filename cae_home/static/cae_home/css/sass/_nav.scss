@@ -59,6 +59,7 @@ header nav {
             @include display-flex;
 
             margin-right: 1vw;
+            margin-left: 1vw;
         }
     }
 
@@ -66,7 +67,9 @@ header nav {
         padding: 0;
         margin: 0;
         margin-top: 3px;
+        margin-right: 2px;
         margin-bottom: 3px;
+        margin-left: 2px;
 
         @media only screen and (max-width: $screen-tablet-mid) {
             display: none;
@@ -85,6 +88,8 @@ header nav {
     // Sub-nav properties.
     > ul > li > ul {
         position: absolute;
+        right: 0;
+        left: 0;
         display: none;
 
         @include flex-direction(column);
@@ -286,6 +291,10 @@ header nav {
     li {
         background-color: $theme-nav-background;
     }
+
+    li:hover {
+        background-color: $theme-header-highlight;
+    }
 }
 
 header .header-top nav {
@@ -336,6 +345,7 @@ header .header-top nav {
 
     ul > li > ul > li {
         border: 0px;
+        border-radius: 3px;
     }
 }
 
