@@ -1,0 +1,262 @@
+[
+{
+    "model": "cae_home.major",
+    "pk": 1,
+    "fields": {
+        "department": 1,
+        "code": "UND",
+        "name": "Undecided",
+        "undergrad": true,
+        "active": true,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 2,
+    "fields": {
+        "department": 1,
+        "code": "UNK",
+        "name": "Unknown (New or Prospective Student)",
+        "undergrad": true,
+        "active": true,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 3,
+    "fields": {
+        "department": 8,
+        "code": "AERJ",
+        "name": "Aeronautical Engineering",
+        "undergrad": true,
+        "active": true,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 4,
+    "fields": {
+        "department": 5,
+        "code": "CEGJ",
+        "name": "Computer Engineering",
+        "undergrad": true,
+        "active": true,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 5,
+    "fields": {
+        "department": 3,
+        "code": "CENJ",
+        "name": "Construction Engineering",
+        "undergrad": true,
+        "active": true,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 6,
+    "fields": {
+        "department": 2,
+        "code": "CHGJ",
+        "name": "Chemical Engineering",
+        "undergrad": true,
+        "active": true,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 7,
+    "fields": {
+        "department": 3,
+        "code": "CIVJ",
+        "name": "Civil Engineering",
+        "undergrad": true,
+        "active": true,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+    {
+    "model": "cae_home.major",
+    "pk": 8,
+    "fields": {
+        "department": 4,
+        "code": "CSGJ",
+        "name": "Computer Science - General",
+        "undergrad": true,
+        "active": true,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 9,
+    "fields": {
+        "department": 4,
+        "code": "CSTJ",
+        "name": "Computer Science Theory and Analysis",
+        "undergrad": true,
+        "active": true,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 10,
+    "fields": {
+        "department": 6,
+        "code": "EDTJ",
+        "name": "Engineering Design Technology",
+        "undergrad": true,
+        "active": true,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 11,
+    "fields": {
+        "department": 5,
+        "code": "EENJ",
+        "name": "Electrical Engineering",
+        "undergrad": true,
+        "active": true,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 12,
+    "fields": {
+        "department": 7,
+        "code": "IDNJ",
+        "name": "Industrial Design",
+        "undergrad": true,
+        "active": true,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 13,
+    "fields": {
+        "department": 7,
+        "code": "IENJ",
+        "name": "Industrial Engineering",
+        "undergrad": true,
+        "active": true,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 14,
+    "fields": {
+        "department": 2,
+        "code": "IMGJ",
+        "name": "Imaging/Graphic and Printing Science",
+        "undergrad": true,
+        "active": true,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 15,
+    "fields": {
+        "department": 8,
+        "code": "MEGJ",
+        "name": "Mechanical Engineering",
+        "undergrad": true,
+        "active": true,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 16,
+    "fields": {
+        "department": 6,
+        "code": "MFNJ",
+        "name": "Manufacturing Engineering",
+        "undergrad": true,
+        "active": true,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 17,
+    "fields": {
+        "department": 2,
+        "code": "PENJ",
+        "name": "Paper Engineering",
+        "undergrad": true,
+        "active": true,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 18,
+    "fields": {
+        "department": 1,
+        "code": "PREJ",
+        "name": "Pre-Engineering Undecided",
+        "undergrad": true,
+        "active": true,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 19,
+    "fields": {
+        "department": 2,
+        "code": "PSCJ",
+        "name": "Paper Science",
+        "undergrad": true,
+        "active": true,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 20,
+    "fields": {
+        "department": 7,
+        "code": "UEMJ",
+        "name": "Engineering Management Technology",
+        "undergrad": true,
+        "active": true,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+}
+]

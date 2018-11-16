@@ -2,6 +2,7 @@
 Seeder for "WMU" related Core Models.
 """
 
+from django.core.management import call_command
 from django.utils import timezone
 from faker import Faker
 from random import randint
@@ -15,7 +16,7 @@ def generate_model_seeds(model_count):
     """
     print('SEEDING WMU Model Group.')
     create_room_types()
-    create_departments(model_count)
+    create_departments()
     create_rooms(model_count)
     create_majors()
     create_semester_dates()
@@ -26,26 +27,17 @@ def create_room_types():
     """
     Create Room Type models.
     """
-    models.RoomType.objects.get_or_create(name="Classroom")
-    models.RoomType.objects.get_or_create(name="Computer Classroom")
-    models.RoomType.objects.get_or_create(name="Breakout Room")
-    models.RoomType.objects.get_or_create(name="Special Room")
+    # Load preset fixtures. No need to create random models.
+    call_command('loaddata', 'full_models/room_types')
 
     print('Populated room type models.')
 
-def create_departments(model_count):
+def create_departments():
     """
     Create Department models.
     """
-    # Create random data generator.
-    faker_factory = Faker()
-
-    # Count number of models already created.
-    pre_initialized_count = len(models.Department.objects.all())
-
-    # Generate models equal to model count.
-    for i in range(model_count - pre_initialized_count):
-        models.Department.objects.create(name=faker_factory.job())
+    # Load preset fixtures. No need to create random models.
+    call_command('loaddata', 'full_models/departments')
 
     print('Populated department models.')
 
@@ -89,29 +81,8 @@ def create_majors():
     """
     Create Major models.
     """
-    # Create random data generator.
-    faker_factory = Faker()
-
-    models.Major.objects.get_or_create(code='UND', name='Undecided')
-    models.Major.objects.get_or_create(code='UNK', name='Unknown (New or Prospective Student)')
-    models.Major.objects.get_or_create(code='AERJ', name='Aeronautical Engineering')
-    models.Major.objects.get_or_create(code='CEGJ', name='Computer Engineering')
-    models.Major.objects.get_or_create(code='CENJ', name='Construction Engineering')
-    models.Major.objects.get_or_create(code='CHGJ', name='Chemical Engineering')
-    models.Major.objects.get_or_create(code='CIVJ', name='Civil Engineering')
-    models.Major.objects.get_or_create(code='CSGJ', name='Computer Science - General')
-    models.Major.objects.get_or_create(code='CSTJ', name='Computer Science Theory and Analysis')
-    models.Major.objects.get_or_create(code='EDTJ', name='Engineering Design Technology')
-    models.Major.objects.get_or_create(code='EENJ', name='Electrical Engineering')
-    models.Major.objects.get_or_create(code='IDNJ', name='Industrial Design')
-    models.Major.objects.get_or_create(code='IENJ', name='Industrial Engineering')
-    models.Major.objects.get_or_create(code='IMGJ', name='Imaging/Graphic and Printing Science')
-    models.Major.objects.get_or_create(code='MEGJ', name='Mechanical Engineering')
-    models.Major.objects.get_or_create(code='MFNJ', name='Manufacturing Engineering')
-    models.Major.objects.get_or_create(code='PENJ', name='Paper Engineering')
-    models.Major.objects.get_or_create(code='PREJ', name='Pre-Engineering Undecided')
-    models.Major.objects.get_or_create(code='PSCJ', name='Paper Science')
-    models.Major.objects.get_or_create(code='UEMJ', name='Engineering Management Technology')
+    # Load preset fixtures. No need to create random models.
+    call_command('loaddata', 'full_models/majors')
 
     print('Populated major models.')
 
@@ -120,42 +91,8 @@ def create_semester_dates():
     """
     Create Semester Date models.
     """
-    # Create random data generator.
-    faker_factory = Faker()
-
-    models.SemesterDate.objects.get_or_create(start_date=timezone.datetime(2013, 1, 7), end_date=timezone.datetime(2013, 4, 27))
-    models.SemesterDate.objects.get_or_create(start_date=timezone.datetime(2013, 5, 6), end_date=timezone.datetime(2013, 6, 26))
-    models.SemesterDate.objects.get_or_create(start_date=timezone.datetime(2013, 6, 27), end_date=timezone.datetime(2013, 8, 16))
-    models.SemesterDate.objects.get_or_create(start_date=timezone.datetime(2013, 9, 3), end_date=timezone.datetime(2013, 12, 14))
-
-    models.SemesterDate.objects.get_or_create(start_date=timezone.datetime(2014, 1, 6), end_date=timezone.datetime(2014, 4, 26))
-    models.SemesterDate.objects.get_or_create(start_date=timezone.datetime(2014, 5, 5), end_date=timezone.datetime(2014, 6, 25))
-    models.SemesterDate.objects.get_or_create(start_date=timezone.datetime(2014, 6, 26), end_date=timezone.datetime(2014, 8, 15))
-    models.SemesterDate.objects.get_or_create(start_date=timezone.datetime(2014, 9, 2), end_date=timezone.datetime(2014, 12, 13))
-
-    models.SemesterDate.objects.get_or_create(start_date=timezone.datetime(2015, 1, 1), end_date=timezone.datetime(2015, 4, 30))
-    models.SemesterDate.objects.get_or_create(start_date=timezone.datetime(2015, 5, 11), end_date=timezone.datetime(2015, 7, 1))
-    models.SemesterDate.objects.get_or_create(start_date=timezone.datetime(2015, 7, 6), end_date=timezone.datetime(2015, 8, 21))
-    models.SemesterDate.objects.get_or_create(start_date=timezone.datetime(2015, 9, 8), end_date=timezone.datetime(2015, 12, 19))
-
-    models.SemesterDate.objects.get_or_create(start_date=timezone.datetime(2016, 1, 11), end_date=timezone.datetime(2016, 4, 30))
-    models.SemesterDate.objects.get_or_create(start_date=timezone.datetime(2016, 5, 9), end_date=timezone.datetime(2016, 6, 29))
-    models.SemesterDate.objects.get_or_create(start_date=timezone.datetime(2016, 6, 30), end_date=timezone.datetime(2016, 8, 19))
-    models.SemesterDate.objects.get_or_create(start_date=timezone.datetime(2016, 9, 6), end_date=timezone.datetime(2016, 12, 17))
-
-    models.SemesterDate.objects.get_or_create(start_date=timezone.datetime(2017, 1, 9), end_date=timezone.datetime(2017, 4, 29))
-    models.SemesterDate.objects.get_or_create(start_date=timezone.datetime(2017, 5, 8), end_date=timezone.datetime(2017, 6, 28))
-    models.SemesterDate.objects.get_or_create(start_date=timezone.datetime(2017, 6, 29), end_date=timezone.datetime(2017, 8, 18))
-    models.SemesterDate.objects.get_or_create(start_date=timezone.datetime(2017, 9, 5), end_date=timezone.datetime(2017, 12, 16))
-
-    models.SemesterDate.objects.get_or_create(start_date=timezone.datetime(2018, 1, 8), end_date=timezone.datetime(2018, 4, 28))
-    models.SemesterDate.objects.get_or_create(start_date=timezone.datetime(2018, 5, 7), end_date=timezone.datetime(2018, 6, 27))
-    models.SemesterDate.objects.get_or_create(start_date=timezone.datetime(2018, 6, 28), end_date=timezone.datetime(2018, 8, 17))
-    models.SemesterDate.objects.get_or_create(start_date=timezone.datetime(2018, 8, 29), end_date=timezone.datetime(2018, 12, 15))
-
-    models.SemesterDate.objects.get_or_create(start_date=timezone.datetime(2019, 1, 7), end_date=timezone.datetime(2019, 4, 27))
-    models.SemesterDate.objects.get_or_create(start_date=timezone.datetime(2019, 5, 6), end_date=timezone.datetime(2019, 6, 26))
-    models.SemesterDate.objects.get_or_create(start_date=timezone.datetime(2019, 6, 27), end_date=timezone.datetime(2019, 8, 16))
+    # Load preset fixtures. No need to create random models.
+    call_command('loaddata', 'full_models/semester_dates')
 
     print('Populated semester date models.')
 
