@@ -1,10 +1,11 @@
-# Django - CAE Home App
+# Django - CAE Workspace
 
 ## Description
 
 A Django "workspace" to function as the core for future CAE Center projects.
 
-Intended to be as general as possible.
+Intended to be as general as possible. Most views/templates and general page logic should go into separate subprojects
+and apps, to be located in the **apps** folder.
 
 ## Initial Set Up
 
@@ -20,13 +21,19 @@ If using ubuntu, you will need to run:
 
 ### Project Setup
 
-* On first time use, you may want to go into **settings/local_env** and modify **env.py**.
+* For development mode, create a new file called **DEBUG** in the project's root folder. Otherwise, project
+will default to production and yell about "Allowed Hosts".
+* On first time use, you may want to go into **settings/local_env** and modify **env.py**:
     * **Development** - Can probably leave file as is, if using SQLite. Otherwise, edit env file as desired.
     * **Production** - Default env definitely isn't production ready. Will require modificaitons for stability and
     security.
 * Make sure to run migrations to set up initial database schema.
-* If developing on a local machine, create a new file called "DEBUG" in the project's root folder. Otherwise, project
-will yell about "Allowed Hosts".
+
+## Live Updates through Web Sockets
+
+In order to have live updates, you need to run **redis** which handles messaging for **django-channels**.
+
+* Run ```sudo apt-get install redis-server```
 
 ## React Notes
 
@@ -80,12 +87,6 @@ From the project's root directory, run:
     * Where ```<sourceFile>``` is the original react file.
     * And ```<destinationFile>``` is where the browser-friendly file is compiled to.
     * The ```-v``` will notify you each time a change is detected.
-
-### Live Updates through Web Sockets
-
-In order to have live updates, you need to run ```redis``` which handles messaging for ```django-channels```.
-
-* Run ```sudo apt-get install redis-server```
 
 ## Adding a New Project/App
 
@@ -148,7 +149,7 @@ To deploy, you will likely want to do the following on your host/server:
 * Update static media urls.
 * Set the proper "Allowed Host" addresses.
 * Set security settings:
-    * TODO: List security settings.
+    * **TODO**: List security settings.
 * You can doublecheck validity of these settings with **manage.py check --deploy**.
 
 ### Setting Up Apache
