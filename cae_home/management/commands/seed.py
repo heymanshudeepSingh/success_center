@@ -31,6 +31,26 @@ class Command(BaseCommand):
         """
         The logic of the command.
         """
+        # Check if in development or production mode.
+        if settings.DEBUG:
+            # Development. Continue on, this is fine.
+            self.create_seeds(*args, **kwargs)
+        else:
+            # Production. User probably doesn't want this. Show warning first.
+            print('WARNING: Site is in production mode.')
+            print('Proceeding may overwrite some models (fixtures) or create garbage data (random seeders).')
+            print('Are you sure you wish to continue?')
+            user_input = input('[ Yes | No ] ')
+            print('')
+            if user_input.lower() == 'y' or user_input.lower() == 'yes':
+                self.create_seeds(*args, **kwargs)
+            else:
+                print('Seeding cancelled. Exiting.')
+
+    def create_seeds(self, *args, **kwargs):
+        """
+        Creates model seeds.
+        """
         model_count = kwargs['model_count']
         if model_count < 1:
             model_count = 100
