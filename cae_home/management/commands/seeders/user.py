@@ -25,36 +25,49 @@ def create_groups():
     Creates django "auth_group" models and allocates proper permissions.
     """
     # Create base groups.
-    attendant_group = Group.objects.get_or_create(name='CAE Attendant')
-    admin_group = Group.objects.get_or_create(name='CAE Admin')
-    programmer_group = Group.objects.get_or_create(name='CAE Programmer')
+    director_group = Group.objects.get_or_create(name='CAE Director')[0]
+    building_coordinator_group = Group.objects.get_or_create(name='CAE Building Coordinator')[0]
+    admin_ga_group = Group.objects.get_or_create(name='CAE Admin GA')[0]
+    programmer_ga_group = Group.objects.get_or_create(name='CAE Programmer GA')[0]
+    attendant_group = Group.objects.get_or_create(name='CAE Attendant')[0]
+    admin_group = Group.objects.get_or_create(name='CAE Admin')[0]
+    programmer_group = Group.objects.get_or_create(name='CAE Programmer')[0]
+
+    # Set director permissions. Want all, unconditionally.
+    director_group.permissions.set(Permission.objects.all())
+
+    # Set building coordinator permissions. Want all, unconditionally.
+    building_coordinator_group.permissions.set(Permission.objects.all())
 
     # Set programmer permissions. Want all, unconditionally.
-    programmer_group = programmer_group[0]
     programmer_group.permissions.set(Permission.objects.all())
 
-    # Set admin permissions. Want only the ones related to this app.
-    admin_group = admin_group[0]
-    app_permissions = get_app_specific_permissions()
-    admin_group.permissions.set(app_permissions)
+    # Set programmer GA permissions. Want all, unconditionally.
+    programmer_ga_group.permissions.set(Permission.objects.all())
 
-    # Set attendant permissions. Want only add privileges, minus user account adding.
-    attendant_group = attendant_group[0]
+    # Set admin GA permissions. Want all, unconditionally.
+    admin_ga_group.permissions.set(Permission.objects.all())
+
+    # Set admin permissions. Want only the ones directly related to the CAE Center.
+    cae_center_permissions = get_cae_center_permissions()
+    admin_group.permissions.set(cae_center_permissions)
+
+    # Set attendant permissions. Want only CAE Center add privileges.
     filtered_permissions = []
-    for permission in app_permissions:
-        if 'Can add' in permission.name and not 'user' in permission.name:
+    for permission in cae_center_permissions:
+        if 'Can add' in permission.name or 'Can change user' in permission.name:
             filtered_permissions.append(permission)
     attendant_group.permissions.set(filtered_permissions)
 
     print('Populated group models.')
 
 
-def get_app_specific_permissions():
+def get_cae_center_permissions():
     """
-    Finds all permission models specific to the current app.
-    :return: A list of all permission models for current app.
+    Finds all permission models specific to the CAE Center.
+    :return: A list of all permission models for the CAE Center.
     """
-    # First find all content types with the app's name.
+    # First find all content types with "cae" in the name.
     app_content_types = ContentType.objects.filter(app_label__contains='cae')
 
     # Get all id's of found content types.
@@ -68,6 +81,14 @@ def get_app_specific_permissions():
         query_set = Permission.objects.filter(content_type_id=content_id)
         for item in query_set:
             app_permisson_list.append(item)
+
+    # Remove permissions specific to creating or deleting users.
+    for permission in app_permisson_list:
+        if 'Can add user' in permission.name or \
+           'Can delete user' in permission.name or\
+           'Can add Profile' in permission.name or\
+           'Can delete Profile' in permission.name:
+            app_permisson_list.remove(permission)
 
     return app_permisson_list
 
