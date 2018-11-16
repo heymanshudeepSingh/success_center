@@ -224,13 +224,13 @@ class RoomAdmin(admin.ModelAdmin):
 
 class MajorAdmin(admin.ModelAdmin):
     # Fields to display in admin list view.
-    list_display = ('code', 'name', 'undergrad', 'active',)
+    list_display = ('code', 'name', 'department', 'undergrad', 'active',)
 
     # Fields to filter by in admin list view.
     list_filter = ('undergrad', 'active',)
 
     # Fields to search in admin list view.
-    search_fields = ['code', 'name',]
+    search_fields = ['department', 'code', 'name',]
 
     # Read only fields for admin detail view.
     readonly_fields = ('date_created', 'date_modified')
@@ -239,7 +239,7 @@ class MajorAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
             'fields': (
-                'code', 'name', 'undergrad', 'active',
+                'code', 'name', 'department', 'undergrad', 'active',
             )
         }),
         ('Advanced', {

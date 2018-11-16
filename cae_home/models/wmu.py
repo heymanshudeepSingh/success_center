@@ -23,7 +23,7 @@ class Department(models.Model):
     class Meta:
         verbose_name = "Department"
         verbose_name_plural = "Departments"
-        ordering = ('name',)
+        ordering = ('pk',)
 
     def __str__(self):
         return '{0}'.format(self.name)
@@ -103,6 +103,9 @@ class Major(models.Model):
     """
     A major available at WMU.
     """
+    # Relationship keys.
+    department = models.ForeignKey('Department', on_delete=models.CASCADE, default=1)
+
     # Model fields.
     code = models.CharField(max_length=MAX_LENGTH)
     name = models.CharField(max_length=MAX_LENGTH)
