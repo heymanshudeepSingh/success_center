@@ -179,8 +179,13 @@ class MajorTests(TestCase):
     """
     Tests to ensure valid Major model creation/logic.
     """
+    @classmethod
+    def setUpTestData(cls):
+        cls.department = models.Department.objects.create(name='Department')
+
     def setUp(self):
         self.test_major = models.Major.objects.create(
+            department=self.department,
             code='Test Code',
             name='Test Name',
             undergrad=False,
@@ -188,6 +193,7 @@ class MajorTests(TestCase):
         )
 
     def test_model_creation(self):
+        self.assertEqual(self.test_major.department, self.department)
         self.assertEqual(self.test_major.code, 'Test Code')
         self.assertEqual(self.test_major.name, 'Test Name')
         self.assertEqual(self.test_major.undergrad, False)
