@@ -53,7 +53,7 @@ ALLOWED_CAE_PROJECTS = {
             'cae_web_core': {},
             'cae_web_audio_visual': {},
             'cae_web_inventory': {},
-            'cae_web_virus': {},
+            'cae_web_work_log': {},
         },
         'third_party_apps': [
             'schedule',     # django-scheduler
