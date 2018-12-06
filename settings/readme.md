@@ -1,7 +1,6 @@
 # Django - CAE Workspace > Settings
 
 ## Description
-
 All the standard Django website settings go here, plus a bit of extra logic.
 
 Main logic to note is the **allowed_apps.py** file.
