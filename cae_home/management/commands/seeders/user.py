@@ -5,6 +5,7 @@ Seeder for "User" related Core Models.
 from django.contrib.auth.models import Group, Permission
 from django.contrib.contenttypes.models import ContentType
 from faker import Faker
+from random import randint
 
 from cae_home import models
 
@@ -102,6 +103,18 @@ def create_users():
     models.User.get_or_create_superuser('jdc4014', '', 'temppass2')  # Jessie
     models.User.get_or_create_superuser('skd6970', '', 'temppass2')  # Steven (Senior Design)
     models.User.get_or_create_superuser('jbn6294', '', 'temppass2')  # Josh (Senior Design)
+
+    # Assign each user a random group. Might want to explicitly define groups in the future.
+    users = models.User.objects.all()
+    groups = Group.objects.all()
+    for user in users:
+        # Get User Group.
+        index = randint(0, len(groups) - 1)
+        group = groups[index]
+        user.groups.add(group)
+
+    print('Users: {0}'.format(users))
+    print('Groups: {0}'.format(groups))
 
     print('Populated user models.')
 
