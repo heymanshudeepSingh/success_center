@@ -32,6 +32,16 @@ class User(AbstractUser):
             new_user = User.objects.create_superuser(username, email, password)
         return new_user
 
+    @staticmethod
+    def get_or_create_user(username, email, password):
+        """
+        Attempts to either get or create user with given information.
+        """
+        new_user = User.objects.get_or_create(username=username, email=email, password=password)
+        if isinstance(new_user, tuple):
+            new_user = new_user[0]
+        return new_user
+
 
 class Profile(models.Model):
     """

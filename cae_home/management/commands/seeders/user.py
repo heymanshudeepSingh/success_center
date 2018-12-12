@@ -98,20 +98,30 @@ def create_users():
     """
     Creates base user models.
     """
-    models.User.get_or_create_superuser('brodriguez8774', '', 'temppass2')  # Brandon
-    models.User.get_or_create_superuser('ngf9321', '', 'temppass2')  # Nick
-    models.User.get_or_create_superuser('jdc4014', '', 'temppass2')  # Jessie
-    models.User.get_or_create_superuser('skd6970', '', 'temppass2')  # Steven (Senior Design)
-    models.User.get_or_create_superuser('jbn6294', '', 'temppass2')  # Josh (Senior Design)
+    default_password = 'temppass2'
 
-    # Assign each user a random group. Might want to explicitly define groups in the future.
-    users = models.User.objects.all()
-    groups = Group.objects.all()
-    for user in users:
-        # Get User Group.
-        index = randint(0, len(groups) - 1)
-        group = groups[index]
-        user.groups.add(group)
+    # Create superusers for every developer.
+    models.User.get_or_create_superuser('brodriguez8774', '', default_password)  # Brandon
+    models.User.get_or_create_superuser('ngf9321', '', default_password)  # Nick
+    models.User.get_or_create_superuser('jdc4014', '', default_password)  # Jessie
+    models.User.get_or_create_superuser('skd6970', '', default_password)  # Steven (Senior Design)
+    models.User.get_or_create_superuser('jbn6294', '', default_password)  # Josh (Senior Design)
+
+    # Create normal users for every main permission group.
+    cae_director = models.User.get_or_create_user('cae_director', '', default_password)
+    cae_building_coordinator = models.User.get_or_create_user('cae_building_coordinator', '', default_password)
+    cae_admin_ga = models.User.get_or_create_user('cae_admin_ga', '', default_password)
+    cae_programmer_ga = models.User.get_or_create_user('cae_programmer_ga', '', default_password)
+    cae_admin = models.User.get_or_create_user('cae_admin', '', default_password)
+    cae_programmer = models.User.get_or_create_user('cae_programmer', '', default_password)
+
+    # Add permission groups to users.
+    cae_director.groups.add(Group.objects.get(name='CAE Director'))
+    cae_building_coordinator.groups.add(Group.objects.get(name='CAE Building Coordinator'))
+    cae_admin_ga.groups.add(Group.objects.get(name='CAE Admin GA'))
+    cae_programmer_ga.groups.add(Group.objects.get(name='CAE Programmer GA'))
+    cae_admin.groups.add(Group.objects.get(name='CAE Admin'))
+    cae_programmer.groups.add(Group.objects.get(name='CAE Programmer'))
 
     print('Populated user models.')
 
