@@ -113,9 +113,6 @@ def create_users():
         group = groups[index]
         user.groups.add(group)
 
-    print('Users: {0}'.format(users))
-    print('Groups: {0}'.format(groups))
-
     print('Populated user models.')
 
 
