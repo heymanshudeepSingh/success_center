@@ -118,8 +118,8 @@ def create_users():
     # Add permission groups to users.
     cae_director.groups.add(Group.objects.get(name='CAE Director'))
     cae_building_coordinator.groups.add(Group.objects.get(name='CAE Building Coordinator'))
-    cae_admin_ga.groups.add(Group.objects.get(name='CAE Admin GA'))
-    cae_programmer_ga.groups.add(Group.objects.get(name='CAE Programmer GA'))
+    cae_admin_ga.groups.add(Group.objects.get(name='CAE Admin GA'), Group.objects.get(name='CAE Admin'))
+    cae_programmer_ga.groups.add(Group.objects.get(name='CAE Programmer GA'), Group.objects.get(name='CAE Programmer'))
     cae_admin.groups.add(Group.objects.get(name='CAE Admin'))
     cae_programmer.groups.add(Group.objects.get(name='CAE Programmer'))
 
