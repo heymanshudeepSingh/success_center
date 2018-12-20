@@ -38,6 +38,35 @@
 // overflow, overflow-x, overflow-y, clip, clear                                  //
 //================================================================================//
 
+//====================================//
+//==== START Status Message Block ====//
+//====================================//
+
+#status-message-container {
+    @include display-flex;
+    @include flex-direction(column);
+    @include justify-content(center);
+    @include align-items(center);
+
+    padding: 0 !important;
+
+    .message {
+        @include display-flex;
+        @include flex-direction(row);
+        @include flex-wrap(wrap);
+        @include justify-content(center);
+        @include align-items(center);
+
+        width: 100%;
+        padding: 10px;
+    }
+}
+
+//====================================//
+//===== END Status Message Block =====//
+//====================================//
+
+
 //=====================================//
 //==== START Generic Element Block ====//
 //=====================================//
@@ -167,6 +196,58 @@
 // zoom                                                                           //
 //================================================================================//
 
+//====================================//
+//==== START Status Message Block ====//
+//====================================//
+
+#status-message-container {
+
+    background-color: $color-grey-90;
+    border: 1px solid $theme-border;
+
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+
+    li {
+        list-style-type: none;
+    }
+
+    .message {
+        background-color: $color-grey-90;
+        border: 1px solid $theme-border;
+    }
+
+    .message:last-child {
+        border-bottom-right-radius: 5px;
+        border-bottom-left-radius: 5px;
+    }
+
+    .message.info {
+        background-color: $theme-status-info;
+        border: 1px solid $theme-status-info-border;
+    }
+
+    .message.success {
+        background-color: $theme-status-success;
+        border: 1px solid $theme-status-success-border;
+    }
+
+    .message.warning {
+        background-color: $theme-status-warn;
+        border: 1px solid $theme-status-warn-border;
+    }
+
+    .message.error {
+        background-color: $theme-status-error;
+        border: 1px solid $theme-status-error-border;
+    }
+}
+
+//====================================//
+//===== END Status Message Block =====//
+//====================================//
+
+
 //=====================================//
 //==== START Generic Element Block ====//
 //=====================================//
@@ -223,12 +304,17 @@
 // speak                                                                          //
 //================================================================================//
 
-//===========================//
-//==== START ----- Block ====//
-//===========================//
+//====================================//
+//==== START Status Message Block ====//
+//====================================//
 
+#status-message-container {
 
+    .message {
+        box-sizing: border-box;
+    }
+}
 
-//===========================//
-//===== END ----- Block =====//
-//===========================//
+//====================================//
+//===== END Status Message Block =====//
+//====================================//

@@ -1,0 +1,11 @@
+{% block status_messages %}
+  {% if messages %}
+    <ul id="status-message-container">
+      {% for message in messages %}
+        <li class="message {{ message.tags }}">
+          <p>{{ message }}</p>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock status_messages %}
