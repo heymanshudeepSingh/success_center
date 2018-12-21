@@ -182,6 +182,10 @@
 
 #content {
 
+    .hover-highlight:hover {
+        background-color: $theme-header-background;
+    }
+
     .javascript-warn {
         font-weight: bold;
 
@@ -368,6 +372,13 @@
 //===================================//
 //==== START Generic Class Block ====//
 //===================================//
+
+#content {
+
+    .hover-highlight:hover {
+        cursor: pointer;
+    }
+}
 
 .fade-in {
     @include transition(opacity 1.5s linear, visibility 0s 1.5s);
