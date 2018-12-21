@@ -283,6 +283,7 @@ class WmuUserTests(TestCase):
     def setUpTestData(cls):
         cls.department = models.Department.objects.create(name='Test Department')
         cls.major = models.Major.objects.create(
+            department=cls.department,
             code='Test Code',
             name='Test Name',
             undergrad=False,
