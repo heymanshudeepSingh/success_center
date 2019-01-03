@@ -67,13 +67,21 @@
       {% endblock header %}
 
       {% block placeholder_left %}
-        <div id="main-placeholder-left"></div>
+        <div id="main-placeholder-left">
+          <div id="content-bar-left">
+            {% block content-bar-left %}{% endblock content-bar-left %}
+          </div>
+        </div>
       {% endblock placeholder_left %}
 
       {% block main %}{% endblock main %}
 
       {% block placeholder_right %}
-        <div id="main-placeholder-right"></div>
+        <div id="main-placeholder-right">
+          <div id="content-bar-right">
+            {% block content-bar-right %}{% endblock content-bar-right %}
+          </div>
+        </div>
       {% endblock placeholder_right %}
 
       {% block footer %}
@@ -83,6 +91,7 @@
       {% block base_scripts_body %}
         <script src="{% static 'cae_home/js/mobile_nav.js' %}"></script>
         <script src="{% static 'cae_home/js/status_messages.js' %}"></script>
+        <script src="{% static 'cae_home/js/side_content_bars.js' %}"></script>
       {% endblock base_scripts_body %}
       {% block extra_scripts_body %}{% endblock extra_scripts_body %}
     </body>
