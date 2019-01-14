@@ -4,6 +4,8 @@
   "description": "CAE Workspace is a core project for Western Michigan University CAE Center.",
   "browser": "index.js",
   "dependencies": {
+    "react": "^16.7.0",
+    "react-flatpickr": "^3.6.4"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
