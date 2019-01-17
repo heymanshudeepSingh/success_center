@@ -5,7 +5,7 @@
 
 // Wait for full page load.
 $(document).ready(function() {
-    console.log("Loaded status_messages.js file.");
+    // console.log("Loaded status_messages.js file.");
 
     // Get dom elements of all message exit buttons.
     var message_exit_buttons = $('#status-message-container').children('.message').children('.exit');

@@ -85,6 +85,8 @@
 
 #content {
 
+    padding-bottom: 10px;
+
     ul {
         padding-left: 20px
     }
@@ -158,8 +160,59 @@
 }
 
 //=====================================//
-//===== END Generic Class Block =====//
+//===== END Generic Class Block =======//
 //=====================================//
+
+
+//=================================//
+//==== START Content Bar Block ====//
+//=================================//
+
+#content-bar-left, #content-bar-right {
+    position: absolute;
+
+    @include display-flex;
+    @include flex-direction(row);
+
+    min-width: 100%;
+    min-height: 100%;
+
+    > .bar-nav {
+        padding-top: 15px;
+    }
+
+    > .bar-content {
+        min-height: 100%;
+        padding: 5px;
+    }
+}
+
+#content-bar-left {
+    left: 0;
+
+    > .bar-nav {
+        left: 0;
+        order: 1;
+    }
+}
+
+#content-bar-right {
+    right: 0;
+
+    @include justify-content(flex-end);
+
+    > .bar-nav {
+        right: 0;
+    }
+}
+
+.arrow-right:hover, .arrow-left:hover {
+    background-color: white;
+}
+
+//===============================//
+//==== End Content Bar Block ====//
+//===============================//
 
 
 //================================================================================//
@@ -200,6 +253,26 @@
 //===================================//
 //===== END Generic Class Block =====//
 //===================================//
+
+//=================================//
+//==== START Content Bar Block ====//
+//=================================//
+
+#content-bar-left, #content-bar-right {
+
+    > .bar-nav p {
+        font-size: 150%;
+        color: $theme-header-background;
+    }
+
+    > .bar-nav p:hover {
+        color: $theme-text;
+    }
+}
+
+//===============================//
+//==== End Content Bar Block ====//
+//===============================//
 
 
 //================================================================================//
@@ -330,6 +403,24 @@
 //===================================//
 
 
+//=================================//
+//==== START Content Bar Block ====//
+//=================================//
+
+#content-bar-left, #content-bar-right {
+
+    > .bar-content {
+        background-color: $theme-header-background;
+        border-right: 1px solid $theme-border;
+        border-left: 1px solid $theme-border;
+    }
+}
+
+//===============================//
+//==== End Content Bar Block ====//
+//===============================//
+
+
 //================================================================================//
 //==================================== Other =====================================//
 //================================== Includes: ===================================//
@@ -395,3 +486,19 @@
 //===================================//
 //===== END Generic Class Block =====//
 //===================================//
+
+
+//=================================//
+//==== START Content Bar Block ====//
+//=================================//
+
+#content-bar-left, #content-bar-right {
+
+    > .bar-nav p {
+        cursor: pointer;
+    }
+}
+
+//===============================//
+//==== End Content Bar Block ====//
+//===============================//
