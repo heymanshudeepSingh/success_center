@@ -125,8 +125,6 @@ body {
         position: relative;
         z-index: 10;
 
-        margin-top: 10px;
-
         grid-area: footer;
 
         // Printer layout.
@@ -139,112 +137,6 @@ body {
 //===========================//
 //===== END ----- Block =====//
 //===========================//
-
-
-//=================================//
-//==== START Content Bar Block ====//
-//=================================//
-
-#content-bar-left, #content-bar-right {
-
-    position: absolute;
-
-    @include display-flex;
-    @include flex-direction(row);
-
-    min-height: 100%;
-
-    .content-bar-header {
-        position: relative;
-        background-color: blue;
-    }
-
-    .content-bar-header > * {
-        position: relative;
-    }
-
-    .content-bar-header > * > * {
-        /*position: absolute;*/
-        /*position: relative;*/
-        /*bottom: 0;*/
-        background-color: red;
-
-        font-size: 80%;
-
-        /*transform-origin: 50% 50%;*/
-        transform-origin: top left;
-        transform: rotate(90deg);
-        white-space: nowrap;
-    }
-
-    .content-bar-header > * > * > * {
-        transform: rotate(180deg);
-    }
-
-    /*.rotation-wrapper-outer {
-        /*background-color: pink;*/
-        /*display: table;*
-        position: relative;
-    }
-
-    .rotation-wrapper-inner {
-        /*background-color: red;*
-        position: relative;
-        padding: 50% 0;
-        height: 0;
-    }
-
-    .rotation-wrapper-inner > * {
-        /*display: block;*
-        transform-origin: 50% 50%;
-        transform: rotate(-90deg) translate(-100%);
-        /*margin-top: -50%;*
-        white-space: nowrap;
-
-        font-size: 80%;
-        background-color: pink;
-        border: 1px solid black;
-    }*/
-
-/*
-    > div:first-child > * {
-        font-size: 80%;
-        height: auto;
-        /*padding: 50% 0;     // CSS trick to make element's height equal to width when rotated.
-        //transform: rotate(-90deg) translate(-100%);
-        //transform-origin: 50% 50%;
-
-        background-color: red;
-    }*/
-
-
-    > div:nth-child(2) {
-        background-color: green;
-    }
-
-    /*h2, h3 {
-        position: absolute;
-
-        font-size: 80%;
-        transform: rotate(90deg);
-    }*/
-
-    .content-bar-content {
-        @include flex(1);
-    }
-}
-
-#content-bar-right {
-    right: 0;
-}
-
-#content-bar-left {
-    left: 0;
-}
-
-//=================================//
-//===== END Content Bar Block =====//
-//=================================//
 
 
 //================================================================================//

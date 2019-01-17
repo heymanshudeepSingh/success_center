@@ -69,7 +69,13 @@
       {% block placeholder_left %}
         <div id="main-placeholder-left">
           <div id="content-bar-left">
-            {% block content-bar-left %}{% endblock content-bar-left %}
+            <div class="bar-nav">
+              <p class="arrow-right">&#9205;</p>
+              <p class="arrow-left">&#9204;</p>
+            </div>
+            <div class="bar-content">
+              {% block content-bar-left %}{% endblock content-bar-left %}
+            </div>
           </div>
         </div>
       {% endblock placeholder_left %}
@@ -79,7 +85,13 @@
       {% block placeholder_right %}
         <div id="main-placeholder-right">
           <div id="content-bar-right">
-            {% block content-bar-right %}{% endblock content-bar-right %}
+            <div class="bar-nav">
+              <p class="arrow-right">&#9205;</p>
+              <p class="arrow-left">&#9204;</p>
+            </div>
+            <div class="bar-content">
+              {% block content-bar-right %}{% endblock content-bar-right %}
+            </div>
           </div>
         </div>
       {% endblock placeholder_right %}
