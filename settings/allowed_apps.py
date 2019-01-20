@@ -52,6 +52,7 @@ ALLOWED_CAE_PROJECTS = {
         'related_apps': {
             'cae_web_core': {},
             'cae_web_audio_visual': {},
+            'cae_web_attendants': {},
             'cae_web_inventory': {},
             'cae_work_log': {},
         },
