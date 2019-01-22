@@ -84,14 +84,16 @@ ALLOWED_CAE_PROJECTS = {
 # Automatically populated for automatic url generation on home page. Do not edit.
 INSTALLED_CAE_PROJECTS = {}
 
+
 # Logic to automatically install a given allowed app, if found.
+installed_app_count = 1
+excluded_project_list = []
+
 # First iterate through list of all project folders within the apps folder.
 debug_print('Automatically Installed Apps:')
 project_folder_list = [
     x for x in os.listdir(APP_DIR) if os.path.isdir(os.path.join(APP_DIR, x)) and not x.startswith('__')
 ]
-installed_app_count = 1
-excluded_project_list = []
 for project_name in project_folder_list:
 
     # Check that project is defined through settings.
@@ -104,6 +106,7 @@ for project_name in project_folder_list:
             x for x in os.listdir(project_folder)
             if os.path.isdir(os.path.join(project_folder, x)) and not x.startswith('.git') and not x.startswith('_')
         ]
+        included_app_list = []
         excluded_app_list = []
 
         # Iterate through project apps.
@@ -123,6 +126,7 @@ for project_name in project_folder_list:
                         INSTALLED_CAE_PROJECTS[project_name]['url-prefix']
                     ))
                     installed_app_count += 1
+                    included_app_list.append(app_name)
                 else:
                     # App not allowed through settings.
                     excluded_app_list.append(app_name)
@@ -130,6 +134,18 @@ for project_name in project_folder_list:
                 # No related apps key. All apps automatically excluded.
                 excluded_app_list.append(app_name)
 
+        # Print out all whitelisted but not found apps.
+        delete_list = []
+        for app_name in ALLOWED_CAE_PROJECTS[project_name]['related_apps']:
+            if app_name not in included_app_list and app_name not in excluded_app_list:
+                debug_print('       {0}Missing App{1}:  {2}'.format(ConsoleColors.bold_yellow, ConsoleColors.reset, app_name))
+                delete_list.append(app_name)
+
+        # Remove all references to whitelisted but not found apps.
+        for item in delete_list:
+            del ALLOWED_CAE_PROJECTS[project_name]['related_apps'][item]
+
+        # Print out all excluded apps.
         for app_name in excluded_app_list:
             debug_print('       {0}Excluded App{1}: {2}'.format(ConsoleColors.bold_red, ConsoleColors.reset, app_name))
 
@@ -149,7 +165,7 @@ for project_name in project_folder_list:
         # Project folder not allowed through settings.
         excluded_project_list.append(project_name)
 
-
+# Print out excluded projects.
 for project_name in excluded_project_list:
     debug_print('   {0}Excluded Project{1}: {2}'.format(ConsoleColors.bold_red, ConsoleColors.reset, project_name))
 
