@@ -43,6 +43,7 @@ class ConsoleColors:
     Full explanation can be found at http://ozzmaker.com/add-colour-to-text-in-python/ and
     https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
     """
-    bold_red = '\033[1;31;0m'
-    bold_blue = '\033[1;34;0m'
     reset = '\033[0m'
+    bold_red = '\033[1;31m'
+    bold_yellow = '\033[1;33m'
+    bold_blue = '\033[1;34m'
