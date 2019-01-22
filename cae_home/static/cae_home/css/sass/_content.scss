@@ -134,7 +134,7 @@ button {
     padding-left: 12px;
 }
 
-.button {
+a.button {
     display: inline-block;
 
     padding-top: 6px;
@@ -146,6 +146,58 @@ button {
 //============================//
 //===== END Button Block =====//
 //============================//
+
+
+//===========================//
+//==== START Panel Block ====//
+//===========================//
+
+div.panel {
+    position: relative;
+
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    a {
+        padding-top: 5px;
+        padding-right: 10px;
+        padding-bottom: 5px;
+        padding-left: 10px;
+    }
+
+    p > a {
+        padding-top: 0;
+        padding-right: 0;
+        padding-bottom: 0;
+        padding-left: 0;
+    }
+
+    > .header {
+        @include display-flex;
+        @include flex-direction(row);
+        @include justify-content(space-between);
+        @include align-items(center);
+
+        padding: 10px;
+    }
+
+    > .content {
+        padding: 10px;
+    }
+
+    > .footer {
+        @include display-flex;
+        @include flex-direction(row);
+        @include justify-content(space-between);
+        @include align-items(center);
+
+        padding: 10px;
+    }
+}
+
+//===========================//
+//===== END Panel Block =====//
+//===========================//
 
 
 //====================================//
@@ -292,18 +344,64 @@ button:hover {
     color: $theme-text;
 }
 
-.button {
+a.button {
     color: $theme-text-accent;
     text-decoration: none;
 }
 
-.button:hover {
+a.button:hover {
     color: $theme-text;
 }
 
 //============================//
 //===== END Button Block =====//
 //============================//
+
+
+//===========================//
+//==== START Panel Block ====//
+//===========================//
+
+div.panel {
+    a {
+        font-weight: bold;
+        color: $theme-content-text-subtle;
+        text-decoration: none;
+    }
+
+    > .header {
+        font-size: 110%;
+        font-weight: bold;
+    }
+}
+
+div.panel.info {
+    a {
+        color: $theme-status-info-text;
+    }
+}
+
+div.panel.success {
+    a {
+        color: $theme-status-success-text;
+    }
+}
+
+div.panel.warning {
+    a {
+        color: $theme-status-warn-text;
+    }
+}
+
+div.panel.error, div.panel.danger {
+    a {
+        color: $theme-status-error-text;
+    }
+}
+
+//===========================//
+//===== END Panel Block =====//
+//===========================//
 
 
 //=================================//
@@ -445,83 +543,187 @@ button.warning:hover {
     background-color: $theme-status-warn-border;
 }
 
-button.error {
+button.error, button.danger {
     background-color: $theme-status-error;
     border: 1px solid $theme-status-error-border;
 }
 
-button.error:hover {
+button.error:hover, button.danger:hover {
     background-color:  $theme-status-error-border;
 }
 
-button.danger {
-    background-color: $theme-status-error;
-    border: 1px solid $theme-status-error-border;
-}
-
-button.danger:hover {
-    background-color: $theme-status-error-border;
-}
-
-.button {
+a.button {
     background-color: $color-grey-90;
     border: 1px solid $theme-border;
 
     border-radius: 5px;
 }
 
-.button:hover {
+a.button:hover {
     background-color: $theme-border;
 }
 
-.button.info {
+a.button.info {
     background-color: $theme-status-info;
     border: 1px solid $theme-status-info-border;
 }
 
-.button.info:hover {
+a.button.info:hover {
     background-color: $theme-status-info-border;
 }
 
-.button.success {
+a.button.success {
     background-color: $theme-status-success;
     border: 1px solid $theme-status-success-border;
 }
 
-.button.success:hover {
+a.button.success:hover {
     background-color: $theme-status-success-border;
 }
 
-.button.warning {
+a.button.warning {
     background-color: $theme-status-warn;
     border: 1px solid $theme-status-warn-border;
 }
 
-.button.warning:hover {
+a.button.warning:hover {
     background-color: $theme-status-warn-border;
 }
 
-.button.error {
+a.button.error, .button.danger {
     background-color: $theme-status-error;
     border: 1px solid $theme-status-error-border;
 }
 
-.button.error:hover {
-    background-color: $theme-status-error-border;
-}
-
-.button.danger {
-    background-color: $theme-status-error;
-    border: 1px solid $theme-status-error-border;
-}
-
-.button.danger:hover {
+a.button.error:hover, .button.danger:hover {
     background-color: $theme-status-error-border;
 }
 
 //============================//
 //===== END Button Block =====//
 //============================//
+
+
+//===========================//
+//==== START Panel Block ====//
+//===========================//
+
+div.panel {
+    background-color: $theme-header-background;
+    border: 1px solid $theme-border;
+
+    a {
+        border-radius: 5em
+    }
+
+    a:hover {
+        background-color: $theme-header-background;
+    }
+
+    > .header {
+        border-bottom: 1px solid $theme-border;
+    }
+
+    > .content {
+        background-color: $theme-content-background;
+    }
+
+    > .footer {
+        border-top: 1px solid $theme-border;
+    }
+}
+
+div.panel:hover {
+    background-color: $theme-header-highlight;
+}
+
+div.panel.info {
+    background-color: $theme-status-info;
+    border: 1px solid $theme-status-info-border;
+
+    a:hover {
+        background-color: $theme-status-info;
+    }
+
+    > .header {
+        border-bottom: 1px solid $theme-status-info-border;
+    }
+
+    > .footer {
+        border-top: 1px solid $theme-status-info-border;
+    }
+}
+
+div.panel.info:hover {
+    background-color: $theme-status-info-light;
+}
+
+div.panel.success {
+    background-color: $theme-status-success;
+    border: 1px solid $theme-status-success-border;
+
+    a:hover {
+        background-color: $theme-status-success;
+    }
+
+    > .header {
+        border-bottom: 1px solid $theme-status-success-border;
+    }
+
+    > .footer {
+        border-top: 1px solid $theme-status-success-border;
+    }
+}
+
+div.panel.success:hover {
+    background-color: $theme-status-success-light;
+}
+
+div.panel.warning {
+    background-color: $theme-status-warn;
+    border: 1px solid $theme-status-warn-border;
+
+    a:hover {
+        background-color: $theme-status-warn;
+    }
+
+    > .header {
+        border-bottom: 1px solid $theme-status-warn-border;
+    }
+
+    > .footer {
+        border-top: 1px solid $theme-status-warn-border;
+    }
+}
+
+div.panel.warning:hover {
+    background-color: $theme-status-warn-light;
+}
+
+div.panel.error, .panel.danger {
+    background-color: $theme-status-error;
+    border: 1px solid $theme-status-error-border;
+
+    a:hover {
+        background-color: $theme-status-error;
+    }
+
+    > .header {
+        border-bottom: 1px solid $theme-status-error-border;
+    }
+
+    > .footer {
+        border-top: 1px solid $theme-status-error-border;
+    }
+}
+
+div.panel.error:hover, .panel.danger:hover {
+    background-color: $theme-status-error-light;
+}
+
+//===========================//
+//===== END Panel Block =====//
+//===========================//
 
 
 //====================================//
@@ -561,7 +763,7 @@ button.danger:hover {
         border: 1px solid $theme-status-warn-border;
     }
 
-    .message.error {
+    .message.error, .message.danger {
         background-color: $theme-status-error;
         border: 1px solid $theme-status-error-border;
     }
@@ -641,7 +843,7 @@ button.danger:hover {
 //==== START Button Block ====//
 //============================//
 
-button, .button {
+button, a.button {
     cursor: pointer;
     @include transition(color 0.5s, background-color 0.5s);
 }
@@ -649,6 +851,23 @@ button, .button {
 //============================//
 //===== END Button Block =====//
 //============================//
+
+
+//===========================//
+//==== START Panel Block ====//
+//===========================//
+
+div.panel {
+    @include transition(background-color 0.5s);
+
+    a {
+        @include transition(background-color 0.5s);
+    }
+}
+
+//===========================//
+//===== END Panel Block =====//
+//===========================//
 
 
 //====================================//
