@@ -123,6 +123,31 @@
 //=====================================//
 
 
+//============================//
+//==== START Button Block ====//
+//============================//
+
+button {
+    padding-top: 6px;
+    padding-right: 12px;
+    padding-bottom: 6px;
+    padding-left: 12px;
+}
+
+.button {
+    display: inline-block;
+
+    padding-top: 6px;
+    padding-right: 12px;
+    padding-bottom: 6px;
+    padding-left: 12px;
+}
+
+//============================//
+//===== END Button Block =====//
+//============================//
+
+
 //====================================//
 //==== START Status Message Block ====//
 //====================================//
@@ -254,6 +279,33 @@
 //===== END Generic Class Block =====//
 //===================================//
 
+
+//============================//
+//==== START Button Block ====//
+//============================//
+
+button {
+    color: $theme-text-accent;
+}
+
+button:hover {
+    color: $theme-text;
+}
+
+.button {
+    color: $theme-text-accent;
+    text-decoration: none;
+}
+
+.button:hover {
+    color: $theme-text;
+}
+
+//============================//
+//===== END Button Block =====//
+//============================//
+
+
 //=================================//
 //==== START Content Bar Block ====//
 //=================================//
@@ -351,30 +403,147 @@
 //===================================//
 
 
+//============================//
+//==== START Button Block ====//
+//============================//
+
+button {
+    background-color: $color-grey-90;
+    border: 1px solid $theme-border;
+
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: $theme-border;
+}
+
+button.info {
+    background-color: $theme-status-info;
+    border: 1px solid $theme-status-info-border;
+}
+
+button.info:hover {
+    background-color: $theme-status-info-border;
+}
+
+button.success {
+    background-color: $theme-status-success;
+    border: 1px solid $theme-status-success-border;
+}
+
+button.success:hover {
+    background-color: $theme-status-success-border;
+}
+
+button.warning {
+    background-color: $theme-status-warn;
+    border: 1px solid $theme-status-warn-border;
+}
+
+button.warning:hover {
+    background-color: $theme-status-warn-border;
+}
+
+button.error {
+    background-color: $theme-status-error;
+    border: 1px solid $theme-status-error-border;
+}
+
+button.error:hover {
+    background-color:  $theme-status-error-border;
+}
+
+button.danger {
+    background-color: $theme-status-error;
+    border: 1px solid $theme-status-error-border;
+}
+
+button.danger:hover {
+    background-color: $theme-status-error-border;
+}
+
+.button {
+    background-color: $color-grey-90;
+    border: 1px solid $theme-border;
+
+    border-radius: 5px;
+}
+
+.button:hover {
+    background-color: $theme-border;
+}
+
+.button.info {
+    background-color: $theme-status-info;
+    border: 1px solid $theme-status-info-border;
+}
+
+.button.info:hover {
+    background-color: $theme-status-info-border;
+}
+
+.button.success {
+    background-color: $theme-status-success;
+    border: 1px solid $theme-status-success-border;
+}
+
+.button.success:hover {
+    background-color: $theme-status-success-border;
+}
+
+.button.warning {
+    background-color: $theme-status-warn;
+    border: 1px solid $theme-status-warn-border;
+}
+
+.button.warning:hover {
+    background-color: $theme-status-warn-border;
+}
+
+.button.error {
+    background-color: $theme-status-error;
+    border: 1px solid $theme-status-error-border;
+}
+
+.button.error:hover {
+    background-color: $theme-status-error-border;
+}
+
+.button.danger {
+    background-color: $theme-status-error;
+    border: 1px solid $theme-status-error-border;
+}
+
+.button.danger:hover {
+    background-color: $theme-status-error-border;
+}
+
+//============================//
+//===== END Button Block =====//
+//============================//
+
+
 //====================================//
 //==== START Status Message Block ====//
 //====================================//
 
 #status-message-container {
-
-    /*background-color: $color-grey-90;
-    border: 1px solid $theme-border;
-
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;*/
-
     li {
         list-style-type: none;
-    }
-
-    .message {
-        background-color: $color-grey-90;
-        border: 1px solid $theme-border;
     }
 
     .message:last-child {
         border-bottom-right-radius: 5px;
         border-bottom-left-radius: 5px;
+    }
+}
+
+#status-message-container, form {
+
+    .message {
+        background-color: $color-grey-90;
+        border: 1px solid $theme-border;
     }
 
     .message.info {
@@ -466,6 +635,20 @@
 //===================================//
 //===== END Generic Class Block =====//
 //===================================//
+
+
+//============================//
+//==== START Button Block ====//
+//============================//
+
+button, .button {
+    cursor: pointer;
+    @include transition(color 0.5s, background-color 0.5s);
+}
+
+//============================//
+//===== END Button Block =====//
+//============================//
 
 
 //====================================//

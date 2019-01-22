@@ -91,7 +91,7 @@ h1, h2, h3, h4, h5, h6 {
         font-family: 'Source Sans Pro', 'Open Sans', 'Lato', sans-serif;
     }
 
-    p {
+    p, button, .button {
         font-family: 'Open Sans', 'Lato', 'Source Sans Pro', sans-serif;
     }
 }
@@ -115,7 +115,7 @@ html, body, hgroup, header, footer, nav,
 article, section, aside, figure, figcaption,
 h1, h2, h3, h4, h5, h6,
 ol, ul, li,
-div, span, p, img, a,
+div, span, p, img, a, button
 {
     @media only screen {
         font-size: 4.5vw;
