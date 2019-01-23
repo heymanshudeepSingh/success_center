@@ -112,7 +112,7 @@
     padding: 0 !important;
     margin: 0 !important;
 
-    > p {
+    * {
         padding: 0 !important;
         margin: 0 !important;
     }
@@ -214,24 +214,43 @@ div.panel {
 
     padding: 0 !important;
 
+    a {
+        padding-top: 5px;
+        padding-right: 10px;
+        padding-bottom: 5px;
+        padding-left: 10px;
+    }
+
     .message {
         position: relative;
 
         @include display-flex;
         @include flex-direction(row);
-        @include flex-wrap(wrap);
         @include justify-content(center);
         @include align-items(center);
 
         width: 100%;
         padding: 10px;
 
+        > p:first-child {
+            @include display-flex;
+            @include flex-direction(row);
+            @include justify-content(space-between);
+            @include align-items(center);
+
+            @include flex(1);
+        }
+
         .exit {
-            position: absolute;
+            position: relative;
             right: 0;
 
-            padding: 5px;
-            margin-right: 1%;
+            padding-top: 3px;
+            padding-right: 8px;
+            padding-bottom: 3px;
+            padding-left: 8px;
+            margin-right: 0.5%;
+            margin-left: 0.5%;
         }
     }
 }
@@ -323,8 +342,10 @@ div.panel {
     }
 }
 
-.fade-out > p {
-    font-size: 0px;
+.fade-out {
+    * {
+        font-size: 0px;
+    }
 }
 
 //===================================//
@@ -365,7 +386,7 @@ a.button:hover {
 div.panel {
     a {
         font-weight: bold;
-        color: $theme-content-text-subtle;
+        color: $theme-status-default-text;
         text-decoration: none;
     }
 
@@ -402,6 +423,76 @@ div.panel.error, div.panel.danger {
 //===========================//
 //===== END Panel Block =====//
 //===========================//
+
+
+//====================================//
+//==== START Status Message Block ====//
+//====================================//
+
+#status-message-container {
+
+    .message {
+        a {
+            font-weight: bold;
+            color: $theme-status-default-text;
+            text-decoration: none;
+        }
+
+        .exit {
+            font-weight: bold;
+            color: $theme-status-default-text;
+        }
+
+        .exit:hover {
+            font-weight: bold;
+            color: $theme-text !important;
+        }
+    }
+
+    .message.info {
+        a {
+            color: $theme-status-info-text;
+        }
+
+        .exit {
+            color: $theme-status-info-text;
+        }
+    }
+
+    .message.success {
+        a {
+            color: $theme-status-success-text;
+        }
+
+        .exit {
+            color: $theme-status-success-text;
+        }
+    }
+
+    .message.warning {
+        a {
+            color: $theme-status-warn-text;
+        }
+
+        .exit {
+            color: $theme-status-warn-text;
+        }
+    }
+
+    .message.error, .message.danger {
+        a {
+            color: $theme-status-error-text;
+        }
+
+        .exit {
+            color: $theme-status-error-text;
+        }
+    }
+}
+
+//====================================//
+//===== END Status Message Block =====//
+//====================================//
 
 
 //=================================//
@@ -506,14 +597,14 @@ div.panel.error, div.panel.danger {
 //============================//
 
 button {
-    background-color: $color-grey-90;
-    border: 1px solid $theme-border;
+    background-color: $theme-status-default;
+    border: 1px solid $theme-status-default-border;
 
     border-radius: 5px;
 }
 
 button:hover {
-    background-color: $theme-border;
+    background-color: $theme-status-default-border;
 }
 
 button.info {
@@ -553,14 +644,14 @@ button.error:hover, button.danger:hover {
 }
 
 a.button {
-    background-color: $color-grey-90;
-    border: 1px solid $theme-border;
+    background-color: $theme-status-default;
+    border: 1px solid $theme-status-default-border;
 
     border-radius: 5px;
 }
 
 a.button:hover {
-    background-color: $theme-border;
+    background-color: $theme-status-default-border;
 }
 
 a.button.info {
@@ -609,19 +700,19 @@ a.button.error:hover, .button.danger:hover {
 //===========================//
 
 div.panel {
-    background-color: $theme-header-background;
-    border: 1px solid $theme-border;
+    background-color: $theme-status-default;
+    border: 1px solid $theme-status-default-border;
 
     a {
         border-radius: 5em
     }
 
     a:hover {
-        background-color: $theme-header-background;
+        background-color: $theme-status-default;
     }
 
     > .header {
-        border-bottom: 1px solid $theme-border;
+        border-bottom: 1px solid $theme-status-default-border;
     }
 
     > .content {
@@ -629,12 +720,12 @@ div.panel {
     }
 
     > .footer {
-        border-top: 1px solid $theme-border;
+        border-top: 1px solid $theme-status-default-border;
     }
 }
 
 div.panel:hover {
-    background-color: $theme-header-highlight;
+    background-color: $theme-status-default-light;
 }
 
 div.panel.info {
@@ -731,41 +822,83 @@ div.panel.error:hover, .panel.danger:hover {
 //====================================//
 
 #status-message-container {
+
     li {
         list-style-type: none;
+    }
+
+    a, .exit {
+        border-radius: 5em;
+    }
+
+    .message {
+        background-color: $theme-status-default;
+        border: 1px solid $theme-status-default-border;
+
+        a:hover, .exit:hover {
+            background-color: $theme-status-default;
+        }
     }
 
     .message:last-child {
         border-bottom-right-radius: 5px;
         border-bottom-left-radius: 5px;
     }
-}
 
-#status-message-container, form {
-
-    .message {
-        background-color: $color-grey-90;
-        border: 1px solid $theme-border;
+    .message:hover {
+        background-color: $theme-status-default-light;
     }
 
     .message.info {
         background-color: $theme-status-info;
         border: 1px solid $theme-status-info-border;
+
+        a:hover, .exit:hover {
+            background-color: $theme-status-info;
+        }
+    }
+
+    .message.info:hover {
+        background-color: $theme-status-info-light;
     }
 
     .message.success {
         background-color: $theme-status-success;
         border: 1px solid $theme-status-success-border;
+
+        a:hover, .exit:hover {
+            background-color: $theme-status-success;
+        }
+    }
+
+    .message.success:hover {
+        background-color: $theme-status-success-light;
     }
 
     .message.warning {
         background-color: $theme-status-warn;
         border: 1px solid $theme-status-warn-border;
+
+        a:hover, .exit:hover {
+            background-color: $theme-status-warn;
+        }
+    }
+
+    .message.warning:hover {
+        background-color: $theme-status-warn-light;
     }
 
     .message.error, .message.danger {
         background-color: $theme-status-error;
         border: 1px solid $theme-status-error-border;
+
+        a:hover, .exit:hover {
+            background-color: $theme-status-error;
+        }
+    }
+
+    .message.error:hover, .message.danger:hover {
+        background-color: $theme-status-error-light;
     }
 }
 
@@ -823,14 +956,14 @@ div.panel.error:hover, .panel.danger:hover {
 }
 
 .fade-in {
-    @include transition(opacity 1.5s linear, visibility 0s 1.5s);
+    @include transition(opacity 1s linear, visibility 0s 1s);
 }
 
 .fade-out {
-    @include transition(padding 1.5s, margin 1.5s, opacity 1.5s linear, visibility 0s 1.5s);
+    @include transition(padding 0.9s, margin 0.9s, font-size 0.9s, opacity 0.9s linear, visibility 0s 0.9s);
 
-    > p {
-        @include transition(padding 1.5s, margin 1.5s, font-size 1.5s);
+    * {
+        @include transition(padding 0.9s, margin 0.9s, font-size 0.9s);
     }
 }
 
@@ -879,7 +1012,14 @@ div.panel {
     .message {
         box-sizing: border-box;
 
+        @include transition(padding 0.9s, margin 0.9s, font-size 0.9s, border-radius 0.5s, opacity 0.9s linear, visibility 0s 0.9s);
+
+        a {
+            @include transition(background-color 0.5s);
+        }
+
         .exit {
+            @include transition(background-color 0.5s, color 0.5s);
             cursor: pointer;
         }
     }

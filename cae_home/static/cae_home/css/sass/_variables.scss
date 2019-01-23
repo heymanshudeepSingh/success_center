@@ -129,6 +129,11 @@ $theme-content-text-subtle: $color-grey-50;
 $theme-warning: $wmu-red;
 
 //== Status/Variant Colors ==//
+$theme-status-default: $theme-header-background;
+$theme-status-default-text: $theme-content-text-subtle;
+$theme-status-default-border: $theme-border;
+$theme-status-default-light: $theme-header-highlight;
+
 /*$theme-status-info: #d2d2f9;*/
 $theme-status-info: #d7d7f9;
 $theme-status-info-text: #4b4be7;

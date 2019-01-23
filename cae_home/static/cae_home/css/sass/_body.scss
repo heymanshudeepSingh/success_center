@@ -65,7 +65,7 @@ body {
     // Show on larger screens.
     @media only screen and (min-width: $screen-tablet-mid) {
         grid-template-columns: 15% 35% 35% 15%;
-        grid-template-rows: 35px auto auto 35px;
+        grid-template-rows: 40px auto auto 35px;
     }
 
     // Printer layout.

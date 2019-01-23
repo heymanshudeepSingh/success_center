@@ -52,6 +52,7 @@ header nav {
 
         @include flex-direction(row);
         @include justify-content(flex-end);
+        @include align-items(center);
         @include flex(1);
 
         // Show on larger screens.
@@ -64,6 +65,8 @@ header nav {
     }
 
     > ul > hr {
+        height: 25px;
+
         padding: 0;
         margin: 0;
         margin-top: 3px;
@@ -96,6 +99,7 @@ header nav {
 
         @include flex-direction(column);
         @include justify-content(space-around);
+        /*@include align-items(center);*/
 
         margin-left: 5px;
         margin-right: 5px;
@@ -121,6 +125,7 @@ header nav {
         @include display-flex;
         @include flex-direction(row);
         @include justify-content(space-around);
+        @include align-items(center);
         @include flex(1);
 
         padding-top: 5px;
@@ -143,6 +148,7 @@ header nav {
     @include display-flex;
     @include flex-direction(column);
     @include justify-content(center);
+    @include align-items(center);
 
     width: 28px;
     height: 20px;
