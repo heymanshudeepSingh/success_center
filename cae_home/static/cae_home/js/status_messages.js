@@ -22,9 +22,14 @@ $(document).ready(function() {
                 exit_parent.removeClass('fade-in');
             }
             exit_parent.addClass('fade-out');
+
+            // Remove message after timer.
             setTimeout(function() {
-                exit_parent.addClass('hidden');
-            }, 1500); // Wait 1.5 seconds.
+                // Save message to console so user can still access it, if needed.
+                console.log('Removed message:');
+                console.log($(exit_parent).children().first().text().trim());
+                exit_parent.detach();
+            }, 1000); // Wait 1 seconds.
         });
     });
 
