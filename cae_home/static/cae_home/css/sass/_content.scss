@@ -132,6 +132,8 @@ button {
     padding-right: 12px;
     padding-bottom: 6px;
     padding-left: 12px;
+    margin-top: 2px;
+    margin-bottom: 2px;
 }
 
 a.button {
@@ -141,11 +143,34 @@ a.button {
     padding-right: 12px;
     padding-bottom: 6px;
     padding-left: 12px;
+    margin-top: 2px;
+    margin-bottom: 2px;
 }
 
 //============================//
 //===== END Button Block =====//
 //============================//
+
+
+//===========================//
+//==== START Alert Block ====//
+//===========================//
+
+.alert {
+    @include display-flex;
+    @include flex-direction(row);
+    @include justify-content(space-between);
+    @include align-items(center);
+
+    padding-top: 6px;
+    padding-right: 12px;
+    padding-bottom: 6px;
+    padding-left: 12px;
+}
+
+//===========================//
+//===== END Alert Block =====//
+//===========================//
 
 
 //===========================//
@@ -377,6 +402,53 @@ a.button:hover {
 //============================//
 //===== END Button Block =====//
 //============================//
+
+
+//===========================//
+//==== START Alert Block ====//
+//===========================//
+
+.alert {
+    color: $theme-text-accent;
+
+    a {
+        font-weight: bold;
+        color: $theme-status-default-text;
+        text-decoration: none;
+    }
+}
+
+.alert:hover {
+    color: $theme-text;
+}
+
+.alert.info {
+    a {
+        color: $theme-status-info-text;
+    }
+}
+
+.alert.success {
+    a {
+        color: $theme-status-success-text;
+    }
+}
+
+.alert.warning {
+    a {
+        color: $theme-status-warn-text;
+    }
+}
+
+.alert.error, .alert.danger {
+    a {
+        color: $theme-status-error-text;
+    }
+}
+
+//===========================//
+//===== END Alert Block =====//
+//===========================//
 
 
 //===========================//
@@ -696,6 +768,60 @@ a.button.error:hover, .button.danger:hover {
 
 
 //===========================//
+//==== START Alert Block ====//
+//===========================//
+
+.alert {
+    background-color: $theme-status-default;
+    border: 1px solid $theme-status-default-border;
+}
+
+.alert:hover {
+    background-color: $theme-status-default-light;
+}
+
+.alert.info {
+    background-color: $theme-status-info;
+    border: 1px solid $theme-status-info-border;
+}
+
+.alert.info:hover {
+    background-color: $theme-status-info-light;
+}
+
+.alert.success {
+    background-color: $theme-status-success;
+    border: 1px solid $theme-status-success-border;
+}
+
+.alert.success:hover {
+    background-color: $theme-status-success-light;
+}
+
+.alert.warning {
+    background-color: $theme-status-warn;
+    border: 1px solid $theme-status-warn-border;
+}
+
+.alert.warning:hover {
+    background-color: $theme-status-warn-light;
+}
+
+.alert.error, .alert.danger {
+    background-color: $theme-status-error;
+    border: 1px solid $theme-status-error-border;
+}
+
+.alert.error:hover, .alert.danger:hover {
+    background-color: $theme-status-error-light;
+}
+
+//===========================//
+//===== END Alert Block =====//
+//===========================//
+
+
+//===========================//
 //==== START Panel Block ====//
 //===========================//
 
@@ -984,6 +1110,19 @@ button, a.button {
 //============================//
 //===== END Button Block =====//
 //============================//
+
+
+//===========================//
+//==== START Alert Block ====//
+//===========================//
+
+.alert {
+    @include transition(color 0.5s, background-color 0.5s);
+}
+
+//===========================//
+//===== END Alert Block =====//
+//===========================//
 
 
 //===========================//
