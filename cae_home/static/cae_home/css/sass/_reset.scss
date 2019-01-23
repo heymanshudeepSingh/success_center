@@ -117,7 +117,7 @@ h1, h2, h3, h4, h5, h6,
 ol, ul, li,
 div, span, p, img, a, button
 {
-    @media only screen {
+    /*@media only screen {
         font-size: 4.5vw;
     }
 
@@ -151,7 +151,7 @@ div, span, p, img, a, button
 
     @media only screen and (min-width: $screen-desktop-min) {
         font-size: 0.9vw;
-    }
+    }*/
 
     @media only print {
         font-size: 11px;
