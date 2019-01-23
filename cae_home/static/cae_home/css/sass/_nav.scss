@@ -52,12 +52,12 @@ header nav {
 
         @include flex-direction(row);
         @include justify-content(flex-end);
-        @include align-items(center);
         @include flex(1);
 
         // Show on larger screens.
         @media only screen and (min-width: $screen-tablet-mid) {
             @include display-flex;
+            @include align-items(center);
 
             margin-right: 1vw;
             margin-left: 1vw;
