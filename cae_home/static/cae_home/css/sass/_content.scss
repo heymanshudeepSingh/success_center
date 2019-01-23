@@ -991,6 +991,7 @@ button, a.button {
 //===========================//
 
 div.panel {
+    box-shadow: 1px 1px 5px $color-grey-90;
     @include transition(background-color 0.5s);
 
     a {

@@ -134,24 +134,25 @@ $theme-status-default-text: $theme-content-text-subtle;
 $theme-status-default-border: $theme-border;
 $theme-status-default-light: $theme-header-highlight;
 
-/*$theme-status-info: #d2d2f9;*/
-$theme-status-info: #d7d7f9;
-$theme-status-info-text: #4b4be7;
-$theme-status-info-border: #a5a5f3;
+
+$theme-status-info: #ddddf4;
+$theme-status-info-text: #5c5cd6;
+$theme-status-info-border: #c1c1f0;
 $theme-status-info-light: #e9e9fc;
-/*$theme-status-success: #d2f9d2;*/
-$theme-status-success: #c9f8c9;
+
+$theme-status-success: #d1f0d1;
 $theme-status-success-text: #18b418;
-$theme-status-success-border: #a5f3a5;
+$theme-status-success-border: #adebad;
 $theme-status-success-light: #e9fce9;
-/*$theme-status-warn: #f9ecd2;*/
-$theme-status-warn: #f8e8c9;
+
+$theme-status-warn: #f9f2d2;
 $theme-status-warn-text: #df9f20;
-$theme-status-warn-border: #f2d9a6;
+$theme-status-warn-border: #eee2aa;
 $theme-status-warn-light: #fcf5e9;
-$theme-status-error: #f9d2d2;
-$theme-status-error-text: #ec7979;
-$theme-status-error-border: #f2a6a6;
+
+$theme-status-error: #f5dbd6;
+$theme-status-error-text: #ec8379;
+$theme-status-error-border: #f0c9c2;
 $theme-status-error-light: #fce9e9;
 
 //==============================//
