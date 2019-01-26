@@ -127,18 +127,8 @@
 //==== START Button Block ====//
 //============================//
 
-button {
-    padding-top: 6px;
-    padding-right: 12px;
-    padding-bottom: 6px;
-    padding-left: 12px;
-    margin-top: 2px;
-    margin-bottom: 2px;
-}
-
-a.button {
+button, a.button {
     display: inline-block;
-
     padding-top: 6px;
     padding-right: 12px;
     padding-bottom: 6px;
@@ -382,20 +372,13 @@ div.panel {
 //==== START Button Block ====//
 //============================//
 
-button {
+button, a.button {
     color: $theme-text-accent;
-}
-
-button:hover {
-    color: $theme-text;
-}
-
-a.button {
-    color: $theme-text-accent;
+    font-size: 1rem;
     text-decoration: none;
 }
 
-a.button:hover {
+button:hover, a.button:hover {
     color: $theme-text;
 }
 
@@ -668,96 +651,51 @@ div.panel.error, div.panel.danger {
 //==== START Button Block ====//
 //============================//
 
-button {
+button, a.button {
     background-color: $theme-status-default;
     border: 1px solid $theme-status-default-border;
 
     border-radius: 5px;
 }
 
-button:hover {
+button:hover, a.button:hover {
     background-color: $theme-status-default-border;
 }
 
-button.info {
+button.info, a.button.info {
     background-color: $theme-status-info;
     border: 1px solid $theme-status-info-border;
 }
 
-button.info:hover {
+button.info:hover, a.button.info:hover {
     background-color: $theme-status-info-border;
 }
 
-button.success {
+button.success, a.button.success {
     background-color: $theme-status-success;
     border: 1px solid $theme-status-success-border;
 }
 
-button.success:hover {
+button.success:hover, a.button.success:hover {
     background-color: $theme-status-success-border;
 }
 
-button.warning {
+button.warning, a.button.warning {
     background-color: $theme-status-warn;
     border: 1px solid $theme-status-warn-border;
 }
 
-button.warning:hover {
+button.warning:hover, a.button.warning:hover {
     background-color: $theme-status-warn-border;
 }
 
-button.error, button.danger {
-    background-color: $theme-status-error;
-    border: 1px solid $theme-status-error-border;
-}
-
-button.error:hover, button.danger:hover {
-    background-color:  $theme-status-error-border;
-}
-
-a.button {
-    background-color: $theme-status-default;
-    border: 1px solid $theme-status-default-border;
-
-    border-radius: 5px;
-}
-
-a.button:hover {
-    background-color: $theme-status-default-border;
-}
-
-a.button.info {
-    background-color: $theme-status-info;
-    border: 1px solid $theme-status-info-border;
-}
-
-a.button.info:hover {
-    background-color: $theme-status-info-border;
-}
-
-a.button.success {
-    background-color: $theme-status-success;
-    border: 1px solid $theme-status-success-border;
-}
-
-a.button.success:hover {
-    background-color: $theme-status-success-border;
-}
-
-a.button.warning {
-    background-color: $theme-status-warn;
-    border: 1px solid $theme-status-warn-border;
-}
-
-a.button.warning:hover {
-    background-color: $theme-status-warn-border;
-}
-
+button.error, button.danger,
 a.button.error, .button.danger {
     background-color: $theme-status-error;
     border: 1px solid $theme-status-error-border;
 }
 
+button.error:hover, button.danger:hover,
 a.button.error:hover, .button.danger:hover {
     background-color: $theme-status-error-border;
 }

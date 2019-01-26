@@ -9,6 +9,8 @@ and apps, to be located in the **apps** folder.
 
 ## Initial Set Up
 
+TODO: Include instructions on how to setup and run sass.
+
 ### Python Setup
 
 Requires Python version 3.6 or higher.
