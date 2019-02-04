@@ -28,6 +28,14 @@ ALLOWED_HOSTS = [
 ]
 
 
+# Set desired authentication backend. Defaults to standard Django auth.
+AUTHENTICATION_BACKENDS = (
+    # 'settings.backends.CaeAuthBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+AUTH_BACKEND_DEBUG = False
+
+
 # Database connection information.
 DATABASES = {
     'default': {
