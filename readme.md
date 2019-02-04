@@ -37,6 +37,12 @@ In order to have live updates, you need to run **redis** which handles messaging
 
 * Run ```sudo apt-get install redis-server```
 
+## Using LDAP
+
+* Run ```sudo apt install libldap2-dev libsasl2-dev```
+
+If this does not seem to be enough, consult: https://www.python-ldap.org/en/latest/installing.html
+
 ## React Notes
 
 Unfortunately, React seems to prefer a syntax that browsers do not fully understand, out of the gate. To correct for
