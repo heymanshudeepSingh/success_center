@@ -49,6 +49,16 @@ def login(request, *args, **kwargs):
 
 #region Debug/Development Views
 
+def cae_home_css_example(request):
+    """
+    CAE Home css example page.
+    Used for development of pages.
+    """
+    if settings.DEBUG:
+        return TemplateResponse(request, 'cae_home/css_example.html', {})
+    else:
+        raise Http404()
+
 def wmu_test(request):
     """
     "WMU clone" test page. Used for development of imitation WMU layout.

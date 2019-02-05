@@ -24,7 +24,10 @@ urlpatterns = [
 # Debug only urls.
 if settings.DEBUG:
     urlpatterns += [
-        # "WMU Clone" test page. Only use for layout and css development.
+        # "CAE Home" test page(s). Used for layout format and general testing of "internal facing" views.
+        url(r'^cae/$', views.cae_home_css_example, name='cae_css_example'),
+
+        # "WMU Clone" test page(s).  Used for layout format and general testing of "external facing" views.
         url(r'^wmu/$', views.wmu_test, name='wmu_test'),
 
         # Email Testing.
