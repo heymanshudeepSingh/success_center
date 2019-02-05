@@ -62,62 +62,105 @@
   <hr>
 
   <h2>Alert Examples</h2>
-  <p class="alert">Default <a href="">Test Link</a></p>
-  <p class="alert info">Info <a href="">Test Link</a></p>
-  <p class="alert success">Success <a href="">Test Link</a></p>
-  <p class="alert warning">Warning <a href="">Test Link</a></p>
-  <p class="alert error">Error <a href="">Test Link</a></p>
-  <p class="alert danger">Danger <a href="">Test Link</a></p>
+  <div class="alert"><p>Default</p> <a href="">Test Link</a></div>
+  <div class="alert info"><p>Info</p> <a href="">Test Link</a></div>
+  <div class="alert success"><p>Success</p> <a href="">Test Link</a></div>
+  <div class="alert warning"><p>Warning</p> <a href="">Test Link</a></div>
+  <div class="alert error"><p>Error</p> <a href="">Test Link</a></div>
+  <div class="alert danger"><p>Danger</p> <a href="">Test Link</a></div>
 
   <hr>
 
   <h2>Panel Examples</h2>
   <div class="panel">
-    <div class="header">Header <a href="">Test Link</a> <button>Button</button></div>
-    <div class="content">
-      Default
+    <div class="header">
+      <p>Example Header</p>
+      <a href="">Test Link</a>
+      <div><button>Button</button><a class="button" href="">a-Button</a></div>
     </div>
-    <div class="footer">Footer <a href="">Test Link</a></div>
+    <div class="content">
+      <p>Default Panel</p>
+    </div>
+    <div class="footer">Example Footer <a href="">Test Link</a></div>
   </div>
   <div class="panel info">
-    <div class="header">Header <a href="">Test Link</a> <button class="info">Button</button></div>
-    <div class="content">
-      Info
+    <div class="header">
+      <p>Example Header</p>
+      <a href="">Test Link</a>
+      <div><button class="info">Button</button><a class="button" href="">a-Button</a></div>
     </div>
-    <div class="footer">Footer <a href="">Test Link</a></div>
+    <div class="content">
+      <p>Info Panel</p>
+    </div>
+    <div class="footer">Example Footer <a href="">Test Link</a></div>
   </div>
   <div class="panel success">
-    <div class="header">Header <a href="">Test Link</a> <button class="success">Button</button></div>
-    <div class="content">
-      Success
+    <div class="header">
+      <p>Example Header</p>
+      <a href="">Test Link</a>
+      <div><button>Button</button><a class="button" href="">a-Button</a></div>
     </div>
-    <div class="footer">Footer <a href="">Test Link</a></div>
+    <div class="content">
+      <p>Success Panel</p>
+    </div>
+    <div class="footer">Example Footer <a href="">Test Link</a></div>
   </div>
   <div class="panel warning">
-    <div class="header">Header <a href="">Test Link</a> <button class="warning">Button</button></div>
-    <div class="content">
-      Test
+    <div class="header">
+      <p>Example Header</p>
+      <a href="">Test Link</a>
+      <div><button>Button</button><a class="button" href="">a-Button</a></div>
     </div>
-    <div class="footer">Footer <a href="">Test Link</a></div>
+    <div class="content">
+      <p>Warning Panel</p>
+    </div>
+    <div class="footer">Example Footer <a href="">Test Link</a></div>
   </div>
   <div class="panel error">
-    <div class="header">Header <a href="">Test Link</a> <button class="error">Button</button></div>
-    <div class="content">
-      Error
+    <div class="header">
+      <p>Example Header</p>
+      <a href="">Test Link</a>
+      <div><button>Button</button><a class="button" href="">a-Button</a></div>
     </div>
-    <div class="footer">Footer <a href="">Test Link</a></div>
+    <div class="content">
+      <p>Error Panel</p>
+    </div>
+    <div class="footer">Example Footer <a href="">Test Link</a></div>
   </div>
   <div class="panel danger">
-    <div class="header">Header <a href="">Test Link</a> <button class="danger">Button</button></div>
-    <div class="content">
-      Danger
+    <div class="header">
+      <p>Example Header</p>
+      <a href="">Test Link</a>
+      <div><button>Button</button><a class="button" href="">a-Button</a></div>
     </div>
-    <div class="footer">Footer <a href="">Test Link</a></div>
+    <div class="content">
+      <p>Danger Panel</p>
+    </div>
+    <div class="footer">Example Footer <a href="">Test Link</a></div>
   </div>
 
   <hr>
 
   <h2>Specific Usage Examples</h2>
+
+  <div class="panel">
+    <div class="header"><p>This panel only has a header section.</p></div>
+  </div>
+
+  <br>
+
+  <div class="panel">
+    <div class="content"><p>This panel only has a content section.</p></div>
+  </div>
+
+  <br>
+
+  <div class="panel">
+    <div class="footer"><p>This panel only has a footer section.</p></div>
+  </div>
+
+  <br>
+
   <div class="panel">
     <div class="header">
       <p>Header with a <a href="">Test Link</a> Example</p>
@@ -129,6 +172,46 @@
     <div class="footer">
       <p>Footer with a <a href="">Test Link</a> Example</p>
       <a href="">Test Link</a>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="panel">
+    <div class="header">
+      <p>Panel with different status buttons and no content section.</p>
+    </div>
+    <div class="footer">
+      <div><button class="info">Button</button><a class="button info" href="">a-Button</a></div>
+      <div><button class="success">Button</button><a class="button success" href="">a-Button</a></div>
+      <div><button class="warning">Button</button><a class="button warning" href="">a-Button</a></div>
+      <div><button class="error">Button</button><a class="button error" href="">a-Button</a></div>
+      <div><button class="danger">Button</button><a class="button danger" href="">a-Button</a></div>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="panel">
+    <div class="header">
+      <h3>This is panel with nested subpanels</h3>
+    </div>
+    <div class="panel">
+      <div class="header"><p>Subpanel 1</p></div>
+      <div class="content"><p>Subpanel 1 Content</p></div>
+    </div>
+    <div class="panel">
+      <div class="header"><p>Subpanel 2</p></div>
+      <div class="content"><p>Subpanel 2 Content</p></div>
+      <div class="footer"><p>Subpanel 2 Footer</p></div>
+    </div>
+    <div class="panel">
+      <div class="header"><p>Subpanel 3</p></div>
+      <div class="content"><p>Subpanel 3 Content</p></div>
+    </div>
+    <div class="panel">
+      <div class="header"><p>Subpanel 4</p></div>
+      <div class="content"><p>Subpanel 4 Content</p></div>
     </div>
   </div>
 
