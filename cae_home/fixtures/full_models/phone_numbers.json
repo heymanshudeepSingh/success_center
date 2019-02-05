@@ -1,0 +1,11 @@
+[
+{
+    "model": "cae_home.phonenumber",
+    "pk": 1,
+    "fields": {
+        "phone_number": "2692763283",
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+}
+]

@@ -3,7 +3,6 @@ Seeder for "WMU" related Core Models.
 """
 
 from django.core.management import call_command
-from django.utils import timezone
 from faker import Faker
 from random import randint
 

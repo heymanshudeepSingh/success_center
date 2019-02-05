@@ -149,3 +149,43 @@ class PhoneNumber(models.Model):
         # Save model.
         self.full_clean()
         super(PhoneNumber, self).save(*args, **kwargs)
+
+    def display(self):
+        """
+        Returns number in read-friendly format.
+        Assumes US formatting of numbers.
+        """
+        if len(str(self.phone_number)) is 10:
+            # Standard phone number with area code.
+            return '({0}) {1}-{2}'.format(
+                self.phone_number[0:3],
+                self.phone_number[3:6],
+                self.phone_number[6:10]
+            )
+        else:
+            # Other format. Assume US formatting so last 10 digits are what we want.
+            return '({0}) {1}-{2}'.format(
+                self.phone_number[-10:-7],
+                self.phone_number[-7:-4],
+                self.phone_number[-4::]
+            )
+
+    def display_int(self):
+        """
+        Returns number in read-friendly format, plus country code.
+        Assumes US formatting of numbers.
+        """
+        if len(str(self.phone_number)) is 10:
+            # Standard phone number with area code.
+            return '+1-{0}-{1}-{2}'.format(
+                self.phone_number[0:3],
+                self.phone_number[3:6],
+                self.phone_number[6:10]
+            )
+        else:
+            # Other format. Assume US formatting so last 10 digits are what we want.
+            return '+1-{0}-{1}-{2}'.format(
+                self.phone_number[-10:-7],
+                self.phone_number[-7:-4],
+                self.phone_number[-4::]
+            )

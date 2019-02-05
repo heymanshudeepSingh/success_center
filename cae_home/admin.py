@@ -58,7 +58,7 @@ class ProfileAdmin(admin.ModelAdmin):
 
     # Fields to search in admin list view.
     search_fields = [
-        'user',
+        'user__first_name', 'user__last_name',
     ]
 
     # Read only fields for admin detail view.
@@ -118,7 +118,7 @@ class PhoneNumberAdmin(admin.ModelAdmin):
 
     # Fields to display in admin list view.
     list_display = (
-        'phone_number',
+        'formatted_phone_number', 'phone_number',
     )
 
     # Fields to search in admin list view.
@@ -141,6 +141,13 @@ class PhoneNumberAdmin(admin.ModelAdmin):
             'fields': ('date_created', 'date_modified', )
         }),
     )
+
+    def formatted_phone_number(self, obj):
+        """
+        Return list of user-associated group(s).
+        """
+        return obj.display()
+    formatted_phone_number.admin_order_field = 'phone_number'
 
 #endregion User Model Admin
 

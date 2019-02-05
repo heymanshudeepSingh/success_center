@@ -4,7 +4,9 @@ Seeder for "User" related Core Models.
 
 from django.contrib.auth.models import Group, Permission
 from django.contrib.contenttypes.models import ContentType
+from django.core.management import call_command
 from faker import Faker
+from random import randint
 
 from cae_home import models
 
@@ -197,6 +199,9 @@ def create_phone_numbers(model_count):
     """
     Creates phone number models.
     """
+    # First load preset fixtures.
+    call_command('loaddata', 'full_models/phone_numbers')
+
     # Create random data generator.
     faker_factory = Faker()
 
@@ -205,7 +210,7 @@ def create_phone_numbers(model_count):
 
     # Generate models equal to model count.
     for i in range(model_count - pre_initialized_count):
-        phone_number = faker_factory.msisdn()
+        phone_number = '{0}{1}{2}'.format(randint(100, 999), randint(100, 999), randint(1000, 9999))
         models.PhoneNumber.objects.create(phone_number=phone_number)
 
     print('Populated phone number models.')
