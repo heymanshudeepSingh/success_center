@@ -9,6 +9,7 @@ from django.core.management.base import BaseCommand, CommandError
 from .seeders import cae as cae_seeder
 from .seeders import user as user_seeder
 from .seeders import wmu as wmu_seeder
+from settings.reusable_settings import ConsoleColors
 
 
 class Command(BaseCommand):
@@ -37,7 +38,11 @@ class Command(BaseCommand):
             self.create_seeds(*args, **kwargs)
         else:
             # Production. User probably doesn't want this. Show warning first.
-            print('WARNING: Site is in production mode.')
+            print('\n{0}WARNING:{1} Attempting to seed when site is in production mode.{2}\n'.format(
+                ConsoleColors.bold_red,
+                ConsoleColors.bold_yellow,
+                ConsoleColors.reset,
+            ))
             print('Proceeding may overwrite some models (fixtures) or create garbage data (random seeders).')
             print('Are you sure you wish to continue?')
             user_input = input('[ Yes | No ] ')
