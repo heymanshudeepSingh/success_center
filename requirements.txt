@@ -16,4 +16,4 @@ django-modeladmin-reorder   # Third party Django app for admin view customizatio
 
 # Optional imports.
 # mysqlclient         # For connecting to mysql. Not necessary if using sqlite during development.
-# django-auth-ldap    # For ldap connection. Needs testing. Likely to be mandatory upon implementation.
+# ldap3               # For ldap connection. Only necessary when CaeAuthBackend is turned on.
