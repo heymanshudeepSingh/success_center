@@ -24,11 +24,13 @@ urlpatterns = [
 # Debug only urls.
 if settings.DEV_URLS:
     urlpatterns += [
-        # "CAE Home" test page(s). Used for layout format and general testing of "internal facing" views.
-        url(r'^cae/$', views.cae_home_css_example, name='cae_css_example'),
+        # Internal site ("CAE Home") test page(s).
+        # Used for layout format and general testing of "internal facing" views.
+        url(r'^cae/$', views.internal_dev_index, name='internal_dev_index'),
 
-        # "WMU Clone" test page(s).  Used for layout format and general testing of "external facing" views.
-        url(r'^wmu/$', views.wmu_test, name='wmu_test'),
+        # External site ("WMU Clone") test page(s).
+        # Used for layout format and general testing of "external facing" views.
+        url(r'^wmu/$', views.external_dev_index, name='external_dev_index'),
 
         # Email Testing.
         url(r'^test_single_email/$', views.test_single_email, name='test_single_email'),

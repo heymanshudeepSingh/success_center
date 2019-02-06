@@ -17,13 +17,6 @@ from . import forms
 logger = logging.getLogger(__name__)
 
 
-def index(request):
-    """
-    Root site index. Displays links to all added sub-projects.
-    """
-    return TemplateResponse(request, 'cae_home/index.html', {})
-
-
 def login(request, *args, **kwargs):
     """
     Modified login view for "remember me" checkbox.
@@ -49,21 +42,36 @@ def login(request, *args, **kwargs):
 
 #region Debug/Development Views
 
-def cae_home_css_example(request):
+def index(request):
     """
-    CAE Home css example page.
-    Used for development of pages.
+    Root site index. Displays links to all added sub-projects.
+    This should only be accessible in development environments.
     """
-    if settings.DEBUG:
+    if settings.DEV_URLS:
+        return TemplateResponse(request, 'cae_home/index.html', {})
+    else:
+        raise Http404()
+
+
+def internal_dev_index(request):
+    """
+    The internal (cae home) index page.
+    Displays front-end information/examples specific to the internal site layout and stylings.
+    This should only be accessible in development environments.
+    """
+    if settings.DEV_URLS:
         return TemplateResponse(request, 'cae_home/css_example.html', {})
     else:
         raise Http404()
 
-def wmu_test(request):
+
+def external_dev_index(request):
     """
-    "WMU clone" test page. Used for development of imitation WMU layout.
+    The external (wmu clone) index page.
+    Displays front-end information/examples specific to the external site layout and stylings.
+    This should only be accessible in development environments.
     """
-    if settings.DEBUG:
+    if settings.DEV_URLS:
         return TemplateResponse(request, 'wmu_home/index.html', {})
     else:
         raise Http404()
@@ -109,7 +117,7 @@ def test_single_email(request):
 def test_mass_email(request):
     """
     Tests sending of email with "send_mass_mail" function.
-    This function is far more effecient when sending multiple emails. We are likely to use this as the default.
+    This function is far more efficient when sending multiple emails. We are likely to use this as the default.
     Note that, despite the name, send_mass_email can still send a single email, if desired.
     """
     if settings.DEBUG:
