@@ -22,7 +22,7 @@ urlpatterns = [
 
 
 # Debug only urls.
-if settings.DEBUG:
+if settings.DEV_URLS:
     urlpatterns += [
         # "CAE Home" test page(s). Used for layout format and general testing of "internal facing" views.
         url(r'^cae/$', views.cae_home_css_example, name='cae_css_example'),

@@ -2,6 +2,7 @@
 Tests for CAE_Home App.
 """
 
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.db import transaction
@@ -384,7 +385,9 @@ class HomeViewTests(TestCase):
     Tests to ensure views load as expected.
     """
     def test_index(self):
-        response = self.client.get('/')
-        self.assertEqual(response.status_code, 200)
+        # Page refers to dev-only urls. Thus only test in development environments.
+        if settings.DEV_URLS:
+            response = self.client.get('/')
+            self.assertEqual(response.status_code, 200)
 
 #endregion View Tests

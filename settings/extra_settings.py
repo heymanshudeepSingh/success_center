@@ -142,8 +142,6 @@ LOGIN_URL = '/user/login/'
 LOGIN_REDIRECT_URL = '/'
 
 
-# from settings.local_env.env import *
-
 # Local environment setup.
 try:
     from settings.local_env.env import *
@@ -157,3 +155,11 @@ except Exception:
     debug_print('Missing or Invalid local env file. Copy the env_example.py file to env.py in settings/local_env/')
     debug_print(sys.exc_info())
     sys.exit(1)
+
+
+# Set custom "development mode url" variable, based on DEBUG.
+# Necessary for unit testing, or else tests referring to development urls will automatically fail.
+if DEBUG:
+    DEV_URLS = True
+else:
+    DEV_URLS = False
