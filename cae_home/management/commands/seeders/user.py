@@ -122,10 +122,8 @@ def create_users():
     """
     default_password = 'temppass2'
 
-    # Create superusers for every developer.
+    # Create extra superusers for developers.
     models.User.get_or_create_superuser('brodriguez8774', '', default_password)  # Brandon
-    models.User.get_or_create_superuser('ngf9321', '', default_password)  # Nick
-    models.User.get_or_create_superuser('jdc4014', '', default_password)  # Jessie
     models.User.get_or_create_superuser('skd6970', '', default_password)  # Steven (Senior Design)
     models.User.get_or_create_superuser('jbn6294', '', default_password)  # Josh (Senior Design)
 
@@ -156,6 +154,7 @@ def create_permission_group_users(default_password='temppass2'):
     cae_programmer_ga.groups.add(Group.objects.get(name='CAE Programmer GA'), Group.objects.get(name='CAE Programmer'))
     cae_admin.groups.add(Group.objects.get(name='CAE Admin'))
     cae_programmer.groups.add(Group.objects.get(name='CAE Programmer'))
+    cae_attendant.groups.add(Group.objects.get(name='CAE Attendant'))
 
     # Create and add to array. Used in testing.
     user_array = []                                 # Index Num:

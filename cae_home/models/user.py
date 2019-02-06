@@ -16,11 +16,9 @@ MAX_LENGTH = 255
 
 class User(AbstractUser):
     """
-    An extension of Django's default user, but allows for additional functionality.
+    An extension of Django's default user, allowing for additional functionality.
     Contains user authentication related information.
     """
-    # TODO: LDAP Authentication here. Likely need to change to AbstractBaseUser inheritance.
-
     @staticmethod
     def get_or_create_superuser(username, email, password):
         """
@@ -37,9 +35,15 @@ class User(AbstractUser):
         """
         Attempts to either get or create user with given information.
         """
-        new_user = User.objects.get_or_create(username=username, email=email, password=password)
+        new_user, created = User.objects.get_or_create(username=username, email=email)
         if isinstance(new_user, tuple):
             new_user = new_user[0]
+
+        # If user was newly created, set new password.
+        if created:
+            new_user.set_password(password)
+            new_user.save()
+
         return new_user
 
 
