@@ -3,6 +3,7 @@ Custom authentication backends.
 """
 
 from django.conf import settings
+from django.contrib.auth.models import Group
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 
@@ -142,27 +143,71 @@ class CaeAuthBackend(object):
         """
         if settings.AUTH_BACKEND_DEBUG:
             print('Auth Backend: Attempting to create new user model...')
+
         # Connect to server and pull user's full info.
         self.ldap_lib.bind_server()
         ldap_user = self.ldap_lib.search(
             search_filter='(uid={0})'.format(uid),
             attributes=['uid', 'givenName', 'sn',]
         )
+
+        # Get ldap user groups.
+        ldap_attendants = self.ldap_lib.search(
+            search_base=settings.LDAP_GROUP_DN,
+            search_filter='({0})'.format(settings.LDAP_ATTENDANT_CN),
+            attributes=['memberUid'],
+        )['memberUid']
+        ldap_admins = self.ldap_lib.search(
+            search_base=settings.LDAP_GROUP_DN,
+            search_filter='({0})'.format(settings.LDAP_ADMIN_CN),
+            attributes=['memberUid'],
+        )['memberUid']
+        ldap_programmers = self.ldap_lib.search(
+            search_base=settings.LDAP_GROUP_DN,
+            search_filter='({0})'.format(settings.LDAP_PROGRAMMER_CN),
+            attributes=['memberUid'],
+        )['memberUid']
+
+        # Create new user.
         model_user, create = User.objects.get_or_create(username=uid)
 
-        # Double check that user was created. If not, then duplicate user id's exist somehow. Error.
+        # Double check that user was created. If not, then duplicate user ids exist somehow. Error.
         if create:
             # Set password.
             model_user.set_password(password)
             model_user.save()
 
-            # Set all other values.
+            # Set general user values.
             model_user.email = '{0}@wmich.edu'.format(uid)
             model_user.first_name = ldap_user['givenName'][0].strip()
             model_user.last_name = ldap_user['sn'][0].strip()
+
+            # Save model in case of error.
             model_user.save()
             if settings.AUTH_BACKEND_DEBUG:
-                print('Auth Backend: Created user new user model {0}.'.format(uid))
+                print('Auth Backend: Created user new user model {0}. Now setting groups...'.format(uid))
+
+            # Set user group types.
+            if uid in ldap_attendants:
+                model_user.groups.add(Group.objects.get(name='CAE Attendant'))
+                if settings.AUTH_BACKEND_DEBUG:
+                    print('Auth Backend: Added user to CAE Attendant group.')
+            if uid in ldap_admins:
+                model_user.groups.add(Group.objects.get(name='CAE Admin'))
+                if settings.AUTH_BACKEND_DEBUG:
+                    print('Auth Backend: Added user to CAE Admin group.')
+            if uid in ldap_programmers:
+                model_user.groups.add(Group.objects.get(name='CAE Programmer'))
+                model_user.is_staff = True
+                model_user.is_superuser = True
+                if settings.AUTH_BACKEND_DEBUG:
+                    print('Auth Backend: Added user to CAE Programmer group.')
+
+            # Save model.
+            model_user.save()
+            if settings.AUTH_BACKEND_DEBUG:
+                print('Auth Backend: User groups set. User creation complete.'.format(uid))
+
         else:
             # Error. This shouldn't ever happen.
             model_user = None

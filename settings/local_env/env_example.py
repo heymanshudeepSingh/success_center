@@ -40,6 +40,10 @@ LDAP_HOST = ''
 LDAP_DN = ''
 LDAP_PASS = ''
 LDAP_SEARCH_BASE = ''
+LDAP_GROUP_DN = ''
+LDAP_ATTENDANT_CN = ''
+LDAP_ADMIN_CN = ''
+LDAP_PROGRAMMER_CN = ''
 
 
 # Database connection information.
