@@ -169,10 +169,10 @@ class CaeAuthBackend(object):
         )['memberUid']
 
         # Create new user.
-        model_user, create = User.objects.get_or_create(username=uid)
+        model_user, created = User.objects.get_or_create(username=uid)
 
         # Double check that user was created. If not, then duplicate user ids exist somehow. Error.
-        if create:
+        if created:
             # Set password.
             model_user.set_password(password)
             model_user.save()
