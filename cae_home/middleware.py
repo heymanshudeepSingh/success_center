@@ -10,16 +10,26 @@ from django.utils import timezone
 from django.utils.deprecation import MiddlewareMixin
 
 
-class TimezoneMiddleware(MiddlewareMixin):
-    """Allow views to autoconvert from UTC to user's timezone"""
-    def process_request(self, request):
+class TimezoneMiddleware(object):
+    """
+    Allows views to auto-convert from UTC to user's timezone.
+    """
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request, *args, **kwargs):
+        # Attempt to set timezone for user in all views.
         tzname = None
-        if request.user.is_authenticated():
+        if request.user.is_authenticated:
             tzname = request.user.profile.user_timezone
         if tzname:
             timezone.activate(pytz.timezone(tzname))
         else:
             timezone.deactivate()
+
+        # Resume view call as normal.
+        response = self.get_response(request)
+        return response
 
 
 class GetProjectDetailMiddleware(object):

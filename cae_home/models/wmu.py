@@ -150,7 +150,7 @@ class WmuUser(models.Model):
     # Relationship keys.
     department = models.ForeignKey('Department', on_delete=models.CASCADE)
     major = models.ForeignKey('Major', on_delete=models.CASCADE, blank=True)
-    phone_number = models.ForeignKey('PhoneNumber', blank=True, null=True)
+    phone_number = models.ForeignKey('PhoneNumber', on_delete=models.CASCADE, blank=True, null=True)
 
     # Model fields.
     bronco_net = models.CharField(max_length=MAX_LENGTH)

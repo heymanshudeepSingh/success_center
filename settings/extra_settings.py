@@ -98,7 +98,7 @@ LOGGING = {
         },
         # Request logging.
         'django.request': {
-            'handlers': ['console', 'file_warn', 'file_error'],
+            'handlers': ['console', 'file_warn', 'file_error',],
             'level': 'WARNING',
             'propagate': True,
         },
@@ -117,9 +117,11 @@ path_to_key = os.path.join(BASE_DIR, './settings/local_env/secret_key.txt')
 
 try:
     # Attempt to read key.
-    SECRET_KEY = open(path_to_key, 'r').read().strip()
+    secret_key_file = open(path_to_key, 'r')
+    SECRET_KEY = secret_key_file.read().strip()
+    secret_key_file.close()
     debug_print('Secret Key Found.')
-except:
+except FileNotFoundError:
     try:
         # Generate new key.
         debug_print('Creating Secret Key...')
@@ -128,13 +130,15 @@ except:
         debug_print('Secret Key created.')
 
         # Save key to file.
-        secret_file = open(path_to_key, 'w+')
-        secret_file.write(SECRET_KEY)
-        secret_file.close()
+        secret_key_file = open(path_to_key, 'w+')
+        secret_key_file.write(SECRET_KEY)
+        secret_key_file.close()
+
         debug_print('Secret Key saved.')
     except:
         debug_print('Error generating secret key.')
         exit(1)
+
 
 
 # Login url.

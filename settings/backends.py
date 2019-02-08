@@ -21,7 +21,7 @@ class CaeAuthBackend(object):
         self.ldap_lib.set_master_account(settings.LDAP_DN, settings.LDAP_PASS)
         self.ldap_lib.set_search_base(settings.LDAP_SEARCH_BASE)
 
-    def authenticate(self, username=None, password=None):
+    def authenticate(self, request, username=None, password=None):
         """
         Takes user input and attempts authentication.
         :param username: Value from username field.
