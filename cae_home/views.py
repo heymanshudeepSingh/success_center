@@ -37,7 +37,7 @@ def login(request, *args, **kwargs):
             # Remember me is not checked. Set session to time out in 3600 seconds (1 hour).
             request.session.set_expiry(3600)
 
-    return auth_views.login(request, *args, authentication_form=forms.AuthenticationForm, **kwargs)
+    return auth_views.LoginView.as_view(authentication_form=forms.AuthenticationForm, **kwargs)(request)
 
 
 #region Debug/Development Views

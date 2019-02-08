@@ -4,7 +4,7 @@ Urls for CAE_Home App.
 
 from django.contrib.auth import views as auth_views
 from django.conf import settings
-from django.conf.urls import url
+from django.conf.urls import include, url
 
 from . import views
 
@@ -14,7 +14,7 @@ urlpatterns = [
 
     # Auth pages.
     url(r'^user/login/$', views.login, name='login'),
-    url(r'^user/logout/$', auth_views.logout, name='logout', kwargs={'next_page': '/',}),
+    url(r'^user/logout/$', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
 
     # CAE Home/Index page.
     url(r'^$', views.index, name='index'),
