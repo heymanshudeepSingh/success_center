@@ -1152,7 +1152,7 @@ div.panel {
     .message {
         box-sizing: border-box;
 
-        @include transition(padding 0.9s, margin 0.9s, font-size 0.9s, border-radius 0.5s, opacity 0.9s linear, visibility 0s 0.9s);
+        @include transition(padding 0.9s, margin 0.9s, font-size 0.9s, background-color 0.5s, border-radius 0.5s, opacity 0.9s linear, visibility 0s 0.9s);
 
         a {
             @include transition(background-color 0.5s);
