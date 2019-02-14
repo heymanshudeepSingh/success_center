@@ -16,10 +16,21 @@ def generate_model_seeds(model_count):
     Calls individual seeder methods.
     """
     print('SEEDING User Model Group.')
+    create_site_themes()
     create_groups()
     create_users()
     create_addresses(model_count)
     create_phone_numbers(model_count)
+
+
+def create_site_themes():
+    """
+    Creates profile theme models.
+    """
+    # Load preset fixtures. No need to create random models.
+    call_command('loaddata', 'full_models/site_themes')
+
+    print('Populated site theme models.')
 
 
 def create_groups():

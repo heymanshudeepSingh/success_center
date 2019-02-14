@@ -22,10 +22,11 @@ class ProfileAdminForm(forms.ModelForm):
     class Meta:
         model = models.Profile
         fields = {
-            'user', 'address', 'phone_number',
+            'user', 'address', 'phone_number', 'site_theme',
         }
         label = {
             'phone_number': 'Phone Number',
+            'site_theme': 'Site Theme',
         }
 
 

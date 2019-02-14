@@ -10,6 +10,7 @@ from .user import User
 from .user import Profile
 from .user import Address
 from .user import PhoneNumber
+from .user import SiteTheme
 
 # Models related to WMU in general.
 from .wmu import Department

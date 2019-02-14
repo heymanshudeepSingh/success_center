@@ -105,6 +105,27 @@ class PhoneNumberModelTests(TestCase):
         with self.assertRaises(ValidationError):
             models.PhoneNumber.objects.create(phone_number='9876543210987654')
 
+class SiteThemeModelTests(TestCase):
+    """
+    Tests to ensure valid Site Theme Model creation/logic.
+    """
+    def setUp(self):
+        self.test_theme = models.SiteTheme.objects.create(
+            name='Test Theme',
+            gold_logo=False,
+        )
+
+    def test_model_creation(self):
+        self.assertEqual(self.test_theme.name, 'Test Theme')
+        self.assertEqual(self.test_theme.gold_logo, False)
+
+    def test_string_representation(self):
+        self.assertEqual(str(self.test_theme), self.test_theme.name.capitalize())
+
+    def test_plural_representation(self):
+        self.assertEqual(str(self.test_theme._meta.verbose_name), 'Site Theme')
+        self.assertEqual(str(self.test_theme._meta.verbose_name_plural), 'Site Themes')
+
 #endregion User Model Tests
 
 
@@ -385,6 +406,11 @@ class HomeViewTests(TestCase):
     """
     Tests to ensure views load as expected.
     """
+
+    @classmethod
+    def setUpTestData(cls):
+        cls.site_theme = models.SiteTheme.objects.create(name='wmu')
+
     def test_index(self):
         """
         Tests the core index of the site.

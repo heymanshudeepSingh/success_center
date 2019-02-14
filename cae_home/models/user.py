@@ -4,6 +4,8 @@ Definitions of "User" related Core Models.
 
 import pytz
 from django.contrib.auth.models import AbstractUser
+from django.core.exceptions import ObjectDoesNotExist
+from django.core.management import call_command
 from django.core.validators import RegexValidator
 from django.conf import settings
 from django.db import models
@@ -56,6 +58,9 @@ class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     address = models.ForeignKey('Address', on_delete=models.CASCADE, blank=True, null=True)
     phone_number = models.ForeignKey('PhoneNumber', on_delete=models.CASCADE, blank=True, null=True)
+    site_theme = models.ForeignKey('SiteTheme', on_delete=models.CASCADE, blank=True)
+
+    # Model fields.
     user_timezone = models.CharField(
         choices=[(x, x) for x in pytz.common_timezones], default="America/Detroit",
         max_length=255)
@@ -82,8 +87,19 @@ class Profile(models.Model):
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
-        Profile.objects.create(user=instance)
+        # Profile is new instance. Handle for new user being created.
+        try:
+            # Attempt to get default theme.
+            site_theme = SiteTheme.objects.get(name='wmu')
+        except ObjectDoesNotExist:
+            # Failed to get theme. Likely a unit test. Run site_theme fixtures and attempt again.
+            call_command('loaddata', 'full_models/site_themes')
+            site_theme = SiteTheme.objects.get(name='wmu')
+
+        # Create new profile object for new user.
+        Profile.objects.create(user=instance, site_theme=site_theme)
     else:
+        # Just updating an existing profile. Save.
         instance.profile.save()
 
 
@@ -193,3 +209,28 @@ class PhoneNumber(models.Model):
                 self.phone_number[-7:-4],
                 self.phone_number[-4::]
             )
+
+
+class SiteTheme(models.Model):
+    # Model fields.
+    name = models.CharField(max_length=MAX_LENGTH)
+    gold_logo = models.BooleanField(default=True)
+
+    # Self-setting/Non-user-editable fields.
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'Site Theme'
+        verbose_name_plural = 'Site Themes'
+
+    def __str__(self):
+        return '{0}'.format(self.name.capitalize())
+
+    def save(self, *args, **kwargs):
+        """
+        Modify model save behavior.
+        """
+        # Save model.
+        self.full_clean()
+        super(SiteTheme, self).save(*args, **kwargs)

@@ -53,7 +53,7 @@ class ProfileAdmin(admin.ModelAdmin):
 
     # Fields to display in admin list view.
     list_display = (
-        'user', 'address', 'phone_number',
+        'user', 'address', 'phone_number', 'site_theme',
     )
 
     # Fields to search in admin list view.
@@ -69,7 +69,7 @@ class ProfileAdmin(admin.ModelAdmin):
     # Fieldset organization for admin detail view.
     fieldsets = (
         (None, {
-            'fields': ('user', 'address', 'phone_number', 'user_timezone')
+            'fields': ('user', 'address', 'phone_number', 'user_timezone', 'site_theme')
         }),
         ('Advanced', {
             'classes': ('collapse', ),
@@ -148,6 +148,34 @@ class PhoneNumberAdmin(admin.ModelAdmin):
         """
         return obj.display()
     formatted_phone_number.admin_order_field = 'phone_number'
+
+
+class SiteThemeAdmin(admin.ModelAdmin):
+    # Fields to display in admin list view.
+    list_display = (
+        'name', 'gold_logo',
+    )
+
+    # Fields to search in admin list view.
+    search_fields = [
+        'name',
+    ]
+
+    # Read only fields for admin detail view.
+    readonly_fields = (
+        'date_created', 'date_modified',
+    )
+
+    # Fieldset organization for admin detail view.
+    fieldsets = (
+        (None, {
+            'fields': ('name', 'gold_logo',)
+        }),
+        ('Advanced', {
+            'classes': ('collapse', ),
+            'fields': ('date_created', 'date_modified', )
+        }),
+    )
 
 #endregion User Model Admin
 
@@ -348,6 +376,7 @@ admin.site.register(models.User, UserAdmin)
 admin.site.register(models.Profile, ProfileAdmin)
 admin.site.register(models.Address, AddressAdmin)
 admin.site.register(models.PhoneNumber, PhoneNumberAdmin)
+admin.site.register(models.SiteTheme, SiteThemeAdmin)
 
 # WMU Model Registration
 admin.site.register(models.Department, DepartmentAdmin)
