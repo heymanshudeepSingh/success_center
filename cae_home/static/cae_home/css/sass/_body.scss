@@ -158,7 +158,15 @@ body {
 //===========================//
 
 body {
-    color: $theme-text;
+
+  @each $theme, $theme-dict in $theme-colors {
+    &.theme-#{$theme} {
+
+        color: theme-text($theme, 'primary');
+
+    }
+  }
+
 }
 
 //===========================//
@@ -200,9 +208,18 @@ body {
 
 body {
 
-    #content {
-        background-color: $theme-content-background;
+  @each $theme, $theme-dict in $theme-colors {
+    &.theme-#{$theme} {
+
+        background-color: theme-background($theme, 'content');
+
+        #content {
+            background-color: theme-background($theme, 'content');
+        }
+
     }
+  }
+
 }
 
 //===========================//

@@ -42,6 +42,27 @@ $color-grey-100: #ffffff;   // White
 
 
 //===========================================//
+//==== START Transparent Greyscale Block ====//
+//===========================================//
+
+$color-black: rgb(0, 0, 0);
+$color-trans-black-75: rgba(0, 0, 0, 0.75);
+$color-trans-black-50: rgba(0, 0, 0, 0.50);
+$color-trans-black-25: rgba(0, 0, 0, 0.25);
+$color-grey: rgb(127, 127, 127);
+$color-trans-grey-75: rgba(127, 127, 127, 0.75);
+$color-trans-grey-50: rgba(127, 127, 127, 0.50);
+$color-trans-grey-25: rgba(127, 127, 127, 0.25);
+$color-white: rgb(255, 255, 255);
+$color-trans-white-75: rgba(255, 255, 255, 0.75);
+$color-trans-white-50: rgba(255, 255, 255, 0.50);
+$color-trans-white-25: rgba(255, 255, 255, 0.25);
+
+//===========================================//
+//===== END Transparent GreyScale Block =====//
+//===========================================//
+
+//===========================================//
 //==== START "WMU Approved" Colors Block ====//
 //===========================================//
 
@@ -101,64 +122,244 @@ $wmu-metallic-silver: #8a8d8f;
 // a single line or two, instead of having to dig through all of the css files.
 
 //================================//
-//==== START Base Theme Block ====//
+//==== START Theme Dict Block ====//
 //================================//
 
-//== Main Elements ==//
+$theme-colors: (
+    'wmu': (
+        'background': (
+            'primary': $color-grey-90,
+            'highlight': $color-grey-95,
+            'border': $color-grey-80,
+            'content': $color-grey-100,
+        ),
+        'text': (
+            'primary': $color-grey-00,
+            'primary-accent': $color-trans-black-75,
+            'primary-subtle': $color-trans-black-50,
+            'primary-hint': $color-trans-black-25,
+            'secondary': $color-grey-00,
+            'secondary-accent': $color-trans-black-75,
+            'secondary-subtle': $color-trans-black-50,
+            'secondary-hint': $color-trans-black-25,
+            'link': #0000ee,
+        ),
+        'status': (
+            'default': (
+                'primary': $color-grey-90,
+                'highlight': $color-grey-95,
+                'border': $color-grey-80,
+                'text': $color-grey,
+            ),
+            'info': (
+                'primary': #ddddf4,
+                'highlight': #e9e9fc,
+                'border': #c1c1f0,
+                'text': #5c5cd6,
+            ),
+            'success': (
+                'primary': #d1f0d1,
+                'highlight': #e9fce9,
+                'border': #adebad,
+                'text': #18b418,
+            ),
+            'warn': (
+                'primary': #faf2d1,
+                'highlight': #fcf5e9,
+                'border': #eee2aa,
+                'text': #df9f20,
+            ),
+            'error': (
+                'primary': #f5dbd6,
+                'highlight': #fce9e9,
+                'border': #f0c9c2,
+                'text': #ec8379,
+            ),
+        ),
+    ),
 
-$theme-header-background: $color-grey-90;
-$theme-header-highlight: $color-grey-95;
-$theme-border: $color-grey-80;
-$theme-footer-background: $color-grey-90;
-$theme-text: $color-grey-00;
-$theme-text-accent: $color-grey-20;
+    'cae': (
+        'background': (
+            'primary': $color-grey-90,
+            'highlight': $color-grey-95,
+            'border': $color-grey-80,
+            'content': $color-grey-100,
+        ),
+        'text': (
+            'primary': $color-grey-00,
+            'primary-accent': $color-trans-black-75,
+            'primary-subtle': $color-trans-black-50,
+            'primary-hint': $color-trans-black-25,
+            'secondary': $color-grey-00,
+            'secondary-accent': $color-trans-black-75,
+            'secondary-subtle': $color-trans-black-50,
+            'secondary-hint': $color-trans-black-25,
+            'link': #0000ee,
+        ),
+        'status': (
+            'default': (
+                'primary': $color-grey-90,
+                'highlight': $color-grey-95,
+                'border': $color-grey-80,
+                'text': $color-grey,
+            ),
+            'info': (
+                'primary': #ddddf4,
+                'highlight': #e9e9fc,
+                'border': #c1c1f0,
+                'text': #5c5cd6,
+            ),
+            'success': (
+                'primary': #d1f0d1,
+                'highlight': #e9fce9,
+                'border': #adebad,
+                'text': #18b418,
+            ),
+            'warn': (
+                'primary': #faf2d1,
+                'highlight': #fcf5e9,
+                'border': #eee2aa,
+                'text': #df9f20,
+            ),
+            'error': (
+                'primary': #f5dbd6,
+                'highlight': #fce9e9,
+                'border': #f0c9c2,
+                'text': #ec8379,
+            ),
+        ),
+    ),
 
+    'light': (
+        'background': (
+            'primary': $color-grey-90,
+            'highlight': $color-grey-95,
+            'border': $color-grey-80,
+            'content': $color-grey-100,
+        ),
+        'text': (
+            'primary': $color-grey-00,
+            'primary-accent': $color-trans-black-75,
+            'primary-subtle': $color-trans-black-50,
+            'primary-hint': $color-trans-black-25,
+            'secondary': $color-grey-00,
+            'secondary-accent': $color-trans-black-75,
+            'secondary-subtle': $color-trans-black-50,
+            'secondary-hint': $color-trans-black-25,
+            'link': #0000ee,
+        ),
+        'status': (
+            'default': (
+                'primary': $color-grey-90,
+                'highlight': $color-grey-95,
+                'border': $color-grey-80,
+                'text': $color-grey,
+            ),
+            'info': (
+                'primary': #ddddf4,
+                'highlight': #e9e9fc,
+                'border': #c1c1f0,
+                'text': #5c5cd6,
+            ),
+            'success': (
+                'primary': #d1f0d1,
+                'highlight': #e9fce9,
+                'border': #adebad,
+                'text': #18b418,
+            ),
+            'warn': (
+                'primary': #faf2d1,
+                'highlight': #fcf5e9,
+                'border': #eee2aa,
+                'text': #df9f20,
+            ),
+            'error': (
+                'primary': #f5dbd6,
+                'highlight': #fce9e9,
+                'border': #f0c9c2,
+                'text': #ec8379,
+            ),
+        ),
+    ),
 
-//== Nav Elements ==//
+    'dark': (
+        'background': (
+            'primary': $color-grey-90,
+            'highlight': $color-grey-95,
+            'border': $color-grey-80,
+            'content': $color-grey-100,
+        ),
+        'text': (
+            'primary': $color-grey-00,
+            'primary-accent': $color-trans-black-75,
+            'primary-subtle': $color-trans-black-50,
+            'primary-hint': $color-trans-black-25,
+            'secondary': $color-grey-00,
+            'secondary-accent': $color-trans-black-75,
+            'secondary-subtle': $color-trans-black-50,
+            'secondary-hint': $color-trans-black-25,
+            'link': #0000ee,
+        ),
+        'status': (
+            'default': (
+                'primary': $color-grey-90,
+                'highlight': $color-grey-95,
+                'border': $color-grey-80,
+                'text': $color-grey,
+            ),
+            'info': (
+                'primary': #ddddf4,
+                'highlight': #e9e9fc,
+                'border': #c1c1f0,
+                'text': #5c5cd6,
+            ),
+            'success': (
+                'primary': #d1f0d1,
+                'highlight': #e9fce9,
+                'border': #adebad,
+                'text': #18b418,
+            ),
+            'warn': (
+                'primary': #faf2d1,
+                'highlight': #fcf5e9,
+                'border': #eee2aa,
+                'text': #df9f20,
+            ),
+            'error': (
+                'primary': #f5dbd6,
+                'highlight': #fce9e9,
+                'border': #f0c9c2,
+                'text': #ec8379,
+            ),
+        ),
+    ),
 
-$theme-nav-background: $theme-header-background;
-$theme-nav-text: $theme-text;
-$theme-nav-overlay-background: rgba(204, 204, 204, 0.8); // grey-80 with alpha
-$theme-nav-overlay-foreground: rgba(255, 255, 255, 0.9); // grey-100 with alpha
-
-//== Content Areas ==//
-
-$theme-content-background: $color-grey-100;
-$theme-content-text-subtle: $color-grey-50;
-
-$theme-warning: $wmu-red;
-
-//== Status/Variant Colors ==//
-$theme-status-default: $theme-header-background;
-$theme-status-default-text: $theme-content-text-subtle;
-$theme-status-default-border: $theme-border;
-$theme-status-default-light: $theme-header-highlight;
-
-
-$theme-status-info: #ddddf4;
-$theme-status-info-text: #5c5cd6;
-$theme-status-info-border: #c1c1f0;
-$theme-status-info-light: #e9e9fc;
-
-$theme-status-success: #d1f0d1;
-$theme-status-success-text: #18b418;
-$theme-status-success-border: #adebad;
-$theme-status-success-light: #e9fce9;
-
-/*$theme-status-warn: #f9f2d2;*/
-$theme-status-warn: #faf2d1;
-$theme-status-warn-text: #df9f20;
-$theme-status-warn-border: #eee2aa;
-$theme-status-warn-light: #fcf5e9;
-
-$theme-status-error: #f5dbd6;
-$theme-status-error-text: #ec8379;
-$theme-status-error-border: #f0c9c2;
-$theme-status-error-light: #fce9e9;
+);
 
 //==============================//
-//==== End Base Theme Block ====//
+//==== End Theme Dict Block ====//
 //==============================//
+
+
+//=====================================//
+//==== START Theme Functions Block ====//
+//=====================================//
+
+@function theme-background($theme, $style) {
+    @return map-get(map-get(map-get($theme-colors, $theme), 'background'), $style);
+}
+
+@function theme-text($theme, $style) {
+    @return map-get(map-get(map-get($theme-colors, $theme), 'text'), $style);
+}
+
+@function theme-status($theme, $status, $style) {
+    @return map-get(map-get(map-get(map-get($theme-colors, $theme), 'status'), $status), $style);
+}
+
+//===================================//
+//==== End Theme Functions Block ====//
+//===================================//
 
 
 //================================================================================//

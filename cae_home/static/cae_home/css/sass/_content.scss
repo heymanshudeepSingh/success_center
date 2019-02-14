@@ -366,15 +366,34 @@ div.panel {
 // word-break, word-wrap, white-space                                             //
 //================================================================================//
 
+//=====================================//
+//==== START Generic Element Block ====//
+//=====================================//
+
+#content {
+
+  @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & {
+
+        a {
+            color: theme-text($theme, 'link');
+        }
+
+    }
+  }
+
+}
+
+//=====================================//
+//===== END Generic Element Block =====//
+//=====================================//
+
+
 //===================================//
 //==== START Generic Class Block ====//
 //===================================//
 
 #content {
-
-    .hover-highlight:hover {
-        background-color: $theme-header-background;
-    }
 
     .javascript-warn {
         font-weight: bold;
@@ -398,14 +417,24 @@ div.panel {
 //==== START Button Block ====//
 //============================//
 
-button, a.button {
-    color: $theme-text-accent;
-    font-size: 1rem;
-    text-decoration: none;
-}
+#content {
 
-button:hover, a.button:hover {
-    color: $theme-text;
+  @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & {
+
+        button, a.button {
+            color: theme-text($theme, 'primary-accent');
+            font-size: 1rem;
+            text-decoration: none;
+        }
+
+        button:hover, a.button:hover {
+            color: theme-text($theme, 'primary');
+        }
+
+    }
+  }
+
 }
 
 //============================//
@@ -417,42 +446,52 @@ button:hover, a.button:hover {
 //==== START Alert Block ====//
 //===========================//
 
-.alert {
-    color: $theme-text-accent;
+#content {
 
-    a {
-        font-weight: bold;
-        color: $theme-status-default-text;
-        text-decoration: none;
+  @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & {
+
+        .alert {
+            color: theme-text($theme, 'primary-accent');
+
+            a {
+                font-weight: bold;
+                color: theme-status($theme, 'default', 'text');
+                text-decoration: none;
+            }
+        }
+
+        .alert:hover {
+            color: theme-status($theme, 'default', 'text');
+        }
+
+        .alert.info {
+            a {
+                color: theme-status($theme, 'info', 'text');
+            }
+        }
+
+        .alert.success {
+            a {
+                color: theme-status($theme, 'success', 'text');
+            }
+        }
+
+        .alert.warning {
+            a {
+                color: theme-status($theme, 'warn', 'text');
+            }
+        }
+
+        .alert.error, .alert.danger {
+            a {
+                color: theme-status($theme, 'error', 'text');
+            }
+        }
+
     }
-}
+  }
 
-.alert:hover {
-    color: $theme-text;
-}
-
-.alert.info {
-    a {
-        color: $theme-status-info-text;
-    }
-}
-
-.alert.success {
-    a {
-        color: $theme-status-success-text;
-    }
-}
-
-.alert.warning {
-    a {
-        color: $theme-status-warn-text;
-    }
-}
-
-.alert.error, .alert.danger {
-    a {
-        color: $theme-status-error-text;
-    }
 }
 
 //===========================//
@@ -464,45 +503,55 @@ button:hover, a.button:hover {
 //==== START Panel Block ====//
 //===========================//
 
-div.panel {
-    a.button, button {
-        font-weight: normal;
-    }
+#content {
 
-    a:not(.button) {
-        font-weight: bold;
-        color: $theme-status-default-text;
-        text-decoration: none;
-    }
+  @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & {
 
-    > .header {
-        font-size: 110%;
-        font-weight: bold;
-    }
-}
+        div.panel {
+            a.button, button {
+                font-weight: normal;
+            }
 
-div.panel.info {
-    a:not(.button) {
-        color: $theme-status-info-text;
-    }
-}
+            a:not(.button) {
+                font-weight: bold;
+                color: theme-status($theme, 'default', 'text');
+                text-decoration: none;
+            }
 
-div.panel.success {
-    a:not(.button) {
-        color: $theme-status-success-text;
-    }
-}
+            > .header {
+                font-size: 110%;
+                font-weight: bold;
+            }
+        }
 
-div.panel.warning {
-    a:not(.button) {
-        color: $theme-status-warn-text;
-    }
-}
+        div.panel.info {
+            a:not(.button) {
+                color: theme-status($theme, 'info', 'text');
+            }
+        }
 
-div.panel.error, div.panel.danger {
-    a:not(.button) {
-        color: $theme-status-error-text;
+        div.panel.success {
+            a:not(.button) {
+                color: theme-status($theme, 'success', 'text');
+            }
+        }
+
+        div.panel.warning {
+            a:not(.button) {
+                color: theme-status($theme, 'warn', 'text');
+            }
+        }
+
+        div.panel.error, div.panel.danger {
+            a:not(.button) {
+                color: theme-status($theme, 'error', 'text');
+            }
+        }
+
     }
+  }
+
 }
 
 //===========================//
@@ -514,65 +563,75 @@ div.panel.error, div.panel.danger {
 //==== START Status Message Block ====//
 //====================================//
 
-#status-message-container {
+#content {
 
-    .message {
-        a {
-            font-weight: bold;
-            color: $theme-status-default-text;
-            text-decoration: none;
+  @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & {
+
+        #status-message-container {
+
+            .message {
+                a {
+                    font-weight: bold;
+                    color: theme-status($theme, 'default', 'text');
+                    text-decoration: none;
+                }
+
+                .exit {
+                    font-weight: bold;
+                    color: theme-status($theme, 'default', 'text');
+                }
+
+                .exit:hover {
+                    font-weight: bold;
+                    color: theme-text($theme, 'primary') !important;
+                }
+            }
+
+            .message.info {
+                a {
+                    color: theme-status($theme, 'info', 'text');
+                }
+
+                .exit {
+                    color: theme-status($theme, 'info', 'text');
+                }
+            }
+
+            .message.success {
+                a {
+                    color: theme-status($theme, 'success', 'text');
+                }
+
+                .exit {
+                    color: theme-status($theme, 'success', 'text');
+                }
+            }
+
+            .message.warning {
+                a {
+                    color: theme-status($theme, 'warn', 'text');
+                }
+
+                .exit {
+                    color: theme-status($theme, 'warn', 'text');
+                }
+            }
+
+            .message.error, .message.danger {
+                a {
+                    color: theme-status($theme, 'error', 'text');
+                }
+
+                .exit {
+                    color: theme-status($theme, 'error', 'text');
+                }
+            }
         }
 
-        .exit {
-            font-weight: bold;
-            color: $theme-status-default-text;
-        }
-
-        .exit:hover {
-            font-weight: bold;
-            color: $theme-text !important;
-        }
     }
+  }
 
-    .message.info {
-        a {
-            color: $theme-status-info-text;
-        }
-
-        .exit {
-            color: $theme-status-info-text;
-        }
-    }
-
-    .message.success {
-        a {
-            color: $theme-status-success-text;
-        }
-
-        .exit {
-            color: $theme-status-success-text;
-        }
-    }
-
-    .message.warning {
-        a {
-            color: $theme-status-warn-text;
-        }
-
-        .exit {
-            color: $theme-status-warn-text;
-        }
-    }
-
-    .message.error, .message.danger {
-        a {
-            color: $theme-status-error-text;
-        }
-
-        .exit {
-            color: $theme-status-error-text;
-        }
-    }
 }
 
 //====================================//
@@ -586,14 +645,21 @@ div.panel.error, div.panel.danger {
 
 #content-bar-left, #content-bar-right {
 
-    > .bar-nav p {
-        font-size: 150%;
-        color: $theme-header-background;
-    }
+  @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & {
 
-    > .bar-nav p:hover {
-        color: $theme-text;
+        > .bar-nav p {
+            font-size: 150%;
+            color: theme-background($theme, 'primary');
+        }
+
+        > .bar-nav p:hover {
+            color: theme-text($theme, 'primary');
+        }
+
     }
+  }
+
 }
 
 //===============================//
@@ -635,14 +701,26 @@ div.panel.error, div.panel.danger {
 
 #content {
 
-    table {
-        border: 1px solid $theme-border;
-        border-collapse: collapse;
-    }
+  @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & {
 
-    td {
-        border: 1px solid $theme-border;
+        table {
+            border: 1px solid theme-background($theme, 'primary');
+            border-collapse: collapse;
+        }
+
+        td {
+            border: 1px solid theme-background($theme, 'border');
+        }
+
+        hr {
+            border-style: solid;
+            border-color: theme-background($theme, 'border');
+        }
+
     }
+  }
+
 }
 
 //=====================================//
@@ -656,21 +734,31 @@ div.panel.error, div.panel.danger {
 
 #content {
 
-    .javascript-warn {
-        background-color: $theme-warning;
+  @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & {
+
+        .hover-highlight:hover {
+            background-color: theme-background($theme, 'primary');
+        }
+
+        .javascript-warn {
+            background-color: theme-status($theme, 'error', 'primary');
+        }
+
+        .fade-in {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+
     }
-}
+  }
 
-.fade-in {
-    opacity: 1;
-    visibility: visible;
 }
-
-.fade-out {
-    opacity: 0;
-    visibility: hidden;
-}
-
 
 //===================================//
 //===== END Generic Class Block =====//
@@ -681,53 +769,63 @@ div.panel.error, div.panel.danger {
 //==== START Button Block ====//
 //============================//
 
-button, a.button {
-    background-color: $theme-status-default;
-    border: 1px solid $theme-status-default-border;
+#content {
 
-    border-radius: 5px;
-}
+  @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & {
 
-button:hover, a.button:hover {
-    background-color: $theme-status-default-border;
-}
+        button, a.button {
+            background-color: theme-status($theme, 'default', 'primary');
+            border: 1px solid theme-status($theme, 'default', 'border');
 
-button.info, a.button.info, .info button, .info a.button {
-    background-color: $theme-status-info;
-    border: 1px solid $theme-status-info-border;
-}
+            border-radius: 5px;
+        }
 
-button.info:hover, a.button.info:hover, .info button:hover, .info a.button:hover {
-    background-color: $theme-status-info-border;
-}
+        button:hover, a.button:hover {
+            background-color: theme-status($theme, 'default', 'border');
+        }
 
-button.success, a.button.success, .success button, .success a.button {
-    background-color: $theme-status-success;
-    border: 1px solid $theme-status-success-border;
-}
+        button.info, a.button.info, .info button, .info a.button {
+            background-color: theme-status($theme, 'info', 'primary');
+            border: 1px solid theme-status($theme, 'info', 'border');
+        }
 
-button.success:hover, a.button.success:hover, .success button:hover, .success a.button:hover {
-    background-color: $theme-status-success-border;
-}
+        button.info:hover, a.button.info:hover, .info button:hover, .info a.button:hover {
+            background-color: theme-status($theme, 'info', 'border');
+        }
 
-button.warning, a.button.warning, .warning button, .warning a.button {
-    background-color: $theme-status-warn;
-    border: 1px solid $theme-status-warn-border;
-}
+        button.success, a.button.success, .success button, .success a.button {
+            background-color: theme-status($theme, 'success', 'primary');
+            border: 1px solid theme-status($theme, 'success', 'border');
+        }
 
-button.warning:hover, a.button.warning:hover, .warning button:hover, .warning a.button:hover {
-    background-color: $theme-status-warn-border;
-}
+        button.success:hover, a.button.success:hover, .success button:hover, .success a.button:hover {
+            background-color: theme-status($theme, 'success', 'border');
+        }
 
-button.error, a.button.error, .error button, .error a.button,
-button.danger, .button.danger, .danger button, .danger a.button {
-    background-color: $theme-status-error;
-    border: 1px solid $theme-status-error-border;
-}
+        button.warning, a.button.warning, .warning button, .warning a.button {
+            background-color: theme-status($theme, 'warn', 'primary');
+            border: 1px solid theme-status($theme, 'warn', 'border');
+        }
 
-button.error:hover, a.button.error:hover, .error button:hover, .error a.button:hover,
-button.danger:hover, .button.danger:hover, .danger button:hover, .danger a.button:hover {
-    background-color: $theme-status-error-border;
+        button.warning:hover, a.button.warning:hover, .warning button:hover, .warning a.button:hover {
+            background-color: theme-status($theme, 'warn', 'border');
+        }
+
+        button.error, a.button.error, .error button, .error a.button,
+        button.danger, .button.danger, .danger button, .danger a.button {
+            background-color: theme-status($theme, 'error', 'primary');
+            border: 1px solid theme-status($theme, 'error', 'border');
+        }
+
+        button.error:hover, a.button.error:hover, .error button:hover, .error a.button:hover,
+        button.danger:hover, .button.danger:hover, .danger button:hover, .danger a.button:hover {
+            background-color: theme-status($theme, 'error', 'border');
+        }
+
+    }
+  }
+
 }
 
 //============================//
@@ -739,77 +837,87 @@ button.danger:hover, .button.danger:hover, .danger button:hover, .danger a.butto
 //==== START Alert Block ====//
 //===========================//
 
-.alert {
-    background-color: $theme-status-default;
-    border: 1px solid $theme-status-default-border;
+#content {
 
-    a:not(.button) {
-        border-radius: 5em
+  @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & {
+
+        .alert {
+            background-color: theme-status($theme, 'default', 'primary');
+            border: 1px solid theme-status($theme, 'default', 'border');
+
+            a:not(.button) {
+                border-radius: 5em
+            }
+
+            a:hover:not(.button) {
+                background-color: theme-status($theme, 'default', 'primary');
+            }
+        }
+
+        .alert:hover {
+            background-color: theme-status($theme, 'default', 'highlight');
+
+            a:hover:not(.button) {
+                background-color: theme-status($theme, 'default', 'primary');
+            }
+        }
+
+        .alert.info {
+            background-color: theme-status($theme, 'info', 'primary');
+            border: 1px solid theme-status($theme, 'info', 'border');
+
+            a:hover:not(.button) {
+                background-color: theme-status($theme, 'info', 'primary');
+            }
+        }
+
+        .alert.info:hover {
+            background-color: theme-status($theme, 'info', 'highlight');
+        }
+
+        .alert.success {
+            background-color: theme-status($theme, 'success', 'primary');
+            border: 1px solid theme-status($theme, 'success', 'border');
+
+            a:hover:not(.button) {
+                background-color: theme-status($theme, 'success', 'primary');
+            }
+        }
+
+        .alert.success:hover {
+            background-color: theme-status($theme, 'success', 'highlight');
+        }
+
+        .alert.warning {
+            background-color: theme-status($theme, 'warn', 'primary');
+            border: 1px solid theme-status($theme, 'warn', 'border');
+
+            a:hover:not(.button) {
+                background-color: theme-status($theme, 'warn', 'primary');
+            }
+        }
+
+        .alert.warning:hover {
+            background-color: theme-status($theme, 'warn', 'highlight');
+        }
+
+        .alert.error, .alert.danger {
+            background-color: theme-status($theme, 'error', 'primary');
+            border: 1px solid theme-status($theme, 'error', 'border');
+
+            a:hover:not(.button) {
+                background-color: theme-status($theme, 'error', 'primary');
+            }
+        }
+
+        .alert.error:hover, .alert.danger:hover {
+            background-color: theme-status($theme, 'error', 'highlight');
+        }
+
     }
+  }
 
-    a:hover:not(.button) {
-        background-color: $theme-status-default;
-    }
-}
-
-.alert:hover {
-    background-color: $theme-status-default-light;
-
-    a:hover:not(.button) {
-        background-color: $theme-status-default;
-    }
-}
-
-.alert.info {
-    background-color: $theme-status-info;
-    border: 1px solid $theme-status-info-border;
-
-    a:hover:not(.button) {
-        background-color: $theme-status-info;
-    }
-}
-
-.alert.info:hover {
-    background-color: $theme-status-info-light;
-}
-
-.alert.success {
-    background-color: $theme-status-success;
-    border: 1px solid $theme-status-success-border;
-
-    a:hover:not(.button) {
-        background-color: $theme-status-success;
-    }
-}
-
-.alert.success:hover {
-    background-color: $theme-status-success-light;
-}
-
-.alert.warning {
-    background-color: $theme-status-warn;
-    border: 1px solid $theme-status-warn-border;
-
-    a:hover:not(.button) {
-        background-color: $theme-status-warn;
-    }
-}
-
-.alert.warning:hover {
-    background-color: $theme-status-warn-light;
-}
-
-.alert.error, .alert.danger {
-    background-color: $theme-status-error;
-    border: 1px solid $theme-status-error-border;
-
-    a:hover:not(.button) {
-        background-color: $theme-status-error;
-    }
-}
-
-.alert.error:hover, .alert.danger:hover {
-    background-color: $theme-status-error-light;
 }
 
 //===========================//
@@ -821,117 +929,127 @@ button.danger:hover, .button.danger:hover, .danger button:hover, .danger a.butto
 //==== START Panel Block ====//
 //===========================//
 
-div.panel {
-    background-color: $theme-status-default;
-    border: 1px solid $theme-status-default-border;
+#content {
 
-    a:not(.button) {
-        border-radius: 5em
+  @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & {
+
+        div.panel {
+            background-color: theme-status($theme, 'default', 'primary');
+            border: 1px solid theme-status($theme, 'default', 'border');
+
+            a:not(.button) {
+                border-radius: 5em
+            }
+
+            a:hover:not(.button) {
+                background-color: theme-status($theme, 'default', 'primary');
+            }
+
+            > .header {
+                border-bottom: 1px solid theme-status($theme, 'default', 'border');
+            }
+
+            > .content {
+                background-color: theme-background($theme, 'content');
+            }
+
+            > .footer {
+                border-top: 1px solid theme-status($theme, 'default', 'border');
+            }
+        }
+
+        div.panel:hover {
+            background-color: theme-status($theme, 'default', 'highlight');
+        }
+
+        div.panel.info {
+            background-color: theme-status($theme, 'info', 'primary');
+            border: 1px solid theme-status($theme, 'info', 'border');
+
+            a:hover:not(.button) {
+                background-color: theme-status($theme, 'info', 'primary');
+            }
+
+            > .header {
+                border-bottom: 1px solid theme-status($theme, 'info', 'border');
+            }
+
+            > .footer {
+                border-top: 1px solid theme-status($theme, 'info', 'border');
+            }
+        }
+
+        div.panel.info:hover {
+            background-color: theme-status($theme, 'info', 'highlight');
+        }
+
+        div.panel.success {
+            background-color: theme-status($theme, 'success', 'primary');
+            border: 1px solid theme-status($theme, 'success', 'border');
+
+            a:hover:not(.button) {
+                background-color: theme-status($theme, 'success', 'primary');
+            }
+
+            > .header {
+                border-bottom: 1px solid theme-status($theme, 'success', 'border');
+            }
+
+            > .footer {
+                border-top: 1px solid theme-status($theme, 'success', 'border');
+            }
+        }
+
+        div.panel.success:hover {
+            background-color: theme-status($theme, 'success', 'highlight');
+        }
+
+        div.panel.warning {
+            background-color: theme-status($theme, 'warn', 'primary');
+            border: 1px solid theme-status($theme, 'warn', 'border');
+
+            a:hover:not(.button) {
+                background-color: theme-status($theme, 'warn', 'primary');
+            }
+
+            > .header {
+                border-bottom: 1px solid theme-status($theme, 'warn', 'border');
+            }
+
+            > .footer {
+                border-top: 1px solid theme-status($theme, 'warn', 'border');
+            }
+        }
+
+        div.panel.warning:hover {
+            background-color: theme-status($theme, 'warn', 'highlight');
+        }
+
+        div.panel.error, .panel.danger {
+            background-color: theme-status($theme, 'error', 'primary');
+            border: 1px solid theme-status($theme, 'error', 'border');
+
+            a:hover:not(.button) {
+                background-color: theme-status($theme, 'error', 'primary');
+            }
+
+            > .header {
+                border-bottom: 1px solid theme-status($theme, 'error', 'border');
+            }
+
+            > .footer {
+                border-top: 1px solid theme-status($theme, 'error', 'border');
+            }
+        }
+
+        div.panel.error:hover, .panel.danger:hover {
+            background-color: theme-status($theme, 'error', 'highlight');
+        }
+
     }
+  }
 
-    a:hover:not(.button) {
-        background-color: $theme-status-default;
-    }
-
-    > .header {
-        border-bottom: 1px solid $theme-status-default-border;
-    }
-
-    > .content {
-        background-color: $theme-content-background;
-    }
-
-    > .footer {
-        border-top: 1px solid $theme-status-default-border;
-    }
-}
-
-div.panel:hover {
-    background-color: $theme-status-default-light;
-}
-
-div.panel.info {
-    background-color: $theme-status-info;
-    border: 1px solid $theme-status-info-border;
-
-    a:hover:not(.button) {
-        background-color: $theme-status-info;
-    }
-
-    > .header {
-        border-bottom: 1px solid $theme-status-info-border;
-    }
-
-    > .footer {
-        border-top: 1px solid $theme-status-info-border;
-    }
-}
-
-div.panel.info:hover {
-    background-color: $theme-status-info-light;
-}
-
-div.panel.success {
-    background-color: $theme-status-success;
-    border: 1px solid $theme-status-success-border;
-
-    a:hover:not(.button) {
-        background-color: $theme-status-success;
-    }
-
-    > .header {
-        border-bottom: 1px solid $theme-status-success-border;
-    }
-
-    > .footer {
-        border-top: 1px solid $theme-status-success-border;
-    }
-}
-
-div.panel.success:hover {
-    background-color: $theme-status-success-light;
-}
-
-div.panel.warning {
-    background-color: $theme-status-warn;
-    border: 1px solid $theme-status-warn-border;
-
-    a:hover:not(.button) {
-        background-color: $theme-status-warn;
-    }
-
-    > .header {
-        border-bottom: 1px solid $theme-status-warn-border;
-    }
-
-    > .footer {
-        border-top: 1px solid $theme-status-warn-border;
-    }
-}
-
-div.panel.warning:hover {
-    background-color: $theme-status-warn-light;
-}
-
-div.panel.error, .panel.danger {
-    background-color: $theme-status-error;
-    border: 1px solid $theme-status-error-border;
-
-    a:hover:not(.button) {
-        background-color: $theme-status-error;
-    }
-
-    > .header {
-        border-bottom: 1px solid $theme-status-error-border;
-    }
-
-    > .footer {
-        border-top: 1px solid $theme-status-error-border;
-    }
-}
-
-div.panel.error:hover, .panel.danger:hover {
-    background-color: $theme-status-error-light;
 }
 
 //===========================//
@@ -943,85 +1061,95 @@ div.panel.error:hover, .panel.danger:hover {
 //==== START Status Message Block ====//
 //====================================//
 
-#status-message-container {
+#content {
 
-    li {
-        list-style-type: none;
-    }
+  @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & {
 
-    a, .exit {
-        border-radius: 5em;
-    }
+        #status-message-container {
 
-    .message {
-        background-color: $theme-status-default;
-        border: 1px solid $theme-status-default-border;
+            li {
+                list-style-type: none;
+            }
 
-        a:hover, .exit:hover {
-            background-color: $theme-status-default;
+            a, .exit {
+                border-radius: 5em;
+            }
+
+            .message {
+                background-color: theme-status($theme, 'default', 'primary');
+                border: 1px solid theme-status($theme, 'default', 'border');
+
+                a:hover, .exit:hover {
+                    background-color: theme-status($theme, 'default', 'primary');
+                }
+            }
+
+            .message:last-child {
+                border-bottom-right-radius: 5px;
+                border-bottom-left-radius: 5px;
+            }
+
+            .message:hover {
+                background-color: theme-status($theme, 'default', 'highlight');
+            }
+
+            .message.info {
+                background-color: theme-status($theme, 'info', 'primary');
+                border: 1px solid theme-status($theme, 'info', 'border');
+
+                a:hover, .exit:hover {
+                    background-color: theme-status($theme, 'info', 'primary');
+                }
+            }
+
+            .message.info:hover {
+                background-color: theme-status($theme, 'info', 'highlight');
+            }
+
+            .message.success {
+                background-color: theme-status($theme, 'success', 'primary');
+                border: 1px solid theme-status($theme, 'success', 'border');
+
+                a:hover, .exit:hover {
+                    background-color: theme-status($theme, 'success', 'primary');
+                }
+            }
+
+            .message.success:hover {
+                background-color: theme-status($theme, 'success', 'highlight');
+            }
+
+            .message.warning {
+                background-color: theme-status($theme, 'warn', 'primary');
+                border: 1px solid theme-status($theme, 'warn', 'border');
+
+                a:hover, .exit:hover {
+                    background-color: theme-status($theme, 'warn', 'primary');
+                }
+            }
+
+            .message.warning:hover {
+                background-color: theme-status($theme, 'warn', 'highlight');
+            }
+
+            .message.error, .message.danger {
+                background-color: theme-status($theme, 'error', 'primary');
+                border: 1px solid theme-status($theme, 'error', 'border');
+
+                a:hover, .exit:hover {
+                    background-color: theme-status($theme, 'error', 'primary');
+                }
+            }
+
+            .message.error:hover, .message.danger:hover {
+                background-color: theme-status($theme, 'error', 'highlight');
+            }
         }
+
     }
+  }
 
-    .message:last-child {
-        border-bottom-right-radius: 5px;
-        border-bottom-left-radius: 5px;
-    }
-
-    .message:hover {
-        background-color: $theme-status-default-light;
-    }
-
-    .message.info {
-        background-color: $theme-status-info;
-        border: 1px solid $theme-status-info-border;
-
-        a:hover, .exit:hover {
-            background-color: $theme-status-info;
-        }
-    }
-
-    .message.info:hover {
-        background-color: $theme-status-info-light;
-    }
-
-    .message.success {
-        background-color: $theme-status-success;
-        border: 1px solid $theme-status-success-border;
-
-        a:hover, .exit:hover {
-            background-color: $theme-status-success;
-        }
-    }
-
-    .message.success:hover {
-        background-color: $theme-status-success-light;
-    }
-
-    .message.warning {
-        background-color: $theme-status-warn;
-        border: 1px solid $theme-status-warn-border;
-
-        a:hover, .exit:hover {
-            background-color: $theme-status-warn;
-        }
-    }
-
-    .message.warning:hover {
-        background-color: $theme-status-warn-light;
-    }
-
-    .message.error, .message.danger {
-        background-color: $theme-status-error;
-        border: 1px solid $theme-status-error-border;
-
-        a:hover, .exit:hover {
-            background-color: $theme-status-error;
-        }
-    }
-
-    .message.error:hover, .message.danger:hover {
-        background-color: $theme-status-error-light;
-    }
 }
 
 //====================================//
@@ -1035,11 +1163,16 @@ div.panel.error:hover, .panel.danger:hover {
 
 #content-bar-left, #content-bar-right {
 
-    > .bar-content {
-        background-color: $theme-header-background;
-        border-right: 1px solid $theme-border;
-        border-left: 1px solid $theme-border;
+  @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & {
+
+        > .bar-content {
+            background-color: theme-background($theme, 'primary');
+            border-right: 1px solid theme-background($theme, 'border');
+            border-left: 1px solid theme-background($theme, 'border');
+        }
     }
+  }
 }
 
 //===============================//
@@ -1130,7 +1263,15 @@ button, a.button {
 //===========================//
 
 div.panel {
-    box-shadow: 1px 1px 5px $color-grey-90;
+
+  @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & {
+
+        box-shadow: 1px 1px 5px theme-background($theme, 'border');
+
+    }
+  }
+
     @include transition(background-color 0.5s);
 
     a {

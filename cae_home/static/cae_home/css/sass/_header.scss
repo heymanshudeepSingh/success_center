@@ -138,7 +138,17 @@ header .site-logo {
 //==== START ----- Block ====//
 //===========================//
 
+footer {
 
+  @each $theme, $theme-dict in $theme-colors {
+    &.theme-#{$theme} {
+
+        background-color: theme-font($theme, 'secondary');
+
+    }
+  }
+
+}
 
 //===========================//
 //===== END ----- Block =====//
@@ -178,12 +188,25 @@ header .site-logo {
 //=============================//
 
 header {
-    background-color: $theme-header-background;
-    border-bottom: 1px solid $theme-border;
 
-    .header-bottom {
-        border-top: 1px solid $theme-border;
+  @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & {
+
+        background-color: theme-background($theme, 'primary');
+        border-bottom: 1px solid theme-background($theme, 'border');
+
+        hr {
+            border-style: solid;
+            border-color: theme-background($theme, 'border');
+        }
+
+        .header-bottom {
+            border-top: 1px solid theme-border($theme, 'border');
+        }
+
     }
+  }
+
 }
 
 //=============================//
@@ -197,15 +220,22 @@ header {
 
 header .site-logo > nav {
 
-    > ul > li > ul > li {
-        border: 1px solid $theme-border;
-        border-top: 0;
-    }
+  @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & {
 
-    > ul > li > ul > li:last-child {
-        border-bottom-right-radius: 3px;
-        border-bottom-left-radius: 3px;
+        > ul > li > ul > li {
+            border: 1px solid theme-border($theme, 'border');
+            border-top: 0;
+        }
+
+        > ul > li > ul > li:last-child {
+            border-bottom-right-radius: 3px;
+            border-bottom-left-radius: 3px;
+        }
+
     }
+  }
+
 }
 
 //==========================//
