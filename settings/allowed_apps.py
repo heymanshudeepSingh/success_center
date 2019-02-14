@@ -188,6 +188,7 @@ ADMIN_REORDER = (
             'cae_home.Profile',
             'cae_home.Address',
             'cae_home.PhoneNumber',
+            'cae_home.SiteTheme',
         ),
     },
     {

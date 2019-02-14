@@ -7,10 +7,11 @@ import pytz
 from django.conf import settings
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils import timezone
-from django.utils.deprecation import MiddlewareMixin
+
+from cae_home import models
 
 
-class TimezoneMiddleware(object):
+class SetTimezoneMiddleware(object):
     """
     Allows views to auto-convert from UTC to user's timezone.
     """
@@ -52,5 +53,28 @@ class GetProjectDetailMiddleware(object):
 
         # Get installed project/app details.
         response.context_data['imported_projects'] = settings.INSTALLED_APP_DETAILS
+
+        return response
+
+
+class GetSiteThemeMiddleware(object):
+    """
+    Gets site theme for all views.
+    """
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request, *args, **kwargs):
+        #Resume view call as normal.
+        response = self.get_response(request)
+        return response
+
+    def process_template_response(self, request, response):
+        if request.user.is_authenticated:
+            # User authenticated. Attempt to get user's model.
+            response.context_data['site_theme'] = request.user.profile.site_theme
+        else:
+            # Default to "wmu" site theme.
+            response.context_data['site_theme'] = models.SiteTheme.objects.get(name='wmu')
 
         return response

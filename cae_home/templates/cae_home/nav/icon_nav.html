@@ -5,7 +5,11 @@
   <ul>
     <li>
       <div>
-        <img src="{% static 'cae_home/images/cae_icons/brown_small.png' %}" alt="CAE Center">
+        {% if site_theme.gold_logo %}
+          <img src="{% static 'cae_home/images/cae_icons/brown_small.png' %}" alt="CAE Center">
+        {% else %}
+          <img src="{% static 'cae_home/images/cae_icons/black_small.png' %}" alt="CAE Center">
+        {% endif %}
       </div>
       <ul>
         {% for project in imported_projects %}

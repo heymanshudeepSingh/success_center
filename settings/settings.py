@@ -33,7 +33,8 @@ MIDDLEWARE = [
     'admin_reorder.middleware.ModelAdminReorder',
 
     'cae_home.middleware.GetProjectDetailMiddleware',
-    'cae_home.middleware.TimezoneMiddleware',
+    'cae_home.middleware.GetSiteThemeMiddleware',
+    'cae_home.middleware.SetTimezoneMiddleware',
 ]
 
 ROOT_URLCONF = 'settings.urls'
