@@ -67,9 +67,10 @@ footer {
 footer {
 
   @each $theme, $theme-dict in $theme-colors {
-    &.theme-#{$theme} {
+    .theme-#{$theme} & {
 
-        background-color: theme-text($theme, 'primary');
+        font-weight: bold;
+        color: theme-text($theme, 'secondary');
 
     }
   }

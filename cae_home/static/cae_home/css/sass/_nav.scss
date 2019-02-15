@@ -70,9 +70,9 @@ header nav {
         padding: 0;
         margin: 0;
         margin-top: 3px;
-        margin-right: 2px;
+        /*margin-right: 2px;*/
         margin-bottom: 3px;
-        margin-left: 2px;
+        /*margin-left: 2px;*/
 
         @media only screen and (max-width: $screen-tablet-mid) {
             display: none;
@@ -232,15 +232,28 @@ header nav {
   @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
+        li {
+            color: theme-text($theme, 'secondary');
+        }
+
+        li:hover {
+            color: theme-text($theme, 'secondary-hover');
+        }
+
         a, p {
             font-weight: bold;
-            color: theme-text($theme, 'secondary');
+            color: inherit;
             text-align: center;
             text-decoration: none;
         }
 
+        a, p {
+            color: inherit;
+        }
+
     }
   }
+
 }
 
 //===============================//

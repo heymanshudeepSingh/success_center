@@ -138,12 +138,12 @@ header .site-logo {
 //==== START ----- Block ====//
 //===========================//
 
-footer {
+header {
 
   @each $theme, $theme-dict in $theme-colors {
-    &.theme-#{$theme} {
+    .theme-#{$theme} & {
 
-        background-color: theme-font($theme, 'secondary');
+        color: theme-text($theme, 'secondary');
 
     }
   }

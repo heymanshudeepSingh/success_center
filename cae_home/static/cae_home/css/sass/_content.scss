@@ -776,51 +776,51 @@ div.panel {
 
         button, a.button {
             background-color: theme-status($theme, 'default', 'primary');
-            border: 1px solid theme-status($theme, 'default', 'border');
+            border: 1px solid theme-status($theme, 'default', 'darken');
 
             border-radius: 5px;
         }
 
         button:hover, a.button:hover {
-            background-color: theme-status($theme, 'default', 'border');
+            background-color: theme-status($theme, 'default', 'darken');
         }
 
         button.info, a.button.info, .info button, .info a.button {
             background-color: theme-status($theme, 'info', 'primary');
-            border: 1px solid theme-status($theme, 'info', 'border');
+            border: 1px solid theme-status($theme, 'info', 'darken');
         }
 
         button.info:hover, a.button.info:hover, .info button:hover, .info a.button:hover {
-            background-color: theme-status($theme, 'info', 'border');
+            background-color: theme-status($theme, 'info', 'darken');
         }
 
         button.success, a.button.success, .success button, .success a.button {
             background-color: theme-status($theme, 'success', 'primary');
-            border: 1px solid theme-status($theme, 'success', 'border');
+            border: 1px solid theme-status($theme, 'success', 'darken');
         }
 
         button.success:hover, a.button.success:hover, .success button:hover, .success a.button:hover {
-            background-color: theme-status($theme, 'success', 'border');
+            background-color: theme-status($theme, 'success', 'darken');
         }
 
         button.warning, a.button.warning, .warning button, .warning a.button {
             background-color: theme-status($theme, 'warn', 'primary');
-            border: 1px solid theme-status($theme, 'warn', 'border');
+            border: 1px solid theme-status($theme, 'warn', 'darken');
         }
 
         button.warning:hover, a.button.warning:hover, .warning button:hover, .warning a.button:hover {
-            background-color: theme-status($theme, 'warn', 'border');
+            background-color: theme-status($theme, 'warn', 'darken');
         }
 
         button.error, a.button.error, .error button, .error a.button,
         button.danger, .button.danger, .danger button, .danger a.button {
             background-color: theme-status($theme, 'error', 'primary');
-            border: 1px solid theme-status($theme, 'error', 'border');
+            border: 1px solid theme-status($theme, 'error', 'darken');
         }
 
         button.error:hover, a.button.error:hover, .error button:hover, .error a.button:hover,
         button.danger:hover, .button.danger:hover, .danger button:hover, .danger a.button:hover {
-            background-color: theme-status($theme, 'error', 'border');
+            background-color: theme-status($theme, 'error', 'darken');
         }
 
     }
@@ -844,7 +844,7 @@ div.panel {
 
         .alert {
             background-color: theme-status($theme, 'default', 'primary');
-            border: 1px solid theme-status($theme, 'default', 'border');
+            border: 1px solid theme-status($theme, 'default', 'darken');
 
             a:not(.button) {
                 border-radius: 5em
@@ -865,7 +865,7 @@ div.panel {
 
         .alert.info {
             background-color: theme-status($theme, 'info', 'primary');
-            border: 1px solid theme-status($theme, 'info', 'border');
+            border: 1px solid theme-status($theme, 'info', 'darken');
 
             a:hover:not(.button) {
                 background-color: theme-status($theme, 'info', 'primary');
@@ -878,7 +878,7 @@ div.panel {
 
         .alert.success {
             background-color: theme-status($theme, 'success', 'primary');
-            border: 1px solid theme-status($theme, 'success', 'border');
+            border: 1px solid theme-status($theme, 'success', 'darken');
 
             a:hover:not(.button) {
                 background-color: theme-status($theme, 'success', 'primary');
@@ -891,7 +891,7 @@ div.panel {
 
         .alert.warning {
             background-color: theme-status($theme, 'warn', 'primary');
-            border: 1px solid theme-status($theme, 'warn', 'border');
+            border: 1px solid theme-status($theme, 'warn', 'darken');
 
             a:hover:not(.button) {
                 background-color: theme-status($theme, 'warn', 'primary');
@@ -904,7 +904,7 @@ div.panel {
 
         .alert.error, .alert.danger {
             background-color: theme-status($theme, 'error', 'primary');
-            border: 1px solid theme-status($theme, 'error', 'border');
+            border: 1px solid theme-status($theme, 'error', 'darken');
 
             a:hover:not(.button) {
                 background-color: theme-status($theme, 'error', 'primary');
@@ -936,7 +936,7 @@ div.panel {
 
         div.panel {
             background-color: theme-status($theme, 'default', 'primary');
-            border: 1px solid theme-status($theme, 'default', 'border');
+            border: 1px solid theme-status($theme, 'default', 'darken');
 
             a:not(.button) {
                 border-radius: 5em
@@ -947,7 +947,7 @@ div.panel {
             }
 
             > .header {
-                border-bottom: 1px solid theme-status($theme, 'default', 'border');
+                border-bottom: 1px solid theme-status($theme, 'default', 'darken');
             }
 
             > .content {
@@ -955,7 +955,7 @@ div.panel {
             }
 
             > .footer {
-                border-top: 1px solid theme-status($theme, 'default', 'border');
+                border-top: 1px solid theme-status($theme, 'default', 'darken');
             }
         }
 
@@ -965,18 +965,18 @@ div.panel {
 
         div.panel.info {
             background-color: theme-status($theme, 'info', 'primary');
-            border: 1px solid theme-status($theme, 'info', 'border');
+            border: 1px solid theme-status($theme, 'info', 'darken');
 
             a:hover:not(.button) {
                 background-color: theme-status($theme, 'info', 'primary');
             }
 
             > .header {
-                border-bottom: 1px solid theme-status($theme, 'info', 'border');
+                border-bottom: 1px solid theme-status($theme, 'info', 'darken');
             }
 
             > .footer {
-                border-top: 1px solid theme-status($theme, 'info', 'border');
+                border-top: 1px solid theme-status($theme, 'info', 'darken');
             }
         }
 
@@ -986,18 +986,18 @@ div.panel {
 
         div.panel.success {
             background-color: theme-status($theme, 'success', 'primary');
-            border: 1px solid theme-status($theme, 'success', 'border');
+            border: 1px solid theme-status($theme, 'success', 'darken');
 
             a:hover:not(.button) {
                 background-color: theme-status($theme, 'success', 'primary');
             }
 
             > .header {
-                border-bottom: 1px solid theme-status($theme, 'success', 'border');
+                border-bottom: 1px solid theme-status($theme, 'success', 'darken');
             }
 
             > .footer {
-                border-top: 1px solid theme-status($theme, 'success', 'border');
+                border-top: 1px solid theme-status($theme, 'success', 'darken');
             }
         }
 
@@ -1007,18 +1007,18 @@ div.panel {
 
         div.panel.warning {
             background-color: theme-status($theme, 'warn', 'primary');
-            border: 1px solid theme-status($theme, 'warn', 'border');
+            border: 1px solid theme-status($theme, 'warn', 'darken');
 
             a:hover:not(.button) {
                 background-color: theme-status($theme, 'warn', 'primary');
             }
 
             > .header {
-                border-bottom: 1px solid theme-status($theme, 'warn', 'border');
+                border-bottom: 1px solid theme-status($theme, 'warn', 'darken');
             }
 
             > .footer {
-                border-top: 1px solid theme-status($theme, 'warn', 'border');
+                border-top: 1px solid theme-status($theme, 'warn', 'darken');
             }
         }
 
@@ -1028,18 +1028,18 @@ div.panel {
 
         div.panel.error, .panel.danger {
             background-color: theme-status($theme, 'error', 'primary');
-            border: 1px solid theme-status($theme, 'error', 'border');
+            border: 1px solid theme-status($theme, 'error', 'darken');
 
             a:hover:not(.button) {
                 background-color: theme-status($theme, 'error', 'primary');
             }
 
             > .header {
-                border-bottom: 1px solid theme-status($theme, 'error', 'border');
+                border-bottom: 1px solid theme-status($theme, 'error', 'darken');
             }
 
             > .footer {
-                border-top: 1px solid theme-status($theme, 'error', 'border');
+                border-top: 1px solid theme-status($theme, 'error', 'darken');
             }
         }
 
@@ -1078,7 +1078,7 @@ div.panel {
 
             .message {
                 background-color: theme-status($theme, 'default', 'primary');
-                border: 1px solid theme-status($theme, 'default', 'border');
+                border: 1px solid theme-status($theme, 'default', 'darken');
 
                 a:hover, .exit:hover {
                     background-color: theme-status($theme, 'default', 'primary');
@@ -1096,7 +1096,7 @@ div.panel {
 
             .message.info {
                 background-color: theme-status($theme, 'info', 'primary');
-                border: 1px solid theme-status($theme, 'info', 'border');
+                border: 1px solid theme-status($theme, 'info', 'darken');
 
                 a:hover, .exit:hover {
                     background-color: theme-status($theme, 'info', 'primary');
@@ -1109,7 +1109,7 @@ div.panel {
 
             .message.success {
                 background-color: theme-status($theme, 'success', 'primary');
-                border: 1px solid theme-status($theme, 'success', 'border');
+                border: 1px solid theme-status($theme, 'success', 'darken');
 
                 a:hover, .exit:hover {
                     background-color: theme-status($theme, 'success', 'primary');
@@ -1122,7 +1122,7 @@ div.panel {
 
             .message.warning {
                 background-color: theme-status($theme, 'warn', 'primary');
-                border: 1px solid theme-status($theme, 'warn', 'border');
+                border: 1px solid theme-status($theme, 'warn', 'darken');
 
                 a:hover, .exit:hover {
                     background-color: theme-status($theme, 'warn', 'primary');
@@ -1135,7 +1135,7 @@ div.panel {
 
             .message.error, .message.danger {
                 background-color: theme-status($theme, 'error', 'primary');
-                border: 1px solid theme-status($theme, 'error', 'border');
+                border: 1px solid theme-status($theme, 'error', 'darken');
 
                 a:hover, .exit:hover {
                     background-color: theme-status($theme, 'error', 'primary');
@@ -1171,8 +1171,10 @@ div.panel {
             border-right: 1px solid theme-background($theme, 'border');
             border-left: 1px solid theme-background($theme, 'border');
         }
+
     }
   }
+
 }
 
 //===============================//
