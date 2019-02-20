@@ -111,7 +111,7 @@ article {
     .theme-#{$theme} & {
 
         article {
-            background-color: theme-background($theme, 'highlight');
+            background-color: theme-background($theme, 'content-alt');
             border: 1px solid theme-background($theme, 'border');
         }
 

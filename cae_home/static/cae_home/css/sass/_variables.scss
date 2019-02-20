@@ -220,6 +220,7 @@ $theme-colors: (
             'highlight': $wmu-web-link-hover,
             'border': $wmu-web-brown,
             'content': $color-white,
+            'content-alt': $wmu-web-alt-header-text,
         ),
         'text': (
             'primary': $wmu-web-alt-header-text,
@@ -319,6 +320,9 @@ $theme-colors: (
             'highlight': #994c00,
             'border': #9b5b27,
             'content': #331900,
+            'content-alt': #422000,
+            /*'content': #331100,*/
+            /*'content-alt': #3c1807,*/
         ),
         'text': (
             'primary': $color-white,
@@ -338,6 +342,7 @@ $theme-colors: (
         'status': (
             'default': (
                 'primary': #663300,
+                /*'primary': #662a00,*/
                 'primary-hover': #994c00,
                 'secondary': #4d2500,
                 'secondary-hover': #663100,
@@ -388,6 +393,7 @@ $theme-colors: (
             'highlight': $bootstrap-header-text,
             'border': $color-grey-60,
             'content': $color-white,
+            'content-alt': $color-grey-95,
         ),
         'text': (
             'primary': $color-black,
@@ -488,6 +494,7 @@ $theme-colors: (
             'highlight': $color-grey-95,
             'border': $color-grey-70,
             'content': $color-white,
+            'content-alt': $color-grey-95,
         ),
         'text': (
             'primary': $color-black,
@@ -556,7 +563,10 @@ $theme-colors: (
             'primary': $color-grey-20,
             'highlight': $color-grey-30,
             'border': $color-grey-30,
-            'content': $color-grey-15,
+            /*'content': $color-grey-15,*/
+            /*'content-alt': $color-grey-10,*/
+            'content': #1f1f1f,
+            'content-alt': $color-grey-15,
         ),
         'text': (
             'primary': $color-white,
