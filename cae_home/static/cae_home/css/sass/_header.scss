@@ -42,15 +42,19 @@ header {
     height: 40px;
 
     .header-top {
+        z-index: 10;
+
         @include display-flex;
         @include flex-direction(row);
         @include justify-content(space-between);
         @include align-items(center);
 
         height: 40px;
+
     }
 
     .header-bottom {
+        z-index: 10;
         display: none;
     }
 }
@@ -192,12 +196,14 @@ header {
   @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
-        background-color: theme-background($theme, 'primary');
-        border-bottom: 1px solid theme-background($theme, 'border');
-
         hr {
             border-style: solid;
             border-color: theme-background($theme, 'border');
+        }
+
+        .header-top {
+            background-color: theme-background($theme, 'primary');
+            border-bottom: 1px solid theme-background($theme, 'border');
         }
 
         .header-bottom {

@@ -74,7 +74,7 @@
               <p class="arrow-left">&#9204;</p>
             </div>
             <div class="bar-content">
-              {% block content-bar-left %}{% endblock content-bar-left %}
+              {% block content_bar_left %}{% endblock content_bar_left %}
             </div>
           </div>
         </div>
@@ -90,20 +90,23 @@
               <p class="arrow-left">&#9204;</p>
             </div>
             <div class="bar-content">
-              {% block content-bar-right %}{% endblock content-bar-right %}
+              {% block content_bar_right %}{% endblock content_bar_right %}
             </div>
           </div>
         </div>
       {% endblock placeholder_right %}
 
-      {% block footer %}
-        {% include 'cae_home/footer.html' %}
-      {% endblock footer %}
+      <footer>
+        {% block footer %}
+          {% include 'cae_home/footer.html' %}
+        {% endblock footer %}
+      </footer>
 
       {% block base_scripts_body %}
         <script src="{% static 'cae_home/js/mobile_nav.js' %}"></script>
         <script src="{% static 'cae_home/js/status_messages.js' %}"></script>
         <script src="{% static 'cae_home/js/side_content_bars.js' %}"></script>
+        <script src="{% static 'cae_home/js/overlay_modal.js' %}"></script>
       {% endblock base_scripts_body %}
       {% block extra_scripts_body %}{% endblock extra_scripts_body %}
     </body>

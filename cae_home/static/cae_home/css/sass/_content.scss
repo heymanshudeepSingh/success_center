@@ -307,6 +307,7 @@ div.panel {
 
 #content-bar-left, #content-bar-right {
     position: absolute;
+    z-index: 5;
 
     @include display-flex;
     @include flex-direction(row);
@@ -350,6 +351,33 @@ div.panel {
 //===============================//
 //==== End Content Bar Block ====//
 //===============================//
+
+//===================================//
+//==== START Overlay Modal Block ====//
+//===================================//
+
+#overlay-modal-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+
+    @include display-flex;
+    @include flex-direction(column);
+    @include justify-content(center);
+    @include align-items(center);
+
+    > #overlay-modal {
+        min-width: 50px;
+        min-height: 50px;
+    }
+}
+
+//===================================//
+//===== END Overlay Modal Block =====//
+//===================================//
 
 
 //================================================================================//
@@ -1255,6 +1283,28 @@ div.panel {
 //==== End Content Bar Block ====//
 //===============================//
 
+//===================================//
+//==== START Overlay Modal Block ====//
+//===================================//
+
+#overlay-modal-container {
+    background-color: $color-trans-grey-75;
+
+  @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & {
+        > #overlay-modal {
+            background-color: theme-background($theme, 'content');
+            border: 1px solid theme-background($theme, 'border');
+        }
+
+    }
+  }
+
+}
+
+//===================================//
+//===== END Overlay Modal Block =====//
+//===================================//
 
 //================================================================================//
 //==================================== Other =====================================//
@@ -1354,20 +1404,11 @@ button, a.button {
 //===========================//
 
 div.panel {
-
-  @each $theme, $theme-dict in $theme-colors {
-    .theme-#{$theme} & {
-
-        /*box-shadow: 1px 1px 5px theme-background($theme, 'border');*/
-
-    }
+    @include transition(color 0.5s, background-color 0.5s, border 0.5s);
 
     > div {
         @include transition(color 0.5s, background-color 0.5s, border 0.5s);
     }
-  }
-
-    @include transition(color 0.5s, background-color 0.5s, border 0.5s);
 
     a {
         @include transition(color 0.5s, background-color 0.5s, border 0.5s);
@@ -1388,7 +1429,7 @@ div.panel {
     .message {
         box-sizing: border-box;
 
-        @include transition(padding 0.9s, margin 0.9s, font-size 0.9s, color 0.5s, background-color 0.5s, border 0.5s, border-radius 0.5s, opacity 0.9s linear, visibility 0s 0.9s);
+        @include transition(padding 0.7s, margin 0.7s, font-size 0.7s, color 0.5s, background-color 0.5s, border 0.5s, border-radius 0.5s, opacity 0.7s linear, visibility 0s 0.7s);
 
         a {
             @include transition(color 0.5s, background-color 0.5s, border 0.5s);

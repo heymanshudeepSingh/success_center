@@ -75,7 +75,6 @@ body {
 
     header {
         position: relative;
-        z-index: 10;
 
         grid-area: header;
 
@@ -87,7 +86,6 @@ body {
 
     main {
         position: relative;
-        z-index: 5;
 
         grid-area: main;
 
@@ -99,7 +97,6 @@ body {
 
     #main-placeholder-left {
         position: relative;
-        z-index: 5;
 
         grid-area: main-placeholder-left;
 
@@ -111,7 +108,6 @@ body {
 
     #main-placeholder-right {
         position: relative;
-        z-index: 5;
 
         grid-area: main-placeholder-right;
 
@@ -123,7 +119,6 @@ body {
 
     footer {
         position: relative;
-        z-index: 10;
 
         grid-area: footer;
 

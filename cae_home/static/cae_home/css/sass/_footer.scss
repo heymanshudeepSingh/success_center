@@ -39,6 +39,15 @@ footer {
     @include flex-direction(row);
     @include justify-content(space-around);
     @include align-items(center);
+
+    > div {
+        z-index: 10;
+
+        @include display-flex;
+        @include flex-direction(row);
+        @include justify-content(space-around);
+        @include align-items(center);
+    }
 }
 
 //===========================//

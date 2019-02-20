@@ -29,7 +29,7 @@ $(document).ready(function() {
                 console.log('Removed message:');
                 console.log($(exit_parent).children().first().text().trim());
                 exit_parent.detach();
-            }, 1000); // Wait 1 seconds.
+            }, 700); // Wait 0.7 seconds.
         });
     });
 
