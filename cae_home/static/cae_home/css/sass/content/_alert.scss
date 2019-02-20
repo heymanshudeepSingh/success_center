@@ -173,8 +173,10 @@
             background-color: theme-status($theme, 'default', 'primary');
             border: 1px solid theme-status($theme, 'default', 'border');
 
+            border-radius: 5px;
+
             a:not(.button) {
-                border-radius: 5em
+                border-radius: 5em;
             }
 
             a:hover:not(.button) {
