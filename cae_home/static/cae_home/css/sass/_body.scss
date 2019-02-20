@@ -47,8 +47,7 @@ html {
     }
 }
 
-body {
-    position: relative;
+body.grid {
     display: grid;
 
     grid-template-columns: 5% 45% 45% 5%;
@@ -59,14 +58,22 @@ body {
         "main-placeholder-left main main main-placeholder-right"
         "footer footer footer footer";
 
-    min-height:100vh;
-    height: auto;
-
     // Show on larger screens.
     @media only screen and (min-width: $screen-tablet-mid) {
         grid-template-columns: 15% 35% 35% 15%;
         grid-template-rows: 40px auto auto 35px;
     }
+}
+
+body.no-grid {
+    display: block;
+}
+
+body {
+    position: relative;
+
+    min-height:100vh;
+    height: auto;
 
     // Printer layout.
     @media only print {

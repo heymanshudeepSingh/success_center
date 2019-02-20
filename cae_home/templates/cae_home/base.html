@@ -61,7 +61,10 @@
   {% endblock head %}
 
   {% block body %}
-    <body class="theme-{{ site_theme.name }}">
+
+    <body class="theme-{{ site_theme.name }} {% block body_extra_classes %}grid{% endblock body_extra_classes %}">
+
+
       {% block header %}
         {% include 'cae_home/header.html' with app_nav='cae_home/nav/default_app_nav.html' %}
       {% endblock header %}
@@ -96,11 +99,11 @@
         </div>
       {% endblock placeholder_right %}
 
-      <footer>
-        {% block footer %}
+      {% block footer %}
+        <footer>
           {% include 'cae_home/footer.html' %}
-        {% endblock footer %}
-      </footer>
+        </footer>
+      {% endblock footer %}
 
       {% block base_scripts_body %}
         <script src="{% static 'cae_home/js/mobile_nav.js' %}"></script>
