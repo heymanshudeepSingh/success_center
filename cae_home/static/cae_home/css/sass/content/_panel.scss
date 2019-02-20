@@ -8,6 +8,11 @@
 @import '../_mixins';
 
 
+$panel_header_names_list: ('.header', '.head');
+$panel_content_names_list: ('.content', '.body');
+$panel_footer_names_list: ('.footer', '.foot');
+
+
 //================================================================================//
 //================================= Positioning ==================================//
 //================================== Includes: ===================================//
@@ -34,60 +39,63 @@
 //==== START ----- Block ====//
 //===========================//
 
-div.panel {
-    position: relative;
+#content {
+    div.panel {
+        position: relative;
 
-    margin-top: 10px;
-    margin-bottom: 10px;
+        margin-top: 20px;
+        margin-bottom: 20px;
 
-    a:not(.button) {
-        padding-top: 5px;
-        padding-right: 10px;
-        padding-bottom: 5px;
-        padding-left: 10px;
-    }
+        > div.panel {
+            margin: 15px;
+        }
 
-    p > a:not(.button) {
-        padding-top: 1px;
-        padding-right: 7px;
-        padding-bottom: 1px;
-        padding-left: 7px;
-    }
+        a:not(.button) {
+            padding-top: 5px;
+            padding-right: 10px;
+            padding-bottom: 5px;
+            padding-left: 10px;
+        }
 
-    > .header {
-        @include display-flex;
-        @include flex-direction(row);
-        @include justify-content(space-between);
-        @include align-items(center);
+        p > a:not(.button) {
+            padding-top: 1px;
+            padding-right: 7px;
+            padding-bottom: 1px;
+            padding-left: 7px;
+        }
 
-        padding: 10px;
+        @each $header in $panel_header_names_list {
+            > #{$header} {
+                @include display-flex;
+                @include flex-direction(row);
+                @include justify-content(space-between);
+                @include align-items(center);
 
-        > h1, h2, h3, h4, h5, h6 {
-            padding-top: 0;
+                padding: 10px;
+
+                > h1, h2, h3, h4, h5, h6 {
+                    padding-top: 0;
+                }
+            }
+        }
+
+        @each $content in $panel_content_names_list {
+            > #{$content} {
+                padding: 10px;
+            }
+        }
+
+        @each $footer in $panel_footer_names_list {
+            > #{$footer} {
+                @include display-flex;
+                @include flex-direction(row);
+                @include justify-content(space-between);
+                @include align-items(center);
+
+                padding: 10px;
+            }
         }
     }
-
-    > .content {
-        padding: 10px;
-    }
-
-    > div.panel {
-        margin: 15px;
-    }
-
-    > .footer {
-        @include display-flex;
-        @include flex-direction(row);
-        @include justify-content(space-between);
-        @include align-items(center);
-
-        padding: 10px;
-    }
-}
-
-#content > div.panel {
-    margin-top: 20px;
-    margin-bottom: 20px;
 }
 
 //===========================//
@@ -133,36 +141,50 @@ div.panel {
                 color: theme-status($theme, 'default', 'link-hover');
             }
 
-            > .header {
-                font-size: 110%;
-                font-weight: bold;
+            @each $header in $panel_header_names_list {
+                > #{$header} {
+                    font-size: 110%;
+                    font-weight: bold;
 
-                color: theme-text($theme, 'primary');
-            }
+                    color: theme-text($theme, 'primary');
 
-            > .content {
-                a:not(.button) {
-                    color: theme-text($theme, 'link');
-                }
-
-                a:not(.button):hover {
-                    color: theme-text($theme, 'link-hover');
+                    > h1, h2, h3, h4, h5, h6 {
+                        font-size: 110%;
+                    }
                 }
             }
 
-            > .footer {
-                color: theme-text($theme, 'primary');
+            @each $content in $panel_content_names_list {
+                > #{$content} {
+                    a:not(.button) {
+                        color: theme-text($theme, 'link');
+                    }
+
+                    a:not(.button):hover {
+                        color: theme-text($theme, 'link-hover');
+                    }
+                }
+            }
+
+            @each $footer in $panel_footer_names_list {
+                > #{$footer} {
+                    color: theme-text($theme, 'primary');
+                }
             }
         }
 
         div.panel:hover {
 
-            > .header {
-                color: theme-text($theme, 'primary-hover');
+            @each $header in $panel_header_names_list {
+                > #{$header} {
+                    color: theme-text($theme, 'primary-hover');
+                }
             }
 
-            > .footer {
-                color: theme-text($theme, 'primary-hover');
+            @each $footer in $panel_footer_names_list {
+                > #{$footer} {
+                    color: theme-text($theme, 'primary-hover');
+                }
             }
         }
 
@@ -261,20 +283,26 @@ div.panel {
                 background-color: theme-status($theme, 'default', 'border');
             }
 
-            > .header {
-                border-bottom: 1px solid theme-status($theme, 'default', 'border');
-            }
-
-            > .content {
-                background-color: theme-status($theme, 'default', 'secondary');
-
-                a:hover:not(.button) {
-                    background-color: theme-status($theme, 'default', 'primary-hover');
+            @each $header in $panel_header_names_list {
+                > #{$header} {
+                    border-bottom: 1px solid theme-status($theme, 'default', 'border');
                 }
             }
 
-            > .footer {
-                border-top: 1px solid theme-status($theme, 'default', 'border');
+            @each $content in $panel_content_names_list {
+                > #{$content} {
+                    background-color: theme-status($theme, 'default', 'secondary');
+
+                    a:hover:not(.button) {
+                        background-color: theme-status($theme, 'default', 'primary-hover');
+                    }
+                }
+            }
+
+            @each $footer in $panel_footer_names_list {
+                > #{$footer} {
+                    border-top: 1px solid theme-status($theme, 'default', 'border');
+                }
             }
         }
 
@@ -282,8 +310,10 @@ div.panel {
             background-color: theme-status($theme, 'default', 'primary-hover');
             border: 1px solid theme-status($theme, 'default', 'border-hover');
 
-            > .content {
-                background-color: theme-status($theme, 'default', 'secondary-hover');
+            @each $content in $panel_content_names_list {
+                > #{$content} {
+                    background-color: theme-status($theme, 'default', 'secondary-hover');
+                }
             }
         }
 
@@ -295,12 +325,16 @@ div.panel {
                 background-color: theme-status($theme, 'info', 'primary');
             }
 
-            > .header {
-                border-bottom: 1px solid theme-status($theme, 'info', 'border');
+            @each $header in $panel_header_names_list {
+                > #{$header} {
+                    border-bottom: 1px solid theme-status($theme, 'info', 'border');
+                }
             }
 
-            > .footer {
-                border-top: 1px solid theme-status($theme, 'info', 'border');
+            @each $footer in $panel_footer_names_list {
+                > #{$footer} {
+                    border-top: 1px solid theme-status($theme, 'info', 'border');
+                }
             }
         }
 
@@ -317,12 +351,16 @@ div.panel {
                 background-color: theme-status($theme, 'success', 'primary');
             }
 
-            > .header {
-                border-bottom: 1px solid theme-status($theme, 'success', 'border');
+            @each $header in $panel_header_names_list {
+                > #{$header} {
+                    border-bottom: 1px solid theme-status($theme, 'success', 'border');
+                }
             }
 
-            > .footer {
-                border-top: 1px solid theme-status($theme, 'success', 'border');
+            @each $footer in $panel_footer_names_list {
+                > #{$footer} {
+                    border-top: 1px solid theme-status($theme, 'success', 'border');
+                }
             }
         }
 
@@ -339,12 +377,16 @@ div.panel {
                 background-color: theme-status($theme, 'warn', 'primary');
             }
 
-            > .header {
-                border-bottom: 1px solid theme-status($theme, 'warn', 'border');
+            @each $header in $panel_header_names_list {
+                > #{$header} {
+                    border-bottom: 1px solid theme-status($theme, 'warn', 'border');
+                }
             }
 
-            > .footer {
-                border-top: 1px solid theme-status($theme, 'warn', 'border');
+            @each $footer in $panel_footer_names_list {
+                > #{$footer} {
+                    border-top: 1px solid theme-status($theme, 'warn', 'border');
+                }
             }
         }
 
@@ -361,12 +403,16 @@ div.panel {
                 background-color: theme-status($theme, 'error', 'primary');
             }
 
-            > .header {
-                border-bottom: 1px solid theme-status($theme, 'error', 'border');
+            @each $header in $panel_header_names_list {
+                > #{$header} {
+                    border-bottom: 1px solid theme-status($theme, 'error', 'border');
+                }
             }
 
-            > .footer {
-                border-top: 1px solid theme-status($theme, 'error', 'border');
+            @each $footer in $panel_footer_names_list {
+                > #{$footer} {
+                    border-top: 1px solid theme-status($theme, 'error', 'border');
+                }
             }
         }
 
