@@ -24,6 +24,7 @@
     "user": 1,
     "address": null,
     "phone_number": null,
+    "site_theme": 3,
     "date_created": "2018-06-23T22:14:49.963Z",
     "date_modified": "2018-06-23T22:14:49.963Z"
   }

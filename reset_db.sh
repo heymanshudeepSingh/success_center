@@ -20,6 +20,7 @@ python ./manage.py makemigrations
 python ./manage.py migrate
 
 # Load example data
+python ./manage.py loaddata full_models/site_themes.json
 python ./manage.py loaddata users
 python ./manage.py loaddata room_types
 python ./manage.py loaddata rooms
