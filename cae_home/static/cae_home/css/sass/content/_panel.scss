@@ -1,0 +1,425 @@
+
+//===========================//
+//==== Panel Element CSS ====//
+//===========================//
+
+// Import statements
+@import '../_variables';
+@import '../_mixins';
+
+
+//================================================================================//
+//================================= Positioning ==================================//
+//================================== Includes: ===================================//
+//================================================================================//
+// position, top, right, bottom, left, z-index, display, float                    //
+//                                                                                //
+// grid-template-columns, grid-template-rows, grid-template-areas, grid-template, //
+// grid-gap, place-items, grid, grid-column, grid-row, grid-area, place-self,     //
+//                                                                                //
+// flex-direction, flex-wrap, justify-content, align-items, align-content, order, //
+// flex-grow, flex-shrink, flex-basis, flex, align-self,                          //
+//                                                                                //
+// width, height, max-width, max-height, min-width, min-height,                   //
+// padding, padding-top, padding-right, padding-bottom, padding-left,             //
+// margin, margin-top, margin-right, margin-bottom, margin-left,                  //
+//                                                                                //
+// margin-collapse, margin-top-collapse, margin-right-collapse,                   //
+// margin-bottom-collapse, margin-left-collapse,                                  //
+//                                                                                //
+// overflow, overflow-x, overflow-y, clip, clear                                  //
+//================================================================================//
+
+//===========================//
+//==== START ----- Block ====//
+//===========================//
+
+div.panel {
+    position: relative;
+
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    a:not(.button) {
+        padding-top: 5px;
+        padding-right: 10px;
+        padding-bottom: 5px;
+        padding-left: 10px;
+    }
+
+    p > a:not(.button) {
+        padding-top: 1px;
+        padding-right: 7px;
+        padding-bottom: 1px;
+        padding-left: 7px;
+    }
+
+    > .header {
+        @include display-flex;
+        @include flex-direction(row);
+        @include justify-content(space-between);
+        @include align-items(center);
+
+        padding: 10px;
+
+        > h1, h2, h3, h4, h5, h6 {
+            padding-top: 0;
+        }
+    }
+
+    > .content {
+        padding: 10px;
+    }
+
+    > div.panel {
+        margin: 15px;
+    }
+
+    > .footer {
+        @include display-flex;
+        @include flex-direction(row);
+        @include justify-content(space-between);
+        @include align-items(center);
+
+        padding: 10px;
+    }
+}
+
+#content > div.panel {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+//===========================//
+//===== END ----- Block =====//
+//===========================//
+
+
+//================================================================================//
+//================================== Typography ==================================//
+//================================== Includes: ===================================//
+//================================================================================//
+// font, font-family, font-size, font-smoothing, osx-font-smoothing, font-style,  //
+// font-weight,                                                                   //
+//                                                                                //
+// hyphens, src, line-height, letter-spacing, word-spacing, color, text-align,    //
+// text-decoration, text-indent, text-overflow, text-rendering, text-size-adjust, //
+// text-shadow, text-transform,                                                   //
+//                                                                                //
+// word-break, word-wrap, white-space                                             //
+//================================================================================//
+
+//===========================//
+//==== START ----- Block ====//
+//===========================//
+
+#content {
+
+  @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & {
+
+        div.panel {
+            a.button, button {
+                font-weight: normal;
+            }
+
+            a:not(.button) {
+                font-weight: bold;
+                color: theme-status($theme, 'default', 'link');
+                text-decoration: none;
+            }
+
+            a:not(.button):hover {
+                color: theme-status($theme, 'default', 'link-hover');
+            }
+
+            > .header {
+                font-size: 110%;
+                font-weight: bold;
+
+                color: theme-text($theme, 'primary');
+            }
+
+            > .content {
+                a:not(.button) {
+                    color: theme-text($theme, 'link');
+                }
+
+                a:not(.button):hover {
+                    color: theme-text($theme, 'link-hover');
+                }
+            }
+
+            > .footer {
+                color: theme-text($theme, 'primary');
+            }
+        }
+
+        div.panel:hover {
+
+            > .header {
+                color: theme-text($theme, 'primary-hover');
+            }
+
+            > .footer {
+                color: theme-text($theme, 'primary-hover');
+            }
+        }
+
+        div.panel.info {
+            a:not(.button) {
+                color: theme-status($theme, 'info', 'link');
+            }
+
+            a:not(.button):hover {
+                color: theme-status($theme, 'info', 'link-hover');
+            }
+        }
+
+        div.panel.success {
+            a:not(.button) {
+                color: theme-status($theme, 'success', 'link');
+            }
+        }
+
+        div.panel.warning {
+            a:not(.button) {
+                color: theme-status($theme, 'warn', 'link');
+            }
+
+            a:not(.button):hover {
+                color: theme-status($theme, 'warn', 'link-hover');
+            }
+        }
+
+        div.panel.error, div.panel.danger {
+            a:not(.button) {
+                color: theme-status($theme, 'error', 'link');
+            }
+
+            a:not(.button):hover {
+                color: theme-status($theme, 'error', 'link-hover');
+            }
+        }
+
+    }
+  }
+
+}
+
+//===========================//
+//===== END ----- Block =====//
+//===========================//
+
+
+//================================================================================//
+//==================================== Visual ====================================//
+//================================== Includes: ===================================//
+//================================================================================//
+// vertical-align,                                                                //
+//                                                                                //
+// list-style, list-style-type, list-style-position, list-style-image,            //
+//                                                                                //
+// pointer-events, cursor,                                                        //
+//                                                                                //
+// background, background-attatchment, background-color, background-image,        //
+// background-position, background-repeat, background-size,                       //
+//                                                                                //
+// border, border-collapse, border-top, border-right, border-bottom, border-left, //
+// border-color, border-image, border-top-color, border-right-color,              //
+// border-bottom-color, border-left-color, border-spacing, border-style,          //
+// border-top-style, border-right-style, border-bottom-style, border-left-style,  //
+// border-width, border-top-width, border-right-width, border-bottom-width,       //
+// border-left-width,                                                             //
+//                                                                                //
+// border-radius, border-top-right-radius, border-bottom-right-radius,            //
+// border-bottom-left-radius, border-top-left-radius, border-radius-topright,     //
+// border-radius-bottomright, border-radius-bottomleft, border-radius-topleft,    //
+//                                                                                //
+// content, quotes, outline, outline-offset, opacity, filter, visibility, size,   //
+// zoom                                                                           //
+//================================================================================//
+
+//===========================//
+//==== START ----- Block ====//
+//===========================//
+
+#content {
+
+  @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & {
+
+        div.panel {
+            background-color: theme-status($theme, 'default', 'primary');
+            border: 1px solid theme-status($theme, 'default', 'border');
+
+            a:not(.button) {
+                border-radius: 5em;
+            }
+
+            a:hover:not(.button) {
+                background-color: theme-status($theme, 'default', 'border');
+            }
+
+            > .header {
+                border-bottom: 1px solid theme-status($theme, 'default', 'border');
+            }
+
+            > .content {
+                background-color: theme-status($theme, 'default', 'secondary');
+
+                a:hover:not(.button) {
+                    background-color: theme-status($theme, 'default', 'primary-hover');
+                }
+            }
+
+            > .footer {
+                border-top: 1px solid theme-status($theme, 'default', 'border');
+            }
+        }
+
+        div.panel:hover {
+            background-color: theme-status($theme, 'default', 'primary-hover');
+            border: 1px solid theme-status($theme, 'default', 'border-hover');
+
+            > .content {
+                background-color: theme-status($theme, 'default', 'secondary-hover');
+            }
+        }
+
+        div.panel.info {
+            background-color: theme-status($theme, 'info', 'primary');
+            border: 1px solid theme-status($theme, 'info', 'border');
+
+            a:hover:not(.button) {
+                background-color: theme-status($theme, 'info', 'primary');
+            }
+
+            > .header {
+                border-bottom: 1px solid theme-status($theme, 'info', 'border');
+            }
+
+            > .footer {
+                border-top: 1px solid theme-status($theme, 'info', 'border');
+            }
+        }
+
+        div.panel.info:hover {
+            background-color: theme-status($theme, 'info', 'primary-hover');
+            border: 1px solid theme-status($theme, 'default', 'border-hover');
+        }
+
+        div.panel.success {
+            background-color: theme-status($theme, 'success', 'primary');
+            border: 1px solid theme-status($theme, 'success', 'border');
+
+            a:hover:not(.button) {
+                background-color: theme-status($theme, 'success', 'primary');
+            }
+
+            > .header {
+                border-bottom: 1px solid theme-status($theme, 'success', 'border');
+            }
+
+            > .footer {
+                border-top: 1px solid theme-status($theme, 'success', 'border');
+            }
+        }
+
+        div.panel.success:hover {
+            background-color: theme-status($theme, 'success', 'primary-hover');
+            border: 1px solid theme-status($theme, 'default', 'border-hover');
+        }
+
+        div.panel.warning {
+            background-color: theme-status($theme, 'warn', 'primary');
+            border: 1px solid theme-status($theme, 'warn', 'border');
+
+            a:hover:not(.button) {
+                background-color: theme-status($theme, 'warn', 'primary');
+            }
+
+            > .header {
+                border-bottom: 1px solid theme-status($theme, 'warn', 'border');
+            }
+
+            > .footer {
+                border-top: 1px solid theme-status($theme, 'warn', 'border');
+            }
+        }
+
+        div.panel.warning:hover {
+            background-color: theme-status($theme, 'warn', 'primary-hover');
+            border: 1px solid theme-status($theme, 'default', 'border-hover');
+        }
+
+        div.panel.error, .panel.danger {
+            background-color: theme-status($theme, 'error', 'primary');
+            border: 1px solid theme-status($theme, 'error', 'border');
+
+            a:hover:not(.button) {
+                background-color: theme-status($theme, 'error', 'primary');
+            }
+
+            > .header {
+                border-bottom: 1px solid theme-status($theme, 'error', 'border');
+            }
+
+            > .footer {
+                border-top: 1px solid theme-status($theme, 'error', 'border');
+            }
+        }
+
+        div.panel.error:hover, .panel.danger:hover {
+            background-color: theme-status($theme, 'error', 'primary-hover');
+            border: 1px solid theme-status($theme, 'default', 'border-hover');
+        }
+
+    }
+  }
+
+}
+
+//===========================//
+//===== END ----- Block =====//
+//===========================//
+
+
+//================================================================================//
+//==================================== Other =====================================//
+//================================== Includes: ===================================//
+//================================================================================//
+// transform, box-align, box-flex, box-orient, box-pack, box-shadow, box-sizing,  //
+// table-layout,                                                                  //
+//                                                                                //
+// animation, animation-delay, animation-duration, animation-iteration-count,     //
+// animation-name, animation-play-state, animation-timing-function,               //
+// animation-fill-mode,                                                           //
+//                                                                                //
+// transition, transition-delay, transition-duration, transition-property,        //
+// transition-timing-function,                                                    //
+//                                                                                //
+// background-clip, backface-visibility, resize, appearance, user-select,         //
+// interpolation-mode, direction, marks, page, set-link-source, unicode-bidi,     //
+// speak                                                                          //
+//================================================================================//
+
+//===========================//
+//==== START ----- Block ====//
+//===========================//
+
+div.panel {
+    @include transition(color 0.5s, background-color 0.5s, border 0.5s);
+
+    > div {
+        @include transition(color 0.5s, background-color 0.5s, border 0.5s);
+    }
+
+    a {
+        @include transition(color 0.5s, background-color 0.5s, border 0.5s);
+    }
+}
+
+//===========================//
+//===== END ----- Block =====//
+//===========================//

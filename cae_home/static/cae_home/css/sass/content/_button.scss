@@ -1,26 +1,11 @@
 
-//=============================//
-//==== General Content CSS ====//
-//=============================//
-
-// Essentially, any "content" that's rendered within the <main> DOM element
-// should be styled here.
-
-// Note: Content specific to sub-projects or sub-apps should probably be defined
-// within that sub-project or sub-app.
-// This file is meant for general content values that apply to the all projects,
-// such as overall table or form stylings, and similar things.
+//============================//
+//==== Button Element CSS ====//
+//============================//
 
 // Import statements
-@import '_variables';
-@import '_mixins';
-
-@import 'content/_alert';
-@import 'content/_button';
-@import 'content/_content_bar';
-@import 'content/_overlay_modal';
-@import 'content/_panel';
-@import 'content/_status_message';
+@import '../_variables';
+@import '../_mixins';
 
 
 //================================================================================//
@@ -45,89 +30,22 @@
 // overflow, overflow-x, overflow-y, clip, clear                                  //
 //================================================================================//
 
-//=====================================//
-//==== START Generic Element Block ====//
-//=====================================//
+//===========================//
+//==== START ----- Block ====//
+//===========================//
 
-#content {
-
-    padding-bottom: 10px;
-
-    ul {
-        padding-left: 20px
-    }
-
-    table {
-        margin-right: auto;
-        margin-left: auto;
-    }
-
-    td {
-        padding-top: 5px;
-        padding-right: 8px;
-        padding-bottom: 5px;
-        padding-left: 8px;
-    }
+button, a.button {
+    display: inline-block;
+    padding-top: 6px;
+    padding-right: 12px;
+    padding-bottom: 6px;
+    padding-left: 12px;
+    margin: 2px;
 }
 
-//=====================================//
-//===== END Generic Element Block =====//
-//=====================================//
-
-
-//===================================//
-//==== START Generic Class Block ====//
-//===================================//
-
-#content {
-
-    // Hide on print viewing.
-    .display-only-web {
-        @media only print {
-            display: none !important;
-        }
-    }
-
-    // Hide on web viewing.
-    .display-only-print {
-        @media only screen {
-            display: none !important;
-        }
-    }
-
-    // Attempt to center as much as possible.
-    .center {
-        @include flex-direction(center);
-        @include align-items(center);
-        text-align: center;
-    }
-
-    // Warning for javascript requirement.
-    .javascript-warn {
-        margin-right: auto;
-        margin-top: 25px;
-        margin-left: auto;
-        margin-bottom: 25px;
-    }
-}
-
-.hidden {
-    display: none !important;
-}
-
-.fade-out {
-    padding: 0 !important;
-    margin: 0 !important;
-
-    * {
-        padding: 0 !important;
-        margin: 0 !important;
-    }
-}
-
-//=====================================//
-//===== END Generic Class Block =======//
-//=====================================//
+//===========================//
+//===== END ----- Block =====//
+//===========================//
 
 
 //================================================================================//
@@ -144,23 +62,24 @@
 // word-break, word-wrap, white-space                                             //
 //================================================================================//
 
-//=====================================//
-//==== START Generic Element Block ====//
-//=====================================//
+//===========================//
+//==== START ----- Block ====//
+//===========================//
 
 #content {
 
   @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
-        color: theme-text($theme, 'content');
+        button, a.button {
+            font-size: 1rem;
+            text-decoration: none;
 
-        a {
-            color: theme-text($theme, 'link');
+            color: theme-text($theme, 'primary-accent');
         }
 
-        a:hover {
-            color: theme-text($theme, 'link-hover');
+        button:hover, a.button:hover {
+            color: theme-text($theme, 'primary');
         }
 
     }
@@ -168,33 +87,9 @@
 
 }
 
-//=====================================//
-//===== END Generic Element Block =====//
-//=====================================//
-
-
-//===================================//
-//==== START Generic Class Block ====//
-//===================================//
-
-#content {
-
-    .javascript-warn {
-        font-weight: bold;
-
-        text-align: center;
-    }
-}
-
-.fade-out {
-    * {
-        font-size: 0px;
-    }
-}
-
-//===================================//
-//===== END Generic Class Block =====//
-//===================================//
+//===========================//
+//===== END ----- Block =====//
+//===========================//
 
 
 //================================================================================//
@@ -225,64 +120,67 @@
 // zoom                                                                           //
 //================================================================================//
 
-//=====================================//
-//==== START Generic Element Block ====//
-//=====================================//
+//===========================//
+//==== START ----- Block ====//
+//===========================//
 
 #content {
 
   @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
-        table {
-            border: 1px solid theme-background($theme, 'primary');
-            border-collapse: collapse;
+        button, a.button {
+            background-color: theme-status($theme, 'default', 'primary');
+            border: 1px solid theme-status($theme, 'default', 'border');
+
+            border-radius: 5px;
         }
 
-        td {
-            border: 1px solid theme-background($theme, 'border');
+        button:hover, a.button:hover {
+            background-color: theme-status($theme, 'default', 'border');
+            border: 1px solid theme-status($theme, 'default', 'border-hover');
         }
 
-        hr {
-            border-style: solid;
-            border-color: theme-background($theme, 'border');
+        button.info, a.button.info, .info button, .info a.button {
+            background-color: theme-status($theme, 'info', 'primary');
+            border: 1px solid theme-status($theme, 'info', 'border');
         }
 
-    }
-  }
-
-}
-
-//=====================================//
-//===== END Generic Element Block =====//
-//=====================================//
-
-
-//===================================//
-//==== START Generic Class Block ====//
-//===================================//
-
-#content {
-
-  @each $theme, $theme-dict in $theme-colors {
-    .theme-#{$theme} & {
-
-        .hover-highlight:hover {
-            background-color: theme-background($theme, 'primary');
+        button.info:hover, a.button.info:hover, .info button:hover, .info a.button:hover {
+            background-color: theme-status($theme, 'info', 'border');
+            border: 1px solid theme-status($theme, 'default', 'border-hover');
         }
 
-        .javascript-warn {
+        button.success, a.button.success, .success button, .success a.button {
+            background-color: theme-status($theme, 'success', 'primary');
+            border: 1px solid theme-status($theme, 'success', 'border');
+        }
+
+        button.success:hover, a.button.success:hover, .success button:hover, .success a.button:hover {
+            background-color: theme-status($theme, 'success', 'border');
+            border: 1px solid theme-status($theme, 'default', 'border-hover');
+        }
+
+        button.warning, a.button.warning, .warning button, .warning a.button {
+            background-color: theme-status($theme, 'warn', 'primary');
+            border: 1px solid theme-status($theme, 'warn', 'border');
+        }
+
+        button.warning:hover, a.button.warning:hover, .warning button:hover, .warning a.button:hover {
+            background-color: theme-status($theme, 'warn', 'border');
+            border: 1px solid theme-status($theme, 'default', 'border-hover');
+        }
+
+        button.error, a.button.error, .error button, .error a.button,
+        button.danger, .button.danger, .danger button, .danger a.button {
             background-color: theme-status($theme, 'error', 'primary');
+            border: 1px solid theme-status($theme, 'error', 'border');
         }
 
-        .fade-in {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .fade-out {
-            opacity: 0;
-            visibility: hidden;
+        button.error:hover, a.button.error:hover, .error button:hover, .error a.button:hover,
+        button.danger:hover, a.button.danger:hover, .danger button:hover, .danger a.button:hover {
+            background-color: theme-status($theme, 'error', 'border');
+            border: 1px solid theme-status($theme, 'default', 'border-hover');
         }
 
     }
@@ -290,9 +188,9 @@
 
 }
 
-//===================================//
-//===== END Generic Class Block =====//
-//===================================//
+//===========================//
+//===== END ----- Block =====//
+//===========================//
 
 
 //================================================================================//
@@ -314,44 +212,15 @@
 // speak                                                                          //
 //================================================================================//
 
-//=====================================//
-//==== START Generic Element Block ====//
-//=====================================//
+//===========================//
+//==== START ----- Block ====//
+//===========================//
 
-#content {
-    a {
-        @include transition(color 0.5s, background-color 0.5s, border 0.5s);
-    }
+button, a.button {
+    cursor: pointer;
+    @include transition(color 0.5s, background-color 0.5s, border 0.5s);
 }
 
-//===================================//
-//==== End Generic Element Block ====//
-//===================================//
-
-
-//===================================//
-//==== START Generic Class Block ====//
-//===================================//
-
-#content {
-
-    .hover-highlight:hover {
-        cursor: pointer;
-    }
-}
-
-.fade-in {
-    @include transition(color 0.5s, background-color 0.5s, border 0.5s, opacity 1s linear, visibility 0s 1s);
-}
-
-.fade-out {
-    @include transition(padding 0.9s, margin 0.9s, font-size 0.9s, color 0.5s, background-color 0.5s, border 0.5s, opacity 0.9s linear, visibility 0s 0.9s);
-
-    * {
-        @include transition(padding 0.9s, margin 0.9s, font-size 0.9s, color 0.5s, background-color 0.5s, border 0.5s);
-    }
-}
-
-//===================================//
-//===== END Generic Class Block =====//
-//===================================//
+//===========================//
+//===== END ----- Block =====//
+//===========================//

@@ -1,26 +1,11 @@
 
-//=============================//
-//==== General Content CSS ====//
-//=============================//
-
-// Essentially, any "content" that's rendered within the <main> DOM element
-// should be styled here.
-
-// Note: Content specific to sub-projects or sub-apps should probably be defined
-// within that sub-project or sub-app.
-// This file is meant for general content values that apply to the all projects,
-// such as overall table or form stylings, and similar things.
+//=================================//
+//==== Content Bar Element CSS ====//
+//=================================//
 
 // Import statements
-@import '_variables';
-@import '_mixins';
-
-@import 'content/_alert';
-@import 'content/_button';
-@import 'content/_content_bar';
-@import 'content/_overlay_modal';
-@import 'content/_panel';
-@import 'content/_status_message';
+@import '../_variables';
+@import '../_mixins';
 
 
 //================================================================================//
@@ -45,89 +30,60 @@
 // overflow, overflow-x, overflow-y, clip, clear                                  //
 //================================================================================//
 
-//=====================================//
-//==== START Generic Element Block ====//
-//=====================================//
+//===========================//
+//==== START ----- Block ====//
+//===========================//
 
-#content {
+#content-bar-left, #content-bar-right {
+    position: absolute;
+    z-index: 5;
 
-    padding-bottom: 10px;
+    @include display-flex;
+    @include flex-direction(row);
 
-    ul {
-        padding-left: 20px
+    min-width: 100%;
+    min-height: 100%;
+
+    > .bar-nav {
+        padding-top: 15px;
     }
 
-    table {
-        margin-right: auto;
-        margin-left: auto;
+    > .bar-content {
+        min-height: 100%;
+        padding: 5px;
     }
 
-    td {
-        padding-top: 5px;
-        padding-right: 8px;
-        padding-bottom: 5px;
-        padding-left: 8px;
-    }
-}
-
-//=====================================//
-//===== END Generic Element Block =====//
-//=====================================//
-
-
-//===================================//
-//==== START Generic Class Block ====//
-//===================================//
-
-#content {
-
-    // Hide on print viewing.
-    .display-only-web {
-        @media only print {
-            display: none !important;
-        }
-    }
-
-    // Hide on web viewing.
-    .display-only-print {
-        @media only screen {
-            display: none !important;
-        }
-    }
-
-    // Attempt to center as much as possible.
-    .center {
-        @include flex-direction(center);
-        @include align-items(center);
-        text-align: center;
-    }
-
-    // Warning for javascript requirement.
-    .javascript-warn {
-        margin-right: auto;
-        margin-top: 25px;
-        margin-left: auto;
-        margin-bottom: 25px;
+    .arrow-right, .arrow-left {
+        padding-right: 2px;
+        padding-bottom: 2px;
+        padding-left: 2px;
+        margin-right: 2px;
+        margin-left: 2px;
     }
 }
 
-.hidden {
-    display: none !important;
-}
+#content-bar-left {
+    left: 0;
 
-.fade-out {
-    padding: 0 !important;
-    margin: 0 !important;
-
-    * {
-        padding: 0 !important;
-        margin: 0 !important;
+    > .bar-nav {
+        left: 0;
+        order: 1;
     }
 }
 
-//=====================================//
-//===== END Generic Class Block =======//
-//=====================================//
+#content-bar-right {
+    right: 0;
+
+    @include justify-content(flex-end);
+
+    > .bar-nav {
+        right: 0;
+    }
+}
+
+//===========================//
+//===== END ----- Block =====//
+//===========================//
 
 
 //================================================================================//
@@ -144,23 +100,26 @@
 // word-break, word-wrap, white-space                                             //
 //================================================================================//
 
-//=====================================//
-//==== START Generic Element Block ====//
-//=====================================//
+//===========================//
+//==== START ----- Block ====//
+//===========================//
 
-#content {
+#content-bar-left, #content-bar-right {
 
   @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
-        color: theme-text($theme, 'content');
-
-        a {
-            color: theme-text($theme, 'link');
+        > .bar-nav p {
+            font-size: 150%;
+            color: theme-status($theme, 'default', 'primary');
         }
 
-        a:hover {
-            color: theme-text($theme, 'link-hover');
+        > .bar-nav p:hover {
+            color: theme-text($theme, 'primary');
+        }
+
+        .arrow-right, .arrow-left {
+            font-size: 100% !important;
         }
 
     }
@@ -168,33 +127,9 @@
 
 }
 
-//=====================================//
-//===== END Generic Element Block =====//
-//=====================================//
-
-
-//===================================//
-//==== START Generic Class Block ====//
-//===================================//
-
-#content {
-
-    .javascript-warn {
-        font-weight: bold;
-
-        text-align: center;
-    }
-}
-
-.fade-out {
-    * {
-        font-size: 0px;
-    }
-}
-
-//===================================//
-//===== END Generic Class Block =====//
-//===================================//
+//===========================//
+//===== END ----- Block =====//
+//===========================//
 
 
 //================================================================================//
@@ -225,74 +160,39 @@
 // zoom                                                                           //
 //================================================================================//
 
-//=====================================//
-//==== START Generic Element Block ====//
-//=====================================//
+//===========================//
+//==== START ----- Block ====//
+//===========================//
 
-#content {
-
-  @each $theme, $theme-dict in $theme-colors {
-    .theme-#{$theme} & {
-
-        table {
-            border: 1px solid theme-background($theme, 'primary');
-            border-collapse: collapse;
-        }
-
-        td {
-            border: 1px solid theme-background($theme, 'border');
-        }
-
-        hr {
-            border-style: solid;
-            border-color: theme-background($theme, 'border');
-        }
-
-    }
-  }
-
-}
-
-//=====================================//
-//===== END Generic Element Block =====//
-//=====================================//
-
-
-//===================================//
-//==== START Generic Class Block ====//
-//===================================//
-
-#content {
+#content-bar-left, #content-bar-right {
 
   @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
-        .hover-highlight:hover {
+        > .bar-content {
+            background-color: theme-background($theme, 'primary');
+            border-right: 1px solid theme-background($theme, 'border');
+            border-left: 1px solid theme-background($theme, 'border');
+        }
+
+        .arrow-right, .arrow-left {
+            background-color: theme-status($theme, 'default', 'secondary');
+            /*background-color: $color-trans-grey-25;*/
+            border-radius: 25px;
+        }
+
+        .arrow-right:hover, .arrow-left:hover {
             background-color: theme-background($theme, 'primary');
         }
 
-        .javascript-warn {
-            background-color: theme-status($theme, 'error', 'primary');
-        }
-
-        .fade-in {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .fade-out {
-            opacity: 0;
-            visibility: hidden;
-        }
-
     }
   }
 
 }
 
-//===================================//
-//===== END Generic Class Block =====//
-//===================================//
+//===========================//
+//===== END ----- Block =====//
+//===========================//
 
 
 //================================================================================//
@@ -314,44 +214,18 @@
 // speak                                                                          //
 //================================================================================//
 
-//=====================================//
-//==== START Generic Element Block ====//
-//=====================================//
+//===========================//
+//==== START ----- Block ====//
+//===========================//
 
-#content {
-    a {
+#content-bar-left, #content-bar-right {
+
+    > .bar-nav p {
         @include transition(color 0.5s, background-color 0.5s, border 0.5s);
-    }
-}
-
-//===================================//
-//==== End Generic Element Block ====//
-//===================================//
-
-
-//===================================//
-//==== START Generic Class Block ====//
-//===================================//
-
-#content {
-
-    .hover-highlight:hover {
         cursor: pointer;
     }
 }
 
-.fade-in {
-    @include transition(color 0.5s, background-color 0.5s, border 0.5s, opacity 1s linear, visibility 0s 1s);
-}
-
-.fade-out {
-    @include transition(padding 0.9s, margin 0.9s, font-size 0.9s, color 0.5s, background-color 0.5s, border 0.5s, opacity 0.9s linear, visibility 0s 0.9s);
-
-    * {
-        @include transition(padding 0.9s, margin 0.9s, font-size 0.9s, color 0.5s, background-color 0.5s, border 0.5s);
-    }
-}
-
-//===================================//
-//===== END Generic Class Block =====//
-//===================================//
+//===========================//
+//===== END ----- Block =====//
+//===========================//
