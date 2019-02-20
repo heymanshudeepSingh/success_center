@@ -24,14 +24,23 @@
 //===============================//
 
 $color-grey-00: #000000;    // Black
+$color-grey-05: #0d0d0d;
 $color-grey-10: #191919;    //  ^
+$color-grey-15: #262626;    //  |
 $color-grey-20: #333333;    //  |
+$color-grey-25: #404040;    //  |
 $color-grey-30: #4c4c4c;    //  | Darker
+$color-grey-35: #595959;    //  |
 $color-grey-40: #666666;    //  |
+$color-grey-45: #737373;    //  |
 $color-grey-50: #7f7f7f;    //  Scaling by 10% gradients.
+$color-grey-55: #8c8c8c;    //  |
 $color-grey-60: #999999;    //  |
+$color-grey-65: #a6a6a6;    //  |
 $color-grey-70: #b2b2b2;    //  | Ligher
+$color-grey-75: #bfbfbf;    //  |
 $color-grey-80: #cccccc;    //  |
+$color-grey-85: #d9d9d9;    //  |
 $color-grey-90: #e5e5e5;    //  v
 $color-grey-95: #f2f2f2;
 $color-grey-100: #ffffff;   // White
@@ -73,271 +82,538 @@ $color-trans-white-25: rgba(255, 255, 255, 0.25);
 // At the end of the day, just be consistent and try to make it look good.
 
 // "Primary" WMU Colors.
-$wmu-gold: #ffae00;
-$wmu-brown: #442416;
+$wmu-official-gold: #ffae00;
+$wmu-official-brown: #442416;
 
 // "Secondary" WMU Colors.
-$wmu-chocolate: #7c5826;
-$wmu-khaki: #c0aa71;
-$wmu-sienna: #a9431e;
-$wmu-tangerine: #d87c21;
-$wmu-light-tan: #ede1aa;
+$wmu-official-chocolate: #7c5826;
+$wmu-official-khaki: #c0aa71;
+$wmu-official-sienna: #a9431e;
+$wmu-official-tangerine: #d87c21;
+$wmu-official-light-tan: #ede1aa;
 
 // "Accent" WMU Colors.
-$wmu-teal: #0b645d;
-$wmu-red: #b91233;
-$wmu-plum: #865f7f;
-$wmu-sky-blue: #0091c1;
-$wmu-green-apple: #7ab700;
-$wmu-black: #000000;
-$wmu-dark-grey: #816f5f;
-$wmu-warm-grey: #bdb1a7;
-$wmu-metallic-gold: #8b6f4e;
-$wmu-metallic-brown: #594839;
-$wmu-metallic-silver: #8a8d8f;
+$wmu-official-teal: #0b645d;
+$wmu-official-red: #b91233;
+$wmu-official-plum: #865f7f;
+$wmu-official-sky-blue: #0091c1;
+$wmu-official-green-apple: #7ab700;
+$wmu-official-black: #000000;
+$wmu-official-dark-grey: #816f5f;
+$wmu-official-warm-grey: #bdb1a7;
+$wmu-official-metallic-gold: #8b6f4e;
+$wmu-official-metallic-brown: #594839;
+$wmu-official-metallic-silver: #8a8d8f;
 
 //=========================================//
 //==== END "WMU Approved" Colors Block ====//
 //=========================================//
 
 
-//==================================//
-//==== START Other Colors Block ====//
-//==================================//
+//==========================================//
+//==== START "WMU Website" Colors Block ====//
+//==========================================//
+
+// Colors used in WMU's official website.
+// Annoyingly enough, these tend to be different than the above WMU colors.
+
+$wmu-web-gold: #fcc30f;
+$wmu-web-brown: #986516;
+$wmu-web-header: #331900;
+$wmu-web-alt-header: #c48b04;
+$wmu-web-alt-header-text: #fde392;
+$wmu-web-infographic-grey: #333333;
+$wmu-web-infographic-header: #cccccc;
+$wmu-web-infographic-text: #999999;
+$wmu-web-sidebar: #eedab9;
+$wmu-web-link: $wmu-web-brown;
+$wmu-web-link-hover: #fcc30f;
+$wmu-web-info: #1abee9;
+$wmu-web-info-hover: #129abd;
+$wmu-web-success: #7ea634;
+$wmu-web-success-hover: #65852a;
+$wmu-web-warn: #ef8843;
+$wmu-web-warn-hover: #e26613;
+$wmu-web-error: #c30a0a;
+$wmu-web-error-hover: #9c0808;
+
+//========================================//
+//==== END "WMU Website" Colors Block ====//
+//========================================//
 
 
+//======================================//
+//==== START Bootstrap Colors Block ====//
+//======================================//
 
-//================================//
-//==== END Other Colors Block ====//
-//================================//
+$bootstrap-header: #563d7c;
+$bootstrap-header-text: #cbbde2;
+$bootstrap-link: $color-grey-45;
+
+$bootstrap-default: #fff;
+$bootstrap-default-border: #cccccc;
+$bootstrap-default-text: #333333;
+$bootstrap-default-link: #191919;
+$bootstrap-primary: #cce5ff;
+$bootstrap-primary-border: #b8daff;
+$bootstrap-primary-text: #004085;
+$bootstrap-primary-link: #002752;
+$bootstrap-info: #d1ecf1;
+$bootstrap-info-border: #bee5eb;
+$bootstrap-info-text: #0c5460;
+$bootstrap-info-link: #245269;
+$bootstrap-success: #d4edda;
+$bootstrap-success-border: #c3e6cb;
+$bootstrap-success-text: #155724;
+$bootstrap-success-link: #2b542c;
+$bootstrap-warn: #fff3cd;
+$bootstrap-warn-border: #ffeeba;
+$bootstrap-warn-text: #856404;
+$bootstrap-warn-link: #66512c;
+$bootstrap-error: #f8d7da;
+$bootstrap-error-border: #f5c6cb;
+$bootstrap-error-text: #721c24;
+$bootstrap-error-link: #843534;
+
+$bootstrap-button-primary: #007bff;
+$bootstrap-button-primary-hover: #0069b9;
+$bootstrap-button-primary-border: #2e6da4;
+$bootstrap-button-info: #5bc0de;
+$bootstrap-button-info-hover: #31b0d5;
+$bootstrap-button-info-border: #46b8da;
+$bootstrap-button-success: #5cb85c;
+$bootstrap-button-success-hover: #449d44;
+$bootstrap-button-success-border: #4cae4c;
+$bootstrap-button-warn: #f0ad4e;
+$bootstrap-button-warn-hover: #ec971f;
+$bootstrap-button-warn-border: #eea236;
+$bootstrap-button-error: #d9534f;
+$bootstrap-button-error-hover: #c9302c;
+$bootstrap-button-error-border: #d43f3a;
+
+//====================================//
+//==== END Bootstrap Colors Block ====//
+//====================================//
+
 
 //================================================================================//
 //==================================== Themes ====================================//
 //================================================================================//
 
-// Theme is the actual pallet used on the site.
-//
-// Ideally, add variables here (prefixed with "theme") and then reference
-// said variable later on. Allows for changing of the entire site coloring with
-// a single line or two, instead of having to dig through all of the css files.
+// Various themes used by the site.
+// Established within the "$theme-colors" nested dictionaries.
+// Accessed by theme functions.
 
 //================================//
 //==== START Theme Dict Block ====//
 //================================//
 
 $theme-colors: (
+
+    //===================//
+    //==== WMU Theme ====//
+    //===================//
+
     'wmu': (
         'background': (
-            'primary': #fcc30f,
-            'highlight': #986516,
-            'border': #c67f00,
-            'content': $color-grey-100,
+            'primary': $wmu-web-alt-header,
+            'highlight': $wmu-web-link-hover,
+            'border': $wmu-web-brown,
+            'content': $color-white,
         ),
         'text': (
-            'primary': $color-grey-00,
+            'primary': $wmu-web-alt-header-text,
+            /*'primary': $color-white,*/
             'primary-accent': $color-trans-black-75,
             'primary-subtle': $color-trans-black-50,
             'primary-hint': $color-trans-black-25,
-            'secondary': #986516,
-            'secondary-accent': $color-trans-black-75,
-            'secondary-subtle': $color-trans-black-50,
-            'secondary-hint': $color-trans-black-25,
-            'secondary-hover': $color-grey-100,
-            'link': #986516,
+            'primary-hover': $color-white,
+            'secondary': $wmu-web-alt-header-text,
+            'secondary-accent': $color-trans-white-75,
+            'secondary-subtle': $color-trans-white-50,
+            'secondary-hint': $color-trans-white-25,
+            'secondary-hover': $color-white,
+            'content': $color-black,
+            'link': $wmu-web-link,
+            'link-hover': $color-white,
         ),
         'status': (
             'default': (
-                'primary': #fcc30f,
-                'highlight': #fff553,
-                'darken': #c49300,
-                'text': #8f6600,
+                'primary': $wmu-web-alt-header,
+                'primary-hover': $wmu-web-link-hover,
+                'secondary': $color-grey-100,
+                'secondary-hover': $color-grey-100,
+                'border': #7b5f1e,
+                'border-hover': $color-trans-grey-75,
+                'link': $wmu-web-alt-header-text,
+                'link-hover': $color-white,
             ),
-            'info': (
-                'primary': $wmu-sky-blue,
-                'highlight': #5ac1f4,
-                'darken': #006390,
-                'text': #003962,
+            /*'info': (
+                'primary': $wmu-web-info,
+                'primary-hover': $wmu-web-info-hover,
+                'border': $wmu-web-info-hover,
+                'link': #003962,
+                'link-hover': #003962,
             ),
             'success': (
-                'primary': $wmu-green-apple,
-                'highlight': #aeea48,
-                'darken': #478700,
-                'text': #105900,
+                'primary': $wmu-web-success,
+                'primary-hover': $wmu-web-success-hover,
+                'border': $wmu-web-success-hover,
+                'link': #105900,
+                'link-hover': #105900,
+            ),
+            'warn': (
+                'primary': $wmu-web-warn,
+                'primary-hover': $wmu-web-warn-hover,
+                'border': $wmu-web-warn-hover,
+                'link': #7b2400,
+                'link-hover': #7b2400,
+            ),
+            'error': (
+                'primary': $wmu-web-error,
+                'primary-hover': $wmu-web-error-hover,
+                'border': $wmu-web-error-hover,
+                'link': #4f0000,
+                'link-hover': #4f0000,
+            ),*/
+
+            'info': (
+                'primary': $wmu-official-sky-blue,
+                'primary-hover': #5ac1f4,
+                'border': #0073a8,
+                'link': #003962,
+                'link-hover': #003962,
+            ),
+            'success': (
+                'primary': $wmu-official-green-apple,
+                'primary-hover': #aeea48,
+                'border': #478700,
+                'link': #105900,
+                'link-hover': #105900,
             ),
             'warn': (
                 'primary': #e87f17,
-                'highlight': #ffaf4c,
-                'darken': #b05100,
-                'text': #7b2400,
+                'primary-hover': #ffaf4c,
+                'border': #b05100,
+                'link': #7b2400,
+                'link-hover': #7b2400,
             ),
             'error': (
-                'primary': $wmu-red,
-                'highlight': #f2515c,
-                'darken': #81000e,
-                'text': #4f0000,
+                'primary': $wmu-official-red,
+                'primary-hover': #f2515c,
+                'border': #81000e,
+                'link': #4f0000,
+                'link-hover': #4f0000,
             ),
         ),
     ),
 
+
+    //===================//
+    //==== CAE Theme ====//
+    //===================//
+
     'cae': (
         'background': (
-            'primary': $color-grey-90,
-            'highlight': $color-grey-95,
-            'border': $color-grey-80,
-            'content': $color-grey-100,
+            'primary': #663300,
+            'highlight': #994c00,
+            'border': #9b5b27,
+            'content': #331900,
         ),
         'text': (
-            'primary': $color-grey-00,
-            'primary-accent': $color-trans-black-75,
-            'primary-subtle': $color-trans-black-50,
-            'primary-hint': $color-trans-black-25,
-            'secondary': $color-grey-00,
-            'secondary-accent': $color-trans-black-75,
-            'secondary-subtle': $color-trans-black-50,
-            'secondary-hint': $color-trans-black-25,
-            'secondary-hover': $color-grey-00,
-            'link': #0000ee,
+            'primary': $color-white,
+            'primary-accent': $color-trans-white-75,
+            'primary-subtle': $color-trans-white-50,
+            'primary-hint': $color-trans-white-25,
+            'primary-hover': $color-white,
+            'secondary': $color-white,
+            'secondary-accent': $color-trans-white-75,
+            'secondary-subtle': $color-trans-white-50,
+            'secondary-hint': $color-trans-white-25,
+            'secondary-hover': $color-white,
+            'content': $color-white,
+            'link': #986516,
+            'link-hover': #d68d1f,
         ),
         'status': (
             'default': (
-                'primary': $color-grey-90,
-                'highlight': $color-grey-95,
-                'darken': $color-grey-80,
-                'text': $color-grey,
+                'primary': #663300,
+                'primary-hover': #994c00,
+                'secondary': #4d2500,
+                'secondary-hover': #663100,
+                'border': #9b5b27,
+                'border-hover': $color-trans-white-50,
+                'link': #ffc354,
+                'link-hover': #f9e9d2,
             ),
             'info': (
-                'primary': #ddddf4,
-                'highlight': #e9e9fc,
-                'darken': #c1c1f0,
-                'text': #5c5cd6,
+                'primary': #19194d,
+                'primary-hover': #464079,
+                'border': #464079,
+                'link': #9289ff,
+                'link-hover': #5c5cd6,
             ),
             'success': (
-                'primary': #d1f0d1,
-                'highlight': #e9fce9,
-                'darken': #adebad,
-                'text': #18b418,
+                'primary': #145214,
+                'primary-hover': #457f3e,
+                'border': #457f3e,
+                'link': #61e750,
+                'link-hover': #18b418,
             ),
             'warn': (
-                'primary': #faf2d1,
-                'highlight': #fcf5e9,
-                'darken': #eee2aa,
-                'text': #df9f20,
+                'primary': #a14412,
+                'primary-hover': #be5a27,
+                'border': #be5a27,
+                'link': #ffd055,
+                'link-hover': #df9f20,
             ),
             'error': (
-                'primary': #f5dbd6,
-                'highlight': #fce9e9,
-                'darken': #f0c9c2,
-                'text': #ec8379,
+                'primary': #821717,
+                'primary-hover': #b7493e,
+                'border': #a32929,
+                'link': #ffb4a8,
+                'link-hover': #ec8379,
             ),
         ),
     ),
+
+
+    //=========================//
+    //==== Bootstrap Theme ====//
+    //=========================//
+
+    'bootstrap': (
+        'background': (
+            'primary': $bootstrap-header,
+            'highlight': $bootstrap-header-text,
+            'border': $color-grey-60,
+            'content': $color-white,
+        ),
+        'text': (
+            'primary': $color-black,
+            'primary-accent': $color-trans-black-75,
+            'primary-subtle': $color-trans-black-50,
+            'primary-hint': $color-trans-black-25,
+            'primary-hover': $color-black,
+            'secondary': $bootstrap-header-text,
+            'secondary-accent': $color-trans-white-75,
+            'secondary-subtle': $color-trans-white-50,
+            'secondary-hint': $color-trans-white-25,
+            'secondary-hover': $color-grey-100,
+            'content': $color-black,
+            'link': $bootstrap-link,
+            'link-hover': $color-grey-10,
+        ),
+        'status': (
+            'default': (
+                'primary': $color-grey-85,
+                'primary-hover': $color-grey-80,
+                'secondary': $bootstrap-default,
+                'secondary-hover': $bootstrap-default,
+                'border': $color-grey-75,
+                'border-hover': $color-trans-grey-75,
+                'link': $bootstrap-link,
+                'link-hover': $color-grey-10,
+            ),
+
+            'info': (
+                'primary': $bootstrap-button-info,
+                'primary-hover': $bootstrap-button-info-hover,
+                'border': $bootstrap-button-info-border,
+                'link': $bootstrap-info-text,
+                'link-hover': $bootstrap-info-link,
+            ),
+            'success': (
+                'primary': $bootstrap-button-success,
+                'primary-hover': $bootstrap-button-success-hover,
+                'border': $bootstrap-button-success-border,
+                'link': $bootstrap-success-text,
+                'link-hover': $bootstrap-success-link,
+            ),
+            'warn': (
+                'primary': $bootstrap-button-warn,
+                'primary-hover': $bootstrap-button-warn-hover,
+                'border': $bootstrap-button-warn-border,
+                'link': $bootstrap-warn-text,
+                'link-hover': $bootstrap-warn-link,
+            ),
+            'error': (
+                'primary': $bootstrap-button-error,
+                'primary-hover': $bootstrap-button-error-hover,
+                'border': $bootstrap-button-error-border,
+                'link': $bootstrap-error-text,
+                'link-hover': $bootstrap-error-link,
+            ),
+
+
+            /*'info': (
+                'primary': $bootstrap-info,
+                'primary-hover': #e0f2f5,
+                'border': $bootstrap-info-border,
+                'link': $bootstrap-info-text,
+                'link-hover': $bootstrap-info-link,
+            ),
+            'success': (
+                'primary': $bootstrap-success,
+                'primary-hover': #e2f3e6,
+                'border': $bootstrap-success-border,
+                'link': $bootstrap-success-text,
+                'link-hover': $bootstrap-success-link,
+            ),
+            'warn': (
+                'primary': $bootstrap-warn,
+                'primary-hover': #fff8e0,
+                'border': $bootstrap-warn-border,
+                'link': $bootstrap-warn-text,
+                'link-hover': $bootstrap-warn-link,
+            ),
+            'error': (
+                'primary': $bootstrap-error,
+                'primary-hover': #fae5e7,
+                'border': $bootstrap-error-border,
+                'link': $bootstrap-error-text,
+                'link-hover': $bootstrap-error-link,
+            ),*/
+        ),
+    ),
+
+
+    //=====================//
+    //==== Light Theme ====//
+    //=====================//
 
     'light': (
         'background': (
             'primary': $color-grey-90,
             'highlight': $color-grey-95,
-            'border': $color-grey-80,
-            'content': $color-grey-100,
+            'border': $color-grey-70,
+            'content': $color-white,
         ),
         'text': (
-            'primary': $color-grey-00,
+            'primary': $color-black,
             'primary-accent': $color-trans-black-75,
             'primary-subtle': $color-trans-black-50,
             'primary-hint': $color-trans-black-25,
-            'secondary': $color-grey-00,
+            'primary-hover': $color-black,
+            'secondary': $color-grey-40,
             'secondary-accent': $color-trans-black-75,
             'secondary-subtle': $color-trans-black-50,
             'secondary-hint': $color-trans-black-25,
-            'secondary-hover': $color-grey-00,
+            'secondary-hover': $color-black,
+            'content': $color-black,
             'link': #0000ee,
+            'link-hover': #0000ee,
         ),
         'status': (
             'default': (
                 'primary': $color-grey-90,
-                'highlight': $color-grey-95,
-                'darken': $color-grey-80,
-                'text': $color-grey,
+                'primary-hover': $color-grey-95,
+                'secondary': $color-grey-95,
+                'secondary-hover': $color-white,
+                'border': $color-grey-80,
+                'border-hover': $color-trans-grey-75,
+                'link': $color-grey-50,
+                'link-hover': $color-black,
             ),
             'info': (
-                'primary': #ddddf4,
-                'highlight': #e9e9fc,
-                'darken': #c1c1f0,
-                'text': #5c5cd6,
+                'primary': #d1d5eb,
+                'primary-hover': #edeff7,
+                'border': #9cacd3,
+                'link': #4040bf,
+                'link-hover': #4040bf,
             ),
             'success': (
-                'primary': #d1f0d1,
-                'highlight': #e9fce9,
-                'darken': #adebad,
-                'text': #18b418,
+                'primary': #c6ecd0,
+                'primary-hover': #ecf9ef,
+                'border': #66cc81,
+                'link': #339933,
+                'link-hover': #339933,
             ),
             'warn': (
-                'primary': #faf2d1,
-                'highlight': #fcf5e9,
-                'darken': #eee2aa,
-                'text': #df9f20,
+                'primary': #fff4cc,
+                'primary-hover': #fff9e5,
+                'border': #e1c251,
+                'link': #b88a2e,
+                'link-hover': #b88a2e,
             ),
             'error': (
-                'primary': #f5dbd6,
-                'highlight': #fce9e9,
-                'darken': #f0c9c2,
-                'text': #ec8379,
+                'primary': #f4cbbe,
+                'primary-hover': #fbede9,
+                'border': #e19b84,
+                'link': #d15347,
+                'link-hover': #d15347,
             ),
         ),
     ),
+
+
+    //====================//
+    //==== Dark Theme ====//
+    //====================//
 
     'dark': (
         'background': (
-            'primary': $color-grey-90,
-            'highlight': $color-grey-95,
-            'border': $color-grey-80,
-            'content': $color-grey-100,
+            'primary': $color-grey-20,
+            'highlight': $color-grey-30,
+            'border': $color-grey-30,
+            'content': $color-grey-15,
         ),
         'text': (
-            'primary': $color-grey-00,
-            'primary-accent': $color-trans-black-75,
-            'primary-subtle': $color-trans-black-50,
-            'primary-hint': $color-trans-black-25,
-            'secondary': $color-grey-00,
-            'secondary-accent': $color-trans-black-75,
-            'secondary-subtle': $color-trans-black-50,
-            'secondary-hint': $color-trans-black-25,
-            'secondary-hover': $color-grey-00,
-            'link': #0000ee,
+            'primary': $color-white,
+            'primary-accent': $color-trans-white-75,
+            'primary-subtle': $color-trans-white-50,
+            'primary-hint': $color-trans-white-25,
+            'primary-hover': $color-white,
+            'secondary': $color-white,
+            'secondary-accent': $color-trans-white-75,
+            'secondary-subtle': $color-trans-white-50,
+            'secondary-hint': $color-trans-white-25,
+            'secondary-hover': $color-grey-100,
+            'content': $color-white,
+            'link': #6767e4,
+            'link-hover': #a8a8f0,
         ),
         'status': (
             'default': (
-                'primary': $color-grey-90,
-                'highlight': $color-grey-95,
-                'darken': $color-grey-80,
-                'text': $color-grey,
+                'primary': $color-grey-20,
+                'primary-hover': $color-grey-30,
+                'secondary': $color-grey-15,
+                'secondary-hover': $color-grey-20,
+                'border': $color-grey-25,
+                'border-hover': $color-trans-grey-75,
+                'link': $color-trans-white-50,
+                'link-hover': $color-trans-white-75,
             ),
             'info': (
-                'primary': #ddddf4,
-                'highlight': #e9e9fc,
-                'darken': #c1c1f0,
-                'text': #5c5cd6,
+                'primary': #242442,
+                'primary-hover': #3b3b59,
+                'border': #353564,
+                'link': #7575f0,
+                'link-hover': #7575f0,
             ),
             'success': (
-                'primary': #d1f0d1,
-                'highlight': #e9fce9,
-                'darken': #adebad,
-                'text': #18b418,
+                'primary': #293d29,
+                'primary-hover': #365936,
+                'border': #2d532d,
+                'link': #18b418,
+                'link-hover': #18b418,
             ),
             'warn': (
-                'primary': #faf2d1,
-                'highlight': #fcf5e9,
-                'darken': #eee2aa,
-                'text': #df9f20,
+                'primary': #4d2b19,
+                'primary-hover': #734026,
+                'border': #6a4015,
+                'link': #df9f20,
+                'link-hover': #df9f20,
             ),
             'error': (
-                'primary': #f5dbd6,
-                'highlight': #fce9e9,
-                'darken': #f0c9c2,
-                'text': #ec8379,
+                'primary': #471f1f,
+                'primary-hover': #6b2e2e,
+                'border': #602120,
+                'link': #ec8379,
+                'link-hover': #ec8379,
             ),
         ),
     ),
-
 );
 
 //==============================//
@@ -364,6 +640,7 @@ $theme-colors: (
 //===================================//
 //==== End Theme Functions Block ====//
 //===================================//
+
 
 
 //================================================================================//

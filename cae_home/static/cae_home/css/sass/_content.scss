@@ -194,10 +194,10 @@ div.panel {
     }
 
     p > a:not(.button) {
-        padding-top: 0;
-        padding-right: 0;
-        padding-bottom: 0;
-        padding-left: 0;
+        padding-top: 1px;
+        padding-right: 7px;
+        padding-bottom: 1px;
+        padding-left: 7px;
     }
 
     > .header {
@@ -375,8 +375,14 @@ div.panel {
   @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
+        color: theme-text($theme, 'content');
+
         a {
             color: theme-text($theme, 'link');
+        }
+
+        a:hover {
+            color: theme-text($theme, 'link-hover');
         }
 
     }
@@ -423,9 +429,10 @@ div.panel {
     .theme-#{$theme} & {
 
         button, a.button {
-            color: theme-text($theme, 'primary-accent');
             font-size: 1rem;
             text-decoration: none;
+
+            color: theme-text($theme, 'primary-accent');
         }
 
         button:hover, a.button:hover {
@@ -456,36 +463,32 @@ div.panel {
 
             a {
                 font-weight: bold;
-                color: theme-status($theme, 'default', 'text');
+                color: theme-status($theme, 'default', 'link');
                 text-decoration: none;
             }
         }
 
-        .alert:hover {
-            color: theme-status($theme, 'default', 'text');
-        }
-
         .alert.info {
             a {
-                color: theme-status($theme, 'info', 'text');
+                color: theme-status($theme, 'info', 'link');
             }
         }
 
         .alert.success {
             a {
-                color: theme-status($theme, 'success', 'text');
+                color: theme-status($theme, 'success', 'link');
             }
         }
 
         .alert.warning {
             a {
-                color: theme-status($theme, 'warn', 'text');
+                color: theme-status($theme, 'warn', 'link');
             }
         }
 
         .alert.error, .alert.danger {
             a {
-                color: theme-status($theme, 'error', 'text');
+                color: theme-status($theme, 'error', 'link');
             }
         }
 
@@ -515,37 +518,80 @@ div.panel {
 
             a:not(.button) {
                 font-weight: bold;
-                color: theme-status($theme, 'default', 'text');
+                color: theme-status($theme, 'default', 'link');
                 text-decoration: none;
+            }
+
+            a:not(.button):hover {
+                color: theme-status($theme, 'default', 'link-hover');
             }
 
             > .header {
                 font-size: 110%;
                 font-weight: bold;
+
+                color: theme-text($theme, 'primary');
+            }
+
+            > .content {
+                a:not(.button) {
+                    color: theme-text($theme, 'link');
+                }
+
+                a:not(.button):hover {
+                    color: theme-text($theme, 'link-hover');
+                }
+            }
+
+            > .footer {
+                color: theme-text($theme, 'primary');
+            }
+        }
+
+        div.panel:hover {
+
+            > .header {
+                color: theme-text($theme, 'primary-hover');
+            }
+
+            > .footer {
+                color: theme-text($theme, 'primary-hover');
             }
         }
 
         div.panel.info {
             a:not(.button) {
-                color: theme-status($theme, 'info', 'text');
+                color: theme-status($theme, 'info', 'link');
+            }
+
+            a:not(.button):hover {
+                color: theme-status($theme, 'info', 'link-hover');
             }
         }
 
         div.panel.success {
             a:not(.button) {
-                color: theme-status($theme, 'success', 'text');
+                color: theme-status($theme, 'success', 'link');
             }
         }
 
         div.panel.warning {
             a:not(.button) {
-                color: theme-status($theme, 'warn', 'text');
+                color: theme-status($theme, 'warn', 'link');
+            }
+
+            a:not(.button):hover {
+                color: theme-status($theme, 'warn', 'link-hover');
             }
         }
 
         div.panel.error, div.panel.danger {
             a:not(.button) {
-                color: theme-status($theme, 'error', 'text');
+                color: theme-status($theme, 'error', 'link');
+            }
+
+            a:not(.button):hover {
+                color: theme-status($theme, 'error', 'link-hover');
             }
         }
 
@@ -573,13 +619,13 @@ div.panel {
             .message {
                 a {
                     font-weight: bold;
-                    color: theme-status($theme, 'default', 'text');
+                    color: theme-status($theme, 'default', 'link');
                     text-decoration: none;
                 }
 
                 .exit {
                     font-weight: bold;
-                    color: theme-status($theme, 'default', 'text');
+                    color: theme-status($theme, 'default', 'link');
                 }
 
                 .exit:hover {
@@ -590,41 +636,41 @@ div.panel {
 
             .message.info {
                 a {
-                    color: theme-status($theme, 'info', 'text');
+                    color: theme-status($theme, 'info', 'link');
                 }
 
                 .exit {
-                    color: theme-status($theme, 'info', 'text');
+                    color: theme-status($theme, 'info', 'link');
                 }
             }
 
             .message.success {
                 a {
-                    color: theme-status($theme, 'success', 'text');
+                    color: theme-status($theme, 'success', 'link');
                 }
 
                 .exit {
-                    color: theme-status($theme, 'success', 'text');
+                    color: theme-status($theme, 'success', 'link');
                 }
             }
 
             .message.warning {
                 a {
-                    color: theme-status($theme, 'warn', 'text');
+                    color: theme-status($theme, 'warn', 'link');
                 }
 
                 .exit {
-                    color: theme-status($theme, 'warn', 'text');
+                    color: theme-status($theme, 'warn', 'link');
                 }
             }
 
             .message.error, .message.danger {
                 a {
-                    color: theme-status($theme, 'error', 'text');
+                    color: theme-status($theme, 'error', 'link');
                 }
 
                 .exit {
-                    color: theme-status($theme, 'error', 'text');
+                    color: theme-status($theme, 'error', 'link');
                 }
             }
         }
@@ -776,51 +822,56 @@ div.panel {
 
         button, a.button {
             background-color: theme-status($theme, 'default', 'primary');
-            border: 1px solid theme-status($theme, 'default', 'darken');
+            border: 1px solid theme-status($theme, 'default', 'border');
 
             border-radius: 5px;
         }
 
         button:hover, a.button:hover {
-            background-color: theme-status($theme, 'default', 'darken');
+            background-color: theme-status($theme, 'default', 'border');
+            border: 1px solid theme-status($theme, 'default', 'border-hover');
         }
 
         button.info, a.button.info, .info button, .info a.button {
             background-color: theme-status($theme, 'info', 'primary');
-            border: 1px solid theme-status($theme, 'info', 'darken');
+            border: 1px solid theme-status($theme, 'info', 'border');
         }
 
         button.info:hover, a.button.info:hover, .info button:hover, .info a.button:hover {
-            background-color: theme-status($theme, 'info', 'darken');
+            background-color: theme-status($theme, 'info', 'border');
+            border: 1px solid theme-status($theme, 'default', 'border-hover');
         }
 
         button.success, a.button.success, .success button, .success a.button {
             background-color: theme-status($theme, 'success', 'primary');
-            border: 1px solid theme-status($theme, 'success', 'darken');
+            border: 1px solid theme-status($theme, 'success', 'border');
         }
 
         button.success:hover, a.button.success:hover, .success button:hover, .success a.button:hover {
-            background-color: theme-status($theme, 'success', 'darken');
+            background-color: theme-status($theme, 'success', 'border');
+            border: 1px solid theme-status($theme, 'default', 'border-hover');
         }
 
         button.warning, a.button.warning, .warning button, .warning a.button {
             background-color: theme-status($theme, 'warn', 'primary');
-            border: 1px solid theme-status($theme, 'warn', 'darken');
+            border: 1px solid theme-status($theme, 'warn', 'border');
         }
 
         button.warning:hover, a.button.warning:hover, .warning button:hover, .warning a.button:hover {
-            background-color: theme-status($theme, 'warn', 'darken');
+            background-color: theme-status($theme, 'warn', 'border');
+            border: 1px solid theme-status($theme, 'default', 'border-hover');
         }
 
         button.error, a.button.error, .error button, .error a.button,
         button.danger, .button.danger, .danger button, .danger a.button {
             background-color: theme-status($theme, 'error', 'primary');
-            border: 1px solid theme-status($theme, 'error', 'darken');
+            border: 1px solid theme-status($theme, 'error', 'border');
         }
 
         button.error:hover, a.button.error:hover, .error button:hover, .error a.button:hover,
-        button.danger:hover, .button.danger:hover, .danger button:hover, .danger a.button:hover {
-            background-color: theme-status($theme, 'error', 'darken');
+        button.danger:hover, a.button.danger:hover, .danger button:hover, .danger a.button:hover {
+            background-color: theme-status($theme, 'error', 'border');
+            border: 1px solid theme-status($theme, 'default', 'border-hover');
         }
 
     }
@@ -844,7 +895,7 @@ div.panel {
 
         .alert {
             background-color: theme-status($theme, 'default', 'primary');
-            border: 1px solid theme-status($theme, 'default', 'darken');
+            border: 1px solid theme-status($theme, 'default', 'border');
 
             a:not(.button) {
                 border-radius: 5em
@@ -856,7 +907,8 @@ div.panel {
         }
 
         .alert:hover {
-            background-color: theme-status($theme, 'default', 'highlight');
+            background-color: theme-status($theme, 'default', 'primary-hover');
+            border: 1px solid theme-status($theme, 'default', 'border-hover');
 
             a:hover:not(.button) {
                 background-color: theme-status($theme, 'default', 'primary');
@@ -865,7 +917,7 @@ div.panel {
 
         .alert.info {
             background-color: theme-status($theme, 'info', 'primary');
-            border: 1px solid theme-status($theme, 'info', 'darken');
+            border: 1px solid theme-status($theme, 'info', 'border');
 
             a:hover:not(.button) {
                 background-color: theme-status($theme, 'info', 'primary');
@@ -873,12 +925,13 @@ div.panel {
         }
 
         .alert.info:hover {
-            background-color: theme-status($theme, 'info', 'highlight');
+            background-color: theme-status($theme, 'info', 'primary-hover');
+            border: 1px solid theme-status($theme, 'default', 'border-hover');
         }
 
         .alert.success {
             background-color: theme-status($theme, 'success', 'primary');
-            border: 1px solid theme-status($theme, 'success', 'darken');
+            border: 1px solid theme-status($theme, 'success', 'border');
 
             a:hover:not(.button) {
                 background-color: theme-status($theme, 'success', 'primary');
@@ -886,12 +939,13 @@ div.panel {
         }
 
         .alert.success:hover {
-            background-color: theme-status($theme, 'success', 'highlight');
+            background-color: theme-status($theme, 'success', 'primary-hover');
+            border: 1px solid theme-status($theme, 'default', 'border-hover');
         }
 
         .alert.warning {
             background-color: theme-status($theme, 'warn', 'primary');
-            border: 1px solid theme-status($theme, 'warn', 'darken');
+            border: 1px solid theme-status($theme, 'warn', 'border');
 
             a:hover:not(.button) {
                 background-color: theme-status($theme, 'warn', 'primary');
@@ -899,12 +953,13 @@ div.panel {
         }
 
         .alert.warning:hover {
-            background-color: theme-status($theme, 'warn', 'highlight');
+            background-color: theme-status($theme, 'warn', 'primary-hover');
+            border: 1px solid theme-status($theme, 'default', 'border-hover');
         }
 
         .alert.error, .alert.danger {
             background-color: theme-status($theme, 'error', 'primary');
-            border: 1px solid theme-status($theme, 'error', 'darken');
+            border: 1px solid theme-status($theme, 'error', 'border');
 
             a:hover:not(.button) {
                 background-color: theme-status($theme, 'error', 'primary');
@@ -912,7 +967,8 @@ div.panel {
         }
 
         .alert.error:hover, .alert.danger:hover {
-            background-color: theme-status($theme, 'error', 'highlight');
+            background-color: theme-status($theme, 'error', 'primary-hover');
+            border: 1px solid theme-status($theme, 'default', 'border-hover');
         }
 
     }
@@ -936,115 +992,128 @@ div.panel {
 
         div.panel {
             background-color: theme-status($theme, 'default', 'primary');
-            border: 1px solid theme-status($theme, 'default', 'darken');
+            border: 1px solid theme-status($theme, 'default', 'border');
 
             a:not(.button) {
-                border-radius: 5em
+                border-radius: 5em;
             }
 
             a:hover:not(.button) {
-                background-color: theme-status($theme, 'default', 'primary');
+                background-color: theme-status($theme, 'default', 'border');
             }
 
             > .header {
-                border-bottom: 1px solid theme-status($theme, 'default', 'darken');
+                border-bottom: 1px solid theme-status($theme, 'default', 'border');
             }
 
             > .content {
-                background-color: theme-background($theme, 'content');
+                background-color: theme-status($theme, 'default', 'secondary');
+
+                a:hover:not(.button) {
+                    background-color: theme-status($theme, 'default', 'primary-hover');
+                }
             }
 
             > .footer {
-                border-top: 1px solid theme-status($theme, 'default', 'darken');
+                border-top: 1px solid theme-status($theme, 'default', 'border');
             }
         }
 
         div.panel:hover {
-            background-color: theme-status($theme, 'default', 'highlight');
+            background-color: theme-status($theme, 'default', 'primary-hover');
+            border: 1px solid theme-status($theme, 'default', 'border-hover');
+
+            > .content {
+                background-color: theme-status($theme, 'default', 'secondary-hover');
+            }
         }
 
         div.panel.info {
             background-color: theme-status($theme, 'info', 'primary');
-            border: 1px solid theme-status($theme, 'info', 'darken');
+            border: 1px solid theme-status($theme, 'info', 'border');
 
             a:hover:not(.button) {
                 background-color: theme-status($theme, 'info', 'primary');
             }
 
             > .header {
-                border-bottom: 1px solid theme-status($theme, 'info', 'darken');
+                border-bottom: 1px solid theme-status($theme, 'info', 'border');
             }
 
             > .footer {
-                border-top: 1px solid theme-status($theme, 'info', 'darken');
+                border-top: 1px solid theme-status($theme, 'info', 'border');
             }
         }
 
         div.panel.info:hover {
-            background-color: theme-status($theme, 'info', 'highlight');
+            background-color: theme-status($theme, 'info', 'primary-hover');
+            border: 1px solid theme-status($theme, 'default', 'border-hover');
         }
 
         div.panel.success {
             background-color: theme-status($theme, 'success', 'primary');
-            border: 1px solid theme-status($theme, 'success', 'darken');
+            border: 1px solid theme-status($theme, 'success', 'border');
 
             a:hover:not(.button) {
                 background-color: theme-status($theme, 'success', 'primary');
             }
 
             > .header {
-                border-bottom: 1px solid theme-status($theme, 'success', 'darken');
+                border-bottom: 1px solid theme-status($theme, 'success', 'border');
             }
 
             > .footer {
-                border-top: 1px solid theme-status($theme, 'success', 'darken');
+                border-top: 1px solid theme-status($theme, 'success', 'border');
             }
         }
 
         div.panel.success:hover {
-            background-color: theme-status($theme, 'success', 'highlight');
+            background-color: theme-status($theme, 'success', 'primary-hover');
+            border: 1px solid theme-status($theme, 'default', 'border-hover');
         }
 
         div.panel.warning {
             background-color: theme-status($theme, 'warn', 'primary');
-            border: 1px solid theme-status($theme, 'warn', 'darken');
+            border: 1px solid theme-status($theme, 'warn', 'border');
 
             a:hover:not(.button) {
                 background-color: theme-status($theme, 'warn', 'primary');
             }
 
             > .header {
-                border-bottom: 1px solid theme-status($theme, 'warn', 'darken');
+                border-bottom: 1px solid theme-status($theme, 'warn', 'border');
             }
 
             > .footer {
-                border-top: 1px solid theme-status($theme, 'warn', 'darken');
+                border-top: 1px solid theme-status($theme, 'warn', 'border');
             }
         }
 
         div.panel.warning:hover {
-            background-color: theme-status($theme, 'warn', 'highlight');
+            background-color: theme-status($theme, 'warn', 'primary-hover');
+            border: 1px solid theme-status($theme, 'default', 'border-hover');
         }
 
         div.panel.error, .panel.danger {
             background-color: theme-status($theme, 'error', 'primary');
-            border: 1px solid theme-status($theme, 'error', 'darken');
+            border: 1px solid theme-status($theme, 'error', 'border');
 
             a:hover:not(.button) {
                 background-color: theme-status($theme, 'error', 'primary');
             }
 
             > .header {
-                border-bottom: 1px solid theme-status($theme, 'error', 'darken');
+                border-bottom: 1px solid theme-status($theme, 'error', 'border');
             }
 
             > .footer {
-                border-top: 1px solid theme-status($theme, 'error', 'darken');
+                border-top: 1px solid theme-status($theme, 'error', 'border');
             }
         }
 
         div.panel.error:hover, .panel.danger:hover {
-            background-color: theme-status($theme, 'error', 'highlight');
+            background-color: theme-status($theme, 'error', 'primary-hover');
+            border: 1px solid theme-status($theme, 'default', 'border-hover');
         }
 
     }
@@ -1078,7 +1147,7 @@ div.panel {
 
             .message {
                 background-color: theme-status($theme, 'default', 'primary');
-                border: 1px solid theme-status($theme, 'default', 'darken');
+                border: 1px solid theme-status($theme, 'default', 'border');
 
                 a:hover, .exit:hover {
                     background-color: theme-status($theme, 'default', 'primary');
@@ -1091,12 +1160,13 @@ div.panel {
             }
 
             .message:hover {
-                background-color: theme-status($theme, 'default', 'highlight');
+                background-color: theme-status($theme, 'default', 'primary-hover');
+                border: 1px solid theme-status($theme, 'default', 'border-hover');
             }
 
             .message.info {
                 background-color: theme-status($theme, 'info', 'primary');
-                border: 1px solid theme-status($theme, 'info', 'darken');
+                border: 1px solid theme-status($theme, 'info', 'border');
 
                 a:hover, .exit:hover {
                     background-color: theme-status($theme, 'info', 'primary');
@@ -1104,12 +1174,13 @@ div.panel {
             }
 
             .message.info:hover {
-                background-color: theme-status($theme, 'info', 'highlight');
+                background-color: theme-status($theme, 'info', 'primary-hover');
+                border: 1px solid theme-status($theme, 'default', 'border-hover');
             }
 
             .message.success {
                 background-color: theme-status($theme, 'success', 'primary');
-                border: 1px solid theme-status($theme, 'success', 'darken');
+                border: 1px solid theme-status($theme, 'success', 'border');
 
                 a:hover, .exit:hover {
                     background-color: theme-status($theme, 'success', 'primary');
@@ -1117,12 +1188,13 @@ div.panel {
             }
 
             .message.success:hover {
-                background-color: theme-status($theme, 'success', 'highlight');
+                background-color: theme-status($theme, 'success', 'primary-hover');
+                border: 1px solid theme-status($theme, 'default', 'border-hover');
             }
 
             .message.warning {
                 background-color: theme-status($theme, 'warn', 'primary');
-                border: 1px solid theme-status($theme, 'warn', 'darken');
+                border: 1px solid theme-status($theme, 'warn', 'border');
 
                 a:hover, .exit:hover {
                     background-color: theme-status($theme, 'warn', 'primary');
@@ -1130,12 +1202,13 @@ div.panel {
             }
 
             .message.warning:hover {
-                background-color: theme-status($theme, 'warn', 'highlight');
+                background-color: theme-status($theme, 'warn', 'primary-hover');
+                border: 1px solid theme-status($theme, 'default', 'border-hover');
             }
 
             .message.error, .message.danger {
                 background-color: theme-status($theme, 'error', 'primary');
-                border: 1px solid theme-status($theme, 'error', 'darken');
+                border: 1px solid theme-status($theme, 'error', 'border');
 
                 a:hover, .exit:hover {
                     background-color: theme-status($theme, 'error', 'primary');
@@ -1143,7 +1216,8 @@ div.panel {
             }
 
             .message.error:hover, .message.danger:hover {
-                background-color: theme-status($theme, 'error', 'highlight');
+                background-color: theme-status($theme, 'error', 'primary-hover');
+                border: 1px solid theme-status($theme, 'default', 'border-hover');
             }
         }
 
@@ -1201,6 +1275,21 @@ div.panel {
 // speak                                                                          //
 //================================================================================//
 
+//=====================================//
+//==== START Generic Element Block ====//
+//=====================================//
+
+#content {
+    a {
+        @include transition(color 0.5s, background-color 0.5s, border 0.5s);
+    }
+}
+
+//===================================//
+//==== End Generic Element Block ====//
+//===================================//
+
+
 //===================================//
 //==== START Generic Class Block ====//
 //===================================//
@@ -1213,14 +1302,14 @@ div.panel {
 }
 
 .fade-in {
-    @include transition(opacity 1s linear, visibility 0s 1s);
+    @include transition(color 0.5s, background-color 0.5s, border 0.5s, opacity 1s linear, visibility 0s 1s);
 }
 
 .fade-out {
-    @include transition(padding 0.9s, margin 0.9s, font-size 0.9s, opacity 0.9s linear, visibility 0s 0.9s);
+    @include transition(padding 0.9s, margin 0.9s, font-size 0.9s, color 0.5s, background-color 0.5s, border 0.5s, opacity 0.9s linear, visibility 0s 0.9s);
 
     * {
-        @include transition(padding 0.9s, margin 0.9s, font-size 0.9s);
+        @include transition(padding 0.9s, margin 0.9s, font-size 0.9s, color 0.5s, background-color 0.5s, border 0.5s);
     }
 }
 
@@ -1235,7 +1324,7 @@ div.panel {
 
 button, a.button {
     cursor: pointer;
-    @include transition(color 0.5s, background-color 0.5s);
+    @include transition(color 0.5s, background-color 0.5s, border 0.5s);
 }
 
 //============================//
@@ -1248,10 +1337,10 @@ button, a.button {
 //===========================//
 
 .alert {
-    @include transition(color 0.5s, background-color 0.5s);
+    @include transition(color 0.5s, background-color 0.5s, border 0.5s);
 
     a {
-        @include transition(background-color 0.5s);
+        @include transition(color 0.5s, background-color 0.5s, border 0.5s);
     }
 }
 
@@ -1269,15 +1358,19 @@ div.panel {
   @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
-        box-shadow: 1px 1px 5px theme-background($theme, 'border');
+        /*box-shadow: 1px 1px 5px theme-background($theme, 'border');*/
 
+    }
+
+    > div {
+        @include transition(color 0.5s, background-color 0.5s, border 0.5s);
     }
   }
 
-    @include transition(background-color 0.5s);
+    @include transition(color 0.5s, background-color 0.5s, border 0.5s);
 
     a {
-        @include transition(background-color 0.5s);
+        @include transition(color 0.5s, background-color 0.5s, border 0.5s);
     }
 }
 
@@ -1295,14 +1388,14 @@ div.panel {
     .message {
         box-sizing: border-box;
 
-        @include transition(padding 0.9s, margin 0.9s, font-size 0.9s, background-color 0.5s, border-radius 0.5s, opacity 0.9s linear, visibility 0s 0.9s);
+        @include transition(padding 0.9s, margin 0.9s, font-size 0.9s, color 0.5s, background-color 0.5s, border 0.5s, border-radius 0.5s, opacity 0.9s linear, visibility 0s 0.9s);
 
         a {
-            @include transition(background-color 0.5s);
+            @include transition(color 0.5s, background-color 0.5s, border 0.5s);
         }
 
         .exit {
-            @include transition(background-color 0.5s, color 0.5s);
+            @include transition(color 0.5s, background-color 0.5s, border 0.5s);
             cursor: pointer;
         }
     }
