@@ -70,6 +70,7 @@ $panel_footer_names_list: ('.footer', '.foot');
                 @include flex-direction(row);
                 @include justify-content(space-between);
                 @include align-items(center);
+                @include flex-wrap(wrap);
 
                 padding: 10px;
 
@@ -91,6 +92,7 @@ $panel_footer_names_list: ('.footer', '.foot');
                 @include flex-direction(row);
                 @include justify-content(space-between);
                 @include align-items(center);
+                @include flex-wrap(wrap);
 
                 padding: 10px;
             }
