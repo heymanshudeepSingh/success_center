@@ -5,39 +5,41 @@
 
 
 {% block content %}
-  <h1>CAE Home Index Page</h1>
-  <p>Welcome to the CAE Workspace Index Page.</p>
-  <p>You should only be seeing this page if serving in development mode.</p>
+  <article>
+    <h1>CAE Home Index Page</h1>
+    <p>Welcome to the CAE Workspace Index Page.</p>
+    <p>You should only be seeing this page if serving in development mode.</p>
 
-  <hr>
+    <hr>
 
-  <h2>Develoment-Only Testing Views</h2>
-  <p>Internal Facing Dev Views:</p>
-  <ul>
-    <li><a href="{% url 'cae_home:internal_dev_index' %}">CAE Home (Internal Site) CSS Examples</a></li>
-  </ul>
+    <h2>Develoment-Only Testing Views</h2>
+    <p>Internal Facing Dev Views:</p>
+    <ul>
+      <li><a href="{% url 'cae_home:internal_dev_index' %}">CAE Home (Internal Site) CSS Examples</a></li>
+    </ul>
 
-  <br>
+    <br>
 
-  <p>External Facing Dev Views:</p>
-  <ul>
-    <li><a href="{% url 'cae_home:external_dev_index' %}">WMU (External Site) Clone Test</a></li>
-  </ul>
+    <p>External Facing Dev Views:</p>
+    <ul>
+      <li><a href="{% url 'cae_home:external_dev_index' %}">WMU (External Site) Clone Test</a></li>
+    </ul>
 
-  <hr>
+    <hr>
 
-  <h2>Installed Projects</h2>
-  <p>Below are easy links to all currently installed projects in the apps folder. They can also be found on any page
-    by hovering over the "cae" icon in the upper topleft of the page.</p>
-  <ul>
-    {% for project in imported_projects %}
-      {% if project.index and project.index != '' %}
-        <li><a href="{% url project.index %}">{{ project.name }}</a></li>
-      {% else %}
-        <li><a href="{% url 'cae_home:index' %}">{{ project.name }} &nbsp (No index set)</a></li>
-      {% endif %}
-    {% empty %}
-      <p>No projects yet.</p>
-    {% endfor %}
-  </ul>
+    <h2>Installed Projects</h2>
+    <p>Below are easy links to all currently installed projects in the apps folder. They can also be found on any page
+      by hovering over the "cae" icon in the upper topleft of the page.</p>
+    <ul>
+      {% for project in imported_projects %}
+        {% if project.index and project.index != '' %}
+          <li><a href="{% url project.index %}">{{ project.name }}</a></li>
+        {% else %}
+          <li><a href="{% url 'cae_home:index' %}">{{ project.name }} &nbsp (No index set)</a></li>
+        {% endif %}
+      {% empty %}
+        <p>No projects yet.</p>
+      {% endfor %}
+    </ul>
+  </article>
 {% endblock content %}
