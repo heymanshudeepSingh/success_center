@@ -15,6 +15,7 @@ debug_print('')
 # All other CAE Apps should be defined under the "Allowed_CAE_Apps" setting.
 INSTALLED_APPS = [
     'cae_home.apps.CaeHomeConfig',
+    'cae_tools.apps.CaeToolsConfig',
 
     'django.contrib.admin',
     'django.contrib.auth',

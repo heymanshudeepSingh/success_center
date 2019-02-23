@@ -17,6 +17,9 @@ urlpatterns = [
 
     # CAE_Home app views.
     url(r'^', include('cae_home.urls')),
+
+    # CAE Tools app views.
+    url(r'^cae_tools/', include('cae_tools.urls')),
 ]
 
 

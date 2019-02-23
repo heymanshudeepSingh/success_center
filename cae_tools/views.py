@@ -1,3 +1,12 @@
-from django.shortcuts import render
+"""
+Views for CAE Tools app.
+"""
 
-# Create your views here.
+from django.template.response import TemplateResponse
+
+
+def color_tool(request):
+    """
+    Color tool.
+    """
+    return TemplateResponse(request, 'cae_tools/color_tool.html', {})
