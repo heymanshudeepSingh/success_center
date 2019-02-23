@@ -3,7 +3,7 @@
 set -e
 
 # Remove migrations
-rm -f apps/cae_home/migrations/0*.py
+rm -f cae_home/migrations/0*.py
 rm -f apps/CAE_Web/cae_web_core/migrations/0*.py
 rm -f apps/CAE_Web/cae_web_autio_visual/migrations/0*.py
 
