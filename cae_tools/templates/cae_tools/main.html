@@ -1,4 +1,19 @@
-{% extends 'cae_home/main.html' %}
+{% extends 'cae_home/main_no_margins.html' %}
+{% load static %}
 
 
 {% block title_site_name %}CAE Tools{% endblock title_site_name %}
+
+
+{% block extra_styles %}
+  <link rel="stylesheet" type="text/css" href="{% static 'cae_tools/css/base.css' %}">
+{% endblock extra_styles %}
+
+
+{% block main %}
+  <main id="content" class="cae-tools">
+    {% include 'cae_home/include/status_messages.html' %}
+    {% include 'cae_home/include/overlay_modal.html' %}
+    {% block content %}{% endblock content %}
+  </main>
+{% endblock %}

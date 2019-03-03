@@ -1,11 +1,11 @@
 
-//==================//
-//==== Body CSS ====//
-//==================//
+//========================//
+//==== Color Tool CSS ====//
+//========================//
 
 // Import statements
-@import '_variables';
-@import '_mixins';
+@import '../../../../../cae_home/static/cae_home/css/sass/_variables';
+@import '../../../../../cae_home/static/cae_home/css/sass/_mixins';
 
 
 //================================================================================//
@@ -34,110 +34,73 @@
 //==== START ----- Block ====//
 //===========================//
 
-html {
-    @include display-flex;
-    @include flex-direction(column);
-    @include flex(1);
+#content.cae-tools {
 
-    min-height: 100vh;
+    .color-display {
+        min-width: 125px;
+        min-height: 100px;
 
-    // Printer layout.
-    @media only print {
-        display: block;
+        padding: 10px;
+
+        > div:first-child {
+            @include display-flex;
+            @include flex-direction(row);
+            @include justify-content(center);
+            @include align-items(center);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            padding-top: 0;
+        }
+    }
+
+    .color-edit {
+        @include display-flex;
+        @include flex-direction(row);
+        @include justify-content(center);
+        @include align-items(center);
+
+        padding: 10px;
+    }
+
+    .color-box {
+        width: 25px;
+        height: 25px;
+
+        margin: 5px;
+    }
+
+    #wmu-color-display {
+
+        /*overflow-x: scroll;*/
+
+        > div {
+            @include display-flex;
+            @include flex-direction(row);
+            @include align-items(center);
+
+            padding: 5px;
+
+            overflow-x: scroll;
+        }
+    }
+
+    #color-adjustment {
+
+        > div {
+            @include display-flex;
+            @include flex-direction(row);
+            @include align-items(center);
+
+            padding: 5px;
+
+            overflow-x: scroll;
+        }
     }
 }
 
-body.grid {
-    display: grid;
-
-    grid-template-columns: 5% 45% 45% 5%;
-    grid-template-rows: 40px auto auto 35px;
-    grid-template-areas:
-        "header header header header"
-        "main-placeholder-left main main main-placeholder-right"
-        "main-placeholder-left main main main-placeholder-right"
-        "footer footer footer footer";
-
-    // Show on larger screens.
-    @media only screen and (min-width: $screen-tablet-mid) {
-        grid-template-columns: 15% 35% 35% 15%;
-        grid-template-rows: 40px auto auto 35px;
-    }
-}
-
-body.no-margins {
-    grid-template-columns: 0% 50% 50% 0%;
-}
-
-body.no-grid {
-    display: block;
-}
-
-body {
-    position: relative;
-
-    min-height:100vh;
-    height: auto;
-
-    // Printer layout.
-    @media only print {
-        display: block;
-    }
-
-    header {
-        position: relative;
-
-        grid-area: header;
-
-        // Printer layout.
-        @media only print {
-            display: none;
-        }
-    }
-
-    main {
-        position: relative;
-
-        grid-area: main;
-
-        // Printer layout.
-        @media only print {
-            display: block;
-        }
-    }
-
-    #main-placeholder-left {
-        position: relative;
-
-        grid-area: main-placeholder-left;
-
-        // Printer layout.
-        @media only print {
-            display: none;
-        }
-    }
-
-    #main-placeholder-right {
-        position: relative;
-
-        grid-area: main-placeholder-right;
-
-        // Printer layout.
-        @media only print {
-            display: none;
-        }
-    }
-
-    footer {
-        position: relative;
-
-        grid-area: footer;
-
-        // Printer layout.
-        @media only print {
-            display: none;
-        }
-    }
+input {
+    width: auto;
 }
 
 //===========================//
@@ -163,16 +126,11 @@ body {
 //==== START ----- Block ====//
 //===========================//
 
-body {
+#content.cae-tools {
 
-  @each $theme, $theme-dict in $theme-colors {
-    &.theme-#{$theme} {
-
-        color: theme-text($theme, 'content');
-
+    .color-display {
+        font-size: 60%;
     }
-  }
-
 }
 
 //===========================//
@@ -212,20 +170,19 @@ body {
 //==== START ----- Block ====//
 //===========================//
 
-body {
+#content.cae-tools {
 
-  @each $theme, $theme-dict in $theme-colors {
-    &.theme-#{$theme} {
-
-        background-color: theme-background($theme, 'content');
-
-        #content {
-            background-color: theme-background($theme, 'content');
-        }
-
+    .color-display {
+        border: 1px solid $color-black;
     }
-  }
 
+    .color-edit {
+        border: 1px solid $color-black;
+    }
+
+    .color-box {
+        border: 1px solid $color-black;
+    }
 }
 
 //===========================//
