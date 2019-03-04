@@ -10,4 +10,5 @@ from . import views
 app_name = 'cae_tools'
 urlpatterns = [
     url(r'color/$', views.color_tool, name='color_tool'),
+    url(r'$', views.index, name='index'),
 ]
