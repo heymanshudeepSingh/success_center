@@ -3,19 +3,11 @@
 
 {% block title_site_name %}CAE Center{% endblock title_site_name %}
 
-{% block body_extra_classes %}no-margins{% endblock body_extra_classes %}
-
-{% block header %}{% endblock header %}
-
-{% block placeholder_left %}{% endblock placeholder_left %}
+{% block body_extra_classes %}grid no-margins{% endblock body_extra_classes %}
 
 {% block main %}
-  <main id="content" class="content_only cae_home">
+  <main id="content" class="cae_home">
     {% include 'cae_home/include/status_messages.html' %}
     {% block content %}{% endblock content %}
   </main>
 {% endblock %}
-
-{% block placeholder_right %}{% endblock placeholder_right %}
-
-{% block footer %}{% endblock footer %}
