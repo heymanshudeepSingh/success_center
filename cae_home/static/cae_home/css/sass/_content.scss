@@ -118,9 +118,10 @@
 
     // Attempt to center as much as possible.
     .center {
-        @include flex-direction(center);
-        @include align-items(center);
-        text-align: center;
+        @include flex-direction(center !important);
+        @include justify-content(center !important);
+        @include align-items(center !important);
+        text-align: center !important;
     }
 
     // Warning for javascript requirement.
