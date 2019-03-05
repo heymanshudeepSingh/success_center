@@ -177,6 +177,17 @@
 
         color: theme-text($theme, 'text');
 
+        > h1, > h2, > h3, > h4, > h5, > h6 {
+            color: theme-text($theme, 'header');
+
+            // Stylings specific to wmu theme.
+            @if $theme == 'wmu' {
+                font-weight: normal;
+
+                text-align: left;
+            }
+        }
+
         a {
             color: theme-text($theme, 'link');
         }
@@ -277,6 +288,13 @@
 
   @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
+
+        // Stylings specific to wmu theme.
+        @if $theme == 'wmu' {
+            > h1, > h2, > h3, > h4, > h5, > h6 {
+                border-bottom: 1px solid theme-text($theme, 'header');
+            }
+        }
 
         table {
             border: 1px solid theme-background($theme, 'border');

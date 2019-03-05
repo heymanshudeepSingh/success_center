@@ -102,6 +102,22 @@
             }
         }
 
+        .alert.primary {
+            color: theme-text($theme, 'primary');
+
+            a {
+                color: theme-status($theme, 'primary', 'link');
+            }
+        }
+
+        .alert.primary:hover {
+            color: theme-text($theme, 'primary-hover');
+
+            a {
+                color: theme-status($theme, 'primary', 'link-hover');
+            }
+        }
+
         .alert.info {
             a {
                 color: theme-status($theme, 'info', 'link');
@@ -195,6 +211,20 @@
             a:hover:not(.button) {
                 background-color: theme-status($theme, 'default', 'primary');
             }
+        }
+
+        .alert.primary {
+            background-color: theme-status($theme, 'primary', 'primary');
+            border: 1px solid theme-status($theme, 'primary', 'border');
+
+            a:hover:not(.button) {
+                background-color: theme-status($theme, 'primary', 'primary');
+            }
+        }
+
+        .alert.primary:hover {
+            background-color: theme-status($theme, 'primary', 'primary-hover');
+            border: 1px solid theme-status($theme, 'default', 'border-hover');
         }
 
         .alert.info {

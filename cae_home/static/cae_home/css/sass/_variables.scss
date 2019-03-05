@@ -237,9 +237,9 @@ $theme-colors: (
         'background': (
             'primary': #331900,
             'highlight': #cb983e,
-            'border': $wmu-web-brown,
+            'border': $color-white,
             'content': $color-white,
-            'content-alt': #fef2cd,
+            'content-alt': $color-white,
         ),
         'text': (
             'primary': #fcc30f,
@@ -252,22 +252,32 @@ $theme-colors: (
             'content-subtle': $color-trans-black-50,
             'content-hint': $color-trans-black-25,
             'content-hover': $color-black,
+            'header': #b3b3b3,
             'text': $color-black,
             'link': $wmu-web-link,
-            'link-hover': $color-white,
+            'link-hover': #331900,
         ),
         'status': (
             'default': (
-                /*'primary': #fab005,*/
-                'primary': #c48b04,
-                'primary-hover': $wmu-web-link-hover,
+                'primary': #fcc30f,
+                'primary-alt': #c48b04,
+                'primary-hover': #d3a103,
                 'secondary': $color-grey-100,
                 'secondary-hover': $color-grey-100,
-                'border': #7b5f1e,
+                'border': #d3a103,
                 'border-hover': $color-trans-grey-75,
                 'link': $wmu-web-alt-header-text,
                 'link-hover': $color-white,
             ),
+            'primary': (
+                'primary': #663300,
+                'primary-hover': #986516,
+                'border': #331900,
+                'border-hover': $color-trans-grey-75,
+                'link': $color-trans-white-75,
+                'link-hover': $color-white,
+            ),
+
             /*'info': (
                 'primary': $wmu-web-info,
                 'primary-hover': $wmu-web-info-hover,
@@ -335,16 +345,14 @@ $theme-colors: (
 
     'cae': (
         'background': (
-            'primary': #663300,
-            'highlight': #994c00,
-            'border': #9b5b27,
-            'content': #331900,
-            'content-alt': #422000,
-            /*'content': #331100,*/
-            /*'content-alt': #3c1807,*/
+            'primary': #331100,
+            'highlight': #cb983e,
+            'border': #865628,
+            'content': #1f0500,
+            'content-alt': #3c1702,
         ),
         'text': (
-            'primary': $color-white,
+            'primary': #c48b04,
             'primary-accent': $color-trans-white-75,
             'primary-subtle': $color-trans-white-50,
             'primary-hint': $color-trans-white-25,
@@ -354,17 +362,27 @@ $theme-colors: (
             'content-subtle': $color-trans-white-50,
             'content-hint': $color-trans-white-25,
             'content-hover': $color-white,
+            'header': $color-trans-white-75,
             'text': $color-trans-white-75,
             'link': #986516,
             'link-hover': #d68d1f,
         ),
         'status': (
             'default': (
-                'primary': #663300,
-                /*'primary': #662a00,*/
-                'primary-hover': #994c00,
-                'secondary': #4d2500,
-                'secondary-hover': #663100,
+                'primary': #331100,
+                'primary-hover': #663300,
+                'secondary': #1f0500,
+                'secondary-hover': #3c1702,
+                'border': #9b5b27,
+                'border-hover': $color-trans-white-50,
+                'link': #ffc354,
+                'link-hover': #f9e9d2,
+            ),
+            'primary': (
+                'primary': #331100,
+                'primary-hover': #663300,
+                'secondary': #1f0500,
+                'secondary-hover': #3c1702,
                 'border': #9b5b27,
                 'border-hover': $color-trans-white-50,
                 'link': #ffc354,
@@ -410,7 +428,7 @@ $theme-colors: (
         'background': (
             'primary': $bootstrap-header,
             'highlight': $bootstrap-header-text,
-            'border': $color-grey-60,
+            'border': #bbaad5,
             'content': $color-white,
             'content-alt': $color-grey-95,
         ),
@@ -425,6 +443,7 @@ $theme-colors: (
             'content-subtle': $color-trans-black-50,
             'content-hint': $color-trans-black-25,
             'content-hover': $color-black,
+            'header': $color-black,
             'text': $color-black,
             'link': $bootstrap-link,
             'link-hover': $color-grey-10,
@@ -440,7 +459,14 @@ $theme-colors: (
                 'link': $bootstrap-link,
                 'link-hover': $color-grey-10,
             ),
-
+            'primary': (
+                'primary': $bootstrap-header,
+                'primary-hover': $bootstrap-header-text,
+                'border': #bbaad5,
+                'border-hover': $color-trans-grey-75,
+                'link': $color-trans-white-75,
+                'link-hover': $color-trans-white-75,
+            ),
             'info': (
                 'primary': $bootstrap-button-info,
                 'primary-hover': $bootstrap-button-info-hover,
@@ -526,6 +552,7 @@ $theme-colors: (
             'content-subtle': $color-trans-black-50,
             'content-hint': $color-trans-black-25,
             'content-hover': $color-black,
+            'header': $color-black,
             'text': $color-black,
             'link': #4040bf,
             'link-hover': #4040bf,
@@ -536,6 +563,14 @@ $theme-colors: (
                 'primary-hover': $color-grey-90,
                 'secondary': $color-grey-95,
                 'secondary-hover': $color-white,
+                'border': $color-grey-75,
+                'border-hover': $color-trans-grey-75,
+                'link': $color-grey-45,
+                'link-hover': $color-trans-black-75,
+            ),
+            'primary': (
+                'primary': $color-grey-85,
+                'primary-hover': $color-grey-90,
                 'border': $color-grey-75,
                 'border-hover': $color-trans-grey-75,
                 'link': $color-grey-45,
@@ -556,7 +591,6 @@ $theme-colors: (
                 'link-hover': #339933,
             ),
             'warn': (
-                /*'primary': #fff4cc,*/
                 'primary': #ffeeb3,
                 'primary-hover': #fff4cc,
                 'border': #e1c251,
@@ -597,6 +631,7 @@ $theme-colors: (
             'content-subtle': $color-trans-white-50,
             'content-hint': $color-trans-white-25,
             'content-hover': $color-grey-100,
+            'header': $color-trans-white-75,
             'text': $color-trans-white-75,
             'link': #6767e4,
             'link-hover': #a8a8f0,
@@ -608,6 +643,14 @@ $theme-colors: (
                 'secondary': #36393f,
                 'secondary-hover': #2a2d32,
                 'border': #5e646e,
+                'border-hover': $color-trans-grey-75,
+                'link': $color-trans-white-50,
+                'link-hover': $color-trans-white-75,
+            ),
+            'primary': (
+                'primary': #2a2d32,
+                'primary-hover': #36393f,
+                'border': #36393f,
                 'border-hover': $color-trans-grey-75,
                 'link': $color-trans-white-50,
                 'link-hover': $color-trans-white-75,
@@ -641,72 +684,6 @@ $theme-colors: (
                 'link-hover': #ec8379,
             ),
         ),
-
-        /*'background': (
-            'primary': $color-grey-20,
-            'highlight': $color-grey-30,
-            'border': $color-grey-30,
-            /*'content': $color-grey-15,*/
-            /*'content-alt': $color-grey-10,*
-            'content': #1f1f1f,
-            'content-alt': $color-grey-15,
-        ),
-        'text': (
-
-            'primary': $color-trans-white-75,
-            'primary-accent': $color-trans-white-75,
-            'primary-subtle': $color-trans-white-50,
-            'primary-hint': $color-trans-white-25,
-            'primary-hover': $color-white,
-            'content': $color-trans-white-75,
-            'content-accent': $color-trans-white-75,
-            'content-subtle': $color-trans-white-50,
-            'content-hint': $color-trans-white-25,
-            'content-hover': $color-white,
-            'text': $color-trans-white-75,
-            'link': #6767e4,
-            'link-hover': #a8a8f0,
-        ),
-        'status': (
-            'default': (
-                'primary': $color-grey-20,
-                'primary-hover': $color-grey-30,
-                'secondary': $color-grey-15,
-                'secondary-hover': $color-grey-20,
-                'border': $color-grey-25,
-                'border-hover': $color-trans-grey-75,
-                'link': $color-trans-white-50,
-                'link-hover': $color-trans-white-75,
-            ),
-            'info': (
-                'primary': #242442,
-                'primary-hover': #3b3b59,
-                'border': #353564,
-                'link': #7575f0,
-                'link-hover': #7575f0,
-            ),
-            'success': (
-                'primary': #293d29,
-                'primary-hover': #365936,
-                'border': #2d532d,
-                'link': #18b418,
-                'link-hover': #18b418,
-            ),
-            'warn': (
-                'primary': #4d2b19,
-                'primary-hover': #734026,
-                'border': #6a4015,
-                'link': #df9f20,
-                'link-hover': #df9f20,
-            ),
-            'error': (
-                'primary': #471f1f,
-                'primary-hover': #6b2e2e,
-                'border': #602120,
-                'link': #ec8379,
-                'link-hover': #ec8379,
-            ),
-        ),*/
     ),
 );
 

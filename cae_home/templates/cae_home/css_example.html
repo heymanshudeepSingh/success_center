@@ -70,6 +70,7 @@
   <article>
     <h3>Standard Button Elements</h3>
     <button>Default</button>
+    <button class="primary">Primary</button>
     <button class="info">Info</button>
     <button class="success">Success</button>
     <button class="warning">Warning</button>
@@ -80,6 +81,7 @@
 
     <h3>Anchor Button Elements</h3>
     <a href="" class="button">Default</a>
+    <a href="" class="button primary">Primary</a>
     <a href="" class="button info">Info</a>
     <a href="" class="button success">Success</a>
     <a href="" class="button warning">Warning</a>
@@ -92,6 +94,7 @@
   <h2>Alert Examples</h2>
   <article>
     <div class="alert"><p>Default</p> <a href="">Test Link</a></div>
+    <div class="alert primary"><p>Primary</p> <a href="">Test Link</a></div>
     <div class="alert info"><p>Info</p> <a href="">Test Link</a></div>
     <div class="alert success"><p>Success</p> <a href="">Test Link</a></div>
     <div class="alert warning"><p>Warning</p> <a href="">Test Link</a></div>
@@ -106,6 +109,10 @@
     <ul id="status-message-container">
       <li class="message">
         <p>Default <a href="">Test Link</a> Default</p>
+        <p class="exit">x</p>
+      </li>
+      <li class="message primary">
+        <p>Primary <a href="">Test Link</a> Primary</p>
         <p class="exit">x</p>
       </li>
       <li class="message info">
@@ -147,6 +154,17 @@
         <p>Default Content with a <a href="">Test Link</a></p>
       </div>
       <div class="footer">Default Footer Example <a href="">Test Link</a></div>
+    </div>
+    <div class="panel primary">
+      <div class="header">
+        <p>Primary Header Example</p>
+        <a href="">Test Link</a>
+        <div><button>Button</button><a class="button" href="">a-Button</a></div>
+      </div>
+      <div class="content">
+        <p>Primary Content with a <a href="">Test Link</a></p>
+      </div>
+      <div class="footer">Primary Footer Example <a href="">Test Link</a></div>
     </div>
     <div class="panel info">
       <div class="header">
@@ -229,11 +247,13 @@
         <p>Panel with different status buttons and no content section.</p>
       </div>
       <div class="footer">
-        <div><button class="info">Button</button><a class="button info" href="">a-Button</a></div>
-        <div><button class="success">Button</button><a class="button success" href="">a-Button</a></div>
-        <div><button class="warning">Button</button><a class="button warning" href="">a-Button</a></div>
-        <div><button class="error">Button</button><a class="button error" href="">a-Button</a></div>
-        <div><button class="danger">Button</button><a class="button danger" href="">a-Button</a></div>
+        <div><button>Default Button</button><a class="button" href="">Default a-Button</a></div>
+        <div><button class="primary">Primary Button</button><a class="button primary" href="">Primary a-Button</a></div>
+        <div><button class="info">Info Button</button><a class="button info" href="">Info a-Button</a></div>
+        <div><button class="success">Success Button</button><a class="button success" href="">Success a-Button</a></div>
+        <div><button class="warning">Warning Button</button><a class="button warning" href="">Warning a-Button</a></div>
+        <div><button class="error">Error Button</button><a class="button error" href="">Error a-Button</a></div>
+        <div><button class="danger">Danger Button</button><a class="button danger" href="">Danger a-Button</a></div>
       </div>
     </div>
 

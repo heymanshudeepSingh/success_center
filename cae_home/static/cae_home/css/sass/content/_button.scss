@@ -82,6 +82,21 @@ button, a.button {
             color: theme-text($theme, 'content');
         }
 
+        button.primary, a.button.primary {
+            color: theme-text($theme, 'primary');
+        }
+
+        button.primary:hover, a.button.primary:hover {
+            color: theme-text($theme, 'primary-hover');
+        }
+
+        /*// Stylings specific to wmu theme.
+        @if $theme == 'wmu' {
+            button.primary:hover, a.button.primary:hover {
+                color: $color-white;
+            }
+        }*/
+
     }
   }
 
@@ -138,6 +153,16 @@ button, a.button {
 
         button:hover, a.button:hover {
             background-color: theme-status($theme, 'default', 'border');
+            border: 1px solid theme-status($theme, 'default', 'border-hover');
+        }
+
+        button.primary, a.button.primary, .primary button, .primary a.button {
+            background-color: theme-status($theme, 'primary', 'primary');
+            border: 1px solid theme-status($theme, 'primary', 'border');
+        }
+
+        button.primary:hover, a.button.primary:hover, .primary button:hover, .primary a.button:hover {
+            background-color: theme-status($theme, 'primary', 'border');
             border: 1px solid theme-status($theme, 'default', 'border-hover');
         }
 

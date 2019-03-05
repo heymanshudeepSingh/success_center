@@ -137,6 +137,38 @@
                 }
             }
 
+            .message.primary {
+                color: theme-text($theme, 'primary');
+
+                a {
+                    color: theme-status($theme, 'primary', 'link');
+                }
+
+                .exit {
+                    color: theme-status($theme, 'primary', 'link');
+                }
+
+                .exit:hover {
+                    color: theme-status($theme, 'primary', 'link-hover');
+                }
+            }
+
+            .message.primary:hover {
+                color: theme-text($theme, 'primary-hover');
+
+                a {
+                    color: theme-status($theme, 'primary', 'link-hover');
+                }
+
+                .exit {
+                    color: theme-status($theme, 'primary', 'link-hover');
+                }
+
+                .exit:hover {
+                    color: theme-status($theme, 'primary', 'link-hover');
+                }
+            }
+
             .message.info {
                 a {
                     color: theme-status($theme, 'info', 'link');
@@ -267,6 +299,20 @@
 
             .message:hover {
                 background-color: theme-status($theme, 'default', 'primary-hover');
+                border: 1px solid theme-status($theme, 'default', 'border-hover');
+            }
+
+            .message.primary {
+                background-color: theme-status($theme, 'primary', 'primary');
+                border: 1px solid theme-status($theme, 'primary', 'border');
+
+                a:hover, .exit:hover {
+                    background-color: theme-status($theme, 'primary', 'primary');
+                }
+            }
+
+            .message.primary:hover {
+                background-color: theme-status($theme, 'primary', 'primary-hover');
                 border: 1px solid theme-status($theme, 'default', 'border-hover');
             }
 
