@@ -216,11 +216,11 @@ $theme-colors: (
 
     'wmu': (
         'background': (
-            'primary': $wmu-web-alt-header,
-            'highlight': $wmu-web-link-hover,
+            'primary': #331900,
+            'highlight': #cb983e,
             'border': $wmu-web-brown,
             'content': $color-white,
-            'content-alt': $wmu-web-alt-header-text,
+            'content-alt': #fef2cd,
         ),
         'text': (
             'primary': $wmu-web-alt-header-text,
@@ -229,7 +229,7 @@ $theme-colors: (
             'primary-subtle': $color-trans-black-50,
             'primary-hint': $color-trans-black-25,
             'primary-hover': $color-white,
-            'secondary': $wmu-web-alt-header-text,
+            'secondary': #fcc30f,
             'secondary-accent': $color-trans-white-75,
             'secondary-subtle': $color-trans-white-50,
             'secondary-hint': $color-trans-white-25,
@@ -240,7 +240,8 @@ $theme-colors: (
         ),
         'status': (
             'default': (
-                'primary': $wmu-web-alt-header,
+                /*'primary': #fab005,*/
+                'primary': #c48b04,
                 'primary-hover': $wmu-web-link-hover,
                 'secondary': $color-grey-100,
                 'secondary-hover': $color-grey-100,
