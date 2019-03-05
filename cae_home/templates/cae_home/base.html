@@ -19,21 +19,26 @@
       {% endblock title %}
 
       {% block base_fonts %}
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+
         {% if site_debug %}
-          <link media="screen" href="{% static 'third_party/fonts/font_family_lato.css' %}" rel="stylesheet" type="text/css">
-          <link media="screen" href="{% static 'third_party/fonts/font_family_open_sans.css' %}" rel="stylesheet" type="text/css">
-          <link media="screen" href="{% static 'third_party/fonts/font_family_source_sans_pro.css' %}" rel="stylesheet" type="text/css">
+          <link rel="stylesheet" type="text/css" media="screen" href="{% static 'third_party/fonts/font_family_lato.css' %}">
+          <link rel="stylesheet" type="text/css" media="screen" href="{% static 'third_party/fonts/font_family_open_sans.css' %}">
+          <link rel="stylesheet" type="text/css" media="screen" href="{% static 'third_party/fonts/font_family_source_sans_pro.css' %}">
 
-          <link media="print" href="{% static 'third_party/fonts/font_family_lora.css' %}" rel="stylesheet" type="text/css">
-          <link media="print" href="{% static 'third_party/fonts/font_family_pt_serif.css' %}" rel="stylesheet" type="text/css">
+          <link rel="stylesheet" type="text/css" media="print" href="{% static 'third_party/fonts/font_family_lora.css' %}">
+          <link rel="stylesheet" type="text/css" media="print" href="{% static 'third_party/fonts/font_family_pt_serif.css' %}">
+
+          <link rel="stylesheet" type="text/css" href="{% static 'third_party/fonts/fontawesome_5.7.2.css' %}">
         {% else %}
-          <link media="screen" href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
-          <link media="screen" href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
-          <link media="screen" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet" type="text/css">
+          <link rel="stylesheet" type="text/css" media="screen" href="https://fonts.googleapis.com/css?family=Lato">
+          <link rel="stylesheet" type="text/css" media="screen" href="https://fonts.googleapis.com/css?family=Open+Sans">
+          <link rel="stylesheet" type="text/css" media="screen" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
 
-          <link media="print" href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet" type="text/css">
-          <link media="print" href="https://fonts.googleapis.com/css?family=PT+Serif" rel="stylesheet" type="text/css">
+          <link rel="stylesheet" type="text/css" media="print" href="https://fonts.googleapis.com/css?family=Lora">
+          <link rel="stylesheet" type="text/css" media="print" href="https://fonts.googleapis.com/css?family=PT+Serif">
+
+          <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
         {% endif %}
       {% endblock base_fonts %}
       {% block extra_fonts %}{% endblock extra_fonts %}
