@@ -219,8 +219,16 @@ $bootstrap-button-error-border: #d43f3a;
 //      elements such as panels, etc.
 //
 //  Status - Various 'status' stylings, such as for panels, buttons, etc.
-//      Comes in flavors of 'default' (no class provided), 'info', 'success',
-//      'warn', and 'error'/'danger'.
+//      Comes in flavors of:
+//          * default (No class provided) - Generally grey/unfilled
+//          * primary - Resembles header colors
+//          * secondary - Optional secondary colors. Mimics primary if not present
+//          * info - Blue colored
+//          * success - Green colored
+//          * warn - Yellow/Orange colored
+//          * error/danger - Red colored
+//
+//      Note that the "WMU" theme's primary and secondary values are swapped.
 //
 
 //================================//
@@ -247,7 +255,7 @@ $theme-colors: (
             'primary-subtle': $color-trans-white-50,
             'primary-hint': $color-trans-white-25,
             'primary-hover': $color-white,
-            'content': $wmu-web-alt-header-text,
+            'content': #331900,
             'content-accent': $color-trans-black-75,
             'content-subtle': $color-trans-black-50,
             'content-hint': $color-trans-black-25,
@@ -259,21 +267,31 @@ $theme-colors: (
         ),
         'status': (
             'default': (
+                'primary': $color-grey-95,
+                'primary-hover': $color-grey-85,
+                'secondary': $color-grey-100,
+                'secondary-hover': $color-grey-100,
+                'border': $color-grey-80,
+                'border-hover': $color-trans-grey-75,
+                'link': #331900,
+                'link-hover': $color-black,
+            ),
+            'primary': (
                 'primary': #fcc30f,
                 'primary-alt': #c48b04,
                 'primary-hover': #d3a103,
-                'secondary': $color-grey-100,
-                'secondary-hover': $color-grey-100,
                 'border': #d3a103,
                 'border-hover': $color-trans-grey-75,
-                'link': $wmu-web-alt-header-text,
+                'text': $color-trans-black-75,
+                'link': $color-trans-white-75,
                 'link-hover': $color-white,
             ),
-            'primary': (
+            'secondary': (
                 'primary': #663300,
                 'primary-hover': #986516,
                 'border': #331900,
                 'border-hover': $color-trans-grey-75,
+                'text': $color-trans-white-75,
                 'link': $color-trans-white-75,
                 'link-hover': $color-white,
             ),
@@ -385,6 +403,18 @@ $theme-colors: (
                 'secondary-hover': #3c1702,
                 'border': #9b5b27,
                 'border-hover': $color-trans-white-50,
+                'text': $color-trans-white-75,
+                'link': #ffc354,
+                'link-hover': #f9e9d2,
+            ),
+            'secondary': (
+                'primary': #331100,
+                'primary-hover': #663300,
+                'secondary': #1f0500,
+                'secondary-hover': #3c1702,
+                'border': #9b5b27,
+                'border-hover': $color-trans-white-50,
+                'text': $color-trans-white-75,
                 'link': #ffc354,
                 'link-hover': #f9e9d2,
             ),
@@ -461,9 +491,19 @@ $theme-colors: (
             ),
             'primary': (
                 'primary': $bootstrap-header,
-                'primary-hover': $bootstrap-header-text,
-                'border': #bbaad5,
+                'primary-hover': #744eb1,
+                'border': #bfbfbf,
                 'border-hover': $color-trans-grey-75,
+                'text': $bootstrap-header-text,
+                'link': $color-trans-white-75,
+                'link-hover': $color-trans-white-75,
+            ),
+            'secondary': (
+                'primary': $bootstrap-header,
+                'primary-hover': #744eb1,
+                'border': #bfbfbf,
+                'border-hover': $color-trans-grey-75,
+                'text': $bootstrap-header-text,
                 'link': $color-trans-white-75,
                 'link-hover': $color-trans-white-75,
             ),
@@ -573,6 +613,16 @@ $theme-colors: (
                 'primary-hover': $color-grey-90,
                 'border': $color-grey-75,
                 'border-hover': $color-trans-grey-75,
+                'text': $color-black,
+                'link': $color-grey-45,
+                'link-hover': $color-trans-black-75,
+            ),
+            'secondary': (
+                'primary': $color-grey-85,
+                'primary-hover': $color-grey-90,
+                'border': $color-grey-75,
+                'border-hover': $color-trans-grey-75,
+                'text': $color-black,
                 'link': $color-grey-45,
                 'link-hover': $color-trans-black-75,
             ),
@@ -652,6 +702,16 @@ $theme-colors: (
                 'primary-hover': #36393f,
                 'border': #36393f,
                 'border-hover': $color-trans-grey-75,
+                'text': $color-trans-white-75,
+                'link': $color-trans-white-50,
+                'link-hover': $color-trans-white-75,
+            ),
+            'secondary': (
+                'primary': #2a2d32,
+                'primary-hover': #36393f,
+                'border': #36393f,
+                'border-hover': $color-trans-grey-75,
+                'text': $color-trans-white-75,
                 'link': $color-trans-white-50,
                 'link-hover': $color-trans-white-75,
             ),

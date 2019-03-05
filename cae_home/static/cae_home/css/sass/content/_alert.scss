@@ -103,7 +103,7 @@
         }
 
         .alert.primary {
-            color: theme-text($theme, 'primary');
+            color: theme-status($theme, 'primary', 'text');
 
             a {
                 color: theme-status($theme, 'primary', 'link');
@@ -111,10 +111,22 @@
         }
 
         .alert.primary:hover {
-            color: theme-text($theme, 'primary-hover');
-
             a {
                 color: theme-status($theme, 'primary', 'link-hover');
+            }
+        }
+
+        .alert.secondary {
+            color: theme-status($theme, 'secondary', 'text');
+
+            a {
+                color: theme-status($theme, 'secondary', 'link');
+            }
+        }
+
+        .alert.secondary:hover {
+            a {
+                color: theme-status($theme, 'secondary', 'link-hover');
             }
         }
 
@@ -224,6 +236,20 @@
 
         .alert.primary:hover {
             background-color: theme-status($theme, 'primary', 'primary-hover');
+            border: 1px solid theme-status($theme, 'default', 'border-hover');
+        }
+
+        .alert.secondary {
+            background-color: theme-status($theme, 'secondary', 'primary');
+            border: 1px solid theme-status($theme, 'secondary', 'border');
+
+            a:hover:not(.button) {
+                background-color: theme-status($theme, 'secondary', 'primary');
+            }
+        }
+
+        .alert.secondary:hover {
+            background-color: theme-status($theme, 'secondary', 'primary-hover');
             border: 1px solid theme-status($theme, 'default', 'border-hover');
         }
 
