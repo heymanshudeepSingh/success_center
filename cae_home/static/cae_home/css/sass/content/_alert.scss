@@ -96,6 +96,10 @@
                 color: theme-status($theme, 'default', 'link');
                 text-decoration: none;
             }
+
+            a:hover {
+                color: theme-status($theme, 'default', 'link-hover');
+            }
         }
 
         .alert.info {

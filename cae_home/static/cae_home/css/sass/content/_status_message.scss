@@ -122,6 +122,10 @@
                     text-decoration: none;
                 }
 
+                a:hover {
+                    color: theme-status($theme, 'default', 'link-hover');
+                }
+
                 .exit {
                     font-weight: bold;
                     color: theme-status($theme, 'default', 'link');
@@ -129,7 +133,7 @@
 
                 .exit:hover {
                     font-weight: bold;
-                    color: theme-text($theme, 'content') !important;
+                    color: theme-status($theme, 'default', 'link-hover');
                 }
             }
 
@@ -141,6 +145,10 @@
                 .exit {
                     color: theme-status($theme, 'info', 'link');
                 }
+
+                .exit:hover {
+                    color: theme-status($theme, 'info', 'link-hover');
+                }
             }
 
             .message.success {
@@ -150,6 +158,10 @@
 
                 .exit {
                     color: theme-status($theme, 'success', 'link');
+                }
+
+                .exit:hover {
+                    color: theme-status($theme, 'success', 'link-hover');
                 }
             }
 
@@ -161,6 +173,10 @@
                 .exit {
                     color: theme-status($theme, 'warn', 'link');
                 }
+
+                .exit:hover {
+                    color: theme-status($theme, 'warn', 'link-hover');
+                }
             }
 
             .message.error, .message.danger {
@@ -170,6 +186,10 @@
 
                 .exit {
                     color: theme-status($theme, 'error', 'link');
+                }
+
+                .exit:hover {
+                    color: theme-status($theme, 'error', 'link-hover');
                 }
             }
         }
