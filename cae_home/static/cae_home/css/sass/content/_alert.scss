@@ -89,7 +89,7 @@
     .theme-#{$theme} & {
 
         .alert {
-            color: theme-text($theme, 'primary-accent');
+            color: theme-text($theme, 'content-accent');
 
             a {
                 font-weight: bold;

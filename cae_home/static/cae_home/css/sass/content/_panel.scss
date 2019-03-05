@@ -148,7 +148,7 @@ $panel_footer_names_list: ('.footer', '.foot');
                     font-size: 110%;
                     font-weight: bold;
 
-                    color: theme-text($theme, 'primary');
+                    color: theme-text($theme, 'content');
 
                     > h1, h2, h3, h4, h5, h6 {
                         font-size: 110%;
@@ -170,7 +170,7 @@ $panel_footer_names_list: ('.footer', '.foot');
 
             @each $footer in $panel_footer_names_list {
                 > #{$footer} {
-                    color: theme-text($theme, 'primary');
+                    color: theme-text($theme, 'content');
                 }
             }
         }
@@ -179,13 +179,13 @@ $panel_footer_names_list: ('.footer', '.foot');
 
             @each $header in $panel_header_names_list {
                 > #{$header} {
-                    color: theme-text($theme, 'primary-hover');
+                    color: theme-text($theme, 'content-hover');
                 }
             }
 
             @each $footer in $panel_footer_names_list {
                 > #{$footer} {
-                    color: theme-text($theme, 'primary-hover');
+                    color: theme-text($theme, 'content-hover');
                 }
             }
         }

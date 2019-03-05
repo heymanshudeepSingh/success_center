@@ -204,6 +204,25 @@ $bootstrap-button-error-border: #d43f3a;
 // Established within the "$theme-colors" nested dictionaries.
 // Accessed by theme functions.
 
+// Note:
+//
+//  Primary - Tends to refer to styles used for main elements, such as header and
+//      footer.
+//
+//  Content - Tends to refer to styles used within the main #content block. This
+//      is generally where actual page info is displayed.
+//
+//      For clarification, the 'text' value within the text block refers to
+//      the color of standard text within the #content element.
+//
+//      Then the various 'content' stylings tend to refer to text within
+//      elements such as panels, etc.
+//
+//  Status - Various 'status' stylings, such as for panels, buttons, etc.
+//      Comes in flavors of 'default' (no class provided), 'info', 'success',
+//      'warn', and 'error'/'danger'.
+//
+
 //================================//
 //==== START Theme Dict Block ====//
 //================================//
@@ -223,18 +242,17 @@ $theme-colors: (
             'content-alt': #fef2cd,
         ),
         'text': (
-            'primary': $wmu-web-alt-header-text,
-            /*'primary': $color-white,*/
-            'primary-accent': $color-trans-black-75,
-            'primary-subtle': $color-trans-black-50,
-            'primary-hint': $color-trans-black-25,
+            'primary': #fcc30f,
+            'primary-accent': $color-trans-white-75,
+            'primary-subtle': $color-trans-white-50,
+            'primary-hint': $color-trans-white-25,
             'primary-hover': $color-white,
-            'secondary': #fcc30f,
-            'secondary-accent': $color-trans-white-75,
-            'secondary-subtle': $color-trans-white-50,
-            'secondary-hint': $color-trans-white-25,
-            'secondary-hover': $color-white,
-            'content': $color-black,
+            'content': $wmu-web-alt-header-text,
+            'content-accent': $color-trans-black-75,
+            'content-subtle': $color-trans-black-50,
+            'content-hint': $color-trans-black-25,
+            'content-hover': $color-black,
+            'text': $color-black,
             'link': $wmu-web-link,
             'link-hover': $color-white,
         ),
@@ -331,12 +349,12 @@ $theme-colors: (
             'primary-subtle': $color-trans-white-50,
             'primary-hint': $color-trans-white-25,
             'primary-hover': $color-white,
-            'secondary': $color-white,
-            'secondary-accent': $color-trans-white-75,
-            'secondary-subtle': $color-trans-white-50,
-            'secondary-hint': $color-trans-white-25,
-            'secondary-hover': $color-white,
-            'content': $color-white,
+            'content': $color-trans-white-75,
+            'content-accent': $color-trans-white-75,
+            'content-subtle': $color-trans-white-50,
+            'content-hint': $color-trans-white-25,
+            'content-hover': $color-white,
+            'text': $color-trans-white-75,
             'link': #986516,
             'link-hover': #d68d1f,
         ),
@@ -397,17 +415,17 @@ $theme-colors: (
             'content-alt': $color-grey-95,
         ),
         'text': (
-            'primary': $color-black,
-            'primary-accent': $color-trans-black-75,
-            'primary-subtle': $color-trans-black-50,
-            'primary-hint': $color-trans-black-25,
+            'primary': $bootstrap-header-text,
+            'primary-accent': $color-trans-white-75,
+            'primary-subtle': $color-trans-white-50,
+            'primary-hint': $color-trans-white-25,
             'primary-hover': $color-black,
-            'secondary': $bootstrap-header-text,
-            'secondary-accent': $color-trans-white-75,
-            'secondary-subtle': $color-trans-white-50,
-            'secondary-hint': $color-trans-white-25,
-            'secondary-hover': $color-grey-100,
             'content': $color-black,
+            'content-accent': $color-trans-black-75,
+            'content-subtle': $color-trans-black-50,
+            'content-hint': $color-trans-black-25,
+            'content-hover': $color-black,
+            'text': $color-black,
             'link': $bootstrap-link,
             'link-hover': $color-grey-10,
         ),
@@ -498,17 +516,17 @@ $theme-colors: (
             'content-alt': $color-grey-95,
         ),
         'text': (
-            'primary': $color-black,
+            'primary': $color-grey-40,
             'primary-accent': $color-trans-black-75,
             'primary-subtle': $color-trans-black-50,
             'primary-hint': $color-trans-black-25,
             'primary-hover': $color-black,
-            'secondary': $color-grey-40,
-            'secondary-accent': $color-trans-black-75,
-            'secondary-subtle': $color-trans-black-50,
-            'secondary-hint': $color-trans-black-25,
-            'secondary-hover': $color-black,
             'content': $color-black,
+            'content-accent': $color-trans-black-75,
+            'content-subtle': $color-trans-black-50,
+            'content-hint': $color-trans-black-25,
+            'content-hover': $color-black,
+            'text': $color-black,
             'link': #0000ee,
             'link-hover': #0000ee,
         ),
@@ -570,17 +588,18 @@ $theme-colors: (
             'content-alt': $color-grey-15,
         ),
         'text': (
+
             'primary': $color-white,
             'primary-accent': $color-trans-white-75,
             'primary-subtle': $color-trans-white-50,
             'primary-hint': $color-trans-white-25,
             'primary-hover': $color-white,
-            'secondary': $color-white,
-            'secondary-accent': $color-trans-white-75,
-            'secondary-subtle': $color-trans-white-50,
-            'secondary-hint': $color-trans-white-25,
-            'secondary-hover': $color-grey-100,
             'content': $color-white,
+            'content-accent': $color-trans-white-75,
+            'content-subtle': $color-trans-white-50,
+            'content-hint': $color-trans-white-25,
+            'content-hover': $color-grey-100,
+            'text': $color-white,
             'link': #6767e4,
             'link-hover': #a8a8f0,
         ),

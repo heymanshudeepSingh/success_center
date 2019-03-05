@@ -79,7 +79,7 @@ footer {
     .theme-#{$theme} & {
 
         font-weight: bold;
-        color: theme-text($theme, 'secondary');
+        color: theme-text($theme, 'primary');
 
     }
   }

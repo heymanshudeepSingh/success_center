@@ -99,7 +99,6 @@ header nav {
 
         @include flex-direction(column);
         @include justify-content(space-around);
-        /*@include align-items(center);*/
 
         margin-left: 5px;
         margin-right: 5px;
@@ -233,11 +232,11 @@ header nav {
     .theme-#{$theme} & {
 
         li {
-            color: theme-text($theme, 'secondary');
+            color: theme-text($theme, 'primary');
         }
 
         li:hover {
-            color: theme-text($theme, 'secondary-hover');
+            color: theme-text($theme, 'primary-hover');
         }
 
         a, p {

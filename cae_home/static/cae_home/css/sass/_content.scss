@@ -175,7 +175,7 @@
   @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
-        color: theme-text($theme, 'content');
+        color: theme-text($theme, 'text');
 
         a {
             color: theme-text($theme, 'link');
@@ -188,7 +188,7 @@
         table {
 
             thead, tfoot {
-                color: theme-text($theme, 'secondary');
+                color: theme-text($theme, 'primary');
             }
 
             th {
@@ -201,7 +201,7 @@
 
             th, td {
                 > a {
-                    color: theme-text($theme, 'content');
+                    color: theme-text($theme, 'text');
                     text-decoration: none;
                 }
             }

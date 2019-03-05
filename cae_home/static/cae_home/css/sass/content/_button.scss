@@ -75,11 +75,11 @@ button, a.button {
             font-size: 1rem;
             text-decoration: none;
 
-            color: theme-text($theme, 'primary-accent');
+            color: theme-text($theme, 'content-accent');
         }
 
         button:hover, a.button:hover {
-            color: theme-text($theme, 'primary');
+            color: theme-text($theme, 'content');
         }
 
     }

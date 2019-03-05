@@ -147,7 +147,7 @@ header {
   @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
-        color: theme-text($theme, 'secondary');
+        color: theme-text($theme, 'primary');
 
     }
   }
