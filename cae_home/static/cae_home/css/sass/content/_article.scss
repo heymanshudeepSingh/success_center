@@ -34,17 +34,19 @@
 //==== START ----- Block ====//
 //===========================//
 
-article {
-    padding: 10px;
+#content {
+    article, div.article, article.color, div.article-color {
+        padding: 10px;
 
-    @media only screen and (min-width: $screen-tablet-mid) {
-        padding: 15px;
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
+        @media only screen and (min-width: $screen-tablet-mid) {
+            padding: 15px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
 
-    h1, h2, h3, h4, h5, h6 {
-        padding-top: 0;
+        h1, h2, h3, h4, h5, h6 {
+            padding-top: 0;
+        }
     }
 }
 
@@ -115,7 +117,7 @@ article {
   @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
-        article {
+        article.color, div.article-color {
             background-color: theme-background($theme, 'content-alt');
             border: 1px solid theme-background($theme, 'border');
         }

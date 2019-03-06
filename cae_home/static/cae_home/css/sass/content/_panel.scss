@@ -194,29 +194,39 @@ $panel_footer_names_list: ('.footer', '.foot');
 
             @each $header in $panel_header_names_list {
                 > #{$header} {
-                    color: theme-status($theme, 'primary', 'text');
+                    // Stylings specific to wmu theme.
+                    @if $theme == "wmu" {
+                        color: $color-trans-white-75;
+                    } @else {
+                        color: theme-status($theme, 'primary', 'text');
+                    }
 
                     a:not(.button) {
                         color: theme-status($theme, 'primary', 'link');
                     }
+                }
 
-                    a:not(.button):hover {
-                        color: theme-status($theme, 'primary', 'link-hover');
-                    }
+                a:not(.button):hover {
+                    color: theme-status($theme, 'primary', 'link-hover');
                 }
             }
 
             @each $footer in $panel_footer_names_list {
                 > #{$footer} {
-                    color: theme-status($theme, 'primary', 'text');
+                    // Stylings specific to wmu theme.
+                    @if $theme == "wmu" {
+                        color: $color-trans-white-75;
+                    } @else {
+                        color: theme-status($theme, 'primary', 'text');
+                    }
 
                     a:not(.button) {
                         color: theme-status($theme, 'primary', 'link');
                     }
+                }
 
-                    a:not(.button):hover {
-                        color: theme-status($theme, 'primary', 'link-hover');
-                    }
+                a:not(.button):hover {
+                    color: theme-status($theme, 'primary', 'link-hover');
                 }
             }
 
@@ -247,10 +257,10 @@ $panel_footer_names_list: ('.footer', '.foot');
                     a:not(.button) {
                         color: theme-status($theme, 'secondary', 'link');
                     }
+                }
 
-                    a:not(.button):hover {
-                        color: theme-status($theme, 'secondary', 'link-hover');
-                    }
+                a:not(.button):hover {
+                    color: theme-status($theme, 'secondary', 'link-hover');
                 }
             }
 
@@ -261,10 +271,10 @@ $panel_footer_names_list: ('.footer', '.foot');
                     a:not(.button) {
                         color: theme-status($theme, 'secondary', 'link');
                     }
+                }
 
-                    a:not(.button):hover {
-                        color: theme-status($theme, 'secondary', 'link-hover');
-                    }
+                a:not(.button):hover {
+                    color: theme-status($theme, 'secondary', 'link-hover');
                 }
             }
         }
@@ -380,7 +390,7 @@ $panel_footer_names_list: ('.footer', '.foot');
             }
 
             a:hover:not(.button) {
-                background-color: theme-status($theme, 'default', 'border');
+                background-color: theme-status($theme, 'default', 'primary');
             }
 
             @each $header in $panel_header_names_list {
@@ -393,9 +403,9 @@ $panel_footer_names_list: ('.footer', '.foot');
                 > #{$content} {
                     background-color: theme-status($theme, 'default', 'secondary');
 
-                    a:hover:not(.button) {
+                    /*a:hover:not(.button) {
                         background-color: theme-status($theme, 'default', 'primary-hover');
-                    }
+                    }*/
                 }
             }
 
@@ -408,6 +418,7 @@ $panel_footer_names_list: ('.footer', '.foot');
 
         div.panel:hover {
             background-color: theme-status($theme, 'default', 'primary-hover');
+            border: 1px solid theme-status($theme, 'default', 'border-hover');
 
             @each $content in $panel_content_names_list {
                 > #{$content} {
@@ -424,11 +435,16 @@ $panel_footer_names_list: ('.footer', '.foot');
                 border: 1px solid theme-status($theme, 'primary', 'primary-hover');
             } @else {
                 background-color: theme-status($theme, 'primary', 'primary');
-                border: 1px solid theme-status($theme, 'default', 'border');
+                border: 1px solid theme-status($theme, 'primary', 'border');
             }
 
             a:hover:not(.button) {
-                background-color: theme-status($theme, 'primary', 'border');
+                // Stylings specific to wmu theme.
+                @if $theme == "wmu" {
+                    background-color: theme-status($theme, 'primary', 'primary-hover');
+                } @else {
+                    background-color: theme-status($theme, 'primary', 'primary');
+                }
             }
 
             @each $header in $panel_header_names_list {
@@ -452,7 +468,7 @@ $panel_footer_names_list: ('.footer', '.foot');
                 border: 1px solid theme-status($theme, 'primary', 'primary');
             } @else {
                 background-color: theme-status($theme, 'primary', 'primary-hover');
-                border: 1px solid theme-status($theme, 'default', 'border-hover');
+                border: 1px solid theme-status($theme, 'primary', 'border-hover');
             }
         }
 
@@ -479,7 +495,7 @@ $panel_footer_names_list: ('.footer', '.foot');
 
         div.panel.secondary:hover {
             background-color: theme-status($theme, 'secondary', 'primary-hover');
-            border: 1px solid theme-status($theme, 'default', 'border-hover');
+            border: 1px solid theme-status($theme, 'secondary', 'border-hover');
         }
 
         div.panel.info {

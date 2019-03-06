@@ -1,29 +1,11 @@
 
-//=============================//
-//==== General Content CSS ====//
-//=============================//
-
-// Essentially, any "content" that's rendered within the <main> DOM element
-// should be styled here.
-
-// Note: Content specific to sub-projects or sub-apps should probably be defined
-// within that sub-project or sub-app.
-// This file is meant for general content values that apply to the all projects,
-// such as overall table or form stylings, and similar things.
-// Due to the size of this file, it's been split into mutliple subfiles.
+//======================//
+//==== FileNameHere ====//
+//======================//
 
 // Import statements
-@import '_variables';
-@import '_mixins';
-
-@import 'content/_alert';
-@import 'content/_article';
-@import 'content/_button';
-@import 'content/_content_bar';
-@import 'content/_overlay_modal';
-@import 'content/_panel';
-@import 'content/_status_message';
-@import 'content/_table';
+@import '../_variables';
+@import '../_mixins';
 
 
 //================================================================================//
@@ -48,78 +30,47 @@
 // overflow, overflow-x, overflow-y, clip, clear                                  //
 //================================================================================//
 
-//=====================================//
-//==== START Generic Element Block ====//
-//=====================================//
+//===========================//
+//==== START ----- Block ====//
+//===========================//
 
 #content {
-
-    padding-bottom: 10px;
-
-    ul {
-        padding-left: 20px
-    }
-}
-
-//=====================================//
-//===== END Generic Element Block =====//
-//=====================================//
-
-
-//===================================//
-//==== START Generic Class Block ====//
-//===================================//
-
-#content {
-
-    // Hide on print viewing.
-    .display-only-web {
-        @media only print {
-            display: none !important;
-        }
-    }
-
-    // Hide on web viewing.
-    .display-only-print {
-        @media only screen {
-            display: none !important;
-        }
-    }
-
-    // Attempt to center as much as possible.
-    .center {
-        @include flex-direction(center !important);
-        @include justify-content(center !important);
-        @include align-items(center !important);
-        text-align: center !important;
-    }
-
-    // Warning for javascript requirement.
-    .javascript-warn {
+    table {
+        margin-top: 10px;
         margin-right: auto;
-        margin-top: 25px;
+        margin-bottom: 10px;
         margin-left: auto;
-        margin-bottom: 25px;
+
+        th, td {
+
+            > * {
+                display: inline-block;
+
+                width: 100%;
+                padding-top: 5px;
+                padding-right: 3px;
+                padding-bottom: 5px;
+                padding-left: 3px;
+            }
+        }
+
+        @media only screen and (min-width: $screen-tablet-mid) {
+            width: 100%;
+
+            th, td {
+
+                > * {
+                    padding-right: 8px;
+                    padding-left: 8px;
+                }
+            }
+        }
     }
 }
 
-.hidden {
-    display: none !important;
-}
-
-.fade-out {
-    padding: 0 !important;
-    margin: 0 !important;
-
-    * {
-        padding: 0 !important;
-        margin: 0 !important;
-    }
-}
-
-//=====================================//
-//===== END Generic Class Block =======//
-//=====================================//
+//===========================//
+//===== END ----- Block =====//
+//===========================//
 
 
 //================================================================================//
@@ -136,34 +87,50 @@
 // word-break, word-wrap, white-space                                             //
 //================================================================================//
 
-//=====================================//
-//==== START Generic Element Block ====//
-//=====================================//
+//===========================//
+//==== START ----- Block ====//
+//===========================//
 
 #content {
 
   @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
-        color: theme-text($theme, 'text');
+        table {
 
-        > h1, > h2, > h3, > h4, > h5, > h6 {
-            color: theme-text($theme, 'header');
-
-            // Stylings specific to wmu theme.
-            @if $theme == 'wmu' {
-                font-weight: normal;
-
-                text-align: left;
+            thead, tfoot {
+                // Stylings specific to wmu theme.
+                @if $theme == "wmu" {
+                    color: theme-status($theme, 'secondary', 'text');
+                } @else {
+                    color: theme-status($theme, 'primary', 'text');
+                }
             }
-        }
 
-        a {
-            color: theme-text($theme, 'link');
-        }
+            th {
+                font-weight: bold;
 
-        a:hover {
-            color: theme-text($theme, 'link-hover');
+                > h1, h2, h3,  h4, h5, h6 {
+                    font-size: 115%;
+                }
+            }
+
+            th, td {
+                > a, a:hover {
+                    color: theme-text($theme, 'text');
+                    text-decoration: none;
+                }
+            }
+
+            tr:hover th, tr:hover td {
+                > a {
+                    color: theme-text($theme, 'link');
+                }
+
+                > a:hover {
+                    color: theme-text($theme, 'link-hover');
+                }
+            }
         }
 
     }
@@ -171,33 +138,9 @@
 
 }
 
-//=====================================//
-//===== END Generic Element Block =====//
-//=====================================//
-
-
-//===================================//
-//==== START Generic Class Block ====//
-//===================================//
-
-#content {
-
-    .javascript-warn {
-        font-weight: bold;
-
-        text-align: center;
-    }
-}
-
-.fade-out {
-    * {
-        font-size: 0px;
-    }
-}
-
-//===================================//
-//===== END Generic Class Block =====//
-//===================================//
+//===========================//
+//===== END ----- Block =====//
+//===========================//
 
 
 //================================================================================//
@@ -228,72 +171,75 @@
 // zoom                                                                           //
 //================================================================================//
 
-//=====================================//
-//==== START Generic Element Block ====//
-//=====================================//
+//===========================//
+//==== START ----- Block ====//
+//===========================//
 
 #content {
 
   @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
-        // Stylings specific to wmu theme.
-        @if $theme == 'wmu' {
-            > h1, > h2, > h3, > h4, > h5, > h6 {
-                border-bottom: 1px solid theme-text($theme, 'header');
+        table {
+            border-collapse: collapse;
+
+            thead, tfoot {
+                // Stylings specific to wmu theme.
+                @if $theme == "wmu" {
+                    background-color: theme-status($theme, 'secondary', 'primary');
+                } @else {
+                    background-color: theme-status($theme, 'primary', 'primary');
+                }
+            }
+
+            tbody {
+                tr:nth-child(odd) {
+                    background-color: theme-background($theme, 'table-row-odd');
+                }
+
+                tr:nth-child(even) {
+                    background-color: theme-background($theme, 'table-row-even');
+                }
+
+                tr:hover {
+                    // Stylings specific to wmu theme.
+                    @if $theme == "wmu" {
+                        background-color: theme-status($theme, 'default', 'border');
+                    } @else {
+                        background-color: theme-status($theme, 'primary', 'border');
+                    }
+                }
+            }
+
+            tr {
+                // Stylings specific to wmu theme.
+                @if $theme == "wmu" {
+                    border-left: 1px solid theme-status($theme, 'secondary', 'border');
+                    border-right: 1px solid theme-status($theme, 'secondary', 'border');
+                } @else {
+                    border-left: 1px solid theme-status($theme, 'primary', 'border');
+                    border-right: 1px solid theme-status($theme, 'primary', 'border');
+                }
+            }
+
+            th {
+                // Stylings specific to wmu theme.
+                @if $theme == "wmu" {
+                    border: 1px solid theme-status($theme, 'secondary', 'border');
+                } @else {
+                    border: 1px solid theme-status($theme, 'primary', 'border');
+                }
             }
         }
 
-        hr {
-            border-style: solid;
-            border-color: theme-background($theme, 'border');
-        }
-
     }
   }
 
 }
 
-//=====================================//
-//===== END Generic Element Block =====//
-//=====================================//
-
-
-//===================================//
-//==== START Generic Class Block ====//
-//===================================//
-
-#content {
-
-  @each $theme, $theme-dict in $theme-colors {
-    .theme-#{$theme} & {
-
-        .hover-highlight:hover {
-            background-color: theme-background($theme, 'primary');
-        }
-
-        .javascript-warn {
-            background-color: theme-status($theme, 'error', 'primary');
-        }
-
-        .fade-in {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .fade-out {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-    }
-  }
-
-}
-
-//===================================//
-//===== END Generic Class Block =====//
-//===================================//
+//===========================//
+//===== END ----- Block =====//
+//===========================//
 
 
 //================================================================================//
@@ -315,44 +261,31 @@
 // speak                                                                          //
 //================================================================================//
 
-//=====================================//
-//==== START Generic Element Block ====//
-//=====================================//
+//===========================//
+//==== START ----- Block ====//
+//===========================//
 
 #content {
-    a {
+    table {
+        box-sizing: border-box;
         @include transition(color 0.5s, background-color 0.5s, border 0.5s);
+
+        thead, tbody, tfoot {
+            box-sizing: border-box;
+            @include transition(color 0.5s, background-color 0.5s, border 0.5s);
+        }
+
+        tr, th, td {
+            box-sizing: border-box;
+            @include transition(color 0.5s, background-color 0.5s, border 0.5s);
+
+            > * {
+                box-sizing: border-box;
+            }
+        }
     }
 }
 
-//===================================//
-//==== End Generic Element Block ====//
-//===================================//
-
-
-//===================================//
-//==== START Generic Class Block ====//
-//===================================//
-
-#content {
-
-    .hover-highlight:hover {
-        cursor: pointer;
-    }
-}
-
-.fade-in {
-    @include transition(color 0.5s, background-color 0.5s, border 0.5s, opacity 1s linear, visibility 0s 1s);
-}
-
-.fade-out {
-    @include transition(padding 0.9s, margin 0.9s, font-size 0.9s, color 0.5s, background-color 0.5s, border 0.5s, opacity 0.9s linear, visibility 0s 0.9s);
-
-    * {
-        @include transition(padding 0.9s, margin 0.9s, font-size 0.9s, color 0.5s, background-color 0.5s, border 0.5s);
-    }
-}
-
-//===================================//
-//===== END Generic Class Block =====//
-//===================================//
+//===========================//
+//===== END ----- Block =====//
+//===========================//
