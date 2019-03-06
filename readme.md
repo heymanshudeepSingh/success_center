@@ -43,6 +43,10 @@ In order to have live updates, you need to run **redis** which handles messaging
 
 If this does not seem to be enough, consult: https://www.python-ldap.org/en/latest/installing.html
 
+## Sass Notes
+Sass is a css preprocessor. It's used to compile css. To install:
+* ```sudo apt install ruby-sass```
+
 ## React Notes
 
 Unfortunately, React seems to prefer a syntax that browsers do not fully understand, out of the gate. To correct for
