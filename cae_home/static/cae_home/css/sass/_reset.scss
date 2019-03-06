@@ -36,14 +36,16 @@
 //==== START General Element Block ====//
 //=====================================//
 
-html, body, hgroup, header, footer, nav,
-article, section, aside, figure, figcaption,
-h1, h2, h3, h4, h5, h6,
-ol, ul, li,
-div, span, p, img, a,
-{
+html {
     margin: 0;
     padding: 0;
+}
+
+@each $html_element in $html_element_list {
+    #{$html_element} {
+        margin: 0;
+        padding: 0;
+    }
 }
 
 @each $header_element in $header_element_list {
@@ -113,50 +115,79 @@ div, span, p, img, a,
 //==== START Font Size Block ====//
 //===============================//
 
-html, body, hgroup, header, footer, nav,
-article, section, aside, figure, figcaption,
-h1, h2, h3, h4, h5, h6,
-ol, ul, li,
-div, span, p, img, a, button
-{
-    /*@media only screen {
-        font-size: 4.5vw;
+html {
+    font-size: 16px;
+}
+
+// Set general font sizes for all basic html elements.
+@each $html_element in $html_element_list {
+    #{$html_element} {
+        @media only screen {
+            @each $font-option, $font-option-value in $font-size-options {
+                .font-size-#{$font-option} & {
+                    font-size: font-option($font-option);
+                }
+            }
+        }
+    }
+}
+
+// Set header font sizes for screen displays.
+@media only screen {
+    @each $font-option, $font-option-value in $font-size-options {
+
+        .font-size-#{$font-option} h1 {
+            font-size: font-option($font-option) * 2;
+        }
+
+        .font-size-#{$font-option} h2 {
+            font-size: font-option($font-option) * 1.74;
+        }
+
+        .font-size-#{$font-option} h3 {
+            font-size: font-option($font-option) * 1.51;
+        }
+
+        .font-size-#{$font-option} h4 {
+            font-size: font-option($font-option) * 1.32;
+        }
+
+        .font-size-#{$font-option} h5 {
+            font-size: font-option($font-option) * 1.15;
+        }
+
+        .font-size-#{$font-option} h6 {
+            font-size: font-option($font-option) * 1.05;
+        }
+    }
+}
+
+// Set header font sizes for print displays.
+@media only print {
+    font-size: 11px;
+
+    h1 {
+        font-size: 200%;
     }
 
-    @media only screen and (min-width: 400px) and (max-width: $screen-phone-small) {
-        font-size: 3.8vw;
+    h2 {
+        font-size: 174%;
     }
 
-    @media only screen and (min-width: $screen-phone-small) and (max-width: $screen-phone-mid) {
-        font-size: 3.4vw;
+    h3 {
+        font-size: 151%;
     }
 
-    @media only screen and (min-width: $screen-phone-mid) and (max-width: $screen-phone-max) {
-        font-size: 2.7vw;
+    h4 {
+        font-size: 132%;
     }
 
-    @media only screen and (min-width: $screen-tablet-min) and (max-width: $screen-tablet-max) {
-        font-size: 2.1vw;
+    h5 {
+        font-size: 115%;
     }
 
-    @media only screen and (min-width: $screen-tablet-mid) and (max-width: $screen-tablet-max) {
-        font-size: 1.8vw;
-    }
-
-    @media only screen and (min-width: $screen-laptop-min) and (max-width: $screen-laptop-mid) {
-        font-size: 1.4vw;
-    }
-
-    @media only screen and (min-width: $screen-laptop-mid) and (max-width: $screen-laptop-max) {
-        font-size: 1.1vw;
-    }
-
-    @media only screen and (min-width: $screen-desktop-min) {
-        font-size: 0.9vw;
-    }*/
-
-    @media only print {
-        font-size: 11px;
+    h6 {
+        font-size: 100%;
     }
 }
 
@@ -166,29 +197,7 @@ div, span, p, img, a, button
     }
 }
 
-h1 {
-    font-size: 200%;
-}
 
-h2 {
-    font-size: 174%;
-}
-
-h3 {
-    font-size: 151%;
-}
-
-h4 {
-    font-size: 132%;
-}
-
-h5 {
-    font-size: 115%;
-}
-
-h6 {
-    font-size: 100%;
-}
 
 //===============================//
 //===== END Font Size Block =====//
@@ -227,15 +236,18 @@ h6 {
 //==== START ----- Block ====//
 //===========================//
 
-html, body, hgroup, header, footer, nav,
-article, section, aside, figure, figcaption,
-h1, h2, h3, h4, h5, h6,
-ol, ul, li,
-div, span, p, img, a,
-{
+html {
     vertical-align: baseline;
 
     border: 0;
+}
+
+@each $html_element in $html_element_list {
+    #{$html_element} {
+        vertical-align: baseline;
+
+        border: 0;
+    }
 }
 
 //===========================//

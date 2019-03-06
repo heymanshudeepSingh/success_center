@@ -20,6 +20,12 @@
 //============================== Element Variables ===============================//
 //================================================================================//
 
+$html_element_list: ('body', 'hgroup', 'header', 'footer', 'nav',
+    'article', 'section', 'aside', 'figure', 'figcaption',
+    'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+    'ol', 'ul', 'li',
+    'div', 'span', 'p', 'img', 'a');
+
 $header_element_list: ('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
 $article_element_list: ('article', 'div.article', 'article.color',
     'div.article.color', 'section', 'div.section');
@@ -809,6 +815,39 @@ $theme-colors: (
 //==== End Theme Functions Block ====//
 //===================================//
 
+
+//================================================================================//
+//================================== FontSizing ==================================//
+//================================================================================//
+
+// Various font size options.
+// Assumes that the base font size for the browser is 16px.
+// Each option scales from that.
+
+$font-size-options: (
+    'xs': (
+        font-size: .75rem, // 12px
+    ),
+    'sm': (
+        font-size: .875rem, // 14px
+    ),
+    'base': (
+        font-size: 1rem, // 16px
+    ),
+    'md': (
+        font-size: 1.125rem, // 18px
+    ),
+    'lg': (
+        font-size: 1.25rem, // 20px
+    ),
+    'xl': (
+        font-size: 1.5rem, // 24px
+    ),
+);
+
+@function font-option($option) {
+    @return map-get(map-get($font-size-options, $option), 'font-size');
+}
 
 
 //================================================================================//
