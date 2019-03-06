@@ -31,6 +31,9 @@ class ProfileModelTests(TestCase):
             zip="Test Zip",
         )
         cls.phone_number = models.PhoneNumber.objects.create(phone_number='1234567890')
+        cls.site_theme = models.SiteTheme.objects.get(pk=1)
+        cls.user_timezone = 'America/Detroit'
+        cls.font_size = models.Profile.FONT_BASE
 
     def setUp(self):
         self.test_profile = models.Profile.objects.get(user=self.user)
@@ -40,6 +43,10 @@ class ProfileModelTests(TestCase):
     def test_model_creation(self):
         self.assertEqual(self.test_profile.user, self.user)
         self.assertEqual(self.test_profile.address, self.address)
+        self.assertEqual(self.test_profile.site_theme, self.site_theme)
+        self.assertEqual(self.test_profile.user_timezone, self.user_timezone)
+        self.assertEqual(self.test_profile.desktop_font_size, self.font_size)
+        self.assertEqual(self.test_profile.mobile_font_size, self.font_size)
 
     def test_string_representation(self):
         self.assertEqual(str(self.test_profile), str(self.test_profile.user))

@@ -61,6 +61,11 @@
           <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
           <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
         {% endif %}
+
+        <script>
+          var user_site_option_desktop_font_size = '{{ desktop_font_size }}';
+          var user_site_option_mobile_font_size = '{{ mobile_font_size }}';
+        </script>
       {% endblock base_scripts %}
       {% block extra_scripts %}{% endblock extra_scripts %}
     </head>
@@ -69,7 +74,6 @@
   {% block body %}
 
     <body class="theme-{{ site_theme.name }} {% block body_extra_classes %}grid{% endblock body_extra_classes %}">
-
 
       {% block header %}
         {% include 'cae_home/header.html' with app_nav='cae_home/nav/default_app_nav.html' %}

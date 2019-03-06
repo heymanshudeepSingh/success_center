@@ -57,7 +57,7 @@ class GetProjectDetailMiddleware(object):
         return response
 
 
-class GetSiteThemeMiddleware(object):
+class GetUserSiteOptionsMiddleware(object):
     """
     Gets site theme for all views.
     """
@@ -73,8 +73,12 @@ class GetSiteThemeMiddleware(object):
         if request.user.is_authenticated:
             # User authenticated. Attempt to get user's model.
             response.context_data['site_theme'] = request.user.profile.site_theme
+            response.context_data['desktop_font_size'] = request.user.profile.get_desktop_font_size()
+            response.context_data['mobile_font_size'] = request.user.profile.get_mobile_font_size()
         else:
             # Default to "wmu" site theme.
             response.context_data['site_theme'] = models.SiteTheme.objects.get(name='wmu')
+            response.context_data['desktop_font_size'] = 'base'
+            response.context_data['mobile_font_size'] = 'base'
 
         return response

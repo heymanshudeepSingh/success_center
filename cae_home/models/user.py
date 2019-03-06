@@ -54,6 +54,22 @@ class Profile(models.Model):
     A profile for a given user.
     Contains additional user information not regarding authentication.
     """
+    # Preset field choices.
+    FONT_XS = 0
+    FONT_SM = 1
+    FONT_BASE = 2
+    FONT_MD = 3
+    FONT_LG = 4
+    FONT_XL = 5
+    FONT_SIZE_CHOICES = (
+        (FONT_XS, 'Extra Small'),
+        (FONT_SM, 'Small'),
+        (FONT_BASE, 'Default'),
+        (FONT_MD, 'Medium'),
+        (FONT_LG, 'Large'),
+        (FONT_XL, 'Extra Large'),
+    )
+
     # Relationship Keys.
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     address = models.ForeignKey('Address', on_delete=models.CASCADE, blank=True, null=True)
@@ -62,8 +78,11 @@ class Profile(models.Model):
 
     # Model fields.
     user_timezone = models.CharField(
-        choices=[(x, x) for x in pytz.common_timezones], default="America/Detroit",
-        max_length=255)
+        choices=[(x, x) for x in pytz.common_timezones], blank=True, default="America/Detroit",
+        max_length=255
+    )
+    desktop_font_size = models.PositiveSmallIntegerField(choices=FONT_SIZE_CHOICES, blank=True, default=2)
+    mobile_font_size = models.PositiveSmallIntegerField(choices=FONT_SIZE_CHOICES, blank=True, default=2)
 
     # Self-setting/Non-user-editable fields.
     date_created = models.DateTimeField(auto_now_add=True)
@@ -83,6 +102,29 @@ class Profile(models.Model):
         self.full_clean()
         super(Profile, self).save(*args, **kwargs)
 
+    def get_font_size(self, value):
+        if value is 0:
+            return 'xs'
+        elif value is 1:
+            return 'sm'
+        elif value is 3:
+            return 'md'
+        elif value is 4:
+            return 'lg'
+        elif value is 5:
+            return 'xl'
+        else:
+            return 'base'
+
+    def get_desktop_font_size(self, value=None):
+        if value is None:
+            value = self.desktop_font_size
+        return self.get_font_size(value)
+
+    def get_mobile_font_size(self, value=None):
+        if value is None:
+            value = self.mobile_font_size
+        return self.get_font_size(value)
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):

@@ -33,7 +33,7 @@ MIDDLEWARE = [
     'admin_reorder.middleware.ModelAdminReorder',
 
     'cae_home.middleware.GetProjectDetailMiddleware',
-    'cae_home.middleware.GetSiteThemeMiddleware',
+    'cae_home.middleware.GetUserSiteOptionsMiddleware',
     'cae_home.middleware.SetTimezoneMiddleware',
 ]
 
