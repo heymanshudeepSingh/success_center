@@ -1,6 +1,15 @@
 #!/bin/bash
+# Script to reset database, including fresh migrations.
+# Currently only works with sqlite databases.
+
+
 # Abort on error
-#set -e
+set -e
+
+
+# Change to location of script's directory.
+# Otherwise logic is inconsistent, based on where terminal initially is.
+cd "$(dirname "$0")"
 
 
 function main () {
@@ -11,9 +20,9 @@ function main () {
     rm -f ../db.sqlite3
 
     # Activate venv if present.
-    if [[ -d ".venv" ]]
+    if [[ -d "../.venv" ]]
     then
-        . .venv/bin/activate
+        . ../.venv/bin/activate
     fi
 
     # Recreate migrations.

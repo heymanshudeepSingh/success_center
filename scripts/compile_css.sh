@@ -2,6 +2,15 @@
 # Script to compile all css files in all subprojects.
 
 
+# Abort on error
+set -e
+
+
+# Change to location of script's directory.
+# Otherwise logic is inconsistent, based on where terminal initially is.
+cd "$(dirname "$0")"
+
+
 # Global Variables.
 args=()
 
@@ -11,7 +20,6 @@ args=()
  # Note that parameters are normally passed as $1, $2, $3...
  # To dynamically read all of them, some logic is needed
  ##
-
 # Get first parameters by using a counter as part of the arg name.
 counter=1
 parameter="$(eval echo "\$$counter")"
@@ -52,7 +60,7 @@ function main () {
     done
 
     # Determine directories to compile.
-    for dir in ./*/*/*/* ./*/*/*/*/*/*
+    for dir in ../*/*/*/* ../*/*/*/*/*/*
     do
         # Check if actually a directory.
         if [[ -d $dir ]]

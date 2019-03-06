@@ -2,6 +2,15 @@
 # Script to remove all migrations.
 
 
+# Abort on error
+set -e
+
+
+# Change to location of script's directory.
+# Otherwise logic is inconsistent, based on where terminal initially is.
+cd "$(dirname "$0")"
+
+
 function main () {
     # Loop through all directories in 2nd and 4th levels.
     for dir in ../*/* ../*/*/*/*
