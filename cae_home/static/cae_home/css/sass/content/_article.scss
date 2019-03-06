@@ -35,17 +35,21 @@
 //===========================//
 
 #content {
-    article, div.article, article.color, div.article-color {
-        padding: 10px;
+    @each $article_element in $article_element_list {
+        #{$article_element} {
+            padding: 10px;
 
-        @media only screen and (min-width: $screen-tablet-mid) {
-            padding: 15px;
-            margin-top: 10px;
-            margin-bottom: 10px;
-        }
+            @media only screen and (min-width: $screen-tablet-mid) {
+                padding: 15px;
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
 
-        h1, h2, h3, h4, h5, h6 {
-            padding-top: 0;
+            @each $header_element in $header_element_list {
+                #{$header_element} {
+                    padding-top: 0;
+                }
+            }
         }
     }
 }
@@ -73,7 +77,33 @@
 //==== START ----- Block ====//
 //===========================//
 
+#content {
 
+  @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & {
+
+        @each $article_element in $article_element_list {
+            #{$article_element} {
+
+                @each $header_element in $header_element_list {
+                    > #{$header_element} {
+                        color: theme-text($theme, 'header');
+
+                        // Stylings specific to wmu theme.
+                        @if $theme == 'wmu' {
+                            font-weight: normal;
+                            text-align: left;
+                        }
+                    }
+                }
+
+            }
+        }
+
+    }
+  }
+
+}
 
 //===========================//
 //===== END ----- Block =====//
@@ -116,6 +146,18 @@
 
   @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
+
+        @each $article_element in $article_element_list {
+            #{$article_element} {
+
+                @each $header_element in $header_element_list {
+                    > #{$header_element} {
+                        border-bottom: 1px solid theme-status($theme, 'default', 'border');
+                    }
+                }
+
+            }
+        }
 
         article.color, div.article-color {
             background-color: theme-background($theme, 'content-alt');

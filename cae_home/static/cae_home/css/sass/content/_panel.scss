@@ -8,11 +8,6 @@
 @import '../_mixins';
 
 
-$panel_header_names_list: ('.header', '.head');
-$panel_content_names_list: ('.content', '.body');
-$panel_footer_names_list: ('.footer', '.foot');
-
-
 //================================================================================//
 //================================= Positioning ==================================//
 //================================== Includes: ===================================//
@@ -64,8 +59,8 @@ $panel_footer_names_list: ('.footer', '.foot');
             padding-left: 7px;
         }
 
-        @each $header in $panel_header_names_list {
-            > #{$header} {
+        @each $panel_header_element in $panel_header_element_list {
+            > #{$panel_header_element} {
                 @include display-flex;
                 @include flex-direction(row);
                 @include justify-content(space-between);
@@ -74,20 +69,22 @@ $panel_footer_names_list: ('.footer', '.foot');
 
                 padding: 10px;
 
-                > h1, h2, h3, h4, h5, h6 {
-                    padding-top: 0;
+                @each $header_element in $header_element_list {
+                    > #{$header_element} {
+                        padding-top: 0;
+                    }
                 }
             }
         }
 
-        @each $content in $panel_content_names_list {
-            > #{$content} {
+        @each $panel_content_element in $panel_content_element_list {
+            > #{$panel_content_element} {
                 padding: 10px;
             }
         }
 
-        @each $footer in $panel_footer_names_list {
-            > #{$footer} {
+        @each $panel_footer_element in $panel_footer_element_list {
+            > #{$panel_footer_element} {
                 @include display-flex;
                 @include flex-direction(row);
                 @include justify-content(space-between);
@@ -143,21 +140,23 @@ $panel_footer_names_list: ('.footer', '.foot');
                 color: theme-status($theme, 'default', 'link-hover');
             }
 
-            @each $header in $panel_header_names_list {
-                > #{$header} {
+            @each $panel_header_element in $panel_header_element_list {
+                > #{$panel_header_element} {
                     font-size: 110%;
                     font-weight: bold;
 
                     color: theme-text($theme, 'content');
 
-                    > h1, h2, h3, h4, h5, h6 {
-                        font-size: 110%;
+                    @each $header_element in $header_element_list {
+                        > #{$header_element} {
+                            font-size: 110%;
+                        }
                     }
                 }
             }
 
-            @each $content in $panel_content_names_list {
-                > #{$content} {
+            @each $panel_content_element in $panel_content_element_list {
+                > #{$panel_content_element} {
                     a:not(.button) {
                         color: theme-text($theme, 'link');
                     }
@@ -168,8 +167,8 @@ $panel_footer_names_list: ('.footer', '.foot');
                 }
             }
 
-            @each $footer in $panel_footer_names_list {
-                > #{$footer} {
+            @each $panel_footer_element in $panel_footer_element_list {
+                > #{$panel_footer_element} {
                     color: theme-text($theme, 'content');
                 }
             }
@@ -177,14 +176,14 @@ $panel_footer_names_list: ('.footer', '.foot');
 
         div.panel:hover {
 
-            @each $header in $panel_header_names_list {
-                > #{$header} {
+            @each $panel_header_element in $panel_header_element_list {
+                > #{$panel_header_element} {
                     color: theme-text($theme, 'content-hover');
                 }
             }
 
-            @each $footer in $panel_footer_names_list {
-                > #{$footer} {
+            @each $panel_footer_element in $panel_footer_element_list {
+                > #{$panel_footer_element} {
                     color: theme-text($theme, 'content-hover');
                 }
             }
@@ -192,8 +191,8 @@ $panel_footer_names_list: ('.footer', '.foot');
 
         div.panel.primary {
 
-            @each $header in $panel_header_names_list {
-                > #{$header} {
+            @each $panel_header_element in $panel_header_element_list {
+                > #{$panel_header_element} {
                     // Stylings specific to wmu theme.
                     @if $theme == "wmu" {
                         color: $color-trans-white-75;
@@ -211,8 +210,8 @@ $panel_footer_names_list: ('.footer', '.foot');
                 }
             }
 
-            @each $footer in $panel_footer_names_list {
-                > #{$footer} {
+            @each $panel_footer_element in $panel_footer_element_list {
+                > #{$panel_footer_element} {
                     // Stylings specific to wmu theme.
                     @if $theme == "wmu" {
                         color: $color-trans-white-75;
@@ -235,14 +234,14 @@ $panel_footer_names_list: ('.footer', '.foot');
 
         div.panel.primary:hover {
 
-            @each $header in $panel_header_names_list {
-                > #{$header} {
+            @each $panel_header_element in $panel_header_element_list {
+                > #{$panel_header_element} {
                     color: theme-status($theme, 'primary', 'link-hover');
                 }
             }
 
-            @each $footer in $panel_footer_names_list {
-                > #{$footer} {
+            @each $panel_footer_element in $panel_footer_element_list {
+                > #{$panel_footer_element} {
                     color: theme-status($theme, 'primary', 'link-hover');
                 }
             }
@@ -250,8 +249,8 @@ $panel_footer_names_list: ('.footer', '.foot');
 
         div.panel.secondary {
 
-            @each $header in $panel_header_names_list {
-                > #{$header} {
+            @each $panel_header_element in $panel_header_element_list {
+                > #{$panel_header_element} {
                     color: theme-status($theme, 'secondary', 'text');
 
                     a:not(.button) {
@@ -264,8 +263,8 @@ $panel_footer_names_list: ('.footer', '.foot');
                 }
             }
 
-            @each $footer in $panel_footer_names_list {
-                > #{$footer} {
+            @each $panel_footer_element in $panel_footer_element_list {
+                > #{$panel_footer_element} {
                     color: theme-status($theme, 'secondary', 'text');
 
                     a:not(.button) {
@@ -281,14 +280,14 @@ $panel_footer_names_list: ('.footer', '.foot');
 
         div.panel.secondary:hover {
 
-            @each $header in $panel_header_names_list {
-                > #{$header} {
+            @each $panel_header_element in $panel_header_element_list {
+                > #{$panel_header_element} {
                     color: theme-text($theme, 'secondary-hover');
                 }
             }
 
-            @each $footer in $panel_footer_names_list {
-                > #{$footer} {
+            @each $panel_footer_element in $panel_footer_element_list {
+                > #{$panel_footer_element} {
                     color: theme-text($theme, 'secondary-hover');
                 }
             }
@@ -393,14 +392,14 @@ $panel_footer_names_list: ('.footer', '.foot');
                 background-color: theme-status($theme, 'default', 'primary');
             }
 
-            @each $header in $panel_header_names_list {
-                > #{$header} {
+            @each $panel_header_element in $panel_header_element_list {
+                > #{$panel_header_element} {
                     border-bottom: 1px solid theme-status($theme, 'default', 'border');
                 }
             }
 
-            @each $content in $panel_content_names_list {
-                > #{$content} {
+            @each $panel_content_element in $panel_content_element_list {
+                > #{$panel_content_element} {
                     background-color: theme-status($theme, 'default', 'secondary');
 
                     /*a:hover:not(.button) {
@@ -409,8 +408,8 @@ $panel_footer_names_list: ('.footer', '.foot');
                 }
             }
 
-            @each $footer in $panel_footer_names_list {
-                > #{$footer} {
+            @each $panel_footer_element in $panel_footer_element_list {
+                > #{$panel_footer_element} {
                     border-top: 1px solid theme-status($theme, 'default', 'border');
                 }
             }
@@ -420,8 +419,8 @@ $panel_footer_names_list: ('.footer', '.foot');
             background-color: theme-status($theme, 'default', 'primary-hover');
             border: 1px solid theme-status($theme, 'default', 'border-hover');
 
-            @each $content in $panel_content_names_list {
-                > #{$content} {
+            @each $panel_content_element in $panel_content_element_list {
+                > #{$panel_content_element} {
                     background-color: theme-status($theme, 'default', 'secondary-hover');
                 }
             }
@@ -447,14 +446,14 @@ $panel_footer_names_list: ('.footer', '.foot');
                 }
             }
 
-            @each $header in $panel_header_names_list {
-                > #{$header} {
+            @each $panel_header_element in $panel_header_element_list {
+                > #{$panel_header_element} {
                     border-bottom: 1px solid theme-status($theme, 'primary', 'border');
                 }
             }
 
-            @each $footer in $panel_footer_names_list {
-                > #{$footer} {
+            @each $panel_footer_element in $panel_footer_element_list {
+                > #{$panel_footer_element} {
                     border-top: 1px solid theme-status($theme, 'primary', 'border');
                 }
             }
@@ -480,14 +479,14 @@ $panel_footer_names_list: ('.footer', '.foot');
                 background-color: theme-status($theme, 'secondary', 'primary');
             }
 
-            @each $header in $panel_header_names_list {
-                > #{$header} {
+            @each $panel_header_element in $panel_header_element_list {
+                > #{$panel_header_element} {
                     border-bottom: 1px solid theme-status($theme, 'secondary', 'border');
                 }
             }
 
-            @each $footer in $panel_footer_names_list {
-                > #{$footer} {
+            @each $panel_footer_element in $panel_footer_element_list {
+                > #{$panel_footer_element} {
                     border-top: 1px solid theme-status($theme, 'secondary', 'border');
                 }
             }
@@ -506,14 +505,14 @@ $panel_footer_names_list: ('.footer', '.foot');
                 background-color: theme-status($theme, 'info', 'primary');
             }
 
-            @each $header in $panel_header_names_list {
-                > #{$header} {
+            @each $panel_header_element in $panel_header_element_list {
+                > #{$panel_header_element} {
                     border-bottom: 1px solid theme-status($theme, 'info', 'border');
                 }
             }
 
-            @each $footer in $panel_footer_names_list {
-                > #{$footer} {
+            @each $panel_footer_element in $panel_footer_element_list {
+                > #{$panel_footer_element} {
                     border-top: 1px solid theme-status($theme, 'info', 'border');
                 }
             }
@@ -532,14 +531,14 @@ $panel_footer_names_list: ('.footer', '.foot');
                 background-color: theme-status($theme, 'success', 'primary');
             }
 
-            @each $header in $panel_header_names_list {
-                > #{$header} {
+            @each $panel_header_element in $panel_header_element_list {
+                > #{$panel_header_element} {
                     border-bottom: 1px solid theme-status($theme, 'success', 'border');
                 }
             }
 
-            @each $footer in $panel_footer_names_list {
-                > #{$footer} {
+            @each $panel_footer_element in $panel_footer_element_list {
+                > #{$panel_footer_element} {
                     border-top: 1px solid theme-status($theme, 'success', 'border');
                 }
             }
@@ -558,14 +557,14 @@ $panel_footer_names_list: ('.footer', '.foot');
                 background-color: theme-status($theme, 'warn', 'primary');
             }
 
-            @each $header in $panel_header_names_list {
-                > #{$header} {
+            @each $panel_header_element in $panel_header_element_list {
+                > #{$panel_header_element} {
                     border-bottom: 1px solid theme-status($theme, 'warn', 'border');
                 }
             }
 
-            @each $footer in $panel_footer_names_list {
-                > #{$footer} {
+            @each $panel_footer_element in $panel_footer_element_list {
+                > #{$panel_footer_element} {
                     border-top: 1px solid theme-status($theme, 'warn', 'border');
                 }
             }
@@ -584,14 +583,14 @@ $panel_footer_names_list: ('.footer', '.foot');
                 background-color: theme-status($theme, 'error', 'primary');
             }
 
-            @each $header in $panel_header_names_list {
-                > #{$header} {
+            @each $panel_header_element in $panel_header_element_list {
+                > #{$panel_header_element} {
                     border-bottom: 1px solid theme-status($theme, 'error', 'border');
                 }
             }
 
-            @each $footer in $panel_footer_names_list {
-                > #{$footer} {
+            @each $panel_footer_element in $panel_footer_element_list {
+                > #{$panel_footer_element} {
                     border-top: 1px solid theme-status($theme, 'error', 'border');
                 }
             }

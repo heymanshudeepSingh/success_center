@@ -59,6 +59,12 @@
     ul {
         padding-left: 20px
     }
+
+    @each $header_element in $header_element_list {
+        #{$header_element} {
+            margin-bottom: 10px;
+        }
+    }
 }
 
 //=====================================//
@@ -147,14 +153,15 @@
 
         color: theme-text($theme, 'text');
 
-        > h1, > h2, > h3, > h4, > h5, > h6 {
-            color: theme-text($theme, 'header');
+        @each $header_element in $header_element_list {
+            > #{$header_element} {
+                color: theme-text($theme, 'header');
 
-            // Stylings specific to wmu theme.
-            @if $theme == 'wmu' {
-                font-weight: normal;
-
-                text-align: left;
+                // Stylings specific to wmu theme.
+                @if $theme == 'wmu' {
+                    font-weight: normal;
+                    text-align: left;
+                }
             }
         }
 
@@ -237,12 +244,12 @@
   @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
-        // Stylings specific to wmu theme.
-        @if $theme == 'wmu' {
-            > h1, > h2, > h3, > h4, > h5, > h6 {
-                border-bottom: 1px solid theme-text($theme, 'header');
+        @each $header_element in $header_element_list {
+            > #{$header_element} {
+                border-bottom: 1px solid theme-status($theme, 'default', 'border');
             }
         }
+
 
         hr {
             border-style: solid;

@@ -46,8 +46,10 @@ div, span, p, img, a,
     padding: 0;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    padding-top: 10px;
+@each $header_element in $header_element_list {
+    #{$header_element} {
+        padding-top: 10px;
+    }
 }
 
 //=====================================//
@@ -158,8 +160,10 @@ div, span, p, img, a, button
     }
 }
 
-h1, h2, h3, h4, h5, h6 {
-    text-align: center;
+@each $header_element in $header_element_list {
+    #{$header_element} {
+        text-align: center;
+    }
 }
 
 h1 {

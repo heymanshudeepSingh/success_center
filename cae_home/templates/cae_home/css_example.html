@@ -7,16 +7,16 @@
 {% block content %}
 
   <h1>CAE Home CSS Examples</h1>
-  <a href="{% url 'cae_home:index' %}">Return to Index</a>
-  <p>Welcome to the CAE Workspace CSS Example Page.</p>
-  <p>You should only be seeing this page if serving in development mode.</p>
-  <br>
-  <p>This page contains various, reusable css stylings. Use these for reference when formatting new pages.</p>
-
-  <hr>
-
-  <h2>Table Examples</h2>
   <article>
+    <a href="{% url 'cae_home:index' %}">Return to Index</a>
+    <p>Welcome to the CAE Workspace CSS Example Page.</p>
+    <p>You should only be seeing this page if serving in development mode.</p>
+    <br>
+    <p>This page contains various, reusable css stylings. Use these for reference when formatting new pages.</p>
+  </article>
+
+  <article>
+    <h2>Table Examples</h2>
     <table>
       <caption>This is a table caption.</caption>
       <thead>
@@ -64,37 +64,35 @@
     </table>
   </article>
 
-  <hr>
-
-  <h2>Button Element Examples</h2>
   <article>
-    <h3>Standard Button Elements</h3>
-    <button>Default</button>
-    <button class="primary">Primary</button>
-    <button class="secondary">Secondary</button>
-    <button class="info">Info</button>
-    <button class="success">Success</button>
-    <button class="warning">Warning</button>
-    <button class="error">Error</button>
-    <button class="danger">Danger</button>
+    <h2>Button Element Examples</h2>
+    <section class="center">
+      <h3>Standard Button Elements</h3>
+      <button>Default</button>
+      <button class="primary">Primary</button>
+      <button class="secondary">Secondary</button>
+      <button class="info">Info</button>
+      <button class="success">Success</button>
+      <button class="warning">Warning</button>
+      <button class="error">Error</button>
+      <button class="danger">Danger</button>
+    </section>
 
-    <hr>
-
-    <h3>Anchor Button Elements</h3>
-    <a href="" class="button">Default</a>
-    <a href="" class="button primary">Primary</a>
-    <a href="" class="button secondary">Secondary</a>
-    <a href="" class="button info">Info</a>
-    <a href="" class="button success">Success</a>
-    <a href="" class="button warning">Warning</a>
-    <a href="" class="button error">Error</a>
-    <a href="" class="button danger">Danger</a>
+    <section class="center">
+      <h3>Anchor Button Elements</h3>
+      <a href="" class="button">Default</a>
+      <a href="" class="button primary">Primary</a>
+      <a href="" class="button secondary">Secondary</a>
+      <a href="" class="button info">Info</a>
+      <a href="" class="button success">Success</a>
+      <a href="" class="button warning">Warning</a>
+      <a href="" class="button error">Error</a>
+      <a href="" class="button danger">Danger</a>
+    </section>
   </article>
 
-  <hr>
-
-  <h2>Alert Examples</h2>
   <article>
+    <h2>Alert Examples</h2>
     <div class="alert"><p>Default</p> <a href="">Test Link</a></div>
     <div class="alert primary"><p>Primary</p> <a href="">Test Link</a></div>
     <div class="alert secondary"><p>Secondary</p> <a href="">Test Link</a></div>
@@ -105,10 +103,8 @@
     <div class="alert danger"><p>Danger</p> <a href="">Test Link</a></div>
   </article>
 
-  <hr>
-
-  <h2>Status Message Examples</h2>
   <article>
+    <h2>Status Message Examples</h2>
     <ul id="status-message-container">
       <li class="message">
         <p>Default <a href="">Test Link</a> Default</p>
@@ -145,10 +141,8 @@
     </ul>
   </article>
 
-  <hr>
-
-  <h2>Panel Examples</h2>
   <article>
+    <h2>Panel Examples</h2>
     <p>Note: The stylings (".header" or ".head"), (".content" or ".body"), and (".footer" or ".foot") all work for
       targeting the appropriate panel children.</p>
     <div class="panel">
@@ -241,65 +235,65 @@
     </div>
   </article>
 
-  <hr>
-
-  <h2>Specific Usage Examples</h2>
   <article>
+    <h2>Specific Usage Examples</h2>
 
-    <div class="panel">
-      <div class="header"><p>This panel only has a header section.</p></div>
-    </div>
-
-    <div class="panel">
-      <div class="content"><p>This panel only has a content section.</p></div>
-    </div>
-
-    <div class="panel">
-      <div class="footer"><p>This panel only has a footer section.</p></div>
-    </div>
-
-    <hr>
-
-    <div class="panel">
-      <div class="header">
-        <p>Panel with different status buttons and no content section.</p>
-      </div>
-      <div class="footer">
-        <div><button>Default Button</button><a class="button" href="">Default a-Button</a></div>
-        <div><button class="primary">Primary Button</button><a class="button primary" href="">Primary a-Button</a></div>
-        <div><button class="secondary">Secondary Button</button><a class="button secondary" href="">Secondary a-Button</a></div>
-        <div><button class="info">Info Button</button><a class="button info" href="">Info a-Button</a></div>
-        <div><button class="success">Success Button</button><a class="button success" href="">Success a-Button</a></div>
-        <div><button class="warning">Warning Button</button><a class="button warning" href="">Warning a-Button</a></div>
-        <div><button class="error">Error Button</button><a class="button error" href="">Error a-Button</a></div>
-        <div><button class="danger">Danger Button</button><a class="button danger" href="">Danger a-Button</a></div>
-      </div>
-    </div>
-
-    <hr>
-
-    <div class="panel">
-      <div class="header">
-        <h3>This is panel with nested subpanels</h3>
-      </div>
+    <section>
       <div class="panel">
-        <div class="header"><p>Subpanel 1</p></div>
-        <div class="content"><p>Subpanel 1 Content</p></div>
+        <div class="header"><p>This panel only has a header section.</p></div>
       </div>
+
       <div class="panel">
-        <div class="header"><p>Subpanel 2</p></div>
-        <div class="content"><p>Subpanel 2 Content</p></div>
-        <div class="footer"><p>Subpanel 2 Footer</p></div>
+        <div class="content"><p>This panel only has a content section.</p></div>
       </div>
+
       <div class="panel">
-        <div class="header"><p>Subpanel 3</p></div>
-        <div class="content"><p>Subpanel 3 Content</p></div>
+        <div class="footer"><p>This panel only has a footer section.</p></div>
       </div>
+    </section>
+
+    <section>
       <div class="panel">
-        <div class="header"><p>Subpanel 4</p></div>
-        <div class="content"><p>Subpanel 4 Content</p></div>
+        <div class="header">
+          <p>Panel with different status buttons and no content section.</p>
+        </div>
+        <div class="footer">
+          <div><button>Default Button</button><a class="button" href="">Default a-Button</a></div>
+          <div><button class="primary">Primary Button</button><a class="button primary" href="">Primary a-Button</a></div>
+          <div><button class="secondary">Secondary Button</button><a class="button secondary" href="">Secondary a-Button</a></div>
+          <div><button class="info">Info Button</button><a class="button info" href="">Info a-Button</a></div>
+          <div><button class="success">Success Button</button><a class="button success" href="">Success a-Button</a></div>
+          <div><button class="warning">Warning Button</button><a class="button warning" href="">Warning a-Button</a></div>
+          <div><button class="error">Error Button</button><a class="button error" href="">Error a-Button</a></div>
+          <div><button class="danger">Danger Button</button><a class="button danger" href="">Danger a-Button</a></div>
+        </div>
       </div>
-    </div>
+    </section>
+
+    <section>
+      <div class="panel">
+        <div class="header">
+          <h3>This is panel with nested subpanels</h3>
+        </div>
+        <div class="panel">
+          <div class="header"><p>Subpanel 1</p></div>
+          <div class="content"><p>Subpanel 1 Content</p></div>
+        </div>
+        <div class="panel">
+          <div class="header"><p>Subpanel 2</p></div>
+          <div class="content"><p>Subpanel 2 Content</p></div>
+          <div class="footer"><p>Subpanel 2 Footer</p></div>
+        </div>
+        <div class="panel">
+          <div class="header"><p>Subpanel 3</p></div>
+          <div class="content"><p>Subpanel 3 Content</p></div>
+        </div>
+        <div class="panel">
+          <div class="header"><p>Subpanel 4</p></div>
+          <div class="content"><p>Subpanel 4 Content</p></div>
+        </div>
+      </div>
+    </section>
   </article>
 
 {% endblock content %}

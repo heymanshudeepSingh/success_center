@@ -15,6 +15,20 @@
 //  * From then on, access both by importing the app-specific variables file in
 //    all further app-specific sass files.
 
+
+//================================================================================//
+//============================== Element Variables ===============================//
+//================================================================================//
+
+$header_element_list: ('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
+$article_element_list: ('article', 'div.article', 'article.color',
+    'div.article.color', 'section', 'div.section');
+
+$panel_header_element_list: ('.header', '.head');
+$panel_content_element_list: ('.content', '.body');
+$panel_footer_element_list: ('.footer', '.foot');
+
+
 //================================================================================//
 //==================================== Colors ====================================//
 //================================================================================//
@@ -55,17 +69,29 @@ $color-grey-100: #ffffff;   // White
 //===========================================//
 
 $color-black: rgb(0, 0, 0);
+$color-trans-black-95: rgba(0, 0, 0, 0.95);
+$color-trans-black-90: rgba(0, 0, 0, 0.90);
 $color-trans-black-75: rgba(0, 0, 0, 0.75);
 $color-trans-black-50: rgba(0, 0, 0, 0.50);
 $color-trans-black-25: rgba(0, 0, 0, 0.25);
+$color-trans-black-10: rgba(0, 0, 0, 0.10);
+$color-trans-black-05: rgba(0, 0, 0, 0.05);
 $color-grey: rgb(127, 127, 127);
+$color-trans-grey-95: rgba(127, 127, 127, 0.95);
+$color-trans-grey-90: rgba(127, 127, 127, 0.90);
 $color-trans-grey-75: rgba(127, 127, 127, 0.75);
 $color-trans-grey-50: rgba(127, 127, 127, 0.50);
 $color-trans-grey-25: rgba(127, 127, 127, 0.25);
+$color-trans-grey-10: rgba(127, 127, 127, 0.10);
+$color-trans-grey-05: rgba(127, 127, 127, 0.05);
 $color-white: rgb(255, 255, 255);
+$color-trans-white-95: rgba(255, 255, 255, 0.95);
+$color-trans-white-90: rgba(255, 255, 255, 0.90);
 $color-trans-white-75: rgba(255, 255, 255, 0.75);
 $color-trans-white-50: rgba(255, 255, 255, 0.50);
 $color-trans-white-25: rgba(255, 255, 255, 0.25);
+$color-trans-white-10: rgba(255, 255, 255, 0.10);
+$color-trans-white-05: rgba(255, 255, 255, 0.05);
 
 //===========================================//
 //===== END Transparent GreyScale Block =====//
@@ -384,7 +410,8 @@ $theme-colors: (
             'content-subtle': $color-trans-white-50,
             'content-hint': $color-trans-white-25,
             'content-hover': $color-white,
-            'header': $color-trans-white-75,
+            /*'header': $color-trans-white-75,*/
+            'header': $color-trans-white-90,
             'text': $color-trans-white-75,
             'link': #986516,
             'link-hover': #d68d1f,
@@ -691,7 +718,7 @@ $theme-colors: (
             'content-subtle': $color-trans-white-50,
             'content-hint': $color-trans-white-25,
             'content-hover': $color-grey-100,
-            'header': $color-trans-white-75,
+            'header': $color-trans-white-90,
             'text': $color-trans-white-75,
             'link': #6767e4,
             'link-hover': #a8a8f0,
