@@ -55,7 +55,7 @@ function main () {
     for dir in ./*/*/*/* ./*/*/*/*/*/*
     do
         # Check if actually a directory.
-        if [ -d $dir ]
+        if [[ -d $dir ]]
         then
             # Check if folder name ends in "css".
             if [[ $dir == *"/css" ]]
@@ -85,7 +85,7 @@ function main () {
                     for file in $dir/*
                     do
                         # Double check that value is not a directory.
-                        if [ ! -d $file ]
+                        if [[ ! -d $file ]]
                         then
                             rm -f $file
                         fi
@@ -110,5 +110,6 @@ function main () {
     $command
     echo ""
 }
+
 
 main

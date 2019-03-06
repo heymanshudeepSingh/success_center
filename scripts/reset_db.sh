@@ -1,35 +1,54 @@
 #!/bin/bash
 # Abort on error
-set -e
+#set -e
 
-# Remove migrations
-rm -f cae_home/migrations/0*.py
-rm -f apps/CAE_Web/cae_web_core/migrations/0*.py
-rm -f apps/CAE_Web/cae_web_autio_visual/migrations/0*.py
 
-# Remove db
-rm -f db.sqlite3
+function main () {
+    # Remove migrations.
+    ./reset_migrations.sh force
 
-# Activate venv
-. .venv/bin/activate
+    # Remove sqlite database if present.
+    rm -f ../db.sqlite3
 
-# Recreate migrations
-python ./manage.py makemigrations
+    # Activate venv if present.
+    if [[ -d ".venv" ]]
+    then
+        . .venv/bin/activate
+    fi
 
-# Migrate
-python ./manage.py migrate
+    # Recreate migrations.
+    echo ""
+    echo "Creating migrations..."
+    python ../manage.py makemigrations
+    echo ""
+    echo ""
 
-# Load example data
-python ./manage.py loaddata full_models/site_themes.json
-python ./manage.py loaddata users
-python ./manage.py loaddata room_types
-python ./manage.py loaddata rooms
+    # Migrate.
+    echo "Migrating to database..."
+    python ../manage.py migrate
+    echo ""
+    echo ""
 
-# Load CAE_Web data if installed
-if [ -d apps/CAE_Web ]; then
-    echo "Loading CAE_Web Fixtures..."
-    python ./manage.py loaddata calendars
-    python ./manage.py loaddata room_events
-else
-    echo "CAE_Web not found. Not loading its fixtures."
+    # Create seeded data.
+    echo "Seeding data..."
+    python ../manage.py seed
+    echo ""
+
+    echo ""
+    echo "Database reset and reseeded. Terminating script."
+}
+
+
+# Warn user with prompt. Skips if arg of "force" was provided.
+if [[ $1 != "force" ]]
+then
+    echo ""
+    echo "Note: This will remove all migrations in CAE_Workspace, including ones in the apps subfolders."
+    echo "      This script probably shouldn't be run in production environments."
+    echo "      Only proceed if you know what you are doing."
+    echo "      To cancel, hit ctrl+c now. Otherwise hit enter to start."
+    read userInput
+    echo ""
 fi
+
+main
