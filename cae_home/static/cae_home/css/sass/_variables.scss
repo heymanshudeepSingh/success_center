@@ -397,13 +397,16 @@ $theme-colors: (
 
     'cae': (
         'background': (
-            'primary': #331100,
+            /*'primary': #331100,*/
+            'primary': #5c1f00,
             'highlight': #cb983e,
             'border': #865628,
             'content': #1f0500,
             'content-alt': #3c1702,
-            'table-row-even': #290b00,
-            'table-row-odd': #1f0500,
+            /*'table-row-even': #290b00,*/
+            'table-row-even': #2e1005,
+            /*'table-row-odd': #1f0500,*/
+            'table-row-odd': #250b04,
         ),
         'text': (
             'primary': #c48b04,
@@ -416,7 +419,6 @@ $theme-colors: (
             'content-subtle': $color-trans-white-50,
             'content-hint': $color-trans-white-25,
             'content-hover': $color-white,
-            /*'header': $color-trans-white-75,*/
             'header': $color-trans-white-90,
             'text': $color-trans-white-75,
             'link': #986516,
@@ -424,32 +426,41 @@ $theme-colors: (
         ),
         'status': (
             'default': (
-                'primary': #331100,
-                'primary-hover': #663300,
+                /*'primary': #331100,*/
+                'primary': #4d1900,
+                /*'primary-hover': #663300,*/
+                'primary-hover': #662b00,
                 'secondary': #1f0500,
                 'secondary-hover': #3c1702,
-                'border': #7a481f,
+                /*'border': #7a481f,*/
+                'border': #6c3b13,
                 'border-hover': #9b5b27,
                 'link': #ffc354,
                 'link-hover': #f9e9d2,
             ),
             'primary': (
-                'primary': #331100,
-                'primary-hover': #663300,
+                /*'primary': #331100,*/
+                'primary': #4d1900,
+                /*'primary-hover': #663300,*/
+                'primary-hover': #662b00,
                 'secondary': #1f0500,
                 'secondary-hover': #3c1702,
-                'border': #7a481f,
+                /*'border': #7a481f,*/
+                'border': #6c3b13,
                 'border-hover': #9b5b27,
                 'text': $color-trans-white-75,
                 'link': #ffc354,
                 'link-hover': #f9e9d2,
             ),
             'secondary': (
-                'primary': #331100,
-                'primary-hover': #663300,
+                /*'primary': #331100,*/
+                'primary': #4d1900,
+                /*'primary-hover': #663300,*/
+                'primary-hover': #662b00,
                 'secondary': #1f0500,
                 'secondary-hover': #3c1702,
-                'border': #7a481f,
+                /*'border': #7a481f,*/
+                'border': #6c3b13,
                 'border-hover': #9b5b27,
                 'text': $color-trans-white-75,
                 'link': #ffc354,
@@ -821,7 +832,7 @@ $theme-colors: (
 //================================================================================//
 
 // Various font size options.
-// Assumes that the base font size for the browser is 16px.
+// Assumes that the base font size for the browser is 16px (when in desktop mode).
 // Each option scales from that.
 
 $font-size-options: (

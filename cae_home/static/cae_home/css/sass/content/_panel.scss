@@ -401,10 +401,6 @@
             @each $panel_content_element in $panel_content_element_list {
                 > #{$panel_content_element} {
                     background-color: theme-status($theme, 'default', 'secondary');
-
-                    /*a:hover:not(.button) {
-                        background-color: theme-status($theme, 'default', 'primary-hover');
-                    }*/
                 }
             }
 
@@ -431,7 +427,8 @@
             // Stylings specific to wmu theme.
             @if $theme == "wmu" {
                 background-color: theme-status($theme, 'primary', 'primary-alt');
-                border: 1px solid theme-status($theme, 'primary', 'primary-hover');
+                /*border: 1px solid theme-status($theme, 'primary', 'primary-hover');*/
+                border: 1px solid $color-white;
             } @else {
                 background-color: theme-status($theme, 'primary', 'primary');
                 border: 1px solid theme-status($theme, 'primary', 'border');

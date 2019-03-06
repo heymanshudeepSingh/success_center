@@ -61,7 +61,7 @@
     }
 
     @each $header_element in $header_element_list {
-        #{$header_element} {
+        > #{$header_element} {
             margin-bottom: 10px;
         }
     }

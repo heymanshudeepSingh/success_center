@@ -41,6 +41,8 @@
         margin-bottom: 10px;
         margin-left: auto;
 
+        width: 100%;
+
         th, td {
 
             > * {
@@ -55,7 +57,6 @@
         }
 
         @media only screen and (min-width: $screen-tablet-mid) {
-            width: 100%;
 
             th, td {
 

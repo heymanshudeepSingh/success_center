@@ -116,7 +116,13 @@ html {
 //===============================//
 
 html {
-    font-size: 16px;
+    // Font size for mobile devices seems to be 12px, as recommended by
+    // https://ux.stackexchange.com/questions/102813/minimum-font-size-for-mobile-view
+    font-size: 12px;
+
+    @media only screen and (min-width: $screen-tablet-mid) {
+        font-size: 16px;
+    }
 }
 
 // Set general font sizes for all basic html elements.
