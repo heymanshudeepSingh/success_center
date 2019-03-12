@@ -5,12 +5,16 @@
 
 
 {% block content %}
-  <article id="content">
-    <h1>Login Page</h1>
-    <form method="POST">
+  <div class="panel primary">
+    <div class="header">
+      <h1>Login Page</h1>
+    </div>
+    <div class="body">
+      <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Login</button>
       </form>
-  </article>
+    </div>
+  </div>
 {% endblock content %}
