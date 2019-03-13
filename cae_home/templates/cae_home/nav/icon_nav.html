@@ -6,10 +6,16 @@
   <ul>
     <li tabindex="0">
       <div>
-        {% if site_theme.gold_logo %}
-          <img src="{% static 'cae_home/images/cae_icons/brown_small.png' %}" alt="CAE Center">
-        {% else %}
-          <img src="{% static 'cae_home/images/cae_icons/black_small.png' %}" alt="CAE Center">
+        {% if site_debug %}
+          <a href="{% url 'cae_home:index' %}">
+        {% endif %}
+          {% if site_theme.gold_logo %}
+            <img src="{% static 'cae_home/images/cae_icons/brown_small.png' %}" alt="CAE Center">
+          {% else %}
+            <img src="{% static 'cae_home/images/cae_icons/black_small.png' %}" alt="CAE Center">
+          {% endif %}
+        {% if site_debug %}
+          </a>
         {% endif %}
       </div>
       <ul>
