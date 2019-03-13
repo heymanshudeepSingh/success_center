@@ -1,11 +1,12 @@
 <nav class="nav-header-main">
-
+  <h2 class="accessibility-element">Main Menu</h2>
   <ul>
     {% include app_nav %}
     <hr>
 
     {% if user.is_authenticated %}
-      <li>
+      <li tabindex="0">
+        <h2 class="accessibility-element">User Sub Menu</h2>
         <p href="">{{ user.get_username }}</p>
         <ul>
           {% if user.is_staff %}
