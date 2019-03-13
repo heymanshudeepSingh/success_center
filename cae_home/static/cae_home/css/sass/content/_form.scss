@@ -1,30 +1,11 @@
 
-//=============================//
-//==== General Content CSS ====//
-//=============================//
-
-// Essentially, any "content" that's rendered within the <main> DOM element
-// should be styled here.
-
-// Note: Content specific to sub-projects or sub-apps should probably be defined
-// within that sub-project or sub-app.
-// This file is meant for general content values that apply to the all projects,
-// such as overall table or form stylings, and similar things.
-// Due to the size of this file, it's been split into mutliple subfiles.
+//==================//
+//==== Form CSS ====//
+//==================//
 
 // Import statements
 @import '_variables';
 @import '_mixins';
-
-@import 'content/_alert';
-@import 'content/_article';
-@import 'content/_button';
-@import 'content/_content_bar';
-@import 'content/_form';
-@import 'content/_overlay_modal';
-@import 'content/_panel';
-@import 'content/_status_message';
-@import 'content/_table';
 
 
 //================================================================================//
@@ -49,84 +30,47 @@
 // overflow, overflow-x, overflow-y, clip, clear                                  //
 //================================================================================//
 
-//=====================================//
-//==== START Generic Element Block ====//
-//=====================================//
+//===========================//
+//==== START ----- Block ====//
+//===========================//
 
-#content {
+#content form {
 
-    padding-bottom: 10px;
+    text-align: center;
 
-    ul {
-        padding-left: 20px
-    }
+    // Overall field div.
+    > div {
+        @include display-flex;
+        @include flex-direction(row);
+        @include justify-content(center);
 
-    @each $header_element in $header_element_list {
-        > #{$header_element} {
-            margin-bottom: 10px;
+        > label {
+            width: 42.5%;
+            margin: 5px;
+
+            text-align: right;
         }
-    }
-}
 
-//=====================================//
-//===== END Generic Element Block =====//
-//=====================================//
+        // Field value div.
+        > div {
+            margin: 5px;
+            width: 57.5%;
 
-
-//===================================//
-//==== START Generic Class Block ====//
-//===================================//
-
-#content {
-
-    // Hide on print viewing.
-    .display-only-web {
-        @media only print {
-            display: none !important;
+            text-align: left;
         }
     }
 
-    // Hide on web viewing.
-    .display-only-print {
-        @media only screen {
-            display: none !important;
-        }
-    }
+    .alert {
+        width: 25%;
 
-    // Attempt to center as much as possible.
-    .center {
-        @include flex-direction(center !important);
-        @include justify-content(center !important);
-        @include align-items(center !important);
-        text-align: center !important;
-    }
-
-    // Warning for javascript requirement.
-    .javascript-warn {
         margin-right: auto;
-        margin-top: 25px;
         margin-left: auto;
-        margin-bottom: 25px;
     }
 }
 
-.hidden {
-    display: none !important;
-}
-
-.fade-out {
-    padding: 0 !important;
-    margin: 0 !important;
-
-    * {
-        padding: 0 !important;
-        margin: 0 !important;
-    }
-}
-
-//=====================================//
-//===== END Generic Class Block =======//
-//=====================================//
+//===========================//
+//===== END ----- Block =====//
+//===========================//
 
 
 //================================================================================//
@@ -143,69 +87,15 @@
 // word-break, word-wrap, white-space                                             //
 //================================================================================//
 
-//=====================================//
-//==== START Generic Element Block ====//
-//=====================================//
-
-#content {
-
-  @each $theme, $theme-dict in $theme-colors {
-    .theme-#{$theme} & {
-
-        color: theme-text($theme, 'text');
-
-        @each $header_element in $header_element_list {
-            > #{$header_element} {
-                color: theme-text($theme, 'header');
-
-                // Stylings specific to wmu theme.
-                @if $theme == 'wmu' {
-                    font-weight: normal;
-                    text-align: left;
-                }
-            }
-        }
-
-        a {
-            color: theme-text($theme, 'link');
-        }
-
-        a:hover {
-            color: theme-text($theme, 'link-hover');
-        }
-
-    }
-  }
-
-}
-
-//=====================================//
-//===== END Generic Element Block =====//
-//=====================================//
+//===========================//
+//==== START ----- Block ====//
+//===========================//
 
 
-//===================================//
-//==== START Generic Class Block ====//
-//===================================//
 
-#content {
-
-    .javascript-warn {
-        font-weight: bold;
-
-        text-align: center;
-    }
-}
-
-.fade-out {
-    * {
-        font-size: 0px;
-    }
-}
-
-//===================================//
-//===== END Generic Class Block =====//
-//===================================//
+//===========================//
+//===== END ----- Block =====//
+//===========================//
 
 
 //================================================================================//
@@ -236,72 +126,15 @@
 // zoom                                                                           //
 //================================================================================//
 
-//=====================================//
-//==== START Generic Element Block ====//
-//=====================================//
-
-#content {
-
-  @each $theme, $theme-dict in $theme-colors {
-    .theme-#{$theme} & {
-
-        @each $header_element in $header_element_list {
-            > #{$header_element} {
-                border-bottom: 1px solid theme-status($theme, 'default', 'border');
-            }
-        }
+//===========================//
+//==== START ----- Block ====//
+//===========================//
 
 
-        hr {
-            border-style: solid;
-            border-color: theme-background($theme, 'border');
-        }
 
-    }
-  }
-
-}
-
-//=====================================//
-//===== END Generic Element Block =====//
-//=====================================//
-
-
-//===================================//
-//==== START Generic Class Block ====//
-//===================================//
-
-#content {
-
-  @each $theme, $theme-dict in $theme-colors {
-    .theme-#{$theme} & {
-
-        .hover-highlight:hover {
-            background-color: theme-background($theme, 'primary');
-        }
-
-        .javascript-warn {
-            background-color: theme-status($theme, 'error', 'primary');
-        }
-
-        .fade-in {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .fade-out {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-    }
-  }
-
-}
-
-//===================================//
-//===== END Generic Class Block =====//
-//===================================//
+//===========================//
+//===== END ----- Block =====//
+//===========================//
 
 
 //================================================================================//
@@ -323,44 +156,12 @@
 // speak                                                                          //
 //================================================================================//
 
-//=====================================//
-//==== START Generic Element Block ====//
-//=====================================//
-
-#content {
-    a {
-        @include transition(color 0.5s, background-color 0.5s, border 0.5s);
-    }
-}
-
-//===================================//
-//==== End Generic Element Block ====//
-//===================================//
+//===========================//
+//==== START ----- Block ====//
+//===========================//
 
 
-//===================================//
-//==== START Generic Class Block ====//
-//===================================//
 
-#content {
-
-    .hover-highlight:hover {
-        cursor: pointer;
-    }
-}
-
-.fade-in {
-    @include transition(color 0.5s, background-color 0.5s, border 0.5s, opacity 1s linear, visibility 0s 1s);
-}
-
-.fade-out {
-    @include transition(padding 0.9s, margin 0.9s, font-size 0.9s, color 0.5s, background-color 0.5s, border 0.5s, opacity 0.9s linear, visibility 0s 0.9s);
-
-    * {
-        @include transition(padding 0.9s, margin 0.9s, font-size 0.9s, color 0.5s, background-color 0.5s, border 0.5s);
-    }
-}
-
-//===================================//
-//===== END Generic Class Block =====//
-//===================================//
+//===========================//
+//===== END ----- Block =====//
+//===========================//
