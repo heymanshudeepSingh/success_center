@@ -8,65 +8,119 @@
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
 },
-    {
+{
     "model": "cae_home.department",
     "pk": 2,
+    "fields": {
+        "name": "Advising",
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 3,
+    "fields": {
+        "name": "CAE Center",
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 4,
     "fields": {
         "name": "Chemical and Paper Engineering",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
 },
-    {
+{
     "model": "cae_home.department",
-    "pk": 3,
+    "pk": 5,
     "fields": {
         "name": "Civil and Construction Engineering",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
 },
-    {
+{
     "model": "cae_home.department",
-    "pk": 4,
+    "pk": 6,
     "fields": {
         "name": "Computer Science",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
 },
-    {
+{
     "model": "cae_home.department",
-    "pk": 5,
+    "pk": 7,
+    "fields": {
+        "name": "Dean's Office",
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 8,
     "fields": {
         "name": "Electrical and Computer Engineering",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
 },
-    {
+{
     "model": "cae_home.department",
-    "pk": 6,
+    "pk": 9,
     "fields": {
         "name": "Engineering Design, Manufacturing, and Management Systems",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
 },
-    {
+{
     "model": "cae_home.department",
-    "pk": 7,
+    "pk": 10,
     "fields": {
         "name": "Industrial and Entrepreneurial Engineering and Engineering Management",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
 },
-    {
+{
     "model": "cae_home.department",
-    "pk": 8,
+    "pk": 11,
     "fields": {
         "name": "Mechanical and Aerospace Engineering",
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 12,
+    "fields": {
+        "name": "Paper, Coating, and Printing Pilot Plant",
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 13,
+    "fields": {
+        "name": "Paper Technology Foundation",
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 14,
+    "fields": {
+        "name": "Parkview Cafe",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }

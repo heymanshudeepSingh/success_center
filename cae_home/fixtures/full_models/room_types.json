@@ -12,7 +12,7 @@
     "model": "cae_home.roomtype",
     "pk": 2,
     "fields": {
-        "name": "Classroom",
+        "name": "Breakout Room",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -21,7 +21,7 @@
     "model": "cae_home.roomtype",
     "pk": 3,
     "fields": {
-        "name": "Computer Classroom",
+        "name": "Classroom",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -30,7 +30,7 @@
     "model": "cae_home.roomtype",
     "pk": 4,
     "fields": {
-        "name": "Computer Lab",
+        "name": "Commons",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -39,7 +39,7 @@
     "model": "cae_home.roomtype",
     "pk": 5,
     "fields": {
-        "name": "Engineering Lab",
+        "name": "Computer Classroom",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -48,7 +48,7 @@
     "model": "cae_home.roomtype",
     "pk": 6,
     "fields": {
-        "name": "Graduate Carrel",
+        "name": "Computer Lab",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -57,7 +57,7 @@
     "model": "cae_home.roomtype",
     "pk": 7,
     "fields": {
-        "name": "Breakout Room",
+        "name": "Custodial/Maintenance",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -66,7 +66,70 @@
     "model": "cae_home.roomtype",
     "pk": 8,
     "fields": {
+        "name": "Department Office",
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.roomtype",
+    "pk": 9,
+    "fields": {
+        "name": "Engineering Lab",
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.roomtype",
+    "pk": 10,
+    "fields": {
+        "name": "Faculty Office",
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.roomtype",
+    "pk": 11,
+    "fields": {
+        "name": "Graduate Carrel",
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.roomtype",
+    "pk": 12,
+    "fields": {
+        "name": "Lecture Hall",
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.roomtype",
+    "pk": 13,
+    "fields": {
+        "name": "Restroom",
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.roomtype",
+    "pk": 14,
+    "fields": {
         "name": "Special Room",
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.roomtype",
+    "pk": 15,
+    "fields": {
+        "name": "Stairway",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }

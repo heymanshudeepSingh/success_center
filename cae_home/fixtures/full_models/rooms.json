@@ -1,0 +1,7737 @@
+[
+{
+    "model": "cae_home.room",
+    "pk": 1,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "A-101",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 2,
+    "fields": {
+        "room_type": 15,
+        "department": 1,
+        "name": "A-102",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 3,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "A-103",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 4,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "A-104",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 5,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "A-105",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 6,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "A-106",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 7,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "A-107",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 8,
+    "fields": {
+        "room_type": 9,
+        "department": 4,
+        "name": "A-108",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 9,
+    "fields": {
+        "room_type": 9,
+        "department": 1,
+        "name": "A-109",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 10,
+    "fields": {
+        "room_type": 9,
+        "department": 1,
+        "name": "A-110",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 11,
+    "fields": {
+        "room_type": 9,
+        "department": 1,
+        "name": "A-111",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 12,
+    "fields": {
+        "room_type": 9,
+        "department": 1,
+        "name": "A-112",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 13,
+    "fields": {
+        "room_type": 9,
+        "department": 1,
+        "name": "A-113",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 14,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "A-114",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 15,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "A-115",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 16,
+    "fields": {
+        "room_type": 9,
+        "department": 4,
+        "name": "A-116",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 17,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "A-117",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 18,
+    "fields": {
+        "room_type": 9,
+        "department": 11,
+        "name": "A-118",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 19,
+    "fields": {
+        "room_type": 9,
+        "department": 11,
+        "name": "A-119",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 20,
+    "fields": {
+        "room_type": 2,
+        "department": 1,
+        "name": "A-120",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 21,
+    "fields": {
+        "room_type": 9,
+        "department": 11,
+        "name": "A-121",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 22,
+    "fields": {
+        "room_type": 9,
+        "department": 11,
+        "name": "A-122",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 23,
+    "fields": {
+        "room_type": 9,
+        "department": 11,
+        "name": "A-123",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 24,
+    "fields": {
+        "room_type": 9,
+        "department": 11,
+        "name": "A-124",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 25,
+    "fields": {
+        "room_type": 9,
+        "department": 11,
+        "name": "A-125",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 26,
+    "fields": {
+        "room_type": 11,
+        "department": 1,
+        "name": "A-126",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 27,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "A-127",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 28,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "A-128",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 29,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "A-129",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 30,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "A-130",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 31,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "A-131",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 32,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "A-132",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 33,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "A-133",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 34,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "A-134",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 35,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "A-135",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 36,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "A-136",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 37,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "A-137",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 38,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "A-138",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 39,
+    "fields": {
+        "room_type": 15,
+        "department": 1,
+        "name": "A-201",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 40,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "A-202",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 41,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "A-203",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 42,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "A-204",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 43,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "A-205",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 44,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "A-206",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 45,
+    "fields": {
+        "room_type": 9,
+        "department": 1,
+        "name": "A-207",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 46,
+    "fields": {
+        "room_type": 9,
+        "department": 1,
+        "name": "A-208",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 47,
+    "fields": {
+        "room_type": 9,
+        "department": 1,
+        "name": "A-209",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 48,
+    "fields": {
+        "room_type": 9,
+        "department": 1,
+        "name": "A-210",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 49,
+    "fields": {
+        "room_type": 9,
+        "department": 1,
+        "name": "A-211",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 50,
+    "fields": {
+        "room_type": 9,
+        "department": 1,
+        "name": "A-212",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 51,
+    "fields": {
+        "room_type": 2,
+        "department": 1,
+        "name": "A-213",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 52,
+    "fields": {
+        "room_type": 11,
+        "department": 1,
+        "name": "A-214",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 53,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "A-215",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 54,
+    "fields": {
+        "room_type": 9,
+        "department": 1,
+        "name": "A-216",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 55,
+    "fields": {
+        "room_type": 8,
+        "department": 4,
+        "name": "A-217",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 56,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "A-218",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 57,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "A-219",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 58,
+    "fields": {
+        "room_type": 10,
+        "department": 4,
+        "name": "A-220",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 59,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "A-221",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 60,
+    "fields": {
+        "room_type": 10,
+        "department": 4,
+        "name": "A-222",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 61,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "A-223",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 62,
+    "fields": {
+        "room_type": 10,
+        "department": 4,
+        "name": "A-224",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 63,
+    "fields": {
+        "room_type": 10,
+        "department": 4,
+        "name": "A-225",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 64,
+    "fields": {
+        "room_type": 10,
+        "department": 4,
+        "name": "A-226",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 65,
+    "fields": {
+        "room_type": 10,
+        "department": 4,
+        "name": "A-227",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 66,
+    "fields": {
+        "room_type": 10,
+        "department": 4,
+        "name": "A-228",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 67,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "A-229",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 68,
+    "fields": {
+        "room_type": 10,
+        "department": 4,
+        "name": "A-230",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 69,
+    "fields": {
+        "room_type": 10,
+        "department": 4,
+        "name": "A-231",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 70,
+    "fields": {
+        "room_type": 10,
+        "department": 4,
+        "name": "A-232",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 71,
+    "fields": {
+        "room_type": 10,
+        "department": 4,
+        "name": "A-233",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 72,
+    "fields": {
+        "room_type": 10,
+        "department": 4,
+        "name": "A-234",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 73,
+    "fields": {
+        "room_type": 10,
+        "department": 4,
+        "name": "A-235",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 74,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "A-236",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 75,
+    "fields": {
+        "room_type": 10,
+        "department": 8,
+        "name": "A-237",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 76,
+    "fields": {
+        "room_type": 10,
+        "department": 6,
+        "name": "A-238",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 77,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "A-239",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 78,
+    "fields": {
+        "room_type": 10,
+        "department": 8,
+        "name": "A-240",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 79,
+    "fields": {
+        "room_type": 10,
+        "department": 8,
+        "name": "A-241",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 80,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "A-242",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 81,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "A-243",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 82,
+    "fields": {
+        "room_type": 10,
+        "department": 4,
+        "name": "A-244",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 83,
+    "fields": {
+        "room_type": 10,
+        "department": 8,
+        "name": "A-245",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 84,
+    "fields": {
+        "room_type": 10,
+        "department": 8,
+        "name": "A-246",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 85,
+    "fields": {
+        "room_type": 10,
+        "department": 8,
+        "name": "A-247",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 86,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "A-248",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 87,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "A-249",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 88,
+    "fields": {
+        "room_type": 1,
+        "department": 4,
+        "name": "A-250",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 89,
+    "fields": {
+        "room_type": 1,
+        "department": 4,
+        "name": "A-251",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 90,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "A-252",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 91,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "A-253",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 92,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "A-254",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 93,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "A-255",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 94,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "A-256",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 95,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "A-257",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 96,
+    "fields": {
+        "room_type": 13,
+        "department": 1,
+        "name": "B-101",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 97,
+    "fields": {
+        "room_type": 13,
+        "department": 1,
+        "name": "B-102",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 98,
+    "fields": {
+        "room_type": 15,
+        "department": 1,
+        "name": "B-103",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 99,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "B-104",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 100,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "B-105",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 101,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "B-106",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 102,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "B-107",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 103,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "B-108",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 104,
+    "fields": {
+        "room_type": 9,
+        "department": 1,
+        "name": "B-109",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 105,
+    "fields": {
+        "room_type": 9,
+        "department": 1,
+        "name": "B-110",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 106,
+    "fields": {
+        "room_type": 9,
+        "department": 1,
+        "name": "B-111",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 107,
+    "fields": {
+        "room_type": 9,
+        "department": 1,
+        "name": "B-112",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 108,
+    "fields": {
+        "room_type": 9,
+        "department": 1,
+        "name": "B-113",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 109,
+    "fields": {
+        "room_type": 9,
+        "department": 1,
+        "name": "B-114",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 110,
+    "fields": {
+        "room_type": 9,
+        "department": 1,
+        "name": "B-115",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 111,
+    "fields": {
+        "room_type": 4,
+        "department": 1,
+        "name": "B-116",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 112,
+    "fields": {
+        "room_type": 11,
+        "department": 1,
+        "name": "B-117",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 113,
+    "fields": {
+        "room_type": 9,
+        "department": 1,
+        "name": "B-118",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 114,
+    "fields": {
+        "room_type": 9,
+        "department": 1,
+        "name": "B-119",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 115,
+    "fields": {
+        "room_type": 9,
+        "department": 1,
+        "name": "B-120",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 116,
+    "fields": {
+        "room_type": 9,
+        "department": 4,
+        "name": "B-121",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 117,
+    "fields": {
+        "room_type": 2,
+        "department": 1,
+        "name": "B-122",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 118,
+    "fields": {
+        "room_type": 9,
+        "department": 1,
+        "name": "B-123",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 119,
+    "fields": {
+        "room_type": 9,
+        "department": 1,
+        "name": "B-124",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 120,
+    "fields": {
+        "room_type": 11,
+        "department": 1,
+        "name": "B-125",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 121,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "B-126",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 122,
+    "fields": {
+        "room_type": 15,
+        "department": 1,
+        "name": "B-201",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 123,
+    "fields": {
+        "room_type": 13,
+        "department": 1,
+        "name": "B-202",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 124,
+    "fields": {
+        "room_type": 13,
+        "department": 1,
+        "name": "B-203",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 125,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "B-204",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 126,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "B-205",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 127,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "B-206",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 128,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "B-207",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 129,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "B-208",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 130,
+    "fields": {
+        "room_type": 4,
+        "department": 1,
+        "name": "B-209",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 131,
+    "fields": {
+        "room_type": 9,
+        "department": 1,
+        "name": "B-210",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 132,
+    "fields": {
+        "room_type": 2,
+        "department": 1,
+        "name": "B-211",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 133,
+    "fields": {
+        "room_type": 9,
+        "department": 1,
+        "name": "B-212",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 134,
+    "fields": {
+        "room_type": 9,
+        "department": 1,
+        "name": "B-213",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 135,
+    "fields": {
+        "room_type": 9,
+        "department": 1,
+        "name": "B-214",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 136,
+    "fields": {
+        "room_type": 9,
+        "department": 1,
+        "name": "B-215",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 137,
+    "fields": {
+        "room_type": 9,
+        "department": 1,
+        "name": "B-216",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 138,
+    "fields": {
+        "room_type": 9,
+        "department": 1,
+        "name": "B-217",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 139,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "B-218",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 140,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "B-219",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 141,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "B-220",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 142,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "B-221",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 143,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "B-222",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 144,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "B-223",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 145,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "B-224",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 146,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "B-225",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 147,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "B-226",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 148,
+    "fields": {
+        "room_type": 10,
+        "department": 8,
+        "name": "B-227",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 149,
+    "fields": {
+        "room_type": 10,
+        "department": 8,
+        "name": "B-228",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 150,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "B-229",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 151,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "B-230",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 152,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "B-231",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 153,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "B-232",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 154,
+    "fields": {
+        "room_type": 10,
+        "department": 8,
+        "name": "B-233",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 155,
+    "fields": {
+        "room_type": 10,
+        "department": 8,
+        "name": "B-234",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 156,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "B-235",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 157,
+    "fields": {
+        "room_type": 8,
+        "department": 8,
+        "name": "B-236",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 158,
+    "fields": {
+        "room_type": 8,
+        "department": 6,
+        "name": "B-237",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 159,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "B-238",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 160,
+    "fields": {
+        "room_type": 10,
+        "department": 6,
+        "name": "B-239",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 161,
+    "fields": {
+        "room_type": 10,
+        "department": 6,
+        "name": "B-240",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 162,
+    "fields": {
+        "room_type": 10,
+        "department": 6,
+        "name": "B-241",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 163,
+    "fields": {
+        "room_type": 10,
+        "department": 6,
+        "name": "B-242",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 164,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "B-243",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 165,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "B-244",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 166,
+    "fields": {
+        "room_type": 10,
+        "department": 6,
+        "name": "B-245",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 167,
+    "fields": {
+        "room_type": 10,
+        "department": 6,
+        "name": "B-246",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 168,
+    "fields": {
+        "room_type": 10,
+        "department": 6,
+        "name": "B-247",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 169,
+    "fields": {
+        "room_type": 10,
+        "department": 6,
+        "name": "B-248",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 170,
+    "fields": {
+        "room_type": 10,
+        "department": 6,
+        "name": "B-249",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 171,
+    "fields": {
+        "room_type": 10,
+        "department": 6,
+        "name": "B-250",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 172,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "B-251",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 173,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "B-252",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 174,
+    "fields": {
+        "room_type": 10,
+        "department": 6,
+        "name": "B-253",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 175,
+    "fields": {
+        "room_type": 10,
+        "department": 6,
+        "name": "B-254",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 176,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "B-255",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 177,
+    "fields": {
+        "room_type": 10,
+        "department": 6,
+        "name": "B-256",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 178,
+    "fields": {
+        "room_type": 10,
+        "department": 6,
+        "name": "B-257",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 179,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "B-258",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 180,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "B-259",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 181,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "B-260",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 182,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "B-261",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 183,
+    "fields": {
+        "room_type": 1,
+        "department": 8,
+        "name": "B-262",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 184,
+    "fields": {
+        "room_type": 1,
+        "department": 8,
+        "name": "B-263",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 185,
+    "fields": {
+        "room_type": 1,
+        "department": 6,
+        "name": "B-264",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 186,
+    "fields": {
+        "room_type": 1,
+        "department": 6,
+        "name": "B-265",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 187,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "B-266",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 188,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "B-267",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 189,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "C-101",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 190,
+    "fields": {
+        "room_type": 15,
+        "department": 1,
+        "name": "C-102",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 191,
+    "fields": {
+        "room_type": 13,
+        "department": 1,
+        "name": "C-103",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 192,
+    "fields": {
+        "room_type": 13,
+        "department": 1,
+        "name": "C-104",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 193,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "C-105",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 194,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "C-106",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 195,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "C-107",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 196,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "C-108",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 197,
+    "fields": {
+        "room_type": 14,
+        "department": 1,
+        "name": "C-109",
+        "description": "Vending",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 198,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "C-110",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 199,
+    "fields": {
+        "room_type": 9,
+        "department": 4,
+        "name": "C-111",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 200,
+    "fields": {
+        "room_type": 9,
+        "department": 5,
+        "name": "C-112",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 201,
+    "fields": {
+        "room_type": 9,
+        "department": 1,
+        "name": "C-113",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 202,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "C-114",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 203,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "C-115",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 204,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "C-116",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 205,
+    "fields": {
+        "room_type": 13,
+        "department": 1,
+        "name": "C-117",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 206,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "C-118",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 207,
+    "fields": {
+        "room_type": 13,
+        "department": 1,
+        "name": "C-119",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 208,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "C-120",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 209,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "C-121",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 210,
+    "fields": {
+        "room_type": 3,
+        "department": 1,
+        "name": "C-122",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 211,
+    "fields": {
+        "room_type": 3,
+        "department": 1,
+        "name": "C-123",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 212,
+    "fields": {
+        "room_type": 3,
+        "department": 1,
+        "name": "C-124",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 213,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "C-125",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 214,
+    "fields": {
+        "room_type": 4,
+        "department": 1,
+        "name": "C-126",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 215,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "C-127",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 216,
+    "fields": {
+        "room_type": 14,
+        "department": 1,
+        "name": "C-128",
+        "description": "Loading Docks",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 217,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "C-129",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 218,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "C-130",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 219,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "C-131",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 220,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "C-132",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 221,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "C-133",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 222,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "C-134",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 223,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "C-135",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 224,
+    "fields": {
+        "room_type": 3,
+        "department": 1,
+        "name": "C-136",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 225,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "C-137",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 226,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "C-138",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 227,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "C-139",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 228,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "C-140",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 229,
+    "fields": {
+        "room_type": 3,
+        "department": 1,
+        "name": "C-141",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 230,
+    "fields": {
+        "room_type": 14,
+        "department": 1,
+        "name": "C-142",
+        "description": "Building Security Room",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 231,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "C-201",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 232,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "C-202",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 233,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "C-203",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 234,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "C-204",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 235,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "C-205",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 236,
+    "fields": {
+        "room_type": 15,
+        "department": 1,
+        "name": "C-206",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 237,
+    "fields": {
+        "room_type": 4,
+        "department": 1,
+        "name": "C-207",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 238,
+    "fields": {
+        "room_type": 5,
+        "department": 3,
+        "name": "C-208",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 239,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "C-209",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 240,
+    "fields": {
+        "room_type": 11,
+        "department": 1,
+        "name": "C-210",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 241,
+    "fields": {
+        "room_type": 9,
+        "department": 11,
+        "name": "C-211",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 241,
+    "fields": {
+        "room_type": 14,
+        "department": 11,
+        "name": "C-211-1",
+        "description": "Server Room",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 243,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "C-212",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 244,
+    "fields": {
+        "room_type": 14,
+        "department": 1,
+        "name": "C-213",
+        "description": "Computation Fluid Dynamics",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 245,
+    "fields": {
+        "room_type": 14,
+        "department": 3,
+        "name": "C-214",
+        "description": "Server Room",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 246,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "C-215",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 247,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "C-216",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 248,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "C-217",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 249,
+    "fields": {
+        "room_type": 14,
+        "department": 8,
+        "name": "C-218",
+        "description": "CS Department Technician Room",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 250,
+    "fields": {
+        "room_type": 5,
+        "department": 3,
+        "name": "C-219",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 251,
+    "fields": {
+        "room_type": 5,
+        "department": 3,
+        "name": "C-220",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 252,
+    "fields": {
+        "room_type": 1,
+        "department": 3,
+        "name": "C-221",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 253,
+    "fields": {
+        "room_type": 6,
+        "department": 3,
+        "name": "C-222",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 254,
+    "fields": {
+        "room_type": 7,
+        "department": 3,
+        "name": "C-223",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 255,
+    "fields": {
+        "room_type": 5,
+        "department": 3,
+        "name": "C-224",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 256,
+    "fields": {
+        "room_type": 8,
+        "department": 3,
+        "name": "C-225",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 256,
+    "fields": {
+        "room_type": 10,
+        "department": 3,
+        "name": "C-225-1",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 257,
+    "fields": {
+        "room_type": 10,
+        "department": 3,
+        "name": "C-225-2",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 259,
+    "fields": {
+        "room_type": 5,
+        "department": 3,
+        "name": "C-226",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 260,
+    "fields": {
+        "room_type": 5,
+        "department": 3,
+        "name": "C-227",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 261,
+    "fields": {
+        "room_type": 5,
+        "department": 3,
+        "name": "C-228",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 262,
+    "fields": {
+        "room_type": 5,
+        "department": 3,
+        "name": "C-229",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 263,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "C-230",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 264,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "C-231",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 265,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "C-232",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 266,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "C-233",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 267,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "C-234",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 268,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "C-235",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 269,
+    "fields": {
+        "room_type": 13,
+        "department": 1,
+        "name": "C-236",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 270,
+    "fields": {
+        "room_type": 13,
+        "department": 1,
+        "name": "C-237",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 271,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "C-238",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 272,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "C-239",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 273,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "C-240",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 274,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "C-241",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 275,
+    "fields": {
+        "room_type": 8,
+        "department": 7,
+        "name": "C-242",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 276,
+    "fields": {
+        "room_type": 1,
+        "department": 7,
+        "name": "C-243",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 277,
+    "fields": {
+        "room_type": 1,
+        "department": 7,
+        "name": "C-244",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 278,
+    "fields": {
+        "room_type": 1,
+        "department": 7,
+        "name": "C-245",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 279,
+    "fields": {
+        "room_type": 1,
+        "department": 7,
+        "name": "C-246",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 280,
+    "fields": {
+        "room_type": 1,
+        "department": 7,
+        "name": "C-247",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 281,
+    "fields": {
+        "room_type": 1,
+        "department": 7,
+        "name": "C-248",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 282,
+    "fields": {
+        "room_type": 1,
+        "department": 7,
+        "name": "C-249",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 283,
+    "fields": {
+        "room_type": 1,
+        "department": 7,
+        "name": "C-250",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 284,
+    "fields": {
+        "room_type": 1,
+        "department": 7,
+        "name": "C-251",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 285,
+    "fields": {
+        "room_type": 1,
+        "department": 7,
+        "name": "C-252",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 286,
+    "fields": {
+        "room_type": 1,
+        "department": 7,
+        "name": "C-253",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 287,
+    "fields": {
+        "room_type": 14,
+        "department": 7,
+        "name": "C-254",
+        "description": "Copy Center",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 288,
+    "fields": {
+        "room_type": 1,
+        "department": 7,
+        "name": "C-255",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 289,
+    "fields": {
+        "room_type": 1,
+        "department": 7,
+        "name": "C-256",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 290,
+    "fields": {
+        "room_type": 1,
+        "department": 7,
+        "name": "C-257",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 291,
+    "fields": {
+        "room_type": 14,
+        "department": 7,
+        "name": "C-258",
+        "description": "Dean's Conference Room",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 292,
+    "fields": {
+        "room_type": 1,
+        "department": 7,
+        "name": "C-259",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 293,
+    "fields": {
+        "room_type": 13,
+        "department": 1,
+        "name": "C-260",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 294,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "D-101",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 295,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "D-102",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 295,
+    "fields": {
+        "room_type": 14,
+        "department": 1,
+        "name": "D-102-1",
+        "description": "Under-Staircase Room",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 296,
+    "fields": {
+        "room_type": 14,
+        "department": 1,
+        "name": "D-102-2",
+        "description": "Under-Staircase Room",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 298,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "D-103",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 299,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "D-104",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 300,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "D-105",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 301,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "D-106",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 302,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "D-107",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 303,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "D-108",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 304,
+    "fields": {
+        "room_type": 12,
+        "department": 1,
+        "name": "D-109",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 305,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "D-110",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 306,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "D-111",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 307,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "D-112",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 308,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "D-113",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 309,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "D-114",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 310,
+    "fields": {
+        "room_type": 12,
+        "department": 1,
+        "name": "D-115",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 311,
+    "fields": {
+        "room_type": 4,
+        "department": 14,
+        "name": "D-116",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 312,
+    "fields": {
+        "room_type": 4,
+        "department": 1,
+        "name": "D-117",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 313,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "D-118",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 314,
+    "fields": {
+        "room_type": 14,
+        "department": 14,
+        "name": "D-119",
+        "description": "Campus Kitchen/Cafe",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 315,
+    "fields": {
+        "room_type": 14,
+        "department": 1,
+        "name": "D-120",
+        "description": "Faculty Staff Lounge",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 316,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "D-121",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 317,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "D-122",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 318,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "D-123",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 319,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "D-124",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 320,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "D-125",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 321,
+    "fields": {
+        "room_type": 13,
+        "department": 1,
+        "name": "D-126",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 322,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "D-127",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 323,
+    "fields": {
+        "room_type": 13,
+        "department": 1,
+        "name": "D-128",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 324,
+    "fields": {
+        "room_type": 15,
+        "department": 1,
+        "name": "D-129",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 325,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "D-130",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 326,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "D-131",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 327,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "D-132",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 328,
+    "fields": {
+        "room_type": 3,
+        "department": 1,
+        "name": "D-201",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 329,
+    "fields": {
+        "room_type": 3,
+        "department": 1,
+        "name": "D-202",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 330,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "D-203",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 331,
+    "fields": {
+        "room_type": 3,
+        "department": 1,
+        "name": "D-204",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 332,
+    "fields": {
+        "room_type": 3,
+        "department": 1,
+        "name": "D-205",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 333,
+    "fields": {
+        "room_type": 3,
+        "department": 1,
+        "name": "D-206",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 334,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "D-207",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 335,
+    "fields": {
+        "room_type": 3,
+        "department": 1,
+        "name": "D-208",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 336,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "D-209",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 337,
+    "fields": {
+        "room_type": 3,
+        "department": 1,
+        "name": "D-210",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 338,
+    "fields": {
+        "room_type": 3,
+        "department": 1,
+        "name": "D-211",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 339,
+    "fields": {
+        "room_type": 3,
+        "department": 1,
+        "name": "D-212",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 340,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "D-213",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 341,
+    "fields": {
+        "room_type": 3,
+        "department": 1,
+        "name": "D-214",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 342,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "D-215",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 343,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "D-216",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 344,
+    "fields": {
+        "room_type": 13,
+        "department": 1,
+        "name": "D-217",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 345,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "D-218",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 346,
+    "fields": {
+        "room_type": 13,
+        "department": 1,
+        "name": "D-219",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 347,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "D-220",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 348,
+    "fields": {
+        "room_type": 15,
+        "department": 1,
+        "name": "D-221",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 349,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "D-222",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 350,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "D-223",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 351,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "D-224",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 352,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "D-225",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 353,
+    "fields": {
+        "room_type": 14,
+        "department": 1,
+        "name": "D-226",
+        "description": "Cae Storage Room",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 354,
+    "fields": {
+        "room_type": 9,
+        "department": 9,
+        "name": "E-101",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 355,
+    "fields": {
+        "room_type": 8,
+        "department": 2,
+        "name": "E-102",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 356,
+    "fields": {
+        "room_type": 1,
+        "department": 2,
+        "name": "E-103",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 357,
+    "fields": {
+        "room_type": 10,
+        "department": 2,
+        "name": "E-104",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 358,
+    "fields": {
+        "room_type": 1,
+        "department": 2,
+        "name": "E-105",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 359,
+    "fields": {
+        "room_type": 1,
+        "department": 2,
+        "name": "E-106",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 360,
+    "fields": {
+        "room_type": 1,
+        "department": 2,
+        "name": "E-107",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 361,
+    "fields": {
+        "room_type": 1,
+        "department": 2,
+        "name": "E-108",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 362,
+    "fields": {
+        "room_type": 10,
+        "department": 2,
+        "name": "E-109",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 363,
+    "fields": {
+        "room_type": 1,
+        "department": 2,
+        "name": "E-110",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 364,
+    "fields": {
+        "room_type": 10,
+        "department": 2,
+        "name": "E-111",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 365,
+    "fields": {
+        "room_type": 1,
+        "department": 2,
+        "name": "E-112",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 366,
+    "fields": {
+        "room_type": 1,
+        "department": 2,
+        "name": "E-113",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 367,
+    "fields": {
+        "room_type": 1,
+        "department": 2,
+        "name": "E-114",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 368,
+    "fields": {
+        "room_type": 1,
+        "department": 2,
+        "name": "E-115",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 369,
+    "fields": {
+        "room_type": 10,
+        "department": 7,
+        "name": "E-116",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 370,
+    "fields": {
+        "room_type": 10,
+        "department": 7,
+        "name": "E-117",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 371,
+    "fields": {
+        "room_type": 10,
+        "department": 2,
+        "name": "E-118",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 372,
+    "fields": {
+        "room_type": 1,
+        "department": 10,
+        "name": "E-119",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 373,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "E-120",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 374,
+    "fields": {
+        "room_type": 3,
+        "department": 1,
+        "name": "E-121",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 375,
+    "fields": {
+        "room_type": 11,
+        "department": 1,
+        "name": "E-122",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 376,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "E-123",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 377,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "E-124",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 378,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "E-125",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 379,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "E-126",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 380,
+    "fields": {
+        "room_type": 15,
+        "department": 1,
+        "name": "E-127",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 381,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "E-128",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 382,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "E-129",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 383,
+    "fields": {
+        "room_type": 4,
+        "department": 1,
+        "name": "E-130",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 384,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "E-131",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 385,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "E-132",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 386,
+    "fields": {
+        "room_type": 13,
+        "department": 1,
+        "name": "E-133",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 387,
+    "fields": {
+        "room_type": 13,
+        "department": 1,
+        "name": "E-134",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 388,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "E-201",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 389,
+    "fields": {
+        "room_type": 10,
+        "department": 10,
+        "name": "E-202",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 390,
+    "fields": {
+        "room_type": 10,
+        "department": 10,
+        "name": "E-203",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 391,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "E-204",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 392,
+    "fields": {
+        "room_type": 10,
+        "department": 10,
+        "name": "E-205",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 393,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "E-206",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 394,
+    "fields": {
+        "room_type": 10,
+        "department": 10,
+        "name": "E-207",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 395,
+    "fields": {
+        "room_type": 10,
+        "department": 10,
+        "name": "E-208",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 396,
+    "fields": {
+        "room_type": 10,
+        "department": 7,
+        "name": "E-209",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 397,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "E-210",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 398,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "E-211",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 399,
+    "fields": {
+        "room_type": 10,
+        "department": 10,
+        "name": "E-212",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 400,
+    "fields": {
+        "room_type": 10,
+        "department": 10,
+        "name": "E-213",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 401,
+    "fields": {
+        "room_type": 10,
+        "department": 9,
+        "name": "E-214",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 402,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "E-215",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 403,
+    "fields": {
+        "room_type": 10,
+        "department": 10,
+        "name": "E-216",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 404,
+    "fields": {
+        "room_type": 10,
+        "department": 9,
+        "name": "E-217",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 405,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "E-218",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 406,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "E-219",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 407,
+    "fields": {
+        "room_type": 10,
+        "department": 10,
+        "name": "E-220",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 408,
+    "fields": {
+        "room_type": 10,
+        "department": 10,
+        "name": "E-221",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 409,
+    "fields": {
+        "room_type": 10,
+        "department": 10,
+        "name": "E-222",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 410,
+    "fields": {
+        "room_type": 10,
+        "department": 9,
+        "name": "E-223",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 411,
+    "fields": {
+        "room_type": 10,
+        "department": 9,
+        "name": "E-224",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 412,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "E-225",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 413,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "E-226",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 414,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "E-227",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 415,
+    "fields": {
+        "room_type": 10,
+        "department": 10,
+        "name": "E-228",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 416,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "E-229",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 417,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "E-230",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 418,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "E-231",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 419,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "E-232",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 420,
+    "fields": {
+        "room_type": 4,
+        "department": 1,
+        "name": "E-233",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 421,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "E-234",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 422,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "E-235",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 423,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "E-236",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 424,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "E-237",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 425,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "E-238",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 426,
+    "fields": {
+        "room_type": 15,
+        "department": 1,
+        "name": "E-239",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 427,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "E-240",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 428,
+    "fields": {
+        "room_type": 13,
+        "department": 1,
+        "name": "E-241",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 429,
+    "fields": {
+        "room_type": 13,
+        "department": 1,
+        "name": "E-242",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 430,
+    "fields": {
+        "room_type": 13,
+        "department": 1,
+        "name": "F-101",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 431,
+    "fields": {
+        "room_type": 13,
+        "department": 1,
+        "name": "F-102",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 432,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "F-103",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 433,
+    "fields": {
+        "room_type": 9,
+        "department": 9,
+        "name": "F-104",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 434,
+    "fields": {
+        "room_type": 9,
+        "department": 9,
+        "name": "F-105",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 435,
+    "fields": {
+        "room_type": 9,
+        "department": 9,
+        "name": "F-106",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 436,
+    "fields": {
+        "room_type": 9,
+        "department": 11,
+        "name": "F-107",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 437,
+    "fields": {
+        "room_type": 9,
+        "department": 11,
+        "name": "F-108",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 438,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "F-109",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 439,
+    "fields": {
+        "room_type": 11,
+        "department": 11,
+        "name": "F-110",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 440,
+    "fields": {
+        "room_type": 9,
+        "department": 9,
+        "name": "F-111",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 441,
+    "fields": {
+        "room_type": 9,
+        "department": 9,
+        "name": "F-112",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 442,
+    "fields": {
+        "room_type": 9,
+        "department": 9,
+        "name": "F-113",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 443,
+    "fields": {
+        "room_type": 9,
+        "department": 11,
+        "name": "F-114",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 444,
+    "fields": {
+        "room_type": 2,
+        "department": 1,
+        "name": "F-115",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 445,
+    "fields": {
+        "room_type": 9,
+        "department": 11,
+        "name": "F-116",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 446,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "F-117",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 447,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "F-118",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 448,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "F-119",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 449,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "F-120",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 450,
+    "fields": {
+        "room_type": 15,
+        "department": 1,
+        "name": "F-121",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 451,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "F-122",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 452,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "F-123",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 453,
+    "fields": {
+        "room_type": 4,
+        "department": 1,
+        "name": "F-124",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 454,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "F-201",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 455,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "F-202",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 456,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "F-203",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 457,
+    "fields": {
+        "room_type": 13,
+        "department": 1,
+        "name": "F-204",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 458,
+    "fields": {
+        "room_type": 13,
+        "department": 1,
+        "name": "F-205",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 459,
+    "fields": {
+        "room_type": 9,
+        "department": 11,
+        "name": "F-206",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 460,
+    "fields": {
+        "room_type": 9,
+        "department": 11,
+        "name": "F-207",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 461,
+    "fields": {
+        "room_type": 9,
+        "department": 10,
+        "name": "F-208",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 462,
+    "fields": {
+        "room_type": 9,
+        "department": 11,
+        "name": "F-209",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 463,
+    "fields": {
+        "room_type": 2,
+        "department": 1,
+        "name": "F-210",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 464,
+    "fields": {
+        "room_type": 9,
+        "department": 1,
+        "name": "F-211",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 465,
+    "fields": {
+        "room_type": 9,
+        "department": 1,
+        "name": "F-212",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 466,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "F-213",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 467,
+    "fields": {
+        "room_type": 10,
+        "department": 9,
+        "name": "F-214",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 468,
+    "fields": {
+        "room_type": 10,
+        "department": 9,
+        "name": "F-215",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 469,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "F-216",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 470,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "F-217",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 471,
+    "fields": {
+        "room_type": 10,
+        "department": 9,
+        "name": "F-218",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 472,
+    "fields": {
+        "room_type": 10,
+        "department": 9,
+        "name": "F-219",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 473,
+    "fields": {
+        "room_type": 10,
+        "department": 10,
+        "name": "F-220",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 474,
+    "fields": {
+        "room_type": 10,
+        "department": 9,
+        "name": "F-221",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 475,
+    "fields": {
+        "room_type": 10,
+        "department": 9,
+        "name": "F-222",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 476,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "F-223",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 477,
+    "fields": {
+        "room_type": 10,
+        "department": 10,
+        "name": "F-224",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 478,
+    "fields": {
+        "room_type": 10,
+        "department": 10,
+        "name": "F-225",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 479,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "F-226",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 480,
+    "fields": {
+        "room_type": 10,
+        "department": 9,
+        "name": "F-227",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 481,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "F-228",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 482,
+    "fields": {
+        "room_type": 10,
+        "department": 9,
+        "name": "F-229",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 483,
+    "fields": {
+        "room_type": 10,
+        "department": 9,
+        "name": "F-230",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 484,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "F-231",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 485,
+    "fields": {
+        "room_type": 8,
+        "department": 10,
+        "name": "F-232",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 486,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "F-233",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 487,
+    "fields": {
+        "room_type": 8,
+        "department": 11,
+        "name": "F-234",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 488,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "F-235",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 489,
+    "fields": {
+        "room_type": 10,
+        "department": 11,
+        "name": "F-236",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 490,
+    "fields": {
+        "room_type": 10,
+        "department": 11,
+        "name": "F-237",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 491,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "F-238",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 492,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "F-239",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 493,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "F-240",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 494,
+    "fields": {
+        "room_type": 10,
+        "department": 11,
+        "name": "F-241",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 495,
+    "fields": {
+        "room_type": 10,
+        "department": 7,
+        "name": "F-242",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 496,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "F-243",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 497,
+    "fields": {
+        "room_type": 4,
+        "department": 1,
+        "name": "F-244",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 498,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "F-245",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 499,
+    "fields": {
+        "room_type": 10,
+        "department": 11,
+        "name": "F-246",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 500,
+    "fields": {
+        "room_type": 10,
+        "department": 11,
+        "name": "F-247",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 501,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "F-248",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 502,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "F-249",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 503,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "F-250",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 504,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "F-251",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 505,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "F-252",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 506,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "F-253",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 507,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "F-254",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 508,
+    "fields": {
+        "room_type": 15,
+        "department": 1,
+        "name": "F-255",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 509,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "F-256",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 510,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "F-257",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 511,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "F-258",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 512,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "F-259",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 513,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "F-260",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 514,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "F-261",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 515,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "F-262",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 516,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "F-263",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 517,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "G-101",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 518,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "G-102",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 519,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "G-103",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 520,
+    "fields": {
+        "room_type": 11,
+        "department": 1,
+        "name": "G-104",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 521,
+    "fields": {
+        "room_type": 9,
+        "department": 1,
+        "name": "G-105",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 522,
+    "fields": {
+        "room_type": 3,
+        "department": 1,
+        "name": "G-106",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 523,
+    "fields": {
+        "room_type": 9,
+        "department": 11,
+        "name": "G-107",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 524,
+    "fields": {
+        "room_type": 9,
+        "department": 10,
+        "name": "G-108",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 525,
+    "fields": {
+        "room_type": 9,
+        "department": 11,
+        "name": "G-109",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 526,
+    "fields": {
+        "room_type": 9,
+        "department": 11,
+        "name": "G-110",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 527,
+    "fields": {
+        "room_type": 9,
+        "department": 9,
+        "name": "G-111",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 528,
+    "fields": {
+        "room_type": 9,
+        "department": 11,
+        "name": "G-112",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 529,
+    "fields": {
+        "room_type": 2,
+        "department": 1,
+        "name": "G-113",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 530,
+    "fields": {
+        "room_type": 9,
+        "department": 11,
+        "name": "G-114",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 531,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "G-115",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 532,
+    "fields": {
+        "room_type": 15,
+        "department": 1,
+        "name": "G-116",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 533,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "G-117",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 534,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "G-118",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 535,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "G-119",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 536,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "G-201",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 537,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "G-202",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 538,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "G-203",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 539,
+    "fields": {
+        "room_type": 9,
+        "department": 11,
+        "name": "G-204",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 540,
+    "fields": {
+        "room_type": 9,
+        "department": 1,
+        "name": "G-205",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 541,
+    "fields": {
+        "room_type": 9,
+        "department": 11,
+        "name": "G-206",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 542,
+    "fields": {
+        "room_type": 9,
+        "department": 1,
+        "name": "G-207",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 543,
+    "fields": {
+        "room_type": 9,
+        "department": 1,
+        "name": "G-208",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 544,
+    "fields": {
+        "room_type": 2,
+        "department": 1,
+        "name": "G-209",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 545,
+    "fields": {
+        "room_type": 1,
+        "department": 10,
+        "name": "G-210",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 546,
+    "fields": {
+        "room_type": 3,
+        "department": 10,
+        "name": "G-211",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 547,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "G-212",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 548,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "G-213",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 549,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "G-214",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 550,
+    "fields": {
+        "room_type": 10,
+        "department": 11,
+        "name": "G-215",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 551,
+    "fields": {
+        "room_type": 10,
+        "department": 11,
+        "name": "G-216",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 552,
+    "fields": {
+        "room_type": 10,
+        "department": 11,
+        "name": "G-217",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 553,
+    "fields": {
+        "room_type": 10,
+        "department": 11,
+        "name": "G-218",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 554,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "G-219",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 555,
+    "fields": {
+        "room_type": 10,
+        "department": 11,
+        "name": "G-220",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 556,
+    "fields": {
+        "room_type": 10,
+        "department": 11,
+        "name": "G-221",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 557,
+    "fields": {
+        "room_type": 10,
+        "department": 11,
+        "name": "G-222",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 558,
+    "fields": {
+        "room_type": 10,
+        "department": 11,
+        "name": "G-223",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 559,
+    "fields": {
+        "room_type": 10,
+        "department": 11,
+        "name": "G-224",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 560,
+    "fields": {
+        "room_type": 10,
+        "department": 11,
+        "name": "G-225",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 561,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "G-226",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 562,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "G-227",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 563,
+    "fields": {
+        "room_type": 10,
+        "department": 11,
+        "name": "G-228",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 564,
+    "fields": {
+        "room_type": 10,
+        "department": 11,
+        "name": "G-229",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 565,
+    "fields": {
+        "room_type": 10,
+        "department": 11,
+        "name": "G-230",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 566,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "G-231",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 567,
+    "fields": {
+        "room_type": 10,
+        "department": 11,
+        "name": "G-232",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 568,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "G-233",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 569,
+    "fields": {
+        "room_type": 10,
+        "department": 5,
+        "name": "G-234",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 570,
+    "fields": {
+        "room_type": 10,
+        "department": 11,
+        "name": "G-235",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 571,
+    "fields": {
+        "room_type": 10,
+        "department": 5,
+        "name": "G-236",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 572,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "G-237",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 573,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "G-238",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 574,
+    "fields": {
+        "room_type": 10,
+        "department": 5,
+        "name": "G-239",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 575,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "G-240",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 576,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "G-241",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 577,
+    "fields": {
+        "room_type": 10,
+        "department": 5,
+        "name": "G-242",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 578,
+    "fields": {
+        "room_type": 10,
+        "department": 5,
+        "name": "G-243",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 579,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "G-244",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 580,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "G-245",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 581,
+    "fields": {
+        "room_type": 10,
+        "department": 5,
+        "name": "G-246",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 582,
+    "fields": {
+        "room_type": 10,
+        "department": 5,
+        "name": "G-247",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 583,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "G-248",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 584,
+    "fields": {
+        "room_type": 10,
+        "department": 5,
+        "name": "G-249",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 585,
+    "fields": {
+        "room_type": 10,
+        "department": 5,
+        "name": "G-250",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 586,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "G-251",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 587,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "G-252",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 588,
+    "fields": {
+        "room_type": 8,
+        "department": 5,
+        "name": "G-253",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 589,
+    "fields": {
+        "room_type": 11,
+        "department": 1,
+        "name": "G-254",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 590,
+    "fields": {
+        "room_type": 10,
+        "department": 1,
+        "name": "G-255",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 591,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "G-256",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 592,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "G-257",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 593,
+    "fields": {
+        "room_type": 1,
+        "department": 1,
+        "name": "G-258",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 594,
+    "fields": {
+        "room_type": 7,
+        "department": 1,
+        "name": "G-259",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.room",
+    "pk": 595,
+    "fields": {
+        "room_type": 15,
+        "department": 1,
+        "name": "G-260",
+        "description": "",
+        "capacity": -1,
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+}
+]

@@ -53,6 +53,7 @@ class RoomType(models.Model):
     class Meta:
         verbose_name = "Room Type"
         verbose_name_plural = "Room Types"
+        ordering = ('pk',)
 
     def __str__(self):
         return self.name
@@ -76,6 +77,7 @@ class Room(models.Model):
 
     # Model fields.
     name = models.CharField(max_length=MAX_LENGTH)
+    description = models.CharField(max_length=MAX_LENGTH)
     capacity = models.PositiveSmallIntegerField()
 
     # Self-setting/Non-user-editable fields.

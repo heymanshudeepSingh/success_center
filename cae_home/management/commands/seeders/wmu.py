@@ -16,7 +16,7 @@ def generate_model_seeds(model_count):
     print('SEEDING WMU Model Group.')
     create_room_types()
     create_departments()
-    create_rooms(model_count)
+    create_rooms()
     create_majors()
     create_semester_dates()
     create_wmu_users(model_count)
@@ -31,6 +31,7 @@ def create_room_types():
 
     print('Populated room type models.')
 
+
 def create_departments():
     """
     Create Department models.
@@ -40,39 +41,14 @@ def create_departments():
 
     print('Populated department models.')
 
-def create_rooms(model_count):
+
+def create_rooms():
     """
     Create Room models.
     """
-    # Create random data generator.
-    faker_factory = Faker()
+    # Load preset fixtures. No need to create random models.
+    call_command('loaddata', 'full_models/rooms')
 
-    # Count number of models already created.
-    pre_initialized_count = len(models.Room.objects.all())
-
-    # Get all related models.
-    room_types = models.RoomType.objects.all()
-    departments = models.Department.objects.all()
-
-    # Generate models equal to model count.
-    for i in range(model_count - pre_initialized_count):
-        # Get Room Type.
-        index = randint(0, len(room_types) - 1)
-        room_type = room_types[index]
-
-        # Get Department.
-        index = randint(0, len(departments) - 1)
-        department = departments[index]
-
-        # Generate room name.
-        name = '{0}-{1}'.format(chr(randint(65, 90)), randint(100, 299))
-
-        models.Room.objects.create(
-            name=name,
-            capacity=randint(15, 200),
-            room_type=room_type,
-            department=department,
-        )
     print('Populated room models.')
 
 
