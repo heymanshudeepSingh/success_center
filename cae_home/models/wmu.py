@@ -44,6 +44,11 @@ class RoomType(models.Model):
     # Model fields.
     name = models.CharField(
         max_length=MAX_LENGTH,
+        unique=True,
+    )
+    slug = models.SlugField(
+        max_length=MAX_LENGTH,
+        help_text="Used for urls referencing this room type.",
     )
 
     # Self-setting/Non-user-editable fields.

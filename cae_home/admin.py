@@ -224,9 +224,12 @@ class RoomTypeAdmin(admin.ModelAdmin):
         }),
         ('Advanced', {
             'classes': ('collapse',),
-            'fields': ('date_created', 'date_modified',),
+            'fields': ('slug', 'date_created', 'date_modified',),
         }),
     )
+
+    # New object's slugs will be automatically set by the name.
+    prepopulated_fields = {"slug": ("name",)}
 
 
 class RoomAdmin(admin.ModelAdmin):

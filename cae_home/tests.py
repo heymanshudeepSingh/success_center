@@ -161,7 +161,7 @@ class RoomTypeModelTests(TestCase):
     Tests to ensure valid Room Type model creation/logic.
     """
     def setUp(self):
-        self.test_room_type = models.RoomType.objects.create(name="Test Room Type")
+        self.test_room_type = models.RoomType.objects.create(name="Test Room Type", slug='test-room-type')
 
     def test_model_creation(self):
         self.assertEqual(self.test_room_type.name, "Test Room Type")
@@ -180,7 +180,7 @@ class RoomModelTests(TestCase):
     """
     @classmethod
     def setUpTestData(cls):
-        cls.room_type = models.RoomType.objects.create(name="Test Room Type")
+        cls.room_type = models.RoomType.objects.create(name="Test Room Type", slug='test-room-type')
         cls.department = models.Department.objects.create(name='Department')
 
     def setUp(self):
@@ -365,7 +365,7 @@ class AssetModelTests(TestCase):
     """
     @classmethod
     def setUpTestData(cls):
-        cls.room_type = models.RoomType.objects.create(name="Test Room Type")
+        cls.room_type = models.RoomType.objects.create(name="Test Room Type", slug='test-room-type')
         cls.department = models.Department.objects.create(name='Department')
         cls.room = models.Room.objects.create(
             name='Test Room',

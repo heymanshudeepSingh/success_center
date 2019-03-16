@@ -4,6 +4,7 @@
     "pk": 1,
     "fields": {
         "name": "NA/Unknown",
+        "slug": "na-unknown",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -13,6 +14,7 @@
     "pk": 2,
     "fields": {
         "name": "Breakout Room",
+        "slug": "breakout-room",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -22,6 +24,7 @@
     "pk": 3,
     "fields": {
         "name": "Classroom",
+        "slug": "classroom",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -31,6 +34,7 @@
     "pk": 4,
     "fields": {
         "name": "Commons",
+        "slug": "commons",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -40,6 +44,7 @@
     "pk": 5,
     "fields": {
         "name": "Computer Classroom",
+        "slug": "computer-classroom",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -49,6 +54,7 @@
     "pk": 6,
     "fields": {
         "name": "Computer Lab",
+        "slug": "computer-lab",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -58,6 +64,7 @@
     "pk": 7,
     "fields": {
         "name": "Custodial/Maintenance",
+        "slug": "custodial/maintenance",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -67,6 +74,7 @@
     "pk": 8,
     "fields": {
         "name": "Department Office",
+        "slug": "department-office",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -76,6 +84,7 @@
     "pk": 9,
     "fields": {
         "name": "Engineering Lab",
+        "slug": "engineering-lab",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -85,6 +94,7 @@
     "pk": 10,
     "fields": {
         "name": "Faculty Office",
+        "slug": "faculty-office",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -94,6 +104,7 @@
     "pk": 11,
     "fields": {
         "name": "Graduate Carrel",
+        "slug": "graduate-carrel",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -103,6 +114,7 @@
     "pk": 12,
     "fields": {
         "name": "Lecture Hall",
+        "slug": "lecture-hall",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -112,6 +124,7 @@
     "pk": 13,
     "fields": {
         "name": "Restroom",
+        "slug": "restroom",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -121,6 +134,7 @@
     "pk": 14,
     "fields": {
         "name": "Special Room",
+        "slug": "special-room",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -130,6 +144,7 @@
     "pk": 15,
     "fields": {
         "name": "Stairway",
+        "slug": "stairway",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
