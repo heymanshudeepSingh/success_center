@@ -12,7 +12,7 @@
  */
 
 
-console.log('Started overlay_modal.js file.');
+// console.log('Started overlay_modal.js file.');
 
 var overlay_container = $('#overlay-modal-container');
 // console.log(overlay_container);
