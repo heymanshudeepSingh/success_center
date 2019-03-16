@@ -189,6 +189,7 @@ class RoomModelTests(TestCase):
             room_type=self.room_type,
             department=self.department,
             capacity=30,
+            description="Test Room Description",
         )
 
     def test_model_creation(self):
@@ -371,6 +372,7 @@ class AssetModelTests(TestCase):
             room_type=cls.room_type,
             department=cls.department,
             capacity=30,
+            description="Test Room Description",
         )
 
     def setUp(self):
