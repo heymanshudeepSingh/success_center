@@ -34,7 +34,7 @@
 //==== START ----- Block ====//
 //===========================//
 
-#content {
+.main-content {
     @each $article_element in $article_element_list {
         #{$article_element} {
             padding: 10px;
@@ -78,7 +78,7 @@
 //==== START ----- Block ====//
 //===========================//
 
-#content {
+.main-content {
 
   @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
@@ -143,7 +143,7 @@
 //==== START ----- Block ====//
 //===========================//
 
-#content {
+.main-content {
 
   @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {

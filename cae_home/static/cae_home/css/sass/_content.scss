@@ -53,7 +53,7 @@
 //==== START Generic Element Block ====//
 //=====================================//
 
-#content {
+.main-content {
 
     padding-bottom: 10px;
 
@@ -77,7 +77,7 @@
 //==== START Generic Class Block ====//
 //===================================//
 
-#content {
+.main-content {
 
     // Hide on print viewing.
     .display-only-web {
@@ -147,7 +147,7 @@
 //==== START Generic Element Block ====//
 //=====================================//
 
-#content {
+.main-content {
 
   @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
@@ -188,7 +188,7 @@
 //==== START Generic Class Block ====//
 //===================================//
 
-#content {
+.main-content {
 
     .javascript-warn {
         font-weight: bold;
@@ -240,7 +240,7 @@
 //==== START Generic Element Block ====//
 //=====================================//
 
-#content {
+.main-content {
 
   @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
@@ -271,7 +271,7 @@
 //==== START Generic Class Block ====//
 //===================================//
 
-#content {
+.main-content {
 
   @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
@@ -327,7 +327,7 @@
 //==== START Generic Element Block ====//
 //=====================================//
 
-#content {
+.main-content {
     a {
         @include transition(color 0.5s, background-color 0.5s, border 0.5s);
     }
@@ -342,7 +342,7 @@
 //==== START Generic Class Block ====//
 //===================================//
 
-#content {
+.main-content {
 
     .hover-highlight:hover {
         cursor: pointer;

@@ -66,7 +66,7 @@ button, a.button {
 //==== START ----- Block ====//
 //===========================//
 
-#content {
+.main-content {
 
   @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
@@ -141,7 +141,7 @@ button, a.button {
 //==== START ----- Block ====//
 //===========================//
 
-#content {
+.main-content {
 
   @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {

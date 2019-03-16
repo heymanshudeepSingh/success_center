@@ -83,7 +83,7 @@
 //==== START ----- Block ====//
 //===========================//
 
-#content {
+.main-content {
 
   @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
@@ -196,7 +196,7 @@
 //==== START ----- Block ====//
 //===========================//
 
-#content {
+.main-content {
 
   @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {

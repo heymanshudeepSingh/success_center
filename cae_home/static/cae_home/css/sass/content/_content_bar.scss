@@ -34,7 +34,7 @@
 //==== START ----- Block ====//
 //===========================//
 
-#content-bar-left, #content-bar-right {
+.main-content-bar-left, .main-content-bar-right {
     position: absolute;
     z-index: 5;
 
@@ -62,7 +62,7 @@
     }
 }
 
-#content-bar-left {
+.main-content-bar-left {
     left: 0;
 
     > .bar-nav {
@@ -71,7 +71,7 @@
     }
 }
 
-#content-bar-right {
+.main-content-bar-right {
     right: 0;
 
     @include justify-content(flex-end);
@@ -104,7 +104,7 @@
 //==== START ----- Block ====//
 //===========================//
 
-#content-bar-left, #content-bar-right {
+.main-content-bar-left, .main-content-bar-right {
 
   @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
@@ -164,7 +164,7 @@
 //==== START ----- Block ====//
 //===========================//
 
-#content-bar-left, #content-bar-right {
+.main-content-bar-left, .main-content-bar-right {
 
   @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
@@ -218,7 +218,7 @@
 //==== START ----- Block ====//
 //===========================//
 
-#content-bar-left, #content-bar-right {
+.main-content-bar-left, .main-content-bar-right {
 
     > .bar-nav p {
         @include transition(color 0.5s, background-color 0.5s, border 0.5s);

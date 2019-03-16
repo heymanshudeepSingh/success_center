@@ -34,7 +34,7 @@
 //==== START ----- Block ====//
 //===========================//
 
-#content {
+.main-content {
     table {
         margin-top: 10px;
         margin-right: auto;
@@ -92,7 +92,7 @@
 //==== START ----- Block ====//
 //===========================//
 
-#content {
+.main-content {
 
   @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
@@ -178,7 +178,7 @@
 //==== START ----- Block ====//
 //===========================//
 
-#content {
+.main-content {
 
   @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
@@ -268,7 +268,7 @@
 //==== START ----- Block ====//
 //===========================//
 
-#content {
+.main-content {
     table {
         box-sizing: border-box;
         @include transition(color 0.5s, background-color 0.5s, border 0.5s);
