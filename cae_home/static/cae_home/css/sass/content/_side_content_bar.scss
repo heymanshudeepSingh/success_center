@@ -44,16 +44,43 @@
     min-width: 100%;
     min-height: 100%;
 
+    ul {
+        padding-left: 0 !important;
+    }
+
     > .bar-nav {
         padding-top: 15px;
     }
 
     > .bar-content {
-        min-height: 100%;
-        padding: 5px;
+        position: sticky;
+        top: 0;
+
+        height: 100vh;
+        padding: 10px;
+
+        @each $header_element in $header_element_list {
+        > #{$header_element} {
+            padding-top: 0;
+        }}
+
+        li {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        > p {
+            margin-top: 5px;
+            margin-right: 2px;
+            margin-bottom: 5px;
+            margin-left: 2px;
+        }
     }
 
     .arrow-right, .arrow-left {
+        position: sticky;
+        top: 0;
+
         padding-right: 2px;
         padding-bottom: 2px;
         padding-left: 2px;
@@ -106,8 +133,15 @@
 
 .content-bar-left, .content-bar-right {
 
-  @each $theme, $theme-dict in $theme-colors {
+    @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
+
+        @each $header_element in $header_element_list {
+        #{$header_element} {
+
+            font-size: 110%;
+            color: theme-text($theme, 'primary');
+        }}
 
         > .bar-nav p {
             font-size: 150%;
@@ -118,12 +152,21 @@
             color: theme-text($theme, 'content');
         }
 
-        .arrow-right, .arrow-left {
-            font-size: 100% !important;
+        > .bar-content p, > .bar-content a {
+            font-size: 90%;
+            color: theme-text($theme, 'primary');
         }
 
+        > .bar-content a:hover {
+            font-size: 90%;
+            color: theme-text($theme, 'primary-hover');
+        }
+
+    }}
+
+    .arrow-right, .arrow-left {
+        font-size: 100% !important;
     }
-  }
 
 }
 
@@ -166,18 +209,21 @@
 
 .content-bar-left, .content-bar-right {
 
-  @each $theme, $theme-dict in $theme-colors {
+    li {
+        list-style: none;
+    }
+
+    @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
         > .bar-content {
-            background-color: theme-background($theme, 'primary');
+            background-color: theme-status($theme, 'secondary', 'primary');
             border-right: 1px solid theme-background($theme, 'border');
             border-left: 1px solid theme-background($theme, 'border');
         }
 
         .arrow-right, .arrow-left {
             background-color: theme-status($theme, 'default', 'secondary');
-            /*background-color: $color-trans-grey-25;*/
             border-radius: 25px;
         }
 
@@ -185,8 +231,7 @@
             background-color: theme-background($theme, 'primary');
         }
 
-    }
-  }
+    }}
 
 }
 

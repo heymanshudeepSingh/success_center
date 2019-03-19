@@ -60,7 +60,15 @@ def internal_dev_index(request):
     This should only be accessible in development environments.
     """
     if settings.DEV_URLS:
-        return TemplateResponse(request, 'cae_home/css_example.html', {})
+        # Get example forms.
+        form = forms.ExampleForm()
+        if request.method == 'POST':
+            form = forms.ExampleForm(request.POST)
+
+        # Render template to user.
+        return TemplateResponse(request, 'cae_home/css_example.html', {
+            'form': form,
+        })
     else:
         raise Http404()
 

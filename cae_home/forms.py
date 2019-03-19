@@ -15,6 +15,16 @@ class AuthenticationForm(auth_form):
     remember_me = forms.BooleanField(required=False)
 
 
+class ExampleForm(forms.Form):
+    """
+    An example form, used in the css examples page.
+    Should not actually submit any data.
+    """
+    name = forms.CharField()
+    time = forms.TimeField()
+    check_me = forms.BooleanField(required=False)
+
+
 class ProfileAdminForm(forms.ModelForm):
     """
     Define admin form view for the Profile model.

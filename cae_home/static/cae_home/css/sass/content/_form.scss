@@ -49,15 +49,27 @@
             margin: 5px;
 
             text-align: right;
+
+            @media only screen and (min-width: $screen-tablet-mid) {
+                width: 30%;
+            }
         }
 
         // Field value div.
         > div {
             margin: 5px;
-            width: 57.5%;
+            width: 70%;
 
             text-align: left;
+
+            @media only screen and (min-width: $screen-tablet-mid) {
+                width: 57.5%;
+            }
         }
+    }
+
+    input {
+        max-width: 90%;
     }
 
     .alert {

@@ -34,13 +34,36 @@
 //==== START ----- Block ====//
 //===========================//
 
-button, a.button {
-    display: inline-block;
-    padding-top: 6px;
-    padding-right: 12px;
-    padding-bottom: 6px;
-    padding-left: 12px;
-    margin: 2px;
+.main-content {
+
+    button, a.button {
+        display: inline-block;
+        padding-top: 6px;
+        padding-right: 12px;
+        padding-bottom: 6px;
+        padding-left: 12px;
+        margin: 2px;
+    }
+
+    div.buttons {
+        @include display-flex;
+        @include flex-direction(row);
+        @include justify-content(center);
+        @include align-items(center);
+        @include flex-wrap(wrap);
+
+        button, a.button {
+            display: block;
+        }
+
+        button:not(:first-child), a.button:not(:first-child) {
+            margin-left: 0;
+        }
+
+        button:not(:last-child), a.button:not(:last-child) {
+            margin-right: 0;
+        }
+    }
 }
 
 //===========================//
@@ -68,7 +91,7 @@ button, a.button {
 
 .main-content {
 
-  @each $theme, $theme-dict in $theme-colors {
+    @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
         button, a.button {
@@ -99,8 +122,7 @@ button, a.button {
             color: theme-status($theme, 'secondary', 'link-hover');
         }
 
-    }
-  }
+    }}
 
 }
 
@@ -143,7 +165,7 @@ button, a.button {
 
 .main-content {
 
-  @each $theme, $theme-dict in $theme-colors {
+    @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
         button, a.button {
@@ -220,8 +242,20 @@ button, a.button {
             border: 1px solid theme-status($theme, 'default', 'border-hover');
         }
 
+    }}
+
+    div.buttons {
+
+        button:not(:first-child), a.button:not(:first-child) {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        button:not(:last-child), a.button:not(:last-child) {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
     }
-  }
 
 }
 

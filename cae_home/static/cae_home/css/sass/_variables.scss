@@ -20,16 +20,22 @@
 //============================== Element Variables ===============================//
 //================================================================================//
 
+// Full Html Element List.
 $html_element_list: ('body', 'hgroup', 'header', 'footer', 'nav',
     'article', 'section', 'aside', 'figure', 'figcaption',
     'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
     'ol', 'ul', 'li',
     'div', 'span', 'p', 'img', 'a');
 
-$header_element_list: ('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
-$article_element_list: ('article', 'div.article', 'article.color',
-    'div.article.color', 'section', 'div.section');
 
+// Main Element Lists.
+$header_element_list: ('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
+$content_element_list: ('.main-content', '.content-bar-left', '.content-bar-right');
+$article_element_list: ('article', 'div.article', 'article.color',
+    'div.article-color', 'section', 'div.section', 'div.section-color');
+
+
+// Panel Element Lists.
 $panel_header_element_list: ('.header', '.head');
 $panel_content_element_list: ('.content', '.body');
 $panel_footer_element_list: ('.footer', '.foot');
@@ -517,7 +523,7 @@ $theme-colors: (
             'primary-accent': $color-trans-white-75,
             'primary-subtle': $color-trans-white-50,
             'primary-hint': $color-trans-white-25,
-            'primary-hover': $color-black,
+            'primary-hover': $color-white,
             'content': $color-black,
             'content-accent': $color-trans-black-75,
             'content-subtle': $color-trans-black-50,
