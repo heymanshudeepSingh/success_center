@@ -245,10 +245,10 @@ class RoomAdmin(admin.ModelAdmin):
         inlines = [RoomEventInline]
 
     # Fields to display in admin list view.
-    list_display = ('name', 'room_type', 'get_departments') #department)
+    list_display = ('name', 'room_type', 'get_departments')
 
     # Fields to filter by in admin list view.
-    list_filter = ('room_type',)# 'department',)
+    list_filter = ('room_type', 'department',)
 
     # Fields to search in admin list view.
     search_fields = ['name', 'capacity',]
