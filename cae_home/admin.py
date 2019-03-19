@@ -233,15 +233,22 @@ class RoomTypeAdmin(admin.ModelAdmin):
 
 
 class RoomAdmin(admin.ModelAdmin):
+
+    def get_departments(self, obj):
+        dept_list = ''
+        for department in obj.department.all():
+            dept_list += '{0} | '.format(department.name)
+        return dept_list[:-3]
+
     # Check that the inline import succeeded.
     if RoomEventInline is not None:
         inlines = [RoomEventInline]
 
     # Fields to display in admin list view.
-    list_display = ('name', 'department', 'room_type',)
+    list_display = ('name', 'room_type', 'get_departments') #department)
 
     # Fields to filter by in admin list view.
-    list_filter = ('room_type', 'department',)
+    list_filter = ('room_type',)# 'department',)
 
     # Fields to search in admin list view.
     search_fields = ['name', 'capacity',]
@@ -253,7 +260,7 @@ class RoomAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
             'fields': (
-                'name', 'room_type', 'department', 'capacity',
+                'name', 'room_type', 'department', 'description', 'capacity',
             )
         }),
         ('Advanced', {

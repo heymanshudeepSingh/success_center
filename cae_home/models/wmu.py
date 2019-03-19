@@ -77,12 +77,12 @@ class Room(models.Model):
     A standard university room.
     """
     # Relationship keys.
+    department = models.ManyToManyField('Department', blank=True)
     room_type = models.ForeignKey('RoomType', on_delete=models.CASCADE)
-    department = models.ForeignKey('Department', on_delete=models.CASCADE, blank=True, null=True)
 
     # Model fields.
     name = models.CharField(max_length=MAX_LENGTH)
-    description = models.CharField(max_length=MAX_LENGTH)
+    description = models.CharField(max_length=MAX_LENGTH, default='', blank=True)
     capacity = models.PositiveSmallIntegerField()
 
     # Self-setting/Non-user-editable fields.
