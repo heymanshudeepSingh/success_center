@@ -60,40 +60,44 @@
         }
 
         @each $panel_header_element in $panel_header_element_list {
-            > #{$panel_header_element} {
-                @include display-flex;
-                @include flex-direction(row);
-                @include justify-content(space-between);
-                @include align-items(center);
-                @include flex-wrap(wrap);
+        > #{$panel_header_element} {
 
-                padding: 10px;
+            @include display-flex;
+            @include flex-direction(row);
+            @include justify-content(space-between);
+            @include align-items(center);
+            @include flex-wrap(wrap);
 
-                @each $header_element in $header_element_list {
-                    > #{$header_element} {
-                        padding-top: 0;
-                    }
-                }
-            }
-        }
+            padding: 10px;
+
+            @each $header_element in $header_element_list {
+            > #{$header_element} {
+
+                    padding-top: 0;
+
+                }}
+
+        }}
 
         @each $panel_content_element in $panel_content_element_list {
-            > #{$panel_content_element} {
-                padding: 10px;
-            }
-        }
+        > #{$panel_content_element} {
+
+            padding: 10px;
+
+        }}
 
         @each $panel_footer_element in $panel_footer_element_list {
-            > #{$panel_footer_element} {
-                @include display-flex;
-                @include flex-direction(row);
-                @include justify-content(space-between);
-                @include align-items(center);
-                @include flex-wrap(wrap);
+        > #{$panel_footer_element} {
 
-                padding: 10px;
-            }
-        }
+            @include display-flex;
+            @include flex-direction(row);
+            @include justify-content(space-between);
+            @include align-items(center);
+            @include flex-wrap(wrap);
+
+            padding: 10px;
+
+        }}
     }
 }
 
@@ -122,7 +126,7 @@
 
 .main-content {
 
-  @each $theme, $theme-dict in $theme-colors {
+    @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
         div.panel {
@@ -141,93 +145,99 @@
             }
 
             @each $panel_header_element in $panel_header_element_list {
-                > #{$panel_header_element} {
+            > #{$panel_header_element} {
+
                     font-size: 110%;
                     font-weight: bold;
 
                     color: theme-text($theme, 'content');
 
                     @each $header_element in $header_element_list {
-                        > #{$header_element} {
-                            font-size: 110%;
-                        }
-                    }
-                }
-            }
+                    > #{$header_element} {
+
+                        font-size: 110%;
+
+                    }}
+
+            }}
 
             @each $panel_content_element in $panel_content_element_list {
-                > #{$panel_content_element} {
-                    a:not(.button) {
-                        color: theme-text($theme, 'link');
-                    }
+            > #{$panel_content_element} {
 
-                    a:not(.button):hover {
-                        color: theme-text($theme, 'link-hover');
-                    }
+                a:not(.button) {
+                    color: theme-text($theme, 'link');
                 }
-            }
+
+                a:not(.button):hover {
+                    color: theme-text($theme, 'link-hover');
+                }
+
+            }}
 
             @each $panel_footer_element in $panel_footer_element_list {
-                > #{$panel_footer_element} {
-                    color: theme-text($theme, 'content');
-                }
-            }
+            > #{$panel_footer_element} {
+
+                color: theme-text($theme, 'content');
+
+            }}
+
         }
 
         div.panel:hover {
 
             @each $panel_header_element in $panel_header_element_list {
-                > #{$panel_header_element} {
-                    color: theme-text($theme, 'content-hover');
-                }
-            }
+            > #{$panel_header_element} {
+
+                color: theme-text($theme, 'content-hover');
+
+            }}
 
             @each $panel_footer_element in $panel_footer_element_list {
-                > #{$panel_footer_element} {
-                    color: theme-text($theme, 'content-hover');
-                }
-            }
+            > #{$panel_footer_element} {
+
+                color: theme-text($theme, 'content-hover');
+
+            }}
+
         }
 
         div.panel.primary {
 
-            @each $panel_header_element in $panel_header_element_list {
-                > #{$panel_header_element} {
-                    // Stylings specific to wmu theme.
-                    @if $theme == "wmu" {
-                        color: $color-trans-white-75;
-                    } @else {
-                        color: theme-status($theme, 'primary', 'text');
-                    }
-
-                    a:not(.button) {
-                        color: theme-status($theme, 'primary', 'link');
-                    }
-                }
-
-                a:not(.button):hover {
-                    color: theme-status($theme, 'primary', 'link-hover');
-                }
+            a:not(.button):hover {
+                color: theme-status($theme, 'primary', 'link-hover');
             }
+
+            @each $panel_header_element in $panel_header_element_list {
+            > #{$panel_header_element} {
+
+                // Stylings specific to wmu theme.
+                @if $theme == "wmu" {
+                    color: $color-trans-white-75;
+                } @else {
+                    color: theme-status($theme, 'primary', 'text');
+                }
+
+                a:not(.button) {
+                    color: theme-status($theme, 'primary', 'link');
+                }
+
+            }}
 
             @each $panel_footer_element in $panel_footer_element_list {
-                > #{$panel_footer_element} {
-                    // Stylings specific to wmu theme.
-                    @if $theme == "wmu" {
-                        color: $color-trans-white-75;
-                    } @else {
-                        color: theme-status($theme, 'primary', 'text');
-                    }
+            > #{$panel_footer_element} {
 
-                    a:not(.button) {
-                        color: theme-status($theme, 'primary', 'link');
-                    }
+                // Stylings specific to wmu theme.
+                @if $theme == "wmu" {
+                    color: $color-trans-white-75;
+                } @else {
+                    color: theme-status($theme, 'primary', 'text');
                 }
 
-                a:not(.button):hover {
-                    color: theme-status($theme, 'primary', 'link-hover');
+                a:not(.button) {
+                    color: theme-status($theme, 'primary', 'link');
                 }
-            }
+
+            }}
 
 
         }
@@ -235,62 +245,67 @@
         div.panel.primary:hover {
 
             @each $panel_header_element in $panel_header_element_list {
-                > #{$panel_header_element} {
-                    color: theme-status($theme, 'primary', 'link-hover');
-                }
-            }
+            > #{$panel_header_element} {
+
+                color: theme-status($theme, 'primary', 'link-hover');
+
+            }}
 
             @each $panel_footer_element in $panel_footer_element_list {
-                > #{$panel_footer_element} {
-                    color: theme-status($theme, 'primary', 'link-hover');
-                }
-            }
+            > #{$panel_footer_element} {
+
+                color: theme-status($theme, 'primary', 'link-hover');
+
+            }}
+
         }
 
         div.panel.secondary {
 
-            @each $panel_header_element in $panel_header_element_list {
-                > #{$panel_header_element} {
-                    color: theme-status($theme, 'secondary', 'text');
-
-                    a:not(.button) {
-                        color: theme-status($theme, 'secondary', 'link');
-                    }
-                }
-
-                a:not(.button):hover {
-                    color: theme-status($theme, 'secondary', 'link-hover');
-                }
+            a:not(.button):hover {
+                color: theme-status($theme, 'secondary', 'link-hover');
             }
+
+            @each $panel_header_element in $panel_header_element_list {
+            > #{$panel_header_element} {
+
+                color: theme-status($theme, 'secondary', 'text');
+
+                a:not(.button) {
+                    color: theme-status($theme, 'secondary', 'link');
+                }
+
+            }}
 
             @each $panel_footer_element in $panel_footer_element_list {
-                > #{$panel_footer_element} {
-                    color: theme-status($theme, 'secondary', 'text');
+            > #{$panel_footer_element} {
 
-                    a:not(.button) {
-                        color: theme-status($theme, 'secondary', 'link');
-                    }
+                color: theme-status($theme, 'secondary', 'text');
+
+                a:not(.button) {
+                    color: theme-status($theme, 'secondary', 'link');
                 }
 
-                a:not(.button):hover {
-                    color: theme-status($theme, 'secondary', 'link-hover');
-                }
-            }
+            }}
+
         }
 
         div.panel.secondary:hover {
 
             @each $panel_header_element in $panel_header_element_list {
-                > #{$panel_header_element} {
-                    color: theme-text($theme, 'secondary-hover');
-                }
-            }
+            > #{$panel_header_element} {
+
+                color: theme-text($theme, 'secondary-hover');
+
+            }}
 
             @each $panel_footer_element in $panel_footer_element_list {
-                > #{$panel_footer_element} {
-                    color: theme-text($theme, 'secondary-hover');
-                }
-            }
+            > #{$panel_footer_element} {
+
+                color: theme-text($theme, 'secondary-hover');
+
+            }}
+
         }
 
         div.panel.info {
@@ -333,8 +348,7 @@
             }
         }
 
-    }
-  }
+    }}
 
 }
 
@@ -377,7 +391,7 @@
 
 .main-content {
 
-  @each $theme, $theme-dict in $theme-colors {
+    @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
         div.panel {
@@ -393,22 +407,26 @@
             }
 
             @each $panel_header_element in $panel_header_element_list {
-                > #{$panel_header_element} {
-                    border-bottom: 1px solid theme-status($theme, 'default', 'border');
-                }
-            }
+            > #{$panel_header_element} {
+
+                border-bottom: 1px solid theme-status($theme, 'default', 'border');
+
+            }}
 
             @each $panel_content_element in $panel_content_element_list {
-                > #{$panel_content_element} {
-                    background-color: theme-status($theme, 'default', 'secondary');
-                }
-            }
+            > #{$panel_content_element} {
+
+                background-color: theme-status($theme, 'default', 'secondary');
+
+            }}
 
             @each $panel_footer_element in $panel_footer_element_list {
-                > #{$panel_footer_element} {
-                    border-top: 1px solid theme-status($theme, 'default', 'border');
-                }
-            }
+            > #{$panel_footer_element} {
+
+                border-top: 1px solid theme-status($theme, 'default', 'border');
+
+            }}
+
         }
 
         div.panel:hover {
@@ -416,10 +434,12 @@
             border: 1px solid theme-status($theme, 'default', 'border-hover');
 
             @each $panel_content_element in $panel_content_element_list {
-                > #{$panel_content_element} {
-                    background-color: theme-status($theme, 'default', 'secondary-hover');
-                }
-            }
+            > #{$panel_content_element} {
+
+                background-color: theme-status($theme, 'default', 'secondary-hover');
+
+            }}
+
         }
 
         div.panel.primary {
@@ -444,16 +464,19 @@
             }
 
             @each $panel_header_element in $panel_header_element_list {
-                > #{$panel_header_element} {
-                    border-bottom: 1px solid theme-status($theme, 'primary', 'border');
-                }
-            }
+            > #{$panel_header_element} {
+
+                border-bottom: 1px solid theme-status($theme, 'primary', 'border');
+
+            }}
 
             @each $panel_footer_element in $panel_footer_element_list {
-                > #{$panel_footer_element} {
-                    border-top: 1px solid theme-status($theme, 'primary', 'border');
-                }
-            }
+            > #{$panel_footer_element} {
+
+                border-top: 1px solid theme-status($theme, 'primary', 'border');
+
+            }}
+
         }
 
         div.panel.primary:hover {
@@ -477,16 +500,19 @@
             }
 
             @each $panel_header_element in $panel_header_element_list {
-                > #{$panel_header_element} {
-                    border-bottom: 1px solid theme-status($theme, 'secondary', 'border');
-                }
-            }
+            > #{$panel_header_element} {
+
+                border-bottom: 1px solid theme-status($theme, 'secondary', 'border');
+
+            }}
 
             @each $panel_footer_element in $panel_footer_element_list {
-                > #{$panel_footer_element} {
-                    border-top: 1px solid theme-status($theme, 'secondary', 'border');
-                }
-            }
+            > #{$panel_footer_element} {
+
+                border-top: 1px solid theme-status($theme, 'secondary', 'border');
+
+            }}
+
         }
 
         div.panel.secondary:hover {
@@ -503,16 +529,19 @@
             }
 
             @each $panel_header_element in $panel_header_element_list {
-                > #{$panel_header_element} {
-                    border-bottom: 1px solid theme-status($theme, 'info', 'border');
-                }
-            }
+            > #{$panel_header_element} {
+
+                border-bottom: 1px solid theme-status($theme, 'info', 'border');
+
+            }}
 
             @each $panel_footer_element in $panel_footer_element_list {
-                > #{$panel_footer_element} {
-                    border-top: 1px solid theme-status($theme, 'info', 'border');
-                }
-            }
+            > #{$panel_footer_element} {
+
+                border-top: 1px solid theme-status($theme, 'info', 'border');
+
+            }}
+
         }
 
         div.panel.info:hover {
@@ -529,16 +558,19 @@
             }
 
             @each $panel_header_element in $panel_header_element_list {
-                > #{$panel_header_element} {
-                    border-bottom: 1px solid theme-status($theme, 'success', 'border');
-                }
-            }
+            > #{$panel_header_element} {
+
+                border-bottom: 1px solid theme-status($theme, 'success', 'border');
+
+            }}
 
             @each $panel_footer_element in $panel_footer_element_list {
-                > #{$panel_footer_element} {
-                    border-top: 1px solid theme-status($theme, 'success', 'border');
-                }
-            }
+            > #{$panel_footer_element} {
+
+                border-top: 1px solid theme-status($theme, 'success', 'border');
+
+            }}
+
         }
 
         div.panel.success:hover {
@@ -555,16 +587,19 @@
             }
 
             @each $panel_header_element in $panel_header_element_list {
-                > #{$panel_header_element} {
-                    border-bottom: 1px solid theme-status($theme, 'warn', 'border');
-                }
-            }
+            > #{$panel_header_element} {
+
+                border-bottom: 1px solid theme-status($theme, 'warn', 'border');
+
+            }}
 
             @each $panel_footer_element in $panel_footer_element_list {
-                > #{$panel_footer_element} {
-                    border-top: 1px solid theme-status($theme, 'warn', 'border');
-                }
-            }
+            > #{$panel_footer_element} {
+
+                border-top: 1px solid theme-status($theme, 'warn', 'border');
+
+            }}
+
         }
 
         div.panel.warning:hover {
@@ -581,16 +616,19 @@
             }
 
             @each $panel_header_element in $panel_header_element_list {
-                > #{$panel_header_element} {
-                    border-bottom: 1px solid theme-status($theme, 'error', 'border');
-                }
-            }
+            > #{$panel_header_element} {
+
+                border-bottom: 1px solid theme-status($theme, 'error', 'border');
+
+            }}
 
             @each $panel_footer_element in $panel_footer_element_list {
-                > #{$panel_footer_element} {
-                    border-top: 1px solid theme-status($theme, 'error', 'border');
-                }
-            }
+            > #{$panel_footer_element} {
+
+                border-top: 1px solid theme-status($theme, 'error', 'border');
+
+            }}
+
         }
 
         div.panel.error:hover, div.panel.danger:hover {
@@ -598,8 +636,7 @@
             border: 1px solid theme-status($theme, 'default', 'border-hover');
         }
 
-    }
-  }
+    }}
 
 }
 

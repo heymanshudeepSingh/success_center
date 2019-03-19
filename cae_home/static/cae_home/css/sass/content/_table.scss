@@ -94,7 +94,7 @@
 
 .main-content {
 
-  @each $theme, $theme-dict in $theme-colors {
+    @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
         table {
@@ -112,10 +112,12 @@
                 font-weight: bold;
 
                 @each $header_element in $header_element_list {
-                    > #{$header_element} {
-                        font-size: 115%;
-                    }
-                }
+                > #{$header_element} {
+
+                    font-size: 115%;
+
+                }}
+
             }
 
             th, td {
@@ -180,7 +182,7 @@
 
 .main-content {
 
-  @each $theme, $theme-dict in $theme-colors {
+    @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
         table {
@@ -235,8 +237,7 @@
             }
         }
 
-    }
-  }
+    }}
 
 }
 

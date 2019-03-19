@@ -75,14 +75,13 @@ footer {
 
 footer {
 
-  @each $theme, $theme-dict in $theme-colors {
+    @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
         font-weight: bold;
         color: theme-text($theme, 'primary');
 
-    }
-  }
+    }}
 
 }
 
@@ -125,14 +124,13 @@ footer {
 
 footer {
 
-  @each $theme, $theme-dict in $theme-colors {
+    @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
         background-color: theme-background($theme, 'primary');
         border-top: 1px solid theme-background($theme, 'border');
 
-    }
-  }
+    }}
 
 }
 

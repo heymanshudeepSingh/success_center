@@ -37,27 +37,29 @@
 .main-content {
 
     @each $article_element in $article_element_list {
-        #{$article_element} {
-            padding: 10px;
+    #{$article_element} {
 
-            @media only screen and (min-width: $screen-tablet-mid) {
-                padding: 15px;
-                margin-top: 10px;
+        padding: 10px;
+
+        @media only screen and (min-width: $screen-tablet-mid) {
+            padding: 15px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        @each $header_element in $header_element_list {
+            > #{$header_element} {
+                padding-top: 0;
                 margin-bottom: 10px;
             }
-
-            @each $header_element in $header_element_list {
-                > #{$header_element} {
-                    padding-top: 0;
-                    margin-bottom: 10px;
-                }
-            }
-
-            > p {
-                margin: 5px;
-            }
         }
-    }
+
+        > p {
+            margin: 5px;
+        }
+
+    }}
+
 }
 
 //===========================//
@@ -85,29 +87,27 @@
 
 .main-content {
 
-  @each $theme, $theme-dict in $theme-colors {
+    @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
         @each $article_element in $article_element_list {
-            #{$article_element} {
+        #{$article_element} {
 
-                @each $header_element in $header_element_list {
-                    > #{$header_element} {
-                        color: theme-text($theme, 'header');
+            @each $header_element in $header_element_list {
+            > #{$header_element} {
+                color: theme-text($theme, 'header');
 
-                        // Stylings specific to wmu theme.
-                        @if $theme == 'wmu' {
-                            font-weight: normal;
-                            text-align: left;
-                        }
-                    }
+                // Stylings specific to wmu theme.
+                @if $theme == 'wmu' {
+                    font-weight: normal;
+                    text-align: left;
                 }
 
-            }
-        }
+            }}
 
-    }
-  }
+        }}
+
+    }}
 
 }
 
@@ -150,28 +150,27 @@
 
 .main-content {
 
-  @each $theme, $theme-dict in $theme-colors {
+    @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
         @each $article_element in $article_element_list {
-            #{$article_element} {
+        #{$article_element} {
 
-                @each $header_element in $header_element_list {
-                    > #{$header_element} {
-                        border-bottom: 1px solid theme-status($theme, 'default', 'border');
-                    }
-                }
+            @each $header_element in $header_element_list {
+            > #{$header_element} {
 
-            }
-        }
+                border-bottom: 1px solid theme-status($theme, 'default', 'border');
+
+            }}
+
+        }}
 
         article.color, div.article-color, section.color, div.section-color {
             background-color: theme-background($theme, 'content-alt');
             border: 1px solid theme-background($theme, 'border');
         }
 
-    }
-  }
+    }}
 
 }
 

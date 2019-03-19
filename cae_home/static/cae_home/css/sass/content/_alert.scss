@@ -85,7 +85,7 @@
 
 .main-content {
 
-  @each $theme, $theme-dict in $theme-colors {
+    @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
         .alert {
@@ -154,8 +154,7 @@
             }
         }
 
-    }
-  }
+    }}
 
 }
 
@@ -198,7 +197,7 @@
 
 .main-content {
 
-  @each $theme, $theme-dict in $theme-colors {
+    @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
         .alert {
@@ -309,8 +308,7 @@
             border: 1px solid theme-status($theme, 'default', 'border-hover');
         }
 
-    }
-  }
+    }}
 
 }
 

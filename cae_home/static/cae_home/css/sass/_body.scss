@@ -185,13 +185,12 @@ body {
 
 body {
 
-  @each $theme, $theme-dict in $theme-colors {
+    @each $theme, $theme-dict in $theme-colors {
     &.theme-#{$theme} {
 
         color: theme-text($theme, 'text');
 
-    }
-  }
+    }}
 
 }
 
@@ -234,7 +233,7 @@ body {
 
 body {
 
-  @each $theme, $theme-dict in $theme-colors {
+    @each $theme, $theme-dict in $theme-colors {
     &.theme-#{$theme} {
 
         background-color: theme-background($theme, 'content');
@@ -243,8 +242,7 @@ body {
             background-color: theme-background($theme, 'content');
         }
 
-    }
-  }
+    }}
 
 }
 

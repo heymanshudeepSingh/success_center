@@ -144,13 +144,12 @@ header .site-logo {
 
 header {
 
-  @each $theme, $theme-dict in $theme-colors {
+    @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
         color: theme-text($theme, 'primary');
 
-    }
-  }
+    }}
 
 }
 
@@ -193,7 +192,7 @@ header {
 
 header {
 
-  @each $theme, $theme-dict in $theme-colors {
+    @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
         hr {
@@ -210,8 +209,7 @@ header {
             border-top: 1px solid theme-border($theme, 'border');
         }
 
-    }
-  }
+    }}
 
 }
 
@@ -226,7 +224,7 @@ header {
 
 header .site-logo > nav {
 
-  @each $theme, $theme-dict in $theme-colors {
+    @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
         > ul > li > ul > li {
@@ -239,8 +237,7 @@ header .site-logo > nav {
             border-bottom-left-radius: 3px;
         }
 
-    }
-  }
+    }}
 
 }
 

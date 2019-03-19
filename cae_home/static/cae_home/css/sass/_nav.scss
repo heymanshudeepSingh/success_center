@@ -309,7 +309,7 @@ header nav {
 
 header nav {
 
-  @each $theme, $theme-dict in $theme-colors {
+    @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
         ul {
@@ -324,14 +324,13 @@ header nav {
             background-color: theme-background($theme, 'highlight');
         }
 
-    }
-  }
+    }}
 
 }
 
 header .header-top nav {
 
-  @each $theme, $theme-dict in $theme-colors {
+    @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
         > ul > li > ul > li {
@@ -344,8 +343,7 @@ header .header-top nav {
             border-bottom-left-radius: 3px;
         }
 
-    }
-  }
+    }}
 
 }
 
@@ -360,7 +358,7 @@ header .header-top nav {
 
 header nav {
 
-  @each $theme, $theme-dict in $theme-colors {
+    @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
         .mobile-nav-icon {
@@ -373,8 +371,7 @@ header nav {
             }
         }
 
-    }
-  }
+    }}
 
 }
 
@@ -389,7 +386,7 @@ header nav {
 
 header {
 
-  @each $theme, $theme-dict in $theme-colors {
+    @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
         .header-bottom nav {
@@ -404,8 +401,7 @@ header {
             }
         }
 
-    }
-  }
+    }}
 
 }
 
