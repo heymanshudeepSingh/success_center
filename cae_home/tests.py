@@ -187,16 +187,25 @@ class RoomModelTests(TestCase):
         self.test_room = models.Room.objects.create(
             name='Test Room',
             room_type=self.room_type,
-            department=self.department,
             capacity=30,
-            description="Test Room Description",
+            description='Test Room Description',
         )
+        self.test_room.department.add(self.department)
+        self.test_room.save()
+
+        # self.toppings_on_pizza = self.test_pizza.toppings.all()
+        # self.pizzas_with_topping = self.topping.pizza_set.all()
+
+        self.departments_for_room = self.test_room.department.all()
+        self.rooms_with_department = self.department.room_set.all()
 
     def test_model_creation(self):
         self.assertEqual(self.test_room.name, 'Test Room')
         self.assertEqual(self.test_room.room_type, self.room_type)
-        self.assertEqual(self.test_room.department, self.department)
+        self.assertEqual(self.departments_for_room[0], self.department)
+        self.assertEqual(self.rooms_with_department[0], self.test_room)
         self.assertEqual(self.test_room.capacity, 30)
+        self.assertEqual(self.test_room.description, 'Test Room Description')
 
     def test_string_representation(self):
         self.assertEqual(str(self.test_room), self.test_room.name)
@@ -370,10 +379,11 @@ class AssetModelTests(TestCase):
         cls.room = models.Room.objects.create(
             name='Test Room',
             room_type=cls.room_type,
-            department=cls.department,
             capacity=30,
             description="Test Room Description",
         )
+        cls.room.department.add(cls.department)
+        cls.room.save()
 
     def setUp(self):
         self.test_asset = models.Asset.objects.create(
