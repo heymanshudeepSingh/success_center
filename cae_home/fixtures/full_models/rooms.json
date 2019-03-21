@@ -3616,7 +3616,7 @@
 },
 {
     "model": "cae_home.room",
-    "pk": 241,
+    "pk": 242,
     "fields": {
         "room_type": 14,
         "department": [
@@ -3841,7 +3841,7 @@
 },
 {
     "model": "cae_home.room",
-    "pk": 256,
+    "pk": 257,
     "fields": {
         "room_type": 10,
         "department": [
@@ -3856,7 +3856,7 @@
 },
 {
     "model": "cae_home.room",
-    "pk": 257,
+    "pk": 258,
     "fields": {
         "room_type": 10,
         "department": [
@@ -4426,7 +4426,7 @@
 },
 {
     "model": "cae_home.room",
-    "pk": 295,
+    "pk": 296,
     "fields": {
         "room_type": 14,
         "department": [
@@ -4441,7 +4441,7 @@
 },
 {
     "model": "cae_home.room",
-    "pk": 296,
+    "pk": 297,
     "fields": {
         "room_type": 14,
         "department": [
