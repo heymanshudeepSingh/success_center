@@ -44,6 +44,7 @@
       {% block extra_fonts %}{% endblock extra_fonts %}
 
       {% block base_styles %}
+        <link rel="stylesheet" type="text/css" href="{% static 'third_party/css/select2_4.0.5.min.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'cae_home/css/base.css' %}">
       {% endblock base_styles %}
       {% block extra_styles %}{% endblock extra_styles %}
@@ -52,6 +53,8 @@
 
         {% if site_debug %}
           <script src="{% static 'third_party/js/jquery_3.3.1_min.js' %}"></script>
+          <script src="{% static 'third_party/js/select2_4.0.5.min.js' %}"></script>
+          <script src="{% static 'cae_home/js/select2.js' %}"></script>
           <!--<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>-->
           <!--<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>-->
           <script src="{% static 'third_party/js/react_16.7.0_development.js' %}" crossorigin></script>

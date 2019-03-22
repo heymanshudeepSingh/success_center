@@ -253,6 +253,8 @@ class RoomAdmin(admin.ModelAdmin):
     # Fields to search in admin list view.
     search_fields = ['name', 'capacity',]
 
+    autocomplete_fields = ['department',]
+
     # Read only fields for admin detail view.
     readonly_fields = ('date_created', 'date_modified')
 
