@@ -267,7 +267,9 @@ class SemesterDateModelTests(TestCase):
         self.assertEqual(self.test_semester_date.end_date, self.end_date)
 
     def test_string_representation(self):
-        self.assertEqual(str(self.test_semester_date), str(self.start_date) + ' - ' + str(self.end_date))
+        self.assertEqual(
+            str(self.test_semester_date),
+            '{0}: {1} - {2}'.format(self.test_semester_date.name, self.start_date, self.end_date))
 
     def test_plural_representation(self):
         self.assertEqual(str(self.test_semester_date._meta.verbose_name), 'Semester Date')

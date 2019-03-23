@@ -211,7 +211,7 @@ class SemesterDate(models.Model):
         verbose_name_plural = "Semester Dates"
 
     def __str__(self):
-        return '{0} - {1}'.format(self.start_date, self.end_date)
+        return '{0}: {1} - {2}'.format(self.name, self.start_date, self.end_date)
 
     def clean(self, *args, **kwargs):
         """

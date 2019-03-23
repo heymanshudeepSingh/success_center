@@ -1,4 +1,7 @@
 
+{% for error in form.non_field_errors %}
+  <div class="alert error">{{ error }}</div>
+{% endfor %}
 <form method="POST" action="" enctype="multipart/form-data">
   {% csrf_token %}
 
