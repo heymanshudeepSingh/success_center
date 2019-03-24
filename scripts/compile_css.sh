@@ -82,20 +82,23 @@ function main () {
                             css_directories+=("$file:$dir/$filename.css")
 
                             # Remove old file before compiling, if present.
-                            rm -f "$dir/$filename.css"
+                            rm -f "$dir/$filename.css" "$dir/$filename.css.map"
                         fi
                     done
                 else
                     # Add directory to list of compile locations.
                     css_directories+=("$dir/sass:$dir")
 
-                    # Remove old files before compiling.
-                    for file in $dir/*
+                    # Loop through all files in sass subfolder.
+                    for file in $dir/sass/*
                     do
-                        # Double check that value is not a directory.
-                        if [[ ! -d $file ]]
+                        # Check that file follows sass compilation file naming convention.
+                        if [[ $file != *"/css/sass/_"*".scss" ]]
                         then
-                            rm -f $file
+                            filename=$(basename "${file%.*}")
+
+                            # Remove old file before compiling, if present.
+                            rm -f "$dir/$filename.css" "$dir/$filename.css.map"
                         fi
                     done
                 fi
