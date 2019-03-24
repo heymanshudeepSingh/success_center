@@ -6,13 +6,14 @@
 django~=2.1.0       # Core Django framework.
 channels            # Support for websocket connections.
 channels-redis      # Additional channels support for live updates between sockets.
+djangorestframework     # Support for easy model API access.
 faker               # Faker library for automatic model seeding.
 xlrd                # Read .xls and .xlsx Excel files (Deprecated, but required for .xls)
 
 
 # Third Party Django Apps.
-django-scheduler==0.8.8 # Third party Django app for calendar scheduling.
-django-modeladmin-reorder   # Third party Django app for admin view customization.
+django-modeladmin-reorder   # Third party app for admin view customization.
+django-scheduler==0.8.8     # Third party app for calendar scheduling.
 
 
 # Optional imports.

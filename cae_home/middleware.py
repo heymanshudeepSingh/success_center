@@ -48,11 +48,15 @@ class GetProjectDetailMiddleware(object):
         return response
 
     def process_template_response(self, request, response):
-        # Get site domain.
-        response.context_data['domain'] = get_current_site(request)
 
-        # Get installed project/app details.
-        response.context_data['imported_projects'] = settings.INSTALLED_APP_DETAILS
+        # Check to ensure DjangoRest views don't error.
+        if response.context_data is not None:
+
+            # Get site domain.
+            response.context_data['domain'] = get_current_site(request)
+
+            # Get installed project/app details.
+            response.context_data['imported_projects'] = settings.INSTALLED_APP_DETAILS
 
         return response
 
@@ -70,15 +74,19 @@ class GetUserSiteOptionsMiddleware(object):
         return response
 
     def process_template_response(self, request, response):
-        if request.user.is_authenticated:
-            # User authenticated. Attempt to get user's model.
-            response.context_data['site_theme'] = request.user.profile.site_theme
-            response.context_data['desktop_font_size'] = request.user.profile.get_desktop_font_size()
-            response.context_data['mobile_font_size'] = request.user.profile.get_mobile_font_size()
-        else:
-            # Default to "wmu" site theme.
-            response.context_data['site_theme'] = models.SiteTheme.objects.get(name='wmu')
-            response.context_data['desktop_font_size'] = 'base'
-            response.context_data['mobile_font_size'] = 'base'
+
+        # Check to ensure DjangoRest views don't error.
+        if response.context_data is not None:
+
+            if request.user.is_authenticated:
+                # User authenticated. Attempt to get user's model.
+                response.context_data['site_theme'] = request.user.profile.site_theme
+                response.context_data['desktop_font_size'] = request.user.profile.get_desktop_font_size()
+                response.context_data['mobile_font_size'] = request.user.profile.get_mobile_font_size()
+            else:
+                # Default to "wmu" site theme.
+                response.context_data['site_theme'] = models.SiteTheme.objects.get(name='wmu')
+                response.context_data['desktop_font_size'] = 'base'
+                response.context_data['mobile_font_size'] = 'base'
 
         return response

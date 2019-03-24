@@ -7,10 +7,11 @@ from django.conf import settings
 from django.contrib.auth import views as auth_views
 from django.core.mail import send_mail, send_mass_mail
 from django.http import Http404
-from django.shortcuts import redirect
+from django.shortcuts import get_object_or_404, redirect
 from django.template.response import TemplateResponse
+from rest_framework import viewsets, permissions
 
-from . import forms
+from . import forms, models, serializers
 
 
 # Import logger.
@@ -38,6 +39,19 @@ def login(request, *args, **kwargs):
             request.session.set_expiry(3600)
 
     return auth_views.LoginView.as_view(authentication_form=forms.AuthenticationForm, **kwargs)(request)
+
+
+#region DjangoRest Views
+
+class DepartmentViewSet(viewsets.ModelViewSet):
+    """
+    DjangoRest views for department model.
+    """
+    queryset = models.Department.objects.all()
+    permission_classes = (permissions.IsAuthenticated,)
+    serializer_class = serializers.DepartmentSerializer
+
+#endregion DjangoRest Views
 
 
 #region Debug/Development Views

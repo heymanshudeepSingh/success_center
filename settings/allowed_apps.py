@@ -26,6 +26,7 @@ INSTALLED_APPS = [
 
     'admin_reorder',
     'channels',
+    'rest_framework',
 ]
 
 
