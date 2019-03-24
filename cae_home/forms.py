@@ -8,6 +8,40 @@ from django.contrib.auth.forms import AuthenticationForm as auth_form
 from . import models
 
 
+#region Custom Widgets
+
+class Select2Widget(forms.Select):
+    """
+    Widget for select2 "single selection" input.
+    """
+    def build_attrs(self, base_attrs, extra_attrs=None):
+        """
+        Set html attribute values.
+        """
+        attrs = super().build_attrs(base_attrs, extra_attrs=extra_attrs)
+        attrs.setdefault('class', 'select2')
+        return attrs
+
+
+class Select2MultipleWidget(forms.Select):
+    """
+    Widget for select2 "multiple selection" input.
+    """
+    def build_attrs(self, base_attrs, extra_attrs=None):
+        """
+        Set html attribute values.
+        """
+        attrs = super().build_attrs(base_attrs, extra_attrs=extra_attrs)
+        attrs.setdefault('class', 'select2-multiple')
+        attrs.setdefault('multiple', 'multiple')
+        return attrs
+
+#endregion Custom Widgets
+
+
+
+#region Standard View Forms
+
 class AuthenticationForm(auth_form):
     """
     Modified login page form.
@@ -23,6 +57,23 @@ class ExampleForm(forms.Form):
     name = forms.CharField()
     time = forms.TimeField()
     check_me = forms.BooleanField(required=False)
+
+
+class RoomForm(forms.ModelForm):
+    """
+    Room model form.
+    """
+    class Meta:
+        model = models.Room
+        fields = (
+            'name', 'department', 'room_type', 'description', 'capacity',
+        )
+        widgets = {
+            'department': Select2MultipleWidget,
+        }
+
+#endregion Standard View Forms
+
 
 
 class ProfileAdminForm(forms.ModelForm):
