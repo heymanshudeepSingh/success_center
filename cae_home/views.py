@@ -11,7 +11,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.template.response import TemplateResponse
 from rest_framework import viewsets, permissions
 
-from . import forms, models, serializers
+from . import filters, forms, models, serializers
 
 
 # Import logger.
@@ -50,6 +50,8 @@ class DepartmentViewSet(viewsets.ModelViewSet):
     queryset = models.Department.objects.all()
     permission_classes = (permissions.IsAuthenticated,)
     serializer_class = serializers.DepartmentSerializer
+    filter_class = filters.DepartmentFilter
+
 
 #endregion DjangoRest Views
 

@@ -26,6 +26,7 @@ INSTALLED_APPS = [
 
     'admin_reorder',
     'channels',
+    'django_filters',
     'rest_framework',
 ]
 
