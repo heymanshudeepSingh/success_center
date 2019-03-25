@@ -5,7 +5,7 @@ Used in DjangoRest views.
 
 import django_filters
 
-from . import models
+from cae_home import models
 
 
 class DepartmentFilter(django_filters.FilterSet):

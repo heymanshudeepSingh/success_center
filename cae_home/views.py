@@ -7,11 +7,12 @@ from django.conf import settings
 from django.contrib.auth import views as auth_views
 from django.core.mail import send_mail, send_mass_mail
 from django.http import Http404
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import redirect
 from django.template.response import TemplateResponse
 from rest_framework import viewsets, permissions
 
-from . import filters, forms, models, serializers
+from . import forms, models
+from .rest import filters, serializers
 
 
 # Import logger.

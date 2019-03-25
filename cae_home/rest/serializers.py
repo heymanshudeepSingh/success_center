@@ -5,7 +5,7 @@ Used in DjangoRest views.
 
 from rest_framework import serializers
 
-from . import models
+from cae_home import models
 
 
 class DepartmentSerializer(serializers.HyperlinkedModelSerializer):
