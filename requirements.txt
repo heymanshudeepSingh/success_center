@@ -15,7 +15,6 @@ xlrd                # Read .xls and .xlsx Excel files (Deprecated, but required 
 # Third Party Django Apps.
 django-modeladmin-reorder   # Third party app for admin view customization.
 django-scheduler==0.8.8     # Third party app for calendar scheduling.
-django_select2              # Third party app for providing select2 to forms.
 
 
 # Optional imports.
