@@ -90,21 +90,25 @@ function main () {
                         done
                     fi
                 else
-                    # Add directory to list of compile locations.
-                    css_directories+=("$dir/sass:$dir")
+                    # Check that sass directory exists.
+                    if [[ -d $dir/sass ]]
+                    then
+                        # Add directory to list of compile locations.
+                        css_directories+=("$dir/sass:$dir")
 
-                    # Loop through all files in sass subfolder.
-                    for file in $dir/sass/*
-                    do
-                        # Check that file follows sass compilation file naming convention.
-                        if [[ $file != *"/css/sass/_"*".scss" ]]
-                        then
-                            filename=$(basename "${file%.*}")
+                        # Loop through all files in sass subfolder.
+                        for file in $dir/sass/*
+                        do
+                            # Check that file follows sass compilation file naming convention.
+                            if [[ $file != *"/css/sass/_"*".scss" ]]
+                            then
+                                filename=$(basename "${file%.*}")
 
-                            # Remove old file before compiling, if present.
-                            rm -f "$dir/$filename.css" "$dir/$filename.css.map"
-                        fi
-                    done
+                                # Remove old file before compiling, if present.
+                                rm -f "$dir/$filename.css" "$dir/$filename.css.map"
+                            fi
+                        done
+                    fi
                 fi
             fi
         fi
