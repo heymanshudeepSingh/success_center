@@ -317,12 +317,14 @@ $theme-colors: (
                 'link-hover': $color-black,
             ),
             'primary': (
-                'primary': #e9b50c,
+                /*'primary': #e9b50c,*/
+                'primary': #fcc30f,
                 'primary-alt': #c48b04,
-                'primary-hover': #d3a103,
+                'primary-hover': #e9b50c,
+                /*'primary-hover': #d3a103,*/
                 'border': #d3a103,
                 'border-hover': $color-trans-grey-75,
-                'text': $color-trans-black-75,
+                'text': #986516,
                 'link': $color-trans-white-75,
                 'link-hover': $color-white,
             ),

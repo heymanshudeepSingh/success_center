@@ -210,12 +210,7 @@
             @each $panel_header_element in $panel_header_element_list {
             > #{$panel_header_element} {
 
-                // Stylings specific to wmu theme.
-                @if $theme == "wmu" {
-                    color: $color-trans-white-75;
-                } @else {
-                    color: theme-status($theme, 'primary', 'text');
-                }
+                color: theme-status($theme, 'primary', 'text');
 
                 a:not(.button) {
                     color: theme-status($theme, 'primary', 'link');
@@ -226,12 +221,7 @@
             @each $panel_footer_element in $panel_footer_element_list {
             > #{$panel_footer_element} {
 
-                // Stylings specific to wmu theme.
-                @if $theme == "wmu" {
-                    color: $color-trans-white-75;
-                } @else {
-                    color: theme-status($theme, 'primary', 'text');
-                }
+                color: theme-status($theme, 'primary', 'text');
 
                 a:not(.button) {
                     color: theme-status($theme, 'primary', 'link');
@@ -444,23 +434,11 @@
 
         div.panel.primary {
 
-            // Stylings specific to wmu theme.
-            @if $theme == "wmu" {
-                background-color: theme-status($theme, 'primary', 'primary-alt');
-                /*border: 1px solid theme-status($theme, 'primary', 'primary-hover');*/
-                border: 1px solid $color-white;
-            } @else {
-                background-color: theme-status($theme, 'primary', 'primary');
-                border: 1px solid theme-status($theme, 'primary', 'border');
-            }
+            background-color: theme-status($theme, 'primary', 'primary');
+            border: 1px solid theme-status($theme, 'primary', 'border');
 
             a:hover:not(.button) {
-                // Stylings specific to wmu theme.
-                @if $theme == "wmu" {
-                    background-color: theme-status($theme, 'primary', 'primary-hover');
-                } @else {
-                    background-color: theme-status($theme, 'primary', 'primary');
-                }
+                background-color: theme-status($theme, 'primary', 'primary');
             }
 
             @each $panel_header_element in $panel_header_element_list {
@@ -480,15 +458,8 @@
         }
 
         div.panel.primary:hover {
-
-            // Stylings specific to wmu theme.
-            @if $theme == 'wmu' {
-                background-color: theme-status($theme, 'primary', 'primary');
-                border: 1px solid theme-status($theme, 'primary', 'primary');
-            } @else {
-                background-color: theme-status($theme, 'primary', 'primary-hover');
-                border: 1px solid theme-status($theme, 'primary', 'border-hover');
-            }
+            background-color: theme-status($theme, 'primary', 'primary-hover');
+            border: 1px solid theme-status($theme, 'primary', 'border-hover');
         }
 
         div.panel.secondary {
