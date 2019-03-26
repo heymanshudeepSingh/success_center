@@ -3624,7 +3624,7 @@
         ],
         "name": "C-211-1",
         "description": "Server Room",
-        "capacity": -1,
+        "capacity": 0,
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3849,7 +3849,7 @@
         ],
         "name": "C-225-1",
         "description": "",
-        "capacity": -1,
+        "capacity": 0,
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3864,7 +3864,7 @@
         ],
         "name": "C-225-2",
         "description": "",
-        "capacity": -1,
+        "capacity": 0,
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4434,7 +4434,7 @@
         ],
         "name": "D-102-1",
         "description": "Under-Staircase Room",
-        "capacity": -1,
+        "capacity": 0,
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4449,7 +4449,7 @@
         ],
         "name": "D-102-2",
         "description": "Under-Staircase Room",
-        "capacity": -1,
+        "capacity": 0,
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8929,5 +8929,5 @@
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
-}
+},
 ]
