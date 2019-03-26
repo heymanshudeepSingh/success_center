@@ -4,11 +4,19 @@ Urls for CAE_Home App.
 
 from django.contrib.auth import views as auth_views
 from django.conf import settings
-from django.conf.urls import include, url
+from django.conf.urls import url
 
 from . import views
 
 
+# Error url handling.
+handler400 = views.handler400   # Bad/suspicious request.
+handler403 = views.handler403   # Permission denied.
+handler404 = views.handler404   # Page not found.
+handler500 = views.handler500   # Server error.
+
+
+# General url handling.
 app_name = 'cae_home'
 urlpatterns = [
 
@@ -25,6 +33,9 @@ urlpatterns = [
 # Debug only urls.
 if settings.DEV_URLS:
     urlpatterns += [
+        # Error page test views.
+        url(r'^404/$', views.handler400, name='error_404'),
+
         # Internal site ("CAE Home") test page(s).
         # Used for layout format and general testing of "internal facing" views.
         url(r'^cae/$', views.internal_dev_index, name='internal_dev_index'),
