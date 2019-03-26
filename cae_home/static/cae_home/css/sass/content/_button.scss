@@ -36,7 +36,7 @@
 
 .main-content {
 
-    button, a.button, input.button {
+    button, .button, input.button {
         display: inline-block;
         padding-top: 6px;
         padding-right: 12px;
@@ -52,15 +52,15 @@
         @include align-items(center);
         @include flex-wrap(wrap);
 
-        button, a.button {
+        button, .button {
             display: block;
         }
 
-        button:not(:first-child), a.button:not(:first-child) {
+        button:not(:first-child), .button:not(:first-child) {
             margin-left: 0;
         }
 
-        button:not(:last-child), a.button:not(:last-child) {
+        button:not(:last-child), .button:not(:last-child) {
             margin-right: 0;
         }
     }
@@ -94,29 +94,29 @@
     @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
-        button, a.button {
+        button, .button {
             font-size: 1rem;
             text-decoration: none;
 
             color: theme-text($theme, 'content-accent');
         }
 
-        button:hover, a.button:hover {
+        button:hover, .button:hover {
             color: theme-text($theme, 'content');
         }
 
-        button.primary, .primary button, a.button.primary, .primary a.button {
+        button.primary, .primary button, .button.primary, .primary .button {
             color: theme-status($theme, 'primary', 'text');
         }
 
-        button.secondary, .secondary button, a.button.secondary, .secondary a.button {
+        button.secondary, .secondary button, .button.secondary, .secondary .button {
             color: theme-status($theme, 'secondary', 'text');
         }
 
         // Loop through all possible status types.
         @each $status, $status-dict in theme-status-dict($theme) {
 
-            button.#{$status}:hover, .#{$status} button:hover, a.button.#{$status}:hover, .#{$status} a.button:hover {
+            button.#{$status}:hover, .#{$status} button:hover, .button.#{$status}:hover, .#{$status} .button:hover {
                 color: theme-status($theme, $status, 'link-hover');
             }
 
@@ -168,14 +168,14 @@
     @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
-        button, a.button {
+        button, .button {
             background-color: theme-status($theme, 'default', 'primary');
             border: 1px solid theme-status($theme, 'default', 'border');
 
             border-radius: 5px;
         }
 
-        button:hover, a.button:hover {
+        button:hover, .button:hover {
             background-color: theme-status($theme, 'default', 'border');
             border: 1px solid theme-status($theme, 'default', 'border-hover');
         }
@@ -183,12 +183,12 @@
         // Loop through all possible status types.
         @each $status, $status-dict in theme-status-dict($theme) {
 
-            button.#{$status}, a.button.#{$status}, .#{$status} button, .#{$status} a.button {
+            button.#{$status}, .button.#{$status}, .#{$status} button, .#{$status} .button {
                 background-color: theme-status($theme, $status, 'primary');
                 border: 1px solid theme-status($theme, $status, 'border');
             }
 
-            button.#{$status}:hover, a.button.#{$status}:hover, .#{$status} button:hover, .#{$status} a.button:hover {
+            button.#{$status}:hover, .button.#{$status}:hover, .#{$status} button:hover, .#{$status} .button:hover {
                 background-color: theme-status($theme, $status, 'border');
                 border: 1px solid theme-status($theme, 'default', 'border-hover');
             }
@@ -199,12 +199,12 @@
 
     div.buttons {
 
-        button:not(:first-child), a.button:not(:first-child) {
+        button:not(:first-child), .button:not(:first-child) {
             border-top-left-radius: 0;
             border-bottom-left-radius: 0;
         }
 
-        button:not(:last-child), a.button:not(:last-child) {
+        button:not(:last-child), .button:not(:last-child) {
             border-top-right-radius: 0;
             border-bottom-right-radius: 0;
         }
@@ -240,7 +240,7 @@
 //==== START ----- Block ====//
 //===========================//
 
-button, a.button {
+button, .button {
     cursor: pointer;
     @include transition(color 0.5s, background-color 0.5s, border 0.5s);
 }
