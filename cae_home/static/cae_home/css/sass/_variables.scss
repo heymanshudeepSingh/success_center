@@ -259,14 +259,12 @@ $bootstrap-button-error-border: #d43f3a;
 //  Status - Various 'status' stylings, such as for panels, buttons, etc.
 //      Comes in flavors of:
 //          * default (No class provided) - Generally grey/unfilled
-//          * primary - Resembles header colors
-//          * secondary - Optional secondary colors. Mimics primary if not present
+//          * primary - Generally resembles header colors
+//          * secondary - Optional secondary colors. Should mimic primary colors if not present
 //          * info - Blue colored
 //          * success - Green colored
-//          * warn - Yellow/Orange colored
+//          * warn/warning - Yellow/Orange colored
 //          * error/danger - Red colored
-//
-//      Note that the "WMU" theme's primary and secondary values are swapped.
 //
 
 //================================//
@@ -288,6 +286,7 @@ $theme-colors: (
             'content-alt': $color-white,
             'table-row-even': #fff1cc,
             'table-row-odd': #fff8e6,
+            'table-row-hover': $color-trans-grey-25,
         ),
         'text': (
             'primary': #fcc30f,
@@ -317,11 +316,9 @@ $theme-colors: (
                 'link-hover': $color-black,
             ),
             'primary': (
-                /*'primary': #e9b50c,*/
                 'primary': #fcc30f,
                 'primary-alt': #c48b04,
                 'primary-hover': #e9b50c,
-                /*'primary-hover': #d3a103,*/
                 'border': #d3a103,
                 'border-hover': $color-trans-grey-75,
                 'text': #986516,
@@ -352,7 +349,7 @@ $theme-colors: (
                 'link': #105900,
                 'link-hover': #105900,
             ),
-            'warn': (
+            'warning': (
                 'primary': $wmu-web-warn,
                 'primary-hover': $wmu-web-warn-hover,
                 'border': $wmu-web-warn-hover,
@@ -388,7 +385,21 @@ $theme-colors: (
                 'link': #7b2400,
                 'link-hover': #7b2400,
             ),
+            'warning': (
+                'primary': #e87f17,
+                'primary-hover': #ffaf4c,
+                'border': #b05100,
+                'link': #7b2400,
+                'link-hover': #7b2400,
+            ),
             'error': (
+                'primary': $wmu-official-red,
+                'primary-hover': #f2515c,
+                'border': #81000e,
+                'link': #4f0000,
+                'link-hover': #4f0000,
+            ),
+            'danger': (
                 'primary': $wmu-official-red,
                 'primary-hover': #f2515c,
                 'border': #81000e,
@@ -415,6 +426,7 @@ $theme-colors: (
             'table-row-even': #2e1005,
             /*'table-row-odd': #1f0500,*/
             'table-row-odd': #250b04,
+            'table-row-hover': #6c3b13,
         ),
         'text': (
             'primary': #c48b04,
@@ -495,7 +507,21 @@ $theme-colors: (
                 'link': #ffd055,
                 'link-hover': #df9f20,
             ),
+            'warning': (
+                'primary': #a14412,
+                'primary-hover': #be5a27,
+                'border': #be5a27,
+                'link': #ffd055,
+                'link-hover': #df9f20,
+            ),
             'error': (
+                'primary': #821717,
+                'primary-hover': #b7493e,
+                'border': #a32929,
+                'link': #ffb4a8,
+                'link-hover': #ec8379,
+            ),
+            'danger': (
                 'primary': #821717,
                 'primary-hover': #b7493e,
                 'border': #a32929,
@@ -519,6 +545,7 @@ $theme-colors: (
             'content-alt': $color-grey-95,
             'table-row-even': $color-grey-90,
             'table-row-odd': $color-grey-95,
+            'table-row-hover': #bfbfbf,
         ),
         'text': (
             'primary': $bootstrap-header-text,
@@ -550,7 +577,7 @@ $theme-colors: (
             'primary': (
                 'primary': $bootstrap-header,
                 'primary-hover': #744eb1,
-                'border': #bfbfbf,
+                'border': #744eb1,
                 'border-hover': $color-trans-grey-75,
                 'text': $bootstrap-header-text,
                 'link': $color-trans-white-75,
@@ -586,7 +613,21 @@ $theme-colors: (
                 'link': $bootstrap-warn-text,
                 'link-hover': $bootstrap-warn-link,
             ),
+            'warning': (
+                'primary': $bootstrap-button-warn,
+                'primary-hover': $bootstrap-button-warn-hover,
+                'border': $bootstrap-button-warn-border,
+                'link': $bootstrap-warn-text,
+                'link-hover': $bootstrap-warn-link,
+            ),
             'error': (
+                'primary': $bootstrap-button-error,
+                'primary-hover': $bootstrap-button-error-hover,
+                'border': $bootstrap-button-error-border,
+                'link': $bootstrap-error-text,
+                'link-hover': #5b2525,
+            ),
+            'danger': (
                 'primary': $bootstrap-button-error,
                 'primary-hover': $bootstrap-button-error-hover,
                 'border': $bootstrap-button-error-border,
@@ -609,7 +650,7 @@ $theme-colors: (
                 'link': $bootstrap-success-text,
                 'link-hover': $bootstrap-success-link,
             ),
-            'warn': (
+            'warning': (
                 'primary': $bootstrap-warn,
                 'primary-hover': #fff8e0,
                 'border': $bootstrap-warn-border,
@@ -640,6 +681,7 @@ $theme-colors: (
             'content-alt': $color-grey-95,
             'table-row-even': $color-grey-90,
             'table-row-odd': $color-grey-95,
+            'table-row-hover': $color-trans-grey-25,
         ),
         'text': (
             'primary': $color-grey-35,
@@ -707,7 +749,21 @@ $theme-colors: (
                 'link': #b88a2e,
                 'link-hover': #b88a2e,
             ),
+            'warning': (
+                'primary': #ffeeb3,
+                'primary-hover': #fff4cc,
+                'border': #e1c251,
+                'link': #b88a2e,
+                'link-hover': #b88a2e,
+            ),
             'error': (
+                'primary': #f4cbbe,
+                'primary-hover': #f8dcd3,
+                'border': #e19b84,
+                'link': #d15347,
+                'link-hover': #d15347,
+            ),
+            'danger': (
                 'primary': #f4cbbe,
                 'primary-hover': #f8dcd3,
                 'border': #e19b84,
@@ -731,6 +787,7 @@ $theme-colors: (
             'content-alt': #2a2d32,
             'table-row-even': #2a2d32,
             'table-row-odd': #2e3238,
+            'table-row-hover': #5e646e,
         ),
         'text': (
             'primary': $color-trans-white-75,
@@ -762,7 +819,7 @@ $theme-colors: (
             'primary': (
                 'primary': #2a2d32,
                 'primary-hover': #36393f,
-                'border': #36393f,
+                'border': $color-trans-grey-25,
                 'border-hover': $color-trans-grey-75,
                 'text': $color-trans-white-75,
                 'link': $color-trans-white-50,
@@ -771,7 +828,7 @@ $theme-colors: (
             'secondary': (
                 'primary': #2a2d32,
                 'primary-hover': #36393f,
-                'border': #36393f,
+                'border': $color-trans-grey-25,
                 'border-hover': $color-trans-grey-75,
                 'text': $color-trans-white-75,
                 'link': $color-trans-white-50,
@@ -798,7 +855,21 @@ $theme-colors: (
                 'link': #df9f20,
                 'link-hover': #df9f20,
             ),
+            'warning': (
+                'primary': #705a36,
+                'primary-hover': #8b6d3c,
+                'border': #8b6d3c,
+                'link': #df9f20,
+                'link-hover': #df9f20,
+            ),
             'error': (
+                'primary': #6d3f43,
+                'primary-hover': #944c4c,
+                'border': #944c4c,
+                'link': #ec8379,
+                'link-hover': #ec8379,
+            ),
+            'danger': (
                 'primary': #6d3f43,
                 'primary-hover': #944c4c,
                 'border': #944c4c,
@@ -818,14 +889,37 @@ $theme-colors: (
 //==== START Theme Functions Block ====//
 //=====================================//
 
+//**
+// * Get background style.
+// */
 @function theme-background($theme, $style) {
     @return map-get(map-get(map-get($theme-colors, $theme), 'background'), $style);
 }
 
+//**
+// * Get theme text style.
+// */
 @function theme-text($theme, $style) {
     @return map-get(map-get(map-get($theme-colors, $theme), 'text'), $style);
 }
 
+//**
+// * Get dict of all of theme's statuses.
+// */
+@function theme-status-dict($theme) {
+    @return map-get(map-get($theme-colors, $theme), 'status');
+}
+
+/**
+ * Get dict of a specific theme status.
+ */
+@function theme-status-sub-dict($theme, $status) {
+    @return map-get(map-get(map-get($theme-colors, $theme), 'status'), $status);
+}
+
+/**
+ * Get theme status style.
+ */
 @function theme-status($theme, $status, $style) {
     @return map-get(map-get(map-get(map-get($theme-colors, $theme), 'status'), $status), $style);
 }
@@ -833,6 +927,32 @@ $theme-colors: (
 //===================================//
 //==== End Theme Functions Block ====//
 //===================================//
+
+
+//==================================//
+//==== START Theme Append Block ====//
+//==================================//
+
+@each $theme, $theme-dict in $theme-colors {
+
+    // Make 'warning' theme which is copy of 'warn'.
+    /*@debug map-merge( theme-status-dict($theme), ('warning': theme-status-sub-dict($theme, warn)) );*/
+
+    // Make 'danger' theme which is copy of 'error'.
+    /*@debug map-merge( theme-status-dict($theme), ('danger': theme-status-sub-dict($theme, error)) );*/
+
+    /*@debug theme-status-dict($theme);*/
+    /*@debug theme-status-sub-dict($theme, 'error');*/
+    /*@debug map-merge( theme-status-dict($theme), ('danger': theme-status-sub-dict($theme, 'error')) );*/
+
+    /*theme-status-dict($theme):  map-merge( theme-status-dict($theme), ('danger': theme-status-sub-dict($theme, 'error')) );*/
+    /*@debug $test;*/
+    /*@debug theme-status-dict($theme);*/
+}
+
+//================================//
+//==== End Theme Append Block ====//
+//================================//
 
 
 //================================================================================//

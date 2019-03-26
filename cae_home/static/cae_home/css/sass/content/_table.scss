@@ -207,12 +207,7 @@
                 }
 
                 tr:hover {
-                    // Stylings specific to wmu theme.
-                    @if $theme == "wmu" {
-                        background-color: theme-status($theme, 'default', 'border');
-                    } @else {
-                        background-color: theme-status($theme, 'primary', 'border');
-                    }
+                    background-color: theme-background($theme, 'table-row-hover');
                 }
             }
 

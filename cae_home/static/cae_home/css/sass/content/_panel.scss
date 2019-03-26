@@ -203,10 +203,6 @@
 
         div.panel.primary {
 
-            a:not(.button):hover {
-                color: theme-status($theme, 'primary', 'link-hover');
-            }
-
             @each $panel_header_element in $panel_header_element_list {
             > #{$panel_header_element} {
 
@@ -252,10 +248,6 @@
 
         div.panel.secondary {
 
-            a:not(.button):hover {
-                color: theme-status($theme, 'secondary', 'link-hover');
-            }
-
             @each $panel_header_element in $panel_header_element_list {
             > #{$panel_header_element} {
 
@@ -298,44 +290,24 @@
 
         }
 
-        div.panel.info {
-            a:not(.button) {
-                color: theme-status($theme, 'info', 'link');
+        // Loop through all possible status types.
+        @each $status, $status-dict in theme-status-dict($theme) {
+
+            div.panel.#{$status} {
+                a:not(.button) {
+                    // Stylings specific to wmu.
+                    @if $theme == 'wmu' {
+                        color: theme-status($theme, $status, 'primary');
+                    } @else {
+                        color: theme-status($theme, $status, 'link');
+                    }
+                }
+
+                a:not(.button):hover {
+                    color: theme-status($theme, $status, 'link-hover');
+                }
             }
 
-            a:not(.button):hover {
-                color: theme-status($theme, 'info', 'link-hover');
-            }
-        }
-
-        div.panel.success {
-            a:not(.button) {
-                color: theme-status($theme, 'success', 'link');
-            }
-
-            a:not(.button):hover {
-                color: theme-status($theme, 'success', 'link-hover');
-            }
-        }
-
-        div.panel.warning {
-            a:not(.button) {
-                color: theme-status($theme, 'warn', 'link');
-            }
-
-            a:not(.button):hover {
-                color: theme-status($theme, 'warn', 'link-hover');
-            }
-        }
-
-        div.panel.error, div.panel.danger {
-            a:not(.button) {
-                color: theme-status($theme, 'error', 'link');
-            }
-
-            a:not(.button):hover {
-                color: theme-status($theme, 'error', 'link-hover');
-            }
         }
 
     }}
@@ -432,179 +404,39 @@
 
         }
 
-        div.panel.primary {
+        // Loop through all possible status types.
+        @each $status, $status-dict in theme-status-dict($theme) {
 
-            background-color: theme-status($theme, 'primary', 'primary');
-            border: 1px solid theme-status($theme, 'primary', 'border');
+            div.panel.#{$status} {
+                background-color: theme-status($theme, $status, 'primary');
+                border: 1px solid theme-status($theme, $status, 'border');
 
-            a:hover:not(.button) {
-                background-color: theme-status($theme, 'primary', 'primary');
+                a:hover:not(.button) {
+                    background-color: theme-status($theme, $status, 'primary');
+                }
+
+                @each $panel_header_element in $panel_header_element_list {
+                > #{$panel_header_element} {
+
+                    border-bottom: 1px solid theme-status($theme, $status, 'border');
+
+                }}
+
+                @each $panel_footer_element in $panel_footer_element_list {
+                > #{$panel_footer_element} {
+
+                    border-top: 1px solid theme-status($theme, $status, 'border');
+
+                }}
+
             }
 
-            @each $panel_header_element in $panel_header_element_list {
-            > #{$panel_header_element} {
+            div.panel.#{$status}:hover {
+                background-color: theme-status($theme, $status, 'primary-hover');
+                border: 1px solid theme-status($theme, 'default', 'border-hover');
 
-                border-bottom: 1px solid theme-status($theme, 'primary', 'border');
-
-            }}
-
-            @each $panel_footer_element in $panel_footer_element_list {
-            > #{$panel_footer_element} {
-
-                border-top: 1px solid theme-status($theme, 'primary', 'border');
-
-            }}
-
-        }
-
-        div.panel.primary:hover {
-            background-color: theme-status($theme, 'primary', 'primary-hover');
-            border: 1px solid theme-status($theme, 'primary', 'border-hover');
-        }
-
-        div.panel.secondary {
-            background-color: theme-status($theme, 'secondary', 'primary');
-            border: 1px solid theme-status($theme, 'secondary', 'border');
-
-            a:hover:not(.button) {
-                background-color: theme-status($theme, 'secondary', 'primary');
             }
 
-            @each $panel_header_element in $panel_header_element_list {
-            > #{$panel_header_element} {
-
-                border-bottom: 1px solid theme-status($theme, 'secondary', 'border');
-
-            }}
-
-            @each $panel_footer_element in $panel_footer_element_list {
-            > #{$panel_footer_element} {
-
-                border-top: 1px solid theme-status($theme, 'secondary', 'border');
-
-            }}
-
-        }
-
-        div.panel.secondary:hover {
-            background-color: theme-status($theme, 'secondary', 'primary-hover');
-            border: 1px solid theme-status($theme, 'secondary', 'border-hover');
-        }
-
-        div.panel.info {
-            background-color: theme-status($theme, 'info', 'primary');
-            border: 1px solid theme-status($theme, 'info', 'border');
-
-            a:hover:not(.button) {
-                background-color: theme-status($theme, 'info', 'primary');
-            }
-
-            @each $panel_header_element in $panel_header_element_list {
-            > #{$panel_header_element} {
-
-                border-bottom: 1px solid theme-status($theme, 'info', 'border');
-
-            }}
-
-            @each $panel_footer_element in $panel_footer_element_list {
-            > #{$panel_footer_element} {
-
-                border-top: 1px solid theme-status($theme, 'info', 'border');
-
-            }}
-
-        }
-
-        div.panel.info:hover {
-            background-color: theme-status($theme, 'info', 'primary-hover');
-            border: 1px solid theme-status($theme, 'default', 'border-hover');
-        }
-
-        div.panel.success {
-            background-color: theme-status($theme, 'success', 'primary');
-            border: 1px solid theme-status($theme, 'success', 'border');
-
-            a:hover:not(.button) {
-                background-color: theme-status($theme, 'success', 'primary');
-            }
-
-            @each $panel_header_element in $panel_header_element_list {
-            > #{$panel_header_element} {
-
-                border-bottom: 1px solid theme-status($theme, 'success', 'border');
-
-            }}
-
-            @each $panel_footer_element in $panel_footer_element_list {
-            > #{$panel_footer_element} {
-
-                border-top: 1px solid theme-status($theme, 'success', 'border');
-
-            }}
-
-        }
-
-        div.panel.success:hover {
-            background-color: theme-status($theme, 'success', 'primary-hover');
-            border: 1px solid theme-status($theme, 'default', 'border-hover');
-        }
-
-        div.panel.warning {
-            background-color: theme-status($theme, 'warn', 'primary');
-            border: 1px solid theme-status($theme, 'warn', 'border');
-
-            a:hover:not(.button) {
-                background-color: theme-status($theme, 'warn', 'primary');
-            }
-
-            @each $panel_header_element in $panel_header_element_list {
-            > #{$panel_header_element} {
-
-                border-bottom: 1px solid theme-status($theme, 'warn', 'border');
-
-            }}
-
-            @each $panel_footer_element in $panel_footer_element_list {
-            > #{$panel_footer_element} {
-
-                border-top: 1px solid theme-status($theme, 'warn', 'border');
-
-            }}
-
-        }
-
-        div.panel.warning:hover {
-            background-color: theme-status($theme, 'warn', 'primary-hover');
-            border: 1px solid theme-status($theme, 'default', 'border-hover');
-        }
-
-        div.panel.error, div.panel.danger {
-            background-color: theme-status($theme, 'error', 'primary');
-            border: 1px solid theme-status($theme, 'error', 'border');
-
-            a:hover:not(.button) {
-                background-color: theme-status($theme, 'error', 'primary');
-            }
-
-            @each $panel_header_element in $panel_header_element_list {
-            > #{$panel_header_element} {
-
-                border-bottom: 1px solid theme-status($theme, 'error', 'border');
-
-            }}
-
-            @each $panel_footer_element in $panel_footer_element_list {
-            > #{$panel_footer_element} {
-
-                border-top: 1px solid theme-status($theme, 'error', 'border');
-
-            }}
-
-        }
-
-        div.panel.error:hover, div.panel.danger:hover {
-            background-color: theme-status($theme, 'error', 'primary-hover');
-            border: 1px solid theme-status($theme, 'default', 'border-hover');
         }
 
     }}

@@ -36,7 +36,7 @@
 
 .main-content {
 
-    button, a.button {
+    button, a.button, input.button {
         display: inline-block;
         padding-top: 6px;
         padding-right: 12px;
@@ -109,17 +109,17 @@
             color: theme-status($theme, 'primary', 'text');
         }
 
-        button.primary:hover, .primary button:hover, a.button.primary:hover, .primary a.button:hover {
-            color: theme-status($theme, 'primary', 'link-hover');
-        }
-
         button.secondary, .secondary button, a.button.secondary, .secondary a.button {
             color: theme-status($theme, 'secondary', 'text');
-            /*color: $color-white;*/
         }
 
-        button.secondary:hover, .secondary button:hover, a.button.secondary:hover, .secondary a.button:hover {
-            color: theme-status($theme, 'secondary', 'link-hover');
+        // Loop through all possible status types.
+        @each $status, $status-dict in theme-status-dict($theme) {
+
+            button.#{$status}:hover, .#{$status} button:hover, a.button.#{$status}:hover, .#{$status} a.button:hover {
+                color: theme-status($theme, $status, 'link-hover');
+            }
+
         }
 
     }}
@@ -180,66 +180,19 @@
             border: 1px solid theme-status($theme, 'default', 'border-hover');
         }
 
-        button.primary, a.button.primary, .primary button, .primary a.button {
-            background-color: theme-status($theme, 'primary', 'primary');
-            border: 1px solid theme-status($theme, 'primary', 'border');
-        }
+        // Loop through all possible status types.
+        @each $status, $status-dict in theme-status-dict($theme) {
 
-        button.primary:hover, a.button.primary:hover, .primary button:hover, .primary a.button:hover {
-            background-color: theme-status($theme, 'primary', 'border');
-            border: 1px solid theme-status($theme, 'default', 'border-hover');
-        }
+            button.#{$status}, a.button.#{$status}, .#{$status} button, .#{$status} a.button {
+                background-color: theme-status($theme, $status, 'primary');
+                border: 1px solid theme-status($theme, $status, 'border');
+            }
 
-        button.secondary, a.button.secondary, .secondary button, .secondary a.button {
-            background-color: theme-status($theme, 'secondary', 'primary');
-            border: 1px solid theme-status($theme, 'secondary', 'border');
-        }
+            button.#{$status}:hover, a.button.#{$status}:hover, .#{$status} button:hover, .#{$status} a.button:hover {
+                background-color: theme-status($theme, $status, 'border');
+                border: 1px solid theme-status($theme, 'default', 'border-hover');
+            }
 
-        button.secondary:hover, a.button.secondary:hover, .secondary button:hover, .secondary a.button:hover {
-            background-color: theme-status($theme, 'secondary', 'border');
-            border: 1px solid theme-status($theme, 'default', 'border-hover');
-        }
-
-        button.info, a.button.info, .info button, .info a.button {
-            background-color: theme-status($theme, 'info', 'primary');
-            border: 1px solid theme-status($theme, 'info', 'border');
-        }
-
-        button.info:hover, a.button.info:hover, .info button:hover, .info a.button:hover {
-            background-color: theme-status($theme, 'info', 'border');
-            border: 1px solid theme-status($theme, 'default', 'border-hover');
-        }
-
-        button.success, a.button.success, .success button, .success a.button {
-            background-color: theme-status($theme, 'success', 'primary');
-            border: 1px solid theme-status($theme, 'success', 'border');
-        }
-
-        button.success:hover, a.button.success:hover, .success button:hover, .success a.button:hover {
-            background-color: theme-status($theme, 'success', 'border');
-            border: 1px solid theme-status($theme, 'default', 'border-hover');
-        }
-
-        button.warning, a.button.warning, .warning button, .warning a.button {
-            background-color: theme-status($theme, 'warn', 'primary');
-            border: 1px solid theme-status($theme, 'warn', 'border');
-        }
-
-        button.warning:hover, a.button.warning:hover, .warning button:hover, .warning a.button:hover {
-            background-color: theme-status($theme, 'warn', 'border');
-            border: 1px solid theme-status($theme, 'default', 'border-hover');
-        }
-
-        button.error, a.button.error, .error button, .error a.button,
-        button.danger, .button.danger, .danger button, .danger a.button {
-            background-color: theme-status($theme, 'error', 'primary');
-            border: 1px solid theme-status($theme, 'error', 'border');
-        }
-
-        button.error:hover, a.button.error:hover, .error button:hover, .error a.button:hover,
-        button.danger:hover, a.button.danger:hover, .danger button:hover, .danger a.button:hover {
-            background-color: theme-status($theme, 'error', 'border');
-            border: 1px solid theme-status($theme, 'default', 'border-hover');
         }
 
     }}

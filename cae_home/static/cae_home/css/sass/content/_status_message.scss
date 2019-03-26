@@ -137,22 +137,9 @@
 
         .message.primary {
             color: theme-status($theme, 'primary', 'text');
-
-            a {
-                color: theme-status($theme, 'primary', 'link');
-            }
-
-            .exit {
-                color: theme-status($theme, 'primary', 'link');
-            }
-
-            .exit:hover {
-                color: theme-status($theme, 'primary', 'link-hover');
-            }
         }
 
         .message.primary:hover {
-            color: theme-status($theme, 'primary', 'text');
 
             a {
                 color: theme-status($theme, 'primary', 'link-hover');
@@ -169,22 +156,9 @@
 
         .message.secondary {
             color: theme-status($theme, 'secondary', 'text');
-
-            a {
-                color: theme-status($theme, 'secondary', 'link');
-            }
-
-            .exit {
-                color: theme-status($theme, 'secondary', 'link');
-            }
-
-            .exit:hover {
-                color: theme-status($theme, 'secondary', 'link-hover');
-            }
         }
 
         .message.secondary:hover {
-            color: theme-status($theme, 'secondary', 'text');
 
             a {
                 color: theme-status($theme, 'secondary', 'link-hover');
@@ -199,60 +173,38 @@
             }
         }
 
-        .message.info {
-            a {
-                color: theme-status($theme, 'info', 'link');
+        // Loop through all possible status types.
+        @each $status, $status-dict in theme-status-dict($theme) {
+
+            .message.#{$status} {
+                a {
+                    color: theme-status($theme, $status, 'link');
+                }
+
+                .exit {
+                    color: theme-status($theme, $status, 'link');
+                }
+
+                .exit:hover {
+                    color: theme-status($theme, $status, 'link-hover');
+                }
             }
 
-            .exit {
-                color: theme-status($theme, 'info', 'link');
+            .message.#{$status}:hover {
+
+                a {
+                    color: theme-status($theme, $status, 'link-hover');
+                }
+
+                .exit {
+                    color: theme-status($theme, $status, 'link-hover');
+                }
+
+                .exit:hover {
+                    color: theme-status($theme, $status, 'link-hover');
+                }
             }
 
-            .exit:hover {
-                color: theme-status($theme, 'info', 'link-hover');
-            }
-        }
-
-        .message.success {
-            a {
-                color: theme-status($theme, 'success', 'link');
-            }
-
-            .exit {
-                color: theme-status($theme, 'success', 'link');
-            }
-
-            .exit:hover {
-                color: theme-status($theme, 'success', 'link-hover');
-            }
-        }
-
-        .message.warning {
-            a {
-                color: theme-status($theme, 'warn', 'link');
-            }
-
-            .exit {
-                color: theme-status($theme, 'warn', 'link');
-            }
-
-            .exit:hover {
-                color: theme-status($theme, 'warn', 'link-hover');
-            }
-        }
-
-        .message.error, .message.danger {
-            a {
-                color: theme-status($theme, 'error', 'link');
-            }
-
-            .exit {
-                color: theme-status($theme, 'error', 'link');
-            }
-
-            .exit:hover {
-                color: theme-status($theme, 'error', 'link-hover');
-            }
         }
 
     }}
@@ -328,88 +280,23 @@
             border: 1px solid theme-status($theme, 'default', 'border-hover');
         }
 
-        .message.primary {
-            background-color: theme-status($theme, 'primary', 'primary');
-            border: 1px solid theme-status($theme, 'primary', 'border');
+        // Loop through all possible status types.
+        @each $status, $status-dict in theme-status-dict($theme) {
 
-            a:hover, .exit:hover {
-                background-color: theme-status($theme, 'primary', 'primary');
+            .message.#{$status} {
+                background-color: theme-status($theme, $status, 'primary');
+                border: 1px solid theme-status($theme, $status, 'border');
+
+                a:hover, .exit:hover {
+                    background-color: theme-status($theme, $status, 'primary');
+                }
             }
-        }
 
-        .message.primary:hover {
-            background-color: theme-status($theme, 'primary', 'primary-hover');
-            border: 1px solid theme-status($theme, 'default', 'border-hover');
-        }
-
-        .message.secondary {
-            background-color: theme-status($theme, 'secondary', 'primary');
-            border: 1px solid theme-status($theme, 'secondary', 'border');
-
-            a:hover, .exit:hover {
-                background-color: theme-status($theme, 'secondary', 'primary');
+            .message.#{$status}:hover {
+                background-color: theme-status($theme, $status, 'primary-hover');
+                border: 1px solid theme-status($theme, 'default', 'border-hover');
             }
-        }
 
-        .message.secondary:hover {
-            background-color: theme-status($theme, 'secondary', 'primary-hover');
-            border: 1px solid theme-status($theme, 'default', 'border-hover');
-        }
-
-        .message.info {
-            background-color: theme-status($theme, 'info', 'primary');
-            border: 1px solid theme-status($theme, 'info', 'border');
-
-            a:hover, .exit:hover {
-                background-color: theme-status($theme, 'info', 'primary');
-            }
-        }
-
-        .message.info:hover {
-            background-color: theme-status($theme, 'info', 'primary-hover');
-            border: 1px solid theme-status($theme, 'default', 'border-hover');
-        }
-
-        .message.success {
-            background-color: theme-status($theme, 'success', 'primary');
-            border: 1px solid theme-status($theme, 'success', 'border');
-
-            a:hover, .exit:hover {
-                background-color: theme-status($theme, 'success', 'primary');
-            }
-        }
-
-        .message.success:hover {
-            background-color: theme-status($theme, 'success', 'primary-hover');
-            border: 1px solid theme-status($theme, 'default', 'border-hover');
-        }
-
-        .message.warning {
-            background-color: theme-status($theme, 'warn', 'primary');
-            border: 1px solid theme-status($theme, 'warn', 'border');
-
-            a:hover, .exit:hover {
-                background-color: theme-status($theme, 'warn', 'primary');
-            }
-        }
-
-        .message.warning:hover {
-            background-color: theme-status($theme, 'warn', 'primary-hover');
-            border: 1px solid theme-status($theme, 'default', 'border-hover');
-        }
-
-        .message.error, .message.danger {
-            background-color: theme-status($theme, 'error', 'primary');
-            border: 1px solid theme-status($theme, 'error', 'border');
-
-            a:hover, .exit:hover {
-                background-color: theme-status($theme, 'error', 'primary');
-            }
-        }
-
-        .message.error:hover, .message.danger:hover {
-            background-color: theme-status($theme, 'error', 'primary-hover');
-            border: 1px solid theme-status($theme, 'default', 'border-hover');
         }
 
     }}
