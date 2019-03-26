@@ -14,6 +14,7 @@ urlpatterns = [
 
     # Auth pages.
     url(r'^user/login/$', views.login, name='login'),
+    url(r'^user/login_redirect/$', views.login_redirect, name='login_redirect'),
     url(r'^user/logout/$', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
 
     # CAE Home/Index page.

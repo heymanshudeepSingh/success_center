@@ -42,6 +42,36 @@ def login(request, *args, **kwargs):
     return auth_views.LoginView.as_view(authentication_form=forms.AuthenticationForm, **kwargs)(request)
 
 
+def login_redirect(request):
+    """
+    Determines redirect url after user login. Varies based on user group permissions.
+    """
+    if not request.user.is_authenticated:
+        return redirect('cae_home:login')
+    else:
+        user_groups = request.user.groups.values_list('name', flat=True)
+
+        # Check if programmer and development mode.
+        if settings.DEV_URLS:
+            if 'CAE Programmer' in user_groups:
+                return redirect('cae_home:index')
+
+        # Check if CAE Center employee.
+        cae_employee_groups = [
+            'CAE Director',
+            'CAE Building Coordinator',
+            'CAE Attendant',
+            'CAE Admin',
+            'CAE Programmer',
+        ]
+        for cae_group in cae_employee_groups:
+            if cae_group in user_groups:
+                return redirect('cae_web_core:index')
+
+        # Unknown user group.
+        raise Http404
+
+
 #region DjangoRest Views
 
 class DepartmentViewSet(viewsets.ModelViewSet):
