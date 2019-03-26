@@ -61,7 +61,7 @@ class ExampleForm(forms.Form):
 
 class RoomForm(forms.ModelForm):
     """
-    Room model form.
+    Room model form for standard views.
     """
     class Meta:
         model = models.Room
