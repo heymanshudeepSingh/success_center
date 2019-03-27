@@ -56,6 +56,13 @@
             }
         }
 
+        th a {
+            @include display-flex;
+            @include flex-direction(row);
+            @include justify-content(center);
+            @include align-items(center);
+        }
+
         @media only screen and (min-width: $screen-tablet-mid) {
 
             th, td {
@@ -106,9 +113,17 @@
                 } @else {
                     color: theme-status($theme, 'primary', 'text');
                 }
+
+                th a, th a:hover {
+                    @if $theme == "wmu" {
+                        color: theme-status($theme, 'secondary', 'text');
+                    } @else {
+                        color: theme-status($theme, 'primary', 'text');
+                    }
+                }
             }
 
-            th {
+            th, th a {
                 font-weight: bold;
 
                 @each $header_element in $header_element_list {
@@ -117,23 +132,24 @@
                     font-size: 115%;
 
                 }}
-
             }
 
-            th, td {
-                > a, a:hover {
-                    color: theme-text($theme, 'text');
-                    text-decoration: none;
-                }
-            }
-
-            tr:hover th, tr:hover td {
-                > a {
-                    color: theme-text($theme, 'link');
+            tbody {
+                th, td {
+                    > a, a:hover {
+                        color: theme-text($theme, 'text');
+                        text-decoration: none;
+                    }
                 }
 
-                > a:hover {
-                    color: theme-text($theme, 'link-hover');
+                tr:hover th, tr:hover td {
+                    > a {
+                        color: theme-text($theme, 'link');
+                    }
+
+                    > a:hover {
+                        color: theme-text($theme, 'link-hover');
+                    }
                 }
             }
         }
