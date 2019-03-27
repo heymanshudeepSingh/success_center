@@ -5,7 +5,14 @@
 
 
 {% block content %}
-
-<h1>Server Error</h1>
-
+  <h1>Server Error</h1>
+  <article class="color center">
+    {% if error_message %}
+      <p>{{ error_message }}</p>
+    {% else %}
+      <p>The server encountered an unrecoverable error.</p>
+      <p>The CAE Center has been notified and will look into it.</p>
+      <p>We apologize for the inconvenience.</p>
+    {% endif %}
+  </article>
 {% endblock content %}

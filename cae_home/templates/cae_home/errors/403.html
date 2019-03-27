@@ -5,7 +5,13 @@
 
 
 {% block content %}
-
-<h1>Permission Denied</h1>
-
+  <h1>Permission Denied</h1>
+  <article class="color center">
+    {% if error_message %}
+      <p>{{ error_message }}</p>
+    {% else %}
+      <p>You don't have permission to access this page.</p>
+      <p>If you believe you're seeing this in error, please contact the CAE Center.</p>
+    {% endif %}
+  </article>
 {% endblock content %}

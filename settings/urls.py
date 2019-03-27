@@ -17,6 +17,7 @@ router = routers.DefaultRouter()
 router.register(r'departments', views.DepartmentViewSet)
 
 
+# General url handling.
 urlpatterns = [
     # Admin views.
     url(r'^admin/', admin.site.urls),

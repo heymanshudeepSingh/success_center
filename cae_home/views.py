@@ -7,9 +7,8 @@ from django.conf import settings
 from django.contrib.auth import views as auth_views
 from django.core.mail import send_mail, send_mass_mail
 from django.http import Http404
-from django.shortcuts import redirect, render_to_response
+from django.shortcuts import redirect
 from django.template.response import TemplateResponse
-from django.views.defaults import bad_request, page_not_found, permission_denied, server_error
 from rest_framework import viewsets, permissions
 
 from . import forms, models
@@ -70,60 +69,12 @@ def login_redirect(request):
                 return redirect('cae_web_core:index')
 
         # Unknown user group.
-        raise Http404
-
-
-def handler400(request, exception, template_name='cae_home/errors/400.html'):
-    """
-    Handling for bad/suspicious request.
-    This view changes default template location but otherwise uses Django's built in 400 error handling.
-    """
-    bad_request(request, exception, template_name)
-
-
-def handler403(request, exception, template_name='cae_home/errors/403.html'):
-    """
-    Handling for permission denied.
-    This view changes default template location but otherwise uses Django's built in 403 error handling.
-    """
-    permission_denied(request, exception, template_name)
-
-
-def handler404(request, exception, template_name='cae_home/errors/404.html'):
-    """
-    Handling for page not found.
-    This view changes default template location but otherwise uses Django's built in 404 error handling.
-    """
-    page_not_found(request, exception, template_name)
-
-
-def handler500(request, exception, template_name='cae_home/errors/500.html'):
-    """
-    Handling for server error.
-    This view changes default template location but otherwise uses Django's built in 500 error handling.
-    """
-    server_error(request, exception, template_name)
-
-
-# def handler400(request, exception, template_name='400.html'):
-#     response = render_to_response('400.html')
-#     response.status_code = 400
-#     return response
-#
-# def handler403(request, exception, template_name='403.html'):
-#     response = render_to_response('403.html')
-#     response.status_code = 403
-#     return response
-#
-# def handler404(request, exception, template_name='404.html'):
-#     response = render_to_response('404.html')
-#     response.status_code = 404
-#     return response
-#
-# def handler500(request, exception, template_name='500.html'):
-#     response = render_to_response('500.html')
-#     response.status_code = 500
-#     return response
+        exception = 'Server did not recognize login user\'s group. Please contact the CAE Center.'
+        return TemplateResponse(request, 'cae_home/errors/404.html', {
+            'error_message': exception,
+        },
+            status=404,
+        )
 
 
 #region DjangoRest Views

@@ -5,9 +5,13 @@
 
 
 {% block content %}
-
-<h1>Page Not Found</h1>
-
-<p>{{ exception}}</p>
-
+  <h1>Page Not Found</h1>
+  <article class="color center">
+    {% if error_message %}
+      <p>{{ error_message }}</p>
+    {% else %}
+      <p>The page you requested does not exist.</p>
+      <p>If you typed in a url, please double check that you entered it correctly.</p>
+    {% endif %}
+  </article>
 {% endblock content %}
