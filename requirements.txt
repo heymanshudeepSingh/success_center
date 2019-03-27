@@ -20,3 +20,4 @@ django-scheduler==0.8.8     # Third party app for calendar scheduling.
 # Optional imports.
 # mysqlclient         # For connecting to mysql. Not necessary if using sqlite during development.
 # ldap3               # For ldap connection. Only necessary when CaeAuthBackend is turned on.
+# mod_wsgi            # For putting on a production server. Required for apache to use a Python virtual environment.
