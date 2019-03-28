@@ -60,7 +60,7 @@ class UserIntermediary(models.Model):
     profile = models.OneToOneField('Profile', on_delete=models.CASCADE, blank=True, null=True)
 
     # Model fields.
-    bronco_net = models.CharField(max_length=MAX_LENGTH, blank=True, null=True)
+    bronco_net = models.CharField(max_length=MAX_LENGTH, blank=True, null=True, unique=True)
 
     # Self-setting/Non-user-editable fields.
     date_created = models.DateTimeField(auto_now_add=True)
@@ -241,6 +241,7 @@ class Address(models.Model):
     class Meta:
         verbose_name = 'Address'
         verbose_name_plural = 'Addresses'
+        unique_together = ('street', 'optional_street', 'city', 'state', 'zip')
 
     def __str__(self):
         if self.optional_street is not None:
@@ -269,7 +270,7 @@ class PhoneNumber(models.Model):
     )
 
     # Model fields.
-    phone_number = models.CharField(validators=[phone_regex], max_length=15, blank=True)
+    phone_number = models.CharField(validators=[phone_regex], max_length=15, unique=True)
 
     # Self-setting/Non-user-editable fields.
     date_created = models.DateTimeField(auto_now_add=True)
@@ -333,7 +334,7 @@ class PhoneNumber(models.Model):
 
 class SiteTheme(models.Model):
     # Model fields.
-    name = models.CharField(max_length=MAX_LENGTH)
+    name = models.CharField(max_length=MAX_LENGTH, unique=True)
     gold_logo = models.BooleanField(default=True)
 
     # Self-setting/Non-user-editable fields.

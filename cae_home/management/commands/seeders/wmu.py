@@ -2,6 +2,7 @@
 Seeder for "WMU" related Core Models.
 """
 
+from django.core.exceptions import ValidationError
 from django.core.management import call_command
 from faker import Faker
 from random import randint
@@ -88,43 +89,61 @@ def create_wmu_users(model_count):
 
     # Generate models equal to model count.
     for i in range(model_count - pre_initialized_count):
-        # Get Department.
-        index = randint(0, len(departments) - 1)
-        department = departments[index]
+        fail_count = 0
+        try_create_model = True
 
-        # Get Major.
-        index = randint(0, len(majors) - 1)
-        major = majors[index]
+        # Loop attempt until 3 fails or model is created.
+        # Model creation may fail due to randomness of bronco_net and unique requirement.
+        while try_create_model:
+            # Get Department.
+            index = randint(0, len(departments) - 1)
+            department = departments[index]
 
-        # Generate bronco net.
-        bronco_net = '{0}{1}{2}{3}'.format(
-            chr(randint(97, 122)),
-            chr(randint(97, 122)),
-            chr(randint(97, 122)),
-            randint(1000, 9999)
-        )
+            # Get Major.
+            index = randint(0, len(majors) - 1)
+            major = majors[index]
 
-        # Generate win number.
-        winno = '{0}{1}'.format(randint(1000, 9999), randint(10000, 99999))
+            # Generate bronco net.
+            bronco_net = '{0}{1}{2}{3}'.format(
+                chr(randint(97, 122)),
+                chr(randint(97, 122)),
+                chr(randint(97, 122)),
+                randint(1000, 9999)
+            )
 
-        # Generate user type.
-        user_type = randint(0, (len(models.WmuUser.USER_TYPE_CHOICES) - 1))
+            # Generate win number.
+            winno = '{0}{1}'.format(randint(1000, 9999), randint(10000, 99999))
 
-        # Determine if active. 70% change of being true.
-        if randint(0, 9) < 7:
-            active = True
-        else:
-            active = False
+            # Generate user type.
+            user_type = randint(0, (len(models.WmuUser.USER_TYPE_CHOICES) - 1))
 
-        models.WmuUser.objects.create(
-            department=department,
-            major=major,
-            bronco_net=bronco_net,
-            winno=winno,
-            first_name=faker_factory.first_name(),
-            last_name=faker_factory.last_name(),
-            user_type=user_type,
-            active=active,
+            # Determine if active. 70% change of being true.
+            if randint(0, 9) < 7:
+                active = True
+            else:
+                active = False
 
-        )
+            # Attempt to create model seed.
+            try:
+                models.WmuUser.objects.create(
+                    department=department,
+                    major=major,
+                    bronco_net=bronco_net,
+                    winno=winno,
+                    first_name=faker_factory.first_name(),
+                    last_name=faker_factory.last_name(),
+                    user_type=user_type,
+                    active=active,
+                )
+                try_create_model = False
+            except ValidationError:
+                # Seed generation failed. Nothing can be done about this without removing the random generation aspect.
+                # If we want that, we should use fixtures instead.
+                fail_count += 1
+
+                # If failed 3 times, give up model creation and move on to next model, to prevent infinite loops.
+                if fail_count > 2:
+                    try_create_model = False
+                    print('Failed to generate wmu user seed instance.')
+
     print('Populated wmu user models.')

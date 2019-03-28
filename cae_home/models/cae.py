@@ -16,11 +16,11 @@ class Asset(models.Model):
     room = models.ForeignKey('Room', on_delete=models.CASCADE)
 
     # Model fields.
-    serial_number = models.CharField(max_length=MAX_LENGTH)
-    asset_tag = models.CharField(max_length=MAX_LENGTH)
+    serial_number = models.CharField(max_length=MAX_LENGTH, unique=True)
+    asset_tag = models.CharField(max_length=MAX_LENGTH, unique=True)
     brand_name = models.CharField(max_length=MAX_LENGTH)
-    mac_address = models.CharField(max_length=MAX_LENGTH, blank=True, null=True)
-    ip_address = models.CharField(max_length=MAX_LENGTH, blank=True, null=True)
+    mac_address = models.CharField(max_length=MAX_LENGTH, blank=True, null=True, unique=True)
+    ip_address = models.CharField(max_length=MAX_LENGTH, blank=True, null=True, unique=True)
     device_name = models.CharField(max_length=MAX_LENGTH, blank=True, null=True)
     description = models.CharField(max_length=MAX_LENGTH, blank=True, null=True)
 

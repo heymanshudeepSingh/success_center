@@ -4,6 +4,7 @@ Seeder for "User" related Core Models.
 
 from django.contrib.auth.models import Group, Permission
 from django.contrib.contenttypes.models import ContentType
+from django.core.exceptions import ValidationError
 from django.core.management import call_command
 from faker import Faker
 from random import randint
@@ -191,16 +192,41 @@ def create_addresses(model_count):
 
     # Generate models equal to model count.
     for index in range(model_count - pre_initialized_count):
-        street = faker_factory.building_number() + ' ' + faker_factory.street_address()
-        city = faker_factory.city()
-        state = faker_factory.state()
-        zip = faker_factory.postalcode()
-        if faker_factory.boolean():
-            optional_street = faker_factory.secondary_address()
-        else:
-            optional_street = None
+        fail_count = 0
+        try_create_model = True
 
-        models.Address.objects.create(street=street, optional_street=optional_street, city=city, state=state, zip=zip)
+        # Loop attempt until 3 fails or model is created.
+        # Model creation may fail due to randomness of address info and unique requirement.
+        while try_create_model:
+            # Generate address info.
+            street = faker_factory.building_number() + ' ' + faker_factory.street_address()
+            city = faker_factory.city()
+            state = faker_factory.state()
+            zip = faker_factory.postalcode()
+            if faker_factory.boolean():
+                optional_street = faker_factory.secondary_address()
+            else:
+                optional_street = None
+
+            # Attempt to create model seed.
+            try:
+                models.Address.objects.create(
+                    street=street,
+                    optional_street=optional_street,
+                    city=city,
+                    state=state,
+                    zip=zip
+                )
+                try_create_model = False
+            except ValidationError:
+                # Seed generation failed. Nothing can be done about this without removing the random generation aspect.
+                # If we want that, we should use fixtures instead.
+                fail_count += 1
+
+                # If failed 3 times, give up model creation and move on to next model, to prevent infinite loops.
+                if fail_count > 2:
+                    try_create_model = False
+                    print('Failed to generate address seed instance.')
 
     print('Populated address models.')
 
@@ -220,7 +246,27 @@ def create_phone_numbers(model_count):
 
     # Generate models equal to model count.
     for i in range(model_count - pre_initialized_count):
-        phone_number = '{0}{1}{2}'.format(randint(100, 999), randint(100, 999), randint(1000, 9999))
-        models.PhoneNumber.objects.create(phone_number=phone_number)
+        fail_count = 0
+        try_create_model = True
+
+        # Loop attempt until 3 fails or model is created.
+        # Model creation may fail due to randomness of address info and unique requirement.
+        while try_create_model:
+            # Generate random phone number.
+            phone_number = '{0}{1}{2}'.format(randint(100, 999), randint(100, 999), randint(1000, 9999))
+
+            # Attempt to create model seed.
+            try:
+                models.PhoneNumber.objects.create(phone_number=phone_number)
+                try_create_model = False
+            except ValidationError:
+                # Seed generation failed. Nothing can be done about this without removing the random generation aspect.
+                # If we want that, we should use fixtures instead.
+                fail_count += 1
+
+                # If failed 3 times, give up model creation and move on to next model, to prevent infinite loops.
+                if fail_count > 2:
+                    try_create_model = False
+                    print('Failed to generate phone number seed instance.')
 
     print('Populated phone number models.')

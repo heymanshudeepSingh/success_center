@@ -17,7 +17,7 @@ class Department(models.Model):
     A university department.
     """
     # Model fields.
-    name = models.CharField(max_length=MAX_LENGTH)
+    name = models.CharField(max_length=MAX_LENGTH, unique=True)
 
     # Self-setting/Non-user-editable fields.
     date_created = models.DateTimeField(auto_now_add=True)
@@ -45,12 +45,10 @@ class RoomType(models.Model):
     Room types.
     """
     # Model fields.
-    name = models.CharField(
-        max_length=MAX_LENGTH,
-        unique=True,
-    )
+    name = models.CharField(max_length=MAX_LENGTH, unique=True)
     slug = models.SlugField(
         max_length=MAX_LENGTH,
+        unique=True,
         help_text="Used for urls referencing this room type.",
     )
 
@@ -84,7 +82,7 @@ class Room(models.Model):
     room_type = models.ForeignKey('RoomType', on_delete=models.CASCADE)
 
     # Model fields.
-    name = models.CharField(max_length=MAX_LENGTH)
+    name = models.CharField(max_length=MAX_LENGTH, unique=True)
     description = models.CharField(max_length=MAX_LENGTH, default='', blank=True)
     capacity = models.PositiveSmallIntegerField()
 
@@ -117,8 +115,8 @@ class Major(models.Model):
     department = models.ForeignKey('Department', on_delete=models.CASCADE, default=1)
 
     # Model fields.
-    code = models.CharField(max_length=MAX_LENGTH)
-    name = models.CharField(max_length=MAX_LENGTH)
+    code = models.CharField(max_length=MAX_LENGTH, unique=True)
+    name = models.CharField(max_length=MAX_LENGTH, unique=True)
     undergrad = models.BooleanField(default=True)
     active = models.BooleanField(default=True)
 
@@ -162,8 +160,8 @@ class WmuUser(models.Model):
     major = models.ForeignKey('Major', on_delete=models.CASCADE, blank=True)
 
     # Model fields.
-    bronco_net = models.CharField(max_length=MAX_LENGTH)
-    winno = models.CharField(max_length=MAX_LENGTH)
+    bronco_net = models.CharField(max_length=MAX_LENGTH, unique=True)
+    winno = models.CharField(max_length=MAX_LENGTH, unique=True)
     first_name = models.CharField(max_length=MAX_LENGTH)
     last_name = models.CharField(max_length=MAX_LENGTH)
     user_type = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES, default=0)
@@ -221,9 +219,9 @@ class SemesterDate(models.Model):
     The start and end dates for a semester.
     """
     # Model fields.
-    name = models.CharField(max_length=MAX_LENGTH, blank=True, null=True)
-    start_date = models.DateField()
-    end_date = models.DateField()
+    name = models.CharField(max_length=MAX_LENGTH, blank=True, null=True, unique=True)
+    start_date = models.DateField(unique=True)
+    end_date = models.DateField(unique=True)
 
     # Self-setting/Non-user-editable fields.
     date_created = models.DateTimeField(auto_now_add=True)
