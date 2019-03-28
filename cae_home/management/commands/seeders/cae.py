@@ -13,8 +13,9 @@ def generate_model_seeds(model_count):
     """
     Calls individual seeder methods.
     """
-    print('SEEDING CAE Model Group.')
-    create_assets(model_count)
+    # print('SEEDING CAE Model Group.')
+    # create_assets(model_count)
+    pass
 
 
 def create_assets(model_count):
