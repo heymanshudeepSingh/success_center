@@ -214,6 +214,24 @@
             }
 
             tbody {
+                tr:first-child {
+                    // Stylings specific to wmu theme.
+                    @if $theme == "wmu" {
+                        border-top: 1px solid theme-status($theme, 'secondary', 'border');
+                    } @else {
+                        border-top: 1px solid theme-status($theme, 'primary', 'border');
+                    }
+                }
+
+                tr:last-child {
+                    // Stylings specific to wmu theme.
+                    @if $theme == "wmu" {
+                        border-bottom: 1px solid theme-status($theme, 'secondary', 'border');
+                    } @else {
+                        border-bottom: 1px solid theme-status($theme, 'primary', 'border');
+                    }
+                }
+
                 tr:nth-child(odd) {
                     background-color: theme-background($theme, 'table-row-odd');
                 }
