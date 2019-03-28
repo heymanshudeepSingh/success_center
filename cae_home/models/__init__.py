@@ -22,4 +22,4 @@ from .wmu import SemesterDate
 from .wmu import WmuUser
 
 # Models related to the CAE Center.
-from .cae import Asset
+# from .cae import Asset

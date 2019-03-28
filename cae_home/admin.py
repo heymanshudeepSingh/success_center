@@ -505,4 +505,4 @@ admin.site.register(models.SemesterDate, SemesterDateAdmin)
 admin.site.register(models.WmuUser, WmuUserAdmin)
 
 # CAE Model Registration
-admin.site.register(models.Asset, AssetAdmin)
+# admin.site.register(models.Asset, AssetAdmin)
