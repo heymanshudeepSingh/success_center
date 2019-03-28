@@ -7,6 +7,7 @@ If a model only applies to a single project, then it should be defined within th
 
 # Models related to user-login accounts.
 from .user import User
+from .user import UserIntermediary
 from .user import Profile
 from .user import Address
 from .user import PhoneNumber

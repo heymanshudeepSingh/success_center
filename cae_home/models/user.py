@@ -4,11 +4,12 @@ Definitions of "User" related Core Models.
 
 import pytz
 from django.contrib.auth.models import AbstractUser
-from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.core.management import call_command
 from django.core.validators import RegexValidator
 from django.conf import settings
 from django.db import models
+from django.db.models import F
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
@@ -49,6 +50,79 @@ class User(AbstractUser):
         return new_user
 
 
+class UserIntermediary(models.Model):
+    """
+    Intermediary to connect (login) User models, user Profile models, and WmuUser models.
+    """
+    # Relationship Keys.
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
+    wmu_user = models.OneToOneField('cae_home.WMUUser', on_delete=models.CASCADE, blank=True, null=True)
+    profile = models.OneToOneField('Profile', on_delete=models.CASCADE, blank=True, null=True)
+
+    # Model fields.
+    bronco_net = models.CharField(max_length=MAX_LENGTH, blank=True, null=True)
+
+    # Self-setting/Non-user-editable fields.
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "User Intermediary"
+        verbose_name_plural = "User Intermediaries"
+
+    def __str__(self):
+        return '{0}'.format(self.bronco_net)
+
+    def clean(self, *args, **kwargs):
+        """
+        Custom cleaning implementation. Includes validation, setting fields, etc.
+        """
+        # Check that at least one of either "User" or "WmuUser" is provided.
+        if self.user is None and self.wmu_user is None:
+            raise ValidationError('Must have relation to either "User" or "WmuUser" model.')
+
+        # Set fields on model creation.
+        if self.pk is None:
+            # Attempt to pull bronco_net from login model. Otherwise, get from wmu_user model.
+            if self.user is not None:
+                self.bronco_net = self.user.username
+            else:
+                self.bronco_net = self.wmu_user.bronco_net
+        else:
+            # Do not allow null profiles after initial creation.
+            if self.profile is None:
+                raise ValidationError('Must have associated user profile model.')
+
+    def save(self, *args, **kwargs):
+        """
+        Modify model save behavior.
+        """
+        # Save model.
+        self.full_clean()
+        super(UserIntermediary, self).save(*args, **kwargs)
+
+
+@receiver(post_save, sender=User)
+def create_user_intermediary(sender, instance, created, **kwargs):
+    if created:
+        # Handle for new (login) User being created. Attempt to find existing Intermediary with bronco_net.
+        # On failure, create new UserIntermediary instance.
+        try:
+            user_intermediary = UserIntermediary.objects.get(bronco_net=instance.username)
+
+            # Check that User has not been provided to UserIntermediary.
+            if user_intermediary.user is not None:
+                raise ValidationError('User Intermediary model already has associated User model.')
+            else:
+                user_intermediary.user = instance
+                user_intermediary.save()
+        except ObjectDoesNotExist:
+            UserIntermediary.objects.create(user=instance)
+    else:
+        # Just updating an existing UserIntermediary. Save.
+        instance.userintermediary.save()
+
+
 class Profile(models.Model):
     """
     A profile for a given user.
@@ -71,7 +145,6 @@ class Profile(models.Model):
     )
 
     # Relationship Keys.
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     address = models.ForeignKey('Address', on_delete=models.CASCADE, blank=True, null=True)
     phone_number = models.ForeignKey('PhoneNumber', on_delete=models.CASCADE, blank=True, null=True)
     site_theme = models.ForeignKey('SiteTheme', on_delete=models.CASCADE, blank=True)
@@ -93,7 +166,7 @@ class Profile(models.Model):
         verbose_name_plural = 'Profiles'
 
     def __str__(self):
-        return '{0}'.format(self.user)
+        return '{0}'.format(self.userintermediary.bronco_net)
 
     def save(self, *args, **kwargs):
         """
@@ -126,10 +199,11 @@ class Profile(models.Model):
             value = self.mobile_font_size
         return self.get_font_size(value)
 
-@receiver(post_save, sender=User)
+
+@receiver(post_save, sender=UserIntermediary)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
-        # Profile is new instance. Handle for new user being created.
+        # Handle for new UserIntermediary being created. Create new profile as well.
         try:
             # Attempt to get default theme.
             site_theme = SiteTheme.objects.get(name='wmu')
@@ -139,7 +213,11 @@ def create_user_profile(sender, instance, created, **kwargs):
             site_theme = SiteTheme.objects.get(name='wmu')
 
         # Create new profile object for new user.
-        Profile.objects.create(user=instance, site_theme=site_theme)
+        profile = Profile.objects.create(site_theme=site_theme)
+
+        # Associate profile with UserIntermediary.
+        instance.profile = profile
+        instance.save()
     else:
         # Just updating an existing profile. Save.
         instance.profile.save()

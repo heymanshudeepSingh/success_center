@@ -25,7 +25,7 @@ class ProfileInline(admin.StackedInline):
 
 
 class UserAdmin(BaseUserAdmin):
-    inlines = (ProfileInline, )
+    # inlines = (ProfileInline, )
 
     # Fields to display in admin list view.
     BaseUserAdmin.list_display = ('username', 'first_name', 'last_name', 'user_type')
@@ -48,28 +48,133 @@ class UserAdmin(BaseUserAdmin):
         return ', '.join(groups)
 
 
-class ProfileAdmin(admin.ModelAdmin):
-    form = forms.ProfileAdminForm
+class UserIntermediaryToUserListFilter(admin.SimpleListFilter):
+    """
+    Filter for ProfileAdmin to show profiles associated to valid site login accounts.
+    """
+    title = ('Associated with Login User')
+    parameter_name = 'login_user'
 
+    def lookups(self, request, model_admin):
+        return (
+            ('Yes', ('Yes')),
+            ('No', ('No')),
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == 'Yes':
+            return queryset.filter(user__isnull=False)
+        if self.value() == 'No':
+            return queryset.filter(user__isnull=True)
+
+
+class UserIntermediaryToWmuUserListFilter(admin.SimpleListFilter):
+    """
+    Filter for ProfileAdmin to show profiles associated to valid site login accounts.
+    """
+    title = ('Associated with WMU User')
+    parameter_name = 'wmu_user'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('Yes', ('Yes')),
+            ('No', ('No')),
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == 'Yes':
+            return queryset.filter(wmu_user__isnull=False)
+        if self.value() == 'No':
+            return queryset.filter(wmu_user__isnull=True)
+
+
+class UserIntermediaryAdmin(admin.ModelAdmin):
     # Fields to display in admin list view.
     list_display = (
-        'user', 'address', 'phone_number', 'site_theme',
+        'bronco_net',
     )
 
     # Fields to search in admin list view.
     search_fields = [
-        'user__first_name', 'user__last_name',
+        'bronco_net',
     ]
+
+    # Fields to filter by in admin list view.
+    list_filter = (
+        UserIntermediaryToUserListFilter, UserIntermediaryToWmuUserListFilter,
+    )
 
     # Read only fields for admin detail view.
     readonly_fields = (
-        'user', 'date_created', 'date_modified',
+        'date_created', 'date_modified',
+    )
+
+    # Fieldset organization for admin detail view.
+    fieldsets = (
+        (None, {
+            'fields': ('bronco_net',)
+        }),
+        ('Relations', {
+            'fields': ('user', 'wmu_user', 'profile',)
+        }),
+        ('Advanced', {
+            'classes': ('collapse',),
+            'fields': ('date_created', 'date_modified',)
+        }),
+    )
+
+
+class ProfileToUserListFilter(admin.SimpleListFilter):
+    """
+    Filter for ProfileAdmin to show profiles associated to valid site login accounts.
+    """
+    title = ('Associated with Login User')
+    parameter_name = 'login_user'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('Yes', ('Yes')),
+            ('No', ('No')),
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == 'Yes':
+            return queryset.filter(userintermediary__user__isnull=False)
+        if self.value() == 'No':
+            return queryset.filter(userintermediary__user__isnull=True)
+
+
+class ProfileAdmin(admin.ModelAdmin):
+
+    def get_bronco_net(self, obj):
+        return obj.userintermediary.bronco_net
+    get_bronco_net.short_description = 'Bronco Net'
+    get_bronco_net.admin_order_field = 'userintermediary__bronco_net'
+
+    # Fields to display in admin list view.
+    list_display = (
+        'get_bronco_net', 'address', 'phone_number', 'site_theme',
+    )
+
+    # Fields to search in admin list view.
+    search_fields = [
+        'get_bronco_net',
+    ]
+
+    # Fields to filter by in admin list view.
+    list_filter = (
+        ProfileToUserListFilter,
+    )
+
+    # Read only fields for admin detail view.
+    readonly_fields = (
+        'date_created', 'date_modified',
     )
 
     # Fieldset organization for admin detail view.
     fieldsets = (
         ('User Info', {
-            'fields': ('user', 'address', 'phone_number', 'user_timezone',)
+            'fields': ('address', 'phone_number', 'user_timezone',)
         }),
         ('Site Options', {
             'fields': ('site_theme', 'desktop_font_size', 'mobile_font_size',)
@@ -82,8 +187,6 @@ class ProfileAdmin(admin.ModelAdmin):
 
 
 class AddressAdmin(admin.ModelAdmin):
-    form = forms.AddressAdminForm
-
     # Fields to display in admin list view.
     list_display = (
         'street', 'optional_street', 'city', 'state', 'zip',
@@ -117,8 +220,6 @@ class AddressAdmin(admin.ModelAdmin):
 
 
 class PhoneNumberAdmin(admin.ModelAdmin):
-    form = forms.PhoneNumberAdminForm
-
     # Fields to display in admin list view.
     list_display = (
         'formatted_phone_number', 'phone_number',
@@ -389,6 +490,7 @@ class AssetAdmin(admin.ModelAdmin):
 
 # User Model Registration
 admin.site.register(models.User, UserAdmin)
+admin.site.register(models.UserIntermediary, UserIntermediaryAdmin)
 admin.site.register(models.Profile, ProfileAdmin)
 admin.site.register(models.Address, AddressAdmin)
 admin.site.register(models.PhoneNumber, PhoneNumberAdmin)

@@ -188,6 +188,7 @@ ADMIN_REORDER = (
         'models': (
             'auth.Group',
             'cae_home.User',
+            'cae_home.UserIntermediary',
             'cae_home.Profile',
             'cae_home.Address',
             'cae_home.PhoneNumber',

@@ -11,6 +11,23 @@ from django.utils import timezone
 from cae_home import models
 
 
+class GetUserProfileMiddleware(object):
+    """
+    Load profile associated with authenticated user and append to user request object for other middleware/view access.
+    """
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request, *args, **kwargs):
+        # If user is logged in, get profile info.
+        if request.user.is_authenticated:
+            request.user.profile = request.user.userintermediary.profile
+
+        # Resume view call as normal.
+        response = self.get_response(request)
+        return response
+
+
 class SetTimezoneMiddleware(object):
     """
     Allows views to auto-convert from UTC to user's timezone.
@@ -48,7 +65,6 @@ class GetProjectDetailMiddleware(object):
         return response
 
     def process_template_response(self, request, response):
-
         # Check to ensure DjangoRest views don't error.
         if response.context_data is not None:
 
@@ -69,12 +85,11 @@ class GetUserSiteOptionsMiddleware(object):
         self.get_response = get_response
 
     def __call__(self, request, *args, **kwargs):
-        #Resume view call as normal.
+        # Resume view call as normal.
         response = self.get_response(request)
         return response
 
     def process_template_response(self, request, response):
-
         # Check to ensure DjangoRest views don't error.
         if response.context_data is not None:
 

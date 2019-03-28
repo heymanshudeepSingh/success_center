@@ -17,13 +17,184 @@ from . import models
 
 #region User Model Tests
 
+class UserIntermediaryModelTests(TestCase):
+    """
+    Tests to ensure valid UserIntermediary Model creation/logic.
+    """
+    @classmethod
+    def setUpTestData(cls):
+        cls.department = models.Department.objects.create(name='Test Department')
+        cls.major = models.Major.objects.create(
+            department=cls.department,
+            code='Test Code',
+            name='Test Name',
+            undergrad=False,
+            active=False,
+        )
+        cls.user_type = models.WmuUser.PROFESSOR
+
+        # Set up for User model instance.
+        cls.user_bronco_net = 'user_temporary'
+        cls.user = get_user_model().objects.create_user(
+            cls.user_bronco_net,
+            '{0}@wmich.edu'.format(cls.user_bronco_net),
+            cls.user_bronco_net,
+        )
+
+        # Set up for WmuUser model instance.
+        cls.wmu_user_bronco_net = 'wmu_temporary'
+        cls.wmu_user = models.WmuUser.objects.create(
+            department=cls.department,
+            major=cls.major,
+            bronco_net=cls.wmu_user_bronco_net,
+            winno='123456789',
+            first_name='Test First',
+            last_name='Test Last',
+            user_type=cls.user_type,
+        )
+
+        # Set up for instance with both User and WmuUser. User model created first.
+        cls.dual_bronco_net_1 = 'dual_1_temporary'
+        cls.dual_user_1 = get_user_model().objects.create_user(
+            cls.dual_bronco_net_1,
+            '{0}@wmich.edu'.format(cls.dual_bronco_net_1),
+            cls.dual_bronco_net_1,
+        )
+        cls.dual_wmu_user_1 = models.WmuUser.objects.create(
+            department=cls.department,
+            major=cls.major,
+            bronco_net=cls.dual_bronco_net_1,
+            winno='123456789',
+            first_name='Test First',
+            last_name='Test Last',
+            user_type=cls.user_type,
+        )
+
+        # Set up for instance with both User and WmuUser. WmuUser model created first.
+        cls.dual_bronco_net_2 = 'dual_2_temporary'
+        cls.dual_wmu_user_2 = models.WmuUser.objects.create(
+            department=cls.department,
+            major=cls.major,
+            bronco_net=cls.dual_bronco_net_2,
+            winno='123456789',
+            first_name='Test First',
+            last_name='Test Last',
+            user_type=cls.user_type,
+        )
+        cls.dual_user_2 = get_user_model().objects.create_user(
+            cls.dual_bronco_net_2,
+            '{0}@wmich.edu'.format(cls.dual_bronco_net_2),
+            cls.dual_bronco_net_2,
+        )
+
+    def setUp(self):
+        # Set up for User model instance.
+        self.test_intermediary_with_user = models.UserIntermediary.objects.get(user=self.user)
+        self.profile_with_user = self.test_intermediary_with_user.profile
+
+        # Set up for WmuUser model instance.
+        self.test_intermediary_with_wmuuser = models.UserIntermediary.objects.get(wmu_user=self.wmu_user)
+        self.profile_with_wmuuser = self.test_intermediary_with_wmuuser.profile
+
+        # Set up for instance with both User and WmuUser. User model created first.
+        self.test_intermediary_with_dual_1 = models.UserIntermediary.objects.get(user=self.dual_user_1)
+        self.profile_with_dual_1 = self.test_intermediary_with_dual_1.profile
+
+        # Set up for instance with both User and WmuUser. WmuUser model created first.
+        self.test_intermediary_with_dual_2 = models.UserIntermediary.objects.get(wmu_user=self.dual_wmu_user_2)
+        self.profile_with_dual_2 = self.test_intermediary_with_dual_2.profile
+
+    def test_model_creation_with_user(self):
+        with self.subTest('Test User Intermediary with User model.'):
+            # Test User Intermediary model.
+            self.assertEqual(self.test_intermediary_with_user.user, self.user)
+            self.assertEqual(self.test_intermediary_with_user.profile, self.profile_with_user)
+            self.assertEqual(self.test_intermediary_with_user.bronco_net, self.user_bronco_net)
+
+            # Test related bronco_net integrity.
+            self.assertEqual(self.user.username, self.user_bronco_net)
+            self.assertEqual(self.profile_with_user.userintermediary.bronco_net, self.user_bronco_net)
+
+        with self.subTest('Test User Intermediary with WmuUser model.'):
+            # Test User Intermediary model.
+            self.assertEqual(self.test_intermediary_with_wmuuser.wmu_user, self.wmu_user)
+            self.assertEqual(self.test_intermediary_with_wmuuser.profile, self.profile_with_wmuuser)
+            self.assertEqual(self.test_intermediary_with_wmuuser.bronco_net, self.wmu_user_bronco_net)
+
+            # Test related bronco_net integrity.
+            self.assertEqual(self.wmu_user.bronco_net, self.wmu_user_bronco_net)
+            self.assertEqual(self.profile_with_wmuuser.userintermediary.bronco_net, self.wmu_user_bronco_net)
+
+        with self.subTest('Test User Intermediary with both User and WmuUser. User model created first.'):
+            # Test User Intermediary model.
+            self.assertEqual(self.test_intermediary_with_dual_1.user, self.dual_user_1)
+            self.assertEqual(self.test_intermediary_with_dual_1.wmu_user, self.dual_wmu_user_1)
+            self.assertEqual(self.test_intermediary_with_dual_1.profile, self.profile_with_dual_1)
+            self.assertEqual(self.test_intermediary_with_dual_1.bronco_net, self.dual_bronco_net_1)
+
+            # Test related bronco_net integrity.
+            self.assertEqual(self.dual_user_1.username, self.dual_bronco_net_1)
+            self.assertEqual(self.dual_wmu_user_1.bronco_net, self.dual_bronco_net_1)
+            self.assertEqual(self.profile_with_dual_1.userintermediary.bronco_net, self.dual_bronco_net_1)
+
+        with self.subTest('Test User Intermediary with both User and WmuUser. WmuUser model created first.'):
+            # Test User Intermediary model.
+            self.assertEqual(self.test_intermediary_with_dual_2.user, self.dual_user_2)
+            self.assertEqual(self.test_intermediary_with_dual_2.wmu_user, self.dual_wmu_user_2)
+            self.assertEqual(self.test_intermediary_with_dual_2.profile, self.profile_with_dual_2)
+            self.assertEqual(self.test_intermediary_with_dual_2.bronco_net, self.dual_bronco_net_2)
+
+            # Test related bronco_net integrity.
+            self.assertEqual(self.dual_user_2.username, self.dual_bronco_net_2)
+            self.assertEqual(self.dual_wmu_user_2.bronco_net, self.dual_bronco_net_2)
+            self.assertEqual(self.profile_with_dual_2.userintermediary.bronco_net, self.dual_bronco_net_2)
+
+    def test_string_representation_with_user(self):
+        self.assertEqual(str(self.test_intermediary_with_user), str(self.test_intermediary_with_user.bronco_net))
+
+    def test_plural_representation(self):
+        self.assertEqual(str(self.test_intermediary_with_user._meta.verbose_name), 'User Intermediary')
+        self.assertEqual(str(self.test_intermediary_with_user._meta.verbose_name_plural), 'User Intermediaries')
+
+    def test_field_removal(self):
+        # Test that removing profile field creates error.
+        with self.assertRaises(ValidationError):
+            with transaction.atomic():
+                self.test_intermediary_with_user.profile = None
+                self.test_intermediary_with_user.save()
+
+        # Test that removing bronco_net field creates error.
+        with self.assertRaises(ValidationError):
+            with transaction.atomic():
+                self.test_intermediary_with_user.bronco_net = None
+                self.test_intermediary_with_user.save()
+
+        # Test that cannot remove user field when it's the only relation.
+        with self.assertRaises(ValidationError):
+            with transaction.atomic():
+                self.test_intermediary_with_user.user = None
+                self.test_intermediary_with_user.save()
+
+        # Test that cannot remove wmu_user field when it's the only relation.
+        with self.assertRaises(ValidationError):
+            with transaction.atomic():
+                self.test_intermediary_with_wmuuser.wmu_user = None
+                self.test_intermediary_with_wmuuser.save()
+
+
 class ProfileModelTests(TestCase):
     """
     Tests to ensure valid Profile Model creation/logic.
     """
     @classmethod
     def setUpTestData(cls):
-        cls.user = get_user_model().objects.create_user('temporary', 'temporary@gmail.com', 'temporary')
+        cls.bronco_net = 'temporary'
+        cls.user = get_user_model().objects.create_user(
+            cls.bronco_net,
+            '{0}@wmich.edu'.format(cls.bronco_net),
+            cls.bronco_net
+        )
+        cls.user_intermediary = models.UserIntermediary.objects.get(user=cls.user)
         cls.address = models.Address.objects.create(
             street="1234 TestStreet",
             city="Test City",
@@ -36,20 +207,27 @@ class ProfileModelTests(TestCase):
         cls.font_size = models.Profile.FONT_BASE
 
     def setUp(self):
-        self.test_profile = models.Profile.objects.get(user=self.user)
+        self.test_profile = self.user_intermediary.profile
         self.test_profile.address = self.address
+        self.test_profile.phone_number = self.phone_number
         self.test_profile.save()
 
     def test_model_creation(self):
-        self.assertEqual(self.test_profile.user, self.user)
+        # Test related models.
+        self.assertEqual(self.user_intermediary.user, self.user)
+        self.assertEqual(self.user_intermediary.profile, self.test_profile)
+        self.assertEqual(self.user_intermediary.bronco_net, self.bronco_net)
+
+        # Test Profile model.
         self.assertEqual(self.test_profile.address, self.address)
+        self.assertEqual(self.test_profile.phone_number, self.phone_number)
         self.assertEqual(self.test_profile.site_theme, self.site_theme)
         self.assertEqual(self.test_profile.user_timezone, self.user_timezone)
         self.assertEqual(self.test_profile.desktop_font_size, self.font_size)
         self.assertEqual(self.test_profile.mobile_font_size, self.font_size)
 
     def test_string_representation(self):
-        self.assertEqual(str(self.test_profile), str(self.test_profile.user))
+        self.assertEqual(str(self.test_profile), self.test_profile.userintermediary.bronco_net)
 
     def test_plural_representation(self):
         self.assertEqual(str(self.test_profile._meta.verbose_name), 'Profile')
@@ -193,9 +371,6 @@ class RoomModelTests(TestCase):
         self.test_room.department.add(self.department)
         self.test_room.save()
 
-        # self.toppings_on_pizza = self.test_pizza.toppings.all()
-        # self.pizzas_with_topping = self.topping.pizza_set.all()
-
         self.departments_for_room = self.test_room.department.all()
         self.rooms_with_department = self.department.room_set.all()
 
@@ -331,27 +506,25 @@ class WmuUserTests(TestCase):
             undergrad=False,
             active=False,
         )
-        cls.phone_number = models.PhoneNumber.objects.create(
-            phone_number='1234567890',
-        )
         cls.user_type = models.WmuUser.PROFESSOR
 
     def setUp(self):
+        self.bronco_net='abc1234'
         self.test_wmu_user = models.WmuUser.objects.create(
             department=self.department,
             major=self.major,
-            phone_number=self.phone_number,
-            bronco_net='abc1234',
+            bronco_net=self.bronco_net,
             winno='123456789',
             first_name='Test First',
             last_name='Test Last',
             user_type=self.user_type,
         )
+        self.user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.bronco_net)
 
     def test_model_creation(self):
+        self.assertEqual(self.user_intermediary.wmu_user, self.test_wmu_user)
         self.assertEqual(self.test_wmu_user.department, self.department)
         self.assertEqual(self.test_wmu_user.major, self.major)
-        self.assertEqual(self.test_wmu_user.phone_number, self.phone_number)
         self.assertEqual(self.test_wmu_user.bronco_net, 'abc1234')
         self.assertEqual(self.test_wmu_user.winno, '123456789')
         self.assertEqual(self.test_wmu_user.first_name, 'Test First')

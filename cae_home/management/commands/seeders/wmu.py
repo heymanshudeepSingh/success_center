@@ -85,7 +85,6 @@ def create_wmu_users(model_count):
     # Get all related models.
     departments = models.Department.objects.all()
     majors = models.Major.objects.all()
-    phone_numbers = models.PhoneNumber.objects.all()
 
     # Generate models equal to model count.
     for i in range(model_count - pre_initialized_count):
@@ -96,10 +95,6 @@ def create_wmu_users(model_count):
         # Get Major.
         index = randint(0, len(majors) - 1)
         major = majors[index]
-
-        # Get Phone Number.
-        index = randint(0, len(phone_numbers) - 1)
-        phone_number = phone_numbers[index]
 
         # Generate bronco net.
         bronco_net = '{0}{1}{2}{3}'.format(
@@ -124,7 +119,6 @@ def create_wmu_users(model_count):
         models.WmuUser.objects.create(
             department=department,
             major=major,
-            phone_number=phone_number,
             bronco_net=bronco_net,
             winno=winno,
             first_name=faker_factory.first_name(),

@@ -2,9 +2,12 @@
 Definitions of "WMU" related Core Models.
 """
 
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
+from ..models import UserIntermediary
 
 MAX_LENGTH = 255
 
@@ -157,7 +160,6 @@ class WmuUser(models.Model):
     # Relationship keys.
     department = models.ForeignKey('Department', on_delete=models.CASCADE)
     major = models.ForeignKey('Major', on_delete=models.CASCADE, blank=True)
-    phone_number = models.ForeignKey('PhoneNumber', on_delete=models.CASCADE, blank=True, null=True)
 
     # Model fields.
     bronco_net = models.CharField(max_length=MAX_LENGTH)
@@ -191,6 +193,27 @@ class WmuUser(models.Model):
         Returns a string of student's official email.
         """
         return '{0}@wmich.edu'.format(self.bronco_net)
+
+
+@receiver(post_save, sender=WmuUser)
+def create_user_intermediary(sender, instance, created, **kwargs):
+    if created:
+        # Handle for new WmuUser being created. Attempt to find existing Intermediary with bronco_net.
+        # On failure, create new UserIntermediary instance.
+        try:
+            user_intermediary = UserIntermediary.objects.get(bronco_net=instance.bronco_net)
+
+            # Check that WmuUser has not been provided to UserIntermediary.
+            if user_intermediary.wmu_user is not None:
+                raise ValidationError('User Intermediary model already has associated WmuUser model.')
+            else:
+                user_intermediary.wmu_user = instance
+                user_intermediary.save()
+        except ObjectDoesNotExist:
+            UserIntermediary.objects.create(wmu_user=instance)
+    else:
+        # Just updating an existing UserIntermediary. Save.
+        instance.userintermediary.save()
 
 
 class SemesterDate(models.Model):
