@@ -159,6 +159,23 @@ def create_permission_group_users(default_password='temppass2'):
     cae_programmer = models.User.get_or_create_user('cae_programmer', '', default_password)
     cae_attendant = models.User.get_or_create_user('cae_attendant', '', default_password)
 
+    # Set their names
+    cae_admin.first_name = "Gumball"
+    cae_admin.last_name = "Watterson"
+    cae_admin.save()
+    cae_admin_ga.first_name = "Homer"
+    cae_admin_ga.last_name = "Simpson"
+    cae_admin_ga.save()
+    cae_attendant.first_name = "Darwin"
+    cae_attendant.last_name = "Watterson"
+    cae_attendant.save()
+    cae_programmer.first_name = "Phillip"
+    cae_programmer.last_name = "Fry"
+    cae_programmer.save()
+    cae_programmer_ga.first_name = "Chosen"
+    cae_programmer_ga.last_name = "One"
+    cae_programmer_ga.save()
+
     # Add permission groups to users.
     cae_director.groups.add(Group.objects.get(name='CAE Director'))
     cae_building_coordinator.groups.add(Group.objects.get(name='CAE Building Coordinator'))
