@@ -40,7 +40,7 @@ function main () {
 
     # Create seeded data.
     echo "Seeding data..."
-    python ../manage.py seed
+    python ../manage.py seed --traceback
     echo ""
 
     echo ""
@@ -55,9 +55,11 @@ then
     echo "Note: This will remove all migrations in CAE_Workspace, including ones in the apps subfolders."
     echo "      This script probably shouldn't be run in production environments."
     echo "      Only proceed if you know what you are doing."
-    echo "      To cancel, hit ctrl+c now. Otherwise hit enter to start."
-    read userInput
     echo ""
+    read -p "Are you sure you want to DELETE AND RESET? (y/N) " -n 1 -r
+    if [[ $REPLY =~ ^[Yy]$ ]]; then # Only run if y is pressed.
+        echo "" # Move to newline
+        main
+    fi
+    exit
 fi
-
-main

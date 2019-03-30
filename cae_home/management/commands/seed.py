@@ -38,19 +38,15 @@ class Command(BaseCommand):
             self.create_seeds(*args, **kwargs)
         else:
             # Production. User probably doesn't want this. Show warning first.
-            print('\n{0}WARNING:{1} Attempting to seed when site is in production mode.{2}\n'.format(
-                ConsoleColors.bold_red,
-                ConsoleColors.bold_yellow,
-                ConsoleColors.reset,
-            ))
-            print('Proceeding may overwrite some models (fixtures) or create garbage data (random seeders).')
-            print('Are you sure you wish to continue?')
+            self.stdout.write(self.style.WARNING('\nWARNING: Attempting to seed when site is in production mode.\n'))
+            self.stdout.write('Proceeding may overwrite some models (fixtures) or create garbage data (random seeders).')
+            self.stdout.write('Are you sure you wish to continue?')
             user_input = input('[ Yes | No ] ')
-            print('')
+            self.stdout.write('')
             if user_input.lower() == 'y' or user_input.lower() == 'yes':
                 self.create_seeds(*args, **kwargs)
             else:
-                print('Seeding cancelled. Exiting.')
+                self.stdout.write('Seeding cancelled. Exiting.')
 
     def create_seeds(self, *args, **kwargs):
         """
@@ -61,20 +57,20 @@ class Command(BaseCommand):
             model_count = 100
         elif model_count > 10000:
             model_count = 100
-        print('Initializing seeder with {0} randomized models.\n'.format(model_count))
+        self.stdout.write('Initializing seeder with {0} randomized models.\n'.format(model_count))
 
         # Unconditionally seeds models in cae_home app, as that's always installed.
         # Generates in order of "user models", "wmu models", "cae models".
-        print('CAE_HOME: Seed command has been called.')
+        self.stdout.write('CAE_HOME: Seed command has been called.')
         user_seeder.generate_model_seeds(model_count)
         wmu_seeder.generate_model_seeds(model_count)
         cae_seeder.generate_model_seeds(model_count)
 
         # Attempts to seed any additional apps it can find.
-        print('CAE_HOME: Seeding complete. Attempting to call imported apps.')
+        self.stdout.write(self.style.SUCCESS('CAE_HOME: Seeding complete. Attempting to call imported apps.'))
         self.call_imported_app_seeders(model_count)
 
-        print('\nSeeding complete.')
+        self.stdout.write(self.style.SUCCESS('\nSeeding complete.'))
 
     def call_imported_app_seeders(self, model_count):
         """
@@ -89,6 +85,9 @@ class Command(BaseCommand):
                 try:
                     command = '{0}_seed'.format(app)
                     call_command(command, model_count)
-                except CommandError:
-                    # Could not find seeder in app. Skipping.
-                    pass
+                except CommandError as err:
+                    if str(err) == "Unknown command: {0!r}".format(command):
+                        # Could not find seeder in app. Skipping.
+                        self.stdout.write(self.style.WARNING("Seeder {0!r} not found.".format(command)))
+                    else:
+                        raise
