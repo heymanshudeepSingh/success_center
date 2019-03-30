@@ -54,7 +54,6 @@
         {% if site_debug %}
           <script src="{% static 'third_party/js/jquery_3.3.1_min.js' %}"></script>
           <script src="{% static 'third_party/js/select2_4.0.5.min.js' %}"></script>
-          <script src="{% static 'cae_home/js/select2.js' %}"></script>
           <!--<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>-->
           <!--<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>-->
           <script src="{% static 'third_party/js/react_16.7.0_development.js' %}" crossorigin></script>
@@ -64,6 +63,8 @@
           <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
           <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
         {% endif %}
+        <script src="{% static 'cae_home/js/select2.js' %}"></script>
+        <script src="{% static 'cae_home/js/selectbuttons.js' %}"></script>
 
         <script>
           var user_site_option_desktop_font_size = '{{ desktop_font_size }}';

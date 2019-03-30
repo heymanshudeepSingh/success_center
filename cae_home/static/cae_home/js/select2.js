@@ -4,6 +4,6 @@
 
 $(document).ready(function() {
 
-    $('.select2').select2();
-    $('.select2-multiple').select2();
+    $('.form-widget-select2').select2();
+    $('.form-widget-select2-multiple').select2();
 });

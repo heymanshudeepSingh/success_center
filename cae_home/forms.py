@@ -10,6 +10,19 @@ from . import models
 
 #region Custom Widgets
 
+class SelectButtonsWidget(forms.Select):
+    """
+    Widget for select input as clickable buttons.
+    """
+    def build_attrs(self, base_attrs, extra_attrs=None):
+        """
+        Set html attribute values.
+        """
+        attrs = super().build_attrs(base_attrs, extra_attrs=extra_attrs)
+        attrs.setdefault('class', 'form-widget-select-buttons')
+        return attrs
+
+
 class Select2Widget(forms.Select):
     """
     Widget for select2 "single selection" input.
@@ -19,7 +32,7 @@ class Select2Widget(forms.Select):
         Set html attribute values.
         """
         attrs = super().build_attrs(base_attrs, extra_attrs=extra_attrs)
-        attrs.setdefault('class', 'select2')
+        attrs.setdefault('class', 'form-widget-select2')
         return attrs
 
 
@@ -32,7 +45,7 @@ class Select2MultipleWidget(forms.Select):
         Set html attribute values.
         """
         attrs = super().build_attrs(base_attrs, extra_attrs=extra_attrs)
-        attrs.setdefault('class', 'select2-multiple')
+        attrs.setdefault('class', 'form-widget-select2-multiple')
         attrs.setdefault('multiple', 'multiple')
         return attrs
 
