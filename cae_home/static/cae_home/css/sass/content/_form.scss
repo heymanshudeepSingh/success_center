@@ -38,32 +38,42 @@
 
     text-align: center;
 
-    // Overall field div.
-    > div {
-        @include display-flex;
-        @include flex-direction(row);
+    // Parent container for all of a form's fields.
+    .form-inputs {
+        @include display-flex();
+        @include flex-direction(column);
         @include justify-content(center);
+        @include align-items(center);
 
-        > label {
-            width: 42.5%;
-            margin: 5px;
+        padding-bottom: 5px;
 
-            text-align: right;
+        // Container for all elements of a single form field.
+        .form-input {
+            @include display-flex;
+            @include flex-direction(row);
+            @include justify-content(center);
 
-            @media only screen and (min-width: $screen-tablet-mid) {
-                width: 30%;
+            > label {
+                width: 42.5%;
+                margin: 5px;
+
+                text-align: right;
+
+                @media only screen and (min-width: $screen-tablet-mid) {
+                    width: 30%;
+                }
             }
-        }
 
-        // Field value div.
-        > div {
-            margin: 5px;
-            width: 70%;
+            // Field value div.
+            > div {
+                margin: 5px;
+                width: 70%;
 
-            text-align: left;
+                text-align: left;
 
-            @media only screen and (min-width: $screen-tablet-mid) {
-                width: 57.5%;
+                @media only screen and (min-width: $screen-tablet-mid) {
+                    width: 57.5%;
+                }
             }
         }
     }
@@ -77,6 +87,35 @@
 
         margin-right: auto;
         margin-left: auto;
+    }
+}
+
+
+// Logic to display form with multiple columns of inputs.
+.main-content form.multi-col {
+
+    @media only screen and (max-width: $screen-tablet-mid) {
+
+        .form-col {
+            order: 2;
+        }
+
+        .mobile-display-first{
+            order: 1;
+        }
+    }
+
+    // Only display when in desktop mode.
+    @media only screen and (min-width: $screen-tablet-mid) {
+
+        // Parent container for all of a form's fields.
+        .form-inputs {
+            @include flex-direction(row);
+
+            > .form-col {
+                @include flex(1);
+            }
+        }
     }
 }
 

@@ -23,6 +23,20 @@ class SelectButtonsWidget(forms.Select):
         return attrs
 
 
+class SelectButtonsSideWidget(forms.Select):
+    """
+    Widget for select input as clickable buttons.
+    Displays on side of form.
+    """
+    def build_attrs(self, base_attrs, extra_attrs=None):
+        """
+        Set html attribute values.
+        """
+        attrs = super().build_attrs(base_attrs, extra_attrs=extra_attrs)
+        attrs.setdefault('class', 'form-widget-select-buttons-side')
+        return attrs
+
+
 class Select2Widget(forms.Select):
     """
     Widget for select2 "single selection" input.
