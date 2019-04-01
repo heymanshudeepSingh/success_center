@@ -106,7 +106,7 @@ class UserIntermediaryAdmin(admin.ModelAdmin):
 
     # Read only fields for admin detail view.
     readonly_fields = (
-        'date_created', 'date_modified',
+        'id', 'date_created', 'date_modified',
     )
 
     # Fieldset organization for admin detail view.
@@ -119,7 +119,7 @@ class UserIntermediaryAdmin(admin.ModelAdmin):
         }),
         ('Advanced', {
             'classes': ('collapse',),
-            'fields': ('date_created', 'date_modified',)
+            'fields': ('id', 'date_created', 'date_modified',)
         }),
     )
 
@@ -168,7 +168,7 @@ class ProfileAdmin(admin.ModelAdmin):
 
     # Read only fields for admin detail view.
     readonly_fields = (
-        'date_created', 'date_modified',
+        'id', 'date_created', 'date_modified',
     )
 
     # Fieldset organization for admin detail view.
@@ -181,7 +181,7 @@ class ProfileAdmin(admin.ModelAdmin):
         }),
         ('Advanced', {
             'classes': ('collapse', ),
-            'fields': ('date_created', 'date_modified', )
+            'fields': ('id', 'date_created', 'date_modified', )
         }),
     )
 
@@ -204,7 +204,7 @@ class AddressAdmin(admin.ModelAdmin):
 
     # Read only fields for admin detail view.
     readonly_fields = (
-        'date_created', 'date_modified',
+        'id', 'date_created', 'date_modified',
     )
 
     # Fieldset organization for admin detail view.
@@ -214,7 +214,7 @@ class AddressAdmin(admin.ModelAdmin):
         }),
         ('Advanced', {
             'classes': ('collapse', ),
-            'fields': ('date_created', 'date_modified', )
+            'fields': ('id', 'date_created', 'date_modified', )
         }),
     )
 
@@ -232,7 +232,7 @@ class PhoneNumberAdmin(admin.ModelAdmin):
 
     # Read only fields for admin detail view.
     readonly_fields = (
-        'date_created', 'date_modified',
+        'id', 'date_created', 'date_modified',
     )
 
     # Fieldset organization for admin detail view.
@@ -242,7 +242,7 @@ class PhoneNumberAdmin(admin.ModelAdmin):
         }),
         ('Advanced', {
             'classes': ('collapse', ),
-            'fields': ('date_created', 'date_modified', )
+            'fields': ('id', 'date_created', 'date_modified', )
         }),
     )
 
@@ -267,7 +267,7 @@ class SiteThemeAdmin(admin.ModelAdmin):
 
     # Read only fields for admin detail view.
     readonly_fields = (
-        'date_created', 'date_modified',
+        'id', 'date_created', 'date_modified',
     )
 
     # Fieldset organization for admin detail view.
@@ -277,7 +277,7 @@ class SiteThemeAdmin(admin.ModelAdmin):
         }),
         ('Advanced', {
             'classes': ('collapse', ),
-            'fields': ('date_created', 'date_modified', )
+            'fields': ('id', 'date_created', 'date_modified', )
         }),
     )
 
@@ -297,7 +297,7 @@ class DepartmentAdmin(admin.ModelAdmin):
     search_fields = ['name',]
 
     # Read only fields for admin detail view.
-    readonly_fields = ('date_created', 'date_modified')
+    readonly_fields = ('id', 'date_created', 'date_modified')
 
     # Organize fieldsets for admin detail view.
     fieldsets = (
@@ -306,7 +306,7 @@ class DepartmentAdmin(admin.ModelAdmin):
         }),
         ('Advanced', {
             'classes': ('collapse',),
-            'fields': ('slug', 'date_created', 'date_modified',),
+            'fields': ('id', 'slug', 'date_created', 'date_modified',),
         }),
     )
 
@@ -322,7 +322,7 @@ class RoomTypeAdmin(admin.ModelAdmin):
     search_fields = ['name',]
 
     # Read only fields for admin detail view.
-    readonly_fields = ('date_created', 'date_modified')
+    readonly_fields = ('id', 'date_created', 'date_modified')
 
     # Organize fieldsets for admin detail view.
     fieldsets = (
@@ -331,7 +331,7 @@ class RoomTypeAdmin(admin.ModelAdmin):
         }),
         ('Advanced', {
             'classes': ('collapse',),
-            'fields': ('slug', 'date_created', 'date_modified',),
+            'fields': ('id', 'slug', 'date_created', 'date_modified',),
         }),
     )
 
@@ -364,7 +364,7 @@ class RoomAdmin(admin.ModelAdmin):
     autocomplete_fields = ['department',]
 
     # Read only fields for admin detail view.
-    readonly_fields = ('date_created', 'date_modified')
+    readonly_fields = ('id', 'date_created', 'date_modified')
 
     # Organize fieldsets for admin detail view.
     fieldsets = (
@@ -375,7 +375,7 @@ class RoomAdmin(admin.ModelAdmin):
         }),
         ('Advanced', {
             'classes': ('collapse',),
-            'fields': ('slug', 'date_created', 'date_modified',),
+            'fields': ('id', 'slug', 'date_created', 'date_modified',),
         }),
     )
 
@@ -394,7 +394,7 @@ class MajorAdmin(admin.ModelAdmin):
     search_fields = ['department', 'code', 'name',]
 
     # Read only fields for admin detail view.
-    readonly_fields = ('date_created', 'date_modified')
+    readonly_fields = ('id', 'date_created', 'date_modified')
 
     # Organize fieldsets for admin detail view.
     fieldsets = (
@@ -405,7 +405,7 @@ class MajorAdmin(admin.ModelAdmin):
         }),
         ('Advanced', {
             'classes': ('collapse',),
-            'fields': ('slug', 'date_created', 'date_modified',),
+            'fields': ('id', 'slug', 'date_created', 'date_modified',),
         }),
     )
 
@@ -421,7 +421,7 @@ class SemesterDateAdmin(admin.ModelAdmin):
     search_fields = ['name', 'start_date', 'end_date',]
 
     # Read only fields for admin detail view.
-    readonly_fields = ('date_created', 'date_modified')
+    readonly_fields = ('id', 'date_created', 'date_modified')
 
     # Organize fieldsets for admin detail view.
     fieldsets = (
@@ -432,7 +432,7 @@ class SemesterDateAdmin(admin.ModelAdmin):
         }),
         ('Advanced', {
             'classes': ('collapse',),
-            'fields': ('date_created', 'date_modified',),
+            'fields': ('id', 'date_created', 'date_modified',),
         }),
     )
 
@@ -448,7 +448,7 @@ class WmuUserAdmin(admin.ModelAdmin):
     search_fields = ['bronco_net', 'winno', 'first_name', 'last_name',]
 
     # Read only fields for admin detail view.
-    readonly_fields = ('date_created', 'date_modified', 'official_email')
+    readonly_fields = ('id', 'date_created', 'date_modified', 'official_email')
 
     # Organize fieldsets for admin detail view.
     fieldsets = (
@@ -457,11 +457,11 @@ class WmuUserAdmin(admin.ModelAdmin):
                 'user_type', 'bronco_net', 'winno', 'first_name', 'last_name', 'major', 'department',
             )}),
         ('Contact Info', {
-            'fields': ('official_email', 'phone_number',)
+            'fields': ('official_email',)
         }),
         ('Advanced', {
             'classes': ('collapse',),
-            'fields': ('active', 'date_created', 'date_modified',),
+            'fields': ('id', 'active', 'date_created', 'date_modified',),
         }),
     )
 
@@ -481,7 +481,7 @@ class AssetAdmin(admin.ModelAdmin):
     search_fields = ['asset_tag', 'serial_number', 'mac_address', 'ip_address',]
 
     # Read only fields for admin detail view.
-    readonly_fields = ('date_created', 'date_modified')
+    readonly_fields = ('id', 'date_created', 'date_modified')
 
     # Organize fieldsets for admin detail view.
     fieldsets = (
@@ -493,7 +493,7 @@ class AssetAdmin(admin.ModelAdmin):
         }),
         ('Advanced', {
             'classes': ('collapse',),
-            'fields': ('date_created', 'date_modified',),
+            'fields': ('id', 'date_created', 'date_modified',),
         }),
     )
 
