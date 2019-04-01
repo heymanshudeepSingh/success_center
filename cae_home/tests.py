@@ -23,13 +23,14 @@ class UserIntermediaryModelTests(TestCase):
     """
     @classmethod
     def setUpTestData(cls):
-        cls.department = models.Department.objects.create(name='Test Department')
+        cls.department = models.Department.objects.create(name='Department', slug='department')
         cls.major = models.Major.objects.create(
             department=cls.department,
             code='Test Code',
             name='Test Name',
             undergrad=False,
             active=False,
+            slug='test-code'
         )
         cls.user_type = models.WmuUser.PROFESSOR
 
@@ -298,6 +299,7 @@ class SiteThemeModelTests(TestCase):
         self.test_theme = models.SiteTheme.objects.create(
             name='Test Theme',
             gold_logo=False,
+            slug='test-theme',
         )
 
     def test_model_creation(self):
@@ -321,7 +323,7 @@ class DepartmentModelTests(TestCase):
     Tests to ensure valid Department model creation/logic.
     """
     def setUp(self):
-        self.test_department = models.Department.objects.create(name='Test Department')
+        self.test_department = models.Department.objects.create(name='Test Department', slug='test-department')
 
     def test_model_creation(self):
         self.assertEqual(self.test_department.name, 'Test Department')
@@ -358,8 +360,8 @@ class RoomModelTests(TestCase):
     """
     @classmethod
     def setUpTestData(cls):
-        cls.room_type = models.RoomType.objects.create(name="Test Room Type", slug='test-room-type')
-        cls.department = models.Department.objects.create(name='Department')
+        cls.room_type = models.RoomType.objects.create(name="Room Type", slug='room-type')
+        cls.department = models.Department.objects.create(name='Department', slug='department')
 
     def setUp(self):
         self.test_room = models.Room.objects.create(
@@ -367,6 +369,7 @@ class RoomModelTests(TestCase):
             room_type=self.room_type,
             capacity=30,
             description='Test Room Description',
+            slug='test-room',
         )
         self.test_room.department.add(self.department)
         self.test_room.save()
@@ -396,7 +399,7 @@ class MajorTests(TestCase):
     """
     @classmethod
     def setUpTestData(cls):
-        cls.department = models.Department.objects.create(name='Department')
+        cls.department = models.Department.objects.create(name='Department', slug='department')
 
     def setUp(self):
         self.test_major = models.Major.objects.create(
@@ -405,6 +408,7 @@ class MajorTests(TestCase):
             name='Test Name',
             undergrad=False,
             active=False,
+            slug='test-code',
         )
 
     def test_model_creation(self):
@@ -498,13 +502,14 @@ class WmuUserTests(TestCase):
     """
     @classmethod
     def setUpTestData(cls):
-        cls.department = models.Department.objects.create(name='Test Department')
+        cls.department = models.Department.objects.create(name='Department', slug='department')
         cls.major = models.Major.objects.create(
             department=cls.department,
             code='Test Code',
             name='Test Name',
             undergrad=False,
             active=False,
+            slug='test-code'
         )
         cls.user_type = models.WmuUser.PROFESSOR
 
@@ -603,7 +608,7 @@ class HomeViewTests(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        cls.site_theme = models.SiteTheme.objects.create(name='wmu')
+        cls.site_theme = models.SiteTheme.objects.create(name='wmu', slug='wmu')
 
     def test_index(self):
         """
