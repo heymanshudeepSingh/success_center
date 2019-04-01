@@ -5,20 +5,21 @@ Seeder for "CAE Center" related Core Models.
 from django.core.exceptions import ValidationError
 from faker import Faker
 from random import randint
+from sys import stdout
 
 from cae_home import models
 
 
-def generate_model_seeds(model_count):
+def generate_model_seeds(style, model_count):
     """
     Calls individual seeder methods.
     """
-    # print('SEEDING CAE Model Group.')
-    # create_assets(model_count)
+    # stdout.write(style.HTTP_NOT_MODIFIED('SEEDING CAE Model Group.\n'))
+    # create_assets(style, model_count)
     pass
 
 
-def create_assets(model_count):
+def create_assets(style, model_count):
     """
     Create Asset models.
     """
@@ -69,6 +70,6 @@ def create_assets(model_count):
                 # If failed 3 times, give up model creation and move on to next model, to prevent infinite loops.
                 if fail_count > 2:
                     try_create_model = False
-                    print('Failed to generate asset seed instance.')
+                    stdout.write('Failed to generate asset seed instance.')
 
-    print('Populated asset models.')
+    stdout.write('Populated ' + style.SQL_FIELD('Asset') + ' models.\n')

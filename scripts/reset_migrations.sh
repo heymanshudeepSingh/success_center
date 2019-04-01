@@ -6,12 +6,20 @@
 set -e
 
 
+color_reset='\033[0m'
+color_green='\033[1;32m'
+color_blue='\033[1;34m'
+
+
 # Change to location of script's directory.
 # Otherwise logic is inconsistent, based on where terminal initially is.
 cd "$(dirname "$0")"
 
 
 function main () {
+    echo ""
+    echo -e "${color_blue}Resetting migrations... ${color_reset}"
+
     # Loop through all directories in 2nd and 4th levels.
     for dir in ../*/* ../*/*/*/*
     do
@@ -21,7 +29,7 @@ function main () {
             # Check if folder name ends in "migrations".
             if [[ $dir == *"migrations" ]]
             then
-                echo "Checking directory $dir"
+                echo "  Checking directory $dir"
                 # Loop through all files in folder.
                 for file in $dir/*
                 do
@@ -29,18 +37,17 @@ function main () {
                     if [[ $file == *"migrations/0"*".py" ]]
                     then
                         # Finally purge selected files.
-                        echo "Removing $file"
+                        echo "  Removing $file"
                         rm -f $file
                     fi
                 done
-                echo ""
             fi
         fi
     done
 
 
     echo ""
-    echo "Migrations have been purged."
+    echo -e "${color_green}Migrations have been purged.${color_reset}"
     echo ""
     echo "For all projects that have committed migrations, you can get them back with a 'git reset --hard'."
     echo "However, note that this command will also reset any uncommitted code."

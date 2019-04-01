@@ -6,74 +6,75 @@ from django.core.exceptions import ValidationError
 from django.core.management import call_command
 from faker import Faker
 from random import randint
+from sys import stdout
 
 from cae_home import models
 
 
-def generate_model_seeds(model_count):
+def generate_model_seeds(style, model_count):
     """
     Calls individual seeder methods.
     """
-    print('SEEDING WMU Model Group.')
-    create_room_types()
-    create_departments()
-    create_rooms()
-    create_majors()
-    create_semester_dates()
-    create_wmu_users(model_count)
+    stdout.write(style.HTTP_NOT_MODIFIED('SEEDING WMU Model Group.\n'))
+    create_room_types(style)
+    create_departments(style)
+    create_rooms(style)
+    create_majors(style)
+    create_semester_dates(style)
+    create_wmu_users(style, model_count)
 
 
-def create_room_types():
+def create_room_types(style):
     """
     Create Room Type models.
     """
     # Load preset fixtures. No need to create random models.
     call_command('loaddata', 'full_models/room_types')
 
-    print('Populated room type models.')
+    stdout.write('Populated ' + style.SQL_FIELD('Room Type') + ' models.\n')
 
 
-def create_departments():
+def create_departments(style):
     """
     Create Department models.
     """
     # Load preset fixtures. No need to create random models.
     call_command('loaddata', 'full_models/departments')
 
-    print('Populated department models.')
+    stdout.write('Populated ' + style.SQL_FIELD('Department') + ' models.\n')
 
 
-def create_rooms():
+def create_rooms(style):
     """
     Create Room models.
     """
     # Load preset fixtures. No need to create random models.
     call_command('loaddata', 'full_models/rooms')
 
-    print('Populated room models.')
+    stdout.write('Populated ' + style.SQL_FIELD('Room') + ' models.\n')
 
 
-def create_majors():
+def create_majors(style):
     """
     Create Major models.
     """
     # Load preset fixtures. No need to create random models.
     call_command('loaddata', 'full_models/majors')
 
-    print('Populated major models.')
+    stdout.write('Populated ' + style.SQL_FIELD('Major') + ' models.\n')
 
 
-def create_semester_dates():
+def create_semester_dates(style):
     """
     Create Semester Date models.
     """
     # Load preset fixtures. No need to create random models.
     call_command('loaddata', 'full_models/semester_dates')
 
-    print('Populated semester date models.')
+    stdout.write('Populated ' + style.SQL_FIELD('Semester Date') + ' models.\n')
 
 
-def create_wmu_users(model_count):
+def create_wmu_users(style, model_count):
     """
     Create WMU User models.
     """
@@ -144,6 +145,6 @@ def create_wmu_users(model_count):
                 # If failed 3 times, give up model creation and move on to next model, to prevent infinite loops.
                 if fail_count > 2:
                     try_create_model = False
-                    print('Failed to generate wmu user seed instance.')
+                    stdout.write('Failed to generate wmu user seed instance.')
 
-    print('Populated wmu user models.')
+    stdout.write('Populated ' + style.SQL_FIELD('Wmu User') + ' models.\n')

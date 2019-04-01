@@ -7,9 +7,35 @@
 set -e
 
 
+return_value=""
+color_reset='\033[0m'
+color_red='\033[1;31m'
+color_green='\033[1;32m'
+color_blue='\033[1;34m'
+color_cyan='\033[1;36m'
+
+
 # Change to location of script's directory.
 # Otherwise logic is inconsistent, based on where terminal initially is.
 cd "$(dirname "$0")"
+
+
+###
+ # Display passed prompt and get user input.
+ # Return true on "yes" or false otherwise.
+ ##
+function user_confirmation () {
+
+    echo -e "$1 ${color_cyan}[ Yes | No ]${color_reset}"
+    read user_input
+
+    if [[ "$user_input" = "yes" ]] || [[ "$user_input" = "y" ]] || [[ "$user_input" = "YES" ]] || [[ "$user_input" = "Y" ]]
+    then
+        return_value=true
+    else
+        return_value=false
+    fi
+}
 
 
 function main () {
@@ -27,24 +53,26 @@ function main () {
 
     # Recreate migrations.
     echo ""
-    echo "Creating migrations..."
+    echo ""
+    echo -e "${color_blue}Creating migrations...${color_reset}"
     python ../manage.py makemigrations
+    echo ""
     echo ""
     echo ""
 
     # Migrate.
-    echo "Migrating to database..."
+    echo -e "${color_blue}Migrating to database...${color_reset}"
     python ../manage.py migrate
+    echo ""
     echo ""
     echo ""
 
     # Create seeded data.
-    echo "Seeding data..."
+    echo -e "${color_blue}Seeding data...${color_reset}"
     python ../manage.py seed --traceback
     echo ""
 
-    echo ""
-    echo "Database reset and reseeded. Terminating script."
+    echo -e "${color_green}Database reset and reseeded. Terminating script.${color_reset}"
 }
 
 
@@ -53,13 +81,19 @@ if [[ $1 != "force" ]]
 then
     echo ""
     echo "Note: This will remove all migrations in CAE_Workspace, including ones in the apps subfolders."
+    echo "      It will also reset and reseed the database, removing any previously existing data."
     echo "      This script probably shouldn't be run in production environments."
     echo "      Only proceed if you know what you are doing."
     echo ""
-    read -p "Are you sure you want to DELETE AND RESET? (y/N) " -n 1 -r
-    if [[ $REPLY =~ ^[Yy]$ ]]; then # Only run if y is pressed.
-        echo "" # Move to newline
+
+    user_confirmation "Are you sure you want to DELETE AND RESET?"
+
+    if [[ "$return_value" == true ]]
+    then
+        echo ""
+        echo ""
         main
     fi
+
     exit
 fi

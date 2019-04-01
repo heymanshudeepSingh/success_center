@@ -8,33 +8,34 @@ from django.core.exceptions import ValidationError
 from django.core.management import call_command
 from faker import Faker
 from random import randint
+from sys import stdout
 
 from cae_home import models
 
 
-def generate_model_seeds(model_count):
+def generate_model_seeds(style, model_count):
     """
     Calls individual seeder methods.
     """
-    print('SEEDING User Model Group.')
-    create_site_themes()
-    create_groups()
-    create_users()
-    create_addresses(model_count)
-    create_phone_numbers(model_count)
+    stdout.write(style.HTTP_NOT_MODIFIED('SEEDING User Model Group.\n'))
+    create_site_themes(style)
+    create_groups(style)
+    create_users(style)
+    create_addresses(style, model_count)
+    create_phone_numbers(style, model_count)
 
 
-def create_site_themes():
+def create_site_themes(style):
     """
     Creates profile theme models.
     """
     # Load preset fixtures. No need to create random models.
     call_command('loaddata', 'full_models/site_themes')
 
-    print('Populated site theme models.')
+    stdout.write('Populated ' + style.SQL_FIELD('Site Theme') + ' models.\n')
 
 
-def create_groups():
+def create_groups(style):
     """
     Creates django "auth_group" models and allocates proper permissions.
     """
@@ -67,7 +68,7 @@ def create_groups():
             filtered_permissions.append(permission)
     group_array[6].permissions.set(filtered_permissions)
 
-    print('Populated group models.')
+    stdout.write('Populated ' + style.SQL_FIELD('Group') + ' models.\n')
 
 
 def create_permission_groups():
@@ -128,7 +129,7 @@ def get_cae_center_permissions():
     return app_permisson_list
 
 
-def create_users():
+def create_users(style):
     """
     Creates base user models.
     """
@@ -141,7 +142,7 @@ def create_users():
 
     create_permission_group_users(default_password=default_password)
 
-    print('Populated user models.')
+    stdout.write('Populated ' + style.SQL_FIELD('User') + ' models.\n')
 
 
 def create_permission_group_users(default_password='temppass2'):
@@ -197,7 +198,7 @@ def create_permission_group_users(default_password='temppass2'):
     return user_array
 
 
-def create_addresses(model_count):
+def create_addresses(style, model_count):
     """
     Creates address models.
     """
@@ -243,12 +244,12 @@ def create_addresses(model_count):
                 # If failed 3 times, give up model creation and move on to next model, to prevent infinite loops.
                 if fail_count > 2:
                     try_create_model = False
-                    print('Failed to generate address seed instance.')
+                    stdout.write('Failed to generate address seed instance.')
 
-    print('Populated address models.')
+    stdout.write('Populated ' + style.SQL_FIELD('Address') + ' models.\n')
 
 
-def create_phone_numbers(model_count):
+def create_phone_numbers(style, model_count):
     """
     Creates phone number models.
     """
@@ -284,6 +285,6 @@ def create_phone_numbers(model_count):
                 # If failed 3 times, give up model creation and move on to next model, to prevent infinite loops.
                 if fail_count > 2:
                     try_create_model = False
-                    print('Failed to generate phone number seed instance.')
+                    stdout.write('Failed to generate phone number seed instance.')
 
-    print('Populated phone number models.')
+    stdout.write('Populated ' + style.SQL_FIELD('Phone Number') + ' models.\n')
