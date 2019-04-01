@@ -5,6 +5,7 @@
     "fields": {
         "name": "wmu",
         "gold_logo": false,
+        "slug": "wmu",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -15,6 +16,7 @@
     "fields": {
         "name": "cae",
         "gold_logo": true,
+        "slug": "cae",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -25,6 +27,7 @@
     "fields": {
         "name": "bootstrap",
         "gold_logo": true,
+        "slug": "bootstrap",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -35,6 +38,7 @@
     "fields": {
         "name": "light",
         "gold_logo": true,
+        "slug": "light",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -45,6 +49,7 @@
     "fields": {
         "name": "dark",
         "gold_logo": true,
+        "slug": "dark",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }

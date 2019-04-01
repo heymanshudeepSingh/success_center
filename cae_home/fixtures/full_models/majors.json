@@ -8,6 +8,7 @@
         "name": "Undecided",
         "undergrad": true,
         "active": true,
+        "slug": "und",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -21,6 +22,7 @@
         "name": "Unknown (New or Prospective Student)",
         "undergrad": true,
         "active": true,
+        "slug": "unk",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -34,6 +36,7 @@
         "name": "Aeronautical Engineering",
         "undergrad": true,
         "active": true,
+        "slug": "aerj",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -47,6 +50,7 @@
         "name": "Computer Engineering",
         "undergrad": true,
         "active": true,
+        "slug": "cegj",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -60,6 +64,7 @@
         "name": "Construction Engineering",
         "undergrad": true,
         "active": true,
+        "slug": "cenj",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -73,6 +78,7 @@
         "name": "Chemical Engineering",
         "undergrad": true,
         "active": true,
+        "slug": "chgj",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -86,6 +92,7 @@
         "name": "Civil Engineering",
         "undergrad": true,
         "active": true,
+        "slug": "civj",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -99,6 +106,7 @@
         "name": "Computer Science - General",
         "undergrad": true,
         "active": true,
+        "slug": "csgj",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -112,6 +120,7 @@
         "name": "Computer Science Theory and Analysis",
         "undergrad": true,
         "active": true,
+        "slug": "cstj",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -125,6 +134,7 @@
         "name": "Engineering Design Technology",
         "undergrad": true,
         "active": true,
+        "slug": "edtj",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -138,6 +148,7 @@
         "name": "Electrical Engineering",
         "undergrad": true,
         "active": true,
+        "slug": "eenj",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -151,6 +162,7 @@
         "name": "Industrial Design",
         "undergrad": true,
         "active": true,
+        "slug": "idnj",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -164,6 +176,7 @@
         "name": "Industrial Engineering",
         "undergrad": true,
         "active": true,
+        "slug": "ienj",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -177,6 +190,7 @@
         "name": "Imaging/Graphic and Printing Science",
         "undergrad": true,
         "active": true,
+        "slug": "imgj",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -190,6 +204,7 @@
         "name": "Mechanical Engineering",
         "undergrad": true,
         "active": true,
+        "slug": "megj",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -203,6 +218,7 @@
         "name": "Manufacturing Engineering",
         "undergrad": true,
         "active": true,
+        "slug": "mfnj",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -216,6 +232,7 @@
         "name": "Paper Engineering",
         "undergrad": true,
         "active": true,
+        "slug": "penj",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -229,6 +246,7 @@
         "name": "Pre-Engineering Undecided",
         "undergrad": true,
         "active": true,
+        "slug": "prej",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -242,6 +260,7 @@
         "name": "Paper Science",
         "undergrad": true,
         "active": true,
+        "slug": "pscj",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -255,6 +274,7 @@
         "name": "Engineering Management Technology",
         "undergrad": true,
         "active": true,
+        "slug": "uemj",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }

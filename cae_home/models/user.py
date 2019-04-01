@@ -9,7 +9,6 @@ from django.core.management import call_command
 from django.core.validators import RegexValidator
 from django.conf import settings
 from django.db import models
-from django.db.models import F
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
@@ -67,8 +66,8 @@ class UserIntermediary(models.Model):
     date_modified = models.DateTimeField(auto_now=True)
 
     class Meta:
-        verbose_name = "User Intermediary"
-        verbose_name_plural = "User Intermediaries"
+        verbose_name = 'User Intermediary'
+        verbose_name_plural = 'User Intermediaries'
 
     def __str__(self):
         return '{0}'.format(self.bronco_net)
@@ -338,6 +337,11 @@ class SiteTheme(models.Model):
     gold_logo = models.BooleanField(default=True)
 
     # Self-setting/Non-user-editable fields.
+    slug = models.SlugField(
+        max_length=MAX_LENGTH,
+        unique=True,
+        help_text='Used for urls referencing this Site Theme.',
+    )
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
 

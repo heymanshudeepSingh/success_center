@@ -4,6 +4,7 @@
     "pk": 1,
     "fields": {
         "name": "NA/Unknown",
+        "slug": "na-unknown",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -13,6 +14,7 @@
     "pk": 2,
     "fields": {
         "name": "Advising",
+        "slug": "advising",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -22,6 +24,7 @@
     "pk": 3,
     "fields": {
         "name": "CAE Center",
+        "slug": "cae-center",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -31,6 +34,7 @@
     "pk": 4,
     "fields": {
         "name": "Chemical and Paper Engineering",
+        "slug": "chemical-and-paper",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -40,6 +44,7 @@
     "pk": 5,
     "fields": {
         "name": "Civil and Construction Engineering",
+        "slug": "civil-and-construction",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -49,6 +54,7 @@
     "pk": 6,
     "fields": {
         "name": "Computer Science",
+        "slug": "computer-science",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -58,6 +64,7 @@
     "pk": 7,
     "fields": {
         "name": "Dean's Office",
+        "slug": "deans-office",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -67,6 +74,7 @@
     "pk": 8,
     "fields": {
         "name": "Electrical and Computer Engineering",
+        "slug": "electrical-and-computer",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -76,6 +84,7 @@
     "pk": 9,
     "fields": {
         "name": "Engineering Design, Manufacturing, and Management Systems",
+        "slug": "engineering-design",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -85,6 +94,7 @@
     "pk": 10,
     "fields": {
         "name": "Industrial and Entrepreneurial Engineering and Engineering Management",
+        "slug": "industrial-and-entrepreneurial",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -94,6 +104,7 @@
     "pk": 11,
     "fields": {
         "name": "Mechanical and Aerospace Engineering",
+        "slug": "mechanical-and-aerospace",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -103,6 +114,7 @@
     "pk": 12,
     "fields": {
         "name": "Paper, Coating, and Printing Pilot Plant",
+        "slug": "paper-coating-and-printing",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -112,6 +124,7 @@
     "pk": 13,
     "fields": {
         "name": "Paper Technology Foundation",
+        "slug": "paper-technology",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -121,6 +134,7 @@
     "pk": 14,
     "fields": {
         "name": "Parkview Cafe",
+        "slug": "parkview-cafe",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }

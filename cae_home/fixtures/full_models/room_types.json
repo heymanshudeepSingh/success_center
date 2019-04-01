@@ -64,7 +64,7 @@
     "pk": 7,
     "fields": {
         "name": "Custodial/Maintenance",
-        "slug": "custodial/maintenance",
+        "slug": "custodial-maintenance",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }

@@ -10,6 +10,7 @@
         "name": "A-101",
         "description": "",
         "capacity": 0,
+        "slug": "a-101",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -25,6 +26,7 @@
         "name": "A-102",
         "description": "",
         "capacity": 0,
+        "slug": "a-102",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -40,6 +42,7 @@
         "name": "A-103",
         "description": "",
         "capacity": 0,
+        "slug": "a-103",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -55,6 +58,7 @@
         "name": "A-104",
         "description": "",
         "capacity": 0,
+        "slug": "a-104",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -70,6 +74,7 @@
         "name": "A-105",
         "description": "",
         "capacity": 0,
+        "slug": "a-105",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -85,6 +90,7 @@
         "name": "A-106",
         "description": "",
         "capacity": 0,
+        "slug": "a-106",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -100,6 +106,7 @@
         "name": "A-107",
         "description": "",
         "capacity": 0,
+        "slug": "a-107",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -115,6 +122,7 @@
         "name": "A-108",
         "description": "",
         "capacity": 0,
+        "slug": "a-108",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -130,6 +138,7 @@
         "name": "A-109",
         "description": "",
         "capacity": 0,
+        "slug": "a-109",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -145,6 +154,7 @@
         "name": "A-110",
         "description": "",
         "capacity": 0,
+        "slug": "a-110",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -160,6 +170,7 @@
         "name": "A-111",
         "description": "",
         "capacity": 0,
+        "slug": "a-111",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -175,6 +186,7 @@
         "name": "A-112",
         "description": "",
         "capacity": 0,
+        "slug": "a-112",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -190,6 +202,7 @@
         "name": "A-113",
         "description": "",
         "capacity": 0,
+        "slug": "a-113",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -205,6 +218,7 @@
         "name": "A-114",
         "description": "",
         "capacity": 0,
+        "slug": "a-114",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -220,6 +234,7 @@
         "name": "A-115",
         "description": "",
         "capacity": 0,
+        "slug": "a-115",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -235,6 +250,7 @@
         "name": "A-116",
         "description": "",
         "capacity": 0,
+        "slug": "a-116",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -250,6 +266,7 @@
         "name": "A-117",
         "description": "",
         "capacity": 0,
+        "slug": "a-117",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -265,6 +282,7 @@
         "name": "A-118",
         "description": "",
         "capacity": 0,
+        "slug": "a-118",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -280,6 +298,7 @@
         "name": "A-119",
         "description": "",
         "capacity": 0,
+        "slug": "a-119",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -295,6 +314,7 @@
         "name": "A-120",
         "description": "",
         "capacity": 0,
+        "slug": "a-120",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -310,6 +330,7 @@
         "name": "A-121",
         "description": "",
         "capacity": 0,
+        "slug": "a-121",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -325,6 +346,7 @@
         "name": "A-122",
         "description": "",
         "capacity": 0,
+        "slug": "a-122",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -340,6 +362,7 @@
         "name": "A-123",
         "description": "",
         "capacity": 0,
+        "slug": "a-123",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -355,6 +378,7 @@
         "name": "A-124",
         "description": "",
         "capacity": 0,
+        "slug": "a-124",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -370,6 +394,7 @@
         "name": "A-125",
         "description": "",
         "capacity": 0,
+        "slug": "a-125",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -385,6 +410,7 @@
         "name": "A-126",
         "description": "",
         "capacity": 0,
+        "slug": "a-126",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -400,6 +426,7 @@
         "name": "A-127",
         "description": "",
         "capacity": 0,
+        "slug": "a-127",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -415,6 +442,7 @@
         "name": "A-128",
         "description": "",
         "capacity": 0,
+        "slug": "a-128",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -430,6 +458,7 @@
         "name": "A-129",
         "description": "",
         "capacity": 0,
+        "slug": "a-129",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -445,6 +474,7 @@
         "name": "A-130",
         "description": "",
         "capacity": 0,
+        "slug": "a-130",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -460,6 +490,7 @@
         "name": "A-131",
         "description": "",
         "capacity": 0,
+        "slug": "a-131",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -475,6 +506,7 @@
         "name": "A-132",
         "description": "",
         "capacity": 0,
+        "slug": "a-132",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -490,6 +522,7 @@
         "name": "A-133",
         "description": "",
         "capacity": 0,
+        "slug": "a-133",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -505,6 +538,7 @@
         "name": "A-134",
         "description": "",
         "capacity": 0,
+        "slug": "a-134",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -520,6 +554,7 @@
         "name": "A-135",
         "description": "",
         "capacity": 0,
+        "slug": "a-135",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -535,6 +570,7 @@
         "name": "A-136",
         "description": "",
         "capacity": 0,
+        "slug": "a-136",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -550,6 +586,7 @@
         "name": "A-137",
         "description": "",
         "capacity": 0,
+        "slug": "a-137",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -565,6 +602,7 @@
         "name": "A-138",
         "description": "",
         "capacity": 0,
+        "slug": "a-138",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -580,6 +618,7 @@
         "name": "A-201",
         "description": "",
         "capacity": 0,
+        "slug": "a-201",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -595,6 +634,7 @@
         "name": "A-202",
         "description": "",
         "capacity": 0,
+        "slug": "a-202",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -610,6 +650,7 @@
         "name": "A-203",
         "description": "",
         "capacity": 0,
+        "slug": "a-203",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -625,6 +666,7 @@
         "name": "A-204",
         "description": "",
         "capacity": 0,
+        "slug": "a-204",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -640,6 +682,7 @@
         "name": "A-205",
         "description": "",
         "capacity": 0,
+        "slug": "a-205",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -655,6 +698,7 @@
         "name": "A-206",
         "description": "",
         "capacity": 0,
+        "slug": "a-206",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -670,6 +714,7 @@
         "name": "A-207",
         "description": "",
         "capacity": 0,
+        "slug": "a-207",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -685,6 +730,7 @@
         "name": "A-208",
         "description": "",
         "capacity": 0,
+        "slug": "a-208",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -700,6 +746,7 @@
         "name": "A-209",
         "description": "",
         "capacity": 0,
+        "slug": "a-209",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -715,6 +762,7 @@
         "name": "A-210",
         "description": "",
         "capacity": 0,
+        "slug": "a-210",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -730,6 +778,7 @@
         "name": "A-211",
         "description": "",
         "capacity": 0,
+        "slug": "a-211",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -745,6 +794,7 @@
         "name": "A-212",
         "description": "",
         "capacity": 0,
+        "slug": "a-212",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -760,6 +810,7 @@
         "name": "A-213",
         "description": "",
         "capacity": 0,
+        "slug": "a-213",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -775,6 +826,7 @@
         "name": "A-214",
         "description": "",
         "capacity": 0,
+        "slug": "a-214",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -790,6 +842,7 @@
         "name": "A-215",
         "description": "",
         "capacity": 0,
+        "slug": "a-215",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -805,6 +858,7 @@
         "name": "A-216",
         "description": "",
         "capacity": 0,
+        "slug": "a-216",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -820,6 +874,7 @@
         "name": "A-217",
         "description": "",
         "capacity": 0,
+        "slug": "a-217",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -835,6 +890,7 @@
         "name": "A-218",
         "description": "",
         "capacity": 0,
+        "slug": "a-218",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -850,6 +906,7 @@
         "name": "A-219",
         "description": "",
         "capacity": 0,
+        "slug": "a-219",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -865,6 +922,7 @@
         "name": "A-220",
         "description": "",
         "capacity": 0,
+        "slug": "a-220",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -880,6 +938,7 @@
         "name": "A-221",
         "description": "",
         "capacity": 0,
+        "slug": "a-221",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -895,6 +954,7 @@
         "name": "A-222",
         "description": "",
         "capacity": 0,
+        "slug": "a-222",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -910,6 +970,7 @@
         "name": "A-223",
         "description": "",
         "capacity": 0,
+        "slug": "a-223",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -925,6 +986,7 @@
         "name": "A-224",
         "description": "",
         "capacity": 0,
+        "slug": "a-224",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -940,6 +1002,7 @@
         "name": "A-225",
         "description": "",
         "capacity": 0,
+        "slug": "a-225",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -955,6 +1018,7 @@
         "name": "A-226",
         "description": "",
         "capacity": 0,
+        "slug": "a-226",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -970,6 +1034,7 @@
         "name": "A-227",
         "description": "",
         "capacity": 0,
+        "slug": "a-227",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -985,6 +1050,7 @@
         "name": "A-228",
         "description": "",
         "capacity": 0,
+        "slug": "a-228",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1000,6 +1066,7 @@
         "name": "A-229",
         "description": "",
         "capacity": 0,
+        "slug": "a-229",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1015,6 +1082,7 @@
         "name": "A-230",
         "description": "",
         "capacity": 0,
+        "slug": "a-230",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1030,6 +1098,7 @@
         "name": "A-231",
         "description": "",
         "capacity": 0,
+        "slug": "a-231",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1045,6 +1114,7 @@
         "name": "A-232",
         "description": "",
         "capacity": 0,
+        "slug": "a-232",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1060,6 +1130,7 @@
         "name": "A-233",
         "description": "",
         "capacity": 0,
+        "slug": "a-233",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1075,6 +1146,7 @@
         "name": "A-234",
         "description": "",
         "capacity": 0,
+        "slug": "a-234",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1090,6 +1162,7 @@
         "name": "A-235",
         "description": "",
         "capacity": 0,
+        "slug": "a-235",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1105,6 +1178,7 @@
         "name": "A-236",
         "description": "",
         "capacity": 0,
+        "slug": "a-236",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1120,6 +1194,7 @@
         "name": "A-237",
         "description": "",
         "capacity": 0,
+        "slug": "a-237",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1135,6 +1210,7 @@
         "name": "A-238",
         "description": "",
         "capacity": 0,
+        "slug": "a-238",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1150,6 +1226,7 @@
         "name": "A-239",
         "description": "",
         "capacity": 0,
+        "slug": "a-239",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1165,6 +1242,7 @@
         "name": "A-240",
         "description": "",
         "capacity": 0,
+        "slug": "a-240",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1180,6 +1258,7 @@
         "name": "A-241",
         "description": "",
         "capacity": 0,
+        "slug": "a-241",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1195,6 +1274,7 @@
         "name": "A-242",
         "description": "",
         "capacity": 0,
+        "slug": "a-242",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1210,6 +1290,7 @@
         "name": "A-243",
         "description": "",
         "capacity": 0,
+        "slug": "a-243",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1225,6 +1306,7 @@
         "name": "A-244",
         "description": "",
         "capacity": 0,
+        "slug": "a-244",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1240,6 +1322,7 @@
         "name": "A-245",
         "description": "",
         "capacity": 0,
+        "slug": "a-245",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1255,6 +1338,7 @@
         "name": "A-246",
         "description": "",
         "capacity": 0,
+        "slug": "a-246",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1270,6 +1354,7 @@
         "name": "A-247",
         "description": "",
         "capacity": 0,
+        "slug": "a-247",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1285,6 +1370,7 @@
         "name": "A-248",
         "description": "",
         "capacity": 0,
+        "slug": "a-248",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1300,6 +1386,7 @@
         "name": "A-249",
         "description": "",
         "capacity": 0,
+        "slug": "a-249",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1315,6 +1402,7 @@
         "name": "A-250",
         "description": "",
         "capacity": 0,
+        "slug": "a-250",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1330,6 +1418,7 @@
         "name": "A-251",
         "description": "",
         "capacity": 0,
+        "slug": "a-251",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1345,6 +1434,7 @@
         "name": "A-252",
         "description": "",
         "capacity": 0,
+        "slug": "a-252",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1360,6 +1450,7 @@
         "name": "A-253",
         "description": "",
         "capacity": 0,
+        "slug": "a-253",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1375,6 +1466,7 @@
         "name": "A-254",
         "description": "",
         "capacity": 0,
+        "slug": "a-254",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1390,6 +1482,7 @@
         "name": "A-255",
         "description": "",
         "capacity": 0,
+        "slug": "a-255",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1405,6 +1498,7 @@
         "name": "A-256",
         "description": "",
         "capacity": 0,
+        "slug": "a-256",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1420,6 +1514,7 @@
         "name": "A-257",
         "description": "",
         "capacity": 0,
+        "slug": "a-257",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1435,6 +1530,7 @@
         "name": "B-101",
         "description": "",
         "capacity": 0,
+        "slug": "b-101",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1450,6 +1546,7 @@
         "name": "B-102",
         "description": "",
         "capacity": 0,
+        "slug": "b-102",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1465,6 +1562,7 @@
         "name": "B-103",
         "description": "",
         "capacity": 0,
+        "slug": "b-103",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1480,6 +1578,7 @@
         "name": "B-104",
         "description": "",
         "capacity": 0,
+        "slug": "b-104",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1495,6 +1594,7 @@
         "name": "B-105",
         "description": "",
         "capacity": 0,
+        "slug": "b-105",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1510,6 +1610,7 @@
         "name": "B-106",
         "description": "",
         "capacity": 0,
+        "slug": "b-106",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1525,6 +1626,7 @@
         "name": "B-107",
         "description": "",
         "capacity": 0,
+        "slug": "b-107",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1540,6 +1642,7 @@
         "name": "B-108",
         "description": "",
         "capacity": 0,
+        "slug": "b-108",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1555,6 +1658,7 @@
         "name": "B-109",
         "description": "",
         "capacity": 0,
+        "slug": "b-109",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1570,6 +1674,7 @@
         "name": "B-110",
         "description": "",
         "capacity": 0,
+        "slug": "b-110",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1585,6 +1690,7 @@
         "name": "B-111",
         "description": "",
         "capacity": 0,
+        "slug": "b-111",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1600,6 +1706,7 @@
         "name": "B-112",
         "description": "",
         "capacity": 0,
+        "slug": "b-112",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1615,6 +1722,7 @@
         "name": "B-113",
         "description": "",
         "capacity": 0,
+        "slug": "b-113",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1630,6 +1738,7 @@
         "name": "B-114",
         "description": "",
         "capacity": 0,
+        "slug": "b-114",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1645,6 +1754,7 @@
         "name": "B-115",
         "description": "",
         "capacity": 0,
+        "slug": "b-115",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1660,6 +1770,7 @@
         "name": "B-116",
         "description": "",
         "capacity": 0,
+        "slug": "b-116",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1675,6 +1786,7 @@
         "name": "B-117",
         "description": "",
         "capacity": 0,
+        "slug": "b-117",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1690,6 +1802,7 @@
         "name": "B-118",
         "description": "",
         "capacity": 0,
+        "slug": "b-118",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1705,6 +1818,7 @@
         "name": "B-119",
         "description": "",
         "capacity": 0,
+        "slug": "b-119",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1720,6 +1834,7 @@
         "name": "B-120",
         "description": "",
         "capacity": 0,
+        "slug": "b-120",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1735,6 +1850,7 @@
         "name": "B-121",
         "description": "",
         "capacity": 0,
+        "slug": "b-121",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1750,6 +1866,7 @@
         "name": "B-122",
         "description": "",
         "capacity": 0,
+        "slug": "b-122",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1765,6 +1882,7 @@
         "name": "B-123",
         "description": "",
         "capacity": 0,
+        "slug": "b-123",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1780,6 +1898,7 @@
         "name": "B-124",
         "description": "",
         "capacity": 0,
+        "slug": "b-124",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1795,6 +1914,7 @@
         "name": "B-125",
         "description": "",
         "capacity": 0,
+        "slug": "b-125",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1810,6 +1930,7 @@
         "name": "B-126",
         "description": "",
         "capacity": 0,
+        "slug": "b-126",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1825,6 +1946,7 @@
         "name": "B-201",
         "description": "",
         "capacity": 0,
+        "slug": "b-201",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1840,6 +1962,7 @@
         "name": "B-202",
         "description": "",
         "capacity": 0,
+        "slug": "b-202",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1855,6 +1978,7 @@
         "name": "B-203",
         "description": "",
         "capacity": 0,
+        "slug": "b-203",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1870,6 +1994,7 @@
         "name": "B-204",
         "description": "",
         "capacity": 0,
+        "slug": "b-204",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1885,6 +2010,7 @@
         "name": "B-205",
         "description": "",
         "capacity": 0,
+        "slug": "b-205",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1900,6 +2026,7 @@
         "name": "B-206",
         "description": "",
         "capacity": 0,
+        "slug": "b-206",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1915,6 +2042,7 @@
         "name": "B-207",
         "description": "",
         "capacity": 0,
+        "slug": "b-207",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1930,6 +2058,7 @@
         "name": "B-208",
         "description": "",
         "capacity": 0,
+        "slug": "b-208",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1945,6 +2074,7 @@
         "name": "B-209",
         "description": "",
         "capacity": 0,
+        "slug": "b-209",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1960,6 +2090,7 @@
         "name": "B-210",
         "description": "",
         "capacity": 0,
+        "slug": "b-210",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1975,6 +2106,7 @@
         "name": "B-211",
         "description": "",
         "capacity": 0,
+        "slug": "b-211",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -1990,6 +2122,7 @@
         "name": "B-212",
         "description": "",
         "capacity": 0,
+        "slug": "b-212",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2005,6 +2138,7 @@
         "name": "B-213",
         "description": "",
         "capacity": 0,
+        "slug": "b-213",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2020,6 +2154,7 @@
         "name": "B-214",
         "description": "",
         "capacity": 0,
+        "slug": "b-214",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2035,6 +2170,7 @@
         "name": "B-215",
         "description": "",
         "capacity": 0,
+        "slug": "b-215",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2050,6 +2186,7 @@
         "name": "B-216",
         "description": "",
         "capacity": 0,
+        "slug": "b-216",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2065,6 +2202,7 @@
         "name": "B-217",
         "description": "",
         "capacity": 0,
+        "slug": "b-217",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2080,6 +2218,7 @@
         "name": "B-218",
         "description": "",
         "capacity": 0,
+        "slug": "b-218",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2095,6 +2234,7 @@
         "name": "B-219",
         "description": "",
         "capacity": 0,
+        "slug": "b-219",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2110,6 +2250,7 @@
         "name": "B-220",
         "description": "",
         "capacity": 0,
+        "slug": "b-220",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2125,6 +2266,7 @@
         "name": "B-221",
         "description": "",
         "capacity": 0,
+        "slug": "b-221",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2140,6 +2282,7 @@
         "name": "B-222",
         "description": "",
         "capacity": 0,
+        "slug": "b-222",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2155,6 +2298,7 @@
         "name": "B-223",
         "description": "",
         "capacity": 0,
+        "slug": "b-223",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2170,6 +2314,7 @@
         "name": "B-224",
         "description": "",
         "capacity": 0,
+        "slug": "b-224",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2185,6 +2330,7 @@
         "name": "B-225",
         "description": "",
         "capacity": 0,
+        "slug": "b-225",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2200,6 +2346,7 @@
         "name": "B-226",
         "description": "",
         "capacity": 0,
+        "slug": "b-226",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2215,6 +2362,7 @@
         "name": "B-227",
         "description": "",
         "capacity": 0,
+        "slug": "b-227",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2230,6 +2378,7 @@
         "name": "B-228",
         "description": "",
         "capacity": 0,
+        "slug": "b-228",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2245,6 +2394,7 @@
         "name": "B-229",
         "description": "",
         "capacity": 0,
+        "slug": "b-229",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2260,6 +2410,7 @@
         "name": "B-230",
         "description": "",
         "capacity": 0,
+        "slug": "b-230",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2275,6 +2426,7 @@
         "name": "B-231",
         "description": "",
         "capacity": 0,
+        "slug": "b-231",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2290,6 +2442,7 @@
         "name": "B-232",
         "description": "",
         "capacity": 0,
+        "slug": "b-232",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2305,6 +2458,7 @@
         "name": "B-233",
         "description": "",
         "capacity": 0,
+        "slug": "b-233",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2320,6 +2474,7 @@
         "name": "B-234",
         "description": "",
         "capacity": 0,
+        "slug": "b-234",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2335,6 +2490,7 @@
         "name": "B-235",
         "description": "",
         "capacity": 0,
+        "slug": "b-235",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2350,6 +2506,7 @@
         "name": "B-236",
         "description": "",
         "capacity": 0,
+        "slug": "b-236",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2365,6 +2522,7 @@
         "name": "B-237",
         "description": "",
         "capacity": 0,
+        "slug": "b-237",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2380,6 +2538,7 @@
         "name": "B-238",
         "description": "",
         "capacity": 0,
+        "slug": "b-238",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2395,6 +2554,7 @@
         "name": "B-239",
         "description": "",
         "capacity": 0,
+        "slug": "b-239",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2410,6 +2570,7 @@
         "name": "B-240",
         "description": "",
         "capacity": 0,
+        "slug": "b-240",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2425,6 +2586,7 @@
         "name": "B-241",
         "description": "",
         "capacity": 0,
+        "slug": "b-241",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2440,6 +2602,7 @@
         "name": "B-242",
         "description": "",
         "capacity": 0,
+        "slug": "b-242",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2455,6 +2618,7 @@
         "name": "B-243",
         "description": "",
         "capacity": 0,
+        "slug": "b-243",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2470,6 +2634,7 @@
         "name": "B-244",
         "description": "",
         "capacity": 0,
+        "slug": "b-244",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2485,6 +2650,7 @@
         "name": "B-245",
         "description": "",
         "capacity": 0,
+        "slug": "b-245",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2500,6 +2666,7 @@
         "name": "B-246",
         "description": "",
         "capacity": 0,
+        "slug": "b-246",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2515,6 +2682,7 @@
         "name": "B-247",
         "description": "",
         "capacity": 0,
+        "slug": "b-247",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2530,6 +2698,7 @@
         "name": "B-248",
         "description": "",
         "capacity": 0,
+        "slug": "b-248",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2545,6 +2714,7 @@
         "name": "B-249",
         "description": "",
         "capacity": 0,
+        "slug": "b-249",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2560,6 +2730,7 @@
         "name": "B-250",
         "description": "",
         "capacity": 0,
+        "slug": "b-250",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2575,6 +2746,7 @@
         "name": "B-251",
         "description": "",
         "capacity": 0,
+        "slug": "b-251",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2590,6 +2762,7 @@
         "name": "B-252",
         "description": "",
         "capacity": 0,
+        "slug": "b-252",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2605,6 +2778,7 @@
         "name": "B-253",
         "description": "",
         "capacity": 0,
+        "slug": "b-253",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2620,6 +2794,7 @@
         "name": "B-254",
         "description": "",
         "capacity": 0,
+        "slug": "b-254",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2635,6 +2810,7 @@
         "name": "B-255",
         "description": "",
         "capacity": 0,
+        "slug": "b-255",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2650,6 +2826,7 @@
         "name": "B-256",
         "description": "",
         "capacity": 0,
+        "slug": "b-256",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2665,6 +2842,7 @@
         "name": "B-257",
         "description": "",
         "capacity": 0,
+        "slug": "b-257",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2680,6 +2858,7 @@
         "name": "B-258",
         "description": "",
         "capacity": 0,
+        "slug": "b-258",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2695,6 +2874,7 @@
         "name": "B-259",
         "description": "",
         "capacity": 0,
+        "slug": "b-259",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2710,6 +2890,7 @@
         "name": "B-260",
         "description": "",
         "capacity": 0,
+        "slug": "b-260",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2725,6 +2906,7 @@
         "name": "B-261",
         "description": "",
         "capacity": 0,
+        "slug": "b-261",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2740,6 +2922,7 @@
         "name": "B-262",
         "description": "",
         "capacity": 0,
+        "slug": "b-262",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2755,6 +2938,7 @@
         "name": "B-263",
         "description": "",
         "capacity": 0,
+        "slug": "b-263",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2770,6 +2954,7 @@
         "name": "B-264",
         "description": "",
         "capacity": 0,
+        "slug": "b-264",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2785,6 +2970,7 @@
         "name": "B-265",
         "description": "",
         "capacity": 0,
+        "slug": "b-265",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2800,6 +2986,7 @@
         "name": "B-266",
         "description": "",
         "capacity": 0,
+        "slug": "b-266",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2815,6 +3002,7 @@
         "name": "B-267",
         "description": "",
         "capacity": 0,
+        "slug": "b-267",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2830,6 +3018,7 @@
         "name": "C-101",
         "description": "",
         "capacity": 0,
+        "slug": "c-101",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2845,6 +3034,7 @@
         "name": "C-102",
         "description": "",
         "capacity": 0,
+        "slug": "c-102",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2860,6 +3050,7 @@
         "name": "C-103",
         "description": "",
         "capacity": 0,
+        "slug": "c-103",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2875,6 +3066,7 @@
         "name": "C-104",
         "description": "",
         "capacity": 0,
+        "slug": "c-104",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2890,6 +3082,7 @@
         "name": "C-105",
         "description": "",
         "capacity": 0,
+        "slug": "c-105",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2905,6 +3098,7 @@
         "name": "C-106",
         "description": "",
         "capacity": 0,
+        "slug": "c-106",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2920,6 +3114,7 @@
         "name": "C-107",
         "description": "",
         "capacity": 0,
+        "slug": "c-107",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2935,6 +3130,7 @@
         "name": "C-108",
         "description": "",
         "capacity": 0,
+        "slug": "c-108",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2950,6 +3146,7 @@
         "name": "C-109",
         "description": "Vending",
         "capacity": 0,
+        "slug": "c-109",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2965,6 +3162,7 @@
         "name": "C-110",
         "description": "",
         "capacity": 0,
+        "slug": "c-110",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2980,6 +3178,7 @@
         "name": "C-111",
         "description": "",
         "capacity": 0,
+        "slug": "c-111",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -2995,6 +3194,7 @@
         "name": "C-112",
         "description": "",
         "capacity": 0,
+        "slug": "c-112",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3010,6 +3210,7 @@
         "name": "C-113",
         "description": "",
         "capacity": 0,
+        "slug": "c-113",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3025,6 +3226,7 @@
         "name": "C-114",
         "description": "",
         "capacity": 0,
+        "slug": "c-114",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3040,6 +3242,7 @@
         "name": "C-115",
         "description": "",
         "capacity": 0,
+        "slug": "c-115",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3055,6 +3258,7 @@
         "name": "C-116",
         "description": "",
         "capacity": 0,
+        "slug": "c-116",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3070,6 +3274,7 @@
         "name": "C-117",
         "description": "",
         "capacity": 0,
+        "slug": "c-117",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3085,6 +3290,7 @@
         "name": "C-118",
         "description": "",
         "capacity": 0,
+        "slug": "c-118",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3100,6 +3306,7 @@
         "name": "C-119",
         "description": "",
         "capacity": 0,
+        "slug": "c-119",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3115,6 +3322,7 @@
         "name": "C-120",
         "description": "",
         "capacity": 0,
+        "slug": "c-120",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3130,6 +3338,7 @@
         "name": "C-121",
         "description": "",
         "capacity": 0,
+        "slug": "c-121",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3145,6 +3354,7 @@
         "name": "C-122",
         "description": "",
         "capacity": 0,
+        "slug": "c-122",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3160,6 +3370,7 @@
         "name": "C-123",
         "description": "",
         "capacity": 0,
+        "slug": "c-123",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3175,6 +3386,7 @@
         "name": "C-124",
         "description": "",
         "capacity": 0,
+        "slug": "c-124",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3190,6 +3402,7 @@
         "name": "C-125",
         "description": "",
         "capacity": 0,
+        "slug": "c-125",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3205,6 +3418,7 @@
         "name": "C-126",
         "description": "",
         "capacity": 0,
+        "slug": "c-126",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3220,6 +3434,7 @@
         "name": "C-127",
         "description": "",
         "capacity": 0,
+        "slug": "c-127",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3235,6 +3450,7 @@
         "name": "C-128",
         "description": "Loading Docks",
         "capacity": 0,
+        "slug": "c-128",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3250,6 +3466,7 @@
         "name": "C-129",
         "description": "",
         "capacity": 0,
+        "slug": "c-129",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3265,6 +3482,7 @@
         "name": "C-130",
         "description": "",
         "capacity": 0,
+        "slug": "c-130",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3280,6 +3498,7 @@
         "name": "C-131",
         "description": "",
         "capacity": 0,
+        "slug": "c-131",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3295,6 +3514,7 @@
         "name": "C-132",
         "description": "",
         "capacity": 0,
+        "slug": "c-132",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3310,6 +3530,7 @@
         "name": "C-133",
         "description": "",
         "capacity": 0,
+        "slug": "c-133",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3325,6 +3546,7 @@
         "name": "C-134",
         "description": "",
         "capacity": 0,
+        "slug": "c-134",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3340,6 +3562,7 @@
         "name": "C-135",
         "description": "",
         "capacity": 0,
+        "slug": "c-135",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3355,6 +3578,7 @@
         "name": "C-136",
         "description": "",
         "capacity": 0,
+        "slug": "c-136",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3370,6 +3594,7 @@
         "name": "C-137",
         "description": "",
         "capacity": 0,
+        "slug": "c-137",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3385,6 +3610,7 @@
         "name": "C-138",
         "description": "",
         "capacity": 0,
+        "slug": "c-138",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3400,6 +3626,7 @@
         "name": "C-139",
         "description": "",
         "capacity": 0,
+        "slug": "c-139",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3415,6 +3642,7 @@
         "name": "C-140",
         "description": "",
         "capacity": 0,
+        "slug": "c-140",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3430,6 +3658,7 @@
         "name": "C-141",
         "description": "",
         "capacity": 0,
+        "slug": "c-141",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3445,6 +3674,7 @@
         "name": "C-142",
         "description": "Building Security Room",
         "capacity": 0,
+        "slug": "c-142",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3460,6 +3690,7 @@
         "name": "C-201",
         "description": "",
         "capacity": 0,
+        "slug": "c-201",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3475,6 +3706,7 @@
         "name": "C-202",
         "description": "",
         "capacity": 0,
+        "slug": "c-202",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3490,6 +3722,7 @@
         "name": "C-203",
         "description": "",
         "capacity": 0,
+        "slug": "c-203",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3505,6 +3738,7 @@
         "name": "C-204",
         "description": "",
         "capacity": 0,
+        "slug": "c-204",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3520,6 +3754,7 @@
         "name": "C-205",
         "description": "",
         "capacity": 0,
+        "slug": "c-205",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3535,6 +3770,7 @@
         "name": "C-206",
         "description": "",
         "capacity": 0,
+        "slug": "c-206",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3550,6 +3786,7 @@
         "name": "C-207",
         "description": "",
         "capacity": 0,
+        "slug": "c-207",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3565,6 +3802,7 @@
         "name": "C-208",
         "description": "",
         "capacity": 0,
+        "slug": "c-208",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3580,6 +3818,7 @@
         "name": "C-209",
         "description": "",
         "capacity": 0,
+        "slug": "c-209",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3595,6 +3834,7 @@
         "name": "C-210",
         "description": "",
         "capacity": 0,
+        "slug": "c-210",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3610,6 +3850,7 @@
         "name": "C-211",
         "description": "",
         "capacity": 0,
+        "slug": "c-211",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3625,6 +3866,7 @@
         "name": "C-211-1",
         "description": "Server Room",
         "capacity": 0,
+        "slug": "c-211-1",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3640,6 +3882,7 @@
         "name": "C-212",
         "description": "",
         "capacity": 0,
+        "slug": "c-212",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3655,6 +3898,7 @@
         "name": "C-213",
         "description": "Computation Fluid Dynamics",
         "capacity": 0,
+        "slug": "c-213",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3670,6 +3914,7 @@
         "name": "C-214",
         "description": "Server Room",
         "capacity": 0,
+        "slug": "c-214",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3685,6 +3930,7 @@
         "name": "C-215",
         "description": "",
         "capacity": 0,
+        "slug": "c-215",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3700,6 +3946,7 @@
         "name": "C-216",
         "description": "",
         "capacity": 0,
+        "slug": "c-216",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3715,6 +3962,7 @@
         "name": "C-217",
         "description": "",
         "capacity": 0,
+        "slug": "c-217",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3730,6 +3978,7 @@
         "name": "C-218",
         "description": "CS Department Technician Room",
         "capacity": 0,
+        "slug": "c-218",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3745,6 +3994,7 @@
         "name": "C-219",
         "description": "",
         "capacity": 0,
+        "slug": "c-219",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3760,6 +4010,7 @@
         "name": "C-220",
         "description": "",
         "capacity": 0,
+        "slug": "c-220",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3775,6 +4026,7 @@
         "name": "C-221",
         "description": "",
         "capacity": 0,
+        "slug": "c-221",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3790,6 +4042,7 @@
         "name": "C-222",
         "description": "",
         "capacity": 0,
+        "slug": "c-222",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3805,6 +4058,7 @@
         "name": "C-223",
         "description": "",
         "capacity": 0,
+        "slug": "c-223",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3820,6 +4074,7 @@
         "name": "C-224",
         "description": "",
         "capacity": 0,
+        "slug": "c-224",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3835,6 +4090,7 @@
         "name": "C-225",
         "description": "",
         "capacity": 0,
+        "slug": "c-225",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3850,6 +4106,7 @@
         "name": "C-225-1",
         "description": "",
         "capacity": 0,
+        "slug": "c-225-1",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3865,6 +4122,7 @@
         "name": "C-225-2",
         "description": "",
         "capacity": 0,
+        "slug": "c-225-2",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3880,6 +4138,7 @@
         "name": "C-226",
         "description": "",
         "capacity": 0,
+        "slug": "c-226",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3895,6 +4154,7 @@
         "name": "C-227",
         "description": "",
         "capacity": 0,
+        "slug": "c-227",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3910,6 +4170,7 @@
         "name": "C-228",
         "description": "",
         "capacity": 0,
+        "slug": "c-228",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3925,6 +4186,7 @@
         "name": "C-229",
         "description": "",
         "capacity": 0,
+        "slug": "c-229",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3940,6 +4202,7 @@
         "name": "C-230",
         "description": "",
         "capacity": 0,
+        "slug": "c-230",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3955,6 +4218,7 @@
         "name": "C-231",
         "description": "",
         "capacity": 0,
+        "slug": "c-231",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3970,6 +4234,7 @@
         "name": "C-232",
         "description": "",
         "capacity": 0,
+        "slug": "c-232",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -3985,6 +4250,7 @@
         "name": "C-233",
         "description": "",
         "capacity": 0,
+        "slug": "c-233",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4000,6 +4266,7 @@
         "name": "C-234",
         "description": "",
         "capacity": 0,
+        "slug": "c-234",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4015,6 +4282,7 @@
         "name": "C-235",
         "description": "",
         "capacity": 0,
+        "slug": "c-235",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4030,6 +4298,7 @@
         "name": "C-236",
         "description": "",
         "capacity": 0,
+        "slug": "c-236",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4045,6 +4314,7 @@
         "name": "C-237",
         "description": "",
         "capacity": 0,
+        "slug": "c-237",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4060,6 +4330,7 @@
         "name": "C-238",
         "description": "",
         "capacity": 0,
+        "slug": "c-238",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4075,6 +4346,7 @@
         "name": "C-239",
         "description": "",
         "capacity": 0,
+        "slug": "c-239",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4090,6 +4362,7 @@
         "name": "C-240",
         "description": "",
         "capacity": 0,
+        "slug": "c-240",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4105,6 +4378,7 @@
         "name": "C-241",
         "description": "",
         "capacity": 0,
+        "slug": "c-241",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4120,6 +4394,7 @@
         "name": "C-242",
         "description": "",
         "capacity": 0,
+        "slug": "c-242",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4135,6 +4410,7 @@
         "name": "C-243",
         "description": "",
         "capacity": 0,
+        "slug": "c-243",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4150,6 +4426,7 @@
         "name": "C-244",
         "description": "",
         "capacity": 0,
+        "slug": "c-244",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4165,6 +4442,7 @@
         "name": "C-245",
         "description": "",
         "capacity": 0,
+        "slug": "c-245",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4180,6 +4458,7 @@
         "name": "C-246",
         "description": "",
         "capacity": 0,
+        "slug": "c-246",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4195,6 +4474,7 @@
         "name": "C-247",
         "description": "",
         "capacity": 0,
+        "slug": "c-247",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4210,6 +4490,7 @@
         "name": "C-248",
         "description": "",
         "capacity": 0,
+        "slug": "c-248",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4225,6 +4506,7 @@
         "name": "C-249",
         "description": "",
         "capacity": 0,
+        "slug": "c-249",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4240,6 +4522,7 @@
         "name": "C-250",
         "description": "",
         "capacity": 0,
+        "slug": "c-250",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4255,6 +4538,7 @@
         "name": "C-251",
         "description": "",
         "capacity": 0,
+        "slug": "c-251",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4270,6 +4554,7 @@
         "name": "C-252",
         "description": "",
         "capacity": 0,
+        "slug": "c-252",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4285,6 +4570,7 @@
         "name": "C-253",
         "description": "",
         "capacity": 0,
+        "slug": "c-253",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4300,6 +4586,7 @@
         "name": "C-254",
         "description": "Copy Center",
         "capacity": 0,
+        "slug": "c-254",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4315,6 +4602,7 @@
         "name": "C-255",
         "description": "",
         "capacity": 0,
+        "slug": "c-255",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4330,6 +4618,7 @@
         "name": "C-256",
         "description": "",
         "capacity": 0,
+        "slug": "c-256",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4345,6 +4634,7 @@
         "name": "C-257",
         "description": "",
         "capacity": 0,
+        "slug": "c-257",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4360,6 +4650,7 @@
         "name": "C-258",
         "description": "Dean's Conference Room",
         "capacity": 0,
+        "slug": "c-258",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4375,6 +4666,7 @@
         "name": "C-259",
         "description": "",
         "capacity": 0,
+        "slug": "c-259",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4390,6 +4682,7 @@
         "name": "C-260",
         "description": "",
         "capacity": 0,
+        "slug": "c-260",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4405,6 +4698,7 @@
         "name": "D-101",
         "description": "",
         "capacity": 0,
+        "slug": "d-101",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4420,6 +4714,7 @@
         "name": "D-102",
         "description": "",
         "capacity": 0,
+        "slug": "d-102",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4435,6 +4730,7 @@
         "name": "D-102-1",
         "description": "Under-Staircase Room",
         "capacity": 0,
+        "slug": "d-102-1",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4450,6 +4746,7 @@
         "name": "D-102-2",
         "description": "Under-Staircase Room",
         "capacity": 0,
+        "slug": "d-102-2",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4465,6 +4762,7 @@
         "name": "D-103",
         "description": "",
         "capacity": 0,
+        "slug": "d-103",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4480,6 +4778,7 @@
         "name": "D-104",
         "description": "",
         "capacity": 0,
+        "slug": "d-104",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4495,6 +4794,7 @@
         "name": "D-105",
         "description": "",
         "capacity": 0,
+        "slug": "d-105",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4510,6 +4810,7 @@
         "name": "D-106",
         "description": "",
         "capacity": 0,
+        "slug": "d-106",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4525,6 +4826,7 @@
         "name": "D-107",
         "description": "",
         "capacity": 0,
+        "slug": "d-107",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4540,6 +4842,7 @@
         "name": "D-108",
         "description": "",
         "capacity": 0,
+        "slug": "d-108",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4555,6 +4858,7 @@
         "name": "D-109",
         "description": "",
         "capacity": 0,
+        "slug": "d-109",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4570,6 +4874,7 @@
         "name": "D-110",
         "description": "",
         "capacity": 0,
+        "slug": "d-110",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4585,6 +4890,7 @@
         "name": "D-111",
         "description": "",
         "capacity": 0,
+        "slug": "d-111",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4600,6 +4906,7 @@
         "name": "D-112",
         "description": "",
         "capacity": 0,
+        "slug": "d-112",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4615,6 +4922,7 @@
         "name": "D-113",
         "description": "",
         "capacity": 0,
+        "slug": "d-113",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4630,6 +4938,7 @@
         "name": "D-114",
         "description": "",
         "capacity": 0,
+        "slug": "d-114",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4645,6 +4954,7 @@
         "name": "D-115",
         "description": "",
         "capacity": 0,
+        "slug": "d-115",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4660,6 +4970,7 @@
         "name": "D-116",
         "description": "",
         "capacity": 0,
+        "slug": "d-116",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4675,6 +4986,7 @@
         "name": "D-117",
         "description": "",
         "capacity": 0,
+        "slug": "d-117",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4690,6 +5002,7 @@
         "name": "D-118",
         "description": "",
         "capacity": 0,
+        "slug": "d-118",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4705,6 +5018,7 @@
         "name": "D-119",
         "description": "Campus Kitchen/Cafe",
         "capacity": 0,
+        "slug": "d-119",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4720,6 +5034,7 @@
         "name": "D-120",
         "description": "Faculty Staff Lounge",
         "capacity": 0,
+        "slug": "d-120",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4735,6 +5050,7 @@
         "name": "D-121",
         "description": "",
         "capacity": 0,
+        "slug": "d-121",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4750,6 +5066,7 @@
         "name": "D-122",
         "description": "",
         "capacity": 0,
+        "slug": "d-122",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4765,6 +5082,7 @@
         "name": "D-123",
         "description": "",
         "capacity": 0,
+        "slug": "d-123",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4780,6 +5098,7 @@
         "name": "D-124",
         "description": "",
         "capacity": 0,
+        "slug": "d-124",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4795,6 +5114,7 @@
         "name": "D-125",
         "description": "",
         "capacity": 0,
+        "slug": "d-125",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4810,6 +5130,7 @@
         "name": "D-126",
         "description": "",
         "capacity": 0,
+        "slug": "d-126",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4825,6 +5146,7 @@
         "name": "D-127",
         "description": "",
         "capacity": 0,
+        "slug": "d-127",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4840,6 +5162,7 @@
         "name": "D-128",
         "description": "",
         "capacity": 0,
+        "slug": "d-128",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4855,6 +5178,7 @@
         "name": "D-129",
         "description": "",
         "capacity": 0,
+        "slug": "d-129",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4870,6 +5194,7 @@
         "name": "D-130",
         "description": "",
         "capacity": 0,
+        "slug": "d-130",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4885,6 +5210,7 @@
         "name": "D-131",
         "description": "",
         "capacity": 0,
+        "slug": "d-131",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4900,6 +5226,7 @@
         "name": "D-132",
         "description": "",
         "capacity": 0,
+        "slug": "d-132",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4915,6 +5242,7 @@
         "name": "D-201",
         "description": "",
         "capacity": 0,
+        "slug": "d-201",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4930,6 +5258,7 @@
         "name": "D-202",
         "description": "",
         "capacity": 0,
+        "slug": "d-202",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4945,6 +5274,7 @@
         "name": "D-203",
         "description": "",
         "capacity": 0,
+        "slug": "d-203",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4960,6 +5290,7 @@
         "name": "D-204",
         "description": "",
         "capacity": 0,
+        "slug": "d-204",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4975,6 +5306,7 @@
         "name": "D-205",
         "description": "",
         "capacity": 0,
+        "slug": "d-205",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -4990,6 +5322,7 @@
         "name": "D-206",
         "description": "",
         "capacity": 0,
+        "slug": "d-206",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5005,6 +5338,7 @@
         "name": "D-207",
         "description": "",
         "capacity": 0,
+        "slug": "d-207",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5020,6 +5354,7 @@
         "name": "D-208",
         "description": "",
         "capacity": 0,
+        "slug": "d-208",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5035,6 +5370,7 @@
         "name": "D-209",
         "description": "",
         "capacity": 0,
+        "slug": "d-209",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5050,6 +5386,7 @@
         "name": "D-210",
         "description": "",
         "capacity": 0,
+        "slug": "d-210",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5065,6 +5402,7 @@
         "name": "D-211",
         "description": "",
         "capacity": 0,
+        "slug": "d-211",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5080,6 +5418,7 @@
         "name": "D-212",
         "description": "",
         "capacity": 0,
+        "slug": "d-212",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5095,6 +5434,7 @@
         "name": "D-213",
         "description": "",
         "capacity": 0,
+        "slug": "d-213",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5110,6 +5450,7 @@
         "name": "D-214",
         "description": "",
         "capacity": 0,
+        "slug": "d-214",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5125,6 +5466,7 @@
         "name": "D-215",
         "description": "",
         "capacity": 0,
+        "slug": "d-215",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5140,6 +5482,7 @@
         "name": "D-216",
         "description": "",
         "capacity": 0,
+        "slug": "d-216",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5155,6 +5498,7 @@
         "name": "D-217",
         "description": "",
         "capacity": 0,
+        "slug": "d-217",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5170,6 +5514,7 @@
         "name": "D-218",
         "description": "",
         "capacity": 0,
+        "slug": "d-218",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5185,6 +5530,7 @@
         "name": "D-219",
         "description": "",
         "capacity": 0,
+        "slug": "d-219",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5200,6 +5546,7 @@
         "name": "D-220",
         "description": "",
         "capacity": 0,
+        "slug": "d-220",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5215,6 +5562,7 @@
         "name": "D-221",
         "description": "",
         "capacity": 0,
+        "slug": "d-221",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5230,6 +5578,7 @@
         "name": "D-222",
         "description": "",
         "capacity": 0,
+        "slug": "d-222",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5245,6 +5594,7 @@
         "name": "D-223",
         "description": "",
         "capacity": 0,
+        "slug": "d-223",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5260,6 +5610,7 @@
         "name": "D-224",
         "description": "",
         "capacity": 0,
+        "slug": "d-224",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5275,6 +5626,7 @@
         "name": "D-225",
         "description": "",
         "capacity": 0,
+        "slug": "d-225",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5290,6 +5642,7 @@
         "name": "D-226",
         "description": "Cae Storage Room",
         "capacity": 0,
+        "slug": "d-226",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5305,6 +5658,7 @@
         "name": "E-101",
         "description": "",
         "capacity": 0,
+        "slug": "e-101",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5320,6 +5674,7 @@
         "name": "E-102",
         "description": "",
         "capacity": 0,
+        "slug": "e-102",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5335,6 +5690,7 @@
         "name": "E-103",
         "description": "",
         "capacity": 0,
+        "slug": "e-103",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5350,6 +5706,7 @@
         "name": "E-104",
         "description": "",
         "capacity": 0,
+        "slug": "e-104",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5365,6 +5722,7 @@
         "name": "E-105",
         "description": "",
         "capacity": 0,
+        "slug": "e-105",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5380,6 +5738,7 @@
         "name": "E-106",
         "description": "",
         "capacity": 0,
+        "slug": "e-106",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5395,6 +5754,7 @@
         "name": "E-107",
         "description": "",
         "capacity": 0,
+        "slug": "e-107",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5410,6 +5770,7 @@
         "name": "E-108",
         "description": "",
         "capacity": 0,
+        "slug": "e-108",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5425,6 +5786,7 @@
         "name": "E-109",
         "description": "",
         "capacity": 0,
+        "slug": "e-109",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5440,6 +5802,7 @@
         "name": "E-110",
         "description": "",
         "capacity": 0,
+        "slug": "e-110",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5455,6 +5818,7 @@
         "name": "E-111",
         "description": "",
         "capacity": 0,
+        "slug": "e-111",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5470,6 +5834,7 @@
         "name": "E-112",
         "description": "",
         "capacity": 0,
+        "slug": "e-112",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5485,6 +5850,7 @@
         "name": "E-113",
         "description": "",
         "capacity": 0,
+        "slug": "e-113",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5500,6 +5866,7 @@
         "name": "E-114",
         "description": "",
         "capacity": 0,
+        "slug": "e-114",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5515,6 +5882,7 @@
         "name": "E-115",
         "description": "",
         "capacity": 0,
+        "slug": "e-115",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5531,6 +5899,7 @@
         "name": "E-116",
         "description": "",
         "capacity": 0,
+        "slug": "e-116",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5547,6 +5916,7 @@
         "name": "E-117",
         "description": "",
         "capacity": 0,
+        "slug": "e-117",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5562,6 +5932,7 @@
         "name": "E-118",
         "description": "",
         "capacity": 0,
+        "slug": "e-118",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5577,6 +5948,7 @@
         "name": "E-119",
         "description": "",
         "capacity": 0,
+        "slug": "e-119",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5592,6 +5964,7 @@
         "name": "E-120",
         "description": "",
         "capacity": 0,
+        "slug": "e-120",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5607,6 +5980,7 @@
         "name": "E-121",
         "description": "",
         "capacity": 0,
+        "slug": "e-121",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5622,6 +5996,7 @@
         "name": "E-122",
         "description": "",
         "capacity": 0,
+        "slug": "e-122",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5637,6 +6012,7 @@
         "name": "E-123",
         "description": "",
         "capacity": 0,
+        "slug": "e-123",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5652,6 +6028,7 @@
         "name": "E-124",
         "description": "",
         "capacity": 0,
+        "slug": "e-124",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5667,6 +6044,7 @@
         "name": "E-125",
         "description": "",
         "capacity": 0,
+        "slug": "e-125",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5682,6 +6060,7 @@
         "name": "E-126",
         "description": "",
         "capacity": 0,
+        "slug": "e-126",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5697,6 +6076,7 @@
         "name": "E-127",
         "description": "",
         "capacity": 0,
+        "slug": "e-127",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5712,6 +6092,7 @@
         "name": "E-128",
         "description": "",
         "capacity": 0,
+        "slug": "e-128",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5727,6 +6108,7 @@
         "name": "E-129",
         "description": "",
         "capacity": 0,
+        "slug": "e-129",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5742,6 +6124,7 @@
         "name": "E-130",
         "description": "",
         "capacity": 0,
+        "slug": "e-130",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5757,6 +6140,7 @@
         "name": "E-131",
         "description": "",
         "capacity": 0,
+        "slug": "e-131",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5772,6 +6156,7 @@
         "name": "E-132",
         "description": "",
         "capacity": 0,
+        "slug": "e-132",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5787,6 +6172,7 @@
         "name": "E-133",
         "description": "",
         "capacity": 0,
+        "slug": "e-133",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5802,6 +6188,7 @@
         "name": "E-134",
         "description": "",
         "capacity": 0,
+        "slug": "e-134",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5817,6 +6204,7 @@
         "name": "E-201",
         "description": "",
         "capacity": 0,
+        "slug": "e-201",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5832,6 +6220,7 @@
         "name": "E-202",
         "description": "",
         "capacity": 0,
+        "slug": "e-202",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5847,6 +6236,7 @@
         "name": "E-203",
         "description": "",
         "capacity": 0,
+        "slug": "e-203",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5862,6 +6252,7 @@
         "name": "E-204",
         "description": "",
         "capacity": 0,
+        "slug": "e-204",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5877,6 +6268,7 @@
         "name": "E-205",
         "description": "",
         "capacity": 0,
+        "slug": "e-205",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5892,6 +6284,7 @@
         "name": "E-206",
         "description": "",
         "capacity": 0,
+        "slug": "e-206",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5907,6 +6300,7 @@
         "name": "E-207",
         "description": "",
         "capacity": 0,
+        "slug": "e-207",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5922,6 +6316,7 @@
         "name": "E-208",
         "description": "",
         "capacity": 0,
+        "slug": "e-208",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5937,6 +6332,7 @@
         "name": "E-209",
         "description": "",
         "capacity": 0,
+        "slug": "e-209",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5952,6 +6348,7 @@
         "name": "E-210",
         "description": "",
         "capacity": 0,
+        "slug": "e-210",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5967,6 +6364,7 @@
         "name": "E-211",
         "description": "",
         "capacity": 0,
+        "slug": "e-211",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5982,6 +6380,7 @@
         "name": "E-212",
         "description": "",
         "capacity": 0,
+        "slug": "e-212",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -5997,6 +6396,7 @@
         "name": "E-213",
         "description": "",
         "capacity": 0,
+        "slug": "e-213",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6013,6 +6413,7 @@
         "name": "E-214",
         "description": "",
         "capacity": 0,
+        "slug": "e-214",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6028,6 +6429,7 @@
         "name": "E-215",
         "description": "",
         "capacity": 0,
+        "slug": "e-215",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6043,6 +6445,7 @@
         "name": "E-216",
         "description": "",
         "capacity": 0,
+        "slug": "e-216",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6058,6 +6461,7 @@
         "name": "E-217",
         "description": "",
         "capacity": 0,
+        "slug": "e-217",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6073,6 +6477,7 @@
         "name": "E-218",
         "description": "",
         "capacity": 0,
+        "slug": "e-218",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6088,6 +6493,7 @@
         "name": "E-219",
         "description": "",
         "capacity": 0,
+        "slug": "e-219",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6103,6 +6509,7 @@
         "name": "E-220",
         "description": "",
         "capacity": 0,
+        "slug": "e-220",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6118,6 +6525,7 @@
         "name": "E-221",
         "description": "",
         "capacity": 0,
+        "slug": "e-221",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6133,6 +6541,7 @@
         "name": "E-222",
         "description": "",
         "capacity": 0,
+        "slug": "e-222",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6148,6 +6557,7 @@
         "name": "E-223",
         "description": "",
         "capacity": 0,
+        "slug": "e-223",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6163,6 +6573,7 @@
         "name": "E-224",
         "description": "",
         "capacity": 0,
+        "slug": "e-224",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6178,6 +6589,7 @@
         "name": "E-225",
         "description": "",
         "capacity": 0,
+        "slug": "e-225",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6193,6 +6605,7 @@
         "name": "E-226",
         "description": "",
         "capacity": 0,
+        "slug": "e-226",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6208,6 +6621,7 @@
         "name": "E-227",
         "description": "",
         "capacity": 0,
+        "slug": "e-227",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6223,6 +6637,7 @@
         "name": "E-228",
         "description": "",
         "capacity": 0,
+        "slug": "e-228",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6238,6 +6653,7 @@
         "name": "E-229",
         "description": "",
         "capacity": 0,
+        "slug": "e-229",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6253,6 +6669,7 @@
         "name": "E-230",
         "description": "",
         "capacity": 0,
+        "slug": "e-230",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6268,6 +6685,7 @@
         "name": "E-231",
         "description": "",
         "capacity": 0,
+        "slug": "e-231",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6283,6 +6701,7 @@
         "name": "E-232",
         "description": "",
         "capacity": 0,
+        "slug": "e-232",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6298,6 +6717,7 @@
         "name": "E-233",
         "description": "",
         "capacity": 0,
+        "slug": "e-233",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6313,6 +6733,7 @@
         "name": "E-234",
         "description": "",
         "capacity": 0,
+        "slug": "e-234",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6328,6 +6749,7 @@
         "name": "E-235",
         "description": "",
         "capacity": 0,
+        "slug": "e-235",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6343,6 +6765,7 @@
         "name": "E-236",
         "description": "",
         "capacity": 0,
+        "slug": "e-236",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6358,6 +6781,7 @@
         "name": "E-237",
         "description": "",
         "capacity": 0,
+        "slug": "e-237",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6373,6 +6797,7 @@
         "name": "E-238",
         "description": "",
         "capacity": 0,
+        "slug": "e-238",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6388,6 +6813,7 @@
         "name": "E-239",
         "description": "",
         "capacity": 0,
+        "slug": "e-239",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6403,6 +6829,7 @@
         "name": "E-240",
         "description": "",
         "capacity": 0,
+        "slug": "e-240",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6418,6 +6845,7 @@
         "name": "E-241",
         "description": "",
         "capacity": 0,
+        "slug": "e-241",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6433,6 +6861,7 @@
         "name": "E-242",
         "description": "",
         "capacity": 0,
+        "slug": "e-242",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6448,6 +6877,7 @@
         "name": "F-101",
         "description": "",
         "capacity": 0,
+        "slug": "f-101",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6463,6 +6893,7 @@
         "name": "F-102",
         "description": "",
         "capacity": 0,
+        "slug": "f-102",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6478,6 +6909,7 @@
         "name": "F-103",
         "description": "",
         "capacity": 0,
+        "slug": "f-103",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6493,6 +6925,7 @@
         "name": "F-104",
         "description": "",
         "capacity": 0,
+        "slug": "f-104",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6508,6 +6941,7 @@
         "name": "F-105",
         "description": "",
         "capacity": 0,
+        "slug": "f-105",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6523,6 +6957,7 @@
         "name": "F-106",
         "description": "",
         "capacity": 0,
+        "slug": "f-106",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6538,6 +6973,7 @@
         "name": "F-107",
         "description": "",
         "capacity": 0,
+        "slug": "f-107",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6553,6 +6989,7 @@
         "name": "F-108",
         "description": "",
         "capacity": 0,
+        "slug": "f-108",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6568,6 +7005,7 @@
         "name": "F-109",
         "description": "",
         "capacity": 0,
+        "slug": "f-109",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6583,6 +7021,7 @@
         "name": "F-110",
         "description": "",
         "capacity": 0,
+        "slug": "f-110",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6598,6 +7037,7 @@
         "name": "F-111",
         "description": "",
         "capacity": 0,
+        "slug": "f-111",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6613,6 +7053,7 @@
         "name": "F-112",
         "description": "",
         "capacity": 0,
+        "slug": "f-112",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6628,6 +7069,7 @@
         "name": "F-113",
         "description": "",
         "capacity": 0,
+        "slug": "f-113",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6643,6 +7085,7 @@
         "name": "F-114",
         "description": "",
         "capacity": 0,
+        "slug": "f-114",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6658,6 +7101,7 @@
         "name": "F-115",
         "description": "",
         "capacity": 0,
+        "slug": "f-115",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6673,6 +7117,7 @@
         "name": "F-116",
         "description": "",
         "capacity": 0,
+        "slug": "f-116",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6688,6 +7133,7 @@
         "name": "F-117",
         "description": "",
         "capacity": 0,
+        "slug": "f-117",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6703,6 +7149,7 @@
         "name": "F-118",
         "description": "",
         "capacity": 0,
+        "slug": "f-118",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6718,6 +7165,7 @@
         "name": "F-119",
         "description": "",
         "capacity": 0,
+        "slug": "f-119",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6733,6 +7181,7 @@
         "name": "F-120",
         "description": "",
         "capacity": 0,
+        "slug": "f-120",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6748,6 +7197,7 @@
         "name": "F-121",
         "description": "",
         "capacity": 0,
+        "slug": "f-121",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6763,6 +7213,7 @@
         "name": "F-122",
         "description": "",
         "capacity": 0,
+        "slug": "f-122",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6778,6 +7229,7 @@
         "name": "F-123",
         "description": "",
         "capacity": 0,
+        "slug": "f-123",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6793,6 +7245,7 @@
         "name": "F-124",
         "description": "",
         "capacity": 0,
+        "slug": "f-124",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6808,6 +7261,7 @@
         "name": "F-201",
         "description": "",
         "capacity": 0,
+        "slug": "f-201",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6823,6 +7277,7 @@
         "name": "F-202",
         "description": "",
         "capacity": 0,
+        "slug": "f-202",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6838,6 +7293,7 @@
         "name": "F-203",
         "description": "",
         "capacity": 0,
+        "slug": "f-203",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6853,6 +7309,7 @@
         "name": "F-204",
         "description": "",
         "capacity": 0,
+        "slug": "f-204",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6868,6 +7325,7 @@
         "name": "F-205",
         "description": "",
         "capacity": 0,
+        "slug": "f-205",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6883,6 +7341,7 @@
         "name": "F-206",
         "description": "",
         "capacity": 0,
+        "slug": "f-206",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6898,6 +7357,7 @@
         "name": "F-207",
         "description": "",
         "capacity": 0,
+        "slug": "f-207",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6913,6 +7373,7 @@
         "name": "F-208",
         "description": "",
         "capacity": 0,
+        "slug": "f-208",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6928,6 +7389,7 @@
         "name": "F-209",
         "description": "",
         "capacity": 0,
+        "slug": "f-209",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6943,6 +7405,7 @@
         "name": "F-210",
         "description": "",
         "capacity": 0,
+        "slug": "f-210",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6958,6 +7421,7 @@
         "name": "F-211",
         "description": "",
         "capacity": 0,
+        "slug": "f-211",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6973,6 +7437,7 @@
         "name": "F-212",
         "description": "",
         "capacity": 0,
+        "slug": "f-212",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -6988,6 +7453,7 @@
         "name": "F-213",
         "description": "",
         "capacity": 0,
+        "slug": "f-213",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7003,6 +7469,7 @@
         "name": "F-214",
         "description": "",
         "capacity": 0,
+        "slug": "f-214",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7018,6 +7485,7 @@
         "name": "F-215",
         "description": "",
         "capacity": 0,
+        "slug": "f-215",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7033,6 +7501,7 @@
         "name": "F-216",
         "description": "",
         "capacity": 0,
+        "slug": "f-216",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7048,6 +7517,7 @@
         "name": "F-217",
         "description": "",
         "capacity": 0,
+        "slug": "f-217",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7063,6 +7533,7 @@
         "name": "F-218",
         "description": "",
         "capacity": 0,
+        "slug": "f-218",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7078,6 +7549,7 @@
         "name": "F-219",
         "description": "",
         "capacity": 0,
+        "slug": "f-219",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7093,6 +7565,7 @@
         "name": "F-220",
         "description": "",
         "capacity": 0,
+        "slug": "f-220",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7108,6 +7581,7 @@
         "name": "F-221",
         "description": "",
         "capacity": 0,
+        "slug": "f-221",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7123,6 +7597,7 @@
         "name": "F-222",
         "description": "",
         "capacity": 0,
+        "slug": "f-222",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7138,6 +7613,7 @@
         "name": "F-223",
         "description": "",
         "capacity": 0,
+        "slug": "f-223",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7153,6 +7629,7 @@
         "name": "F-224",
         "description": "",
         "capacity": 0,
+        "slug": "f-224",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7168,6 +7645,7 @@
         "name": "F-225",
         "description": "",
         "capacity": 0,
+        "slug": "f-225",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7183,6 +7661,7 @@
         "name": "F-226",
         "description": "",
         "capacity": 0,
+        "slug": "f-226",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7198,6 +7677,7 @@
         "name": "F-227",
         "description": "",
         "capacity": 0,
+        "slug": "f-227",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7213,6 +7693,7 @@
         "name": "F-228",
         "description": "",
         "capacity": 0,
+        "slug": "f-228",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7228,6 +7709,7 @@
         "name": "F-229",
         "description": "",
         "capacity": 0,
+        "slug": "f-229",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7243,6 +7725,7 @@
         "name": "F-230",
         "description": "",
         "capacity": 0,
+        "slug": "f-230",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7258,6 +7741,7 @@
         "name": "F-231",
         "description": "",
         "capacity": 0,
+        "slug": "f-231",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7274,6 +7758,7 @@
         "name": "F-232",
         "description": "",
         "capacity": 0,
+        "slug": "f-232",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7289,6 +7774,7 @@
         "name": "F-233",
         "description": "",
         "capacity": 0,
+        "slug": "f-233",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7304,6 +7790,7 @@
         "name": "F-234",
         "description": "",
         "capacity": 0,
+        "slug": "f-234",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7319,6 +7806,7 @@
         "name": "F-235",
         "description": "",
         "capacity": 0,
+        "slug": "f-235",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7334,6 +7822,7 @@
         "name": "F-236",
         "description": "",
         "capacity": 0,
+        "slug": "f-236",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7349,6 +7838,7 @@
         "name": "F-237",
         "description": "",
         "capacity": 0,
+        "slug": "f-237",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7364,6 +7854,7 @@
         "name": "F-238",
         "description": "",
         "capacity": 0,
+        "slug": "f-238",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7379,6 +7870,7 @@
         "name": "F-239",
         "description": "",
         "capacity": 0,
+        "slug": "f-239",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7394,6 +7886,7 @@
         "name": "F-240",
         "description": "",
         "capacity": 0,
+        "slug": "f-240",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7409,6 +7902,7 @@
         "name": "F-241",
         "description": "",
         "capacity": 0,
+        "slug": "f-241",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7424,6 +7918,7 @@
         "name": "F-242",
         "description": "",
         "capacity": 0,
+        "slug": "f-242",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7439,6 +7934,7 @@
         "name": "F-243",
         "description": "",
         "capacity": 0,
+        "slug": "f-243",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7454,6 +7950,7 @@
         "name": "F-244",
         "description": "",
         "capacity": 0,
+        "slug": "f-244",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7469,6 +7966,7 @@
         "name": "F-245",
         "description": "",
         "capacity": 0,
+        "slug": "f-245",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7484,6 +7982,7 @@
         "name": "F-246",
         "description": "",
         "capacity": 0,
+        "slug": "f-246",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7499,6 +7998,7 @@
         "name": "F-247",
         "description": "",
         "capacity": 0,
+        "slug": "f-247",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7514,6 +8014,7 @@
         "name": "F-248",
         "description": "",
         "capacity": 0,
+        "slug": "f-248",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7529,6 +8030,7 @@
         "name": "F-249",
         "description": "",
         "capacity": 0,
+        "slug": "f-249",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7544,6 +8046,7 @@
         "name": "F-250",
         "description": "",
         "capacity": 0,
+        "slug": "f-250",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7559,6 +8062,7 @@
         "name": "F-251",
         "description": "",
         "capacity": 0,
+        "slug": "f-251",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7574,6 +8078,7 @@
         "name": "F-252",
         "description": "",
         "capacity": 0,
+        "slug": "f-252",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7589,6 +8094,7 @@
         "name": "F-253",
         "description": "",
         "capacity": 0,
+        "slug": "f-253",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7604,6 +8110,7 @@
         "name": "F-254",
         "description": "",
         "capacity": 0,
+        "slug": "f-254",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7619,6 +8126,7 @@
         "name": "F-255",
         "description": "",
         "capacity": 0,
+        "slug": "f-255",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7634,6 +8142,7 @@
         "name": "F-256",
         "description": "",
         "capacity": 0,
+        "slug": "f-256",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7649,6 +8158,7 @@
         "name": "F-257",
         "description": "",
         "capacity": 0,
+        "slug": "f-257",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7664,6 +8174,7 @@
         "name": "F-258",
         "description": "",
         "capacity": 0,
+        "slug": "f-258",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7679,6 +8190,7 @@
         "name": "F-259",
         "description": "",
         "capacity": 0,
+        "slug": "f-259",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7694,6 +8206,7 @@
         "name": "F-260",
         "description": "",
         "capacity": 0,
+        "slug": "f-260",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7709,6 +8222,7 @@
         "name": "F-261",
         "description": "",
         "capacity": 0,
+        "slug": "f-261",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7724,6 +8238,7 @@
         "name": "F-262",
         "description": "",
         "capacity": 0,
+        "slug": "f-262",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7739,6 +8254,7 @@
         "name": "F-263",
         "description": "",
         "capacity": 0,
+        "slug": "f-263",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7754,6 +8270,7 @@
         "name": "G-101",
         "description": "",
         "capacity": 0,
+        "slug": "g-101",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7769,6 +8286,7 @@
         "name": "G-102",
         "description": "",
         "capacity": 0,
+        "slug": "g-102",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7784,6 +8302,7 @@
         "name": "G-103",
         "description": "",
         "capacity": 0,
+        "slug": "g-103",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7799,6 +8318,7 @@
         "name": "G-104",
         "description": "",
         "capacity": 0,
+        "slug": "g-104",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7814,6 +8334,7 @@
         "name": "G-105",
         "description": "",
         "capacity": 0,
+        "slug": "g-105",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7829,6 +8350,7 @@
         "name": "G-106",
         "description": "",
         "capacity": 0,
+        "slug": "g-106",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7844,6 +8366,7 @@
         "name": "G-107",
         "description": "",
         "capacity": 0,
+        "slug": "g-107",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7859,6 +8382,7 @@
         "name": "G-108",
         "description": "",
         "capacity": 0,
+        "slug": "g-108",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7874,6 +8398,7 @@
         "name": "G-109",
         "description": "",
         "capacity": 0,
+        "slug": "g-109",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7889,6 +8414,7 @@
         "name": "G-110",
         "description": "",
         "capacity": 0,
+        "slug": "g-110",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7904,6 +8430,7 @@
         "name": "G-111",
         "description": "",
         "capacity": 0,
+        "slug": "g-111",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7920,6 +8447,7 @@
         "name": "G-112",
         "description": "",
         "capacity": 0,
+        "slug": "g-112",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7935,6 +8463,7 @@
         "name": "G-113",
         "description": "",
         "capacity": 0,
+        "slug": "g-113",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7951,6 +8480,7 @@
         "name": "G-114",
         "description": "",
         "capacity": 0,
+        "slug": "g-114",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7966,6 +8496,7 @@
         "name": "G-115",
         "description": "",
         "capacity": 0,
+        "slug": "g-115",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7981,6 +8512,7 @@
         "name": "G-116",
         "description": "",
         "capacity": 0,
+        "slug": "g-116",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -7996,6 +8528,7 @@
         "name": "G-117",
         "description": "",
         "capacity": 0,
+        "slug": "g-117",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8011,6 +8544,7 @@
         "name": "G-118",
         "description": "",
         "capacity": 0,
+        "slug": "g-118",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8026,6 +8560,7 @@
         "name": "G-119",
         "description": "",
         "capacity": 0,
+        "slug": "g-119",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8041,6 +8576,7 @@
         "name": "G-201",
         "description": "",
         "capacity": 0,
+        "slug": "g-201",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8056,6 +8592,7 @@
         "name": "G-202",
         "description": "",
         "capacity": 0,
+        "slug": "g-202",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8071,6 +8608,7 @@
         "name": "G-203",
         "description": "",
         "capacity": 0,
+        "slug": "g-203",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8086,6 +8624,7 @@
         "name": "G-204",
         "description": "",
         "capacity": 0,
+        "slug": "g-204",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8101,6 +8640,7 @@
         "name": "G-205",
         "description": "",
         "capacity": 0,
+        "slug": "g-205",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8116,6 +8656,7 @@
         "name": "G-206",
         "description": "",
         "capacity": 0,
+        "slug": "g-206",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8131,6 +8672,7 @@
         "name": "G-207",
         "description": "",
         "capacity": 0,
+        "slug": "g-207",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8146,6 +8688,7 @@
         "name": "G-208",
         "description": "",
         "capacity": 0,
+        "slug": "g-208",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8161,6 +8704,7 @@
         "name": "G-209",
         "description": "",
         "capacity": 0,
+        "slug": "g-209",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8176,6 +8720,7 @@
         "name": "G-210",
         "description": "",
         "capacity": 0,
+        "slug": "g-210",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8191,6 +8736,7 @@
         "name": "G-211",
         "description": "",
         "capacity": 0,
+        "slug": "g-211",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8206,6 +8752,7 @@
         "name": "G-212",
         "description": "",
         "capacity": 0,
+        "slug": "g-212",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8221,6 +8768,7 @@
         "name": "G-213",
         "description": "",
         "capacity": 0,
+        "slug": "g-213",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8236,6 +8784,7 @@
         "name": "G-214",
         "description": "",
         "capacity": 0,
+        "slug": "g-214",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8251,6 +8800,7 @@
         "name": "G-215",
         "description": "",
         "capacity": 0,
+        "slug": "g-215",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8266,6 +8816,7 @@
         "name": "G-216",
         "description": "",
         "capacity": 0,
+        "slug": "g-216",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8281,6 +8832,7 @@
         "name": "G-217",
         "description": "",
         "capacity": 0,
+        "slug": "g-217",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8296,6 +8848,7 @@
         "name": "G-218",
         "description": "",
         "capacity": 0,
+        "slug": "g-218",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8311,6 +8864,7 @@
         "name": "G-219",
         "description": "",
         "capacity": 0,
+        "slug": "g-219",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8326,6 +8880,7 @@
         "name": "G-220",
         "description": "",
         "capacity": 0,
+        "slug": "g-220",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8341,6 +8896,7 @@
         "name": "G-221",
         "description": "",
         "capacity": 0,
+        "slug": "g-221",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8356,6 +8912,7 @@
         "name": "G-222",
         "description": "",
         "capacity": 0,
+        "slug": "g-222",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8371,6 +8928,7 @@
         "name": "G-223",
         "description": "",
         "capacity": 0,
+        "slug": "g-223",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8386,6 +8944,7 @@
         "name": "G-224",
         "description": "",
         "capacity": 0,
+        "slug": "g-224",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8401,6 +8960,7 @@
         "name": "G-225",
         "description": "",
         "capacity": 0,
+        "slug": "g-225",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8416,6 +8976,7 @@
         "name": "G-226",
         "description": "",
         "capacity": 0,
+        "slug": "g-226",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8431,6 +8992,7 @@
         "name": "G-227",
         "description": "",
         "capacity": 0,
+        "slug": "g-227",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8446,6 +9008,7 @@
         "name": "G-228",
         "description": "",
         "capacity": 0,
+        "slug": "g-228",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8461,6 +9024,7 @@
         "name": "G-229",
         "description": "",
         "capacity": 0,
+        "slug": "g-229",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8476,6 +9040,7 @@
         "name": "G-230",
         "description": "",
         "capacity": 0,
+        "slug": "g-230",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8491,6 +9056,7 @@
         "name": "G-231",
         "description": "",
         "capacity": 0,
+        "slug": "g-231",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8506,6 +9072,7 @@
         "name": "G-232",
         "description": "",
         "capacity": 0,
+        "slug": "g-232",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8521,6 +9088,7 @@
         "name": "G-233",
         "description": "",
         "capacity": 0,
+        "slug": "g-233",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8536,6 +9104,7 @@
         "name": "G-234",
         "description": "",
         "capacity": 0,
+        "slug": "g-234",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8551,6 +9120,7 @@
         "name": "G-235",
         "description": "",
         "capacity": 0,
+        "slug": "g-235",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8566,6 +9136,7 @@
         "name": "G-236",
         "description": "",
         "capacity": 0,
+        "slug": "g-236",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8581,6 +9152,7 @@
         "name": "G-237",
         "description": "",
         "capacity": 0,
+        "slug": "g-237",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8596,6 +9168,7 @@
         "name": "G-238",
         "description": "",
         "capacity": 0,
+        "slug": "g-238",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8611,6 +9184,7 @@
         "name": "G-239",
         "description": "",
         "capacity": 0,
+        "slug": "g-239",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8626,6 +9200,7 @@
         "name": "G-240",
         "description": "",
         "capacity": 0,
+        "slug": "g-240",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8641,6 +9216,7 @@
         "name": "G-241",
         "description": "",
         "capacity": 0,
+        "slug": "g-241",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8656,6 +9232,7 @@
         "name": "G-242",
         "description": "",
         "capacity": 0,
+        "slug": "g-242",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8671,6 +9248,7 @@
         "name": "G-243",
         "description": "",
         "capacity": 0,
+        "slug": "g-243",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8686,6 +9264,7 @@
         "name": "G-244",
         "description": "",
         "capacity": 0,
+        "slug": "g-244",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8701,6 +9280,7 @@
         "name": "G-245",
         "description": "",
         "capacity": 0,
+        "slug": "g-245",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8716,6 +9296,7 @@
         "name": "G-246",
         "description": "",
         "capacity": 0,
+        "slug": "g-246",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8731,6 +9312,7 @@
         "name": "G-247",
         "description": "",
         "capacity": 0,
+        "slug": "g-247",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8746,6 +9328,7 @@
         "name": "G-248",
         "description": "",
         "capacity": 0,
+        "slug": "g-248",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8761,6 +9344,7 @@
         "name": "G-249",
         "description": "",
         "capacity": 0,
+        "slug": "g-249",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8776,6 +9360,7 @@
         "name": "G-250",
         "description": "",
         "capacity": 0,
+        "slug": "g-250",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8791,6 +9376,7 @@
         "name": "G-251",
         "description": "",
         "capacity": 0,
+        "slug": "g-251",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8806,6 +9392,7 @@
         "name": "G-252",
         "description": "",
         "capacity": 0,
+        "slug": "g-252",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8821,6 +9408,7 @@
         "name": "G-253",
         "description": "",
         "capacity": 0,
+        "slug": "g-253",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8836,6 +9424,7 @@
         "name": "G-254",
         "description": "",
         "capacity": 0,
+        "slug": "g-254",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8851,6 +9440,7 @@
         "name": "G-255",
         "description": "",
         "capacity": 0,
+        "slug": "g-255",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8866,6 +9456,7 @@
         "name": "G-256",
         "description": "",
         "capacity": 0,
+        "slug": "g-256",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8881,6 +9472,7 @@
         "name": "G-257",
         "description": "",
         "capacity": 0,
+        "slug": "g-257",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8896,6 +9488,7 @@
         "name": "G-258",
         "description": "",
         "capacity": 0,
+        "slug": "g-258",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8911,6 +9504,7 @@
         "name": "G-259",
         "description": "",
         "capacity": 0,
+        "slug": "g-259",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -8926,6 +9520,7 @@
         "name": "G-260",
         "description": "",
         "capacity": 0,
+        "slug": "g-260",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }

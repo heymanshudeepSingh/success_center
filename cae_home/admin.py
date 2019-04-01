@@ -273,13 +273,16 @@ class SiteThemeAdmin(admin.ModelAdmin):
     # Fieldset organization for admin detail view.
     fieldsets = (
         (None, {
-            'fields': ('name', 'gold_logo',)
+            'fields': ('slug', 'name', 'gold_logo',)
         }),
         ('Advanced', {
             'classes': ('collapse', ),
             'fields': ('date_created', 'date_modified', )
         }),
     )
+
+    # New object's slugs will be automatically set by the name.
+    prepopulated_fields = {'slug': ('name',)}
 
 #endregion User Model Admin
 
@@ -303,9 +306,12 @@ class DepartmentAdmin(admin.ModelAdmin):
         }),
         ('Advanced', {
             'classes': ('collapse',),
-            'fields': ('date_created', 'date_modified',),
+            'fields': ('slug', 'date_created', 'date_modified',),
         }),
     )
+
+    # New object's slugs will be automatically set by the name.
+    prepopulated_fields = {'slug': ('name',)}
 
 
 class RoomTypeAdmin(admin.ModelAdmin):
@@ -330,7 +336,7 @@ class RoomTypeAdmin(admin.ModelAdmin):
     )
 
     # New object's slugs will be automatically set by the name.
-    prepopulated_fields = {"slug": ("name",)}
+    prepopulated_fields = {'slug': ('name',)}
 
 
 class RoomAdmin(admin.ModelAdmin):
@@ -369,9 +375,12 @@ class RoomAdmin(admin.ModelAdmin):
         }),
         ('Advanced', {
             'classes': ('collapse',),
-            'fields': ('date_created', 'date_modified',),
+            'fields': ('slug', 'date_created', 'date_modified',),
         }),
     )
+
+    # New object's slugs will be automatically set by the name.
+    prepopulated_fields = {'slug': ('name',)}
 
 
 class MajorAdmin(admin.ModelAdmin):
@@ -396,9 +405,12 @@ class MajorAdmin(admin.ModelAdmin):
         }),
         ('Advanced', {
             'classes': ('collapse',),
-            'fields': ('date_created', 'date_modified',),
+            'fields': ('slug', 'date_created', 'date_modified',),
         }),
     )
+
+    # New object's slugs will be automatically set by the name.
+    prepopulated_fields = {'slug': ('code',)}
 
 
 class SemesterDateAdmin(admin.ModelAdmin):

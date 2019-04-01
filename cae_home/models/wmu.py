@@ -9,6 +9,7 @@ from django.dispatch import receiver
 
 from ..models import UserIntermediary
 
+
 MAX_LENGTH = 255
 
 
@@ -20,12 +21,17 @@ class Department(models.Model):
     name = models.CharField(max_length=MAX_LENGTH, unique=True)
 
     # Self-setting/Non-user-editable fields.
+    slug = models.SlugField(
+        max_length=MAX_LENGTH,
+        unique=True,
+        help_text='Used for urls referencing this Department.',
+    )
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
 
     class Meta:
-        verbose_name = "Department"
-        verbose_name_plural = "Departments"
+        verbose_name = 'Department'
+        verbose_name_plural = 'Departments'
         ordering = ('pk',)
 
     def __str__(self):
@@ -46,19 +52,19 @@ class RoomType(models.Model):
     """
     # Model fields.
     name = models.CharField(max_length=MAX_LENGTH, unique=True)
+
+    # Self-setting/Non-user-editable fields.
     slug = models.SlugField(
         max_length=MAX_LENGTH,
         unique=True,
-        help_text="Used for urls referencing this room type.",
+        help_text='Used for urls referencing this Room Type.',
     )
-
-    # Self-setting/Non-user-editable fields.
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
 
     class Meta:
-        verbose_name = "Room Type"
-        verbose_name_plural = "Room Types"
+        verbose_name = 'Room Type'
+        verbose_name_plural = 'Room Types'
         ordering = ('pk',)
 
     def __str__(self):
@@ -87,12 +93,17 @@ class Room(models.Model):
     capacity = models.PositiveSmallIntegerField()
 
     # Self-setting/Non-user-editable fields.
+    slug = models.SlugField(
+        max_length=MAX_LENGTH,
+        unique=True,
+        help_text='Used for urls referencing this Room.',
+    )
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
 
     class Meta:
-        verbose_name = "Room"
-        verbose_name_plural = "Rooms"
+        verbose_name = 'Room'
+        verbose_name_plural = 'Rooms'
         ordering = ('name',)
 
     def __str__(self):
@@ -116,18 +127,24 @@ class Major(models.Model):
 
     # Model fields.
     code = models.CharField(max_length=MAX_LENGTH, unique=True)
-    name = models.CharField(max_length=MAX_LENGTH, unique=True)
+    name = models.CharField(max_length=MAX_LENGTH)
     undergrad = models.BooleanField(default=True)
     active = models.BooleanField(default=True)
 
     # Self-setting/Non-user-editable fields.
+    slug = models.SlugField(
+        max_length=MAX_LENGTH,
+        unique=True,
+        help_text="Used for urls referencing this Major.",
+    )
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
 
     class Meta:
-        verbose_name = "Major"
-        verbose_name_plural = "Majors"
+        verbose_name = 'Major'
+        verbose_name_plural = 'Majors'
         ordering = ('pk',)
+        unique_together = ('name', 'undergrad',)
 
     def __str__(self):
         return '{0} - {1}'.format(self.code, self.name)
@@ -172,8 +189,8 @@ class WmuUser(models.Model):
     date_modified = models.DateTimeField(auto_now=True)
 
     class Meta:
-        verbose_name = "WMU User"
-        verbose_name_plural = "WMU Users"
+        verbose_name = 'WMU User'
+        verbose_name_plural = 'WMU Users'
 
     def __str__(self):
         return '{0}: {1} {2}'.format(self.bronco_net, self.first_name, self.last_name)
@@ -228,8 +245,8 @@ class SemesterDate(models.Model):
     date_modified = models.DateTimeField(auto_now=True)
 
     class Meta:
-        verbose_name = "Semester Date"
-        verbose_name_plural = "Semester Dates"
+        verbose_name = 'Semester Date'
+        verbose_name_plural = 'Semester Dates'
 
     def __str__(self):
         return '{0}: {1} - {2}'.format(self.name, self.start_date, self.end_date)
