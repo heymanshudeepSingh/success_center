@@ -78,6 +78,16 @@ def create_wmu_users(style, model_count):
     """
     Create WMU User models.
     """
+    # Load preset fixtures.
+    call_command('loaddata', 'full_models/wmu_users')
+
+    # Set associated profile data for fixtures.
+    # (This is generated automatically. We can't really fixture this.
+    cae_center_number = models.PhoneNumber.objects.get(phone_number='2692763283')
+    cae_center_profile = models.Profile.get_profile('ceas_cae')
+    cae_center_profile.phone_number = cae_center_number
+    cae_center_profile.save()
+
     # Create random data generator.
     faker_factory = Faker()
 

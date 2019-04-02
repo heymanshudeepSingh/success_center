@@ -175,6 +175,9 @@ class Profile(models.Model):
         super(Profile, self).save(*args, **kwargs)
 
     def get_font_size(self, value):
+        """
+        Return text description for font size options.
+        """
         if value is 0:
             return 'xs'
         elif value is 1:
@@ -189,14 +192,37 @@ class Profile(models.Model):
             return 'base'
 
     def get_desktop_font_size(self, value=None):
+        """
+        Return text description for profile's desktop font size.
+        """
         if value is None:
             value = self.desktop_font_size
         return self.get_font_size(value)
 
     def get_mobile_font_size(self, value=None):
+        """
+        Return text description for profile's mobile font size.
+        """
         if value is None:
             value = self.mobile_font_size
         return self.get_font_size(value)
+
+    def get_official_email(self):
+        """
+        Return official email for user profile.
+        """
+        return '{0}@wmich.edu'.format(self.userintermediary.bronco_net)
+
+    @staticmethod
+    def get_profile(bronco_net):
+        """
+        Given a valid bronco id, return the associated profile.
+        """
+        try:
+            user_intermediary = UserIntermediary.objects.get(bronco_net=bronco_net)
+            return user_intermediary.profile
+        except ObjectDoesNotExist:
+            return None
 
 
 @receiver(post_save, sender=UserIntermediary)
