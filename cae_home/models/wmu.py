@@ -166,10 +166,12 @@ class WmuUser(models.Model):
     STUDENT = 0
     PROFESSOR = 1
     FACULTY = 2
+    OTHER = 3
     USER_TYPE_CHOICES = (
         (STUDENT, 'Student'),
         (PROFESSOR, 'Professor'),
         (FACULTY, 'Faculty'),
+        (OTHER, 'Other'),
     )
 
     # Relationship keys.

@@ -1,0 +1,34 @@
+[
+{
+    "model": "cae_home.wmuuser",
+    "pk": 1,
+    "fields": {
+        "department": 3,
+        "major": 1,
+        "bronco_net": "ceas_cae",
+        "winno": "ceas_cae",
+        "first_name": "CAE",
+        "last_name": "Center",
+        "user_type": 3,
+        "active": true,
+        "date_created": "2019-04-01T22:03:30.466Z",
+        "date_modified": "2019-04-01T22:03:30.466Z"
+    }
+},
+{
+    "model": "cae_home.wmuuser",
+    "pk": 2,
+    "fields": {
+        "department": 3,
+        "major": 1,
+        "bronco_net": "ceas_prog",
+        "winno": "ceas_prog",
+        "first_name": "CAE",
+        "last_name": "Programmers",
+        "user_type": 3,
+        "active": true,
+        "date_created": "2019-04-01T22:03:30.466Z",
+        "date_modified": "2019-04-01T22:03:30.466Z"
+    }
+}
+]
