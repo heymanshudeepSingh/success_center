@@ -53,6 +53,8 @@
             @include flex-direction(row);
             @include justify-content(center);
 
+            width: 100%;
+
             > label {
                 // width: 42.5%;
                 margin: 5px;
