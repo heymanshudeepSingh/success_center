@@ -146,6 +146,7 @@ class ProfileToUserListFilter(admin.SimpleListFilter):
 
 class ProfileAdmin(admin.ModelAdmin):
 
+    # Needed for related field list display.
     def get_bronco_net(self, obj):
         return obj.userintermediary.bronco_net
     get_bronco_net.short_description = 'Bronco Net'
@@ -158,7 +159,7 @@ class ProfileAdmin(admin.ModelAdmin):
 
     # Fields to search in admin list view.
     search_fields = [
-        'get_bronco_net',
+        'userintermediary__bronco_net',
     ]
 
     # Fields to filter by in admin list view.
