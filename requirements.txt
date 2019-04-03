@@ -1,23 +1,64 @@
-
 # Run via "pip install -r requirements.txt" while in the base project directory.
 
 
-# Python Libraries.
-django~=2.1.0       # Core Django framework.
-channels            # Support for websocket connections.
-channels-redis      # Additional channels support for live updates between sockets.
-djangorestframework     # Support for easy model API access.
-django-filter       # DjangoRest model filtering support.
-faker               # Faker library for automatic model seeding.
-xlrd                # Read .xls and .xlsx Excel files (Deprecated, but required for .xls)
+# -- Python Libraries --
+# Core Django framework.
+Django==2.1.8
+# Support for websocket connections.
+channels==2.1.7
+channels-redis==2.3.3
+# Support for easy model API access.
+djangorestframework==3.9.2
+# DjangoRest model filtering support.
+django-filter==2.1.0
+# Faker library for automatic model seeding.
+Faker==1.0.4
+# Read .xls and .xlsx Excel files (Deprecated, but required for .xls)
+xlrd==1.2.0
 
 
-# Third Party Django Apps.
-django-modeladmin-reorder   # Third party app for admin view customization.
-django-scheduler==0.8.8     # Third party app for calendar scheduling.
+# -- Third Party Django Apps --
+# Third party app for admin view customization.
+django-modeladmin-reorder==0.3.1
+# Third party app for calendar scheduling.
+django-scheduler==0.8.8
 
 
-# Optional imports.
-# mysqlclient         # For connecting to mysql. Not necessary if using sqlite during development.
-# ldap3               # For ldap connection. Only necessary when CaeAuthBackend is turned on.
-# mod_wsgi            # For putting on a production server. Required for apache to use a Python virtual environment.
+# -- Packages for Testing --
+# Testing with an actual browser, to test JavaScript
+selenium==3.141.0
+
+
+# -- Optional imports --
+# For connecting to mysql. Not necessary if using sqlite during development.
+# mysqlclient
+# For ldap connection. Only necessary when CaeAuthBackend is turned on.
+# ldap3
+# For putting on a production server. Required for apache to use a Python virtual environment.
+# mod_wsgi
+
+
+# -- Pip Freeze: $ pip freeze -r requirements.txt --
+aioredis==1.2.0
+asgiref==2.3.2
+async-timeout==3.0.1
+attrs==19.1.0
+autobahn==19.3.3
+Automat==0.7.0
+constantly==15.1.0
+daphne==2.2.5
+hiredis==1.0.0
+hyperlink==18.0.0
+icalendar==4.0.3
+idna==2.8
+incremental==17.5.0
+msgpack==0.6.1
+PyHamcrest==1.9.0
+python-dateutil==2.8.0
+pytz==2018.9
+six==1.12.0
+text-unidecode==1.2
+Twisted==18.9.0
+txaio==18.8.1
+urllib3==1.24.1
+zope.interface==4.6.0

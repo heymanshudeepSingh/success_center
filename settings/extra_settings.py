@@ -146,6 +146,10 @@ LOGIN_URL = '/user/login/'
 LOGIN_REDIRECT_URL = '/user/login_redirect/'
 
 
+# Set to True to run selenium in headless mode, so you don't see Chrome
+SELENIUM_TESTS_HEADLESS = False
+
+
 # Local environment setup.
 try:
     from settings.local_env.env import *

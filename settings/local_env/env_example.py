@@ -56,6 +56,9 @@ DATABASES = {
         'HOST': '',
         'PORT': '',
         'default-character-set': 'utf8',
+        'TEST': {
+            'NAME': 'testdb.sqlite3',
+        },
     }
 }
 
@@ -94,3 +97,6 @@ ADMINS = []
 # SECURE_BROWSER_XSS_FILTER = True
 # X_FRAME_OPTIONS = "DENY"
 # SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# Set to True to run selenium in headless mode, so you don't see Chrome
+SELENIUM_TESTS_HEADLESS = False
