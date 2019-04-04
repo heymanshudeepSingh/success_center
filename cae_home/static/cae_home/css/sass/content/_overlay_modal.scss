@@ -51,6 +51,11 @@
 #overlay-modal {
     min-width: 50px;
     min-height: 50px;
+
+    > .panel {
+        // Remove redundant Panel margin in popup
+        margin: 0;
+    }
 }
 
 //===========================//
