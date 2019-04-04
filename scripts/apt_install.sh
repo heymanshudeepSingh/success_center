@@ -102,6 +102,10 @@ function main () {
         apt-get install libldap2-dev libsasl2-dev -y
     fi
 
+    echo ""
+    echo -e "${color_blue}Installing Chromium drivers (Required for selenium testing)...${color_reset}"
+    apt-get install chromium-chromedriver -y
+
     # Success. Exit script.
     echo ""
     echo -e "${color_green}Installation has finished. Terminating script.${color_reset}"
