@@ -15,7 +15,7 @@ from settings.reusable_settings import *
 # Static refers to CSS, JavaScript, Images, etc provided by project. Media refers to any user-uploaded files.
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
-MEDIA_URL = '/static/media/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')
 STATICFILES_DIRS = (
     # Path to any additional, non-standard static directories.
