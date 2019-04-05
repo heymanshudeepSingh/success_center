@@ -55,7 +55,7 @@ ALLOWED_CAE_PROJECTS = {
         'related_apps': {
             'cae_web_core': {},
             'cae_web_attendants': {},
-            'cae_work_log': {},
+            'cae_web_work_log': {},
         },
         'third_party_apps': [
             'schedule',     # django-scheduler
