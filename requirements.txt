@@ -20,8 +20,6 @@ xlrd==1.2.0
 # -- Third Party Django Apps --
 # Third party app for admin view customization.
 django-modeladmin-reorder==0.3.1
-# Third party app for calendar scheduling.
-django-scheduler==0.8.8
 
 
 # -- Packages for Testing --

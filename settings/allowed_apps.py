@@ -57,9 +57,7 @@ ALLOWED_CAE_PROJECTS = {
             'cae_web_attendants': {},
             'cae_web_work_log': {},
         },
-        'third_party_apps': [
-            'schedule',     # django-scheduler
-        ],
+        'third_party_apps': [],
     },
 
     'CICO': {
