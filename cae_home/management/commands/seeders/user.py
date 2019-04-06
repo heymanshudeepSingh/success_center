@@ -6,6 +6,7 @@ from django.contrib.auth.models import Group, Permission
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ValidationError
 from django.core.management import call_command
+from django.db import IntegrityError
 from faker import Faker
 from random import randint
 from sys import stdout
@@ -209,6 +210,7 @@ def create_addresses(style, model_count):
     pre_initialized_count = len(models.Address.objects.all())
 
     # Generate models equal to model count.
+    total_fail_count = 0
     for index in range(model_count - pre_initialized_count):
         fail_count = 0
         try_create_model = True
@@ -236,7 +238,7 @@ def create_addresses(style, model_count):
                     zip=zip
                 )
                 try_create_model = False
-            except ValidationError:
+            except (ValidationError, IntegrityError):
                 # Seed generation failed. Nothing can be done about this without removing the random generation aspect.
                 # If we want that, we should use fixtures instead.
                 fail_count += 1
@@ -244,7 +246,13 @@ def create_addresses(style, model_count):
                 # If failed 3 times, give up model creation and move on to next model, to prevent infinite loops.
                 if fail_count > 2:
                     try_create_model = False
-                    stdout.write('Failed to generate address seed instance.')
+                    total_fail_count += 1
+
+    # Output if model instances failed to generate.
+    if total_fail_count > 0:
+        stdout.write(style.WARNING(
+            'Failed to generate {0}/{1} Address seed instances.\n'.format(total_fail_count, model_count)
+        ))
 
     stdout.write('Populated ' + style.SQL_FIELD('Address') + ' models.\n')
 
@@ -263,6 +271,7 @@ def create_phone_numbers(style, model_count):
     pre_initialized_count = len(models.PhoneNumber.objects.all())
 
     # Generate models equal to model count.
+    total_fail_count = 0
     for i in range(model_count - pre_initialized_count):
         fail_count = 0
         try_create_model = True
@@ -277,7 +286,7 @@ def create_phone_numbers(style, model_count):
             try:
                 models.PhoneNumber.objects.create(phone_number=phone_number)
                 try_create_model = False
-            except ValidationError:
+            except (ValidationError, IntegrityError):
                 # Seed generation failed. Nothing can be done about this without removing the random generation aspect.
                 # If we want that, we should use fixtures instead.
                 fail_count += 1
@@ -285,6 +294,12 @@ def create_phone_numbers(style, model_count):
                 # If failed 3 times, give up model creation and move on to next model, to prevent infinite loops.
                 if fail_count > 2:
                     try_create_model = False
-                    stdout.write('Failed to generate phone number seed instance.')
+                    total_fail_count += 1
+
+    # Output if model instances failed to generate.
+    if total_fail_count > 0:
+        stdout.write(style.WARNING(
+            'Failed to generate {0}/{1} Phone Number seed instances.\n'.format(total_fail_count, model_count)
+        ))
 
     stdout.write('Populated ' + style.SQL_FIELD('Phone Number') + ' models.\n')

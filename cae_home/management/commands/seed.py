@@ -54,11 +54,13 @@ class Command(BaseCommand):
         model_count = kwargs['model_count']
         if model_count < 1:
             model_count = 100
-        elif model_count > 10000:
-            model_count = 100
         self.stdout.write(self.style.HTTP_NOT_MODIFIED(
             'Initializing seeder with {0} randomized models.'.format(model_count)
         ))
+        if model_count > 500:
+            self.stdout.write(self.style.WARNING(
+                'WARNING: Depending on your hardware, seeding with more than 500 models may take a while!'
+            ))
 
         # Unconditionally seeds models in cae_home app, as that's always installed.
         # Generates in order of "user models", "wmu models", "cae models".
