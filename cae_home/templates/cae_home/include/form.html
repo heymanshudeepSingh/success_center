@@ -2,12 +2,36 @@
 {% for error in form.non_field_errors %}
   <div class="alert error">{{ error }}</div>
 {% endfor %}
-<form method="POST" action="" enctype="multipart/form-data">
+<form method="POST" action="" enctype="multipart/form-data"
+  {% if form_cols %}
+      class="multi-col"
+  {% endif %}
+>
   {% csrf_token %}
 
   <div class="form-inputs">
+    
+    {% for field in form.hidden_fields %}
+      <div class="hidden">
 
-    {% for field in form %}
+        <div class="form-input">
+          {{ field.label_tag }}
+          <div>
+            {{ field }}
+            {% if field.help_text %}
+              <br><small>{{ field.help_text}}</small>
+            {% endif %}
+          </div>
+        </div>
+
+      </div>
+    {% endfor %}
+
+    {% for field in form.visible_fields %}
+
+      {% if form_cols %}
+        <div class="form-col">
+      {% endif %}
 
       {% for error in field.errors %}
         <div class="alert error">{{ error }}</div>
@@ -23,11 +47,19 @@
         </div>
       </div>
 
+      {% if form_cols %}
+        </div>
+      {% endif %}
+
     {% endfor %}
 
   </div>
 
   {% if not exclude_buttons %}
-    <input class="button primary" type="submit" value="Submit">
+    {% if button_text %}
+      <input class="button primary" type="submit" value="{{ button_text }}">
+    {% else %}
+      <input class="button primary" type="submit" value="Submit">
+    {% endif %}
   {% endif %}
 </form>
