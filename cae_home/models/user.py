@@ -155,6 +155,14 @@ class Profile(models.Model):
     )
     desktop_font_size = models.PositiveSmallIntegerField(choices=FONT_SIZE_CHOICES, blank=True, default=2)
     mobile_font_size = models.PositiveSmallIntegerField(choices=FONT_SIZE_CHOICES, blank=True, default=2)
+    fg_color = models.CharField(
+        blank=True,
+        help_text="Foreground css color for schedule. E.g. 'red' or '#FF0000'",
+        max_length=30)
+    bg_color = models.CharField(
+        blank=True,
+        help_text="Foreground css color for schedule. E.g. 'red' or '#FF0000'",
+        max_length=30)
 
     # Self-setting/Non-user-editable fields.
     date_created = models.DateTimeField(auto_now_add=True)

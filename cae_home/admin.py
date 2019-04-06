@@ -180,6 +180,9 @@ class ProfileAdmin(admin.ModelAdmin):
         ('Site Options', {
             'fields': ('site_theme', 'desktop_font_size', 'mobile_font_size',)
         }),
+        ('Schedule Colors', {
+            'fields': ('fg_color', 'bg_color')
+        }),
         ('Advanced', {
             'classes': ('collapse', ),
             'fields': ('id', 'date_created', 'date_modified', )
