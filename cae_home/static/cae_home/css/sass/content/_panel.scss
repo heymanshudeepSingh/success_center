@@ -30,9 +30,9 @@
 // overflow, overflow-x, overflow-y, clip, clear                                  //
 //================================================================================//
 
-//===========================//
-//==== START ----- Block ====//
-//===========================//
+//=================================//
+//==== START Basic Panel Block ====//
+//=================================//
 
 .main-content {
     div.panel {
@@ -52,13 +52,6 @@
             padding-left: 10px;
         }
 
-        p > a:not(.button) {
-            padding-top: 1px;
-            padding-right: 7px;
-            padding-bottom: 1px;
-            padding-left: 7px;
-        }
-
         @each $panel_header_element in $panel_header_element_list {
         > #{$panel_header_element} {
 
@@ -73,9 +66,9 @@
             @each $header_element in $header_element_list {
             > #{$header_element} {
 
-                    padding-top: 0;
+                padding-top: 0;
 
-                }}
+            }}
 
         }}
 
@@ -83,6 +76,13 @@
         > #{$panel_content_element} {
 
             padding: 10px;
+
+            a:not(.button) {
+                padding-top: 1px;
+                padding-right: 7px;
+                padding-bottom: 1px;
+                padding-left: 7px;
+            }
 
         }}
 
@@ -101,9 +101,53 @@
     }
 }
 
-//===========================//
-//===== END ----- Block =====//
-//===========================//
+//=================================//
+//===== END Basic Panel Block =====//
+//=================================//
+
+
+//==================================//
+//==== START Tabbed Panel Block ====//
+//==================================//
+
+.main-content div.panel.tabs {
+
+    @each $panel_content_element in $panel_content_element_list {
+    > #{$panel_content_element} {
+        padding: 0;
+    }}
+
+    .tab-nav {
+        @include display-flex;
+        @include flex-direction(row);
+        @include justify-content(space-around);
+        @include align-items(center);
+
+        padding-left: 0;
+
+        li {
+            @include flex(1);
+
+            min-width: 10%;
+        }
+
+        @each $header_element in $header_element_list {
+        #{$header_element} {
+
+            padding-top: 5px;
+            padding-bottom: 5px;
+
+        }}
+    }
+
+    .tab-content {
+        padding: 10px;
+    }
+}
+
+//==================================//
+//===== END Tabbed Panel Block =====//
+//==================================//
 
 
 //================================================================================//
@@ -120,9 +164,9 @@
 // word-break, word-wrap, white-space                                             //
 //================================================================================//
 
-//===========================//
-//==== START ----- Block ====//
-//===========================//
+//=================================//
+//==== START Basic Panel Block ====//
+//=================================//
 
 .main-content {
 
@@ -314,9 +358,34 @@
 
 }
 
-//===========================//
-//===== END ----- Block =====//
-//===========================//
+//=================================//
+//===== END Basic Panel Block =====//
+//=================================//
+
+
+//==================================//
+//==== START Tabbed Panel Block ====//
+//==================================//
+
+.main-content div.panel.tabs {
+
+    .tab-nav {
+
+        @each $header_element in $header_element_list {
+        #{$header_element} {
+            font-size: 100%;
+        }}
+
+    }
+
+    .tab-content > *:not(.selected) {
+        display: none;
+    }
+}
+
+//==================================//
+//===== END Tabbed Panel Block =====//
+//==================================//
 
 
 //================================================================================//
@@ -347,9 +416,9 @@
 // zoom                                                                           //
 //================================================================================//
 
-//===========================//
-//==== START ----- Block ====//
-//===========================//
+//=================================//
+//==== START Basic Panel Block ====//
+//=================================//
 
 .main-content {
 
@@ -443,9 +512,95 @@
 
 }
 
-//===========================//
-//===== END ----- Block =====//
-//===========================//
+//=================================//
+//===== END Basic Panel Block =====//
+//=================================//
+
+
+//==================================//
+//==== START Tabbed Panel Block ====//
+//==================================//
+
+.main-content {
+
+    @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & {
+
+        div.panel.tabs {
+
+            .tab-nav {
+                overflow-x: hidden;
+
+                li {
+                    list-style: none;
+
+                    border-right: 1px solid theme-status($theme, 'default', 'border');
+                    border-bottom: 1px solid theme-status($theme, 'default', 'border');
+                    border-left: 1px solid theme-status($theme, 'default', 'border');
+
+                    border-bottom-right-radius: 25px;
+                    border-bottom-left-radius: 25px;
+
+                    cursor: pointer;
+                }
+
+                li.selected {
+                    background-color: theme-status($theme, 'default', 'primary');
+                }
+
+                li:not(.selected) {
+                    background-color: theme-status($theme, 'default', 'border');
+                }
+            }
+        }
+
+        div.panel.tabs:hover {
+
+                li.selected {
+                    background-color: theme-status($theme, 'default', 'primary-hover');
+                }
+            }
+
+        // Loop through all possible status types.
+        @each $status, $status-dict in theme-status-dict($theme) {
+
+            div.panel.tabs.#{$status} {
+
+                .tab-nav {
+
+                    li {
+                        border-right: 1px solid theme-status($theme, $status, 'border');
+                        border-bottom: 1px solid theme-status($theme, $status, 'border');
+                        border-left: 1px solid theme-status($theme, $status, 'border');
+                    }
+
+                    li.selected {
+                        background-color: theme-status($theme, $status, 'primary');
+                    }
+
+                    li:not(.selected) {
+                        background-color: theme-status($theme, $status, 'border');
+                    }
+                }
+
+            }
+
+            div.panel.tabs.#{$status}:hover {
+
+                li.selected {
+                    background-color: theme-status($theme, $status, 'primary-hover');
+                }
+            }
+
+        }
+
+    }}
+
+}
+
+//==================================//
+//===== END Tabbed Panel Block =====//
+//==================================//
 
 
 //================================================================================//
@@ -467,9 +622,9 @@
 // speak                                                                          //
 //================================================================================//
 
-//===========================//
-//==== START ----- Block ====//
-//===========================//
+//=================================//
+//==== START Basic Panel Block ====//
+//=================================//
 
 div.panel {
     @include transition(color 0.5s, background-color 0.5s, border 0.5s);
@@ -483,6 +638,21 @@ div.panel {
     }
 }
 
-//===========================//
-//===== END ----- Block =====//
-//===========================//
+//=================================//
+//===== END Basic Panel Block =====//
+//=================================//
+
+
+//==================================//
+//==== START Tabbed Panel Block ====//
+//==================================//
+
+.main-content div.panel.tabs {
+    .tab-nav li {
+        @include transition(color 0.5s, background-color 0.5s, border 0.5s);
+    }
+}
+
+//==================================//
+//===== END Tabbed Panel Block =====//
+//==================================//
