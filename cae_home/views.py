@@ -81,20 +81,16 @@ def login_redirect(request):
         )
 
 
-def user_edit(request, pk):
+def user_edit(request, slug):
     """
     Edit view for a single user.
     """
     # Pull models from database.
-    user = get_object_or_404(get_user_model(), pk=pk)
-    user_intermediary = get_object_or_404(models.UserIntermediary, user=user)
+    user_intermediary = get_object_or_404(models.UserIntermediary, slug=slug)
+    user = user_intermediary.user
     user_profile = user_intermediary.profile
     address = user_profile.address
     phone_number = user_profile.phone_number
-
-    # form = forms.UserForm(instance=user)
-    # form = forms.ProfileForm(instance=user_profile)
-    # form = forms.AddressForm(instance=address)
 
     form_list = []
     form = forms.UserForm(instance=user)
@@ -160,7 +156,7 @@ def user_edit(request, pk):
 
             # Render response for user.
             messages.success(request, 'Successfully updated user {0}.'.format(user))
-            return HttpResponseRedirect(reverse('cae_home:user_edit', args=(user.pk,)))
+            return HttpResponseRedirect(reverse('cae_home:user_edit', args=(user.username,)))
         else:
             # One or more forms failed to validate.
             messages.warning(request, 'Failed to update user info.')

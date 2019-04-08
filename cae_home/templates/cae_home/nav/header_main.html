@@ -7,7 +7,7 @@
     {% if user.is_authenticated %}
       <li tabindex="0">
         <h2 class="accessibility-element">User Sub Menu</h2>
-        <a href="{% url 'cae_home:user_edit' pk=user.pk %}">{{ user.get_username }}</a>
+        <a href="{% url 'cae_home:user_edit' slug=user.username %}">{{ user.get_username }}</a>
         <ul>
           {% if user.is_staff %}
             <li><a href="{% url 'admin:index' %}">Django Admin</a></li>

@@ -11,6 +11,7 @@ from django.conf import settings
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.utils.text import slugify
 
 
 MAX_LENGTH = 255
@@ -59,9 +60,14 @@ class UserIntermediary(models.Model):
     profile = models.OneToOneField('Profile', on_delete=models.CASCADE, blank=True, null=True)
 
     # Model fields.
-    bronco_net = models.CharField(max_length=MAX_LENGTH, blank=True, null=True, unique=True)
+    bronco_net = models.CharField(max_length=MAX_LENGTH, blank=True, unique=True)
 
     # Self-setting/Non-user-editable fields.
+    slug = models.SlugField(
+        max_length=MAX_LENGTH,
+        unique=True,
+        help_text='Used for urls referencing this User and related models.',
+    )
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
 
@@ -87,6 +93,9 @@ class UserIntermediary(models.Model):
                 self.bronco_net = self.user.username
             else:
                 self.bronco_net = self.wmu_user.bronco_net
+
+            # Set slug.
+            self.slug = slugify(self.bronco_net)
         else:
             # Do not allow null profiles after initial creation.
             if self.profile is None:
@@ -97,6 +106,7 @@ class UserIntermediary(models.Model):
         Modify model save behavior.
         """
         # Save model.
+        self.clean()    # Seems to error on validation without this line.
         self.full_clean()
         super(UserIntermediary, self).save(*args, **kwargs)
 

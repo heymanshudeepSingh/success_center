@@ -123,6 +123,9 @@ class UserIntermediaryAdmin(admin.ModelAdmin):
         }),
     )
 
+    # New object's slugs will be automatically set by bronco_net.
+    prepopulated_fields = {'slug': ('bronco_net',)}
+
 
 class ProfileToUserListFilter(admin.SimpleListFilter):
     """
@@ -285,7 +288,7 @@ class SiteThemeAdmin(admin.ModelAdmin):
         }),
     )
 
-    # New object's slugs will be automatically set by the name.
+    # New object's slugs will be automatically set by name.
     prepopulated_fields = {'slug': ('name',)}
 
 #endregion User Model Admin
@@ -314,7 +317,7 @@ class DepartmentAdmin(admin.ModelAdmin):
         }),
     )
 
-    # New object's slugs will be automatically set by the name.
+    # New object's slugs will be automatically set by name.
     prepopulated_fields = {'slug': ('name',)}
 
 
@@ -339,7 +342,7 @@ class RoomTypeAdmin(admin.ModelAdmin):
         }),
     )
 
-    # New object's slugs will be automatically set by the name.
+    # New object's slugs will be automatically set by name.
     prepopulated_fields = {'slug': ('name',)}
 
 
@@ -383,7 +386,7 @@ class RoomAdmin(admin.ModelAdmin):
         }),
     )
 
-    # New object's slugs will be automatically set by the name.
+    # New object's slugs will be automatically set by name.
     prepopulated_fields = {'slug': ('name',)}
 
 
@@ -413,7 +416,7 @@ class MajorAdmin(admin.ModelAdmin):
         }),
     )
 
-    # New object's slugs will be automatically set by the name.
+    # New object's slugs will be automatically set by code.
     prepopulated_fields = {'slug': ('code',)}
 
 
