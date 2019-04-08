@@ -3,7 +3,7 @@ Views for CAE_Home App.
 """
 
 import logging
-from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import views as auth_views
@@ -81,6 +81,7 @@ def login_redirect(request):
         )
 
 
+@login_required
 def user_edit(request, slug):
     """
     Edit view for a single user.
