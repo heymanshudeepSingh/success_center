@@ -3,7 +3,7 @@
 
 # -- Python Libraries --
 # Core Django framework.
-Django==2.1.8
+Django==2.2.0
 # Support for websocket connections.
 channels==2.1.7
 channels-redis==2.3.3
@@ -46,8 +46,7 @@ Automat==0.7.0
 constantly==15.1.0
 daphne==2.2.5
 hiredis==1.0.0
-hyperlink==18.0.0
-icalendar==4.0.3
+hyperlink==19.0.0
 idna==2.8
 incremental==17.5.0
 msgpack==0.6.1
@@ -55,6 +54,7 @@ PyHamcrest==1.9.0
 python-dateutil==2.8.0
 pytz==2018.9
 six==1.12.0
+sqlparse==0.3.0
 text-unidecode==1.2
 Twisted==18.9.0
 txaio==18.8.1
