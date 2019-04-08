@@ -114,7 +114,10 @@ def user_edit(request, slug):
         valid_forms = True
         form_list = []
 
-        form = forms.UserForm(instance=user, data=request.POST)
+        # Handle for disabled field.
+        POST = request.POST.copy()
+        POST['username'] = user.username
+        form = forms.UserForm(instance=user, data=POST)
         form.name = 'UserForm'
         form.display_name = 'General Info'
         form_list.append(form)

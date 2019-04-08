@@ -90,6 +90,10 @@ class UserForm(forms.ModelForm):
     """
     (Login) User model form for standard views.
     """
+    def __init__(self, *args, **kwargs):
+        super(UserForm, self).__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs['disabled'] = True
+
     class Meta:
         model = models.User
         fields = (
