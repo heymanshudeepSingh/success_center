@@ -105,19 +105,11 @@
             color: theme-text($theme, 'content');
         }
 
-        button.primary, .primary button, .button.primary, .primary .button {
-            color: theme-status($theme, 'primary', 'text');
-        }
-
-        button.secondary, .secondary button, .button.secondary, .secondary .button {
-            color: theme-status($theme, 'secondary', 'text');
-        }
-
         // Loop through all possible status types.
         @each $status, $status-dict in theme-status-dict($theme) {
 
-            button.#{$status}:hover, .#{$status} button:hover, .button.#{$status}:hover, .#{$status} .button:hover {
-                color: theme-status($theme, $status, 'link-hover');
+            button.#{$status}, .#{$status} button, .button.#{$status}, .#{$status} .button {
+                color: theme-status($theme, $status, 'text');
             }
 
         }

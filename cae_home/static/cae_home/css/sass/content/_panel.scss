@@ -245,33 +245,6 @@
 
         }
 
-        div.panel.primary {
-
-            @each $panel_header_element in $panel_header_element_list {
-            > #{$panel_header_element} {
-
-                color: theme-status($theme, 'primary', 'text');
-
-                a:not(.button) {
-                    color: theme-status($theme, 'primary', 'link');
-                }
-
-            }}
-
-            @each $panel_footer_element in $panel_footer_element_list {
-            > #{$panel_footer_element} {
-
-                color: theme-status($theme, 'primary', 'text');
-
-                a:not(.button) {
-                    color: theme-status($theme, 'primary', 'link');
-                }
-
-            }}
-
-
-        }
-
         div.panel.primary:hover {
 
             @each $panel_header_element in $panel_header_element_list {
@@ -285,32 +258,6 @@
             > #{$panel_footer_element} {
 
                 color: theme-status($theme, 'primary', 'link-hover');
-
-            }}
-
-        }
-
-        div.panel.secondary {
-
-            @each $panel_header_element in $panel_header_element_list {
-            > #{$panel_header_element} {
-
-                color: theme-status($theme, 'secondary', 'text');
-
-                a:not(.button) {
-                    color: theme-status($theme, 'secondary', 'link');
-                }
-
-            }}
-
-            @each $panel_footer_element in $panel_footer_element_list {
-            > #{$panel_footer_element} {
-
-                color: theme-status($theme, 'secondary', 'text');
-
-                a:not(.button) {
-                    color: theme-status($theme, 'secondary', 'link');
-                }
 
             }}
 
@@ -338,20 +285,45 @@
         @each $status, $status-dict in theme-status-dict($theme) {
 
             div.panel.#{$status} {
-                a:not(.button) {
-                    // Stylings specific to wmu.
-                    @if $theme == 'wmu' {
-                        color: theme-status($theme, $status, 'primary');
-                    } @else {
+
+                @each $panel_header_element in $panel_header_element_list {
+                > #{$panel_header_element} {
+
+                    color: theme-status($theme, $status, 'text');
+
+                    a:not(.button) {
                         color: theme-status($theme, $status, 'link');
                     }
-                }
 
-                a:not(.button):hover {
-                    color: theme-status($theme, $status, 'link-hover');
-                }
+                    a:not(.button):hover {
+                        color: theme-status($theme, $status, 'link-hover');
+                    }
+
+                }}
+
+                @each $panel_content_element in $panel_content_element_list {
+                > #{$panel_content_element} {
+
+                    a:not(.button):hover {
+                        color: theme-status($theme, $status, 'link-hover');
+                    }
+                }}
+
+                @each $panel_footer_element in $panel_footer_element_list {
+                > #{$panel_footer_element} {
+
+                    color: theme-status($theme, $status, 'text');
+
+                    a:not(.button) {
+                        color: theme-status($theme, $status, 'link');
+                    }
+
+                    a:not(.button):hover {
+                        color: theme-status($theme, $status, 'link-hover');
+                    }
+
+                }}
             }
-
         }
 
     }}
@@ -367,19 +339,37 @@
 //==== START Tabbed Panel Block ====//
 //==================================//
 
-.main-content div.panel.tabs {
+.main-content {
 
-    .tab-nav {
+    @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & {
 
-        @each $header_element in $header_element_list {
-        #{$header_element} {
-            font-size: 100%;
-        }}
+        // Loop through all possible status types.
+        @each $status, $status-dict in theme-status-dict($theme) {
 
-    }
+            div.panel.tabs.#{$status} .tab-nav li {
+                color: theme-status($theme, $status, 'text');
+            }
 
-    .tab-content > *:not(.selected) {
-        display: none;
+        }
+
+    }}
+
+    div.panel.tabs {
+
+        .tab-nav {
+
+            @each $header_element in $header_element_list {
+            #{$header_element} {
+                font-size: 100%;
+
+            }}
+        }
+
+        .tab-content > *:not(.selected) {
+            display: none;
+        }
+
     }
 }
 

@@ -102,19 +102,12 @@
             }
         }
 
-        .alert.primary {
-            color: theme-status($theme, 'primary', 'text');
-        }
-
-        .alert.secondary {
-            color: theme-status($theme, 'secondary', 'text');
-        }
-
-
         // Loop through all possible status types.
         @each $status, $status-dict in theme-status-dict($theme) {
 
             .alert.#{$status} {
+                color: theme-status($theme, $status, 'text');
+
                 a {
                     color: theme-status($theme, $status, 'link');
                 }
