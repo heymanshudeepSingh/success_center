@@ -124,7 +124,7 @@ class SemesterDateModelTests(TestCase):
     """
     @classmethod
     def setUpTestData(cls):
-        cls.end_date = timezone.now().date()
+        cls.end_date = timezone.localdate()
         cls.start_date = cls.end_date - timezone.timedelta(days=90)
 
     def setUp(self):
