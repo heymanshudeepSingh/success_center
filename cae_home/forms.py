@@ -86,6 +86,53 @@ class ExampleForm(forms.Form):
     check_me = forms.BooleanField(required=False)
 
 
+class UserForm(forms.ModelForm):
+    """
+    (Login) User model form for standard views.
+    """
+    class Meta:
+        model = models.User
+        fields = (
+            'username', 'first_name', 'last_name',
+        )
+
+
+class ProfileForm(forms.ModelForm):
+    """
+    User Profile model form for standard views.
+    """
+    class Meta:
+        model = models.Profile
+        fields = (
+            'site_theme', 'user_timezone', 'desktop_font_size', 'mobile_font_size',
+        )
+        widgets = {
+            'user_timezone': Select2Widget,
+        }
+
+
+class AddressForm(forms.ModelForm):
+    """
+    Address model form for standard views.
+    """
+    class Meta:
+        model = models.Address
+        fields = (
+            'street', 'optional_street', 'city', 'state', 'zip',
+        )
+
+
+class PhoneNumberForm(forms.ModelForm):
+    """
+    Phone Number model form for standard views.
+    """
+    class Meta:
+        model = models.PhoneNumber
+        fields = (
+            'phone_number',
+        )
+
+
 class RoomForm(forms.ModelForm):
     """
     Room model form for standard views.

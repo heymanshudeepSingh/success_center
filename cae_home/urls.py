@@ -19,6 +19,8 @@ urlpatterns = [
     url(r'^user/login_redirect/$', views.login_redirect, name='login_redirect'),
     url(r'^user/logout/$', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
 
+    url(r'^user/edit/(?P<pk>[0-9]+)/$', views.user_edit, name='user_edit'),
+
     # CAE Home/Index page.
     url(r'^$', views.index, name='index'),
 ]

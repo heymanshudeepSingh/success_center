@@ -3,12 +3,16 @@ Views for CAE_Home App.
 """
 
 import logging
+from django.contrib.auth import get_user_model
 from django.conf import settings
+from django.contrib import messages
 from django.contrib.auth import views as auth_views
 from django.core.mail import send_mail, send_mass_mail
 from django.http import Http404
-from django.shortcuts import redirect
+from django.http.response import HttpResponseRedirect
+from django.shortcuts import get_object_or_404, redirect
 from django.template.response import TemplateResponse
+from django.urls import reverse
 from rest_framework import viewsets, permissions
 
 from . import forms, models
@@ -75,6 +79,99 @@ def login_redirect(request):
         },
             status=404,
         )
+
+
+def user_edit(request, pk):
+    """
+    Edit view for a single user.
+    """
+    # Pull models from database.
+    user = get_object_or_404(get_user_model(), pk=pk)
+    user_intermediary = get_object_or_404(models.UserIntermediary, user=user)
+    user_profile = user_intermediary.profile
+    address = user_profile.address
+    phone_number = user_profile.phone_number
+
+    # form = forms.UserForm(instance=user)
+    # form = forms.ProfileForm(instance=user_profile)
+    # form = forms.AddressForm(instance=address)
+
+    form_list = []
+    form = forms.UserForm(instance=user)
+    form.display_name = 'General Info'
+    form_list.append(form)
+
+    form = forms.PhoneNumberForm(instance=phone_number)
+    form.display_name = 'Phone Number'
+    form_list.append(form)
+
+    form = forms.AddressForm(instance=address)
+    form.display_name = 'Address'
+    form_list.append(form)
+
+    form = forms.ProfileForm(instance=user_profile)
+    form.display_name = 'Site Settings'
+    form_list.append(form)
+
+    # Check if request is post.
+    if request.method == 'POST':
+        valid_forms = True
+        form_list = []
+
+        form = forms.UserForm(instance=user, data=request.POST)
+        form.name = 'UserForm'
+        form.display_name = 'General Info'
+        form_list.append(form)
+
+        form = forms.PhoneNumberForm(instance=phone_number, data=request.POST)
+        form.name = 'PhoneNumberForm'
+        form.display_name = 'Phone Number'
+        form_list.append(form)
+
+        form = forms.AddressForm(instance=address, data=request.POST)
+        form.name = 'AddressForm'
+        form.display_name = 'Address'
+        form_list.append(form)
+
+        form = forms.ProfileForm(instance=user_profile, data=request.POST)
+        form.name = 'ProfileForm'
+        form.display_name = 'Site Settings'
+        form_list.append(form)
+
+        # Check that all forms are valid.
+        for form in form_list:
+            if not form.is_valid():
+                valid_forms = False
+
+        if valid_forms:
+            # All forms came back as valid. Save.
+            for form in form_list:
+                if form.name == 'PhoneNumberForm':
+                    phone_number = form.save()
+                elif form.name == 'AddressForm':
+                    address = form.save()
+                elif form.name == 'ProfileForm':
+                    profile = form.save(commit=False)
+                    profile.address = address
+                    profile.phone_number = phone_number
+                    profile.save()
+                else:
+                    form.save()
+
+            # Render response for user.
+            messages.success(request, 'Successfully updated user {0}.'.format(user))
+            return HttpResponseRedirect(reverse('cae_home:user_edit', args=(user.pk,)))
+        else:
+            # One or more forms failed to validate.
+            messages.warning(request, 'Failed to update user info.')
+
+    # Handle for non-post request.
+    return TemplateResponse(request, 'cae_home/user_edit.html', {
+        'forms': form_list,
+        'user_model': user,
+        'profile': user_profile,
+        'address': address,
+    })
 
 
 #region DjangoRest Views

@@ -1,0 +1,10 @@
+{% extends 'cae_home/main.html' %}
+
+
+{% block title_page_name %}Edit User | {% endblock title_page_name %}
+
+
+{% block content %}
+  <h1>Edit User {{ user.username }}</h1>
+  {% include 'cae_home/include/form.html' %}
+{% endblock content %}
