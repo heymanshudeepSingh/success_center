@@ -8,6 +8,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import views as auth_views
 from django.core.mail import send_mail, send_mass_mail
+from django.db.models import ObjectDoesNotExist
 from django.http import Http404
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect
@@ -85,6 +86,19 @@ def login_redirect(request):
 def user_edit(request, slug):
     """
     Edit view for a single user.
+
+
+    Note that multiple users may have the same address. Or after years pass, a new user may use a previous user's
+    address. Thus, on update, first try to get an address with equivalent values. Only on failure do we validate and
+    save form data.
+
+    Furthermore, if two users share an address, we don't want one user moving and updating their address
+    to also change the second user's address. Thus, if validating and saving form data, force a new instance of the
+    model to be created (by doing commit=False and setting pk to None, before saving) rather than updating the existing,
+    shared model.
+
+
+    Although less likely, phone numbers can technically encounter the same scenarios. Thus handle similarly.
     """
     # Pull models from database.
     user_intermediary = get_object_or_404(models.UserIntermediary, slug=slug)
@@ -140,16 +154,52 @@ def user_edit(request, slug):
 
         # Check that all forms are valid.
         for form in form_list:
-            if not form.is_valid():
+
+            # Validate phone number form.
+            if form.name == 'PhoneNumberForm':
+                phone_number = None
+                try:
+                    # Attempt to find existing model. Helps prevent unique_required validation errors.
+                    phone_number = models.PhoneNumber.objects.get(phone_number=request.POST['phone_number'])
+                except ObjectDoesNotExist:
+                    # Could not find model. Attempt to validate form.
+                    if not form.is_valid():
+                        valid_forms = False
+
+            # Validate address form.
+            elif form.name == 'AddressForm':
+                address = None
+                try:
+                    # Attempt to find existing model. Helps prevent unique_required validation errors.
+                    address = models.Address.objects.get(
+                        street=request.POST['street'],
+                        optional_street=request.POST['optional_street'],
+                        city=request.POST['city'],
+                        state=request.POST['state'],
+                        zip=request.POST['zip'],
+                    )
+                except ObjectDoesNotExist:
+                    # Could not find model. Attempt to validate form.
+                    if not form.is_valid():
+                        valid_forms = False
+
+            # Validate all other forms.
+            elif not form.is_valid():
                 valid_forms = False
 
         if valid_forms:
             # All forms came back as valid. Save.
             for form in form_list:
                 if form.name == 'PhoneNumberForm':
-                    phone_number = form.save()
+                    if not phone_number:
+                        phone_number = form.save(commit=False)
+                        phone_number.pk = None
+                        phone_number.save()
                 elif form.name == 'AddressForm':
-                    address = form.save()
+                    if not address:
+                        address = form.save(commit=False)
+                        address.pk = None
+                        address.save()
                 elif form.name == 'ProfileForm':
                     profile = form.save(commit=False)
                     profile.address = address
@@ -184,7 +234,6 @@ class DepartmentViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)
     serializer_class = serializers.DepartmentSerializer
     filter_class = filters.DepartmentFilter
-
 
 #endregion DjangoRest Views
 
