@@ -12,6 +12,7 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils.text import slugify
+from os import devnull
 
 
 MAX_LENGTH = 255
@@ -252,7 +253,8 @@ def create_user_profile(sender, instance, created, **kwargs):
             site_theme = SiteTheme.objects.get(name='wmu')
         except ObjectDoesNotExist:
             # Failed to get theme. Likely a unit test. Run site_theme fixtures and attempt again.
-            call_command('loaddata', 'full_models/site_themes')
+            with open(devnull, 'a') as null:
+                call_command('loaddata', 'full_models/site_themes', stdout=null)
             site_theme = SiteTheme.objects.get(name='wmu')
 
         # Create new profile object for new user.
