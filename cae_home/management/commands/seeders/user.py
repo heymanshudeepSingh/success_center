@@ -36,7 +36,7 @@ def create_site_themes(style):
     stdout.write('Populated ' + style.SQL_FIELD('Site Theme') + ' models.\n')
 
 
-def create_groups(style):
+def create_groups(style=None):
     """
     Creates django "auth_group" models and allocates proper permissions.
     """
@@ -69,7 +69,8 @@ def create_groups(style):
             filtered_permissions.append(permission)
     group_array[6].permissions.set(filtered_permissions)
 
-    stdout.write('Populated ' + style.SQL_FIELD('Group') + ' models.\n')
+    if style is not None:
+        stdout.write('Populated ' + style.SQL_FIELD('Group') + ' models.\n')
 
 
 def create_permission_groups():
