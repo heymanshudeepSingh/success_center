@@ -89,7 +89,8 @@ class IntegrationTestCase(TestCase):
                 self.fail("%r != %r (%s doesn't match)" %
                           (url, expected, attr))
 
-    def assertPage(self, url, get=True, data={}, expected_url=None, status=200, is_admin_form=False, secure=False):
+    def assertPage(self, url, get=True, data=None, expected_url=None, status=200, is_admin_form=False, secure=False):
+        data = data or {}
         self.client.force_login(self.user)
         if get:
             response = self.client.get(
@@ -151,7 +152,8 @@ class IntegrationTestCase(TestCase):
     def assertPageGet(self, url, **kwargs):
         return self.assertPage(url, True, **kwargs)
 
-    def assertPagePost(self, url, data={}, **kwargs):
+    def assertPagePost(self, url, data=None, **kwargs):
+        data = data or {}
         return self.assertPage(url, False, data, **kwargs)
 
 
