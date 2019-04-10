@@ -119,7 +119,7 @@ class UserIntermediaryAdmin(admin.ModelAdmin):
         }),
         ('Advanced', {
             'classes': ('collapse',),
-            'fields': ('id', 'date_created', 'date_modified',)
+            'fields': ('id', 'slug', 'date_created', 'date_modified',)
         }),
     )
 
