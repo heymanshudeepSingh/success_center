@@ -96,16 +96,20 @@ def logout(request):
 
         # Fallback url.
         logout_redirect_url = redirect('cae_home:login')
+        url_set = False
 
         # Check if programmer and development mode.
         if settings.DEV_URLS:
             if 'CAE Programmer' in user_groups:
                 logout_redirect_url = redirect('cae_home:index')
+                url_set = True
 
         # Check if CAE Center employee.
-        for cae_group in cae_employee_groups:
-            if cae_group in user_groups:
-                logout_redirect_url = redirect('cae_web_core:index')
+        if not url_set:
+            for cae_group in cae_employee_groups:
+                if cae_group in user_groups:
+                    logout_redirect_url = redirect('cae_web_core:index')
+                    url_set = True
 
         # Call Django's standard logout function.
         return auth_views.LogoutView.as_view(next_page=logout_redirect_url.url)(request)
