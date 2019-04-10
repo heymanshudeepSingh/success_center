@@ -144,6 +144,7 @@ except FileNotFoundError:
 # Login url.
 LOGIN_URL = '/user/login/'
 LOGIN_REDIRECT_URL = '/user/login_redirect/'
+LOGOUT_REDIRECT_URL = LOGIN_URL
 
 
 # Set to True to run selenium in headless mode, so you don't see Chrome

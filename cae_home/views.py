@@ -3,10 +3,10 @@ Views for CAE_Home App.
 """
 
 import logging
-from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import views as auth_views
+from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail, send_mass_mail
 from django.db.models import ObjectDoesNotExist
 from django.http import Http404
@@ -24,6 +24,15 @@ from .rest import filters, serializers
 logger = logging.getLogger(__name__)
 
 
+cae_employee_groups = [
+    'CAE Director',
+    'CAE Building Coordinator',
+    'CAE Attendant',
+    'CAE Admin',
+    'CAE Programmer',
+]
+
+
 def login(request, *args, **kwargs):
     """
     Modified login view for "remember me" checkbox.
@@ -31,7 +40,7 @@ def login(request, *args, **kwargs):
     """
     # Check if user is logged in. If so, automatically redirect to index page.
     if request.user.is_authenticated:
-        return redirect('cae_home:index')
+        return redirect('cae_home:login_redirect')
 
     # User not logged in. Check if request is POST.
     if request.method == 'POST':
@@ -62,13 +71,6 @@ def login_redirect(request):
                 return redirect('cae_home:index')
 
         # Check if CAE Center employee.
-        cae_employee_groups = [
-            'CAE Director',
-            'CAE Building Coordinator',
-            'CAE Attendant',
-            'CAE Admin',
-            'CAE Programmer',
-        ]
         for cae_group in cae_employee_groups:
             if cae_group in user_groups:
                 return redirect('cae_web_core:index')
@@ -80,6 +82,33 @@ def login_redirect(request):
         },
             status=404,
         )
+
+
+def logout(request):
+    """
+    Determines redirect url after user logout. Varies based on user group permissions.
+    Then passes this to Django's standard logout function to handle the rest.
+    """
+    if not request.user.is_authenticated:
+        return redirect('cae_home:login')
+    else:
+        user_groups = request.user.groups.values_list('name', flat=True)
+
+        # Fallback url.
+        logout_redirect_url = redirect('cae_home:login')
+
+        # Check if programmer and development mode.
+        if settings.DEV_URLS:
+            if 'CAE Programmer' in user_groups:
+                logout_redirect_url = redirect('cae_home:index')
+
+        # Check if CAE Center employee.
+        for cae_group in cae_employee_groups:
+            if cae_group in user_groups:
+                logout_redirect_url = redirect('cae_web_core:index')
+
+        # Call Django's standard logout function.
+        return auth_views.LogoutView.as_view(next_page=logout_redirect_url.url)(request)
 
 
 @login_required
