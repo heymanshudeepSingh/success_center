@@ -13,19 +13,12 @@ from cae_home.tests.utils import IntegrationTestCase
 
 class UserIntermediaryModelTests(IntegrationTestCase):
     """
-    Tests to ensure valid UserIntermediary Model creation/logic.
+    Tests to ensure valid UserIntermediary model creation/logic.
     """
     @classmethod
     def setUpTestData(cls):
         cls.department = models.Department.objects.create(name='Department', slug='department')
-        cls.major = models.Major.objects.create(
-            department=cls.department,
-            code='Test Code',
-            name='Test Name',
-            undergrad=False,
-            active=False,
-            slug='test-code'
-        )
+        cls.major = models.Major.create_dummy_model()
         cls.user_type = models.WmuUser.PROFESSOR
 
         # Set up for User model instance.
@@ -184,21 +177,16 @@ class UserIntermediaryModelTests(IntegrationTestCase):
 
 class ProfileModelTests(IntegrationTestCase):
     """
-    Tests to ensure valid Profile Model creation/logic.
+    Tests to ensure valid Profile model creation/logic.
     """
     @classmethod
     def setUpTestData(cls):
         cls.bronco_net = 'temporary'
         cls.user = cls.create_user(cls, cls.bronco_net)
         cls.user_intermediary = models.UserIntermediary.objects.get(user=cls.user)
-        cls.address = models.Address.objects.create(
-            street="1234 TestStreet",
-            city="Test City",
-            state="Test Region",
-            zip="Test Zip",
-        )
+        cls.address = models.Address.create_dummy_model()
         cls.phone_number = '+12693211234'
-        cls.site_theme = models.SiteTheme.objects.get(pk=1)
+        cls.site_theme = models.SiteTheme.create_dummy_model()
         cls.user_timezone = 'America/Detroit'
         cls.font_size = models.Profile.FONT_BASE
 
@@ -206,6 +194,7 @@ class ProfileModelTests(IntegrationTestCase):
         self.test_profile = self.user_intermediary.profile
         self.test_profile.address = self.address
         self.test_profile.phone_number = PhoneNumber.from_string(self.phone_number)
+        self.test_profile.site_theme = self.site_theme
         self.test_profile.save()
 
     def test_model_creation(self):
@@ -232,7 +221,7 @@ class ProfileModelTests(IntegrationTestCase):
 
 class AddressModelTests(IntegrationTestCase):
     """
-    Tests to ensure valid Address Model creation/logic.
+    Tests to ensure valid Address model creation/logic.
     """
     def setUp(self):
         self.test_address = models.Address.objects.create(
@@ -277,7 +266,7 @@ class AddressModelTests(IntegrationTestCase):
 
 class SiteThemeModelTests(IntegrationTestCase):
     """
-    Tests to ensure valid Site Theme Model creation/logic.
+    Tests to ensure valid Site Theme model creation/logic.
     """
     def setUp(self):
         self.test_theme = models.SiteTheme.objects.create(

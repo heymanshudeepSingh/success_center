@@ -80,8 +80,8 @@ class RoomModelTests(IntegrationTestCase):
     """
     @classmethod
     def setUpTestData(cls):
-        cls.room_type = models.RoomType.objects.create(name="Room Type", slug='room-type')
-        cls.department = models.Department.objects.create(name='Department', slug='department')
+        cls.room_type = models.RoomType.create_dummy_model()
+        cls.department = models.Department.create_dummy_model()
 
     def setUp(self):
         self.test_room = models.Room.objects.create(
@@ -133,7 +133,7 @@ class MajorTests(IntegrationTestCase):
     """
     @classmethod
     def setUpTestData(cls):
-        cls.department = models.Department.objects.create(name='Department', slug='department')
+        cls.department = models.Department.create_dummy_model()
 
     def setUp(self):
         self.test_major = models.Major.objects.create(
@@ -264,15 +264,8 @@ class WmuUserTests(IntegrationTestCase):
     """
     @classmethod
     def setUpTestData(cls):
-        cls.department = models.Department.objects.create(name='Department', slug='department')
-        cls.major = models.Major.objects.create(
-            department=cls.department,
-            code='Test Code',
-            name='Test Name',
-            undergrad=False,
-            active=False,
-            slug='test-code'
-        )
+        cls.department = models.Department.create_dummy_model()
+        cls.major = models.Major.create_dummy_model()
         cls.user_type = models.WmuUser.PROFESSOR
 
     def setUp(self):
