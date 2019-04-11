@@ -19,8 +19,6 @@
       {% endblock title %}
 
       {% block base_fonts %}
-
-
         {% if site_debug %}
           <link rel="stylesheet" type="text/css" media="screen" href="{% static 'third_party/fonts/font_family_lato.css' %}">
           <link rel="stylesheet" type="text/css" media="screen" href="{% static 'third_party/fonts/font_family_open_sans.css' %}">
@@ -44,6 +42,7 @@
       {% block extra_fonts %}{% endblock extra_fonts %}
 
       {% block base_styles %}
+        <link rel="icon" type="image/png" href="{% static 'wmu_home/images/wmu_icons/favicon.ico' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'third_party/css/select2_4.0.5.min.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'cae_home/css/base.css' %}">
       {% endblock base_styles %}
