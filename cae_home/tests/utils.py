@@ -464,45 +464,55 @@ class LiveServerTestCase(ChannelsLiveServerTestCase):
 
     #region Wait Helper Functions
 
-    def _wait_for_id(self, driver, element_id, msg=None, wait_time=10):
+    def _wait_for_id(self, driver, element_id, msg=None, wait_time=10, wait_for_remove=False):
         """
         Wait for provided css id to show on page.
         :param driver: Browser manager instance to wait on.
         :param element_id: Css element to wait for.
         :param msg: Optional message to display on failure.
         :param wait_time: Time to wait. Defaults to 10 seconds.
+        :param wait_for_remove: If True, then waits until the provided element is removed.
         """
-        return self.__do_wait(driver, By.ID, element_id, msg, wait_time)
+        return self.__do_wait(driver, By.ID, element_id, msg, wait_time, wait_for_remove)
 
-    def _wait_for_css(self, driver, element_css, msg=None, wait_time=10):
+    def _wait_for_css(self, driver, element_css, msg=None, wait_time=10, wait_for_remove=False):
         """
         Wait for provided css class to show on page.
         :param driver: Browser manager instance to wait on.
         :param element_css: Css element to wait for.
         :param msg: Optional message to display on failure.
         :param wait_time: Time to wait. Defaults to 10 seconds.
+        :param wait_for_remove: If True, then waits until the provided element is removed.
         """
-        return self.__do_wait(driver, By.CSS_SELECTOR, element_css, msg, wait_time)
+        return self.__do_wait(driver, By.CSS_SELECTOR, element_css, msg, wait_time, wait_for_remove)
 
-    def _wait_for_xpath(self, driver, element_xpath, msg=None, wait_time=10):
+    def _wait_for_xpath(self, driver, element_xpath, msg=None, wait_time=10, wait_for_remove=False):
         """
         Wait for xpath (xml?) to show on page.
         :param driver: Browser manager instance to wait on.
         :param element_xpath: Xpath element to wait for.
         :param msg: Optional message to display on failure.
         :param wait_time: Time to wait. Defaults to 10 seconds.
+        :param wait_for_remove: If True, then waits until the provided element is removed.
         """
-        return self.__do_wait(driver, By.XPATH, element_xpath, msg, wait_time)
+        return self.__do_wait(driver, By.XPATH, element_xpath, msg, wait_time, wait_for_remove)
 
-    def __do_wait(self, driver, by, query, msg, wait_time):
+    def __do_wait(self, driver, by, query, msg, wait_time, wait_for_remove):
         """
         Attempt to wait for given value to show on page.
         After time expired, display fail message and quit test.
         """
         try:
-            WebDriverWait(driver, wait_time).until(
-                EC.visibility_of_element_located((by, query)),
-            )
+            if wait_for_remove:
+                # Wait until element is no longer present.
+                WebDriverWait(driver, wait_time).until(
+                    EC.invisibility_of_element_located((by, query)),
+                )
+            else:
+                # Wait until element is present.
+                WebDriverWait(driver, wait_time).until(
+                    EC.visibility_of_element_located((by, query)),
+                )
         except TimeoutException:
             self.fail(msg or "Element not found within time limit.")
 
@@ -536,7 +546,6 @@ class LiveServerTestCase(ChannelsLiveServerTestCase):
         :param window_index: Index of window under driver.
         """
         driver.switch_to.window(driver.window_handles[window_index])
-
 
     #endregion Window Manipulation Helper Functions
 
