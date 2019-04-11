@@ -98,5 +98,9 @@ ADMINS = []
 # X_FRAME_OPTIONS = "DENY"
 # SECURE_CONTENT_TYPE_NOSNIFF = True
 
-# Set to True to run selenium in headless mode, so you don't see Chrome
+
+# Set to True to run selenium in headless mode (hides browser window).
 SELENIUM_TESTS_HEADLESS = False
+
+# Password for model seeds. Includes normal seeds and unittest seeds.
+USER_SEED_PASSWORD = 'temppass2'

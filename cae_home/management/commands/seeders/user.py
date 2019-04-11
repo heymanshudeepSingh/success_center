@@ -2,16 +2,19 @@
 Seeder for "User" related Core Models.
 """
 
+from django.conf import settings
 from django.contrib.auth.models import Group, Permission
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ValidationError
 from django.core.management import call_command
 from django.db import IntegrityError
 from faker import Faker
-from random import randint
 from sys import stdout
 
 from cae_home import models
+
+
+default_password = settings.USER_SEED_PASSWORD
 
 
 def generate_model_seeds(style, model_count):
@@ -134,8 +137,6 @@ def create_users(style):
     """
     Creates base user models.
     """
-    default_password = 'temppass2'
-
     # Create extra superusers for developers.
     models.User.get_or_create_superuser('brodriguez8774', '', default_password)  # Brandon
     models.User.get_or_create_superuser('skd6970', '', default_password)  # Steven (Senior Design)
@@ -146,7 +147,7 @@ def create_users(style):
     stdout.write('Populated ' + style.SQL_FIELD('User') + ' models.\n')
 
 
-def create_permission_group_users(default_password='temppass2', with_names=True):
+def create_permission_group_users(default_password=default_password, with_names=True):
     """
     Create specific users for each main group permission.
     :param default_password: Default password to use.

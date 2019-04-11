@@ -24,6 +24,7 @@ from cae_home.management.commands.seeders.user import create_groups, create_perm
 
 
 UserModel = get_user_model()  # pylint: disable=invalid-name
+default_password = settings.USER_SEED_PASSWORD
 
 
 # |-----------------------------------------------------------------------------
@@ -75,7 +76,7 @@ class IntegrationTestCase(TestCase):
         create_groups()
         create_permission_group_users(with_names=False)
 
-    def create_user(self, username, password, permissions=None, groups=None):
+    def create_user(self, username, password=default_password, permissions=None, groups=None):
         """
         Create new user. Optionally pass permissions/groups.
         :param username: Username to use.
@@ -335,7 +336,7 @@ class LiveServerTestCase(ChannelsLiveServerTestCase):
 
     #region User Management Helper Functions
 
-    def create_user(self, username, password, permissions=None, groups=None):
+    def create_user(self, username, password=default_password, permissions=None, groups=None):
         """
         Create new user. Optionally pass permissions/groups.
         :param username: Username to use.
