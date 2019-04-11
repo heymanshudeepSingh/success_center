@@ -72,12 +72,12 @@ class IntegrationTestCase(TestCase):
         """
         super().setUp()
 
-    def create_default_users_and_groups(self):
+    def create_default_users_and_groups(self, password=default_password):
         """
         Create expected/default groups and dummy users to associate with them.
         """
         create_groups()
-        create_permission_group_users(with_names=False)
+        create_permission_group_users(password=password, with_names=False)
 
     def get_user(self, username, password=default_password):
         """
@@ -355,12 +355,12 @@ class LiveServerTestCase(ChannelsLiveServerTestCase):
 
     #region User Management Helper Functions
 
-    def create_default_users_and_groups(self):
+    def create_default_users_and_groups(self, password=default_password):
         """
         Create expected/default groups and dummy users to associate with them.
         """
         create_groups()
-        create_permission_group_users(with_names=False)
+        create_permission_group_users(password=password, with_names=False)
 
     def get_user(self, username, password=default_password):
         """

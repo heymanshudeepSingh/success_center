@@ -142,25 +142,25 @@ def create_users(style):
     models.User.get_or_create_superuser('skd6970', '', default_password)  # Steven (Senior Design)
     models.User.get_or_create_superuser('jbn6294', '', default_password)  # Josh (Senior Design)
 
-    create_permission_group_users(default_password=default_password)
+    create_permission_group_users(password=default_password)
 
     stdout.write('Populated ' + style.SQL_FIELD('User') + ' models.\n')
 
 
-def create_permission_group_users(default_password=default_password, with_names=True):
+def create_permission_group_users(password=default_password, with_names=True):
     """
     Create specific users for each main group permission.
-    :param default_password: Default password to use.
+    :param password: Password to seed users with.
     :return: Array of users.
     """
     # Create normal users for every main permission group.
-    cae_director = models.User.get_or_create_user('cae_director', '', default_password)
-    cae_building_coordinator = models.User.get_or_create_user('cae_building_coordinator', '', default_password)
-    cae_admin_ga = models.User.get_or_create_user('cae_admin_ga', '', default_password)
-    cae_programmer_ga = models.User.get_or_create_user('cae_programmer_ga', '', default_password)
-    cae_admin = models.User.get_or_create_user('cae_admin', '', default_password)
-    cae_programmer = models.User.get_or_create_user('cae_programmer', '', default_password)
-    cae_attendant = models.User.get_or_create_user('cae_attendant', '', default_password)
+    cae_director = models.User.get_or_create_user('cae_director', '', password)
+    cae_building_coordinator = models.User.get_or_create_user('cae_building_coordinator', '', password)
+    cae_admin_ga = models.User.get_or_create_user('cae_admin_ga', '', password)
+    cae_programmer_ga = models.User.get_or_create_user('cae_programmer_ga', '', password)
+    cae_admin = models.User.get_or_create_user('cae_admin', '', password)
+    cae_programmer = models.User.get_or_create_user('cae_programmer', '', password)
+    cae_attendant = models.User.get_or_create_user('cae_attendant', '', password)
 
     # Set their names.
     if with_names:
