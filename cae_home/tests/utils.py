@@ -72,7 +72,10 @@ class IntegrationTestCase(TestCase):
         """
         super().setUp()
 
-        # Create expected groups and dummy users to associate with them.
+    def create_default_users_and_groups(self):
+        """
+        Create expected/default groups and dummy users to associate with them.
+        """
         create_groups()
         create_permission_group_users(with_names=False)
 
@@ -335,10 +338,6 @@ class LiveServerTestCase(ChannelsLiveServerTestCase):
         """
         super().setUp()
 
-        # Create expected groups and dummy users to associate with them.
-        create_groups()
-        create_permission_group_users(with_names=False)
-
     def tearDown(self):
         """
         Logic to reset state after each individual test.
@@ -355,6 +354,13 @@ class LiveServerTestCase(ChannelsLiveServerTestCase):
     #region Helper Functions
 
     #region User Management Helper Functions
+
+    def create_default_users_and_groups(self):
+        """
+        Create expected/default groups and dummy users to associate with them.
+        """
+        create_groups()
+        create_permission_group_users(with_names=False)
 
     def get_user(self, username, password=default_password):
         """
