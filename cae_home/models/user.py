@@ -6,12 +6,12 @@ import pytz
 from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.core.management import call_command
-from django.core.validators import RegexValidator
 from django.conf import settings
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils.text import slugify
+from phonenumber_field.modelfields import PhoneNumberField
 from os import devnull
 
 
@@ -156,10 +156,10 @@ class Profile(models.Model):
 
     # Relationship Keys.
     address = models.ForeignKey('Address', on_delete=models.CASCADE, blank=True, null=True)
-    phone_number = models.ForeignKey('PhoneNumber', on_delete=models.CASCADE, blank=True, null=True)
     site_theme = models.ForeignKey('SiteTheme', on_delete=models.CASCADE, blank=True)
 
     # Model fields.
+    phone_number = PhoneNumberField(blank=True, null=True)
     user_timezone = models.CharField(
         choices=[(x, x) for x in pytz.common_timezones], blank=True, default="America/Detroit",
         max_length=255
@@ -302,79 +302,6 @@ class Address(models.Model):
         # Save model.
         self.full_clean()
         super(Address, self).save(*args, **kwargs)
-
-
-class PhoneNumber(models.Model):
-    """
-    Phone Number for a user.
-    """
-    # Model validators.
-    phone_regex = RegexValidator(
-        regex='^\+?1?\d{10,15}',
-        message='Phone number must be entered in the format: "+999999999". Between 10 and 15 digits allowed.',
-    )
-
-    # Model fields.
-    phone_number = models.CharField(validators=[phone_regex], max_length=15, unique=True)
-
-    # Self-setting/Non-user-editable fields.
-    date_created = models.DateTimeField(auto_now_add=True)
-    date_modified = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        verbose_name = 'Phone Number'
-        verbose_name_plural = 'Phone Numbers'
-
-    def __str__(self):
-        return '{0}'.format(self.phone_number)
-
-    def save(self, *args, **kwargs):
-        """
-        Modify model save behavior.
-        """
-        # Save model.
-        self.full_clean()
-        super(PhoneNumber, self).save(*args, **kwargs)
-
-    def display(self):
-        """
-        Returns number in read-friendly format.
-        Assumes US formatting of numbers.
-        """
-        if len(str(self.phone_number)) is 10:
-            # Standard phone number with area code.
-            return '({0}) {1}-{2}'.format(
-                self.phone_number[0:3],
-                self.phone_number[3:6],
-                self.phone_number[6:10]
-            )
-        else:
-            # Other format. Assume US formatting so last 10 digits are what we want.
-            return '({0}) {1}-{2}'.format(
-                self.phone_number[-10:-7],
-                self.phone_number[-7:-4],
-                self.phone_number[-4::]
-            )
-
-    def display_int(self):
-        """
-        Returns number in read-friendly format, plus country code.
-        Assumes US formatting of numbers.
-        """
-        if len(str(self.phone_number)) is 10:
-            # Standard phone number with area code.
-            return '+1-{0}-{1}-{2}'.format(
-                self.phone_number[0:3],
-                self.phone_number[3:6],
-                self.phone_number[6:10]
-            )
-        else:
-            # Other format. Assume US formatting so last 10 digits are what we want.
-            return '+1-{0}-{1}-{2}'.format(
-                self.phone_number[-10:-7],
-                self.phone_number[-7:-4],
-                self.phone_number[-4::]
-            )
 
 
 class SiteTheme(models.Model):

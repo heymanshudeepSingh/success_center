@@ -6,6 +6,7 @@ from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.db import transaction
 from django.test import TestCase
+from phonenumber_field.phonenumber import PhoneNumber
 
 from .. import models
 
@@ -195,7 +196,7 @@ class ProfileModelTests(TestCase):
             state="Test Region",
             zip="Test Zip",
         )
-        cls.phone_number = models.PhoneNumber.objects.create(phone_number='1234567890')
+        cls.phone_number = '+12693211234'
         cls.site_theme = models.SiteTheme.objects.get(pk=1)
         cls.user_timezone = 'America/Detroit'
         cls.font_size = models.Profile.FONT_BASE
@@ -203,7 +204,7 @@ class ProfileModelTests(TestCase):
     def setUp(self):
         self.test_profile = self.user_intermediary.profile
         self.test_profile.address = self.address
-        self.test_profile.phone_number = self.phone_number
+        self.test_profile.phone_number = PhoneNumber.from_string(self.phone_number)
         self.test_profile.save()
 
     def test_model_creation(self):
@@ -258,31 +259,6 @@ class AddressModelTests(TestCase):
         self.assertEqual(str(self.test_address._meta.verbose_name), 'Address')
         self.assertEqual(str(self.test_address._meta.verbose_name_plural), 'Addresses')
 
-
-class PhoneNumberModelTests(TestCase):
-    """
-    Tests to ensure valid Phone Number Model creation/logic.
-    """
-    def setUp(self):
-        self.test_phone = models.PhoneNumber.objects.create(
-            phone_number='1234567890',
-        )
-
-    def test_model_creation(self):
-        self.assertEqual(self.test_phone.phone_number, '1234567890')
-
-    def test_string_representation(self):
-        self.assertEqual(str(self.test_phone), self.test_phone.phone_number)
-
-    def test_plural_representation(self):
-        self.assertEqual(str(self.test_phone._meta.verbose_name), 'Phone Number')
-        self.assertEqual(str(self.test_phone._meta.verbose_name_plural), 'Phone Numbers')
-
-    def test_invalid_numbers(self):
-        with self.assertRaises(ValidationError):
-            models.PhoneNumber.objects.create(phone_number='123456789')
-        with self.assertRaises(ValidationError):
-            models.PhoneNumber.objects.create(phone_number='9876543210987654')
 
 class SiteThemeModelTests(TestCase):
     """

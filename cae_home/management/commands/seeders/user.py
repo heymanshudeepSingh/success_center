@@ -23,7 +23,6 @@ def generate_model_seeds(style, model_count):
     create_groups(style)
     create_users(style)
     create_addresses(style, model_count)
-    create_phone_numbers(style, model_count)
 
 
 def create_site_themes(style):
@@ -256,51 +255,3 @@ def create_addresses(style, model_count):
         ))
 
     stdout.write('Populated ' + style.SQL_FIELD('Address') + ' models.\n')
-
-
-def create_phone_numbers(style, model_count):
-    """
-    Creates phone number models.
-    """
-    # First load preset fixtures.
-    call_command('loaddata', 'full_models/phone_numbers')
-
-    # Create random data generator.
-    faker_factory = Faker()
-
-    # Count number of models already created.
-    pre_initialized_count = len(models.PhoneNumber.objects.all())
-
-    # Generate models equal to model count.
-    total_fail_count = 0
-    for i in range(model_count - pre_initialized_count):
-        fail_count = 0
-        try_create_model = True
-
-        # Loop attempt until 3 fails or model is created.
-        # Model creation may fail due to randomness of address info and unique requirement.
-        while try_create_model:
-            # Generate random phone number.
-            phone_number = '{0}{1}{2}'.format(randint(100, 999), randint(100, 999), randint(1000, 9999))
-
-            # Attempt to create model seed.
-            try:
-                models.PhoneNumber.objects.create(phone_number=phone_number)
-                try_create_model = False
-            except (ValidationError, IntegrityError):
-                # Seed generation failed. Nothing can be done about this without removing the random generation aspect.
-                # If we want that, we should use fixtures instead.
-                fail_count += 1
-
-                # If failed 3 times, give up model creation and move on to next model, to prevent infinite loops.
-                if fail_count > 2:
-                    try_create_model = False
-                    total_fail_count += 1
-
-    # Output if model instances failed to generate.
-    if total_fail_count > 0:
-        stdout.write(style.WARNING(
-            'Failed to generate {0}/{1} Phone Number seed instances.\n'.format(total_fail_count, model_count)
-        ))
-
-    stdout.write('Populated ' + style.SQL_FIELD('Phone Number') + ' models.\n')

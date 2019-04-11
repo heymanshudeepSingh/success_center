@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'admin_reorder',
     'channels',
     'django_filters',
+    'phonenumber_field',
     'rest_framework',
 ]
 

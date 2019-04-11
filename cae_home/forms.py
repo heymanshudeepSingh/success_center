@@ -104,11 +104,49 @@ class UserForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
     """
     User Profile model form for standard views.
+    Displays all possible profile fields.
     """
     class Meta:
         model = models.Profile
         fields = (
-            'site_theme', 'user_timezone', 'desktop_font_size', 'mobile_font_size',
+            'address',
+            'phone_number',
+            'site_theme',
+            'user_timezone',
+            'desktop_font_size',
+            'mobile_font_size',
+            'fg_color',
+            'bg_color',
+        )
+        widgets = {
+            'user_timezone': Select2Widget,
+        }
+
+
+class ProfileForm_OnlyPhone(forms.ModelForm):
+    """
+    User Profile model form for standard views.
+    Only displays phone number field.
+    """
+    class Meta:
+        model = models.Profile
+        fields = (
+            'phone_number',
+        )
+        widgets = {
+            'user_timezone': Select2Widget,
+        }
+
+
+class ProfileForm_OnlySiteOptions(forms.ModelForm):
+    """
+    User Profile model form for standard views.
+    Only displays site option fields.
+    """
+    class Meta:
+        model = models.Profile
+        fields = (
+            'site_theme', 'user_timezone', 'desktop_font_size', 'mobile_font_size', 'fg_color', 'bg_color',
         )
         widgets = {
             'user_timezone': Select2Widget,
@@ -123,17 +161,6 @@ class AddressForm(forms.ModelForm):
         model = models.Address
         fields = (
             'street', 'optional_street', 'city', 'state', 'zip',
-        )
-
-
-class PhoneNumberForm(forms.ModelForm):
-    """
-    Phone Number model form for standard views.
-    """
-    class Meta:
-        model = models.PhoneNumber
-        fields = (
-            'phone_number',
         )
 
 

@@ -178,10 +178,10 @@ class ProfileAdmin(admin.ModelAdmin):
     # Fieldset organization for admin detail view.
     fieldsets = (
         ('User Info', {
-            'fields': ('address', 'phone_number', 'user_timezone',)
+            'fields': ('address', 'phone_number',)
         }),
         ('Site Options', {
-            'fields': ('site_theme', 'desktop_font_size', 'mobile_font_size',)
+            'fields': ('user_timezone', 'site_theme', 'desktop_font_size', 'mobile_font_size',)
         }),
         ('Schedule Colors', {
             'fields': ('fg_color', 'bg_color')
@@ -224,41 +224,6 @@ class AddressAdmin(admin.ModelAdmin):
             'fields': ('id', 'date_created', 'date_modified', )
         }),
     )
-
-
-class PhoneNumberAdmin(admin.ModelAdmin):
-    # Fields to display in admin list view.
-    list_display = (
-        'formatted_phone_number', 'phone_number',
-    )
-
-    # Fields to search in admin list view.
-    search_fields = [
-        'phone_number',
-    ]
-
-    # Read only fields for admin detail view.
-    readonly_fields = (
-        'id', 'date_created', 'date_modified',
-    )
-
-    # Fieldset organization for admin detail view.
-    fieldsets = (
-        (None, {
-            'fields': ('phone_number', ),
-        }),
-        ('Advanced', {
-            'classes': ('collapse', ),
-            'fields': ('id', 'date_created', 'date_modified', )
-        }),
-    )
-
-    def formatted_phone_number(self, obj):
-        """
-        Return list of user-associated group(s).
-        """
-        return obj.display()
-    formatted_phone_number.admin_order_field = 'phone_number'
 
 
 class SiteThemeAdmin(admin.ModelAdmin):
@@ -512,7 +477,6 @@ admin.site.register(models.User, UserAdmin)
 admin.site.register(models.UserIntermediary, UserIntermediaryAdmin)
 admin.site.register(models.Profile, ProfileAdmin)
 admin.site.register(models.Address, AddressAdmin)
-admin.site.register(models.PhoneNumber, PhoneNumberAdmin)
 admin.site.register(models.SiteTheme, SiteThemeAdmin)
 
 # WMU Model Registration

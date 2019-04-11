@@ -8,6 +8,7 @@ from django.db import IntegrityError
 from faker import Faker
 from random import randint
 from sys import stdout
+from phonenumber_field.phonenumber import PhoneNumber
 
 from cae_home import models
 
@@ -84,7 +85,7 @@ def create_wmu_users(style, model_count):
 
     # Set associated profile data for fixtures.
     # (This is generated automatically. We can't really fixture this.
-    cae_center_number = models.PhoneNumber.objects.get(phone_number='2692763283')
+    cae_center_number = PhoneNumber.from_string('+12692763283')
     cae_center_profile = models.Profile.get_profile('ceas_cae')
     cae_center_profile.phone_number = cae_center_number
     cae_center_profile.save()
