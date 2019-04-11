@@ -151,6 +151,12 @@ class CaeAuthBackend(object):
             attributes=['uid', 'givenName', 'sn',]
         )
 
+        # Get ldap director groups.
+        ldap_directors = self.ldap_lib.search(
+            search_base=settings.LDAP_GROUP_DN,
+            search_filter='({0})'.format(settings.LDAP_DIRECTOR_CN),
+            attributes=['memberUid'],
+        )['memberUid']
         # Get ldap user groups.
         ldap_attendants = self.ldap_lib.search(
             search_base=settings.LDAP_GROUP_DN,
@@ -188,6 +194,10 @@ class CaeAuthBackend(object):
                 print('Auth Backend: Created user new user model {0}. Now setting groups...'.format(uid))
 
             # Set user group types.
+            if uid in ldap_directors:
+                model_user.groups.add(Group.object.get(name='CAE Director'))
+                if settings.AUTH_BACKEND_DEBUG:
+                    print('Auth Backend: Added user to CAE Director group.')
             if uid in ldap_attendants:
                 model_user.groups.add(Group.objects.get(name='CAE Attendant'))
                 if settings.AUTH_BACKEND_DEBUG:
