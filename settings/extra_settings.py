@@ -151,6 +151,10 @@ LOGOUT_REDIRECT_URL = LOGIN_URL
 SELENIUM_TESTS_HEADLESS = False
 
 
+# django-phonenumber-field settings
+PHONENUMBER_DEFAULT_REGION = "US" # Don't require users to prefix with +1
+
+
 # Local environment setup.
 try:
     from settings.local_env.env import *
