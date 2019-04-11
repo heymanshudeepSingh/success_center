@@ -76,6 +76,26 @@ class IntegrationTestCase(TestCase):
         create_groups()
         create_permission_group_users(with_names=False)
 
+    def get_user(self, username, password=default_password):
+        """
+        Returns a user with the given username.
+        :param username: Username to search.
+        :param password: Password for user.
+        """
+        try:
+            # Get user.
+            user = UserModel.objects.get(username=username)
+
+            # Check that user has associated password string saved.
+            if not hasattr(user, 'password_string'):
+                user.password_string = password
+
+            return user
+        except ObjectDoesNotExist:
+            # Failed to find user.
+            print(list(UserModel.objects.all().values_list('username')))
+            raise ObjectDoesNotExist('User matching {0} was not found.')
+
     def create_user(self, username, password=default_password, permissions=None, groups=None):
         """
         Create new user. Optionally pass permissions/groups.
@@ -336,6 +356,26 @@ class LiveServerTestCase(ChannelsLiveServerTestCase):
 
     #region User Management Helper Functions
 
+    def get_user(self, username, password=default_password):
+        """
+        Returns a user with the given username.
+        :param username: Username to search.
+        :param password: Password for user.
+        """
+        try:
+            # Get user.
+            user = UserModel.objects.get(username=username)
+
+            # Check that user has associated password string saved.
+            if not hasattr(user, 'password_string'):
+                user.password_string = password
+
+            return user
+        except ObjectDoesNotExist:
+            # Failed to find user.
+            print(list(UserModel.objects.all().values_list('username')))
+            raise ObjectDoesNotExist('User matching {0} was not found.')
+
     def create_user(self, username, password=default_password, permissions=None, groups=None):
         """
         Create new user. Optionally pass permissions/groups.
@@ -382,7 +422,8 @@ class LiveServerTestCase(ChannelsLiveServerTestCase):
         except ObjectDoesNotExist:
             # Failed to find permission.
             print(list(Permission.objects.all().values_list('codename')))
-            raise ObjectDoesNotExist('Permission matching {0} not found.'.format(name))
+            raise ObjectDoesNotExist('Permission matching {0} was not found.'.format(name))
+
 
     def add_group(self, user, name):
         """
