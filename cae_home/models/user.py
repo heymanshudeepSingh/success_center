@@ -50,6 +50,14 @@ class User(AbstractUser):
 
         return new_user
 
+    @staticmethod
+    def create_dummy_model():
+        """
+        Attempts to get or create a dummy model.
+        Used for testing.
+        """
+        return User.get_or_create_user('dummy_user', 'dummy@gmail.com', settings.USER_SEED_PASSWORD)
+
 
 class UserIntermediary(models.Model):
     """
@@ -303,6 +311,34 @@ class Address(models.Model):
         self.full_clean()
         super(Address, self).save(*args, **kwargs)
 
+    @staticmethod
+    def create_dummy_model():
+        """
+        Attempts to get or create a dummy model.
+        Used for testing.
+        """
+        street = '1234 Dummy Lane'
+        optional_street = 'Apt 1234'
+        city = 'Kalamazoo'
+        state = 'MI'
+        zip = '49008'
+        try:
+            return Address.objects.get(
+                street=street,
+                optional_street=optional_street,
+                city=city,
+                state=state,
+                zip=zip
+            )
+        except ObjectDoesNotExist:
+            return Address.objects.create(
+                street=street,
+                optional_street=optional_street,
+                city=city,
+                state=state,
+                zip=zip
+            )
+
 
 class SiteTheme(models.Model):
     # Model fields.
@@ -323,7 +359,7 @@ class SiteTheme(models.Model):
         verbose_name_plural = 'Site Themes'
 
     def __str__(self):
-        return '{0}'.format(self.name.capitalize())
+        return '{0}'.format(str(self.name).capitalize())
 
     def save(self, *args, **kwargs):
         """
@@ -332,3 +368,22 @@ class SiteTheme(models.Model):
         # Save model.
         self.full_clean()
         super(SiteTheme, self).save(*args, **kwargs)
+
+    @staticmethod
+    def create_dummy_model():
+        """
+        Attempts to get or create a dummy model.
+        Used for testing.
+        """
+        name = 'Dummy Site Theme'
+        slug = slugify(name)
+        try:
+            return SiteTheme.objects.get(
+                name=name,
+                slug=slug,
+            )
+        except ObjectDoesNotExist:
+            return SiteTheme.objects.create(
+                name=name,
+                slug=slug,
+            )

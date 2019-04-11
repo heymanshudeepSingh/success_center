@@ -151,6 +151,11 @@ class UserIntermediaryModelTests(IntegrationTestCase):
         self.assertEqual(str(self.test_intermediary_with_user._meta.verbose_name), 'User Intermediary')
         self.assertEqual(str(self.test_intermediary_with_user._meta.verbose_name_plural), 'User Intermediaries')
 
+    def test_dummy_creation(self):
+        dummy_model = get_user_model().create_dummy_model()
+        self.assertIsNotNone(dummy_model)
+        self.assertTrue(isinstance(dummy_model, get_user_model()))
+
     def test_field_removal(self):
         # Test that removing profile field creates error.
         with self.assertRaises(ValidationError):
@@ -255,6 +260,20 @@ class AddressModelTests(IntegrationTestCase):
         self.assertEqual(str(self.test_address._meta.verbose_name), 'Address')
         self.assertEqual(str(self.test_address._meta.verbose_name_plural), 'Addresses')
 
+    def test_dummy_creation(self):
+        # Test create.
+        dummy_model_1 = models.Address.create_dummy_model()
+        self.assertIsNotNone(dummy_model_1)
+        self.assertTrue(isinstance(dummy_model_1, models.Address))
+
+        # Test get.
+        dummy_model_2 = models.Address.create_dummy_model()
+        self.assertIsNotNone(dummy_model_2)
+        self.assertTrue(isinstance(dummy_model_2, models.Address))
+
+        # Test both are the same model instance.
+        self.assertEqual(dummy_model_1, dummy_model_2)
+
 
 class SiteThemeModelTests(IntegrationTestCase):
     """
@@ -277,3 +296,17 @@ class SiteThemeModelTests(IntegrationTestCase):
     def test_plural_representation(self):
         self.assertEqual(str(self.test_theme._meta.verbose_name), 'Site Theme')
         self.assertEqual(str(self.test_theme._meta.verbose_name_plural), 'Site Themes')
+
+    def test_dummy_creation(self):
+        # Test create.
+        dummy_model_1 = models.SiteTheme.create_dummy_model()
+        self.assertIsNotNone(dummy_model_1)
+        self.assertTrue(isinstance(dummy_model_1, models.SiteTheme))
+
+        # Test get.
+        dummy_model_2 = models.SiteTheme.create_dummy_model()
+        self.assertIsNotNone(dummy_model_2)
+        self.assertTrue(isinstance(dummy_model_2, models.SiteTheme))
+
+        # Test both are the same model instance.
+        self.assertEqual(dummy_model_1, dummy_model_2)

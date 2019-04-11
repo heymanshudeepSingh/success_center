@@ -2,10 +2,12 @@
 Definitions of "WMU" related Core Models.
 """
 
+import datetime
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.utils.text import slugify
 
 from ..models import UserIntermediary
 
@@ -45,6 +47,25 @@ class Department(models.Model):
         self.full_clean()
         super(Department, self).save(*args, **kwargs)
 
+    @staticmethod
+    def create_dummy_model():
+        """
+        Attempts to get or create a dummy model.
+        Used for testing.
+        """
+        name = 'Dummy Department'
+        slug = slugify(name)
+        try:
+            return Department.objects.get(
+                name=name,
+                slug=slug,
+            )
+        except ObjectDoesNotExist:
+            return Department.objects.create(
+                name=name,
+                slug=slug,
+            )
+
 
 class RoomType(models.Model):
     """
@@ -77,6 +98,25 @@ class RoomType(models.Model):
         # Save model.
         self.full_clean()
         super(RoomType, self).save(*args, **kwargs)
+
+    @staticmethod
+    def create_dummy_model():
+        """
+        Attempts to get or create a dummy model.
+        Used for testing.
+        """
+        name = 'Dummy Room Type'
+        slug = slugify(name)
+        try:
+            return RoomType.objects.get(
+                name=name,
+                slug=slug,
+            )
+        except ObjectDoesNotExist:
+            return RoomType.objects.create(
+                name=name,
+                slug=slug,
+            )
 
 
 class Room(models.Model):
@@ -117,6 +157,33 @@ class Room(models.Model):
         self.full_clean()
         super(Room, self).save(*args, **kwargs)
 
+    @staticmethod
+    def create_dummy_model():
+        """
+        Attempts to get or create a dummy model.
+        Used for testing.
+        """
+        name = 'Dummy Room'
+        slug = slugify(name)
+        department = Department.create_dummy_model()
+        room_type = RoomType.create_dummy_model()
+        try:
+            return Room.objects.get(
+                name=name,
+                slug=slug,
+                department=department,
+                room_type=room_type,
+            )
+        except ObjectDoesNotExist:
+            room = Room.objects.create(
+                name=name,
+                slug=slug,
+                room_type=room_type,
+            )
+            room.department.add(department)
+            room.save()
+            return room
+
 
 class Major(models.Model):
     """
@@ -156,6 +223,31 @@ class Major(models.Model):
         # Save model.
         self.full_clean()
         super(Major, self).save(*args, **kwargs)
+
+    @staticmethod
+    def create_dummy_model():
+        """
+        Attempts to get or create a dummy model.
+        Used for testing.
+        """
+        department = Department.create_dummy_model()
+        code = 'dummy'
+        slug = slugify(code)
+        name = 'Dummy Major'
+        try:
+            return Major.objects.get(
+                code=code,
+                slug=slug,
+                name=name,
+                department=department,
+            )
+        except ObjectDoesNotExist:
+            return Major.objects.create(
+                code=code,
+                slug=slug,
+                name=name,
+                department=department,
+            )
 
 
 class WmuUser(models.Model):
@@ -210,6 +302,37 @@ class WmuUser(models.Model):
         Returns a string of student's official email.
         """
         return '{0}@wmich.edu'.format(self.bronco_net)
+
+    @staticmethod
+    def create_dummy_model():
+        """
+        Attempts to get or create a dummy model.
+        Used for testing.
+        """
+        department = Department.create_dummy_model()
+        major = Major.create_dummy_model()
+        bronco_net = 'dummy123'
+        winno = 'dummy12345'
+        first_name = 'Dummy First'
+        last_name = 'Dummy Last'
+        try:
+            return WmuUser.objects.get(
+                bronco_net=bronco_net,
+                winno=winno,
+                first_name=first_name,
+                last_name=last_name,
+                department=department,
+                major=major,
+            )
+        except ObjectDoesNotExist:
+            return WmuUser.objects.create(
+                bronco_net=bronco_net,
+                winno=winno,
+                first_name=first_name,
+                last_name=last_name,
+                department=department,
+                major=major,
+            )
 
 
 @receiver(post_save, sender=WmuUser)
@@ -286,3 +409,22 @@ class SemesterDate(models.Model):
         # Save model.
         self.full_clean()
         super(SemesterDate, self).save(*args, **kwargs)
+
+    @staticmethod
+    def create_dummy_model():
+        """
+        Attempts to get or create a dummy model.
+        Used for testing.
+        """
+        start_date = datetime.datetime.strptime('2010 01 01', '%Y %m %d')
+        end_date = datetime.datetime.strptime('2010 04 01', '%Y %m %d')
+        try:
+            return SemesterDate.objects.get(
+                start_date=start_date,
+                end_date=end_date,
+            )
+        except ObjectDoesNotExist:
+            return SemesterDate.objects.create(
+                start_date=start_date,
+                end_date=end_date,
+            )

@@ -27,6 +27,20 @@ class DepartmentModelTests(IntegrationTestCase):
         self.assertEqual(str(self.test_department._meta.verbose_name), 'Department')
         self.assertEqual(str(self.test_department._meta.verbose_name_plural), 'Departments')
 
+    def test_dummy_creation(self):
+        # Test create.
+        dummy_model_1 = models.Department.create_dummy_model()
+        self.assertIsNotNone(dummy_model_1)
+        self.assertTrue(isinstance(dummy_model_1, models.Department))
+
+        # Test get.
+        dummy_model_2 = models.Department.create_dummy_model()
+        self.assertIsNotNone(dummy_model_2)
+        self.assertTrue(isinstance(dummy_model_2, models.Department))
+
+        # Test both are the same model instance.
+        self.assertEqual(dummy_model_1, dummy_model_2)
+
 
 class RoomTypeModelTests(IntegrationTestCase):
     """
@@ -44,6 +58,20 @@ class RoomTypeModelTests(IntegrationTestCase):
     def test_plural_representation(self):
         self.assertEqual(str(self.test_room_type._meta.verbose_name), 'Room Type')
         self.assertEqual(str(self.test_room_type._meta.verbose_name_plural), 'Room Types')
+
+    def test_dummy_creation(self):
+        # Test create.
+        dummy_model_1 = models.RoomType.create_dummy_model()
+        self.assertIsNotNone(dummy_model_1)
+        self.assertTrue(isinstance(dummy_model_1, models.RoomType))
+
+        # Test get.
+        dummy_model_2 = models.RoomType.create_dummy_model()
+        self.assertIsNotNone(dummy_model_2)
+        self.assertTrue(isinstance(dummy_model_2, models.RoomType))
+
+        # Test both are the same model instance.
+        self.assertEqual(dummy_model_1, dummy_model_2)
 
 
 class RoomModelTests(IntegrationTestCase):
@@ -84,6 +112,20 @@ class RoomModelTests(IntegrationTestCase):
         self.assertEqual(str(self.test_room._meta.verbose_name), 'Room')
         self.assertEqual(str(self.test_room._meta.verbose_name_plural), 'Rooms')
 
+    def test_dummy_creation(self):
+        # Test create.
+        dummy_model_1 = models.Room.create_dummy_model()
+        self.assertIsNotNone(dummy_model_1)
+        self.assertTrue(isinstance(dummy_model_1, models.Room))
+
+        # Test get.
+        dummy_model_2 = models.Room.create_dummy_model()
+        self.assertIsNotNone(dummy_model_2)
+        self.assertTrue(isinstance(dummy_model_2, models.Room))
+
+        # Test both are the same model instance.
+        self.assertEqual(dummy_model_1, dummy_model_2)
+
 
 class MajorTests(IntegrationTestCase):
     """
@@ -117,6 +159,20 @@ class MajorTests(IntegrationTestCase):
         self.assertEqual(str(self.test_major._meta.verbose_name), 'Major')
         self.assertEqual(str(self.test_major._meta.verbose_name_plural), 'Majors')
 
+    def test_dummy_creation(self):
+        # Test create.
+        dummy_model_1 = models.Major.create_dummy_model()
+        self.assertIsNotNone(dummy_model_1)
+        self.assertTrue(isinstance(dummy_model_1, models.Major))
+
+        # Test get.
+        dummy_model_2 = models.Major.create_dummy_model()
+        self.assertIsNotNone(dummy_model_2)
+        self.assertTrue(isinstance(dummy_model_2, models.Major))
+
+        # Test both are the same model instance.
+        self.assertEqual(dummy_model_1, dummy_model_2)
+
 
 class SemesterDateModelTests(IntegrationTestCase):
     """
@@ -145,6 +201,20 @@ class SemesterDateModelTests(IntegrationTestCase):
     def test_plural_representation(self):
         self.assertEqual(str(self.test_semester_date._meta.verbose_name), 'Semester Date')
         self.assertEqual(str(self.test_semester_date._meta.verbose_name_plural), 'Semester Dates')
+
+    def test_dummy_creation(self):
+        # Test create.
+        dummy_model_1 = models.SemesterDate.create_dummy_model()
+        self.assertIsNotNone(dummy_model_1)
+        self.assertTrue(isinstance(dummy_model_1, models.SemesterDate))
+
+        # Test get.
+        dummy_model_2 = models.SemesterDate.create_dummy_model()
+        self.assertIsNotNone(dummy_model_2)
+        self.assertTrue(isinstance(dummy_model_2, models.SemesterDate))
+
+        # Test both are the same model instance.
+        self.assertEqual(dummy_model_1, dummy_model_2)
 
     def test_name_generation(self):
         # Test Spring.
@@ -234,3 +304,17 @@ class WmuUserTests(IntegrationTestCase):
     def test_plural_representation(self):
         self.assertEqual(str(self.test_wmu_user._meta.verbose_name), 'WMU User')
         self.assertEqual(str(self.test_wmu_user._meta.verbose_name_plural), 'WMU Users')
+
+    def test_dummy_creation(self):
+        # Test create.
+        dummy_model_1 = models.WmuUser.create_dummy_model()
+        self.assertIsNotNone(dummy_model_1)
+        self.assertTrue(isinstance(dummy_model_1, models.WmuUser))
+
+        # Test get.
+        dummy_model_2 = models.WmuUser.create_dummy_model()
+        self.assertIsNotNone(dummy_model_2)
+        self.assertTrue(isinstance(dummy_model_2, models.WmuUser))
+
+        # Test both are the same model instance.
+        self.assertEqual(dummy_model_1, dummy_model_2)
