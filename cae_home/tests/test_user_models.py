@@ -5,13 +5,13 @@ Tests for CAE_Home User Models.
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.db import transaction
-from django.test import TestCase
 from phonenumber_field.phonenumber import PhoneNumber
 
 from .. import models
+from cae_home.tests.utils import IntegrationTestCase
 
 
-class UserIntermediaryModelTests(TestCase):
+class UserIntermediaryModelTests(IntegrationTestCase):
     """
     Tests to ensure valid UserIntermediary Model creation/logic.
     """
@@ -177,18 +177,14 @@ class UserIntermediaryModelTests(TestCase):
                 self.test_intermediary_with_wmuuser.save()
 
 
-class ProfileModelTests(TestCase):
+class ProfileModelTests(IntegrationTestCase):
     """
     Tests to ensure valid Profile Model creation/logic.
     """
     @classmethod
     def setUpTestData(cls):
         cls.bronco_net = 'temporary'
-        cls.user = get_user_model().objects.create_user(
-            cls.bronco_net,
-            '{0}@wmich.edu'.format(cls.bronco_net),
-            cls.bronco_net
-        )
+        cls.user = cls.create_user(cls, cls.bronco_net)
         cls.user_intermediary = models.UserIntermediary.objects.get(user=cls.user)
         cls.address = models.Address.objects.create(
             street="1234 TestStreet",
@@ -229,7 +225,7 @@ class ProfileModelTests(TestCase):
         self.assertEqual(str(self.test_profile._meta.verbose_name_plural), 'Profiles')
 
 
-class AddressModelTests(TestCase):
+class AddressModelTests(IntegrationTestCase):
     """
     Tests to ensure valid Address Model creation/logic.
     """
@@ -260,7 +256,7 @@ class AddressModelTests(TestCase):
         self.assertEqual(str(self.test_address._meta.verbose_name_plural), 'Addresses')
 
 
-class SiteThemeModelTests(TestCase):
+class SiteThemeModelTests(IntegrationTestCase):
     """
     Tests to ensure valid Site Theme Model creation/logic.
     """

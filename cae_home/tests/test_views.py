@@ -3,17 +3,15 @@ Tests for CAE_Home Views.
 """
 
 from django.apps import apps
-from django.contrib.auth import get_user_model
 from django.conf import settings
 from django.core.management import call_command
-from django.test import TestCase
 from django.urls import reverse
 from os import devnull
 
-from cae_home.management.commands.seeders.user import create_groups, create_permission_group_users
+from cae_home.tests.utils import IntegrationTestCase
 
 
-class CAEHomeViewTests(TestCase):
+class CAEHomeViewTests(IntegrationTestCase):
     """
     Tests to ensure views load as expected.
     """
@@ -23,13 +21,15 @@ class CAEHomeViewTests(TestCase):
         cls.installed_app_list = [app.label for app in apps.get_app_configs()]
 
         # Load all relevant fixtures.
-        create_groups()
-        create_permission_group_users(default_password='test')
         with open(devnull, 'a') as null:
             call_command('loaddata', 'full_models/site_themes', stdout=null)
 
-        # Create models.
-        cls.user = get_user_model().objects.create_user('test', '', 'test')
+    def setUp(self):
+        """
+        Logic to reset state before each individual test.
+        """
+        self.create_default_users_and_groups(password='test')
+        super().setUp()
 
     def test_login(self):
         """
@@ -236,8 +236,8 @@ class CAEHomeViewTests(TestCase):
         Tests profile edit view.
         """
         # Test unauthenticated.
-        # print(dir(self.user))
-        slug = self.user.userintermediary.slug
+        user = self.get_user('cae_admin', password='test')
+        slug = user.userintermediary.slug
         response = self.client.get(reverse('cae_home:user_edit', kwargs={'slug': slug}))
         self.assertRedirects(
             response,
@@ -250,12 +250,12 @@ class CAEHomeViewTests(TestCase):
         self.assertContains(response, 'Username:')
 
         # Test authenticated.
-        self.client.login(username='test', password='test')
+        self.client.login(username=user.username, password=user.password_string)
         response = self.client.get(reverse('cae_home:user_edit', kwargs={'slug': slug}))
         self.assertTrue(response.status_code, 200)
 
         # Quickly check template.
-        self.assertContains(response, 'Edit User {0}'.format(self.user.username))
+        self.assertContains(response, 'Edit User {0}'.format(user.username))
 
 
     #region Dev View Tests

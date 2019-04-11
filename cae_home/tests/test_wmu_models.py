@@ -4,13 +4,13 @@ Tests for CAE_Home WMU Models.
 
 from django.core.exceptions import ValidationError
 from django.db import transaction
-from django.test import TestCase
 from django.utils import timezone
 
 from .. import models
+from cae_home.tests.utils import IntegrationTestCase
 
 
-class DepartmentModelTests(TestCase):
+class DepartmentModelTests(IntegrationTestCase):
     """
     Tests to ensure valid Department model creation/logic.
     """
@@ -28,7 +28,7 @@ class DepartmentModelTests(TestCase):
         self.assertEqual(str(self.test_department._meta.verbose_name_plural), 'Departments')
 
 
-class RoomTypeModelTests(TestCase):
+class RoomTypeModelTests(IntegrationTestCase):
     """
     Tests to ensure valid Room Type model creation/logic.
     """
@@ -46,7 +46,7 @@ class RoomTypeModelTests(TestCase):
         self.assertEqual(str(self.test_room_type._meta.verbose_name_plural), 'Room Types')
 
 
-class RoomModelTests(TestCase):
+class RoomModelTests(IntegrationTestCase):
     """
     Tests to ensure valid Room model creation/logic.
     """
@@ -85,7 +85,7 @@ class RoomModelTests(TestCase):
         self.assertEqual(str(self.test_room._meta.verbose_name_plural), 'Rooms')
 
 
-class MajorTests(TestCase):
+class MajorTests(IntegrationTestCase):
     """
     Tests to ensure valid Major model creation/logic.
     """
@@ -118,7 +118,7 @@ class MajorTests(TestCase):
         self.assertEqual(str(self.test_major._meta.verbose_name_plural), 'Majors')
 
 
-class SemesterDateModelTests(TestCase):
+class SemesterDateModelTests(IntegrationTestCase):
     """
     Tests to ensure valid Semester Date model creation/logic.
     """
@@ -188,7 +188,7 @@ class SemesterDateModelTests(TestCase):
                 )
 
 
-class WmuUserTests(TestCase):
+class WmuUserTests(IntegrationTestCase):
     """
     Tests to ensure valid WMU User model creation/logic.
     """
