@@ -133,9 +133,6 @@ class ProfileForm_OnlyPhone(forms.ModelForm):
         fields = (
             'phone_number',
         )
-        widgets = {
-            'user_timezone': Select2Widget,
-        }
 
 
 class ProfileForm_OnlySiteOptions(forms.ModelForm):

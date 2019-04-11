@@ -231,6 +231,32 @@ class CAEHomeViewTests(TestCase):
                     # Quickly check template.
                     self.assertContains(response, 'CAE Center Contact Info')
 
+    def test_profile_edit(self):
+        """
+        Tests profile edit view.
+        """
+        # Test unauthenticated.
+        # print(dir(self.user))
+        slug = self.user.userintermediary.slug
+        response = self.client.get(reverse('cae_home:user_edit', kwargs={'slug': slug}))
+        self.assertRedirects(
+            response,
+            reverse('cae_home:login') + '?next=' + reverse('cae_home:user_edit', kwargs={'slug': slug})
+        )
+
+        # Quickly check template.
+        response = self.client.get(reverse('cae_home:user_edit', kwargs={'slug': slug}), follow=True)
+        self.assertContains(response, 'Login')
+        self.assertContains(response, 'Username:')
+
+        # Test authenticated.
+        self.client.login(username='test', password='test')
+        response = self.client.get(reverse('cae_home:user_edit', kwargs={'slug': slug}))
+        self.assertTrue(response.status_code, 200)
+
+        # Quickly check template.
+        self.assertContains(response, 'Edit User {0}'.format(self.user.username))
+
 
     #region Dev View Tests
 

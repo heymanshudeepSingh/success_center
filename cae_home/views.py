@@ -129,23 +129,19 @@ def user_edit(request, slug):
     to also change the second user's address. Thus, if validating and saving form data, force a new instance of the
     model to be created (by doing commit=False and setting pk to None, before saving) rather than updating the existing,
     shared model.
-
-
-    Although less likely, phone numbers can technically encounter the same scenarios. Thus handle similarly.
     """
     # Pull models from database.
     user_intermediary = get_object_or_404(models.UserIntermediary, slug=slug)
     user = user_intermediary.user
     user_profile = user_intermediary.profile
     address = user_profile.address
-    phone_number = user_profile.phone_number
 
     form_list = []
     form = forms.UserForm(instance=user)
     form.display_name = 'General Info'
     form_list.append(form)
 
-    form = forms.PhoneNumberForm(instance=phone_number)
+    form = forms.ProfileForm_OnlyPhone(instance=user_profile)
     form.display_name = 'Phone Number'
     form_list.append(form)
 
@@ -153,7 +149,7 @@ def user_edit(request, slug):
     form.display_name = 'Address'
     form_list.append(form)
 
-    form = forms.ProfileForm(instance=user_profile)
+    form = forms.ProfileForm_OnlySiteOptions(instance=user_profile)
     form.display_name = 'Site Settings'
     form_list.append(form)
 
@@ -170,7 +166,7 @@ def user_edit(request, slug):
         form.display_name = 'General Info'
         form_list.append(form)
 
-        form = forms.PhoneNumberForm(instance=phone_number, data=request.POST)
+        form = forms.ProfileForm_OnlyPhone(instance=user_profile, data=request.POST)
         form.name = 'PhoneNumberForm'
         form.display_name = 'Phone Number'
         form_list.append(form)
@@ -180,27 +176,15 @@ def user_edit(request, slug):
         form.display_name = 'Address'
         form_list.append(form)
 
-        form = forms.ProfileForm(instance=user_profile, data=request.POST)
-        form.name = 'ProfileForm'
+        form = forms.ProfileForm_OnlySiteOptions(instance=user_profile, data=request.POST)
+        form.name = 'SiteSettingsForm'
         form.display_name = 'Site Settings'
         form_list.append(form)
 
         # Check that all forms are valid.
         for form in form_list:
-
-            # Validate phone number form.
-            if form.name == 'PhoneNumberForm':
-                phone_number = None
-                try:
-                    # Attempt to find existing model. Helps prevent unique_required validation errors.
-                    phone_number = models.PhoneNumber.objects.get(phone_number=request.POST['phone_number'])
-                except ObjectDoesNotExist:
-                    # Could not find model. Attempt to validate form.
-                    if not form.is_valid():
-                        valid_forms = False
-
             # Validate address form.
-            elif form.name == 'AddressForm':
+            if form.name == 'AddressForm':
                 address = None
                 try:
                     # Attempt to find existing model. Helps prevent unique_required validation errors.
@@ -223,20 +207,14 @@ def user_edit(request, slug):
         if valid_forms:
             # All forms came back as valid. Save.
             for form in form_list:
-                if form.name == 'PhoneNumberForm':
-                    if not phone_number:
-                        phone_number = form.save(commit=False)
-                        phone_number.pk = None
-                        phone_number.save()
-                elif form.name == 'AddressForm':
+                if form.name == 'AddressForm':
                     if not address:
                         address = form.save(commit=False)
                         address.pk = None
                         address.save()
-                elif form.name == 'ProfileForm':
+                elif form.name == 'SiteSettingsForm':
                     profile = form.save(commit=False)
                     profile.address = address
-                    profile.phone_number = phone_number
                     profile.save()
                 else:
                     form.save()
