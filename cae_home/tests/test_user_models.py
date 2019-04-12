@@ -228,7 +228,7 @@ class AddressModelTests(IntegrationTestCase):
             street="1234 TestStreet",
             optional_street="Test Apt",
             city="Test City",
-            state="Test State",
+            state=25,
             zip="Test Zip",
         )
 
@@ -236,18 +236,30 @@ class AddressModelTests(IntegrationTestCase):
         self.assertEqual(self.test_address.street, '1234 TestStreet')
         self.assertEqual(self.test_address.optional_street, 'Test Apt')
         self.assertEqual(self.test_address.city, 'Test City')
-        self.assertEqual(self.test_address.state, 'Test State')
+        self.assertEqual(self.test_address.state, 25)
         self.assertEqual(self.test_address.zip, 'Test Zip')
 
     def test_string_representation(self):
         self.assertEqual(str(self.test_address),
                          (self.test_address.street + " " + self.test_address.optional_street +
-                          " " + self.test_address.city + ", " + self.test_address.state +
+                          " " + self.test_address.city + ", " + self.test_address.get_state_abbrev_as_string() +
                           ", " + self.test_address.zip))
 
     def test_plural_representation(self):
         self.assertEqual(str(self.test_address._meta.verbose_name), 'Address')
         self.assertEqual(str(self.test_address._meta.verbose_name_plural), 'Addresses')
+
+    def test_state_as_string(self):
+        self.assertEqual(self.test_address.get_state_as_string(), 'Montana')
+        self.assertEqual(self.test_address.get_state_as_string(1), 'Alaska')
+        self.assertEqual(self.test_address.get_state_as_string(21), 'Michigan')
+        self.assertEqual(self.test_address.get_state_as_string(49), 'Wyoming')
+
+    def test_state_abbrev_as_string(self):
+        self.assertEqual(self.test_address.get_state_abbrev_as_string(), 'MT')
+        self.assertEqual(self.test_address.get_state_abbrev_as_string(1), 'AK')
+        self.assertEqual(self.test_address.get_state_abbrev_as_string(21), 'MI')
+        self.assertEqual(self.test_address.get_state_abbrev_as_string(49), 'WY')
 
     def test_dummy_creation(self):
         # Test create.

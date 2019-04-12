@@ -9,6 +9,7 @@ from django.core.exceptions import ValidationError
 from django.core.management import call_command
 from django.db import IntegrityError
 from faker import Faker
+from random import randint
 from sys import stdout
 
 from cae_home import models
@@ -223,7 +224,7 @@ def create_addresses(style, model_count):
             # Generate address info.
             street = faker_factory.building_number() + ' ' + faker_factory.street_address()
             city = faker_factory.city()
-            state = faker_factory.state()
+            state = randint(0, 49)
             zip = faker_factory.postalcode()
             if faker_factory.boolean():
                 optional_street = faker_factory.secondary_address()

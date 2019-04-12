@@ -280,11 +280,65 @@ class Address(models.Model):
     """
     Address for a user.
     """
+    # Preset field choices.
+    STATE_CHOICES = (
+        (0, 'AL - Alabama'),
+        (1, 'AK - Alaska'),
+        (2, 'AZ - Arizona'),
+        (3, 'AR - Arkansas'),
+        (4, 'CA - California'),
+        (5, 'CO - Colorado'),
+        (6, 'CT - Connecticut'),
+        (7, 'DE - Delaware'),
+        (8, 'FL - Florida'),
+        (9, 'GA - Georgia'),
+        (10, 'HI - Hawaii'),
+        (11, 'ID - Idaho'),
+        (12, 'IL - Illinois'),
+        (13, 'IN - Indiana'),
+        (14, 'IA - Iowa'),
+        (15, 'KS - Kansas'),
+        (16, 'KY - Kentucky'),
+        (17, 'LA - Louisiana'),
+        (18, 'ME - Maine'),
+        (19, 'MD - Maryland'),
+        (20, 'MA - Massachusetts'),
+        (21, 'MI - Michigan'),
+        (22, 'MN - Minnesota'),
+        (23, 'MS - Mississippi'),
+        (24, 'MO - Missouri'),
+        (25, 'MT - Montana'),
+        (26, 'NE - Nebraska'),
+        (27, 'NV - Nevada'),
+        (28, 'NH - New Hampshire'),
+        (29, 'NJ - New Jersey'),
+        (30, 'NM - New Mexico'),
+        (31, 'NY - New York'),
+        (32, 'NC - North Carolina'),
+        (33, 'ND - North Dakota'),
+        (34, 'OH - Ohio'),
+        (35, 'OK - Oklahoma'),
+        (36, 'OR - Oregon'),
+        (37, 'PA - Pennsylvannia'),
+        (38, 'RI - Rhode Island'),
+        (39, 'SC - South Carolina'),
+        (40, 'SD - South Dakota'),
+        (41, 'TN - Tennessee'),
+        (42, 'TX - Texas'),
+        (43, 'UT - Utah'),
+        (44, 'VT - Vermont'),
+        (45, 'VA - Virginia'),
+        (46, 'WA - Washington'),
+        (47, 'WV - West Virginia'),
+        (48, 'WI - Wisconsin'),
+        (49, 'WY - Wyoming'),
+    )
+
     # Model fields.
     street = models.CharField(max_length=MAX_LENGTH)
     optional_street = models.CharField(max_length=MAX_LENGTH, blank=True, null=True)
     city = models.CharField(max_length=MAX_LENGTH)
-    state = models.CharField(max_length=MAX_LENGTH, default='MI')
+    state = models.PositiveSmallIntegerField(choices=STATE_CHOICES, default=21)
     zip = models.CharField(max_length=MAX_LENGTH)
 
     # Self-setting/Non-user-editable fields.
@@ -298,10 +352,20 @@ class Address(models.Model):
 
     def __str__(self):
         if self.optional_street is not None:
-            return '{0} {1} {2}, {3}, {4}'.format(self.street, self.optional_street, self.city, self.state,
-                                                  self.zip)
+            return '{0} {1} {2}, {3}, {4}'.format(
+                self.street,
+                self.optional_street,
+                self.city,
+                self.get_state_abbrev_as_string(),
+                self.zip
+            )
         else:
-            return '{0} {1}, {2}, {3}'.format(self.street, self.city, self.state, self.zip)
+            return '{0} {1}, {2}, {3}'.format(
+                self.street,
+                self.city,
+                self.get_state_abbrev_as_string(),
+                self.zip
+            )
 
     def save(self, *args, **kwargs):
         """
@@ -310,6 +374,28 @@ class Address(models.Model):
         # Save model.
         self.full_clean()
         super(Address, self).save(*args, **kwargs)
+
+    def get_state_as_string(self, value=None):
+        """
+        Returns state name as string.
+        :param value: Integer of value to get. If none, uses current model value.
+        :return: State name.
+        """
+        if value is None:
+            value = self.state
+        state_string = self.STATE_CHOICES[value][1][5:]
+        return state_string
+
+    def get_state_abbrev_as_string(self, value=None):
+        """
+        Returns state abbreviation as string.
+        :param value: Integer of value to get. If none, uses current model value.
+        :return: State abbreviation.
+        """
+        if value is None:
+            value = self.state
+        state_string = self.STATE_CHOICES[value][1][:2]
+        return state_string
 
     @staticmethod
     def create_dummy_model():
@@ -320,7 +406,7 @@ class Address(models.Model):
         street = '1234 Dummy Lane'
         optional_street = 'Apt 1234'
         city = 'Kalamazoo'
-        state = 'MI'
+        state = 21
         zip = '49008'
         try:
             return Address.objects.get(
