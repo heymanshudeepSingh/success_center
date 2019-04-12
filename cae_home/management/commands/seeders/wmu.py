@@ -162,8 +162,20 @@ def create_wmu_users(style, model_count):
 
     # Output if model instances failed to generate.
     if total_fail_count > 0:
-        stdout.write(style.WARNING(
-            'Failed to generate {0}/{1} Wmu User seed instances.\n'.format(total_fail_count, model_count)
-        ))
+        # Handle for all models failing to seed.
+        if total_fail_count == model_count:
+            raise ValidationError('Failed to generate any Wmu User seed instances.')
+
+        if total_fail_count >= (model_count / 2):
+            # Handle for a majority of models failing to seed (at least half).
+            stdout.write(style.ERROR(
+                'Failed to generate {0}/{1} Wmu User seed instances.\n'.format(total_fail_count, model_count)
+            ))
+        else:
+            # Handle for some models failing to seed (less than half, more than 0).
+            stdout.write(style.WARNING(
+                'Failed to generate {0}/{1} Wmu User seed instances.\n'.format(total_fail_count, model_count)
+            ))
+
 
     stdout.write('Populated ' + style.SQL_FIELD('Wmu User') + ' models.\n')
