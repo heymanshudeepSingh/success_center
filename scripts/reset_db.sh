@@ -7,12 +7,17 @@
 set -e
 
 
+# Global Variables.
 return_value=""
 color_reset='\033[0m'
 color_red='\033[1;31m'
 color_green='\033[1;32m'
 color_blue='\033[1;34m'
 color_cyan='\033[1;36m'
+
+
+# Get passed script args.
+model_count="$1"
 
 
 # Change to location of script's directory.
@@ -67,9 +72,16 @@ function main () {
     echo ""
     echo ""
 
-    # Create seeded data.
+    # Create seeded data. Attempts to used passed model_count arg.
     echo -e "${color_blue}Seeding data...${color_reset}"
-    python ../manage.py seed --traceback
+
+    re='^[0-9]+$'
+    if ! [[ $yournumber =~ $re ]]
+    then
+        python ../manage.py seed $model_count --traceback
+    else
+        python ../manage.py seed --traceback
+    fi
     echo ""
 
     echo -e "${color_green}Database reset and reseeded. Terminating script.${color_reset}"
