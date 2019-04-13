@@ -279,6 +279,7 @@ class WmuUser(models.Model):
     active = models.BooleanField(default=True)
 
     # Self-setting/Non-user-editable fields.
+    full_email = models.EmailField(blank=True, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
 
