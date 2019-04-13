@@ -75,12 +75,26 @@ footer {
 
 footer {
 
+    @each $font-option, $font-option-value in $font-size-options {
+    .font-size-#{$font-option} & a, .font-size-#{$font-option} & p {
+
+        font-size: font-option($font-option) * 0.9;
+
+    }}
+
     @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
         font-weight: bold;
         color: theme-text($theme, 'primary');
 
+        a, p {
+            color: inherit;
+        }
+
+        a:hover {
+            color: theme-text($theme, 'primary-hover');
+        }
     }}
 
 }

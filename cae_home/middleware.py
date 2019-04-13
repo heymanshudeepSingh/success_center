@@ -6,6 +6,7 @@ import pytz
 
 from django.conf import settings
 from django.contrib.sites.shortcuts import get_current_site
+from django.db.models import ObjectDoesNotExist
 from django.utils import timezone
 
 from cae_home import models
@@ -73,6 +74,13 @@ class GetProjectDetailMiddleware(object):
 
             # Get installed project/app details.
             response.context_data['imported_projects'] = settings.INSTALLED_APP_DETAILS
+
+            # Get CAE Programmer email (For footer).
+            try:
+                response.context_data['cae_prog_email'] = models.WmuUser.objects.get(bronco_net='ceas_prog').full_email
+            except ObjectDoesNotExist:
+                pass
+
 
         return response
 

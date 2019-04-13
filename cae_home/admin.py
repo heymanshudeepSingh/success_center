@@ -429,7 +429,7 @@ class WmuUserAdmin(admin.ModelAdmin):
                 'user_type', 'bronco_net', 'winno', 'first_name', 'last_name', 'major', 'department',
             )}),
         ('Contact Info', {
-            'fields': ('official_email',)
+            'fields': ('official_email', 'full_email')
         }),
         ('Advanced', {
             'classes': ('collapse',),
