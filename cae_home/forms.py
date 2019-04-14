@@ -73,7 +73,7 @@ class AuthenticationForm(auth_form):
     """
     Modified login page form.
     """
-    remember_me = forms.BooleanField(required=False)
+    remember_me = forms.BooleanField(required=False, label='Keep Me Logged In:')
 
 
 class ExampleForm(forms.Form):
