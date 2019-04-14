@@ -47,6 +47,9 @@ footer {
         @include flex-direction(row);
         @include justify-content(space-around);
         @include align-items(center);
+
+        //width: 100%;
+        //padding: 5px;
     }
 }
 

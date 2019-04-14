@@ -65,8 +65,6 @@ header nav {
     }
 
     > ul > hr {
-        height: 25px;
-
         padding: 0;
         margin: 0;
         margin-top: 3px;
@@ -79,8 +77,6 @@ header nav {
 
     > ul > li {
         position: relative;
-
-        min-height: 33px;
 
         padding-top: 3px;
         padding-right: 10px;
@@ -100,10 +96,6 @@ header nav {
 
         margin-left: 5px;
         margin-right: 5px;
-
-        @media only screen and (min-width: $screen-tablet-mid) {
-            top: 39px;
-        }
     }
 
     > ul > li > ul > li {
@@ -138,6 +130,103 @@ header nav {
 //========================================//
 
 
+//====================================================================//
+//==== START "General Header Nav" Font-Size Option Handling Block ====//
+//====================================================================//
+
+header nav {
+
+    // Size Extra Small.
+    .font-size-xs & {
+
+        > ul > hr {
+            height: 19px;
+        }
+
+        > ul > li > ul {
+            @media only screen and (min-width: $screen-tablet-mid) {
+                top: 33px;
+            }
+        }
+    }
+
+    // Size Small.
+    .font-size-sm & {
+
+        > ul > hr {
+            height: 21px;
+        }
+
+        > ul > li > ul {
+            @media only screen and (min-width: $screen-tablet-mid) {
+                top: 35px;
+            }
+        }
+    }
+
+    // Size Default.
+    .font-size-base & {
+
+        > ul > hr {
+            height: 25px;
+        }
+
+        > ul > li > ul {
+            @media only screen and (min-width: $screen-tablet-mid) {
+                top: 38px;
+            }
+        }
+    }
+
+    // Size Medium.
+    .font-size-md & {
+
+        > ul > hr {
+            height: 26px;
+        }
+
+        > ul > li > ul {
+            @media only screen and (min-width: $screen-tablet-mid) {
+                top: 40px;
+            }
+        }
+    }
+
+    // Size Large.
+    .font-size-lg & {
+
+        > ul > hr {
+            height: 29px;
+        }
+
+        > ul > li > ul {
+            @media only screen and (min-width: $screen-tablet-mid) {
+                top: 43px;
+            }
+        }
+    }
+
+    // Size Extra Large.
+    .font-size-xl & {
+
+        > ul > hr {
+            height: 35px;
+        }
+
+        > ul > li > ul {
+            @media only screen and (min-width: $screen-tablet-mid) {
+                top: 49px;
+            }
+        }
+    }
+
+}
+
+//====================================================================//
+//===== END "General Header Nav" Font-Size Option Handling Block =====//
+//====================================================================//
+
+
 //=====================================//
 //==== START Mobile Nav Icon Block ====//
 //=====================================//
@@ -149,7 +238,7 @@ header nav {
     @include align-items(center);
 
     width: 28px;
-    height: 20px;
+    /*height: 20px;*/
     padding: 5px;
     margin-top: 3px;
     margin-right: 3vw;
@@ -172,6 +261,49 @@ header nav {
 //=====================================//
 //===== END Mobile Nav Icon Block =====//
 //=====================================//
+
+
+//=================================================================//
+//==== START "Mobile Nav Icon" Font-Size Option Handling Block ====//
+//=================================================================//
+
+.mobile-nav-icon {
+
+    // Size Extra Small.
+    .font-size-xs & {
+        height: 14px;
+    }
+
+    // Size Small.
+    .font-size-sm & {
+        height: 16px;
+    }
+
+    // Size Default.
+    .font-size-base & {
+        height: 19px;
+    }
+
+    // Size Medium.
+    .font-size-md & {
+        height: 21px;
+    }
+
+    // Size Large.
+    .font-size-lg & {
+        height: 24px;
+    }
+
+    // Size Extra Large.
+    .font-size-xl & {
+        height: 30px;
+    }
+
+}
+
+//=================================================================//
+//===== END "Mobile Nav Icon" Font-Size Option Handling Block =====//
+//=================================================================//
 
 
 //=========================================//
@@ -199,12 +331,63 @@ header nav {
             @include flex-direction(row);
             @include flex-wrap(wrap);
         }
+
+        ul > li > ul > li {
+            min-height: 24px;
+
+            > a {
+                min-height: 14px;
+            }
+        }
     }
 }
 
 //=========================================//
 //===== END Mobile Nav Dropdown Block =====//
 //=========================================//
+
+
+//=====================================================================//
+//==== START "Mobile Nav Dropdown" Font-Size Option Handling Block ====//
+//=====================================================================//
+
+.header-bottom {
+
+    // Size Extra Small.
+    .font-size-xs & {
+        top: 34px;
+    }
+
+    // Size Small.
+    .font-size-sm & {
+        top: 36px;
+    }
+
+    // Size Default.
+    .font-size-base & {
+        top: 39px;
+    }
+
+    // Size Medium.
+    .font-size-md & {
+        top: 41px;
+    }
+
+    // Size Large.
+    .font-size-lg & {
+        top: 44px;
+    }
+
+    // Size Extra Large.
+    .font-size-xl & {
+        top: 50px;
+    }
+
+}
+
+//=====================================================================//
+//===== END "Mobile Nav Dropdown" Font-Size Option Handling Block =====//
+//=====================================================================//
 
 
 //================================================================================//
