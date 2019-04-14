@@ -52,32 +52,32 @@ body {
 
     // Size Extra Small.
     &.font-size-xs {
-        grid-template-rows: 34px auto auto 35px;
+        grid-template-rows: 34px auto auto 34px;
     }
 
     // Size Small.
     &.font-size-sm {
-        grid-template-rows: 36px auto auto 35px;
+        grid-template-rows: 36px auto auto 36px;
     }
 
     // Size Default.
     &.font-size-base {
-        grid-template-rows: 39px auto auto 35px;
+        grid-template-rows: 39px auto auto 39px;
     }
 
     // Size Medium.
     &.font-size-md {
-        grid-template-rows: 41px auto auto 35px;
+        grid-template-rows: 41px auto auto 41px;
     }
 
     // Size Large.
     &.font-size-lg {
-        grid-template-rows: 44px auto auto 35px;
+        grid-template-rows: 44px auto auto 44px;
     }
 
     // Size Extra Large.
     &.font-size-xl {
-        grid-template-rows: 50px auto auto 35px;
+        grid-template-rows: 50px auto auto 50px;
     }
 }
 

@@ -107,7 +107,12 @@
         @each $header_element in $header_element_list {
         > #{$header_element} {
 
-            font-size: 115%;
+            @each $font-option, $font-option-value in $font-size-options {
+            .font-size-#{$font-option} & {
+
+                font-size: font-option($font-option) * 1.15;
+
+            }}
 
         }}
     }

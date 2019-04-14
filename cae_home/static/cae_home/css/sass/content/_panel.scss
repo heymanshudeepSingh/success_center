@@ -184,13 +184,24 @@
         @each $panel_header_element in $panel_header_element_list {
         > #{$panel_header_element} {
 
-                font-size: 110%;
                 font-weight: bold;
+
+                @each $font-option, $font-option-value in $font-size-options {
+                .font-size-#{$font-option} & {
+
+                    font-size: font-option($font-option) * 1.10;
+
+                }}
 
                 @each $header_element in $header_element_list {
                 > #{$header_element} {
 
-                    font-size: 110%;
+                    @each $font-option, $font-option-value in $font-size-options {
+                    .font-size-#{$font-option} & {
+
+                        font-size: font-option($font-option) * 1.10;
+
+                    }}
 
                 }}
 
@@ -372,7 +383,13 @@
 
             @each $header_element in $header_element_list {
             #{$header_element} {
-                font-size: 100%;
+
+                @each $font-option, $font-option-value in $font-size-options {
+                .font-size-#{$font-option} & {
+
+                    font-size: font-option($font-option);
+
+                }}
 
             }}
         }

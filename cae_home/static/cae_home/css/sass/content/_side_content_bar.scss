@@ -139,25 +139,59 @@
         @each $header_element in $header_element_list {
         #{$header_element} {
 
-            font-size: 110%;
+            @each $font-option, $font-option-value in $font-size-options {
+            .font-size-#{$font-option} & {
+
+                font-size: font-option($font-option) * 1.10;
+
+            }}
+
         }}
 
         > .bar-nav p {
-            font-size: 150%;
+
+            @each $font-option, $font-option-value in $font-size-options {
+            .font-size-#{$font-option} & {
+
+                font-size: font-option($font-option) * 1.50;
+
+            }}
+
         }
 
         > .bar-content p, > .bar-content a {
-            font-size: 90%;
+
+            @each $font-option, $font-option-value in $font-size-options {
+            .font-size-#{$font-option} & {
+
+                font-size: font-option($font-option) * 0.90;
+
+            }}
+
         }
 
         > .bar-content a:hover {
-            font-size: 90%;
+
+            @each $font-option, $font-option-value in $font-size-options {
+            .font-size-#{$font-option} & {
+
+                font-size: font-option($font-option) * 0.90;
+
+            }}
+
         }
 
     }}
 
     .arrow-right, .arrow-left {
-        font-size: 100% !important;
+
+        @each $font-option, $font-option-value in $font-size-options {
+        .font-size-#{$font-option} & {
+
+            font-size: font-option($font-option) !important;
+
+        }}
+
     }
 
 }
