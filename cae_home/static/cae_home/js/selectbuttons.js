@@ -56,7 +56,7 @@ function createSelectButtonWidget(select_element, display_side=false) {
         var parent_container = $(select_element).parent().parent().parent();
 
         // Add css class to form to handle columns.
-        $(parent_container).parent().addClass('multi-col');
+        $(parent_container).addClass('multi-col');
 
         // Get widget to move and add it to a seperate sub-div.
         var right_form_inputs = $('<div class="form-col mobile-display-first"></div>');

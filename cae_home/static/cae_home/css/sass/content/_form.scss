@@ -94,11 +94,11 @@
 
 
 // Logic to display form with multiple columns of inputs.
-.main-content form.multi-col {
+.main-content form .multi-col {
 
     @media only screen and (max-width: $screen-tablet-mid) {
 
-        .form-col {
+        &.form-col {
             order: 2;
         }
 
@@ -111,7 +111,7 @@
     @media only screen and (min-width: $screen-tablet-mid) {
 
         // Parent container for all of a form's fields.
-        .form-inputs {
+        &.form-inputs {
             @include flex-direction(row);
 
             > .form-col {
