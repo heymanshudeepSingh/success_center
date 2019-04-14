@@ -127,9 +127,9 @@
 // word-break, word-wrap, white-space                                             //
 //================================================================================//
 
-//===========================//
-//==== START ----- Block ====//
-//===========================//
+//=========================================//
+//==== START General Content Bar Block ====//
+//=========================================//
 
 .content-bar-left, .content-bar-right {
 
@@ -140,26 +140,18 @@
         #{$header_element} {
 
             font-size: 110%;
-            color: theme-text($theme, 'primary');
         }}
 
         > .bar-nav p {
             font-size: 150%;
-            color: theme-status($theme, 'default', 'primary');
-        }
-
-        > .bar-nav p:hover {
-            color: theme-text($theme, 'content');
         }
 
         > .bar-content p, > .bar-content a {
             font-size: 90%;
-            color: theme-text($theme, 'primary');
         }
 
         > .bar-content a:hover {
             font-size: 90%;
-            color: theme-text($theme, 'primary-hover');
         }
 
     }}
@@ -170,9 +162,49 @@
 
 }
 
-//===========================//
-//===== END ----- Block =====//
-//===========================//
+//=========================================//
+//===== END General Content Bar Block =====//
+//=========================================//
+
+
+//========================================================//
+//==== START "General Content Bar" Theme Colors Block ====//
+//========================================================//
+
+.content-bar-left, .content-bar-right {
+
+    @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & {
+
+        @each $header_element in $header_element_list {
+        #{$header_element} {
+
+            color: theme-text($theme, 'primary');
+        }}
+
+        > .bar-nav p {
+            color: theme-status($theme, 'default', 'primary');
+        }
+
+        > .bar-nav p:hover {
+            color: theme-text($theme, 'content');
+        }
+
+        > .bar-content p, > .bar-content a {
+            color: theme-text($theme, 'primary');
+        }
+
+        > .bar-content a:hover {
+            color: theme-text($theme, 'primary-hover');
+        }
+
+    }}
+
+}
+
+//========================================================//
+//===== END "General Content Bar" Theme Colors Block =====//
+//========================================================//
 
 
 //================================================================================//
@@ -203,15 +235,32 @@
 // zoom                                                                           //
 //================================================================================//
 
-//===========================//
-//==== START ----- Block ====//
-//===========================//
+//=========================================//
+//==== START General Content Bar Block ====//
+//=========================================//
 
 .content-bar-left, .content-bar-right {
 
     li {
         list-style: none;
     }
+
+    .arrow-right, .arrow-left {
+        border-radius: 25px;
+    }
+
+}
+
+//=========================================//
+//===== END General Content Bar Block =====//
+//=========================================//
+
+
+//========================================================//
+//==== START "General Content Bar" Theme Colors Block ====//
+//========================================================//
+
+.content-bar-left, .content-bar-right {
 
     @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
@@ -224,7 +273,6 @@
 
         .arrow-right, .arrow-left {
             background-color: theme-status($theme, 'default', 'secondary');
-            border-radius: 25px;
         }
 
         .arrow-right:hover, .arrow-left:hover {
@@ -235,9 +283,9 @@
 
 }
 
-//===========================//
-//===== END ----- Block =====//
-//===========================//
+//========================================================//
+//===== END "General Content Bar" Theme Colors Block =====//
+//========================================================//
 
 
 //================================================================================//

@@ -238,7 +238,6 @@ header nav {
     @include align-items(center);
 
     width: 28px;
-    /*height: 20px;*/
     padding: 5px;
     margin-top: 3px;
     margin-right: 3vw;
@@ -410,7 +409,31 @@ header nav {
 
 header nav {
 
-  @each $theme, $theme-dict in $theme-colors {
+    a, p {
+        font-weight: bold;
+        color: inherit;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    a, p {
+        color: inherit;
+    }
+
+}
+
+//================================//
+//===== END Header Nav Block =====//
+//================================//
+
+
+//===============================================//
+//==== START "Header Nav" Theme Colors Block ====//
+//===============================================//
+
+header nav {
+
+    @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
         li {
@@ -421,25 +444,13 @@ header nav {
             color: theme-text($theme, 'primary-hover');
         }
 
-        a, p {
-            font-weight: bold;
-            color: inherit;
-            text-align: center;
-            text-decoration: none;
-        }
-
-        a, p {
-            color: inherit;
-        }
-
-    }
-  }
+    }}
 
 }
 
-//===============================//
-//===== END HeaderNav Block =====//
-//===============================//
+//===============================================//
+//===== END "Header Nav" Theme Colors Block =====//
+//===============================================//
 
 
 //=========================================//
@@ -492,12 +503,36 @@ header nav {
 
 header nav {
 
+    ul {
+        list-style-type: none;
+    }
+}
+
+header .header-top nav {
+
+    > ul > li > ul > li {
+        border-top: 0;
+    }
+
+    > ul > li > ul > li:last-child {
+        border-bottom-right-radius: 3px;
+        border-bottom-left-radius: 3px;
+    }
+}
+
+//================================//
+//===== END Header Nav Block =====//
+//================================//
+
+
+//===============================================//
+//==== START "Header Nav" Theme Colors Block ====//
+//===============================================//
+
+header nav {
+
     @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
-
-        ul {
-            list-style-type: none;
-        }
 
         li {
             background-color: theme-background($theme, 'primary');
@@ -518,44 +553,28 @@ header .header-top nav {
 
         > ul > li > ul > li {
             border: 1px solid theme-background($theme, 'border');
-            border-top: 0;
-        }
-
-        > ul > li > ul > li:last-child {
-            border-bottom-right-radius: 3px;
-            border-bottom-left-radius: 3px;
         }
 
     }}
 
 }
 
-//===============================//
-//===== END HeaderNav Block =====//
-//===============================//
+//===============================================//
+//===== END "Header Nav" Theme Colors Block =====//
+//===============================================//
 
 
 //=====================================//
 //==== START Mobile Nav Icon Block ====//
 //=====================================//
 
-header nav {
+header nav .mobile-nav-icon {
 
-    @each $theme, $theme-dict in $theme-colors {
-    .theme-#{$theme} & {
+    border-radius: 5px;
 
-        .mobile-nav-icon {
-            border: 1px solid theme-background($theme, 'border');
-            border-radius: 5px;
-
-            hr {
-                border: 0;
-                border-top: 1px solid theme-background($theme, 'border');
-            }
-        }
-
-    }}
-
+    hr {
+        border: 0;
+    }
 }
 
 //=====================================//
@@ -563,34 +582,68 @@ header nav {
 //=====================================//
 
 
-//=========================================//
-//==== START Mobile Nav Dropdown Block ====//
-//=========================================//
+//====================================================//
+//==== START "Mobile Nav Icon" Theme Colors Block ====//
+//====================================================//
 
-header {
+header nav .mobile-nav-icon {
 
     @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
-        .header-bottom nav {
+        border: 1px solid theme-background($theme, 'border');
 
-            ul > li {
-                border-bottom: 1px solid theme-background($theme, 'border');
-            }
-
-            ul > li > ul > li {
-                border: 0px;
-                border-radius: 3px;
-            }
+        hr {
+            border-top: 1px solid theme-background($theme, 'border');
         }
 
     }}
 
 }
 
+//====================================================//
+//===== END "Mobile Nav Icon" Theme Colors Block =====//
+//====================================================//
+
+
+//=========================================//
+//==== START Mobile Nav Dropdown Block ====//
+//=========================================//
+
+header .header-bottom nav {
+
+    ul > li > ul > li {
+        border: 0px;
+        border-radius: 3px;
+    }
+
+}
+
 //=========================================//
 //===== END Mobile Nav Dropdown Block =====//
 //=========================================//
+
+
+//========================================================//
+//==== START "Mobile Nav Dropdown" Theme Colors Block ====//
+//========================================================//
+
+header .header-bottom nav {
+
+    @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & {
+
+        ul > li {
+            border-bottom: 1px solid theme-background($theme, 'border');
+        }
+
+    }}
+
+}
+
+//========================================================//
+//===== END "Mobile Nav Dropdown" Theme Colors Block =====//
+//========================================================//
 
 
 //================================================================================//

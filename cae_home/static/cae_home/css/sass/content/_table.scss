@@ -95,73 +95,95 @@
 // word-break, word-wrap, white-space                                             //
 //================================================================================//
 
-//===========================//
-//==== START ----- Block ====//
-//===========================//
+//===================================//
+//==== START General Table Block ====//
+//===================================//
 
-.main-content {
+.main-content table {
+
+    th, th a {
+        font-weight: bold;
+
+        @each $header_element in $header_element_list {
+        > #{$header_element} {
+
+            font-size: 115%;
+
+        }}
+    }
+
+    tbody {
+
+        th, td {
+
+            > a, a:hover {
+                text-decoration: none;
+            }
+        }
+
+    }
+
+}
+
+//===================================//
+//===== END General Table Block =====//
+//===================================//
+
+
+//==================================================//
+//==== START "General Table" Theme Colors Block ====//
+//==================================================//
+
+.main-content table {
 
     @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
-        table {
+        thead, tfoot {
+            // Stylings specific to wmu theme.
+            @if $theme == "wmu" {
+                color: theme-status($theme, 'secondary', 'text');
+            } @else {
+                color: theme-status($theme, 'primary', 'text');
+            }
 
-            thead, tfoot {
-                // Stylings specific to wmu theme.
+            th a, th a:hover {
                 @if $theme == "wmu" {
                     color: theme-status($theme, 'secondary', 'text');
                 } @else {
                     color: theme-status($theme, 'primary', 'text');
                 }
+            }
+        }
 
-                th a, th a:hover {
-                    @if $theme == "wmu" {
-                        color: theme-status($theme, 'secondary', 'text');
-                    } @else {
-                        color: theme-status($theme, 'primary', 'text');
-                    }
+        tbody {
+
+            th, td {
+
+                > a, a:hover {
+                    color: theme-text($theme, 'text');
                 }
             }
 
-            th, th a {
-                font-weight: bold;
+            tr:hover th, tr:hover td {
 
-                @each $header_element in $header_element_list {
-                > #{$header_element} {
-
-                    font-size: 115%;
-
-                }}
-            }
-
-            tbody {
-                th, td {
-                    > a, a:hover {
-                        color: theme-text($theme, 'text');
-                        text-decoration: none;
-                    }
+                > a {
+                    color: theme-text($theme, 'link');
                 }
 
-                tr:hover th, tr:hover td {
-                    > a {
-                        color: theme-text($theme, 'link');
-                    }
-
-                    > a:hover {
-                        color: theme-text($theme, 'link-hover');
-                    }
+                > a:hover {
+                    color: theme-text($theme, 'link-hover');
                 }
             }
         }
 
-    }
-  }
+    }}
 
 }
 
-//===========================//
-//===== END ----- Block =====//
-//===========================//
+//==================================================//
+//===== END "General Table" Theme Colors Block =====//
+//==================================================//
 
 
 //================================================================================//
@@ -192,77 +214,86 @@
 // zoom                                                                           //
 //================================================================================//
 
-//===========================//
-//==== START ----- Block ====//
-//===========================//
+//===================================//
+//==== START General Table Block ====//
+//===================================//
 
-.main-content {
+.main-content table {
+    border-collapse: collapse;
+}
+
+//===================================//
+//===== END General Table Block =====//
+//===================================//
+
+
+//==================================================//
+//==== START "General Table" Theme Colors Block ====//
+//==================================================//
+
+.main-content table {
 
     @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
-        table {
-            border-collapse: collapse;
+        thead, tfoot {
+            // Stylings specific to wmu theme.
+            @if $theme == "wmu" {
+                background-color: theme-status($theme, 'secondary', 'primary');
+            } @else {
+                background-color: theme-status($theme, 'primary', 'primary');
+            }
+        }
 
-            thead, tfoot {
+        tbody {
+            tr:first-child {
                 // Stylings specific to wmu theme.
                 @if $theme == "wmu" {
-                    background-color: theme-status($theme, 'secondary', 'primary');
+                    border-top: 1px solid theme-status($theme, 'secondary', 'border');
                 } @else {
-                    background-color: theme-status($theme, 'primary', 'primary');
+                    border-top: 1px solid theme-status($theme, 'primary', 'border');
                 }
             }
 
-            tbody {
-                tr:first-child {
-                    // Stylings specific to wmu theme.
-                    @if $theme == "wmu" {
-                        border-top: 1px solid theme-status($theme, 'secondary', 'border');
-                    } @else {
-                        border-top: 1px solid theme-status($theme, 'primary', 'border');
-                    }
-                }
-
-                tr:last-child {
-                    // Stylings specific to wmu theme.
-                    @if $theme == "wmu" {
-                        border-bottom: 1px solid theme-status($theme, 'secondary', 'border');
-                    } @else {
-                        border-bottom: 1px solid theme-status($theme, 'primary', 'border');
-                    }
-                }
-
-                tr:nth-child(odd) {
-                    background-color: theme-background($theme, 'table-row-odd');
-                }
-
-                tr:nth-child(even) {
-                    background-color: theme-background($theme, 'table-row-even');
-                }
-
-                tr:hover {
-                    background-color: theme-background($theme, 'table-row-hover');
+            tr:last-child {
+                // Stylings specific to wmu theme.
+                @if $theme == "wmu" {
+                    border-bottom: 1px solid theme-status($theme, 'secondary', 'border');
+                } @else {
+                    border-bottom: 1px solid theme-status($theme, 'primary', 'border');
                 }
             }
 
-            tr {
-                // Stylings specific to wmu theme.
-                @if $theme == "wmu" {
-                    border-left: 1px solid theme-status($theme, 'secondary', 'border');
-                    border-right: 1px solid theme-status($theme, 'secondary', 'border');
-                } @else {
-                    border-left: 1px solid theme-status($theme, 'primary', 'border');
-                    border-right: 1px solid theme-status($theme, 'primary', 'border');
-                }
+            tr:nth-child(odd) {
+                background-color: theme-background($theme, 'table-row-odd');
             }
 
-            th {
-                // Stylings specific to wmu theme.
-                @if $theme == "wmu" {
-                    border: 1px solid theme-status($theme, 'secondary', 'border');
-                } @else {
-                    border: 1px solid theme-status($theme, 'primary', 'border');
-                }
+            tr:nth-child(even) {
+                background-color: theme-background($theme, 'table-row-even');
+            }
+
+            tr:hover {
+                background-color: theme-background($theme, 'table-row-hover');
+            }
+        }
+
+        tr {
+            // Stylings specific to wmu theme.
+            @if $theme == "wmu" {
+                border-left: 1px solid theme-status($theme, 'secondary', 'border');
+                border-right: 1px solid theme-status($theme, 'secondary', 'border');
+            } @else {
+                border-left: 1px solid theme-status($theme, 'primary', 'border');
+                border-right: 1px solid theme-status($theme, 'primary', 'border');
+            }
+        }
+
+        th {
+            // Stylings specific to wmu theme.
+            @if $theme == "wmu" {
+                border: 1px solid theme-status($theme, 'secondary', 'border');
+            } @else {
+                border: 1px solid theme-status($theme, 'primary', 'border');
             }
         }
 
@@ -270,9 +301,9 @@
 
 }
 
-//===========================//
-//===== END ----- Block =====//
-//===========================//
+//==================================================//
+//===== END "General Table" Theme Colors Block =====//
+//==================================================//
 
 
 //================================================================================//

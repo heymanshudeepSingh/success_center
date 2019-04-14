@@ -36,7 +36,7 @@
 
 .main-content {
 
-    button, .button, input.button {
+    button, .button {
         display: inline-block;
         padding-top: 6px;
         padding-right: 12px;
@@ -85,9 +85,28 @@
 // word-break, word-wrap, white-space                                             //
 //================================================================================//
 
-//===========================//
-//==== START ----- Block ====//
-//===========================//
+//====================================//
+//==== START General Button Block ====//
+//====================================//
+
+.main-content {
+
+    button, .button {
+        font-size: 1rem;
+        text-decoration: none;
+
+    }
+
+}
+
+//====================================//
+//===== END General Button Block =====//
+//====================================//
+
+
+//===================================================//
+//==== START "General Button" Theme Colors Block ====//
+//===================================================//
 
 .main-content {
 
@@ -95,9 +114,6 @@
     .theme-#{$theme} & {
 
         button, .button {
-            font-size: 1rem;
-            text-decoration: none;
-
             color: theme-text($theme, 'content-accent');
         }
 
@@ -118,9 +134,9 @@
 
 }
 
-//===========================//
-//===== END ----- Block =====//
-//===========================//
+//===================================================//
+//===== END "General Button" Theme Colors Block =====//
+//===================================================//
 
 
 //================================================================================//
@@ -151,9 +167,38 @@
 // zoom                                                                           //
 //================================================================================//
 
-//===========================//
-//==== START ----- Block ====//
-//===========================//
+//====================================//
+//==== START General Button Block ====//
+//====================================//
+
+.main-content {
+
+    button, .button {
+        border-radius: 5px;
+    }
+
+    div.buttons {
+
+        button:not(:first-child), .button:not(:first-child) {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        button:not(:last-child), .button:not(:last-child) {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+    }
+}
+
+//====================================//
+//===== END General Button Block =====//
+//====================================//
+
+
+//===================================================//
+//==== START "General Button" Theme Colors Block ====//
+//===================================================//
 
 .main-content {
 
@@ -163,8 +208,6 @@
         button, .button {
             background-color: theme-status($theme, 'default', 'primary');
             border: 1px solid theme-status($theme, 'default', 'border');
-
-            border-radius: 5px;
         }
 
         button:hover, .button:hover {
@@ -189,24 +232,11 @@
 
     }}
 
-    div.buttons {
-
-        button:not(:first-child), .button:not(:first-child) {
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
-        }
-
-        button:not(:last-child), .button:not(:last-child) {
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0;
-        }
-    }
-
 }
 
-//===========================//
-//===== END ----- Block =====//
-//===========================//
+//===================================================//
+//===== END "General Button" Theme Colors Block =====//
+//===================================================//
 
 
 //================================================================================//

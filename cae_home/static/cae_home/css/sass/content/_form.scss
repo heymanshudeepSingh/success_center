@@ -191,12 +191,30 @@
 
     .select-buttons {
 
+        .select-item {
+            text-align: center;
+        }
+    }
+}
+
+//===================================//
+//===== END Custom Widget Block =====//
+//===================================//
+
+
+//==================================================//
+//==== START "Custom Widget" Theme Colors Block ====//
+//==================================================//
+
+.main-content form {
+
+    .select-buttons {
+
         @each $theme, $theme-dict in $theme-colors {
         .theme-#{$theme} & {
 
             .select-item {
                 color: theme-text($theme, 'content');
-                text-align: center;
             }
 
             .select-item.selected {
@@ -208,9 +226,9 @@
     }
 }
 
-//===================================//
-//===== END Custom Widget Block =====//
-//===================================//
+//==================================================//
+//===== END "Custom Widget" Theme Colors Block =====//
+//==================================================//
 
 
 //================================================================================//
@@ -249,12 +267,30 @@
 
     .select-buttons {
 
+        .select-item {
+            border-radius: 5px;
+        }
+    }
+}
+
+//===================================//
+//===== END Custom Widget Block =====//
+//===================================//
+
+
+//==================================================//
+//==== START "Custom Widget" Theme Colors Block ====//
+//==================================================//
+
+.main-content form {
+
+    .select-buttons {
+
         @each $theme, $theme-dict in $theme-colors {
         .theme-#{$theme} & {
 
             .select-item {
                 border: 3px solid theme-status($theme, 'primary', 'primary');
-                border-radius: 5px;
             }
 
             .select-item.selected {
@@ -267,9 +303,9 @@
     }
 }
 
-//===================================//
-//===== END Custom Widget Block =====//
-//===================================//
+//==================================================//
+//===== END "Custom Widget" Theme Colors Block =====//
+//==================================================//
 
 
 //================================================================================//

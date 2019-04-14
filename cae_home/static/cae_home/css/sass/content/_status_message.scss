@@ -104,9 +104,9 @@
 // word-break, word-wrap, white-space                                             //
 //================================================================================//
 
-//===========================//
-//==== START ----- Block ====//
-//===========================//
+//============================================//
+//==== START General Status Message Block ====//
+//============================================//
 
 .main-content {
 
@@ -116,8 +116,39 @@
         .message {
             a {
                 font-weight: bold;
-                color: theme-status($theme, 'default', 'link');
                 text-decoration: none;
+            }
+
+            .exit {
+                font-weight: bold;
+            }
+
+            .exit:hover {
+                font-weight: bold;
+            }
+        }
+
+    }}
+
+}
+
+//============================================//
+//===== END General Status Message Block =====//
+//============================================//
+
+
+//===========================================================//
+//==== START "General Status Message" Theme Colors Block ====//
+//===========================================================//
+
+.main-content {
+
+    @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & #status-message-container {
+
+        .message {
+            a {
+                color: theme-status($theme, 'default', 'link');
             }
 
             a:hover {
@@ -125,12 +156,10 @@
             }
 
             .exit {
-                font-weight: bold;
                 color: theme-status($theme, 'default', 'link');
             }
 
             .exit:hover {
-                font-weight: bold;
                 color: theme-status($theme, 'default', 'link-hover');
             }
         }
@@ -175,9 +204,9 @@
 
 }
 
-//===========================//
-//===== END ----- Block =====//
-//===========================//
+//===========================================================//
+//===== END "General Status Message" Theme Colors Block =====//
+//===========================================================//
 
 
 //================================================================================//
@@ -208,15 +237,13 @@
 // zoom                                                                           //
 //================================================================================//
 
-//===========================//
-//==== START ----- Block ====//
-//===========================//
+//============================================//
+//==== START General Status Message Block ====//
+//============================================//
 
 .main-content {
 
-    @each $theme, $theme-dict in $theme-colors {
-    .theme-#{$theme} & #status-message-container {
-
+    .message {
         li {
             list-style-type: none;
         }
@@ -224,6 +251,27 @@
         a, .exit {
             border-radius: 5em;
         }
+    }
+
+    .message:last-child {
+        border-bottom-right-radius: 5px;
+        border-bottom-left-radius: 5px;
+    }
+}
+
+//============================================//
+//===== END General Status Message Block =====//
+//============================================//
+
+
+//===========================================================//
+//==== START "General Status Message" Theme Colors Block ====//
+//===========================================================//
+
+.main-content {
+
+    @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & #status-message-container {
 
         .message {
             background-color: theme-status($theme, 'default', 'primary');
@@ -232,11 +280,6 @@
             a:hover, .exit:hover {
                 background-color: theme-status($theme, 'default', 'primary');
             }
-        }
-
-        .message:last-child {
-            border-bottom-right-radius: 5px;
-            border-bottom-left-radius: 5px;
         }
 
         .message:hover {
@@ -267,9 +310,9 @@
 
 }
 
-//===========================//
-//===== END ----- Block =====//
-//===========================//
+//===========================================================//
+//===== END "General Status Message" Theme Colors Block =====//
+//===========================================================//
 
 
 //================================================================================//

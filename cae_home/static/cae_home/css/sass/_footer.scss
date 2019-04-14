@@ -72,11 +72,16 @@ footer {
 // word-break, word-wrap, white-space                                             //
 //================================================================================//
 
-//===========================//
-//==== START ----- Block ====//
-//===========================//
+//====================================//
+//==== START General Footer Block ====//
+//====================================//
 
 footer {
+    font-weight: bold;
+
+    a, p {
+        color: inherit;
+    }
 
     @each $font-option, $font-option-value in $font-size-options {
     .font-size-#{$font-option} & a, .font-size-#{$font-option} & p {
@@ -85,26 +90,35 @@ footer {
 
     }}
 
+}
+
+//====================================//
+//===== END General Footer Block =====//
+//====================================//
+
+
+//===================================================//
+//==== START "General Footer" Theme Colors Block ====//
+//===================================================//
+
+footer {
+
     @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
-        font-weight: bold;
         color: theme-text($theme, 'primary');
-
-        a, p {
-            color: inherit;
-        }
 
         a:hover {
             color: theme-text($theme, 'primary-hover');
         }
+
     }}
 
 }
 
-//===========================//
-//===== END ----- Block =====//
-//===========================//
+//===================================================//
+//===== END "General Footer" Theme Colors Block =====//
+//===================================================//
 
 
 //================================================================================//

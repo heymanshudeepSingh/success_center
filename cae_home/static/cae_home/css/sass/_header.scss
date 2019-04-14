@@ -287,9 +287,25 @@ header {
 // zoom                                                                           //
 //================================================================================//
 
-//=============================//
-//==== START General Block ====//
-//=============================//
+//====================================//
+//==== START General Header Block ====//
+//====================================//
+
+header {
+
+    hr {
+        border-style: solid;
+    }
+}
+
+//====================================//
+//===== END General Header Block =====//
+//====================================//
+
+
+//===================================================//
+//==== START "General Header" Theme Colors Block ====//
+//===================================================//
 
 header {
 
@@ -297,7 +313,6 @@ header {
     .theme-#{$theme} & {
 
         hr {
-            border-style: solid;
             border-color: theme-background($theme, 'border');
         }
 
@@ -314,9 +329,9 @@ header {
 
 }
 
-//=============================//
-//===== END General Block =====//
-//=============================//
+//===================================================//
+//===== END "General Header" Theme Colors Block =====//
+//===================================================//
 
 
 //==========================//
@@ -325,26 +340,41 @@ header {
 
 header .site-logo > nav {
 
+    > ul > li > ul > li {
+        border-top: 0;
+    }
+
+    > ul > li > ul > li:last-child {
+        border-bottom-right-radius: 3px;
+        border-bottom-left-radius: 3px;
+    }
+}
+
+//==========================//
+//===== END Logo Block =====//
+//==========================//
+
+
+//=========================================//
+//==== START "Logo" Theme Colors Block ====//
+//=========================================//
+
+header .site-logo > nav {
+
     @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
         > ul > li > ul > li {
             border: 1px solid theme-border($theme, 'border');
-            border-top: 0;
-        }
-
-        > ul > li > ul > li:last-child {
-            border-bottom-right-radius: 3px;
-            border-bottom-left-radius: 3px;
         }
 
     }}
 
 }
 
-//==========================//
-//===== END Logo Block =====//
-//==========================//
+//=========================================//
+//===== END "Logo" Theme Colors Block =====//
+//=========================================//
 
 
 //================================================================================//

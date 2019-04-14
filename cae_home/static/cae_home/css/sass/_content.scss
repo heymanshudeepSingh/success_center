@@ -165,6 +165,24 @@
 @each $content_element in $content_element_list {
 #{$content_element} {
 
+    pre, span.pre, span.preformat, span.preformatted {
+        font-size: 85%;
+    }
+
+}}
+
+//=====================================//
+//===== END Generic Element Block =====//
+//=====================================//
+
+
+//====================================================//
+//==== START "Generic Element" Theme Colors Block ====//
+//====================================================//
+
+@each $content_element in $content_element_list {
+#{$content_element} {
+
     @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
@@ -191,8 +209,7 @@
             color: theme-text($theme, 'link-hover');
         }
 
-    pre, span.pre, span.preformat, span.preformatted {
-            font-size: 85%;
+        pre, span.pre, span.preformat, span.preformatted {
             color: theme-text($theme, 'primary');
         }
 
@@ -200,9 +217,9 @@
 
 }}
 
-//=====================================//
-//===== END Generic Element Block =====//
-//=====================================//
+//====================================================//
+//===== END "Generic Element" Theme Colors Block =====//
+//====================================================//
 
 
 //===================================//
@@ -214,7 +231,6 @@
 
     .javascript-warn {
         font-weight: bold;
-
         text-align: center;
     }
 
@@ -268,6 +284,28 @@
 
     outline: 0;
 
+    hr {
+        border-style: solid;
+    }
+
+    pre, span.pre, span.preformat, span.preformatted {
+        border-radius: 5px;
+    }
+
+}}
+
+//=====================================//
+//===== END Generic Element Block =====//
+//=====================================//
+
+
+//====================================================//
+//==== START "Generic Element" Theme Colors Block ====//
+//====================================================//
+
+@each $content_element in $content_element_list {
+#{$content_element} {
+
     @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
@@ -279,27 +317,49 @@
         }}
 
         hr {
-            border-style: solid;
             border-color: theme-background($theme, 'border');
         }
 
-    pre, span.pre, span.preformat, span.preformatted {
+        pre, span.pre, span.preformat, span.preformatted {
             background-color: theme-background($theme, 'primary');
-            border-radius: 5px;
         }
 
     }}
 
 }}
 
-//=====================================//
-//===== END Generic Element Block =====//
-//=====================================//
+//====================================================//
+//===== END "Generic Element" Theme Colors Block =====//
+//====================================================//
 
 
 //===================================//
 //==== START Generic Class Block ====//
 //===================================//
+
+@each $content_element in $content_element_list {
+#{$content_element} {
+
+    .fade-in {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .fade-out {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+}}
+
+//===================================//
+//===== END Generic Class Block =====//
+//===================================//
+
+
+//==================================================//
+//==== START "Generic Class" Theme Colors Block ====//
+//==================================================//
 
 @each $content_element in $content_element_list {
 #{$content_element} {
@@ -315,23 +375,13 @@
             background-color: theme-status($theme, 'error', 'primary');
         }
 
-        .fade-in {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .fade-out {
-            opacity: 0;
-            visibility: hidden;
-        }
-
     }}
 
 }}
 
-//===================================//
-//===== END Generic Class Block =====//
-//===================================//
+//==================================================//
+//===== END "Generic Class" Theme Colors Block =====//
+//==================================================//
 
 
 //================================================================================//
