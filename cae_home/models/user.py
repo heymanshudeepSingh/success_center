@@ -339,7 +339,7 @@ class Address(models.Model):
     optional_street = models.CharField(max_length=MAX_LENGTH, blank=True, null=True)
     city = models.CharField(max_length=MAX_LENGTH)
     state = models.PositiveSmallIntegerField(choices=STATE_CHOICES, default=21)
-    zip = models.CharField(max_length=MAX_LENGTH)
+    zip = models.CharField(max_length=7)
 
     # Self-setting/Non-user-editable fields.
     date_created = models.DateTimeField(auto_now_add=True)

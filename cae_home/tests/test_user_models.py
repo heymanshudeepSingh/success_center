@@ -229,7 +229,7 @@ class AddressModelTests(IntegrationTestCase):
             optional_street="Test Apt",
             city="Test City",
             state=25,
-            zip="Test Zip",
+            zip="49006",
         )
 
     def test_model_creation(self):
@@ -237,7 +237,7 @@ class AddressModelTests(IntegrationTestCase):
         self.assertEqual(self.test_address.optional_street, 'Test Apt')
         self.assertEqual(self.test_address.city, 'Test City')
         self.assertEqual(self.test_address.state, 25)
-        self.assertEqual(self.test_address.zip, 'Test Zip')
+        self.assertEqual(self.test_address.zip, '49006')
 
     def test_string_representation(self):
         self.assertEqual(str(self.test_address),

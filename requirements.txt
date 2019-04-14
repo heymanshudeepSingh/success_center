@@ -32,7 +32,7 @@ selenium==3.141.0
 
 # -- Optional imports --
 # For connecting to mysql. Not necessary if using sqlite during development.
-# mysqlclient
+mysqlclient
 # For ldap connection. Only necessary when CaeAuthBackend is turned on.
 # ldap3
 # For putting on a production server. Required for Apache/Daphne to use a Python virtual environment.

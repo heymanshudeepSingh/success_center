@@ -108,4 +108,6 @@ then
     fi
 
     exit
+else
+    main
 fi
