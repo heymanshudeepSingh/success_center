@@ -15,8 +15,6 @@ django-filter==2.1.0
 Faker==1.0.4
 # Read .xls and .xlsx Excel files (Deprecated, but required for .xls)
 xlrd==1.2.0
-# Server to host site
-uwsgi
 
 
 # -- Third Party Django Apps --
@@ -37,8 +35,9 @@ selenium==3.141.0
 # mysqlclient
 # For ldap connection. Only necessary when CaeAuthBackend is turned on.
 # ldap3
-# For putting on a production server. Required for apache to use a Python virtual environment.
+# For putting on a production server. Required for Apache/Daphne to use a Python virtual environment.
 # mod_wsgi
+# uwsgi
 
 
 # -- Pip Freeze: $ pip freeze -r requirements.txt --
