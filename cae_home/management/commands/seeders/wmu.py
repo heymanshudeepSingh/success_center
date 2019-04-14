@@ -4,7 +4,7 @@ Seeder for "WMU" related Core Models.
 
 from django.core.exceptions import ValidationError
 from django.core.management import call_command
-from django.db import IntegrityError
+from django.db import IntegrityError, transaction
 from faker import Faker
 from random import randint
 from sys import stdout
@@ -99,6 +99,7 @@ def create_wmu_users(style, model_count):
     # Get all related models.
     departments = models.Department.objects.all()
     majors = models.Major.objects.all()
+    addresses = models.Address.objects.all()
 
     # Generate models equal to model count.
     total_fail_count = 0
@@ -131,6 +132,13 @@ def create_wmu_users(style, model_count):
             # Generate user type.
             user_type = randint(0, (len(models.WmuUser.USER_TYPE_CHOICES) - 1))
 
+            # Get address.
+            index = randint(0, len(addresses) - 1)
+            address = addresses[index]
+
+            # Generate phone number.
+            phone_number = '+1{0}{1}{2}'.format(randint(111, 999), randint(111, 999), randint(1111, 9999))
+
             # Determine if active. 70% change of being true.
             if randint(0, 9) < 7:
                 active = True
@@ -139,17 +147,23 @@ def create_wmu_users(style, model_count):
 
             # Attempt to create model seed.
             try:
-                models.WmuUser.objects.create(
-                    department=department,
-                    major=major,
-                    bronco_net=bronco_net,
-                    winno=winno,
-                    first_name=faker_factory.first_name(),
-                    last_name=faker_factory.last_name(),
-                    user_type=user_type,
-                    active=active,
-                )
-                try_create_model = False
+                with transaction.atomic():
+                    models.WmuUser.objects.create(
+                        department=department,
+                        major=major,
+                        bronco_net=bronco_net,
+                        winno=winno,
+                        first_name=faker_factory.first_name(),
+                        last_name=faker_factory.last_name(),
+                        user_type=user_type,
+                        active=active,
+                    )
+                    user_profile = models.Profile.get_profile(bronco_net)
+                    user_profile.address = address
+                    user_profile.phone_number = phone_number
+                    user_profile.save()
+
+                    try_create_model = False
             except (ValidationError, IntegrityError):
                 # Seed generation failed. Nothing can be done about this without removing the random generation aspect.
                 # If we want that, we should use fixtures instead.
