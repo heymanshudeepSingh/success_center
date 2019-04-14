@@ -45,6 +45,11 @@
 
         th, td {
 
+            @each $header_element in $header_element_list {
+            #{$header_element} {
+                padding-top: 0;
+            }}
+
             > * {
                 display: inline-block;
 
