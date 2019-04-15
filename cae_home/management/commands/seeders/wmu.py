@@ -6,6 +6,7 @@ from django.core.exceptions import ValidationError
 from django.core.management import call_command
 from django.db import IntegrityError, transaction
 from faker import Faker
+from faker_e164.providers import E164Provider
 from random import randint
 from sys import stdout
 from phonenumber_field.phonenumber import PhoneNumber
@@ -92,6 +93,7 @@ def create_wmu_users(style, model_count):
 
     # Create random data generator.
     faker_factory = Faker()
+    faker_factory.add_provider(E164Provider)
 
     # Count number of models already created.
     pre_initialized_count = len(models.WmuUser.objects.all())
@@ -137,7 +139,7 @@ def create_wmu_users(style, model_count):
             address = addresses[index]
 
             # Generate phone number.
-            phone_number = '+1{0}{1}{2}'.format(randint(111, 999), randint(111, 999), randint(1111, 9999))
+            phone_number = faker_factory.safe_e164(region_code="US")
 
             # Determine if active. 70% change of being true.
             if randint(0, 9) < 7:
