@@ -178,7 +178,6 @@
 
         a:not(.button) {
             font-weight: bold;
-            text-decoration: none;
         }
 
         @each $panel_header_element in $panel_header_element_list {
