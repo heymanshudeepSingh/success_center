@@ -55,6 +55,14 @@
     > .bar-content {
         position: sticky;
         top: 0;
+        overflow-y: auto;
+
+        // Hide scrollbars.
+        -ms-overflow-style: none;  // IE 10+
+        scrollbar-width: none;  // Firefox
+        &::-webkit-scrollbar {
+            display: none;  // Safari and Chrome
+        }
 
         height: 100vh;
         padding: 10px;
@@ -81,11 +89,14 @@
         position: sticky;
         top: 0;
 
-        padding-right: 2px;
+        /*padding-right: 2px;
         padding-bottom: 2px;
         padding-left: 2px;
+        margin
         margin-right: 2px;
-        margin-left: 2px;
+        margin-left: 2px;*/
+        padding: 3px;
+        margin: 2px;
     }
 }
 
@@ -232,6 +243,14 @@
             color: theme-text($theme, 'primary-hover');
         }
 
+        .arrow-right, .arrow-left {
+            color: theme-background($theme, 'content');
+        }
+
+        .arrow-right:hover, .arrow-left:hover {
+            color: theme-stats($theme, 'primary', 'text');
+        }
+
     }}
 
 }
@@ -300,17 +319,17 @@
     .theme-#{$theme} & {
 
         > .bar-content {
-            background-color: theme-status($theme, 'secondary', 'primary');
+            background-color: theme-background($theme, 'primary');
             border-right: 1px solid theme-background($theme, 'border');
             border-left: 1px solid theme-background($theme, 'border');
         }
 
         .arrow-right, .arrow-left {
-            background-color: theme-status($theme, 'default', 'secondary');
+            background-color: $color-trans-grey-25;
         }
 
         .arrow-right:hover, .arrow-left:hover {
-            background-color: theme-background($theme, 'primary');
+            background-color: theme-status($theme, 'primary', 'primary');
         }
 
     }}
