@@ -36,50 +36,22 @@ class TimePickerWidget(forms.TimeInput):
         return attrs
 
 
-# class DateTimePickerWidget(forms.MultiWidget):
-#     """
-#     A SplitDateTime Widget that has some admin-specific styling.
-#     """
-#     def __init__(self, attrs=None):
-#         widgets = (
-#             DatePickerWidget(attrs=attrs),
-#             TimePickerWidget(attrs=attrs),
-#         )
-#         # Note that we're calling MultiWidget, not SplitDateTimeWidget, because
-#         # we want to define widgets.
-#         super(DateTimePickerWidget, self).__init__(widgets, attrs)
-#
-#     def decompress(self, value):
-#         if value:
-#             return [value.date(), value.time()]
-#         return [None, None]
+class DateTimePickerWidget(forms.SplitDateTimeWidget):
+    """
+    Generic widget for DateTime fields.
 
+    Note: Forms using this must set:
+        field_classes = {
+            '<datetime field>': forms.SplitDateTimeField,
+        }
+    """
+    def __init__(self, attrs=None, date_attrs=None, time_attrs=None):
+        if date_attrs is None:
+            date_attrs = {'class': 'form-widget-date-picker'}
+        if time_attrs is None:
+            time_attrs = {'class': 'form-widget-time-picker'}
 
-# class DateTimePickerWidget(forms.SplitDateTimeWidget):
-#     """
-#     Generic widget for DateTime fields.
-#     """
-#
-#     # def __init__(self, attrs=None, date_format=None, time_format=None, date_attrs=None, time_attrs=None):
-#     def __init__(self, attrs=None, date_attrs=None, time_attrs=None):
-#
-#         # if date_format is None:
-#         #     date_format = '%Y-%m-%d'
-#         # if time_format is None:
-#         #     time_format = '%I:%M %p'
-#         if date_attrs is None:
-#             date_attrs = {'class': 'form-widget-date-picker'}
-#         if time_attrs is None:
-#             time_attrs = {'class': 'form-widget-time-picker'}
-#
-#         super(DateTimePickerWidget, self).__init__(
-#             self,
-#             attrs,
-#             # date_format=date_format,
-#             # time_format=time_format,
-#             date_attrs=date_attrs,
-#             time_attrs=time_attrs,
-#         )
+        super(DateTimePickerWidget, self).__init__(self, attrs, date_attrs=date_attrs, time_attrs=time_attrs)
 
 
 class SelectButtonsWidget(forms.Select):
