@@ -1,5 +1,9 @@
 
-<div class="form-inputs">
+{% if form_cols %}
+  <div class="form-inputs multi-col">
+{% else %}
+    <div class="form-inputs">
+{% endif %}
 
   {% for field in form.hidden_fields %}
     <div class="hidden">
