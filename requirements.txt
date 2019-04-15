@@ -30,14 +30,13 @@ phonenumbers
 selenium==3.141.0
 
 
-# -- Optional imports --
+# -- Production imports --
 # For connecting to mysql. Not necessary if using sqlite during development.
-mysqlclient
+mysqlclient==1.4.2.post1
 # For ldap connection. Only necessary when CaeAuthBackend is turned on.
-# ldap3
+ldap3==2.6
 # For putting on a production server. Required for Apache/Daphne to use a Python virtual environment.
-# mod_wsgi
-# uwsgi
+uWSGI==2.0.18
 
 
 # -- Pip Freeze: $ pip freeze -r requirements.txt --
@@ -55,6 +54,7 @@ hyperlink==19.0.0
 idna==2.8
 incremental==17.5.0
 msgpack==0.6.1
+pyasn1==0.4.5
 PyHamcrest==1.9.0
 python-dateutil==2.8.0
 pytz==2018.9
