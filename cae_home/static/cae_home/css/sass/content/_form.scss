@@ -56,13 +56,13 @@
             width: 100%;
 
             > label {
-                width: 42.5%;
+                width: 30%;
                 margin: 5px;
 
                 text-align: right;
 
                 @media only screen and (min-width: $screen-tablet-mid) {
-                    width: 30%;
+                    width: 42.5%;
                 }
             }
 
