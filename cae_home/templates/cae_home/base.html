@@ -45,6 +45,7 @@
         <link rel="icon" type="image/png" href="{% static 'wmu_home/images/wmu_icons/favicon.ico' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'third_party/css/select2_4.0.5.min.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'cae_home/css/base.css' %}">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
       {% endblock base_styles %}
       {% block extra_styles %}{% endblock extra_styles %}
 
@@ -62,6 +63,7 @@
           <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
           <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
         {% endif %}
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr" defer></script>
         <script src="{% static 'cae_home/js/select2.js' %}"></script>
         <script src="{% static 'cae_home/js/selectbuttons.js' %}"></script>
 
@@ -124,6 +126,7 @@
         <script src="{% static 'cae_home/js/side_content_bars.js' %}"></script>
         <script src="{% static 'cae_home/js/overlay_modal.js' %}"></script>
         <script src="{% static 'cae_home/js/tabbed_panel.js' %}"></script>
+        <script src="{% static 'cae_home/js/flat_picker_widgets.js' %}"></script>
       {% endblock base_scripts_body %}
       {% block extra_scripts_body %}{% endblock extra_scripts_body %}
     </body>

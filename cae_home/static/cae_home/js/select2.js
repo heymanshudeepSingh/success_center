@@ -1,5 +1,5 @@
 /**
- * Detects and initialized html emements with the select2 class.
+ * Detects and initializes html emements with the select2 class.
  */
 
 $(document).ready(function() {
