@@ -41,7 +41,9 @@ ALLOWED_CAE_PROJECTS = {
     #     'index': 'example:index',
     #     'url-prefix': 'root_url',
     #     'related_apps': {
-    #         'example_project_app_1': {},
+    #         'example_project_app_1': {
+    #             'config': 'apps.ExampleProjectApp1Config', # Path to Config
+    #         },
     #         'example_project_app_2': {},
     #     },
     #     'third_party_apps': [
@@ -54,7 +56,9 @@ ALLOWED_CAE_PROJECTS = {
         'index': 'cae_web_core:index',
         'url-prefix': 'caeweb',
         'related_apps': {
-            'cae_web_core': {},
+            'cae_web_core': {
+                'config': 'apps.CaeWebCoreConfig',
+            },
             'cae_web_attendants': {},
             'cae_web_work_log': {},
         },
@@ -118,7 +122,14 @@ for project_name in project_folder_list:
             try:
                 if app_name in ALLOWED_CAE_PROJECTS[project_name]['related_apps']:
                     app = 'apps.{0}.{1}'.format(project_name, app_name)
-                    INSTALLED_APPS.insert(1, app)
+                    config = ALLOWED_CAE_PROJECTS[project_name]['related_apps'][app_name].get('config')
+                    if config:
+                        # Add the Config to the INSTALLED_APPS
+                        # We don't override 'app' because that is used for urls later
+                        new_app = 'apps.{0}.{1}.{2}'.format(project_name, app_name, config)
+                        INSTALLED_APPS.insert(1, new_app)
+                    else:
+                        INSTALLED_APPS.insert(1, app)
                     INSTALLED_CAE_PROJECTS[project_name] = ALLOWED_CAE_PROJECTS[project_name]
                     INSTALLED_CAE_PROJECTS[project_name]['related_apps'][app_name] = app
                     debug_print('       {0}Included App{1}: {2:<25}   {0}Url{1}: .../{3}/{2}/'.format(
