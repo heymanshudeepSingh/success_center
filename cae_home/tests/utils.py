@@ -260,8 +260,9 @@ class LiveServerTestCase(ChannelsLiveServerTestCase):
     """
     Test with Selenium to verify things like javascript.
 
-    In a subclass, set NUM_DRIVERS to how many browswers you need.
-    E.g. to 2 to test two people working on something at once.
+    In a subclass, in the setUpClass() method, call super().setUpClass() and
+    then create the number of drivers you need using cls.create_driver().
+    E.g. twice to test two people working on something at once.
 
     By default, this will create two users, self.user1 and self.user2.
     You can use the addPermssion() function to give them any necessary permissions.
@@ -269,7 +270,13 @@ class LiveServerTestCase(ChannelsLiveServerTestCase):
     Example Usage:
 
         class MyTest(LiveServerTestCase):
-            NUM_DRIVERS = 2 # I want two browsers
+            @classmethod
+            def setUpClass(cls):
+                super().setUpClass()
+
+                # Two browser windows, each with a different user.
+                cls.driver1 = cls.create_driver()
+                cls.driver2 = cls.create_driver()
 
             def test_thing(self):
                 # Login with first window (self.driver1)
@@ -290,8 +297,6 @@ class LiveServerTestCase(ChannelsLiveServerTestCase):
 
     """
     serve_static = True
-    NUM_DRIVERS = 1
-
 
     #region Class Setup and Teardown
 
@@ -305,22 +310,36 @@ class LiveServerTestCase(ChannelsLiveServerTestCase):
         try:
             # NOTE: Requires "chromedriver" binary to be installed in $PATH
             # https://sites.google.com/a/chromium.org/chromedriver/getting-started
-            options = webdriver.ChromeOptions()
+            cls._options = webdriver.ChromeOptions()
             if settings.SELENIUM_TESTS_HEADLESS:
-                options.add_argument('headless')  # --headless
+                cls._options.add_argument('headless')  # --headless
 
-            # Create NUM_DRIVERS number of browser windows
             cls._drivers = []
-            for i in range(cls.NUM_DRIVERS):
-                driver = webdriver.Chrome(options=options)
-                cls._drivers.append(driver)
-                setattr(cls, 'driver{}'.format(i+1), driver)
         except:
             sys.stderr.write("\n\n " + "-" * 80 + "\n |\n")
             sys.stderr.write(" | ERROR: See https://sites.google.com/a/chromium.org/chromedriver/getting-started on how to setup Selenium with Chrome.\n")
             sys.stderr.write(" |\n " + "-" * 80 + "\n\n")
             super().tearDownClass()
             raise
+
+    @classmethod
+    def create_driver(cls):
+        """
+        Create a new browser window with it's own session for testing.
+        Should be used within child's setUpClass after super().setUpClass() has
+        been called.
+        """
+        driver = None
+        try:
+            driver = webdriver.Chrome(options=cls._options)
+            cls._drivers.append(driver)
+        except:
+            sys.stderr.write("\n\n " + "-" * 80 + "\n |\n")
+            sys.stderr.write(" | ERROR: See https://sites.google.com/a/chromium.org/chromedriver/getting-started on how to setup Selenium with Chrome.\n")
+            sys.stderr.write(" |\n " + "-" * 80 + "\n\n")
+            raise
+
+        return driver
 
     @classmethod
     def tearDownClass(cls):
