@@ -401,17 +401,18 @@ class LiveServerTestCase(ChannelsLiveServerTestCase):
             print(list(UserModel.objects.all().values_list('username')))
             raise ObjectDoesNotExist('User matching {0} was not found.')
 
-    def create_user(self, username, password=default_password, permissions=None, groups=None):
+    def create_user(self, username, password=default_password, permissions=None, groups=None, **kwargs):
         """
         Create new user. Optionally pass permissions/groups.
         :param username: Username to use.
         :param password: Password for user.
         :param permissions: Optional permissions to add.
         :param groups: Optional permission groups to add.
+        :param kwargs: Passed to UserModel.objects.create_user().
         :return: Instance of created user.
         """
         # Create user.
-        user = UserModel.objects.create_user(username=username, password=password)
+        user = UserModel.objects.create_user(username=username, password=password, **kwargs)
         user.password_string = password
 
         # Check for optional permissions.
