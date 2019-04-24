@@ -35,7 +35,7 @@ class User(AbstractUser):
         return new_user
 
     @staticmethod
-    def get_or_create_user(username, email, password):
+    def get_or_create_user(username, email, password, inactive=False):
         """
         Attempts to either get or create user with given information.
         """
@@ -46,6 +46,8 @@ class User(AbstractUser):
         # If user was newly created, set new password.
         if created:
             new_user.set_password(password)
+            if inactive:
+                new_user.is_active = False
             new_user.save()
 
         return new_user
