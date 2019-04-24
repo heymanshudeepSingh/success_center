@@ -102,7 +102,6 @@ def create_permission_groups():
     return group_array
 
 
-
 def get_cae_center_permissions():
     """
     Finds all permission models specific to the CAE Center.
