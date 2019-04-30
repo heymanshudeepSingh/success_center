@@ -70,7 +70,10 @@ $(document).ready(function() {
             font_size_class = 'font-size-' + user_site_option_mobile_font_size;
         }
 
-        body.addClass(font_size_class);
+        if (font_size_class != 'font-size-') {
+            body.removeClass('font-size-base');
+            body.addClass(font_size_class);
+        }
     }
 
 
