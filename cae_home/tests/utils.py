@@ -308,18 +308,36 @@ class LiveServerTestCase(ChannelsLiveServerTestCase):
         super().setUpClass()
 
         try:
-            # NOTE: Requires "chromedriver" binary to be installed in $PATH
-            # https://sites.google.com/a/chromium.org/chromedriver/getting-started
-            cls._options = webdriver.ChromeOptions()
+            if settings.SELENIUM_TESTS_BROWSER == 'chrome':
+                # NOTE: Requires "chromedriver" binary to be installed in $PATH
+                # https://sites.google.com/a/chromium.org/chromedriver/getting-started
+                cls._options = webdriver.ChromeOptions()
+            elif settings.SELENIUM_TESTS_BROWSER == 'firefox':
+                cls._options = webdriver.FirefoxOptions()
+            else:
+                raise ValueError('Unknown browser defined in selenium settings.')
+
             if settings.SELENIUM_TESTS_HEADLESS:
                 cls._options.add_argument('headless')  # --headless
-
             cls._drivers = []
         except:
-            sys.stderr.write("\n\n " + "-" * 80 + "\n |\n")
-            sys.stderr.write(" | ERROR: See https://sites.google.com/a/chromium.org/chromedriver/getting-started on how to setup Selenium with Chrome.\n")
-            sys.stderr.write(" |\n " + "-" * 80 + "\n\n")
-            super().tearDownClass()
+            if settings.SELENIUM_TESTS_BROWSER == 'chrome':
+                sys.stderr.write('\n\n {0} \n |\n'.format('-' * 80))
+                sys.stderr.write(' | ERROR: See {0} on how to setup Selenium with Chrome.\n'.format(
+                    'https://sites.google.com/a/chromium.org/chromedriver/getting-started'
+                ))
+                sys.stderr.write(' |\n {0} \n\n'.format('-' * 80))
+                super().tearDownClass()
+            elif settings.SELENIUM_TESTS_BROWSER == 'firefox':
+                sys.stderr.write('\n\n {0} \n |\n'.format('-' * 80))
+                sys.stderr.write(' | ERROR: See {0} on how to setup Selenium with Firefox.\n'.format(
+                    'https://github.com/mozilla/geckodriver'
+                ))
+                sys.stderr.write(" |\n {0} \n\n".format('-' * 80))
+                super().tearDownClass()
+            else:
+                super().tearDownClass()
+                raise ValueError('Unknown browser defined in selenium settings.')
             raise
 
     @classmethod
@@ -331,12 +349,28 @@ class LiveServerTestCase(ChannelsLiveServerTestCase):
         """
         driver = None
         try:
-            driver = webdriver.Chrome(options=cls._options)
+            if settings.SELENIUM_TESTS_BROWSER == 'chrome':
+                driver = webdriver.Chrome(options=cls._options)
+            elif settings.SELENIUM_TESTS_BROWSER == 'firefox':
+                driver = webdriver.Firefox(options=cls._options)
+            else:
+                raise ValueError('Unknown browser defined in selenium settings.')
             cls._drivers.append(driver)
         except:
-            sys.stderr.write("\n\n " + "-" * 80 + "\n |\n")
-            sys.stderr.write(" | ERROR: See https://sites.google.com/a/chromium.org/chromedriver/getting-started on how to setup Selenium with Chrome.\n")
-            sys.stderr.write(" |\n " + "-" * 80 + "\n\n")
+            if settings.SELENIUM_TESTS_BROWSER == 'chrome':
+                sys.stderr.write('\n\n {0} \n |\n'.format('-' * 80))
+                sys.stderr.write(' | ERROR: See {0} on how to setup Selenium with Chrome.\n'.format(
+                    'https://sites.google.com/a/chromium.org/chromedriver/getting-started'
+                ))
+                sys.stderr.write(' |\n {0} \n\n'.format('-' * 80))
+            elif settings.SELENIUM_TESTS_BROWSER == 'firefox':
+                sys.stderr.write('\n\n {0} \n |\n'.format('-' * 80))
+                sys.stderr.write(' | ERROR: See {0} on how to setup Selenium with Firefox.\n'.format(
+                    'https://github.com/mozilla/geckodriver'
+                ))
+                sys.stderr.write(" |\n {0} \n\n".format('-' * 80))
+            else:
+                raise ValueError('Unknown browser defined in selenium settings.')
             raise
 
         return driver

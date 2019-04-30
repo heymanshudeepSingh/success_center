@@ -100,8 +100,10 @@ ADMINS = []
 # SECURE_CONTENT_TYPE_NOSNIFF = True
 
 
-# Set to True to run selenium in headless mode (hides browser window).
-SELENIUM_TESTS_HEADLESS = False
+# Selenium Integration Test settings.
+SELENIUM_TESTS_BROWSER = 'chrome'   # Set to 'firefox' to use firefox browser instead.
+SELENIUM_TESTS_HEADLESS = False     # Set to True to run selenium in headless mode (hides browser window).
+
 
 # Password for model seeds. Includes normal seeds and unittest seeds.
 USER_SEED_PASSWORD = 'temppass2'

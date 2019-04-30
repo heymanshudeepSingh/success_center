@@ -107,8 +107,14 @@ function main () {
     fi
 
     echo ""
-    echo -e "${color_blue}Installing Chromium drivers (Required for selenium testing)...${color_reset}"
+    echo -e "${color_blue}Installing Selenium Testing dependencies...${color_reset}"
+    # Google Chrome "chromium" driver for running selenium with chrome.
     apt-get install chromium-chromedriver -y
+    # Firefox "gecko" driver for running selenium with firefox.
+    wget https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-linux64.tar.gz
+    sudo sh -c 'tar -x geckodriver -zf geckodriver-v0.24.0-linux64.tar.gz -O > /usr/bin/geckodriver'
+    sudo chmod +x /usr/bin/geckodriver
+    rm geckodriver-v0.24.0-linux64.tar.gz
 
     # Success. Exit script.
     echo ""

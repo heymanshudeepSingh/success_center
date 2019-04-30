@@ -28,5 +28,8 @@ package-lock.json
 *.css.map
 *.sass-cache/
 
+# Do not track files created from selenium tests.
+geckodriver.log
+
 # Do not track migrations for now.
 */migrations/0*.py
