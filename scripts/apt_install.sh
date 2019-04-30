@@ -88,6 +88,10 @@ function main () {
     echo -e "${color_blue}Installing Python$python_version dependencies...${color_reset}"
     apt-get install "python$python_version" "python$python_version-dev" -y
 
+    echo ""
+    echo -e "${color_blue}Installing sass dependencies...${color_reset}"
+    apt-get install ruby-sass -y
+
     if [[ "$mysql" = true ]]
     then
         echo ""
