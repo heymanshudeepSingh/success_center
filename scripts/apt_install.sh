@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Script to install required apt dependencies for project on a linux system.
+# Script to install required system (apt) dependencies for project on an ubuntu linux system.
 
 
 return_value=""
