@@ -86,7 +86,7 @@ function main () {
 
     echo ""
     echo -e "${color_blue}Installing Python$python_version dependencies...${color_reset}"
-    apt-get install "python$python_version" "python$python_version-dev" -y
+    apt-get install "python$python_version" "python$python_version-dev" "python$python_version-venv" -y
 
     echo ""
     echo -e "${color_blue}Installing sass dependencies...${color_reset}"
@@ -111,14 +111,17 @@ function main () {
     # Google Chrome "chromium" driver for running selenium with chrome.
     apt-get install chromium-chromedriver -y
     # Firefox "gecko" driver for running selenium with firefox.
-    wget https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-linux64.tar.gz
-    sudo sh -c 'tar -x geckodriver -zf geckodriver-v0.24.0-linux64.tar.gz -O > /usr/bin/geckodriver'
-    sudo chmod +x /usr/bin/geckodriver
-    rm geckodriver-v0.24.0-linux64.tar.gz
+    if [[ ! -f "/usr/bin/geckodriver" ]]
+    then
+        wget https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-linux64.tar.gz
+        sudo sh -c 'tar -x geckodriver -zf geckodriver-v0.24.0-linux64.tar.gz -O > /usr/bin/geckodriver'
+        sudo chmod +x /usr/bin/geckodriver
+        rm geckodriver-v0.24.0-linux64.tar.gz
+    fi
 
     # Success. Exit script.
     echo ""
-    echo -e "${color_green}Installation has finished. Terminating script.${color_reset}"
+    echo -e "${color_green}Installation has finished. Terminating Ubuntu Install script.${color_reset}"
     exit 0
 }
 

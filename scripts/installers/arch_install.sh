@@ -87,7 +87,7 @@ function main() {
 
     # Success. Exit script.
     echo ""
-    echo -e "${color_green}Installation has finished. Terminating script.${color_reset}"
+    echo -e "${color_green}Installation has finished. Terminating Arch Install script.${color_reset}"
     exit 0
 }
 
