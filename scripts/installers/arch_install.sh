@@ -69,6 +69,7 @@ function main() {
     echo ""
     echo -e "${color_blue}Installing sass dependencies...${color_reset}"
     pacman -S ruby-sass --noconfirm
+    pacman -S ruby-rb-fsevent --noconfirm
 
     if [[ "$mysql" = true ]]
     then

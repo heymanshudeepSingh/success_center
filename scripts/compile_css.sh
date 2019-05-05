@@ -40,11 +40,13 @@ function main () {
     echo "Possible params:"
     echo "   * watch - Watches for changes."
     echo "   * dev - Compile in human-legible format."
+    echo "   * trace - Adds backtracing to troubleshoot errors."
     echo ""
 
     # Variables.
     watch="--update"
     compress="--style compressed"
+    trace=""
     css_directories=()
 
     # Determine command format from passed args.
@@ -56,6 +58,9 @@ function main () {
         elif [[ $arg == "dev" ]]
         then
             compress=""
+        elif [[ $arg == "trace" ]]
+        then
+            trace=" --trace"
         fi
     done
 
@@ -120,7 +125,7 @@ function main () {
     fi
 
     # Combine variables to create command.
-    command="sass $watch ${css_directories[*]} $compress"
+    command="sass $watch ${css_directories[*]} $compress $trace"
 
     echo ""
     echo "Running command:"
