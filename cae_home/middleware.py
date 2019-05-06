@@ -108,7 +108,7 @@ class GetUserSiteOptionsMiddleware(object):
                 response.context_data['mobile_font_size'] = request.user.profile.get_mobile_font_size()
             else:
                 # Default to "wmu" site theme.
-                response.context_data['site_theme'] = models.SiteTheme.objects.get(name='wmu')
+                response.context_data['site_theme'] = models.SiteTheme.objects.get(slug='wmu')
                 response.context_data['desktop_font_size'] = 'base'
                 response.context_data['mobile_font_size'] = 'base'
 

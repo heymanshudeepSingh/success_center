@@ -229,12 +229,12 @@ class AddressAdmin(admin.ModelAdmin):
 class SiteThemeAdmin(admin.ModelAdmin):
     # Fields to display in admin list view.
     list_display = (
-        'name', 'gold_logo',
+        'display_name', 'file_name', 'gold_logo',
     )
 
     # Fields to search in admin list view.
     search_fields = [
-        'name',
+        'display_name', 'file_name',
     ]
 
     # Read only fields for admin detail view.
@@ -245,16 +245,16 @@ class SiteThemeAdmin(admin.ModelAdmin):
     # Fieldset organization for admin detail view.
     fieldsets = (
         (None, {
-            'fields': ('slug', 'name', 'gold_logo',)
+            'fields': ('display_name', 'file_name', 'gold_logo',)
         }),
         ('Advanced', {
             'classes': ('collapse', ),
-            'fields': ('id', 'date_created', 'date_modified', )
+            'fields': ('id', 'slug', 'date_created', 'date_modified', )
         }),
     )
 
     # New object's slugs will be automatically set by name.
-    prepopulated_fields = {'slug': ('name',)}
+    prepopulated_fields = {'slug': ('file_name',)}
 
 #endregion User Model Admin
 

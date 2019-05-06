@@ -282,17 +282,19 @@ class SiteThemeModelTests(IntegrationTestCase):
     """
     def setUp(self):
         self.test_theme = models.SiteTheme.objects.create(
-            name='Test Theme',
+            display_name='Test Theme',
+            file_name='test-theme',
             gold_logo=False,
             slug='test-theme',
         )
 
     def test_model_creation(self):
-        self.assertEqual(self.test_theme.name, 'Test Theme')
+        self.assertEqual(self.test_theme.display_name, 'Test Theme')
+        self.assertEqual(self.test_theme.file_name, 'test-theme')
         self.assertEqual(self.test_theme.gold_logo, False)
 
     def test_string_representation(self):
-        self.assertEqual(str(self.test_theme), self.test_theme.name.capitalize())
+        self.assertEqual(str(self.test_theme), self.test_theme.display_name)
 
     def test_plural_representation(self):
         self.assertEqual(str(self.test_theme._meta.verbose_name), 'Site Theme')

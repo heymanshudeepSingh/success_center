@@ -77,7 +77,7 @@
   {% endblock head %}
 
   {% block body %}
-    <body class="theme-{% if site_theme %}{{ site_theme.name }}{% else %}wmu{% endif %} font-size-base
+    <body class="theme-{% if site_theme %}{{ site_theme.file_name }}{% else %}wmu{% endif %} font-size-base
     {% block body_extra_classes %}grid{% endblock body_extra_classes %}">
 
       <a class="accessibility-element" href="#content">Skip to Main Content</a>

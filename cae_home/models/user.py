@@ -260,12 +260,12 @@ def create_user_profile(sender, instance, created, **kwargs):
         # Handle for new UserIntermediary being created. Create new profile as well.
         try:
             # Attempt to get default theme.
-            site_theme = SiteTheme.objects.get(name='wmu')
+            site_theme = SiteTheme.objects.get(slug='wmu')
         except ObjectDoesNotExist:
             # Failed to get theme. Likely a unit test. Run site_theme fixtures and attempt again.
             with open(devnull, 'a') as null:
                 call_command('loaddata', 'full_models/site_themes', stdout=null)
-            site_theme = SiteTheme.objects.get(name='wmu')
+            site_theme = SiteTheme.objects.get(slug='wmu')
 
         # Create new profile object for new user.
         profile = Profile.objects.create(site_theme=site_theme)
@@ -430,7 +430,8 @@ class Address(models.Model):
 
 class SiteTheme(models.Model):
     # Model fields.
-    name = models.CharField(max_length=MAX_LENGTH, unique=True)
+    display_name = models.CharField(max_length=MAX_LENGTH, unique=True)     # The value displayed to users.
+    file_name = models.CharField(max_length=MAX_LENGTH, unique=True)        # The value used in files and templating.
     gold_logo = models.BooleanField(default=True)
 
     # Self-setting/Non-user-editable fields.
@@ -447,7 +448,7 @@ class SiteTheme(models.Model):
         verbose_name_plural = 'Site Themes'
 
     def __str__(self):
-        return '{0}'.format(str(self.name).capitalize())
+        return '{0}'.format(str(self.display_name))
 
     def save(self, *args, **kwargs):
         """
@@ -467,11 +468,13 @@ class SiteTheme(models.Model):
         slug = slugify(name)
         try:
             return SiteTheme.objects.get(
-                name=name,
+                display_name=name,
+                file_name=slug,
                 slug=slug,
             )
         except ObjectDoesNotExist:
             return SiteTheme.objects.create(
-                name=name,
+                display_name=name,
+                file_name=slug,
                 slug=slug,
             )
