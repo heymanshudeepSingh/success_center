@@ -1,0 +1,201 @@
+
+//===========================//
+//===== Font Sizing CSS =====//
+//===========================//
+
+// Various color related variables.
+// Not all of these are necessarily used, but are still provided anyways for
+// easy future reference.
+
+
+//================================================================================//
+//==================================== Colors ====================================//
+//================================================================================//
+
+//===============================//
+//==== START GreyScale Block ====//
+//===============================//
+
+$color-grey-00: #000000;    // Black
+$color-grey-05: #0d0d0d;
+$color-grey-10: #191919;    //  ^
+$color-grey-15: #262626;    //  |
+$color-grey-20: #333333;    //  |
+$color-grey-25: #404040;    //  |
+$color-grey-30: #4c4c4c;    //  | Darker
+$color-grey-35: #595959;    //  |
+$color-grey-40: #666666;    //  |
+$color-grey-45: #737373;    //  |
+$color-grey-50: #7f7f7f;    //  Scaling by 10% gradients.
+$color-grey-55: #8c8c8c;    //  |
+$color-grey-60: #999999;    //  |
+$color-grey-65: #a6a6a6;    //  |
+$color-grey-70: #b2b2b2;    //  | Ligher
+$color-grey-75: #bfbfbf;    //  |
+$color-grey-80: #cccccc;    //  |
+$color-grey-85: #d9d9d9;    //  |
+$color-grey-90: #e5e5e5;    //  v
+$color-grey-95: #f2f2f2;
+$color-grey-100: #ffffff;   // White
+
+//===============================//
+//===== END GreyScale Block =====//
+//===============================//
+
+
+//===========================================//
+//==== START Transparent Greyscale Block ====//
+//===========================================//
+
+$color-black: rgb(0, 0, 0);
+$color-trans-black-95: rgba(0, 0, 0, 0.95);
+$color-trans-black-90: rgba(0, 0, 0, 0.90);
+$color-trans-black-75: rgba(0, 0, 0, 0.75);
+$color-trans-black-50: rgba(0, 0, 0, 0.50);
+$color-trans-black-25: rgba(0, 0, 0, 0.25);
+$color-trans-black-10: rgba(0, 0, 0, 0.10);
+$color-trans-black-05: rgba(0, 0, 0, 0.05);
+$color-grey: rgb(127, 127, 127);
+$color-trans-grey-95: rgba(127, 127, 127, 0.95);
+$color-trans-grey-90: rgba(127, 127, 127, 0.90);
+$color-trans-grey-75: rgba(127, 127, 127, 0.75);
+$color-trans-grey-50: rgba(127, 127, 127, 0.50);
+$color-trans-grey-25: rgba(127, 127, 127, 0.25);
+$color-trans-grey-10: rgba(127, 127, 127, 0.10);
+$color-trans-grey-05: rgba(127, 127, 127, 0.05);
+$color-white: rgb(255, 255, 255);
+$color-trans-white-95: rgba(255, 255, 255, 0.95);
+$color-trans-white-90: rgba(255, 255, 255, 0.90);
+$color-trans-white-75: rgba(255, 255, 255, 0.75);
+$color-trans-white-50: rgba(255, 255, 255, 0.50);
+$color-trans-white-25: rgba(255, 255, 255, 0.25);
+$color-trans-white-10: rgba(255, 255, 255, 0.10);
+$color-trans-white-05: rgba(255, 255, 255, 0.05);
+
+//===========================================//
+//===== END Transparent GreyScale Block =====//
+//===========================================//
+
+//===========================================//
+//==== START "WMU Approved" Colors Block ====//
+//===========================================//
+
+// WMU's official guidelines say these "must be used on all materials to
+// ensure proper color combinations". Realistically, that's overkill.
+
+// Provided as reference anyway, in case such information is ever helpful.
+// At the end of the day, just be consistent and try to make it look good.
+
+// "Primary" WMU Colors.
+$wmu-official-gold: #ffae00;
+$wmu-official-brown: #442416;
+
+// "Secondary" WMU Colors.
+$wmu-official-chocolate: #7c5826;
+$wmu-official-khaki: #c0aa71;
+$wmu-official-sienna: #a9431e;
+$wmu-official-tangerine: #d87c21;
+$wmu-official-light-tan: #ede1aa;
+
+// "Accent" WMU Colors.
+$wmu-official-teal: #0b645d;
+$wmu-official-red: #b91233;
+$wmu-official-plum: #865f7f;
+$wmu-official-sky-blue: #0091c1;
+$wmu-official-green-apple: #7ab700;
+$wmu-official-black: #000000;
+$wmu-official-dark-grey: #816f5f;
+$wmu-official-warm-grey: #bdb1a7;
+$wmu-official-metallic-gold: #8b6f4e;
+$wmu-official-metallic-brown: #594839;
+$wmu-official-metallic-silver: #8a8d8f;
+
+//=========================================//
+//==== END "WMU Approved" Colors Block ====//
+//=========================================//
+
+
+//==========================================//
+//==== START "WMU Website" Colors Block ====//
+//==========================================//
+
+// Colors used in WMU's official website.
+// Annoyingly enough, these tend to be different than the above WMU colors.
+
+$wmu-web-gold: #fcc30f;
+$wmu-web-brown: #986516;
+$wmu-web-header: #331900;
+$wmu-web-alt-header: #c48b04;
+$wmu-web-alt-header-text: #fde392;
+$wmu-web-infographic-grey: #333333;
+$wmu-web-infographic-header: #cccccc;
+$wmu-web-infographic-text: #999999;
+$wmu-web-sidebar: #eedab9;
+$wmu-web-link: $wmu-web-brown;
+$wmu-web-link-hover: #fcc30f;
+$wmu-web-info: #1abee9;
+$wmu-web-info-hover: #129abd;
+$wmu-web-success: #7ea634;
+$wmu-web-success-hover: #65852a;
+$wmu-web-warn: #ef8843;
+$wmu-web-warn-hover: #e26613;
+$wmu-web-error: #c30a0a;
+$wmu-web-error-hover: #9c0808;
+
+//========================================//
+//==== END "WMU Website" Colors Block ====//
+//========================================//
+
+
+//======================================//
+//==== START Bootstrap Colors Block ====//
+//======================================//
+
+$bootstrap-header: #563d7c;
+$bootstrap-header-text: #cbbde2;
+$bootstrap-link: $color-grey-45;
+
+$bootstrap-default: #fff;
+$bootstrap-default-border: #cccccc;
+$bootstrap-default-text: #333333;
+$bootstrap-default-link: #191919;
+$bootstrap-primary: #cce5ff;
+$bootstrap-primary-border: #b8daff;
+$bootstrap-primary-text: #004085;
+$bootstrap-primary-link: #002752;
+$bootstrap-info: #d1ecf1;
+$bootstrap-info-border: #bee5eb;
+$bootstrap-info-text: #0c5460;
+$bootstrap-info-link: #245269;
+$bootstrap-success: #d4edda;
+$bootstrap-success-border: #c3e6cb;
+$bootstrap-success-text: #155724;
+$bootstrap-success-link: #2b542c;
+$bootstrap-warn: #fff3cd;
+$bootstrap-warn-border: #ffeeba;
+$bootstrap-warn-text: #856404;
+$bootstrap-warn-link: #66512c;
+$bootstrap-error: #f8d7da;
+$bootstrap-error-border: #f5c6cb;
+$bootstrap-error-text: #721c24;
+$bootstrap-error-link: #843534;
+
+$bootstrap-button-primary: #007bff;
+$bootstrap-button-primary-hover: #0069b9;
+$bootstrap-button-primary-border: #2e6da4;
+$bootstrap-button-info: #5bc0de;
+$bootstrap-button-info-hover: #31b0d5;
+$bootstrap-button-info-border: #46b8da;
+$bootstrap-button-success: #5cb85c;
+$bootstrap-button-success-hover: #449d44;
+$bootstrap-button-success-border: #4cae4c;
+$bootstrap-button-warn: #f0ad4e;
+$bootstrap-button-warn-hover: #ec971f;
+$bootstrap-button-warn-border: #eea236;
+$bootstrap-button-error: #d9534f;
+$bootstrap-button-error-hover: #c9302c;
+$bootstrap-button-error-border: #d43f3a;
+
+//====================================//
+//==== END Bootstrap Colors Block ====//
+//====================================//

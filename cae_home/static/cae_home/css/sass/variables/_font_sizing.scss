@@ -1,0 +1,48 @@
+
+//===========================//
+//===== Font Sizing CSS =====//
+//===========================//
+
+// Various font-size related variables.
+// These are used to allow the user to dynamically set their font-size for
+// improved text legibility.
+//
+// To make font sizes dynamic, any changes in font size should call these values,
+// multiplied by a ratio to adjust.
+//
+// For example, the default size is (obviously) 100% of current user font selection.
+// If you want to display something at 80% size, then use "<user_font_size> * 0.80".
+
+
+//================================================================================//
+//=================================== FontSize ===================================//
+//================================================================================//
+
+// Various font size options.
+// Assumes that the base font size for the browser is 16px (when in desktop mode).
+// Each option scales from that.
+
+$font-size-options: (
+    'xs': (
+        font-size: .75rem, // 12px
+    ),
+    'sm': (
+        font-size: .875rem, // 14px
+    ),
+    'base': (
+        font-size: 1rem, // 16px
+    ),
+    'md': (
+        font-size: 1.125rem, // 18px
+    ),
+    'lg': (
+        font-size: 1.25rem, // 20px
+    ),
+    'xl': (
+        font-size: 1.5rem, // 24px
+    ),
+);
+
+@function font-option($option) {
+    @return map-get(map-get($font-size-options, $option), 'font-size');
+}

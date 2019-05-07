@@ -13,8 +13,7 @@
 // Due to the size of this file, it's been split into mutliple subfiles.
 
 // Import statements
-@import '_variables';
-@import '_mixins';
+@import 'variables/_core';
 
 @import 'content/_alert';
 @import 'content/_article';

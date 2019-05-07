@@ -1,0 +1,36 @@
+
+//===========================//
+//==== Screen Sizing CSS ====//
+//===========================//
+
+// Various screen-size related values.
+// As of right now, only tablet-mid is regularly used.
+// Perhaps these are unecessary?
+
+
+//================================================================================//
+//================================== ScreenSize ==================================//
+//================================================================================//
+
+// Phone
+$screen-phone-small: 475px;
+$screen-phone-mid: 550px;
+$screen-phone-max: 699px;
+
+// Tablet
+$screen-tablet-min: 700px;
+$screen-tablet-mid: 869px;
+$screen-tablet-max: 1024px;
+
+// Laptop
+$screen-laptop-min: 1025px;
+$screen-laptop-mid: 1350px;
+$screen-laptop-max: 1600px;
+
+// Desktop
+$screen-desktop-min: 1601px;
+$screen-desktop-mid: 2000px;
+$screen-desktop-max: 3839px;
+
+// 4k
+$screen-4k-min: 3840px;
