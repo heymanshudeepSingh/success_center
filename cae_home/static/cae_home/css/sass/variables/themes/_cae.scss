@@ -1,0 +1,126 @@
+
+//=========================//
+//===== CAE Theme CSS =====//
+//=========================//
+
+// Variables for theme attempting to mimic the old php CAE Web site look.
+
+
+// Import statements
+@import '../_colors';
+
+
+//================================================================================//
+//==================================== Theme =====================================//
+//================================================================================//
+
+$theme-cae: (
+    'background': (
+        'primary': #5c1f00,
+        'highlight': #cb983e,
+        'border': #865628,
+        'content': #1f0500,
+        'content-alt': #3c1702,
+        'table-row-even': #2e1005,
+        'table-row-odd': #250b04,
+        'table-row-hover': #6c3b13,
+    ),
+    'text': (
+        'primary': #c48b04,
+        'primary-accent': $color-trans-white-75,
+        'primary-subtle': $color-trans-white-50,
+        'primary-hint': $color-trans-white-25,
+        'primary-hover': $color-white,
+        'content': $color-trans-white-75,
+        'content-accent': $color-trans-white-75,
+        'content-subtle': $color-trans-white-50,
+        'content-hint': $color-trans-white-25,
+        'content-hover': $color-white,
+        'header': $color-trans-white-90,
+        'text': $color-trans-white-75,
+        'link': #986516,
+        'link-hover': #d68d1f,
+    ),
+    'status': (
+        'default': (
+            'primary': #4d1900,
+            'primary-hover': #662b00,
+            'secondary': #1f0500,
+            'secondary-hover': #3c1702,
+            'border': #6c3b13,
+            'border-hover': #9b5b27,
+            'link': #ffc354,
+            'link-hover': #f9e9d2,
+        ),
+        'primary': (
+            'primary': #4d1900,
+            'primary-hover': #662b00,
+            'secondary': #1f0500,
+            'secondary-hover': #3c1702,
+            'border': #6c3b13,
+            'border-hover': #9b5b27,
+            'text': $color-trans-white-75,
+            'link': #ffc354,
+            'link-hover': #f9e9d2,
+        ),
+        'secondary': (
+            'primary': #4d1900,
+            'primary-hover': #662b00,
+            'secondary': #1f0500,
+            'secondary-hover': #3c1702,
+            'border': #6c3b13,
+            'border-hover': #9b5b27,
+            'text': $color-trans-white-75,
+            'link': #ffc354,
+            'link-hover': #f9e9d2,
+        ),
+        'info': (
+            'primary': #19194d,
+            'primary-hover': #464079,
+            'border': #464079,
+            'text': $color-trans-white-75,
+            'link': #9289ff,
+            'link-hover': #5c5cd6,
+        ),
+        'success': (
+            'primary': #145214,
+            'primary-hover': #457f3e,
+            'border': #457f3e,
+            'text': $color-trans-white-75,
+            'link': #61e750,
+            'link-hover': #18b418,
+        ),
+        'warn': (
+            'primary': #a14412,
+            'primary-hover': #be5a27,
+            'border': #be5a27,
+            'text': $color-trans-white-75,
+            'link': #ffd055,
+            'link-hover': #df9f20,
+        ),
+        'warning': (
+            'primary': #a14412,
+            'primary-hover': #be5a27,
+            'border': #be5a27,
+            'text': $color-trans-white-75,
+            'link': #ffd055,
+            'link-hover': #df9f20,
+        ),
+        'error': (
+            'primary': #821717,
+            'primary-hover': #b7493e,
+            'border': #a32929,
+            'text': $color-trans-white-75,
+            'link': #ffb4a8,
+            'link-hover': #ec8379,
+        ),
+        'danger': (
+            'primary': #821717,
+            'primary-hover': #b7493e,
+            'border': #a32929,
+            'text': $color-trans-white-75,
+            'link': #ffb4a8,
+            'link-hover': #ec8379,
+        ),
+    ),
+);

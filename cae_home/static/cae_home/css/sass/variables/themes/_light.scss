@@ -1,0 +1,122 @@
+
+//===========================//
+//===== Light Theme CSS =====//
+//===========================//
+
+// Variables for custom light theme.
+
+
+// Import statements
+@import '../_colors';
+
+
+//================================================================================//
+//==================================== Theme =====================================//
+//================================================================================//
+
+$theme-light: (
+    'background': (
+        'primary': $color-grey-85,
+        'highlight': $color-grey-90,
+        'border': $color-grey-65,
+        'content': $color-white,
+        'content-alt': $color-grey-95,
+        'table-row-even': $color-grey-90,
+        'table-row-odd': $color-grey-95,
+        'table-row-hover': $color-trans-grey-25,
+    ),
+    'text': (
+        'primary': $color-grey-35,
+        'primary-accent': $color-trans-black-75,
+        'primary-subtle': $color-trans-black-50,
+        'primary-hint': $color-trans-black-25,
+        'primary-hover': $color-black,
+        'content': $color-black,
+        'content-accent': $color-trans-black-75,
+        'content-subtle': $color-trans-black-50,
+        'content-hint': $color-trans-black-25,
+        'content-hover': $color-black,
+        'header': $color-black,
+        'text': $color-black,
+        'link': #4040bf,
+        'link-hover': #4040bf,
+    ),
+    'status': (
+        'default': (
+            'primary': $color-grey-85,
+            'primary-hover': $color-grey-90,
+            'secondary': $color-grey-95,
+            'secondary-hover': $color-white,
+            'border': $color-grey-75,
+            'border-hover': $color-trans-grey-75,
+            'link': $color-grey-45,
+            'link-hover': $color-trans-black-75,
+        ),
+        'primary': (
+            'primary': $color-grey-85,
+            'primary-hover': $color-grey-90,
+            'border': $color-grey-75,
+            'border-hover': $color-trans-grey-75,
+            'text': $color-black,
+            'link': $color-grey-45,
+            'link-hover': $color-trans-black-75,
+        ),
+        'secondary': (
+            'primary': $color-grey-85,
+            'primary-hover': $color-grey-90,
+            'border': $color-grey-75,
+            'border-hover': $color-trans-grey-75,
+            'text': $color-black,
+            'link': $color-grey-45,
+            'link-hover': $color-trans-black-75,
+        ),
+        'info': (
+            'primary': #d1d5eb,
+            'primary-hover': #dcdfef,
+            'border': #9cacd3,
+            'text': $color-trans-black-75,
+            'link': #4040bf,
+            'link-hover': #4040bf,
+        ),
+        'success': (
+            'primary': #c6ecd0,
+            'primary-hover': #d9f2e0,
+            'border': #66cc81,
+            'text': $color-trans-black-75,
+            'link': #339933,
+            'link-hover': #339933,
+        ),
+        'warn': (
+            'primary': #ffeeb3,
+            'primary-hover': #fff4cc,
+            'border': #e1c251,
+            'text': $color-trans-black-75,
+            'link': #b88a2e,
+            'link-hover': #b88a2e,
+        ),
+        'warning': (
+            'primary': #ffeeb3,
+            'primary-hover': #fff4cc,
+            'border': #e1c251,
+            'text': $color-trans-black-75,
+            'link': #b88a2e,
+            'link-hover': #b88a2e,
+        ),
+        'error': (
+            'primary': #f4cbbe,
+            'primary-hover': #f8dcd3,
+            'border': #e19b84,
+            'text': $color-trans-black-75,
+            'link': #d15347,
+            'link-hover': #d15347,
+        ),
+        'danger': (
+            'primary': #f4cbbe,
+            'primary-hover': #f8dcd3,
+            'border': #e19b84,
+            'text': $color-trans-black-75,
+            'link': #d15347,
+            'link-hover': #d15347,
+        ),
+    ),
+);

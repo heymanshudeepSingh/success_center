@@ -1,0 +1,125 @@
+
+//=========================//
+//===== WMU Theme CSS =====//
+//=========================//
+
+// Variables for theme attempting to mimic the official WMU look and feel.
+
+
+// Import statements
+@import '../_colors';
+
+
+//================================================================================//
+//==================================== Theme =====================================//
+//================================================================================//
+
+$theme-wmu: (
+    'background': (
+        'primary': #331900,
+        'highlight': #cb983e,
+        'border': $color-trans-grey-25,
+        'content': $color-white,
+        'content-alt': $color-white,
+        'table-row-even': #fff1cc,
+        'table-row-odd': #fff8e6,
+        'table-row-hover': $color-trans-grey-25,
+    ),
+    'text': (
+        'primary': #fcc30f,
+        'primary-accent': $color-trans-white-75,
+        'primary-subtle': $color-trans-white-50,
+        'primary-hint': $color-trans-white-25,
+        'primary-hover': $color-white,
+        'content': #331900,
+        'content-accent': $color-trans-black-75,
+        'content-subtle': $color-trans-black-50,
+        'content-hint': $color-trans-black-25,
+        'content-hover': $color-black,
+        'header': #b3b3b3,
+        'text': $color-black,
+        'link': $wmu-web-link,
+        'link-hover': #331900,
+    ),
+    'status': (
+        'default': (
+            'primary': $color-grey-95,
+            'primary-hover': $color-grey-85,
+            'secondary': $color-grey-100,
+            'secondary-hover': $color-grey-100,
+            'border': $color-grey-80,
+            'border-hover': $color-trans-grey-75,
+            'link': #331900,
+            'link-hover': $color-black,
+        ),
+        'primary': (
+            'primary': #fcc30f,
+            'primary-alt': #c48b04,
+            'primary-hover': #e9b50c,
+            'border': #d3a103,
+            'border-hover': $color-trans-grey-75,
+            'text': #986516,
+            'link': $color-trans-white-75,
+            'link-hover': $color-white,
+        ),
+        'secondary': (
+            'primary': #663300,
+            'primary-hover': #986516,
+            'border': #331900,
+            'border-hover': $color-trans-grey-75,
+            'text': $color-trans-white-75,
+            'link': $color-trans-white-75,
+            'link-hover': $color-white,
+        ),
+
+        // Status colors based off of WMU "official" colors.
+        'info': (
+            'primary': $wmu-official-sky-blue,
+            'primary-hover': #5ac1f4,
+            'border': #0073a8,
+            'text': $color-trans-black-75,
+            'link': #003962,
+            'link-hover': #003962,
+        ),
+        'success': (
+            'primary': $wmu-official-green-apple,
+            'primary-hover': #aeea48,
+            'border': #478700,
+            'text': $color-trans-black-75,
+            'link': #105900,
+            'link-hover': #105900,
+        ),
+        'warn': (
+            'primary': #e87f17,
+            'primary-hover': #ffaf4c,
+            'border': #b05100,
+            'text': $color-trans-black-75,
+            'link': #7b2400,
+            'link-hover': #7b2400,
+        ),
+        'warning': (
+            'primary': #e87f17,
+            'primary-hover': #ffaf4c,
+            'border': #b05100,
+            'text': $color-trans-black-75,
+            'link': #7b2400,
+            'link-hover': #7b2400,
+        ),
+        'error': (
+            'primary': $wmu-official-red,
+            'primary-hover': #f2515c,
+            'border': #81000e,
+            'text': $color-trans-white-75,
+            'link': #4f0000,
+            'link-hover': #4f0000,
+        ),
+        'danger': (
+            'primary': $wmu-official-red,
+            'primary-hover': #f2515c,
+            'border': #81000e,
+            'text': $color-trans-white-75,
+            'link': #4f0000,
+            'link-hover': #4f0000,
+        ),
+    ),
+);
