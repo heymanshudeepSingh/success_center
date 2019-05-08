@@ -154,16 +154,17 @@ function main() {
         echo -e "${color_blue}Installing python requirements...${color_reset}"
         echo ""
         source ./.venv/bin/activate
+        pip install --upgrade pip
         pip install -r requirements.txt
-        echo "If you wanted MySQL or LDAP, please uncomment the appropriate lines in requirements.txt and rerun \"pip
-        install -r requirements.txt\""
+        echo ""
+        echo -e "${color_blue}If you wanted MySQL or LDAP, please uncomment the appropriate lines in requirements.txt and rerun \"pip install -r requirements.txt\".${color_reset}"
         echo ""
 
         # Create initial database.
         python manage.py makemigrations
         python manage.py migrate
-        echo "SQLite database created. To use MySQL or PostreSQL, change the settings in \"settings/local_env/env.py\"
-        and rerun \"python manage.py migrate\"."
+        echo ""
+        echo -e "${color_blue}SQLite database created. To use MySQL or PostreSQL, change the settings in \"settings/local_env/env.py\" and rerun \"python manage.py migrate\".${color_reset}"
         echo ""
 
         user_confirmation "Create initial seed for database?"
