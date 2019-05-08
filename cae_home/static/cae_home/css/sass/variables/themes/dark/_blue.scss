@@ -1,0 +1,83 @@
+
+//===========================//
+//===== Dark Theme CSS =====//
+//===========================//
+
+// Variables for custom dark theme.
+// Blue version.
+
+
+// Import statements
+@import '../../_colors';
+@import '_common';
+
+
+//================================================================================//
+//==================================== Theme =====================================//
+//================================================================================//
+
+$theme-dark-blue: (
+    'background': (
+        'primary': #142848,
+        'highlight': #1a305b,
+        'border': #3d495c,
+        'content': #2d3648,
+        'content-alt': #232b38,
+        'table-row-even': #142848,
+        'table-row-odd': #0d2b59,
+        'table-row-hover': #1952b3,
+    ),
+    'text': (
+        'primary': $color-trans-white-75,
+        'primary-accent': $color-trans-white-75,
+        'primary-subtle': $color-trans-white-50,
+        'primary-hint': $color-trans-white-25,
+        'primary-hover': $color-white,
+        'content': $color-trans-white-75,
+        'content-accent': $color-trans-white-75,
+        'content-subtle': $color-trans-white-50,
+        'content-hint': $color-trans-white-25,
+        'content-hover': $color-grey-100,
+        'header': $color-trans-white-90,
+        'text': $color-trans-white-75,
+        'link': #6767e4,
+        'link-hover': #a8a8f0,
+    ),
+    'status': (
+        'default': (
+            'primary': #4f545c,
+            'primary-hover': #5e646e,
+            'secondary': #232b38,
+            'secondary-hover': #212a3b,
+            'border': #5e646e,
+            'border-hover': $color-trans-grey-75,
+            'link': $color-trans-white-50,
+            'link-hover': $color-trans-white-75,
+        ),
+        'primary': (
+            'primary': #142848,
+            'primary-hover': #1a305b,
+            'border': #273959,
+            'border-hover': $color-trans-grey-75,
+            'text': $color-trans-white-75,
+            'link': $color-trans-white-50,
+            'link-hover': $color-trans-white-75,
+        ),
+        'secondary': (
+            'primary': #142848,
+            'primary-hover': #1a305b,
+            'border': #273959,
+            'border-hover': $color-trans-grey-75,
+            'text': $color-trans-white-75,
+            'link': $color-trans-white-50,
+            'link-hover': $color-trans-white-75,
+        ),
+
+        'info': $theme-dark-info,
+        'success': $theme-dark-success,
+        'warn': $theme-dark-warning,
+        'warning': $theme-dark-warning,
+        'error': $theme-dark-error,
+        'danger': $theme-dark-error,
+    ),
+);

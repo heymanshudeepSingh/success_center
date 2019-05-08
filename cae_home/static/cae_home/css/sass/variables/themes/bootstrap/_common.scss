@@ -1,0 +1,62 @@
+
+//=============================================//
+//===== Bootstrap Theme Common Values CSS =====//
+//=============================================//
+
+// Universal variables for bootstrap theme.
+
+
+// Import statements
+@import '../../_colors';
+
+
+//================================================================================//
+//==================================== Theme =====================================//
+//================================================================================//
+
+$theme-bootstrap-default: (
+    'primary': $color-grey-85,
+    'primary-hover': $color-grey-80,
+    'secondary': $bootstrap-default,
+    'secondary-hover': $bootstrap-default,
+    'border': $color-grey-75,
+    'border-hover': $color-trans-grey-75,
+    'link': $bootstrap-link,
+    'link-hover': $color-grey-10,
+);
+
+$theme-bootstrap-info: (
+    'primary': $bootstrap-button-info,
+    'primary-hover': $bootstrap-button-info-hover,
+    'border': $bootstrap-button-info-border,
+    'text': $color-trans-black-75,
+    'link': $bootstrap-info-text,
+    'link-hover': $bootstrap-info-link,
+);
+
+$theme-bootstrap-success: (
+    'primary': $bootstrap-button-success,
+    'primary-hover': $bootstrap-button-success-hover,
+    'border': $bootstrap-button-success-border,
+    'text': $color-trans-black-75,
+    'link': $bootstrap-success-text,
+    'link-hover': $bootstrap-success-link,
+);
+
+$theme-bootstrap-warning: (
+    'primary': $bootstrap-button-warn,
+    'primary-hover': $bootstrap-button-warn-hover,
+    'border': $bootstrap-button-warn-border,
+    'text': $color-trans-black-75,
+    'link': $bootstrap-warn-text,
+    'link-hover': $bootstrap-warn-link,
+);
+
+$theme-bootstrap-error: (
+    'primary': $bootstrap-button-error,
+    'primary-hover': $bootstrap-button-error-hover,
+    'border': $bootstrap-button-error-border,
+    'text': $color-trans-black-75,
+    'link': $bootstrap-error-text,
+    'link-hover': #5b2525,
+);

@@ -1,0 +1,74 @@
+
+//===============================//
+//===== Bootstrap Theme CSS =====//
+//===============================//
+
+// Variables for theme borrowing from bootstrap colors.
+// Grey version.
+
+
+// Import statements
+@import '../../_colors';
+@import '_common';
+
+
+//================================================================================//
+//==================================== Theme =====================================//
+//================================================================================//
+
+$theme-bootstrap-grey: (
+    'background': (
+        'primary': $color-grey-35,
+        'highlight': $color-grey-80,
+        'border': $color-grey-75,
+        'content': $color-white,
+        'content-alt': $color-grey-95,
+        'table-row-even': $color-grey-90,
+        'table-row-odd': $color-grey-95,
+        'table-row-hover': $color-grey-75,
+    ),
+    'text': (
+        'primary': $color-grey-80,
+        'primary-accent': $color-trans-white-75,
+        'primary-subtle': $color-trans-white-50,
+        'primary-hint': $color-trans-white-25,
+        'primary-hover': $color-white,
+        'content': $color-black,
+        'content-accent': $color-trans-black-75,
+        'content-subtle': $color-trans-black-50,
+        'content-hint': $color-trans-black-25,
+        'content-hover': $color-black,
+        'header': $color-black,
+        'text': $color-black,
+        'link': $bootstrap-link,
+        'link-hover': $color-grey-10,
+    ),
+    'status': (
+        'primary': (
+            'primary': $color-grey-35,
+            'primary-hover': $color-grey-50,
+            'border': $color-grey-60,
+            'border-hover': $color-trans-grey-75,
+            'text': $color-grey-80,
+            'link': $color-trans-white-75,
+            'link-hover': $color-trans-white-75,
+        ),
+        'secondary': (
+            'primary': $color-grey-35,
+            'primary-hover': $color-grey-50,
+            'border': $color-grey-60,
+            'border-hover': $color-trans-grey-75,
+            'text': $color-grey-80,
+            'link': $color-trans-white-75,
+            'link-hover': $color-trans-white-75,
+        ),
+
+        'default': $theme-bootstrap-default,
+        'info': $theme-bootstrap-info,
+        'success': $theme-bootstrap-success,
+        'warn': $theme-bootstrap-warning,
+        'warning': $theme-bootstrap-warning,
+        'error': $theme-bootstrap-error,
+        'danger': $theme-bootstrap-error,
+    ),
+);

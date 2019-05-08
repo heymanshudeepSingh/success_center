@@ -1,0 +1,74 @@
+
+//===========================//
+//===== Light Theme CSS =====//
+//===========================//
+
+// Variables for custom light theme.
+// Blue version.
+
+
+// Import statements
+@import '../../_colors';
+@import '_common';
+
+
+//================================================================================//
+//==================================== Theme =====================================//
+//================================================================================//
+
+$theme-light-blue: (
+    'background': (
+        'primary': #a6aed9,
+        'highlight': #dbdff0,
+        'border': #828ec9,
+        'content': $color-white,
+        'content-alt': #edeff7,
+        'table-row-even': #dbdff0,
+        'table-row-odd': #edeff7,
+        'table-row-hover': $color-trans-grey-25,
+    ),
+    'text': (
+        'primary': $color-grey-35,
+        'primary-accent': $color-trans-black-75,
+        'primary-subtle': $color-trans-black-50,
+        'primary-hint': $color-trans-black-25,
+        'primary-hover': $color-black,
+        'content': $color-black,
+        'content-accent': $color-trans-black-75,
+        'content-subtle': $color-trans-black-50,
+        'content-hint': $color-trans-black-25,
+        'content-hover': $color-black,
+        'header': $color-black,
+        'text': $color-black,
+        'link': #4040bf,
+        'link-hover': #4040bf,
+    ),
+    'status': (
+        'primary': (
+            'primary': #a6aed9,
+            'primary-hover': #dbdff0,
+            'border': #828ec9,
+            'border-hover': $color-trans-grey-75,
+            'text': $color-black,
+            'link': $color-grey-45,
+            'link-hover': $color-trans-black-75,
+        ),
+        'secondary': (
+            'primary': #a6aed9,
+            'primary-hover': #dbdff0,
+            'border': #828ec9,
+            'border-hover': $color-trans-grey-75,
+            'text': $color-black,
+            'link': $color-grey-45,
+            'link-hover': $color-trans-black-75,
+        ),
+
+        'default': $theme-light-default,
+        'info': $theme-light-info,
+        'success': $theme-light-success,
+        'warn': $theme-light-warning,
+        'warning': $theme-light-warning,
+        'error': $theme-light-error,
+        'danger': $theme-light-error,
+    ),
+);

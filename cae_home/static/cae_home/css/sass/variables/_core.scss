@@ -58,11 +58,23 @@
 //
 
 
-@import 'themes/_bootstrap';
+// Themes themselves are defined in the files below.
 @import 'themes/_cae';
-@import 'themes/_dark';
-@import 'themes/_light';
+
 @import 'themes/_wmu';
+
+@import 'themes/bootstrap/_grey';
+@import 'themes/bootstrap/_green';
+@import 'themes/bootstrap/_purple';
+@import 'themes/bootstrap/_violet';
+
+@import 'themes/dark/_blue';
+@import 'themes/dark/_grey';
+@import 'themes/dark/_red';
+
+@import 'themes/light/_blue';
+@import 'themes/light/_grey';
+@import 'themes/light/_yellow';
 
 
 //================================//
@@ -75,11 +87,18 @@ $theme-colors: (
 
     'cae': $theme-cae,
 
-    'bootstrap': $theme-bootstrap,
+    'bootstrap-grey': $theme-bootstrap-grey,
+    'bootstrap-green': $theme-bootstrap-green,
+    'bootstrap-purple': $theme-bootstrap-purple,
+    'bootstrap-violet': $theme-bootstrap-violet,
 
-    'light': $theme-light,
+    'light-blue': $theme-light-blue,
+    'light-grey': $theme-light-grey,
+    'light-yellow': $theme-light-yellow,
 
-    'dark': $theme-dark,
+    'dark-blue': $theme-dark-blue,
+    'dark-grey': $theme-dark-grey,
+    'dark-red': $theme-dark-red,
 );
 
 

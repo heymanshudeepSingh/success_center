@@ -1,0 +1,51 @@
+
+//========================================//
+//===== Dark Theme Common Values CSS =====//
+//========================================//
+
+// Universal variables for dark theme.
+
+
+// Import statements
+@import '../../_colors';
+
+
+//================================================================================//
+//==================================== Theme =====================================//
+//================================================================================//
+
+$theme-dark-info: (
+    'primary': #49516e,
+    'primary-hover': #475485,
+    'border': #475485,
+    'text': $color-trans-white-75,
+    'link': #7575f0,
+    'link-hover': #7575f0,
+);
+
+$theme-dark-success: (
+    'primary': #3c5e54,
+    'primary-hover': #3d7159,
+    'border': #3d7159,
+    'text': $color-trans-white-75,
+    'link': #18b418,
+    'link-hover': #18b418,
+);
+
+$theme-dark-warning: (
+    'primary': #705a36,
+    'primary-hover': #8b6d3c,
+    'border': #8b6d3c,
+    'text': $color-trans-white-75,
+    'link': #df9f20,
+    'link-hover': #df9f20,
+);
+
+$theme-dark-error: (
+    'primary': #6d3f43,
+    'primary-hover': #944c4c,
+    'border': #944c4c,
+    'text': $color-trans-white-75,
+    'link': #ec8379,
+    'link-hover': #ec8379,
+);

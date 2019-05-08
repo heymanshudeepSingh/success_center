@@ -4,17 +4,19 @@
 //===========================//
 
 // Variables for custom light theme.
+// Greyscale (original) version.
 
 
 // Import statements
-@import '../_colors';
+@import '../../_colors';
+@import '_common';
 
 
 //================================================================================//
 //==================================== Theme =====================================//
 //================================================================================//
 
-$theme-light: (
+$theme-light-grey: (
     'background': (
         'primary': $color-grey-85,
         'highlight': $color-grey-90,
@@ -42,16 +44,6 @@ $theme-light: (
         'link-hover': #4040bf,
     ),
     'status': (
-        'default': (
-            'primary': $color-grey-85,
-            'primary-hover': $color-grey-90,
-            'secondary': $color-grey-95,
-            'secondary-hover': $color-white,
-            'border': $color-grey-75,
-            'border-hover': $color-trans-grey-75,
-            'link': $color-grey-45,
-            'link-hover': $color-trans-black-75,
-        ),
         'primary': (
             'primary': $color-grey-85,
             'primary-hover': $color-grey-90,
@@ -70,53 +62,13 @@ $theme-light: (
             'link': $color-grey-45,
             'link-hover': $color-trans-black-75,
         ),
-        'info': (
-            'primary': #d1d5eb,
-            'primary-hover': #dcdfef,
-            'border': #9cacd3,
-            'text': $color-trans-black-75,
-            'link': #4040bf,
-            'link-hover': #4040bf,
-        ),
-        'success': (
-            'primary': #c6ecd0,
-            'primary-hover': #d9f2e0,
-            'border': #66cc81,
-            'text': $color-trans-black-75,
-            'link': #339933,
-            'link-hover': #339933,
-        ),
-        'warn': (
-            'primary': #ffeeb3,
-            'primary-hover': #fff4cc,
-            'border': #e1c251,
-            'text': $color-trans-black-75,
-            'link': #b88a2e,
-            'link-hover': #b88a2e,
-        ),
-        'warning': (
-            'primary': #ffeeb3,
-            'primary-hover': #fff4cc,
-            'border': #e1c251,
-            'text': $color-trans-black-75,
-            'link': #b88a2e,
-            'link-hover': #b88a2e,
-        ),
-        'error': (
-            'primary': #f4cbbe,
-            'primary-hover': #f8dcd3,
-            'border': #e19b84,
-            'text': $color-trans-black-75,
-            'link': #d15347,
-            'link-hover': #d15347,
-        ),
-        'danger': (
-            'primary': #f4cbbe,
-            'primary-hover': #f8dcd3,
-            'border': #e19b84,
-            'text': $color-trans-black-75,
-            'link': #d15347,
-            'link-hover': #d15347,
-        ),
+
+        'default': $theme-light-default,
+        'info': $theme-light-info,
+        'success': $theme-light-success,
+        'warn': $theme-light-warning,
+        'warning': $theme-light-warning,
+        'error': $theme-light-error,
+        'danger': $theme-light-error,
     ),
 );
