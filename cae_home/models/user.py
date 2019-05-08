@@ -433,6 +433,7 @@ class SiteTheme(models.Model):
     display_name = models.CharField(max_length=MAX_LENGTH, unique=True)     # The value displayed to users.
     file_name = models.CharField(max_length=MAX_LENGTH, unique=True)        # The value used in files and templating.
     gold_logo = models.BooleanField(default=True)
+    ordering = models.PositiveSmallIntegerField(default=0)
 
     # Self-setting/Non-user-editable fields.
     slug = models.SlugField(
@@ -446,6 +447,7 @@ class SiteTheme(models.Model):
     class Meta:
         verbose_name = 'Site Theme'
         verbose_name_plural = 'Site Themes'
+        ordering = ('ordering', 'display_name')
 
     def __str__(self):
         return '{0}'.format(str(self.display_name))
