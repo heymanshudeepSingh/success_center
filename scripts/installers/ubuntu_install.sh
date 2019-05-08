@@ -47,6 +47,11 @@ function main () {
     python_version=""
     mysql=""
     ldap=""
+    dev_setup=""
+
+    user_confirmation "Is this a local development setup? (Alternative is a production setup)"
+    dev_setup=$return_value
+    echo ""
 
     # Get Python version. Should be in format of "#.#".
     while [[ ! $valid_python ]]
@@ -97,6 +102,9 @@ function main () {
         echo ""
         echo -e "${color_blue}Installing MySQL dependencies...${color_reset}"
         apt-get install mysql-server libmysqlclient-dev -y
+    else
+        echo ""
+        echo -e "${color_blue}Skipping MySQL dependencies...${color_reset}"
     fi
 
     if [[ "$ldap" = true ]]
@@ -104,19 +112,42 @@ function main () {
         echo ""
         echo -e "${color_blue}Installing Ldap dependencies...${color_reset}"
         apt-get install libldap2-dev libsasl2-dev -y
+    else
+        echo ""
+        echo -e "${color_blue}Skipping Ldap dependencies...${color_reset}"
     fi
 
-    echo ""
-    echo -e "${color_blue}Installing Selenium Testing dependencies...${color_reset}"
-    # Google Chrome "chromium" driver for running selenium with chrome.
-    apt-get install chromium-chromedriver -y
-    # Firefox "gecko" driver for running selenium with firefox.
-    if [[ ! -f "/usr/bin/geckodriver" ]]
+    if [[ "$dev_setup" = true ]]
     then
-        wget https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-linux64.tar.gz
-        sudo sh -c 'tar -x geckodriver -zf geckodriver-v0.24.0-linux64.tar.gz -O > /usr/bin/geckodriver'
-        sudo chmod +x /usr/bin/geckodriver
-        rm geckodriver-v0.24.0-linux64.tar.gz
+        echo ""
+        echo -e "${color_blue}Installing Selenium Testing dependencies...${color_reset}"
+        # Google Chrome "chromium" driver for running selenium with chrome.
+        apt-get install chromium-chromedriver -y
+        # Firefox "gecko" driver for running selenium with firefox.
+        if [[ ! -f "/usr/bin/geckodriver" ]]
+        then
+            wget https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-linux64.tar.gz
+            sh -c 'tar -x geckodriver -zf geckodriver-v0.24.0-linux64.tar.gz -O > /usr/bin/geckodriver'
+            chmod +x /usr/bin/geckodriver
+            rm geckodriver-v0.24.0-linux64.tar.gz
+        fi
+    else
+        echo ""
+        echo -e "${color_blue}Skipping Selenium Testing dependencies...${color_reset}"
+
+        echo ""
+        echo -e "${color_blue}Installing Nginx dependencies...${color_reset}"
+        apt-get install nginx -y
+        systemctl disable nginx
+        systemctl stop nginx
+        echo -e "${color_blue}Nginx server installed.${color_reset}"
+        echo -e "${color_blue}Note: If you got errors on installation, then nginx probably installed but had a conflict with apache.${color_reset}"
+        echo -e "${color_blue}      Only one program (apache or nginx) can watch port 80 at a time.${color_reset}"
+        echo -e "${color_blue}      Try disabling apache and then restarting nginx.${color_reset}"
+        echo ""
+        echo -e "${color_blue}To enable Nginx on computer start, run \"sudo systemctl enable nginx\".${color_reset}"
+        echo -e "${color_blue}To start Nginx now, run \"sudo systemctl start nginx\".${color_reset}"
+
     fi
 
     # Success. Exit script.
