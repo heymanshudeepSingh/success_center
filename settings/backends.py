@@ -9,6 +9,10 @@ from django.core.validators import validate_email
 
 from cae_home.models import User
 from settings import simple_ldap_lib
+from settings import extra_settings
+
+
+logger = extra_settings.logging.getLogger(__name__)
 
 
 class CaeAuthBackend(object):
@@ -29,7 +33,7 @@ class CaeAuthBackend(object):
         :return: Valid user object on success. | None on failure.
         """
         if settings.AUTH_BACKEND_DEBUG:
-            print('Auth Backend: Attempting CAE user login...')
+            logger.info('Auth Backend: Attempting CAE user login...')
 
         # Check what format username was provided as.
         user_id = self.parse_username(username)
@@ -48,13 +52,13 @@ class CaeAuthBackend(object):
             if user is None:
                 # Failed user login attempt.
                 if settings.AUTH_BACKEND_DEBUG:
-                    print('Auth Backend: CAE user login failed.')
+                    logger.info('Auth Backend: CAE user login failed.')
             return user
 
         except User.DoesNotExist:
             # User object not found in local Django database. Attempt ldap query.
             if settings.AUTH_BACKEND_DEBUG:
-                print('Auth Backend: CAE user not found in Django database.')
+                logger.info('Auth Backend: CAE user not found in Django database.')
             user = self.ldap_validate_user(user_id, password)
             return user
 
@@ -65,7 +69,7 @@ class CaeAuthBackend(object):
         :return: Dictionary of values to attempt auth with.
         """
         if settings.AUTH_BACKEND_DEBUG:
-            print('Auth Backend: Parsing username...')
+            logger.info('Auth Backend: Parsing username...')
 
         username = username.strip()
 
@@ -90,17 +94,17 @@ class CaeAuthBackend(object):
         :return: Valid user | None on failure
         """
         if settings.AUTH_BACKEND_DEBUG:
-            print('Auth Backend: Attempting Django validation...')
+            logger.info('Auth Backend: Attempting Django validation...')
 
         # Check password.
         if user.check_password(password):
             if settings.AUTH_BACKEND_DEBUG:
-                print('Auth Backend: Logging in...')
+                logger.info('Auth Backend: Logging in...')
             return user
         else:
             # Bad password.
             if settings.AUTH_BACKEND_DEBUG:
-                print('Auth Backend: Bad password. Cancelling login.')
+                logger.info('Auth Backend: Bad password. Cancelling login.')
             return None
 
     def ldap_validate_user(self, user_id, password):
@@ -109,7 +113,7 @@ class CaeAuthBackend(object):
         :return:
         """
         if settings.AUTH_BACKEND_DEBUG:
-            print('Auth Backend: Attempting ldap validation...')
+            logger.info('Auth Backend: Attempting ldap validation...')
 
         # Check if input was email or username. Parse to uid accordingly.
         # Note that if email, it should always be a wmu email. Thus the parse should get a bronconet id.
@@ -123,12 +127,12 @@ class CaeAuthBackend(object):
         if auth_search_return[0]:
             # User validated successfully through ldap. Create new django user.
             if settings.AUTH_BACKEND_DEBUG:
-                print('Auth Backend: {0}'.format(auth_search_return[1]))
+                logger.info('Auth Backend: {0}'.format(auth_search_return[1]))
             user = self.create_new_user(uid, password)
         else:
             # Invalid ldap credentials.
             if settings.AUTH_BACKEND_DEBUG:
-                print('Auth Backend: {0}'.format(auth_search_return[1]))
+                logger.info('Auth Backend: {0}'.format(auth_search_return[1]))
             user = None
 
         return user
@@ -142,7 +146,7 @@ class CaeAuthBackend(object):
         :return:
         """
         if settings.AUTH_BACKEND_DEBUG:
-            print('Auth Backend: Attempting to create new user model...')
+            logger.info('Auth Backend: Attempting to create new user model...')
 
         # Connect to server and pull user's full info.
         self.ldap_lib.bind_server()
@@ -210,32 +214,32 @@ class CaeAuthBackend(object):
             # Save model in case of error.
             model_user.save()
             if settings.AUTH_BACKEND_DEBUG:
-                print('Auth Backend: Created user new user model {0}. Now setting groups...'.format(uid))
+                logger.info('Auth Backend: Created user new user model {0}. Now setting groups...'.format(uid))
 
             # Set user group types.
             if uid in ldap_directors:
                 model_user.groups.add(Group.object.get(name='CAE Director'))
                 if settings.AUTH_BACKEND_DEBUG:
-                    print('Auth Backend: Added user to CAE Director group.')
+                    logger.info('Auth Backend: Added user to CAE Director group.')
             if uid in ldap_attendants:
                 model_user.groups.add(Group.objects.get(name='CAE Attendant'))
                 if settings.AUTH_BACKEND_DEBUG:
-                    print('Auth Backend: Added user to CAE Attendant group.')
+                    logger.info('Auth Backend: Added user to CAE Attendant group.')
             if uid in ldap_admins:
                 model_user.groups.add(Group.objects.get(name='CAE Admin'))
                 if settings.AUTH_BACKEND_DEBUG:
-                    print('Auth Backend: Added user to CAE Admin group.')
+                    logger.info('Auth Backend: Added user to CAE Admin group.')
             if uid in ldap_programmers:
                 model_user.groups.add(Group.objects.get(name='CAE Programmer'))
                 model_user.is_staff = True
                 model_user.is_superuser = True
                 if settings.AUTH_BACKEND_DEBUG:
-                    print('Auth Backend: Added user to CAE Programmer group.')
+                    logger.info('Auth Backend: Added user to CAE Programmer group.')
 
             # Save model.
             model_user.save()
             if settings.AUTH_BACKEND_DEBUG:
-                print('Auth Backend: User groups set. User creation complete.'.format(uid))
+                logger.info('Auth Backend: User groups set. User creation complete.'.format(uid))
 
         else:
             # Error. This shouldn't ever happen.
@@ -249,5 +253,5 @@ class CaeAuthBackend(object):
             return User.objects.get(pk=user_id)
         except User.DoesNotExist:
             if settings.AUTH_BACKEND_DEBUG:
-                print('Auth Backend: User not found.')
+                logger.info('Auth Backend: User not found.')
             return None
