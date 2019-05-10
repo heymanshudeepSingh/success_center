@@ -36,15 +36,17 @@ AUTHENTICATION_BACKENDS = (
 AUTH_BACKEND_DEBUG = False
 
 # LDAP settings. Only used when CAEAuthBackend is used.
-LDAP_HOST = ''
-LDAP_DN = ''
-LDAP_PASS = ''
-LDAP_SEARCH_BASE = ''
-LDAP_GROUP_DN = ''
-LDAP_DIRECTOR_CN = ''
-LDAP_ATTENDANT_CN = ''
-LDAP_ADMIN_CN = ''
-LDAP_PROGRAMMER_CN = ''
+CAE_LDAP = {
+    'host': '',
+    'login_dn': '',
+    'login_password': '',
+    'user_search_base': '',
+    'group_dn': '',
+    'director_cn': '',
+    'attendant_cn': '',
+    'admin_cn': '',
+    'programmer_cn': '',
+}
 
 
 # Database connection information.

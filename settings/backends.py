@@ -13,13 +13,13 @@ from settings import simple_ldap_lib
 
 class CaeAuthBackend(object):
     """
-    Custom CAE Center authentication.
+    Custom authentication through the CAE Center LDAP.
     """
     def __init__(self):
         self.ldap_lib = simple_ldap_lib.SimpleLdap()
-        self.ldap_lib.set_host(settings.LDAP_HOST)
-        self.ldap_lib.set_master_account(settings.LDAP_DN, settings.LDAP_PASS)
-        self.ldap_lib.set_search_base(settings.LDAP_SEARCH_BASE)
+        self.ldap_lib.set_host(settings.CAE_LDAP['host'])
+        self.ldap_lib.set_master_account(settings.CAE_LDAP['login_dn'], settings.CAE_LDAP['login_password'])
+        self.ldap_lib.set_search_base(settings.CAE_LDAP['user_search_base'])
 
     def authenticate(self, request, username=None, password=None):
         """
@@ -29,7 +29,7 @@ class CaeAuthBackend(object):
         :return: Valid user object on success. | None on failure.
         """
         if settings.AUTH_BACKEND_DEBUG:
-            print('Auth Backend: Attempting user login...')
+            print('Auth Backend: Attempting CAE user login...')
 
         # Check what format username was provided as.
         user_id = self.parse_username(username)
@@ -48,13 +48,13 @@ class CaeAuthBackend(object):
             if user is None:
                 # Failed user login attempt.
                 if settings.AUTH_BACKEND_DEBUG:
-                    print('Auth Backend: User login failed.')
+                    print('Auth Backend: CAE user login failed.')
             return user
 
         except User.DoesNotExist:
             # User object not found in local Django database. Attempt ldap query.
             if settings.AUTH_BACKEND_DEBUG:
-                print('Auth Backend: User not found in Django database.')
+                print('Auth Backend: CAE user not found in Django database.')
             user = self.ldap_validate_user(user_id, password)
             return user
 
@@ -151,28 +151,47 @@ class CaeAuthBackend(object):
             attributes=['uid', 'givenName', 'sn',]
         )
 
-        # Get ldap director groups.
+        # Get ldap groups.
+        # Check for ldap directors group match.
         ldap_directors = self.ldap_lib.search(
-            search_base=settings.LDAP_GROUP_DN,
-            search_filter='({0})'.format(settings.LDAP_DIRECTOR_CN),
+            search_base=settings.CAE_LDAP['group_dn'],
+            search_filter='(cn={0})'.format(settings.CAE_LDAP['director_cn']),
             attributes=['memberUid'],
-        )['memberUid']
-        # Get ldap user groups.
+        )
+        if ldap_directors is not None:
+            ldap_directors = ldap_directors['memberUid']
+        else:
+            ldap_directors = []
+        # Check for ldap attendants group match.
         ldap_attendants = self.ldap_lib.search(
-            search_base=settings.LDAP_GROUP_DN,
-            search_filter='({0})'.format(settings.LDAP_ATTENDANT_CN),
+            search_base=settings.CAE_LDAP['group_dn'],
+            search_filter='(cn={0})'.format(settings.CAE_LDAP['attendant_cn']),
             attributes=['memberUid'],
-        )['memberUid']
+        )
+        if ldap_attendants is not None:
+            ldap_attendants = ldap_attendants['memberUid']
+        else:
+            ldap_attendants = []
+        # Check for ldap admins group match.
         ldap_admins = self.ldap_lib.search(
-            search_base=settings.LDAP_GROUP_DN,
-            search_filter='({0})'.format(settings.LDAP_ADMIN_CN),
+            search_base=settings.CAE_LDAP['group_dn'],
+            search_filter='(cn={0})'.format(settings.CAE_LDAP['admin_cn']),
             attributes=['memberUid'],
-        )['memberUid']
+        )
+        if ldap_admins is not None:
+            ldap_admins = ldap_admins['memberUid']
+        else:
+            ldap_admins = []
+        # Check for ldap programmers group match.
         ldap_programmers = self.ldap_lib.search(
-            search_base=settings.LDAP_GROUP_DN,
-            search_filter='({0})'.format(settings.LDAP_PROGRAMMER_CN),
+            search_base=settings.CAE_LDAP['group_dn'],
+            search_filter='(cn={0})'.format(settings.CAE_LDAP['programmer_cn']),
             attributes=['memberUid'],
-        )['memberUid']
+        )
+        if ldap_programmers is not None:
+            ldap_programmers = ldap_programmers['memberUid']
+        else:
+            ldap_programmers = []
 
         # Create new user.
         model_user, created = User.objects.get_or_create(username=uid)
