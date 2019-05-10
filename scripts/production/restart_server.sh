@@ -21,6 +21,7 @@ function main () {
         service uwsgi restart
         service daphne restart
 
+        echo "Server restarted."
         echo ""
         echo "To run this manually, use the following commands:"
         echo "    sudo service nginx restart"
