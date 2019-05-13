@@ -17,7 +17,6 @@ class UserIntermediaryModelTests(IntegrationTestCase):
     """
     @classmethod
     def setUpTestData(cls):
-        cls.department = models.Department.objects.create(name='Department', slug='department')
         cls.major = models.Major.create_dummy_model()
         cls.user_type = models.WmuUser.PROFESSOR
 
@@ -32,7 +31,6 @@ class UserIntermediaryModelTests(IntegrationTestCase):
         # Set up for WmuUser model instance.
         cls.wmu_user_bronco_net = 'wmu_temporary'
         cls.wmu_user = models.WmuUser.objects.create(
-            department=cls.department,
             major=cls.major,
             bronco_net=cls.wmu_user_bronco_net,
             winno=cls.wmu_user_bronco_net,
@@ -49,7 +47,6 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             cls.dual_bronco_net_1,
         )
         cls.dual_wmu_user_1 = models.WmuUser.objects.create(
-            department=cls.department,
             major=cls.major,
             bronco_net=cls.dual_bronco_net_1,
             winno=cls.dual_bronco_net_1,
@@ -61,7 +58,6 @@ class UserIntermediaryModelTests(IntegrationTestCase):
         # Set up for instance with both User and WmuUser. WmuUser model created first.
         cls.dual_bronco_net_2 = 'dual_2_temporary'
         cls.dual_wmu_user_2 = models.WmuUser.objects.create(
-            department=cls.department,
             major=cls.major,
             bronco_net=cls.dual_bronco_net_2,
             winno=cls.dual_bronco_net_2,

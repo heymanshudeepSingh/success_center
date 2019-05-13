@@ -99,7 +99,6 @@ def create_wmu_users(style, model_count):
     pre_initialized_count = len(models.WmuUser.objects.all())
 
     # Get all related models.
-    departments = models.Department.objects.all()
     majors = models.Major.objects.all()
     addresses = models.Address.objects.all()
 
@@ -112,10 +111,6 @@ def create_wmu_users(style, model_count):
         # Loop attempt until 3 fails or model is created.
         # Model creation may fail due to randomness of bronco_net and unique requirement.
         while try_create_model:
-            # Get Department.
-            index = randint(0, len(departments) - 1)
-            department = departments[index]
-
             # Get Major.
             index = randint(0, len(majors) - 1)
             major = majors[index]
@@ -151,7 +146,6 @@ def create_wmu_users(style, model_count):
             try:
                 with transaction.atomic():
                     models.WmuUser.objects.create(
-                        department=department,
                         major=major,
                         bronco_net=bronco_net,
                         winno=winno,

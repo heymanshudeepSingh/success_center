@@ -30,7 +30,7 @@ class UserAdmin(BaseUserAdmin):
     # Fields to display in admin list view.
     BaseUserAdmin.list_display = ('username', 'first_name', 'last_name', 'user_type')
 
-    # Remove individual permission list from admin detail view. Should only ever use groups.
+    # Remove individual permission list from admin detail view. Should only ever use group permissions.
     old_list = BaseUserAdmin.fieldsets[2][1]['fields']
     new_list = ()
     for item in old_list:
@@ -411,7 +411,7 @@ class SemesterDateAdmin(admin.ModelAdmin):
 
 class WmuUserAdmin(admin.ModelAdmin):
     # Fields to display in admin list view.
-    list_display = ('bronco_net', 'winno', 'first_name', 'last_name', 'department',)
+    list_display = ('bronco_net', 'winno', 'first_name', 'last_name', 'major',)
 
     # Fields to filter by in admin list view.
     list_filter = ('active', 'major',)
@@ -420,16 +420,16 @@ class WmuUserAdmin(admin.ModelAdmin):
     search_fields = ['bronco_net', 'winno', 'first_name', 'last_name',]
 
     # Read only fields for admin detail view.
-    readonly_fields = ('id', 'date_created', 'date_modified', 'official_email')
+    readonly_fields = ('id', 'date_created', 'date_modified', 'official_email', 'shorthand_email')
 
     # Organize fieldsets for admin detail view.
     fieldsets = (
         (None, {
             'fields': (
-                'user_type', 'bronco_net', 'winno', 'first_name', 'last_name', 'major', 'department',
+                'user_type', 'bronco_net', 'winno', 'first_name', 'middle_name', 'last_name', 'major',
             )}),
         ('Contact Info', {
-            'fields': ('official_email', 'full_email')
+            'fields': ('official_email', 'shorthand_email')
         }),
         ('Advanced', {
             'classes': ('collapse',),

@@ -31,11 +31,12 @@ ALLOWED_HOSTS = [
 # Set desired authentication backend. Defaults to standard Django auth.
 AUTHENTICATION_BACKENDS = (
     # 'settings.backends.CaeAuthBackend',
+    # 'settings.backends.WmuAuthBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
 AUTH_BACKEND_DEBUG = False
 
-# LDAP settings. Only used when CAEAuthBackend is used.
+# LDAP settings used when CAEAuthBackend is active.
 CAE_LDAP = {
     'host': '',
     'login_dn': '',
@@ -46,6 +47,14 @@ CAE_LDAP = {
     'attendant_cn': '',
     'admin_cn': '',
     'programmer_cn': '',
+}
+
+# LDAP settings used when WmuAuthBackend is active.
+WMU_LDAP = {
+    'host': '',
+    'login_dn': '',
+    'login_password': '',
+    'user_search_base': '',
 }
 
 

@@ -264,14 +264,12 @@ class WmuUserTests(IntegrationTestCase):
     """
     @classmethod
     def setUpTestData(cls):
-        cls.department = models.Department.create_dummy_model()
         cls.major = models.Major.create_dummy_model()
         cls.user_type = models.WmuUser.PROFESSOR
 
     def setUp(self):
         self.bronco_net='abc1234'
         self.test_wmu_user = models.WmuUser.objects.create(
-            department=self.department,
             major=self.major,
             bronco_net=self.bronco_net,
             winno='123456789',
@@ -283,7 +281,6 @@ class WmuUserTests(IntegrationTestCase):
 
     def test_model_creation(self):
         self.assertEqual(self.user_intermediary.wmu_user, self.test_wmu_user)
-        self.assertEqual(self.test_wmu_user.department, self.department)
         self.assertEqual(self.test_wmu_user.major, self.major)
         self.assertEqual(self.test_wmu_user.bronco_net, 'abc1234')
         self.assertEqual(self.test_wmu_user.winno, '123456789')

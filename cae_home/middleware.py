@@ -77,7 +77,8 @@ class GetProjectDetailMiddleware(object):
 
             # Get CAE Programmer email (For footer).
             try:
-                response.context_data['cae_prog_email'] = models.WmuUser.objects.get(bronco_net='ceas_prog').full_email
+                prog_email = models.WmuUser.objects.get(bronco_net='ceas_prog').official_email
+                response.context_data['cae_prog_email'] = prog_email
             except ObjectDoesNotExist:
                 pass
 

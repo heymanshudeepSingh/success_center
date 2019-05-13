@@ -267,19 +267,19 @@ class WmuUser(models.Model):
     )
 
     # Relationship keys.
-    department = models.ForeignKey('Department', on_delete=models.CASCADE)
     major = models.ForeignKey('Major', on_delete=models.CASCADE, blank=True)
 
     # Model fields.
     bronco_net = models.CharField(max_length=MAX_LENGTH, unique=True)
     winno = models.CharField(max_length=MAX_LENGTH, unique=True)
     first_name = models.CharField(max_length=MAX_LENGTH)
+    middle_name = models.CharField(max_length=MAX_LENGTH, blank=True, null=True)
     last_name = models.CharField(max_length=MAX_LENGTH)
     user_type = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES, default=0)
     active = models.BooleanField(default=True)
 
     # Self-setting/Non-user-editable fields.
-    full_email = models.EmailField(blank=True, null=True)
+    official_email = models.EmailField(blank=True, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
 
@@ -298,9 +298,9 @@ class WmuUser(models.Model):
         self.full_clean()
         super(WmuUser, self).save(*args, **kwargs)
 
-    def official_email(self):
+    def shorthand_email(self):
         """
-        Returns a string of student's official email.
+        Returns a string of student's shorthand email.
         """
         return '{0}@wmich.edu'.format(self.bronco_net)
 
@@ -310,7 +310,6 @@ class WmuUser(models.Model):
         Attempts to get or create a dummy model.
         Used for testing.
         """
-        department = Department.create_dummy_model()
         major = Major.create_dummy_model()
         bronco_net = 'dummy123'
         winno = 'dummy12345'
@@ -322,7 +321,6 @@ class WmuUser(models.Model):
                 winno=winno,
                 first_name=first_name,
                 last_name=last_name,
-                department=department,
                 major=major,
             )
         except ObjectDoesNotExist:
@@ -331,7 +329,6 @@ class WmuUser(models.Model):
                 winno=winno,
                 first_name=first_name,
                 last_name=last_name,
-                department=department,
                 major=major,
             )
 
