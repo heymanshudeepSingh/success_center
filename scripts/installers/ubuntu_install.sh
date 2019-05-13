@@ -122,13 +122,19 @@ function main () {
         echo ""
         echo -e "${color_blue}Installing Selenium Testing dependencies...${color_reset}"
         # Google Chrome "chromium" driver for running selenium with chrome.
-        apt-get install chromium-chromedriver -y
+        if [[ ! -f "/usr/local/bin/chromedriver" ]]
+        then
+            wget https://chromedriver.storage.googleapis.com/2.46/chromedriver_linux64.zip
+            unzip chromedriver_linux64.zip -d /usr/local/bin/
+            chmod +x /usr/local/bin/chromedriver
+            rm chromedriver_linux64.zip
+        fi
         # Firefox "gecko" driver for running selenium with firefox.
-        if [[ ! -f "/usr/bin/geckodriver" ]]
+        if [[ ! -f "/usr/local/bin/geckodriver" ]]
         then
             wget https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-linux64.tar.gz
-            sh -c 'tar -x geckodriver -zf geckodriver-v0.24.0-linux64.tar.gz -O > /usr/bin/geckodriver'
-            chmod +x /usr/bin/geckodriver
+            sh -c 'tar -x geckodriver -zf geckodriver-v0.24.0-linux64.tar.gz -O > /usr/local/bin/geckodriver'
+            chmod +x /usr/local/bin/geckodriver
             rm geckodriver-v0.24.0-linux64.tar.gz
         fi
     else
