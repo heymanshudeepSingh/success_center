@@ -69,7 +69,7 @@ class Department(models.Model):
 
 class RoomType(models.Model):
     """
-    Room types.
+    University room types.
     """
     # Model fields.
     name = models.CharField(max_length=MAX_LENGTH, unique=True)
@@ -252,7 +252,9 @@ class Major(models.Model):
 
 class WmuUser(models.Model):
     """
-    An entity with WMU ldap credentials. Generally will be a student, professor, or faculty.
+    An entity with WMU ldap credentials.
+    One of three User model types. Contains all information directly related Wmu LDAP information.
+    Generally will be a student, professor, or faculty.
     """
     # Preset field choices.
     STUDENT = 0

@@ -21,7 +21,7 @@ MAX_LENGTH = 255
 class User(AbstractUser):
     """
     An extension of Django's default user, allowing for additional functionality.
-    Contains user authentication related information.
+    One of three User model types. Contains all information directly related to Django authentication.
     """
     @staticmethod
     def get_or_create_superuser(username, email, password):
@@ -63,7 +63,7 @@ class User(AbstractUser):
 
 class UserIntermediary(models.Model):
     """
-    Intermediary to connect (login) User models, user Profile models, and WmuUser models.
+    Intermediary to connect the three User model types: (login) User models, user Profile models, and WmuUser models.
     """
     # Relationship Keys.
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
@@ -146,7 +146,8 @@ def create_user_intermediary(sender, instance, created, **kwargs):
 class Profile(models.Model):
     """
     A profile for a given user.
-    Contains additional user information not regarding authentication.
+    One of three User model types. Contains all site settings, plus any info that doesn't fit within the other two User
+    model types.
     """
     # Preset field choices.
     FONT_XS = 0
@@ -429,6 +430,9 @@ class Address(models.Model):
 
 
 class SiteTheme(models.Model):
+    """
+    A theme for the site. Users can select these to change the site's overall look.
+    """
     # Model fields.
     display_name = models.CharField(max_length=MAX_LENGTH, unique=True)     # The value displayed to users.
     file_name = models.CharField(max_length=MAX_LENGTH, unique=True)        # The value used in files and templating.

@@ -4,6 +4,7 @@ Custom template tags for CAE Home app.
 
 from django import template
 from django.conf import settings
+from django.utils.html import mark_safe
 
 
 register = template.Library()
@@ -23,3 +24,16 @@ def site_mode_is_debug():
     boolean, so there should be no issues using it for template logic.
     """
     return settings.DEBUG
+
+
+@register.simple_tag
+def render_model_docstring(obj):
+    """
+
+    :param obj:
+    :return:
+    """
+    if obj.__doc__:
+        return mark_safe('<p>{0}</p>'.format(obj.__doc__))
+    else:
+        return mark_safe('<p>No docstring.</p>')
