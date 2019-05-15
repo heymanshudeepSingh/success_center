@@ -61,12 +61,14 @@ function main() {
     cp ./settings/local_env/env_example.py ./settings/local_env/env.py
 
     loop=true
+    windows=false
     while [[ "$loop" == true ]]
     do
         echo "Enter OS type:"
         echo "   1) Arch Linux"
         echo "   2) Ubunutu Linux"
-        echo "   3) Other"
+        echo "   3) Windows 10"
+        echo "   4) Other"
         read user_input
         echo ""
         echo ""
@@ -93,8 +95,25 @@ function main() {
             echo ""
             loop=false
 
-        # Unsupported OS.
+        # Windows 10.
         elif [[ "$user_input" == "3" ]]
+        then
+            echo -e "NOTE: This script has been tested on ${color_blue}Windows 10, with updates for 2019${color_reset}."
+            echo -e "If you haven't already done so, please install Python Version 3.6 or higher from ${color_cyan}https://www.python.org/downloads/${color_reset}."
+            echo ""
+            echo "Please also follow the link below to download ruby."
+            echo -e "   ${color_cyan}https://rubyinstaller.org/downloads/${color_reset}"
+            echo -e "Run the ruby exe installer. Once ruby is already installed, hit ${color_blue}ENTER${color_reset} to continue."
+            echo "(You may first need to restart your terminal for it to dectect that ruby is installed.)"
+            echo ""
+            read user_input
+            gem install sass
+            echo ""
+            windows=true
+            loop=false
+
+        # Unsupported OS.
+        elif [[ "$user_input" == "4" ]]
         then
             echo -e "${color_red}Sorry, this script does not support any other OS types.${color_reset}"
             echo "To proceed:"
@@ -119,7 +138,12 @@ function main() {
 
     # Compile CSS.
     echo -e "${color_blue}Compiling CSS files...${color_reset}"
-    sudo ./scripts/compile_css.sh
+    if [[ "$windows" == true ]]
+    then
+        ./scripts/compile_css.sh
+    else
+        sudo ./scripts/compile_css.sh
+    fi
     echo ""
 
 
@@ -148,14 +172,27 @@ function main() {
 
         # Create environment with desired python version.
         echo -e "${color_blue}Installing local environment...${color_reset}"
-        "python$python_version" -m venv .venv
+        if [[ "$windows" == true ]]
+        then
+            python -m venv .venv
+        else
+            "python$python_version" -m venv .venv
+        fi
 
         # Install python requirements.
         echo -e "${color_blue}Installing python requirements...${color_reset}"
         echo ""
-        source ./.venv/bin/activate
-        pip install --upgrade pip
-        pip install -r requirements.txt
+        if [[ "$windows" == true ]]
+        then
+            . ./.venv/Scripts/activate
+            python -m pip install --upgrade pip
+            pip install pywin32
+            pip install -r requirements.txt
+        else
+            source ./.venv/bin/activate
+            pip install --upgrade pip
+            pip install -r requirements.txt
+        fi
         echo ""
         echo -e "${color_blue}If you wanted MySQL or LDAP, please uncomment the appropriate lines in requirements.txt and rerun \"pip install -r requirements.txt\".${color_reset}"
         echo ""
@@ -188,6 +225,9 @@ function main() {
 
         deactivate
 
+        echo ""
+        echo "If all tests passed, then the project has installed successfully."
+
     # Unknown Python environment.
     else
         echo "No local Python environment found at project root. Script cannot continue."
@@ -199,13 +239,13 @@ function main() {
         echo "   * Install selenium (integration testing) dependencies for your system."
         echo "   * Run \"python manage.py test\" to ensure that everything is working properly."
         echo ""
-        echo "If all tests pass, then the project has installed successfully."
+        echo "If all tests pass, then the project installed successfully."
     fi
+
 
     echo ""
     echo "Exiting script."
     exit 0
 }
-
 
 main
