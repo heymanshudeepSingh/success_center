@@ -38,6 +38,13 @@ class UserAdmin(BaseUserAdmin):
             new_list += (item,)
     BaseUserAdmin.fieldsets[2][1]['fields'] = new_list
 
+    # Hide Contact Info fields. These are redundant and should instead be managed in the WmuUser model.
+    new_list = ()
+    for item in BaseUserAdmin.fieldsets:
+        if item[0] != 'Personal info':
+            new_list += (item,)
+    BaseUserAdmin.fieldsets = new_list
+
     def user_type(self, obj):
         """
         Return list of user-associated group(s).
