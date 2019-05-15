@@ -171,6 +171,58 @@ class UserIntermediaryModelTests(IntegrationTestCase):
                 self.test_intermediary_with_wmuuser.save()
 
 
+class WmuUserTests(IntegrationTestCase):
+    """
+    Tests to ensure valid WMU User model creation/logic.
+    """
+    @classmethod
+    def setUpTestData(cls):
+        cls.major = models.Major.create_dummy_model()
+        cls.user_type = models.WmuUser.PROFESSOR
+
+    def setUp(self):
+        self.bronco_net='abc1234'
+        self.test_wmu_user = models.WmuUser.objects.create(
+            major=self.major,
+            bronco_net=self.bronco_net,
+            winno='123456789',
+            first_name='Test First',
+            last_name='Test Last',
+            user_type=self.user_type,
+        )
+        self.user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.bronco_net)
+
+    def test_model_creation(self):
+        self.assertEqual(self.user_intermediary.wmu_user, self.test_wmu_user)
+        self.assertEqual(self.test_wmu_user.major, self.major)
+        self.assertEqual(self.test_wmu_user.bronco_net, 'abc1234')
+        self.assertEqual(self.test_wmu_user.winno, '123456789')
+        self.assertEqual(self.test_wmu_user.first_name, 'Test First')
+        self.assertEqual(self.test_wmu_user.last_name, 'Test Last')
+        self.assertEqual(self.test_wmu_user.user_type, self.user_type)
+
+    def test_string_representation(self):
+        self.assertEqual(str(self.test_wmu_user), 'abc1234: Test First Test Last')
+
+    def test_plural_representation(self):
+        self.assertEqual(str(self.test_wmu_user._meta.verbose_name), 'WMU User')
+        self.assertEqual(str(self.test_wmu_user._meta.verbose_name_plural), 'WMU Users')
+
+    def test_dummy_creation(self):
+        # Test create.
+        dummy_model_1 = models.WmuUser.create_dummy_model()
+        self.assertIsNotNone(dummy_model_1)
+        self.assertTrue(isinstance(dummy_model_1, models.WmuUser))
+
+        # Test get.
+        dummy_model_2 = models.WmuUser.create_dummy_model()
+        self.assertIsNotNone(dummy_model_2)
+        self.assertTrue(isinstance(dummy_model_2, models.WmuUser))
+
+        # Test both are the same model instance.
+        self.assertEqual(dummy_model_1, dummy_model_2)
+
+
 class ProfileModelTests(IntegrationTestCase):
     """
     Tests to ensure valid Profile model creation/logic.

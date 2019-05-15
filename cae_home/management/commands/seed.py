@@ -65,8 +65,8 @@ class Command(BaseCommand):
         # Unconditionally seeds models in cae_home app, as that's always installed.
         # Generates in order of "user models", "wmu models", "cae models".
         self.stdout.write(self.style.HTTP_INFO('\nCAE_HOME: Seed command has been called.'))
-        user_seeder.generate_model_seeds(self.style, model_count)
         wmu_seeder.generate_model_seeds(self.style, model_count)
+        user_seeder.generate_model_seeds(self.style, model_count)
         cae_seeder.generate_model_seeds(self.style, model_count)
 
         # Attempts to seed any additional apps it can find.

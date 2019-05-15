@@ -199,6 +199,7 @@ ADMIN_REORDER = (
             'auth.Group',
             'cae_home.User',
             'cae_home.UserIntermediary',
+            'cae_home.WmuUser',
             'cae_home.Profile',
             'cae_home.Address',
             'cae_home.PhoneNumber',
@@ -214,7 +215,6 @@ ADMIN_REORDER = (
             'cae_home.RoomType',
             'cae_home.Room',
             'cae_home.SemesterDate',
-            'cae_home.WmuUser',
         ),
     },
     {

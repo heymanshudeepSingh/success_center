@@ -5,11 +5,7 @@ Definitions of "WMU" related Core Models.
 import datetime
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.db import models
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 from django.utils.text import slugify
-
-from ..models import UserIntermediary
 
 
 MAX_LENGTH = 255
@@ -248,112 +244,6 @@ class Major(models.Model):
                 name=name,
                 department=department,
             )
-
-
-class WmuUser(models.Model):
-    """
-    An entity with WMU ldap credentials.
-    One of three User model types. Contains all information directly related Wmu LDAP information.
-    Generally will be a student, professor, or faculty.
-    """
-    # Preset field choices.
-    STUDENT = 0
-    PROFESSOR = 1
-    FACULTY = 2
-    OTHER = 3
-    USER_TYPE_CHOICES = (
-        (STUDENT, 'Student'),
-        (PROFESSOR, 'Professor'),
-        (FACULTY, 'Faculty'),
-        (OTHER, 'Other'),
-    )
-
-    # Relationship keys.
-    major = models.ForeignKey('Major', on_delete=models.CASCADE, blank=True)
-
-    # Model fields.
-    bronco_net = models.CharField(max_length=MAX_LENGTH, unique=True)
-    winno = models.CharField(max_length=MAX_LENGTH, unique=True)
-    first_name = models.CharField(max_length=MAX_LENGTH)
-    middle_name = models.CharField(max_length=MAX_LENGTH, blank=True, null=True)
-    last_name = models.CharField(max_length=MAX_LENGTH)
-    user_type = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES, default=0)
-    active = models.BooleanField(default=True)
-
-    # Self-setting/Non-user-editable fields.
-    official_email = models.EmailField(blank=True, null=True)
-    date_created = models.DateTimeField(auto_now_add=True)
-    date_modified = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        verbose_name = 'WMU User'
-        verbose_name_plural = 'WMU Users'
-
-    def __str__(self):
-        return '{0}: {1} {2}'.format(self.bronco_net, self.first_name, self.last_name)
-
-    def save(self, *args, **kwargs):
-        """
-        Modify model save behavior.
-        """
-        # Save model.
-        self.full_clean()
-        super(WmuUser, self).save(*args, **kwargs)
-
-    def shorthand_email(self):
-        """
-        Returns a string of student's shorthand email.
-        """
-        return '{0}@wmich.edu'.format(self.bronco_net)
-
-    @staticmethod
-    def create_dummy_model():
-        """
-        Attempts to get or create a dummy model.
-        Used for testing.
-        """
-        major = Major.create_dummy_model()
-        bronco_net = 'dummy123'
-        winno = 'dummy12345'
-        first_name = 'Dummy First'
-        last_name = 'Dummy Last'
-        try:
-            return WmuUser.objects.get(
-                bronco_net=bronco_net,
-                winno=winno,
-                first_name=first_name,
-                last_name=last_name,
-                major=major,
-            )
-        except ObjectDoesNotExist:
-            return WmuUser.objects.create(
-                bronco_net=bronco_net,
-                winno=winno,
-                first_name=first_name,
-                last_name=last_name,
-                major=major,
-            )
-
-
-@receiver(post_save, sender=WmuUser)
-def create_user_intermediary(sender, instance, created, **kwargs):
-    if created:
-        # Handle for new WmuUser being created. Attempt to find existing Intermediary with bronco_net.
-        # On failure, create new UserIntermediary instance.
-        try:
-            user_intermediary = UserIntermediary.objects.get(bronco_net=instance.bronco_net)
-
-            # Check that WmuUser has not been provided to UserIntermediary.
-            if user_intermediary.wmu_user is not None:
-                raise ValidationError('User Intermediary model already has associated WmuUser model.')
-            else:
-                user_intermediary.wmu_user = instance
-                user_intermediary.save()
-        except ObjectDoesNotExist:
-            UserIntermediary.objects.create(wmu_user=instance)
-    else:
-        # Just updating an existing UserIntermediary. Save.
-        instance.userintermediary.save()
 
 
 class SemesterDate(models.Model):
