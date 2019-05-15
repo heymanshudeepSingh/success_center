@@ -155,7 +155,6 @@ class CaeAuthBackend(object):
             search_filter='(uid={0})'.format(uid),
             attributes=['uid', 'givenName', 'sn',]
         )
-        self.ldap_lib.unbind_server()
 
         # Get ldap groups.
         # Check for ldap directors group match.
@@ -198,6 +197,7 @@ class CaeAuthBackend(object):
             ldap_programmers = ldap_programmers['memberUid']
         else:
             ldap_programmers = []
+        self.ldap_lib.unbind_server()
 
         # Create new user.
         model_user, created = models.User.objects.get_or_create(username=uid)
