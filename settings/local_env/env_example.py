@@ -11,6 +11,14 @@ Committed values should just be example or "expected default" values.
 from settings.reusable_settings import *
 
 
+#region Site Serve Settings
+
+# Allowed server hosts.
+ALLOWED_HOSTS = [
+    # List of domain names the project can serve. Helps prevent HTTP Host Header attacks.
+]
+
+
 # Static/Media file locations.
 # Static refers to CSS, JavaScript, Images, etc provided by project. Media refers to any user-uploaded files.
 STATIC_URL = '/static/'
@@ -21,12 +29,10 @@ STATICFILES_DIRS = (
     # Path to any additional, non-standard static directories.
 )
 
+#endregion Site Serve Settings
 
-# Allowed server hosts.
-ALLOWED_HOSTS = [
-    # List of domain names the project can serve. Helps prevent HTTP Host Header attacks.
-]
 
+#region Authentication
 
 # Set desired authentication backend. Defaults to standard Django auth.
 AUTHENTICATION_BACKENDS = (
@@ -57,6 +63,10 @@ WMU_LDAP = {
     'user_search_base': '',
 }
 
+#endregion Authentication
+
+
+#region Database Setup
 
 # Database connection information.
 DATABASES = {
@@ -74,14 +84,10 @@ DATABASES = {
     }
 }
 
+#endregion Database Setup
 
-# DjangoRest settings.
-REST_FRAMEWORK = {
-    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 20,
-}
 
+#region Email Settings
 
 # Email settings.
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'    # For SMTP, use 'backends.smtp.EmailBackend'.
@@ -97,6 +103,14 @@ SERVER_EMAIL = 'root@localhost'             # Default email address for admin er
 # Admins to send emails to on error (Only sends if debug = False).
 ADMINS = []
 
+#endregion Email Settings
+
+
+#region General Site Settings
+
+# Password for user model seeds.
+# This is the password used for all the "default" accounts (both in normal serving and tests).
+USER_SEED_PASSWORD = 'temppass2'
 
 # # HTTPS/Security Settings. Used in production.
 # SECURE_SSL_HOST = ""
@@ -110,11 +124,21 @@ ADMINS = []
 # X_FRAME_OPTIONS = "DENY"
 # SECURE_CONTENT_TYPE_NOSNIFF = True
 
+#endregion General Site Settings
+
+
+#region Third Party Library Settings
+
+# DjangoRest settings.
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 20,
+}
+
 
 # Selenium Integration Test settings.
 SELENIUM_TESTS_BROWSER = 'chrome'   # Set to 'firefox' to use firefox browser instead.
 SELENIUM_TESTS_HEADLESS = False     # Set to True to run selenium in headless mode (hides browser window).
 
-
-# Password for model seeds. Includes normal seeds and unittest seeds.
-USER_SEED_PASSWORD = 'temppass2'
+#endregion Third Party Library Settings
