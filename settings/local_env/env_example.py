@@ -1,11 +1,15 @@
 """
-Local settings .env example file.
+Extra (local) settings for Django project.
 
-Move to 'env.py' and modify to provide local overrides.
+These are generally custom or optional settings (as in not necessarily mandatory to Django or installed Libraries).
+Settings here are likely to change based on Project installation.
 
-Committed values should just be example or "expected default" values.
+For settings that will generally stay the same, regardless of Project installation, see "settings/extra_settings.py".
+
+
+Note that this is just an example file. Any values committed to this file should be exmaple or "expected default" values.
+To use in project, please copy file and save at "settings/local_env/env.py".
 """
-
 
 # User Class Imports.
 from settings.reusable_settings import *

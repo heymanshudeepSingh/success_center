@@ -1,5 +1,10 @@
 """
-Extra settings for project, including logging and importing of local environment.
+Extra (universal) settings for Django project.
+
+These are generally custom or optional settings (as in not necessarily mandatory to Django or installed Libraries).
+Settings here will generally stay the same, regardless of Project installation.
+
+For settings that are likely to change based on Project installation, see "settings/local_env/env.py".
 """
 
 # System Imports.
@@ -9,6 +14,8 @@ import logging.config, string
 # User Class Imports.
 from settings.reusable_settings import *
 
+
+#region Logging Settings
 
 # Set up logging directories.
 log_dir = os.path.join(BASE_DIR, 'settings/local_env/logs/')
@@ -111,6 +118,10 @@ LOGGING_CONFIG = None # Prevent django from initializing logging again
 logging.config.dictConfig(LOGGING)
 logger = logging.getLogger(__name__)
 
+#endregion Logging Settings
+
+
+#region Secret Key Settings
 
 # Check for secret key.
 path_to_key = os.path.join(BASE_DIR, './settings/local_env/secret_key.txt')
@@ -139,21 +150,19 @@ except FileNotFoundError:
         debug_print('Error generating secret key.')
         exit(1)
 
+#endregion Secret Key Settings
 
 
-# Login url.
+#region Url Redirection Settings
+
 LOGIN_URL = '/user/login/'
 LOGIN_REDIRECT_URL = '/user/login_redirect/'
 LOGOUT_REDIRECT_URL = LOGIN_URL
 
-
-# Set to True to run selenium in headless mode, so you don't see Chrome
-SELENIUM_TESTS_HEADLESS = False
+#endregion Url Redirection Settings
 
 
-# django-phonenumber-field settings
-PHONENUMBER_DEFAULT_REGION = "US" # Don't require users to prefix with +1
-
+#region Dev Environment Values
 
 # Local environment setup.
 try:
@@ -176,3 +185,13 @@ if DEBUG:
     DEV_URLS = True
 else:
     DEV_URLS = False
+
+#endregion Dev Environment Values
+
+
+#region Third Party Library Settings
+
+# django-phonenumber-field settings
+PHONENUMBER_DEFAULT_REGION = "US" # Don't require users to prefix with +1
+
+#endregion Third Party Library Settings
