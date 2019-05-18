@@ -15,110 +15,13 @@ import logging.config, string
 from settings.reusable_settings import *
 
 
-#region Logging Settings
-
-# Set up logging directories.
-log_dir = os.path.join(BASE_DIR, 'settings/local_env/logs/')
+# Check for local environment setup.
 try:
-    os.makedirs(log_dir)
-    debug_print('Logging folder created.')
-except FileExistsError:
-    debug_print('Logging folder found.')
-
-# Set up logging configuration.
-LOGGING = {
-    'version': 1,
-    'formatters': {
-        # Simple logging. Includes message type and actual message.
-        'simple': {
-            'format': '[%(levelname)s]: %(message)s',
-        },
-        # Basic logging. Includes date, message type, file originated, and actual message.
-        'standard': {
-            'format': '%(asctime)s [%(levelname)s] %(name)s: %(message)s',
-        },
-        # Verbose logging. Includes standard plus the process number and thread id.
-        'verbose': {
-            'format': '%(asctime)s [%(levelname)s] %(name)s || %(process)d %(thread)d || %(message)s',
-        },
-    },
-    'handlers': {
-        # Sends log message to the void. May be useful for debugging.
-        'null': {
-            'class': 'logging.NullHandler',
-        },
-        # To console.
-        'console': {
-            'level': 'INFO',
-            'class': 'logging.StreamHandler',
-            'formatter': 'simple',
-        },
-        # Debug level - To file.
-        'file_debug': {
-            'level': 'DEBUG',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(log_dir, 'debug.log'),
-            'maxBytes': 1024*1024*10,
-            'backupCount': 10,
-            'formatter': 'standard',
-        },
-        # Info level - To file.
-        'file_info': {
-            'level': 'INFO',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(log_dir, 'info.log'),
-            'maxBytes': 1024*1024*10,
-            'backupCount': 10,
-            'formatter': 'standard',
-        },
-        # Warn level - To file.
-        'file_warn': {
-            'level': 'WARNING',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(log_dir, 'warn.log'),
-            'maxBytes': 1024 * 1024 * 10,
-            'backupCount': 10,
-            'formatter': 'verbose',
-        },
-        # Error level - To file.
-        'file_error': {
-            'level': 'ERROR',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(log_dir, 'error.log'),
-            'maxBytes': 1024*1024*10,
-            'backupCount': 10,
-            'formatter': 'verbose',
-        },
-        # Error level - To admin email.
-        'mail_error': {
-            'level': 'ERROR',
-            'class': 'django.utils.log.AdminEmailHandler',
-            'formatter': 'verbose',
-        }
-    },
-    'loggers': {
-        # All basic logging to console/log files.
-        '': {
-            'handlers': ['console', 'file_info', 'file_warn', 'file_error', 'mail_error',],
-            'level': 'INFO',
-            'propagate': True,
-        },
-        # Request logging.
-        'django.request': {
-            'handlers': ['console', 'file_warn', 'file_error',],
-            'level': 'WARNING',
-            'propagate': True,
-        },
-    },
-}
-
-
-# Initialize logging.
-LOGGING_CONFIG = None # Prevent django from initializing logging again
-logging.config.dictConfig(LOGGING)
-logger = logging.getLogger(__name__)
-
-#endregion Logging Settings
+    from settings.local_env.env import *
+except Exception:
+    debug_print('Missing or Invalid local env file. Copy the env_example.py file to env.py in settings/local_env/')
+    debug_print(sys.exc_info())
+    sys.exit(1)
 
 
 #region Secret Key Settings
@@ -153,6 +56,252 @@ except FileNotFoundError:
 #endregion Secret Key Settings
 
 
+#region Logging Settings
+
+# Set up logging directories.
+debug_log_dir = os.path.join(LOGGING_DIRECTORY, 'debug/')
+sql_log_dir = os.path.join(LOGGING_DIRECTORY, 'sql/')
+# Make sure logging directories exist.
+try:
+    os.makedirs(LOGGING_DIRECTORY)
+    os.makedirs(debug_log_dir)
+    os.makedirs(sql_log_dir)
+except FileExistsError:
+    # Root logging directory exists. Attempt sub directories.
+    try:
+        # Debug directory.
+        os.makedirs(debug_log_dir)
+    except FileExistsError:
+        pass    # Debug log dir already exists. This is fine.
+    try:
+        # SQL directory.
+        os.makedirs(sql_log_dir)
+    except FileExistsError:
+        pass    # SQL log dir already exists. This is fine.
+debug_print('{0}Logging folder{1}: {2}'.format(ConsoleColors.bold_blue, ConsoleColors.reset, LOGGING_DIRECTORY))
+
+
+# Logging variables.
+handler_class = 'logging.handlers.RotatingFileHandler'
+handler_file_max_bytes = 1024*1024*10
+handler_file_backup_count = 10
+
+# Set up logging configuration.
+LOGGING = {
+    'version': 1,
+    'formatters': {
+        # Simple logging. Includes message type and actual message.
+        'simple': {
+            'format': '[%(levelname)s]: %(message)s',
+        },
+        # Basic logging. Includes date, message type, file originated, and actual message.
+        'standard': {
+            'format': '%(asctime)s [%(levelname)s] %(name)s: %(message)s',
+        },
+        # Verbose logging. Includes standard plus the process number and thread id.
+        'verbose': {
+            'format': '%(asctime)s [%(levelname)s] %(name)s || %(process)d %(thread)d || %(message)s',
+        },
+    },
+    'handlers': {
+        # Sends log message to the void. May be useful for debugging.
+        'null': {
+            'class': 'logging.NullHandler',
+        },
+        # To console.
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'standard',
+        },
+        # Debug level - To file.
+        'file_debug': {
+            'level': 'DEBUG',
+            'class': handler_class,
+            'filename': os.path.join(LOGGING_DIRECTORY, 'debug.log'),
+            'maxBytes': handler_file_max_bytes,
+            'backupCount': handler_file_backup_count,
+            'formatter': 'standard',
+        },
+        'file_debug_connections': {
+            'level': 'DEBUG',
+            'class': handler_class,
+            'filename': os.path.join(LOGGING_DIRECTORY, 'debug/connections.log'),
+            'maxBytes': handler_file_max_bytes,
+            'backupCount': handler_file_backup_count,
+            'formatter': 'standard',
+        },
+        'file_debug_selenium': {
+            'level': 'DEBUG',
+            'class': handler_class,
+            'filename': os.path.join(LOGGING_DIRECTORY, 'debug/selenium.log'),
+            'maxBytes': handler_file_max_bytes,
+            'backupCount': handler_file_backup_count,
+            'formatter': 'standard',
+        },
+        'file_debug_sql_queries': {
+            'level': 'DEBUG',
+            'class': handler_class,
+            'filename': os.path.join(LOGGING_DIRECTORY, 'sql/queries.log'),
+            'maxBytes': handler_file_max_bytes,
+            'backupCount': handler_file_backup_count,
+            'formatter': 'standard',
+        },
+        'file_debug_sql_schema': {
+            'level': 'DEBUG',
+            'class': handler_class,
+            'filename': os.path.join(LOGGING_DIRECTORY, 'sql/schema.log'),
+            'maxBytes': handler_file_max_bytes,
+            'backupCount': handler_file_backup_count,
+            'formatter': 'standard',
+        },
+        'file_debug_templates': {
+            'level': 'DEBUG',
+            'class': handler_class,
+            'filename': os.path.join(LOGGING_DIRECTORY, 'debug/templates.log'),
+            'maxBytes': handler_file_max_bytes,
+            'backupCount': handler_file_backup_count,
+            'formatter': 'standard',
+        },
+        # Info level - To file.
+        'file_info': {
+            'level': 'INFO',
+            'class': handler_class,
+            'filename': os.path.join(LOGGING_DIRECTORY, 'info.log'),
+            'maxBytes': handler_file_max_bytes,
+            'backupCount': handler_file_backup_count,
+            'formatter': 'standard',
+        },
+        # Warn level - To file.
+        'file_warn': {
+            'level': 'WARNING',
+            'class': handler_class,
+            'filename': os.path.join(LOGGING_DIRECTORY, 'warn.log'),
+            'maxBytes': handler_file_max_bytes,
+            'backupCount': handler_file_backup_count,
+            'formatter': 'verbose',
+        },
+        # Error level - To file.
+        'file_error': {
+            'level': 'ERROR',
+            'class': handler_class,
+            'filename': os.path.join(LOGGING_DIRECTORY, 'error.log'),
+            'maxBytes': handler_file_max_bytes,
+            'backupCount': handler_file_backup_count,
+            'formatter': 'verbose',
+        },
+        # Error level - To admin email.
+        'mail_error': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+            'formatter': 'verbose',
+        }
+    },
+    'loggers': {
+        # Catch all for all other log types not found below (hopefully).
+        '': {
+            'handlers': ['console', 'file_debug', 'file_info', 'file_warn', 'file_error', 'mail_error',],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+
+        # Various debug logging, mostly associated with Daphne (Channels) or Redis.
+        'asyncio': {
+            'handlers': ['file_debug_connections'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        'aioredis': {
+            'handlers': ['file_debug_connections'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        'daphne.http_protocol': {
+            'handlers': ['file_debug_connections'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        'daphne.ws_protocol': {
+            'handlers': ['file_debug_connections'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        'django.db.backends': {
+            'handlers': ['file_debug_sql_queries'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        'django.db.backends.schema': {
+            'handlers': ['file_debug_sql_schema'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        'django.template': {
+            'handlers': ['file_debug_templates'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        'django.utils.autoreload': {
+            'handlers': ['null'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        'selenium': {
+            'handlers': ['file_debug_selenium'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        'urllib3.connectionpool': {
+            'handlers': ['file_debug_connections'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+
+        # Standard logging for Django.
+        'django': {
+            'handlers': ['console', 'file_debug', 'file_info', 'file_warn', 'file_error', 'mail_error',],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        'django.request': {
+            'handlers': ['console', 'file_debug', 'file_info', 'file_warn', 'file_error', 'mail_error',],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        'django.server': {
+            'handlers': ['console', 'file_debug', 'file_info', 'file_warn', 'file_error', 'mail_error',],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+
+        # Standard logging for Django Channels.
+        'django.channels': {
+            'handlers': ['console', 'file_debug', 'file_info', 'file_warn', 'file_error', 'mail_error',],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        'django.channels.request': {
+            'handlers': ['console', 'file_debug', 'file_info', 'file_warn', 'file_error', 'mail_error', ],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        'django.channels.server': {
+            'handlers': ['console', 'file_debug', 'file_info', 'file_warn', 'file_error', 'mail_error',],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+    },
+}
+
+
+# Initialize logging.
+LOGGING_CONFIG = None # Prevent django from initializing logging again
+logging.config.dictConfig(LOGGING)
+logger = logging.getLogger(__name__)
+
+#endregion Logging Settings
+
+
 #region Url Redirection Settings
 
 LOGIN_URL = '/user/login/'
@@ -162,21 +311,15 @@ LOGOUT_REDIRECT_URL = LOGIN_URL
 #endregion Url Redirection Settings
 
 
-#region Dev Environment Values
+#region Environment Values
 
 # Local environment setup.
-try:
-    from settings.local_env.env import *
-    if DEBUG:
-        debug_print('Successfully imported {0}development{1} environment settings.'
-                    .format(ConsoleColors.bold_blue, ConsoleColors.reset))
-    else:
-        debug_print('Successfully imported {0}production{1} environment settings.'
-                    .format(ConsoleColors.bold_blue, ConsoleColors.reset))
-except Exception:
-    debug_print('Missing or Invalid local env file. Copy the env_example.py file to env.py in settings/local_env/')
-    debug_print(sys.exc_info())
-    sys.exit(1)
+if DEBUG:
+    debug_print('Successfully imported {0}development{1} environment settings.'
+                .format(ConsoleColors.bold_blue, ConsoleColors.reset))
+else:
+    debug_print('Successfully imported {0}production{1} environment settings.'
+                .format(ConsoleColors.bold_blue, ConsoleColors.reset))
 
 
 # Set custom "development mode url" variable, based on DEBUG.
@@ -186,7 +329,7 @@ if DEBUG:
 else:
     DEV_URLS = False
 
-#endregion Dev Environment Values
+#endregion Environment Values
 
 
 #region Third Party Library Settings

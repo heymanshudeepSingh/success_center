@@ -116,6 +116,9 @@ ADMINS = []
 # This is the password used for all the "default" accounts (both in normal serving and tests).
 USER_SEED_PASSWORD = 'temppass2'
 
+# Log folder location
+LOGGING_DIRECTORY = os.path.join(BASE_DIR, 'settings/local_env/logs/')
+
 # # HTTPS/Security Settings. Used in production.
 # SECURE_SSL_HOST = ""
 # SECURE_SSL_REDIRECT = True
