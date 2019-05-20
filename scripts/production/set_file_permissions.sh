@@ -17,14 +17,17 @@ function main () {
     else
         cd "$(dirname "$0")/../.."
 
+        echo "Setting project file ownership..."
+        chown www-data:ceas_programmers -R ./
+
         echo "Setting project file permissions..."
 
         find . -type d -exec chmod u+rwx {} \;  # Set all directors to be read/write/executable by user owner.
         find . -type d -exec chmod g+rwx {} \;  # Set all directories to be read/write/executable by group owners.
-        find . -type d -exec chmod o-rwx {} \;    # Remove directory write/executable access by other users.
+        find . -type d -exec chmod o-rwx {} \;  # Remove directory write/executable access by other users.
         find . -type f -exec chmod u+rw {} \;   # Set all files to be read/writeable by user owner.
         find . -type f -exec chmod g+rw {} \;   # Set all files to be read/writeable by group owners.
-        find . -type f -exec chmod o-rwx {} \;    # Remove file write/executable access by other users.
+        find . -type f -exec chmod o-rwx {} \;  # Remove file write/executable access by other users.
 
         echo ""
         echo "Set all directories to be read/write/executable by user and group owners."
