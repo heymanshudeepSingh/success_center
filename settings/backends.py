@@ -3,10 +3,10 @@ Custom authentication backends.
 """
 
 from django.conf import settings
-from django.contrib.auth.models import Group
+from django.contrib.auth import get_user_model
+from django.contrib.auth.models import Group, Permission
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
-from django.db import transaction
 
 from cae_home import models
 from settings import simple_ldap_lib
@@ -25,6 +25,8 @@ class CaeAuthBackend(object):
         self.ldap_lib.set_host(settings.CAE_LDAP['host'])
         self.ldap_lib.set_master_account(settings.CAE_LDAP['login_dn'], settings.CAE_LDAP['login_password'])
         self.ldap_lib.set_search_base(settings.CAE_LDAP['user_search_base'])
+
+    #region User Auth
 
     def authenticate(self, request, username=None, password=None):
         """
@@ -47,6 +49,10 @@ class CaeAuthBackend(object):
             if user:
                 # User object found in local Django database. Use standard Django auth.
                 user = self.validate_user(user, password)
+
+                # Check that user is active.
+                if user and not self.user_can_authenticate(user):
+                    user = None
             else:
                 user = None
 
@@ -250,13 +256,124 @@ class CaeAuthBackend(object):
 
         return model_user
 
+    def user_can_authenticate(self, user):
+        """
+        Default django method, imported from "contrib.auth.backends.ModelBackend".
+
+        Reject users with is_active=False. Custom user models that don't have that attribute are allowed.
+        """
+        is_active = getattr(user, 'is_active', None)
+        return is_active or is_active is None
+
     def get_user(self, user_id):
+        """
+        Default django method, imported from "contrib.auth.backends.ModelBackend".
+
+        Attempts to get user with passed pk.
+        """
         try:
-            return models.User.objects.get(pk=user_id)
-        except models.User.DoesNotExist:
-            if settings.AUTH_BACKEND_DEBUG:
-                logger.info('Auth Backend: User not found.')
-            return None
+            user = get_user_model()._default_manager.get(pk=user_id)
+        except get_user_model().DoesNotExist:
+            user = None
+        if user and not self.user_can_authenticate(user):
+            user = None
+
+        if user is None and settings.AUTH_BACKEND_DEBUG:
+            logger.info('Auth Backend: User not found.')
+        return user
+
+    #endregion User Auth
+
+    #region User Permissions
+
+    def _get_user_permissions(self, user_obj):
+        """
+        Default django method, imported from "contrib.auth.backends.ModelBackend".
+
+        Gets individual permissions for user.
+        """
+        return user_obj.user_permissions.all()
+
+    def _get_group_permissions(self, user_obj):
+        """
+        Default django method, imported from "contrib.auth.backends.ModelBackend".
+
+        Gets group permissions for user.
+        """
+        user_groups_field = get_user_model()._meta.get_field('groups')
+        user_groups_query = 'group__%s' % user_groups_field.related_query_name()
+        return Permission.objects.filter(**{user_groups_query: user_obj})
+
+    def _get_permissions(self, user_obj, obj, from_name):
+        """
+        Default django method, imported from "contrib.auth.backends.ModelBackend".
+
+        Gets permission value specified in "from_name"?
+        """
+        if not user_obj.is_active or user_obj.is_anonymous or obj is not None:
+            return set()
+
+        perm_cache_name = '_%s_perm_cache' % from_name
+        if not hasattr(user_obj, perm_cache_name):
+            if user_obj.is_superuser:
+                perms = Permission.objects.all()
+            else:
+                perms = getattr(self, '_get_%s_permissions' % from_name)(user_obj)
+            perms = perms.values_list('content_type__app_label', 'codename').order_by()
+            setattr(user_obj, perm_cache_name, {'%s.%s' % (ct, name) for ct, name in perms})
+        return getattr(user_obj, perm_cache_name)
+
+    def get_user_permissions(self, user_obj, obj=None):
+        """
+        Default django method, imported from "contrib.auth.backends.ModelBackend".
+
+        Return a set of permission strings the user `user_obj` has from their `user_permissions`.
+        """
+        return self._get_permissions(user_obj, obj, 'user')
+
+    def get_group_permissions(self, user_obj, obj=None):
+        """
+        Default django method, imported from "contrib.auth.backends.ModelBackend".
+
+        Return a set of permission strings the user `user_obj` has from the groups they belong.
+        """
+        return self._get_permissions(user_obj, obj, 'group')
+
+    def get_all_permissions(self, user_obj, obj=None):
+        """
+        Default django method, imported from "contrib.auth.backends.ModelBackend".
+
+        Gets all permissions, both user and group based.
+        """
+        if not user_obj.is_active or user_obj.is_anonymous or obj is not None:
+            return set()
+        if not hasattr(user_obj, '_perm_cache'):
+            user_obj._perm_cache = {
+                *self.get_user_permissions(user_obj),
+                *self.get_group_permissions(user_obj),
+            }
+        return user_obj._perm_cache
+
+    def has_perm(self, user_obj, perm, obj=None):
+        """
+        Default django method, imported from "contrib.auth.backends.ModelBackend".
+
+        Checks if user has a specific permission.
+        """
+        return user_obj.is_active and perm in self.get_all_permissions(user_obj, obj)
+
+    def has_module_perms(self, user_obj, app_label):
+        """
+        Default django method, imported from "contrib.auth.backends.ModelBackend".
+
+        Return True if user_obj has any permissions in the given app_label.
+        """
+        return user_obj.is_active and any(
+            perm[:perm.index('.')] == app_label
+            for perm in self.get_all_permissions(user_obj)
+        )
+
+    #endregion User Permissions
 
 
 class WmuAuthBackend(object):
@@ -272,6 +389,8 @@ class WmuAuthBackend(object):
             get_info='NONE',
         )
         self.ldap_lib.set_search_base(settings.WMU_LDAP['user_search_base'])
+
+    #region User Auth
 
     def authenticate(self, request, username=None, password=None):
         """
@@ -294,6 +413,10 @@ class WmuAuthBackend(object):
             if user:
                 # User object found in local Django database. Use standard Django auth.
                 user = self.validate_user(user, password)
+
+                # Check that user is active.
+                if user and not self.user_can_authenticate(user):
+                    user = None
             else:
                 user = None
 
@@ -478,10 +601,121 @@ class WmuAuthBackend(object):
 
         return model_user
 
+    def user_can_authenticate(self, user):
+        """
+        Default django method, imported from "contrib.auth.backends.ModelBackend".
+
+        Reject users with is_active=False. Custom user models that don't have that attribute are allowed.
+        """
+        is_active = getattr(user, 'is_active', None)
+        return is_active or is_active is None
+
     def get_user(self, user_id):
+        """
+        Default django method, imported from "contrib.auth.backends.ModelBackend".
+
+        Attempts to get user with passed pk.
+        """
         try:
-            return models.User.objects.get(pk=user_id)
-        except models.User.DoesNotExist:
-            if settings.AUTH_BACKEND_DEBUG:
-                logger.info('Auth Backend: User not found.')
-            return None
+            user = get_user_model()._default_manager.get(pk=user_id)
+        except get_user_model().DoesNotExist:
+            user = None
+        if user and not self.user_can_authenticate(user):
+            user = None
+
+        if user is None and settings.AUTH_BACKEND_DEBUG:
+            logger.info('Auth Backend: User not found.')
+        return user
+
+    #endregion User Auth
+
+    #region User Permissions
+
+    def _get_user_permissions(self, user_obj):
+        """
+        Default django method, imported from "contrib.auth.backends.ModelBackend".
+
+        Gets individual permissions for user.
+        """
+        return user_obj.user_permissions.all()
+
+    def _get_group_permissions(self, user_obj):
+        """
+        Default django method, imported from "contrib.auth.backends.ModelBackend".
+
+        Gets group permissions for user.
+        """
+        user_groups_field = get_user_model()._meta.get_field('groups')
+        user_groups_query = 'group__%s' % user_groups_field.related_query_name()
+        return Permission.objects.filter(**{user_groups_query: user_obj})
+
+    def _get_permissions(self, user_obj, obj, from_name):
+        """
+        Default django method, imported from "contrib.auth.backends.ModelBackend".
+
+        Gets permission value specified in "from_name"?
+        """
+        if not user_obj.is_active or user_obj.is_anonymous or obj is not None:
+            return set()
+
+        perm_cache_name = '_%s_perm_cache' % from_name
+        if not hasattr(user_obj, perm_cache_name):
+            if user_obj.is_superuser:
+                perms = Permission.objects.all()
+            else:
+                perms = getattr(self, '_get_%s_permissions' % from_name)(user_obj)
+            perms = perms.values_list('content_type__app_label', 'codename').order_by()
+            setattr(user_obj, perm_cache_name, {'%s.%s' % (ct, name) for ct, name in perms})
+        return getattr(user_obj, perm_cache_name)
+
+    def get_user_permissions(self, user_obj, obj=None):
+        """
+        Default django method, imported from "contrib.auth.backends.ModelBackend".
+
+        Return a set of permission strings the user `user_obj` has from their `user_permissions`.
+        """
+        return self._get_permissions(user_obj, obj, 'user')
+
+    def get_group_permissions(self, user_obj, obj=None):
+        """
+        Default django method, imported from "contrib.auth.backends.ModelBackend".
+
+        Return a set of permission strings the user `user_obj` has from the groups they belong.
+        """
+        return self._get_permissions(user_obj, obj, 'group')
+
+    def get_all_permissions(self, user_obj, obj=None):
+        """
+        Default django method, imported from "contrib.auth.backends.ModelBackend".
+
+        Gets all permissions, both user and group based.
+        """
+        if not user_obj.is_active or user_obj.is_anonymous or obj is not None:
+            return set()
+        if not hasattr(user_obj, '_perm_cache'):
+            user_obj._perm_cache = {
+                *self.get_user_permissions(user_obj),
+                *self.get_group_permissions(user_obj),
+            }
+        return user_obj._perm_cache
+
+    def has_perm(self, user_obj, perm, obj=None):
+        """
+        Default django method, imported from "contrib.auth.backends.ModelBackend".
+
+        Checks if user has a specific permission.
+        """
+        return user_obj.is_active and perm in self.get_all_permissions(user_obj, obj)
+
+    def has_module_perms(self, user_obj, app_label):
+        """
+        Default django method, imported from "contrib.auth.backends.ModelBackend".
+
+        Return True if user_obj has any permissions in the given app_label.
+        """
+        return user_obj.is_active and any(
+            perm[:perm.index('.')] == app_label
+            for perm in self.get_all_permissions(user_obj)
+        )
+
+    #endregion User Permissions
