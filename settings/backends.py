@@ -39,7 +39,7 @@ class CaeAuthBackend(object):
             logger.info('Auth Backend: Attempting CAE user login...')
 
         # Check what format username was provided as.
-        user_id = self.parse_username(username)
+        user_id = self._parse_username(username)
 
         try:
             # Attempt to get user object.
@@ -48,7 +48,7 @@ class CaeAuthBackend(object):
             # Validate user object.
             if user:
                 # User object found in local Django database. Use standard Django auth.
-                user = self.validate_user(user, password)
+                user = self._validate_django_user(user, password)
 
                 # Check that user is active.
                 if user and not self.user_can_authenticate(user):
@@ -66,10 +66,10 @@ class CaeAuthBackend(object):
             # User object not found in local Django database. Attempt ldap query.
             if settings.AUTH_BACKEND_DEBUG:
                 logger.info('Auth Backend: CAE user not found in Django database.')
-            user = self.ldap_validate_user(user_id, password)
+            user = self._validate_ldap_user(user_id, password)
             return user
 
-    def parse_username(self, username):
+    def _parse_username(self, username):
         """
         Allows user to attempt login with username or associated email.
         :param username: String user entered into "username" field.
@@ -94,7 +94,7 @@ class CaeAuthBackend(object):
             kwargs = {'username': username}
         return kwargs
 
-    def validate_user(self, user, password):
+    def _validate_django_user(self, user, password):
         """
         Validates given user object. Uses standard Django auth logic.
         :param user:
@@ -114,7 +114,7 @@ class CaeAuthBackend(object):
                 logger.info('Auth Backend: Bad password. Cancelling login.')
             return None
 
-    def ldap_validate_user(self, user_id, password):
+    def _validate_ldap_user(self, user_id, password):
         """
         Attempts to validate user through ldap. If found, will create a new user account using ldap info.
         :return:
@@ -135,7 +135,7 @@ class CaeAuthBackend(object):
             # User validated successfully through ldap. Create new django user.
             if settings.AUTH_BACKEND_DEBUG:
                 logger.info('Auth Backend: {0}'.format(auth_search_return[1]))
-            user = self.create_new_user(uid, password)
+            user = self._create_new_user_from_ldap(uid, password)
         else:
             # Invalid ldap credentials.
             if settings.AUTH_BACKEND_DEBUG:
@@ -144,7 +144,7 @@ class CaeAuthBackend(object):
 
         return user
 
-    def create_new_user(self, uid, password):
+    def _create_new_user_from_ldap(self, uid, password):
         """
         Attempts to create new user, using pulled ldap information.
         Should only be called on known, valid and authenticated users.
@@ -439,7 +439,7 @@ class WmuAuthBackend(object):
             logger.info('Auth Backend: Attempting WMU user login...')
 
         # Check what format username was provided as.
-        user_id = self.parse_username(username)
+        user_id = self._parse_username(username)
 
         try:
             # Attempt to get user object.
@@ -448,7 +448,7 @@ class WmuAuthBackend(object):
             # Validate user object.
             if user:
                 # User object found in local Django database. Use standard Django auth.
-                user = self.validate_user(user, password)
+                user = self._validate_django_user(user, password)
 
                 # Check that user is active.
                 if user and not self.user_can_authenticate(user):
@@ -466,10 +466,10 @@ class WmuAuthBackend(object):
             # User object not found in local Django database. Attempt ldap query.
             if settings.AUTH_BACKEND_DEBUG:
                 logger.info('Auth Backend: WMU user not found in Django database.')
-            user = self.ldap_validate_user(user_id, password)
+            user = self._validate_ldap_user(user_id, password)
             return user
 
-    def parse_username(self, username):
+    def _parse_username(self, username):
         """
         Allows user to attempt login with username or associated email.
         :param username: String user entered into "username" field.
@@ -494,7 +494,7 @@ class WmuAuthBackend(object):
             kwargs = {'username': username}
         return kwargs
 
-    def validate_user(self, user, password):
+    def _validate_django_user(self, user, password):
         """
         Validates given user object. Uses standard Django auth logic.
         :param user:
@@ -514,7 +514,7 @@ class WmuAuthBackend(object):
                 logger.info('Auth Backend: Bad password. Cancelling login.')
             return None
 
-    def ldap_validate_user(self, user_id, password):
+    def _validate_ldap_user(self, user_id, password):
         """
         Attempts to validate user through ldap. If found, will create a new user account using ldap info.
         :return:
@@ -541,7 +541,7 @@ class WmuAuthBackend(object):
             # User validated successfully through ldap. Create new django user.
             if settings.AUTH_BACKEND_DEBUG:
                 logger.info('Auth Backend: {0}'.format(auth_search_return[1]))
-            user = self.create_new_user(uid, password)
+            user = self._create_new_user_from_ldap(uid, password)
         else:
             # Invalid ldap credentials.
             if settings.AUTH_BACKEND_DEBUG:
@@ -550,7 +550,7 @@ class WmuAuthBackend(object):
 
         return user
 
-    def create_new_user(self, uid, password):
+    def _create_new_user_from_ldap(self, uid, password):
         """
         Attempts to create new user, using pulled ldap information.
         Should only be called on known, valid and authenticated users.
