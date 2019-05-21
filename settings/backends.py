@@ -208,7 +208,6 @@ class CaeAuthBackend(object):
             if ldap_user_groups['programmer']:
                 model_user.groups.add(Group.objects.get(name='CAE Programmer'))
                 model_user.is_staff = True
-                model_user.is_superuser = True
                 if settings.AUTH_BACKEND_DEBUG:
                     logger.info('Auth Backend: Added user to CAE Programmer group.')
 
