@@ -2,6 +2,7 @@
 Custom authentication backends.
 """
 
+import re
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group, Permission
@@ -78,7 +79,14 @@ class CaeAuthBackend(object):
         if settings.AUTH_BACKEND_DEBUG:
             logger.info('Auth Backend: Parsing username...')
 
-        username = username.strip()
+        # Check for any nonstandard characters. If so, skip login.
+        # (Should be standard numbers/letters, optionally with "@wmich.edu" appended.)
+        if not re.match(r'([a-zA-Z0-9]+)(($)|(@wmich.edu$))', username):
+            logger.info('Attempted login with invalid characters ({0})'.format(username))
+            return None
+        else:
+            # Remove whitespace and set all characters to lowercase.
+            username = username.strip().lower()
 
         # Check if user attempted login with email.
         if '@' in username:
@@ -478,7 +486,14 @@ class WmuAuthBackend(object):
         if settings.AUTH_BACKEND_DEBUG:
             logger.info('Auth Backend: Parsing username...')
 
-        username = username.strip()
+        # Check for any nonstandard characters. If so, skip login.
+        # (Should be standard numbers/letters, optionally with "@wmich.edu" appended.)
+        if not re.match(r'([a-zA-Z0-9]+)(($)|(@wmich.edu$))', username):
+            logger.info('Attempted login with invalid characters ({0})'.format(username))
+            return None
+        else:
+            # Remove whitespace and set all characters to lowercase.
+            username = username.strip().lower()
 
         # Check if user attempted login with email.
         if '@' in username:
