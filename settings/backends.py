@@ -161,49 +161,9 @@ class CaeAuthBackend(object):
             search_filter='(uid={0})'.format(uid),
             attributes=['uid', 'givenName', 'sn',]
         )
-
-        # Get ldap groups.
-        # Check for ldap directors group match.
-        ldap_directors = self.ldap_lib.search(
-            search_base=settings.CAE_LDAP['group_dn'],
-            search_filter='(cn={0})'.format(settings.CAE_LDAP['director_cn']),
-            attributes=['memberUid'],
-        )
-        if ldap_directors is not None:
-            ldap_directors = ldap_directors['memberUid']
-        else:
-            ldap_directors = []
-        # Check for ldap attendants group match.
-        ldap_attendants = self.ldap_lib.search(
-            search_base=settings.CAE_LDAP['group_dn'],
-            search_filter='(cn={0})'.format(settings.CAE_LDAP['attendant_cn']),
-            attributes=['memberUid'],
-        )
-        if ldap_attendants is not None:
-            ldap_attendants = ldap_attendants['memberUid']
-        else:
-            ldap_attendants = []
-        # Check for ldap admins group match.
-        ldap_admins = self.ldap_lib.search(
-            search_base=settings.CAE_LDAP['group_dn'],
-            search_filter='(cn={0})'.format(settings.CAE_LDAP['admin_cn']),
-            attributes=['memberUid'],
-        )
-        if ldap_admins is not None:
-            ldap_admins = ldap_admins['memberUid']
-        else:
-            ldap_admins = []
-        # Check for ldap programmers group match.
-        ldap_programmers = self.ldap_lib.search(
-            search_base=settings.CAE_LDAP['group_dn'],
-            search_filter='(cn={0})'.format(settings.CAE_LDAP['programmer_cn']),
-            attributes=['memberUid'],
-        )
-        if ldap_programmers is not None:
-            ldap_programmers = ldap_programmers['memberUid']
-        else:
-            ldap_programmers = []
         self.ldap_lib.unbind_server()
+
+        ldap_user_groups = self.get_ldap_user_groups(uid)
 
         # Create new user.
         model_user, created = models.User.objects.get_or_create(username=uid)
@@ -225,19 +185,19 @@ class CaeAuthBackend(object):
                 logger.info('Auth Backend: Created user new user model {0}. Now setting groups...'.format(uid))
 
             # Set user group types.
-            if uid in ldap_directors:
+            if ldap_user_groups['director']:
                 model_user.groups.add(Group.object.get(name='CAE Director'))
                 if settings.AUTH_BACKEND_DEBUG:
                     logger.info('Auth Backend: Added user to CAE Director group.')
-            if uid in ldap_attendants:
+            if ldap_user_groups['attendant']:
                 model_user.groups.add(Group.objects.get(name='CAE Attendant'))
                 if settings.AUTH_BACKEND_DEBUG:
                     logger.info('Auth Backend: Added user to CAE Attendant group.')
-            if uid in ldap_admins:
+            if ldap_user_groups['admin']:
                 model_user.groups.add(Group.objects.get(name='CAE Admin'))
                 if settings.AUTH_BACKEND_DEBUG:
                     logger.info('Auth Backend: Added user to CAE Admin group.')
-            if uid in ldap_programmers:
+            if ldap_user_groups['programmer']:
                 model_user.groups.add(Group.objects.get(name='CAE Programmer'))
                 model_user.is_staff = True
                 model_user.is_superuser = True
@@ -374,6 +334,82 @@ class CaeAuthBackend(object):
         )
 
     #endregion User Permissions
+
+    def get_ldap_user_info(self, uid, attributes=None):
+        """
+        Gets info for given user.
+        :param uid: User id to search for.
+        :param attributes: Attributes to search for. If not provided, then gets all attributes for user.
+        :return: None if bad user_id | Dict of user's attributes.
+        """
+        if attributes is None:
+            attributes = 'ALL_ATTRIBUTES'
+        elif not isinstance(attributes, list) and attributes != 'ALL_ATTRIBUTES':
+            raise ValidationError('Attributes var must be a of type [list | None].')
+
+        self.ldap_lib.bind_server()
+        user_attributes = self.ldap_lib.search(search_filter='(uid={0})'.format(uid), attributes=attributes)
+        self.ldap_lib.unbind_server()
+
+        if user_attributes is None:
+            logger.warning('Search returned no results. Double check that the uid ({0}) was correct.'.format(uid))
+        return user_attributes
+
+    def get_ldap_user_groups(self, uid):
+        """
+        Check if user is in any CAE Center groups.
+        Note: Does not verify that passed uid is valid. In such a case, all groups will simply return False.
+        :param uid: User id to check.
+        :return: Dict of booleans for possible group membership.
+        """
+        self.ldap_lib.bind_server()
+
+        user_groups = {
+            'director': False,
+            'attendant': False,
+            'admin': False,
+            'programmer': False,
+        }
+
+        # Check for ldap directors group match.
+        ldap_directors = self.ldap_lib.search(
+            search_base=settings.CAE_LDAP['group_dn'],
+            search_filter='(cn={0})'.format(settings.CAE_LDAP['director_cn']),
+            attributes=['memberUid'],
+        )
+        if ldap_directors is not None and uid in ldap_directors['memberUid']:
+            user_groups['director'] = True
+
+        # Check for ldap attendants group match.
+        ldap_attendants = self.ldap_lib.search(
+            search_base=settings.CAE_LDAP['group_dn'],
+            search_filter='(cn={0})'.format(settings.CAE_LDAP['attendant_cn']),
+            attributes=['memberUid'],
+        )
+        if ldap_attendants is not None and uid in ldap_attendants['memberUid']:
+            user_groups['attendant'] = True
+
+        # Check for ldap admins group match.
+        ldap_admins = self.ldap_lib.search(
+            search_base=settings.CAE_LDAP['group_dn'],
+            search_filter='(cn={0})'.format(settings.CAE_LDAP['admin_cn']),
+            attributes=['memberUid'],
+        )
+        if ldap_admins is not None and uid in ldap_admins['memberUid']:
+            user_groups['admin'] = True
+
+        # Check for ldap programmers group match.
+        ldap_programmers = self.ldap_lib.search(
+            search_base=settings.CAE_LDAP['group_dn'],
+            search_filter='(cn={0})'.format(settings.CAE_LDAP['programmer_cn']),
+            attributes=['memberUid'],
+        )
+        if ldap_programmers is not None and uid in ldap_programmers['memberUid']:
+            user_groups['programmer'] = True
+
+        self.ldap_lib.unbind_server()
+
+        return user_groups
 
 
 class WmuAuthBackend(object):
@@ -527,10 +563,9 @@ class WmuAuthBackend(object):
 
         # Connect to server and pull user's full info.
         self.ldap_lib.bind_server(get_info='NONE')
-        ldap_user = self.ldap_lib.search(
-            search_filter='(uid={0})'.format(uid),
-            attributes=['wmuBannerID', 'wmuFirstName', 'wmuMiddleName', 'wmuLastName', 'mail', 'wmuProgramCode']
-        )
+        ldap_user = self.get_ldap_user_info(uid,
+                                            attributes=['wmuBannerID', 'wmuFirstName', 'wmuMiddleName', 'wmuLastName', 'mail', 'wmuProgramCode'],
+                                            )
         self.ldap_lib.unbind_server()
 
         # Create new user.
@@ -558,21 +593,21 @@ class WmuAuthBackend(object):
                 wmu_user = models.WmuUser.objects.get(bronco_net=uid)
             except models.WmuUser.DoesNotExist:
                 # Create new related model.
-                winno = ldap_user['wmuBannerID'][0]
+                winno = ldap_user['wmuBannerID']
                 try:
-                    first_name = ldap_user['wmuFirstName'][0].strip()
+                    first_name = ldap_user['wmuFirstName'].strip()
                 except KeyError:
                     first_name = ''
                 try:
-                    middle_name = ldap_user['wmuMiddleName'][0].strip()
+                    middle_name = ldap_user['wmuMiddleName'].strip()
                 except KeyError:
                     middle_name = ''
                 try:
-                    last_name = ldap_user['wmuLastName'][0].strip()
+                    last_name = ldap_user['wmuLastName'].strip()
                 except KeyError:
                     last_name = ''
                 try:
-                    official_email = ldap_user['mail'][0].strip()
+                    official_email = ldap_user['mail'].strip()
                 except KeyError:
                     official_email = '{0}@wmich.edu'.format(uid)
 
@@ -719,3 +754,23 @@ class WmuAuthBackend(object):
         )
 
     #endregion User Permissions
+
+    def get_ldap_user_info(self, uid, attributes=None):
+        """
+        Gets info for given user.
+        :param uid: User id to search for.
+        :param attributes: Attributes to search for. If not provided, then gets all attributes for user.
+        :return: None if bad user_id | Dict of user's attributes.
+        """
+        if attributes is None:
+            attributes = 'ALL_ATTRIBUTES'
+        elif not isinstance(attributes, list) and attributes != 'ALL_ATTRIBUTES':
+            raise ValidationError('Attributes var must be a of type [list | None].')
+
+        self.ldap_lib.bind_server()
+        user_attributes = self.ldap_lib.search(search_filter='(uid={0})'.format(uid), attributes=attributes)
+        self.ldap_lib.unbind_server()
+
+        if user_attributes is None:
+            logger.warning('Search returned no results. Double check that the uid ({0}) was correct.'.format(uid))
+        return user_attributes
