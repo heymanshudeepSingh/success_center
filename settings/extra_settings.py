@@ -204,6 +204,11 @@ LOGGING = {
             'level': 'DEBUG',
             'propagate': True,
         },
+        'main': {
+            'handlers': ['console', 'file_debug', 'file_info', 'file_warn', 'file_error', 'mail_error',],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
 
         # Various debug logging, mostly associated with Daphne (Channels) or Redis.
         'asyncio': {
