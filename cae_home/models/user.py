@@ -20,6 +20,59 @@ from ..models import Major
 MAX_LENGTH = 255
 
 
+#region Model Functions
+
+def compare_user_and_wmuuser_models(uid):
+    """
+    Validates user info between login_user model and wmu_user model.
+    :param uid: Id (bronconet) of user to validate.
+    """
+    try:
+        user_model = User.objects.get(username=uid)
+        wmu_user_model = WmuUser.objects.get(bronco_net=uid)
+
+        # Check that first_name values are the same.
+        if user_model.first_name != wmu_user_model.first_name:
+            # WmuUser model has priority for this field. If empty for WmuUser model, fallback to User model value.
+            if wmu_user_model.first_name != '':
+                user_model.first_name = wmu_user_model.first_name
+                user_model.save()
+            else:
+                wmu_user_model.first_name = user_model.first_name
+                wmu_user_model.save()
+
+            # Ensure models in memory are up to date for next check.
+            user_model = User.objects.get(username=uid)
+            wmu_user_model = WmuUser.objects.get(bronco_net=uid)
+
+        # Check that last_name values are the same.
+        if user_model.last_name != wmu_user_model.last_name:
+            # WmuUser model has priority for this field. If empty for WmuUser model, fallback to User model value.
+            if wmu_user_model.last_name != '':
+                user_model.last_name = wmu_user_model.last_name
+                user_model.save()
+            else:
+                wmu_user_model.last_name = user_model.last_name
+                wmu_user_model.save()
+
+            # Ensure models in memory are up to date for next check.
+            user_model = User.objects.get(username=uid)
+            wmu_user_model = WmuUser.objects.get(bronco_net=uid)
+
+        # Check that email values are the same.
+        if user_model.email != wmu_user_model.shorthand_email():
+            # WmuUser shorthand should always be correct (<bronconet>@wmich.edu). Use that unconditionally.
+            user_model.email = wmu_user_model.shorthand_email()
+            user_model.save()
+
+    except ObjectDoesNotExist:
+        pass    # User account is not associated with both models. This is fine, we can skip validation then.
+
+#endregion Model Functions
+
+
+#region Models
+
 class User(AbstractUser):
     """
     An extension of Django's default user, allowing for additional functionality.
@@ -61,6 +114,45 @@ class User(AbstractUser):
         Used for testing.
         """
         return User.get_or_create_user('dummy_user', 'dummy@gmail.com', settings.USER_SEED_PASSWORD)
+
+
+@receiver(post_save, sender=User)
+def user_model_post_save(sender, instance, created, **kwargs):
+    """
+    Post-save handling for User model.
+    """
+    # Handling for associated User model.
+    if created:
+        # Handle for new (login) User being created. Attempt to find existing Intermediary with bronco_net.
+        # On failure, create new UserIntermediary instance.
+        try:
+            user_intermediary = UserIntermediary.objects.get(bronco_net=instance.username)
+
+            # Check that User has not been provided to UserIntermediary.
+            if user_intermediary.user is not None:
+                raise ValidationError('User Intermediary model already has associated User model.')
+            else:
+                user_intermediary.user = instance
+                user_intermediary.save()
+        except ObjectDoesNotExist:
+            UserIntermediary.objects.create(user=instance)
+    else:
+        # Just updating an existing UserIntermediary. Save.
+        instance.userintermediary.save()
+
+    # Check that values are consistent between user models.
+    # First disconnect related post_save signals to prevent recursion errors.
+    post_save.disconnect(user_model_post_save, sender=User)
+    post_save.disconnect(userintermediary_model_post_save, sender=UserIntermediary)
+    post_save.disconnect(wmuuser_model_post_save, sender=WmuUser)
+
+    # Run comparison method.
+    compare_user_and_wmuuser_models(instance.username)
+
+    # Reconnect related post_save signals.
+    post_save.connect(user_model_post_save, sender=User)
+    post_save.connect(userintermediary_model_post_save, sender=UserIntermediary)
+    post_save.connect(wmuuser_model_post_save, sender=WmuUser)
 
 
 class UserIntermediary(models.Model):
@@ -124,25 +216,32 @@ class UserIntermediary(models.Model):
         super(UserIntermediary, self).save(*args, **kwargs)
 
 
-@receiver(post_save, sender=User)
-def usermodel_create_user_intermediary(sender, instance, created, **kwargs):
+@receiver(post_save, sender=UserIntermediary)
+def userintermediary_model_post_save(sender, instance, created, **kwargs):
+    """
+    Post-save handling for UserIntermediary model.
+    """
+    # Handling for associated Profile model.
     if created:
-        # Handle for new (login) User being created. Attempt to find existing Intermediary with bronco_net.
-        # On failure, create new UserIntermediary instance.
+        # Handle for new UserIntermediary being created. Create new profile as well.
         try:
-            user_intermediary = UserIntermediary.objects.get(bronco_net=instance.username)
-
-            # Check that User has not been provided to UserIntermediary.
-            if user_intermediary.user is not None:
-                raise ValidationError('User Intermediary model already has associated User model.')
-            else:
-                user_intermediary.user = instance
-                user_intermediary.save()
+            # Attempt to get default theme.
+            site_theme = SiteTheme.objects.get(slug='wmu')
         except ObjectDoesNotExist:
-            UserIntermediary.objects.create(user=instance)
+            # Failed to get theme. Likely a unit test. Run site_theme fixtures and attempt again.
+            with open(devnull, 'a') as null:
+                call_command('loaddata', 'full_models/site_themes', stdout=null)
+            site_theme = SiteTheme.objects.get(slug='wmu')
+
+        # Create new profile object for new user.
+        profile = Profile.objects.create(site_theme=site_theme)
+
+        # Associate profile with UserIntermediary.
+        instance.profile = profile
+        instance.save()
     else:
-        # Just updating an existing UserIntermediary. Save.
-        instance.userintermediary.save()
+        # Just updating an existing profile. Save.
+        instance.profile.save()
 
 
 class WmuUser(models.Model):
@@ -231,7 +330,11 @@ class WmuUser(models.Model):
 
 
 @receiver(post_save, sender=WmuUser)
-def wmuusermodel_create_user_intermediary(sender, instance, created, **kwargs):
+def wmuuser_model_post_save(sender, instance, created, **kwargs):
+    """
+    Post-save handling for Wmu User model.
+    """
+    # Handling for associated User Intermediary model.
     if created:
         # Handle for new WmuUser being created. Attempt to find existing Intermediary with bronco_net.
         # On failure, create new UserIntermediary instance.
@@ -249,6 +352,20 @@ def wmuusermodel_create_user_intermediary(sender, instance, created, **kwargs):
     else:
         # Just updating an existing UserIntermediary. Save.
         instance.userintermediary.save()
+
+    # Check that values are consistent between user models.
+    # First disconnect related post_save signals to prevent recursion errors.
+    post_save.disconnect(user_model_post_save, sender=User)
+    post_save.disconnect(userintermediary_model_post_save, sender=UserIntermediary)
+    post_save.disconnect(wmuuser_model_post_save, sender=WmuUser)
+
+    # Run comparison method.
+    compare_user_and_wmuuser_models(instance.bronco_net)
+
+    # Reconnect related post_save signals.
+    post_save.connect(user_model_post_save, sender=User)
+    post_save.connect(userintermediary_model_post_save, sender=UserIntermediary)
+    post_save.connect(wmuuser_model_post_save, sender=WmuUser)
 
 
 class Profile(models.Model):
@@ -361,30 +478,6 @@ class Profile(models.Model):
             return user_intermediary.profile
         except ObjectDoesNotExist:
             return None
-
-
-@receiver(post_save, sender=UserIntermediary)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        # Handle for new UserIntermediary being created. Create new profile as well.
-        try:
-            # Attempt to get default theme.
-            site_theme = SiteTheme.objects.get(slug='wmu')
-        except ObjectDoesNotExist:
-            # Failed to get theme. Likely a unit test. Run site_theme fixtures and attempt again.
-            with open(devnull, 'a') as null:
-                call_command('loaddata', 'full_models/site_themes', stdout=null)
-            site_theme = SiteTheme.objects.get(slug='wmu')
-
-        # Create new profile object for new user.
-        profile = Profile.objects.create(site_theme=site_theme)
-
-        # Associate profile with UserIntermediary.
-        instance.profile = profile
-        instance.save()
-    else:
-        # Just updating an existing profile. Save.
-        instance.profile.save()
 
 
 class Address(models.Model):
@@ -592,3 +685,5 @@ class SiteTheme(models.Model):
                 file_name=slug,
                 slug=slug,
             )
+
+#endregion Models
