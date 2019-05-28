@@ -40,8 +40,8 @@ STATICFILES_DIRS = (
 
 # Set desired authentication backend. Defaults to standard Django auth.
 AUTHENTICATION_BACKENDS = (
-    # 'settings.backends.CaeAuthBackend',
-    # 'settings.backends.WmuAuthBackend',
+    # 'settings.ldap_backends.wmu_auth.CaeAuthBackend',
+    # 'settings.ldap_backends.wmu_auth.WmuAuthBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
 AUTH_BACKEND_DEBUG = False
@@ -51,6 +51,7 @@ CAE_LDAP = {
     'host': '',
     'login_dn': '',
     'login_password': '',
+    'default_uid': '',
     'user_search_base': '',
     'group_dn': '',
     'director_cn': '',
@@ -64,6 +65,7 @@ WMU_LDAP = {
     'host': '',
     'login_dn': '',
     'login_password': '',
+    'default_uid': '',
     'user_search_base': '',
 }
 
