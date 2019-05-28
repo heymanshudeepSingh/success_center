@@ -31,5 +31,8 @@ package-lock.json
 # Do not track files created from selenium tests.
 geckodriver.log
 
+# Do not track files created from scripts.
+user_list.txt
+
 # Do not track migrations for now.
 */migrations/0*.py
