@@ -75,6 +75,49 @@ function main() {
     then
         echo ""
         echo -e "${color_blue}Installing MySQL dependencies...${color_reset}"
+
+        # Install mysql.
+        pacman -S mysql --noconfirm
+
+        # Setup initial mysql config.
+        mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
+        systemctl enable mariadb.service
+        systemctl start mariadb.service
+
+        # Run mysql secure installation for full setup.
+        mysql_secure_installation
+
+        # Set proper permissions.
+        chown mysql:root -R /var/lib/mysql
+        find /var/lib/mysql -type d -exec chmod g+rwx {} \;
+        chmod g+rw -R /var/lib/mysql
+
+        # Set extra database config values.
+        echo "" >> /etc/mysql/my.cnf
+        echo "#" >> /etc/mysql/my.cnf
+        echo "# Set default character set." >> /etc/mysql/my.cnf
+        echo "#" >> /etc/mysql/my.cnf
+        echo "[client]" >> /etc/mysql/my.cnf
+        echo "default-character-set = utf8" >> /etc/mysql/my.cnf
+        echo "" >> /etc/mysql/my.cnf
+        echo "[mysqld]" >> /etc/mysql/my.cnf
+        echo "collation_server = utf8_unicode_ci" >> /etc/mysql/my.cnf
+        echo "character_set_server = utf8" >> /etc/mysql/my.cnf
+        echo "" >> /etc/mysql/my.cnf
+        echo "[mysql]" >> /etc/mysql/my.cnf
+        echo "default-character-set = utf8" >> /etc/mysql/my.cnf
+        echo "" >> /etc/mysql/my.cnf
+        echo "" >> /etc/mysql/my.cnf
+        echo "#" >> /etc/mysql/my.cnf
+        echo "# Allow auto-completion in MySQL client." >> /etc/mysql/my.cnf
+        echo "#" >> /etc/mysql/my.cnf
+        echo "auto-rehash" >> /etc/mysql/my.cnf
+        echo "" >> /etc/mysql/my.cnf
+
+        # Restart database to read in modified setup.
+        systemctl restart mariadb.service
+
+        # Install python mysql dependencies.
         pacman -S python-mysqlclient --noconfirm
     fi
 
