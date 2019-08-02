@@ -18,7 +18,7 @@ logger = extra_settings.logging.getLogger(__name__)
 
 
 class Command(BaseCommand):
-    help = 'Creates users from a list of bronconet id\'s.'
+    help = 'Creates user models from a list of bronconet id\'s.'
 
     def add_arguments(self, parser):
         """

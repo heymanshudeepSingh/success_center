@@ -294,7 +294,27 @@ class WmuAuthBackend(AbstractWmuBackend):
 
         return login_user
 
-    def update_or_create_wmu_user_model(self, uid):
+    def get_bronconet_from_winno(self, winno):
+        """
+        Attempts to get bronconet from student winno.
+        :param winno: Student winno to use in search.
+        """
+        # Get value from server.
+        self.ldap_lib.bind_server(get_info=self.get_info)
+        bronco_net = self.ldap_lib.search(search_filter='(wmuBannerId={0})'.format(winno), attributes=['wmuUID'])
+
+        if bronco_net is not None:
+            bronco_net = bronco_net['wmuUID'][0]
+
+        # Check if bad bronco_net. Occurs in some older accounts.
+        if bronco_net is not None and len(bronco_net) > 8:
+            bronco_net = self.ldap_lib.search(search_filter='(wmuBannerId={0})'.format(winno), attributes=['uid'])
+            bronco_net = bronco_net['uid'][0]
+
+        self.ldap_lib.unbind_server()
+        return bronco_net
+
+    def update_or_create_wmu_user_model(self, uid, winno=None):
         """
         Attempts to get and update WmuUser model with given bronconet.
         In the event that no such model exists, instead create it from scratch using ldap info from main campus.
@@ -311,9 +331,10 @@ class WmuAuthBackend(AbstractWmuBackend):
             # Doesn't exist. Create new WmuUser model.
 
             # Get win number info.
-            winno = self.get_ldap_user_attribute(uid, 'wmuBannerID')
-            if winno is None or winno == '':
-                raise ValidationError('User {0} got empty winno from Main Campus LDAP.'.format(uid))
+            if winno is None:
+                winno = self.get_ldap_user_attribute(uid, 'wmuBannerID')
+                if winno is None or winno == '':
+                    raise ValidationError('User {0} got empty winno from Main Campus LDAP.'.format(uid))
 
             # Get first name info.
             first_name = self.get_ldap_user_attribute(uid, 'wmuFirstName')
