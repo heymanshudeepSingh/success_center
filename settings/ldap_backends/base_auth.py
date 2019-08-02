@@ -179,7 +179,7 @@ class AbstractLDAPBackend(ABC):
         else:
             uid = user_id['username']
 
-        auth_search_return = self.ldap_lib.authenticate_with_uid(
+        auth_search_return = self.ldap_lib.authenticate_with_unknown_uid(
             uid,
             password,
             search_filter='(uid={0})'.format(uid),
