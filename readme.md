@@ -1,116 +1,28 @@
 # Django - CAE Workspace
 
+## Environment Versions
+This project should be compatible with all versions of Python 3.6 or higher.
+
+Production environment is expected to be an Ubuntu server. But testing/development has also been done on Arch Linux,
+Ubuntu Desktop, and Windows. If you use any other OS types, or see anything missing/incorrect in this documentation,
+please update it accordingly.
+
 ## Description
 
 A Django "workspace" to function as the core for future CAE Center projects.
 
-Intended to be as general as possible. Most views/templates and general page logic should go into separate subprojects
-and apps, to be located in the **apps** folder.
+Intended to be as general as possible. Most views/templates and specific page logic should go into separate SubProjects
+and SubApps, to be located in the **apps** folder.
 
-## Initial Set Up
+For more information, see the `documentation/readme.md` file.
 
-TODO: Include instructions on how to setup and run sass.
+Otherwise, to get started, run `scripts/installers/first_time_setup.sh`.
 
-### Python Setup
 
-Requires Python version 3.6 or higher.
 
-If using ubuntu, you will need to run:
-* ```sudo apt install python<version>-dev```
-    * Where <version> is the version of Python used in your environment.
-    * Ex, Python3.6 would be:
-        * ```sudo apt install python3.6-dev```
+---------
 
-### Project Setup
-
-* For development mode, create a new file called **DEBUG** in the project's root folder. Otherwise, project
-will default to production and yell about "Allowed Hosts".
-* On first time use, you may want to go into **settings/local_env** and modify **env.py**:
-    * **Development** - Can probably leave file as is, if using SQLite. Otherwise, edit env file as desired.
-    * **Production** - Default env definitely isn't production ready. Will require modificaitons for stability and
-    security.
-* Make sure to run migrations to set up initial database schema.
-
-## Live Updates through Web Sockets
-
-In order to have live updates, you need to run **redis** which handles messaging for **django-channels**.
-
-* Run ```sudo apt-get install redis-server```
-
-## Using LDAP
-
-* Run ```sudo apt install libldap2-dev libsasl2-dev```
-
-If this does not seem to be enough, consult: https://www.python-ldap.org/en/latest/installing.html
-
-## Sass Notes
-Sass is a css preprocessor. It's used to compile css. To install:
-* ```sudo apt install ruby-sass```
-
-## React Notes
-
-Unfortunately, React seems to prefer a syntax that browsers do not fully understand, out of the gate. To correct for
-this, you will need to install "npm", and then use "browserify" to compile the code into a browser-friendly format.
-
-(It's actually similar to how sass files compile into standard css. You write code that's easier to handle and far more
-human-friendly. Then you use the console to run a compiler, changing the code into a format the browser understands.)
-
-### Installing NPM
-
-Npm is "the world's largest software registry" and what most front end libraries now seem to install through.
-
-Npm now installs as part of NodeJS. The simplest way to install is to visit:
-* https://nodejs.org/
-
-### Install Required Packages
-
-Npm will install the required development packages specified in ```packages.json```. This also handles installing the
-versions of each package without conflicts.
-
-From the project's root directory, run:
-* ```npm install```
-
-* To run local npm binaries you should add the following to your ```~/.bashrc```:
-
-```bash
-# From user hkly at https://dev.to/hkly/running-local-npm-executables-cle
-# Run a local npm binary with 'npm-run COMMAND'
-npm-run() {
-    $(npm bin)/$*
-}
-```
-
-* Reopen a terminal or run ```source ~/.bashrc``` to reload it.
-
-### Compiling React Files through Browserify
-
-From the project's root directory, run:
-* ```npm-run browserify -t [ babelify --presets [env react] ] <sourceFile> -o <destinationFile>```
-    * Where ```\<sourceFile>``` is the original react file.
-    * And ```\<destinationFile>``` is where the browser-friendly file is compiled to.
-
-### Compiling React Files through Browserify Automatically
-
-Watchify can detect changes to source files and automatically run browserfiy for you. You can pass the same arguments
-that you would use for browserify.
-
-From the project's root directory, run:
-* ```npm-run watchify -v -t [ babelify --presets [env react] ] <sourceFile> -o <destinationFile>```
-    * Where ```<sourceFile>``` is the original react file.
-    * And ```<destinationFile>``` is where the browser-friendly file is compiled to.
-    * The ```-v``` will notify you each time a change is detected.
-
-## Adding a New Project/App
-
-This project essentially just acts as a core/workspace to house all other CAE Center Django projects.
-
-To make usage easier, a system has been implemented to automatically import recognized sub-projects and apps. To add a
-new one:
-* Open up **settings/allowed_apps.py**.
-* Scroll down to **ALLOWED_CAE_APPS** and follow the example provided.
-* Once a new sub-project or app is added, it will automatically be imported from then on out.
-    * Note: Settings will only search for sub-projects and apps inside the **apps** folder.
-
+# Below is Old Information to Move at a Later Date
 ## Development Notes
 
 ### Front End
@@ -146,14 +58,6 @@ new one:
 ## Deployment and Hosting
 
 To deploy, you will likely want to do the following on your host/server:
-
-### Using MySQL
-
-* Install required packages on machine:
-    * **sudo apt-get install python3-dev libmysqlclient-dev mysql-server**
-* Install required packages on desired Python environment:
-    * **pip install mysqlclient**
-* Create the proper database inside MySQL
 
 ### Establishing Production Settings in Settings.py
 
