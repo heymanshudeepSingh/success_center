@@ -60,6 +60,10 @@ ALLOWED_CAE_PROJECTS = {
                 'config': 'apps.CaeWebCoreConfig',
             },
             'cae_web_attendants': {},
+            'cae_web_scheduling': {
+                'config': 'apps.CaeWebSchedulingConfig',
+            },
+            'cae_web_shifts': {},
             'cae_web_work_log': {},
         },
         'third_party_apps': [],
