@@ -50,20 +50,23 @@ def create_groups(style=None):
     # Create base groups.
     group_array = create_permission_groups()
 
+    # Get all permissions.
+    all_permissions = Permission.objects.all()
+
     # Set director permissions. Want all, unconditionally.
-    group_array[0].permissions.set(Permission.objects.all())
+    group_array[0].permissions.set(all_permissions)
 
     # Set building coordinator permissions. Want all, unconditionally.
-    group_array[1].permissions.set(Permission.objects.all())
-
-    # Set programmer permissions. Want all, unconditionally.
-    group_array[5].permissions.set(Permission.objects.all())
+    group_array[1].permissions.set(all_permissions)
 
     # Set programmer GA permissions. Want all, unconditionally.
-    group_array[3].permissions.set(Permission.objects.all())
+    group_array[3].permissions.set(all_permissions)
+
+    # Set programmer permissions. Want all, unconditionally.
+    group_array[5].permissions.set(all_permissions)
 
     # Set admin GA permissions. Want all, unconditionally.
-    group_array[2].permissions.set(Permission.objects.all())
+    group_array[2].permissions.set(all_permissions)
 
     # Set admin permissions. Want only the ones directly related to the CAE Center.
     cae_center_permissions = get_cae_center_permissions()
