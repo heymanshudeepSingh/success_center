@@ -133,12 +133,12 @@ class ExampleForm(forms.Form):
     check_me = forms.BooleanField(required=False)
 
 
-class UserForm(forms.ModelForm):
+class UserModelForm(forms.ModelForm):
     """
     (Login) User model form for standard views.
     """
     def __init__(self, *args, **kwargs):
-        super(UserForm, self).__init__(*args, **kwargs)
+        super(UserModelForm, self).__init__(*args, **kwargs)
         self.fields['username'].widget.attrs['disabled'] = True
 
     class Meta:
@@ -148,7 +148,7 @@ class UserForm(forms.ModelForm):
         )
 
 
-class ProfileForm(forms.ModelForm):
+class ProfileModelForm(forms.ModelForm):
     """
     User Profile model form for standard views.
     Displays all possible profile fields.
@@ -170,7 +170,7 @@ class ProfileForm(forms.ModelForm):
         }
 
 
-class ProfileForm_OnlyPhone(forms.ModelForm):
+class ProfileModelForm_OnlyPhone(forms.ModelForm):
     """
     User Profile model form for standard views.
     Only displays phone number field.
@@ -182,7 +182,7 @@ class ProfileForm_OnlyPhone(forms.ModelForm):
         )
 
 
-class ProfileForm_OnlySiteOptions(forms.ModelForm):
+class ProfileModelForm_OnlySiteOptions(forms.ModelForm):
     """
     User Profile model form for standard views.
     Only displays site option fields.
@@ -197,7 +197,7 @@ class ProfileForm_OnlySiteOptions(forms.ModelForm):
         }
 
 
-class AddressForm(forms.ModelForm):
+class AddressModelForm(forms.ModelForm):
     """
     Address model form for standard views.
     """
@@ -208,7 +208,7 @@ class AddressForm(forms.ModelForm):
         )
 
 
-class RoomForm(forms.ModelForm):
+class RoomModelForm(forms.ModelForm):
     """
     Room model form for standard views.
     """

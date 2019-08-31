@@ -140,19 +140,19 @@ def user_edit(request, slug):
     address = user_profile.address
 
     form_list = []
-    form = forms.UserForm(instance=user)
+    form = forms.UserModelForm(instance=user)
     form.display_name = 'General Info'
     form_list.append(form)
 
-    form = forms.ProfileForm_OnlyPhone(instance=user_profile)
+    form = forms.ProfileModelForm_OnlyPhone(instance=user_profile)
     form.display_name = 'Phone Number'
     form_list.append(form)
 
-    form = forms.AddressForm(instance=address)
+    form = forms.AddressModelForm(instance=address)
     form.display_name = 'Address'
     form_list.append(form)
 
-    form = forms.ProfileForm_OnlySiteOptions(instance=user_profile)
+    form = forms.ProfileModelForm_OnlySiteOptions(instance=user_profile)
     form.display_name = 'Site Settings'
     form_list.append(form)
 
@@ -164,22 +164,22 @@ def user_edit(request, slug):
         # Handle for disabled field.
         POST = request.POST.copy()
         POST['username'] = user.username
-        form = forms.UserForm(instance=user, data=POST)
+        form = forms.UserModelForm(instance=user, data=POST)
         form.name = 'UserForm'
         form.display_name = 'General Info'
         form_list.append(form)
 
-        form = forms.ProfileForm_OnlyPhone(instance=user_profile, data=request.POST)
+        form = forms.ProfileModelForm_OnlyPhone(instance=user_profile, data=request.POST)
         form.name = 'PhoneNumberForm'
         form.display_name = 'Phone Number'
         form_list.append(form)
 
-        form = forms.AddressForm(instance=address, data=request.POST)
+        form = forms.AddressModelForm(instance=address, data=request.POST)
         form.name = 'AddressForm'
         form.display_name = 'Address'
         form_list.append(form)
 
-        form = forms.ProfileForm_OnlySiteOptions(instance=user_profile, data=request.POST)
+        form = forms.ProfileModelForm_OnlySiteOptions(instance=user_profile, data=request.POST)
         form.name = 'SiteSettingsForm'
         form.display_name = 'Site Settings'
         form_list.append(form)
