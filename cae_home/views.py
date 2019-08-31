@@ -1,7 +1,8 @@
 """
-Views for CAE_Home App.
+Views for CAE Home app.
 """
 
+# System Imports.
 import logging
 from django.conf import settings
 from django.contrib import messages
@@ -16,6 +17,7 @@ from django.template.response import TemplateResponse
 from django.urls import reverse
 from rest_framework import viewsets, permissions
 
+# User Class Imports.
 from . import forms, models
 from .rest import filters, serializers
 
@@ -24,6 +26,7 @@ from .rest import filters, serializers
 logger = logging.getLogger(__name__)
 
 
+# CAE Center specific User Group names.
 cae_employee_groups = [
     'CAE Director',
     'CAE Building Coordinator',

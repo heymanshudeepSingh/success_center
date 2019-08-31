@@ -1,10 +1,12 @@
 """
-Serializers for CAE_Home App.
+Serializers for CAE Home app.
 Used in DjangoRest views.
 """
 
+# System Imports.
 from rest_framework import serializers
 
+# User Class Imports.
 from cae_home import models
 
 

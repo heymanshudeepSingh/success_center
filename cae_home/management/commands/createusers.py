@@ -1,8 +1,12 @@
 """
-Command that creates users from a passed list of bronconet id's.
+Command that creates User models from a passed list of bronconet id's.
 For security, these users always default to inactive, and must be manually activated.
+
+For User model creation that is dynamically set to active or inactive (based on LDAP), please use Django's standard
+website login logic.
 """
 
+# System Imports.
 import re
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -10,6 +14,7 @@ from django.contrib.auth.models import Group
 from django.core.exceptions import ValidationError
 from django.core.management.base import BaseCommand
 
+# User Class Imports.
 from settings.ldap_backends import wmu_auth
 from settings import extra_settings
 

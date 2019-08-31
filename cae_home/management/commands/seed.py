@@ -1,11 +1,15 @@
 """
 Seeder command that initializes project models.
+
+Also attempts to hook into SubProjects within "apps" folder and seed those as well.
 """
 
+# System Imports.
 from django.conf import settings
 from django.core.management import call_command
 from django.core.management.base import BaseCommand, CommandError
 
+# User Class Imports.
 from .seeders import cae as cae_seeder
 from .seeders import user as user_seeder
 from .seeders import wmu as wmu_seeder

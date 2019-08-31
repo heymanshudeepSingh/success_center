@@ -1,12 +1,13 @@
 """
-Urls for CAE_Home App.
+Urls for CAE Home app.
 """
 
-from django.contrib.auth import views as auth_views
+# System Imports.
 from django.conf import settings
 from django.conf.urls import url
 from django.views.generic import TemplateView
 
+# User Class Imports.
 from . import views
 
 

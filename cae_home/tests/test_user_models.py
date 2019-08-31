@@ -1,12 +1,13 @@
 """
-Tests for CAE_Home User Models.
+Tests for CAE Home User app Models.
 """
-
+# System Imports.
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.db import transaction
 from phonenumber_field.phonenumber import PhoneNumber
 
+# User Class Imports.
 from .. import models
 from cae_home.tests.utils import IntegrationTestCase
 

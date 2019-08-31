@@ -1,10 +1,12 @@
 """
-Filters for CAE_Home App.
+Filters for CAE Home app.
 Used in DjangoRest views.
 """
 
+# System Imports.
 import django_filters
 
+# User Class Imports.
 from cae_home import models
 
 

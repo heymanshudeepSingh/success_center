@@ -3,17 +3,20 @@ Site-wide route handling for channels websockets.
 
 Note: Routes will automatically be prefixed with "ws/<url-prefix>/" as defined in allowed_apps.py.
 """
-import logging
 
+# System Imports.
+import logging
 from channels.auth import AuthMiddlewareStack
 from channels.routing import ProtocolTypeRouter, URLRouter
 from django.conf import settings
 from django.conf.urls import url
 from importlib import import_module
 
+# User Class Imports.
 from cae_home import routing as cae_home_routing
 
 
+# Import logger.
 logger = logging.getLogger(__name__)
 
 

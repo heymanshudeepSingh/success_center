@@ -1,12 +1,13 @@
 """
-Admin view for CAE_Home App.
+Admin view for CAE Home app.
 """
 
-from django.conf import settings
+# System Imports.
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
-from . import forms, models
+# User Class Imports.
+from . import models
 
 
 # Attempt to import RoomEvent Inline.

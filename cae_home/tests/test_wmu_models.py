@@ -1,11 +1,13 @@
 """
-Tests for CAE_Home WMU Models.
+Tests for CAE Home WMU app Models.
 """
 
+# System Imports.
 from django.core.exceptions import ValidationError
 from django.db import transaction
 from django.utils import timezone
 
+# User Class Imports.
 from .. import models
 from cae_home.tests.utils import IntegrationTestCase
 

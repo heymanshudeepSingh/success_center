@@ -2,6 +2,7 @@
 Definitions of "User" related Core Models.
 """
 
+# System Imports.
 import pytz
 from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
@@ -14,6 +15,7 @@ from django.utils.text import slugify
 from phonenumber_field.modelfields import PhoneNumberField
 from os import devnull
 
+# User Class Imports.
 from ..models import Major
 
 

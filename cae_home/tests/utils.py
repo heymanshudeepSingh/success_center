@@ -1,9 +1,9 @@
 """
-CAE Home test utility functions and classes.
+Tests for CAE Home app Utility Functions/Classes.
 """
 
+# System Imports.
 import sys
-
 from channels.testing import ChannelsLiveServerTestCase
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -19,6 +19,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
+# User Class Imports.
 from .. import models
 from cae_home.management.commands.seeders.user import create_groups, create_permission_group_users
 

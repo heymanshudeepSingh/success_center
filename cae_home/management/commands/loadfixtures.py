@@ -1,12 +1,16 @@
 """
-Fixture loader command that initializes project models.
-Should import relevant calls directly from seeder command.
+Fixture loader command that initializes project models which have associated fixtures.
+Imports relevant fixture calls directly from seeder command.
+
+Also attempts to hook into SubProjects within "apps" folder and load fixtures for those as well.
 """
 
+# System Imports.
 from django.conf import settings
 from django.core.management import call_command
 from django.core.management.base import BaseCommand, CommandError
 
+# User Class Imports.
 from .seeders import user as user_seeder
 from .seeders import wmu as wmu_seeder
 

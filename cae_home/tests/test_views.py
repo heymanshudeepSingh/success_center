@@ -1,13 +1,15 @@
 """
-Tests for CAE_Home Views.
+Tests for CAE Home app Views.
 """
 
+# System Imports.
 from django.apps import apps
 from django.conf import settings
 from django.core.management import call_command
 from django.urls import reverse
 from os import devnull
 
+# User Class Imports.
 from cae_home.tests.utils import IntegrationTestCase
 
 

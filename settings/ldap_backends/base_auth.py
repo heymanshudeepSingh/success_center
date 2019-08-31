@@ -1,7 +1,10 @@
 """
-Custom authentication backends.
+Base/Universal logic for custom authentication backends.
+
+Note that, to work, this needs the simple_ldap_lib git submodule imported, and the correct env settings set.
 """
 
+# System Imports.
 import re
 from abc import ABC, abstractmethod
 from django.conf import settings
@@ -10,11 +13,13 @@ from django.contrib.auth.models import Permission
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 
+# User Class Imports.
 from cae_home import models
 from settings import simple_ldap_lib
 from settings import extra_settings
 
 
+# Import logger.
 logger = extra_settings.logging.getLogger(__name__)
 
 

@@ -2,18 +2,20 @@
 View permission decorators for CAE Home app.
 """
 
+# System Imports.
 from django.contrib import messages
 from django.contrib.auth.views import redirect_to_login
 from django.core.exceptions import PermissionDenied
-
 from functools import wraps
 
 
 def group_required(*required_groups):
     """
     Limits view access based on user group.
-    Must be part of one or more groups provided.
+    To access view, user must be part of one or more groups provided.
     Logic from "https://codereview.stackexchange.com/questions/57073/django-custom-decorator-for-user-group-check"
+
+    Not currently used and not sure if we'll need it, but logic is here just in case.
     """
     def check_group(view_func):
         @wraps(view_func)

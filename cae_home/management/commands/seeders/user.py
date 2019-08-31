@@ -2,6 +2,7 @@
 Seeder for "User" related Core Models.
 """
 
+# System Imports.
 from django.conf import settings
 from django.contrib.auth.models import Group, Permission
 from django.contrib.contenttypes.models import ContentType
@@ -14,7 +15,7 @@ from phonenumber_field.phonenumber import PhoneNumber
 from random import randint
 from sys import stdout
 
-
+# User Class Imports.
 from cae_home import models
 
 

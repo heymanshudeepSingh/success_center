@@ -1,14 +1,15 @@
 """
-CAE Workspace Middleware.
+Middleware for CAE Home app.
 """
 
+# System Imports.
 import pytz
-
 from django.conf import settings
 from django.contrib.sites.shortcuts import get_current_site
 from django.db.models import ObjectDoesNotExist
 from django.utils import timezone
 
+# User Class Imports.
 from cae_home import models
 
 
