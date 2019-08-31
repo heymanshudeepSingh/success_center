@@ -219,10 +219,10 @@ class SemesterDateModelTests(IntegrationTestCase):
     def test_name_generation(self):
         # Test Spring.
         semester_date = models.SemesterDate.objects.create(
-            start_date=timezone.datetime(2017, 1, 1),
-            end_date=timezone.datetime(2017, 1, 2)
+            start_date=timezone.datetime(2018, 1, 1),
+            end_date=timezone.datetime(2018, 1, 2)
         )
-        self.assertEqual(semester_date.name, 'Spring_2017')
+        self.assertEqual(semester_date.name, 'Spring_2018')
 
         # Test Summer 1.
         semester_date = models.SemesterDate.objects.create(
@@ -233,17 +233,17 @@ class SemesterDateModelTests(IntegrationTestCase):
 
         # Test Summer 2.
         semester_date = models.SemesterDate.objects.create(
-            start_date=timezone.datetime(2019, 6, 1),
-            end_date=timezone.datetime(2019, 6, 2)
+            start_date=timezone.datetime(2018, 6, 1),
+            end_date=timezone.datetime(2018, 6, 2)
         )
-        self.assertEqual(semester_date.name, 'Summer_II_2019')
+        self.assertEqual(semester_date.name, 'Summer_II_2018')
 
         # Test Fall.
         semester_date = models.SemesterDate.objects.create(
-            start_date=timezone.datetime(2020, 8, 1),
-            end_date=timezone.datetime(2020, 8, 2)
+            start_date=timezone.datetime(2018, 8, 1),
+            end_date=timezone.datetime(2018, 8, 2)
         )
-        self.assertEqual(semester_date.name, 'Fall_2020')
+        self.assertEqual(semester_date.name, 'Fall_2018')
 
     def test_start_date_before_end_date(self):
         with self.assertRaises(ValidationError):
