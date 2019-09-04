@@ -10,6 +10,7 @@ from django.core.exceptions import ValidationError
 from django.core.management.base import BaseCommand
 
 # User Class Imports.
+from cae_home.models import WmuUser
 from settings.ldap_backends import wmu_auth
 from settings import extra_settings
 
@@ -78,26 +79,34 @@ class Command(BaseCommand):
             else:
                 uid = orig_id.strip().lower()
 
-            self.stdout.write(self.style.HTTP_INFO('Orig read in value: {0}'.format(uid)))
-            bronco_attempt = wmu_ldap.get_bronconet_from_winno(uid)
-            if bronco_attempt is not None:
-                winno = uid
-                uid = bronco_attempt
-            else:
-                winno = None
-
-            # Set user info from main campus LDAP.
-            self.stdout.write(self.style.HTTP_INFO('Importing main campus user info for user {0}...'.format(uid)))
-
-            # Set related WMU User model info.
+            # Attempt to get user model from Django. Only proceed if does not already exist.
             try:
-                wmu_ldap.update_or_create_wmu_user_model(uid, winno)
-            except ValidationError:
-                error_file = open('student_import_error_list.txt', 'a')
-                error_file.write('Student ID: {0}\n'.format(orig_id))
-                error_file.close()
+                WmuUser.objects.get(winno='{0}'.format(uid))
 
-            self.stdout.write(self.style.HTTP_INFO('Main campus import complete. Starting next user...\n'))
+                self.stdout.write('WmuUser {0} already exists. Skipping Ldap import.\n\n'.format(uid))
+            except WmuUser.DoesNotExist:
+                self.stdout.write('WmuUser {0} does not exist. Importing from Ldap.'.format(uid))
+
+                # Attempt to get bronconet value. If fails, then assume the passed uid is a bronconet instead.
+                bronco_attempt = wmu_ldap.get_bronconet_from_winno(uid)
+                if bronco_attempt is not None:
+                    winno = uid
+                    uid = bronco_attempt
+                else:
+                    winno = None
+
+                # Set user info from main campus LDAP.
+                self.stdout.write(self.style.HTTP_INFO('Importing main campus user info for user {0}...'.format(uid)))
+
+                # Set related WMU User model info.
+                try:
+                    wmu_ldap.update_or_create_wmu_user_model(uid, winno)
+                except ValidationError:
+                    error_file = open('student_import_error_list.txt', 'a')
+                    error_file.write('Student ID: {0}\n'.format(orig_id))
+                    error_file.close()
+
+                self.stdout.write(self.style.HTTP_INFO('Main campus import complete. Starting next user...\n'))
 
         # Close file.
         file.close()
