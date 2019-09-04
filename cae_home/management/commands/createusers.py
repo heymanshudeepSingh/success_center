@@ -80,61 +80,68 @@ class Command(BaseCommand):
             # Validate that line is uid. Must be a string comprised of only letters or numbers.
             if not isinstance(uid, str):
                 raise ValidationError('Each line should be a string of a single user\'s bronconet.')
+            elif uid.strip() == '':
+                pass    # Empty line. Skip processing.
             elif not re.match(r'[a-zA-Z0-9]+$', uid):
                 raise ValidationError('Bronconet must be comprised of only standard numbers or letters.')
             else:
                 uid = uid.strip().lower()
 
-            # Attempt to get user model from Django. Only proceed if does not already exist.
-            try:
-                User.objects.get(username='{0}'.format(uid))
+                # Attempt to get user model from Django. Only proceed if does not already exist.
+                try:
+                    User.objects.get(username='{0}'.format(uid))
 
-                self.stdout.write('User {0} already exists. Skipping Ldap import.\n\n'.format(uid))
+                    self.stdout.write('User {0} already exists. Skipping Ldap import.\n\n'.format(uid))
 
-            except User.DoesNotExist:
-                self.stdout.write('User {0} does not exist. Importing from Ldap.'.format(uid))
+                except User.DoesNotExist:
+                    self.stdout.write('User {0} does not exist. Importing from Ldap.'.format(uid))
 
-                # First create user with the "dummy password". Defaults to inactive to prevent security holes.
-                login_user = get_user_model().get_or_create_user(uid, '{0}@wmich.edu'.format(uid), 'temppass2', inactive=True)
+                    # First create user with the "dummy password". Defaults to inactive to prevent security holes.
+                    login_user = get_user_model().get_or_create_user(
+                        uid,
+                        '{0}@wmich.edu'.format(uid),
+                        'temppass2',
+                        inactive=True,
+                    )
 
-                # Get CAE Center name info as a backup, in case fields are missing in Main Campus Ldap.
-                ldap_user_info = cae_ldap.get_ldap_user_info(uid, attributes=['uid', 'givenName', 'sn', ])
-                if ldap_user_info is not None:
-                    login_user.first_name = ldap_user_info['givenName'][0].strip()
-                    login_user.last_name = ldap_user_info['sn'][0].strip()
-                else:
-                    print('User is not in CAE LDAP.')
-                login_user.save()
-                self.stdout.write(self.style.HTTP_INFO('Created user "{0}".'.format(uid.strip())))
+                    # Get CAE Center name info as a backup, in case fields are missing in Main Campus Ldap.
+                    ldap_user_info = cae_ldap.get_ldap_user_info(uid, attributes=['uid', 'givenName', 'sn', ])
+                    if ldap_user_info is not None:
+                        login_user.first_name = ldap_user_info['givenName'][0].strip()
+                        login_user.last_name = ldap_user_info['sn'][0].strip()
+                    else:
+                        print('User is not in CAE LDAP.')
+                    login_user.save()
+                    self.stdout.write(self.style.HTTP_INFO('Created user "{0}".'.format(uid.strip())))
 
-                # Check if user is part of any CAE Center groups.
-                self.stdout.write(self.style.HTTP_INFO('Checking for membership of CAE Center groups...'))
-                user_cae_groups = cae_ldap.get_ldap_user_groups(uid)
+                    # Check if user is part of any CAE Center groups.
+                    self.stdout.write(self.style.HTTP_INFO('Checking for membership of CAE Center groups...'))
+                    user_cae_groups = cae_ldap.get_ldap_user_groups(uid)
 
-                if user_cae_groups['director']:
-                    login_user.groups.add(Group.objects.get(name='CAE Director'))
-                    self.stdout.write(self.style.HTTP_INFO('Set director group.'))
-                if user_cae_groups['attendant']:
-                    login_user.groups.add(Group.objects.get(name='CAE Attendant'))
-                    self.stdout.write(self.style.HTTP_INFO('Set attendant group.'))
-                if user_cae_groups['admin']:
-                    login_user.groups.add(Group.objects.get(name='CAE Admin'))
-                    self.stdout.write(self.style.HTTP_INFO('Set admin group.'))
-                if user_cae_groups['programmer']:
-                    login_user.groups.add(Group.objects.get(name='CAE Programmer'))
-                    login_user.is_staff = True
-                    self.stdout.write(self.style.HTTP_INFO('Set programmer group.'))
+                    if user_cae_groups['director']:
+                        login_user.groups.add(Group.objects.get(name='CAE Director'))
+                        self.stdout.write(self.style.HTTP_INFO('Set director group.'))
+                    if user_cae_groups['attendant']:
+                        login_user.groups.add(Group.objects.get(name='CAE Attendant'))
+                        self.stdout.write(self.style.HTTP_INFO('Set attendant group.'))
+                    if user_cae_groups['admin']:
+                        login_user.groups.add(Group.objects.get(name='CAE Admin'))
+                        self.stdout.write(self.style.HTTP_INFO('Set admin group.'))
+                    if user_cae_groups['programmer']:
+                        login_user.groups.add(Group.objects.get(name='CAE Programmer'))
+                        login_user.is_staff = True
+                        self.stdout.write(self.style.HTTP_INFO('Set programmer group.'))
 
-                login_user.save()
-                self.stdout.write(self.style.HTTP_INFO('CAE Center group membership set.'))
+                    login_user.save()
+                    self.stdout.write(self.style.HTTP_INFO('CAE Center group membership set.'))
 
-                # Set user info from main campus LDAP.
-                self.stdout.write(self.style.HTTP_INFO('Importing main campus user info...'))
+                    # Set user info from main campus LDAP.
+                    self.stdout.write(self.style.HTTP_INFO('Importing main campus user info...'))
 
-                # Set related WMU User model info.
-                wmu_ldap.update_or_create_wmu_user_model(uid)
+                    # Set related WMU User model info.
+                    wmu_ldap.update_or_create_wmu_user_model(uid)
 
-                self.stdout.write(self.style.HTTP_INFO('Main campus import complete. Starting next user...\n'))
+                    self.stdout.write(self.style.HTTP_INFO('Main campus import complete. Starting next user...\n'))
 
         # Close file.
         file.close()
