@@ -69,6 +69,14 @@ WMU_LDAP = {
     'user_search_base': '',
 }
 
+# LDAP settings for AdvisingAuthBackend.
+# Note that most values are still imported from WMU_LDAP. Only the credentials change.
+# This is because the Advising LDAP account has access to student information that the CAE account does not.
+ADV_LDAP = {
+    'login_dn': '',
+    'login_password': '',
+}
+
 #endregion Authentication
 
 

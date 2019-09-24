@@ -9,6 +9,7 @@ from abc import abstractmethod
 from django.conf import settings
 from django.contrib.auth.models import Group
 from django.core.exceptions import ValidationError
+from django.utils.text import slugify
 from phonenumber_field.phonenumber import PhoneNumber
 
 # User Class Imports.
@@ -328,10 +329,43 @@ class WmuAuthBackend(AbstractWmuBackend):
         try:
             wmu_user = models.WmuUser.objects.get(bronco_net=uid)
 
-            # Update major here.
+            if settings.AUTH_BACKEND_DEBUG:
+                logger.info(
+                    '{0} Auth Backend: WmuUser model found for "{1}". Attempting to update...'.format(
+                        self.debug_class,
+                        uid,
+                    )
+                )
+
+            # WmuUser model exists. Attempt to update information.
+            adv_ldap = AdvisingAuthBackend()
+
+            # Update major.
+            new_major = adv_ldap.get_student_major(uid)
+            if wmu_user.major != new_major:
+                if settings.AUTH_BACKEND_DEBUG:
+                    logger.info(
+                        '{0} Auth Backend: Django major "{1}" does not match new User\'s return value from ldap "{2}". Updating...'.format(
+                            self.debug_class,
+                            wmu_user.major,
+                            new_major,
+                        )
+                    )
+                wmu_user.major = new_major
+                wmu_user.save()
+
+            # Refresh all model data and return.
+            return models.WmuUser.objects.get(bronco_net=uid)
 
         except models.WmuUser.DoesNotExist:
             # Doesn't exist. Create new WmuUser model.
+
+            logger.info(
+                '{0} Auth Backend: Could not find WmuUser model for "{1}". Creating new one...'.format(
+                    self.debug_class,
+                    uid,
+                )
+            )
 
             # Get win number info.
             if winno is None:
@@ -357,7 +391,8 @@ class WmuAuthBackend(AbstractWmuBackend):
             if official_email is None or official_email == '':
                 official_email = '{0}@wmich.edu'.format(uid)
 
-            major = models.Major.objects.get(slug='unk')
+            adv_ldap = AdvisingAuthBackend()
+            major = adv_ldap.get_student_major(uid)
 
             models.WmuUser.objects.create(
                 bronco_net=uid,
@@ -444,3 +479,320 @@ class WmuAuthBackend(AbstractWmuBackend):
             backup_name = None
 
         return backup_name
+
+
+class AdvisingAuthBackend(AbstractWmuBackend):
+    """
+    It seems the CAE Center credentials for WMU LDAP are missing some student fields.
+    Thus, we need to use advising credentials at times, but we want to use only when absolutely necessary.
+    """
+    def setup_abstract_class(self):
+        # Set debug logging class name.
+        self.debug_class = 'ADV'
+
+        # Set ldap connection settings.
+        self.get_info = 'NONE'
+        self.ldap_lib.set_host(settings.WMU_LDAP['host'])
+        self.ldap_lib.set_master_account(
+            settings.ADV_LDAP['login_dn'],
+            settings.ADV_LDAP['login_password'],
+            check_credentials=False,
+            get_info=self.get_info,
+        )
+        self.ldap_lib.set_search_base(settings.WMU_LDAP['user_search_base'])
+        self.ldap_lib.set_uid_attribute(settings.WMU_LDAP['default_uid'])
+
+        # "NotImplemenetedError" text.
+        self._not_implemented_string = 'This method is intentionally unimplemented for AdvisingAuthBackend. To use ' \
+                                       'this method, please invoke from CaeAuthBackend or WmuAuthBackend instead.'
+
+    def _create_new_user_from_ldap(self, *args, **kwargs):
+        raise NotImplementedError(self._not_implemented_string)
+
+    # region User Auth
+
+    def authenticate(self, *args, **kwargs):
+        raise NotImplementedError(self._not_implemented_string)
+
+    def _parse_username(self, *args, **kwargs):
+        raise NotImplementedError(self._not_implemented_string)
+
+    def _validate_django_user(self, *args, **kwargs):
+        raise NotImplementedError(self._not_implemented_string)
+
+    def _validate_ldap_user(self, *args, **kwargs):
+        raise NotImplementedError(self._not_implemented_string)
+
+    def user_can_authenticate(self, *args, **kwargs):
+        raise NotImplementedError(self._not_implemented_string)
+
+    def get_user(self, *args, **kwargs):
+        raise NotImplementedError(self._not_implemented_string)
+
+    #endregion User Auth
+
+    # region User Permissions
+
+    def _get_user_permissions(self, *args, **kwargs):
+        raise NotImplementedError(self._not_implemented_string)
+
+    def _get_group_permissions(self, *args, **kwargs):
+        raise NotImplementedError(self._not_implemented_string)
+
+    def _get_permissions(self, *args, **kwargs):
+        raise NotImplementedError(self._not_implemented_string)
+
+    def get_user_permissions(self, *args, **kwargs):
+        raise NotImplementedError(self._not_implemented_string)
+
+    def get_group_permissions(self, *args, **kwargs):
+        raise NotImplementedError(self._not_implemented_string)
+
+    def get_all_permissions(self, *args, **kwargs):
+        raise NotImplementedError(self._not_implemented_string)
+
+    def has_perm(self, *args, **kwargs):
+        raise NotImplementedError(self._not_implemented_string)
+
+    def has_module_perms(self, *args, **kwargs):
+        raise NotImplementedError(self._not_implemented_string)
+
+    # endregion User Permissions
+
+    def get_student_major(self, uid):
+        """
+        Gets major for given student model.
+        :param uid: Bronconet corresponding to student.
+        :return: Django Major model corresponding to student.
+        """
+        # Get win number info.
+        winno = self.get_ldap_user_attribute(uid, 'wmuBannerID')
+
+        print('')
+        print('')
+        print('')
+        logger.info('Attempting to get student major for bronco "{0}", winno "{1}"'.format(uid, winno))
+
+        # Attempt to get student major "ProgramCode".
+        student_code = self.get_ldap_user_attribute(uid, 'wmuStudentMajor')
+
+        # Check if program code was valid.
+        if student_code is not None and student_code != '':
+            logger.info('Found student wmuProgramCode: {0}'.format(student_code))
+
+            search_base = 'ou=Majors,ou=WMUCourses,o=wmich.edu,dc=wmich,dc=edu'
+            search_filter = '(wmuStudentMajor={0})'.format(student_code)
+            attributes = 'ALL_ATTRIBUTES'
+
+            logger.info('search_base: {0}'.format(search_base))
+            logger.info('search_filter: {0}'.format(search_filter))
+            logger.info('attributes: {0}'.format(attributes))
+
+            if isinstance(student_code, list):
+                for code in student_code:
+                    self._get_student_major(code, search_base, search_filter, attributes)
+                    major = models.Major.objects.get(slug='unk')
+            else:
+                major = self._get_student_major(student_code, search_base, search_filter, attributes)
+
+            return major
+        else:
+            logger.warn('Failed to get wmuStudentMajor LDAP field for {0}. Defaulting to "Unknown" major.'.format(uid))
+            return models.Major.objects.get(slug='unk')
+
+    def _get_student_major(self, student_code, search_base, search_filter, attributes):
+        """
+
+        :param student_code:
+        :param search_base:
+        :param search_filter:
+        :param attributes:
+        :return:
+        """
+        self.ldap_lib.bind_server(get_info=self.get_info)
+        ldap_major = self.ldap_lib.search(
+            search_base=search_base,
+            search_filter=search_filter,
+            attributes=attributes,
+        )
+        self.ldap_lib.unbind_server()
+
+        if ldap_major is not None:
+            # Got valid response from LDAP.
+            logger.info('Found ldap_major: {0}'.format(ldap_major))
+
+            try:
+                # Attempt to get major.
+                major = models.Major.objects.get(student_code=student_code)
+                logger.info('Found Django Major: {0}'.format(major))
+                return major
+            except models.Major.DoesNotExist:
+                logger.info('Django Major does not exist. Creating new...')
+
+                # Get major's department.
+                department = self._get_major_department(ldap_major)
+
+                # Get major's program_code.
+                program_code = self._get_major_program_code(ldap_major)
+
+                # Get major's display_name.
+                display_name = self._get_major_display_name(ldap_major)
+
+                # Get major's degree_level.
+                degree_level = self._get_degree_level_from_program_code(program_code)
+
+                logger.info('Got all values. Attempting to create major....')
+
+                try:
+                    major = models.Major.objects.create(
+                        department=department,
+                        student_code=student_code,
+                        program_code=program_code,
+                        name=display_name,
+                        degree_level=degree_level,
+                        slug=slugify(student_code),
+                    )
+                    logger.info('Created Django Major: {0}'.format(major))
+                    return major
+                except Exception as err:
+                    logger.info('Failed to create major: {0}'.format(err))
+                    return models.Major.objects.get(slug='unk')
+
+        else:
+            # Could not get valid response from LDAP. Default to unknown.
+            return models.Major.objects.get(slug='unk')
+
+    def _get_major_department(self, ldap_major):
+        """
+        Attempts to get Django Department model for major.
+        :param ldap_major: LDAP information for major.
+        :return: Django Department model for major.
+        """
+        try:
+            # Attempt to read ldap value.
+            ldap_department = str(ldap_major['wmuDepartmentName'][0]).strip()
+
+            try:
+                # Attempt to get Django model.
+                return models.Department.objects.get(name=ldap_department)
+            except models.Department.DoesNotExist:
+                return models.Department.objects.create(
+                    name=ldap_department,
+                    slug=slugify(ldap_department),
+                )
+
+        except (KeyError, IndexError):
+            return models.Department.objects.get(slug='na-unknown')
+
+    def _get_major_display_name(self, ldap_major):
+        """
+        Attempts to parse display_name from LDAP Major information.
+        :param ldap_major: LDAP information for Major
+        :return: display_name for Major.
+        """
+        # Attempt to get major's display_name.
+        try:
+            return str(ldap_major['displayName'][0]).strip()
+        except KeyError:
+            # 'displayName' field does not exist for entry. Attempt to use title.
+            try:
+                return str(ldap_major['title'][0]).strip()
+            except KeyError:
+                # 'title' field does not exist for entry. Default to student_code value.
+                return str(ldap_major['wmuStudentMajor'][0]).strip()
+
+    def _get_major_program_code(self, ldap_major):
+        """
+        Attempts to parse program_code from LDAP Major information.
+        :param ldap_major: LDAP information for Major.
+        :return: program_code for Major.
+        """
+        # Attempt to get full program code.
+        try:
+            program_code = ldap_major['wmuProgramCode']
+
+            # Check if multiple program_codes exist for major.
+            if len(program_code) > 1:
+                # Two or more program_codes exist for major.
+                # Check each one for format we want. Should be of format "*-*-*" where each "*" is one or more letters.
+                for code in program_code:
+                    code_split = code.split('-')
+                    if len(code_split) == 3:
+                        return str(code).strip()
+
+                # If we made it this far, then the code format we want is not present. Just use first one.
+                return str(program_code[0]).strip()
+            elif len(program_code) == 1:
+                # Only one program_code exists for major.
+                return str(program_code[0]).strip()
+            else:
+                # The program_code field did not return anything meaningful. Default to student_code value.
+                return str(ldap_major['wmuProgramCode'][0]).strip()
+        except KeyError:
+            # 'wmuProgramCode' field does not exist for entry. Default to student_code value.
+            return str(ldap_major['wmuProgramCode'][0]).strip()
+
+    def _get_degree_level_from_program_code(self, program_code):
+        """
+        Attempts to parse degree_level from program_code.
+        :param program_code: The LDAP program_code for the Major.
+        :return: The Major's degree_level.
+        """
+        # Attempt to get degree level.
+        program_split = program_code.split('-')
+        if len(program_split) == 3:
+            # Parse from our preferred format.
+            degree_key = program_split[1]
+
+            if degree_key[:3] == 'PHD':
+                return models.Major.get_degree_level_as_int('Phd')
+            elif degree_key[:2] == 'MS':
+                return models.Major.get_degree_level_as_int('Masters')
+            elif degree_key[:2] == 'BS':
+                return models.Major.get_degree_level_as_int('Bachelors')
+            elif degree_key[:2] == 'AS':
+                return models.Major.get_degree_level_as_int('Associates')
+            else:
+                return models.Major.get_degree_level_as_int('Unknown')
+
+        elif len(program_split) == 2:
+            program_split = program_split[0]
+
+            # First trim off right hand side of code that we don't want.
+            program_split = program_split[:3]
+            # Then trim off left hand side of code that we don't want.
+            program_split = program_split[-2:]
+
+            if program_split == 'MS':
+                return models.Major.get_degree_level_as_int('Masters')
+            elif program_split == 'BS':
+                return models.Major.get_degree_level_as_int('Bachelors')
+            elif program_split == 'AS':
+                return models.Major.get_degree_level_as_int('Associates')
+            else:
+                return models.Major.get_degree_level_as_int('Unknown')
+
+        elif len(program_split) == 1:
+            # Could not split. There was no "-" character in program_code.
+            program_split = program_split[0]
+
+            # Check if program_code is only 4 characters.
+            if len(program_split) == 4:
+                program_char = program_split[3]
+
+                # Check last character.
+                if program_char == 'P':
+                    return models.Major.get_degree_level_as_int('Associates')
+                elif program_char == 'J':
+                    return models.Major.get_degree_level_as_int('Bachelors')
+                elif program_char == 'M' or program_char == 'Q':
+                    return models.Major.get_degree_level_as_int('Masters')
+                elif program_char == 'D':
+                    return models.Major.get_degree_level_as_int('Phd')
+                else:
+                    return models.Major.get_degree_level_as_int('Unknown')
+
+        else:
+            # Unkown program_code format.
+            logger.warning('Could not parse degree_level from program_code "{0}".'.format(program_code))
+            return models.Major.get_degree_level_as_int('Unknown')
