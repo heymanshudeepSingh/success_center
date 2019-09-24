@@ -365,13 +365,13 @@ class RoomAdmin(admin.ModelAdmin):
 
 class MajorAdmin(admin.ModelAdmin):
     # Fields to display in admin list view.
-    list_display = ('code', 'name', 'department', 'undergrad', 'active',)
+    list_display = ('student_code', 'program_code', 'name', 'degree_level', 'department', 'active',)
 
     # Fields to filter by in admin list view.
-    list_filter = ('undergrad', 'active',)
+    list_filter = ('degree_level', 'active',)
 
     # Fields to search in admin list view.
-    search_fields = ['department', 'code', 'name',]
+    search_fields = ['department', 'student_code', 'program_code', 'name',]
 
     # Read only fields for admin detail view.
     readonly_fields = ('id', 'date_created', 'date_modified')
@@ -380,7 +380,12 @@ class MajorAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
             'fields': (
-                'code', 'name', 'department', 'undergrad', 'active',
+                 'name', 'degree_level', 'department', 'active',
+            )
+        }),
+        ('Degree Codes', {
+            'fields': (
+                'student_code', 'program_code',
             )
         }),
         ('Advanced', {
@@ -390,7 +395,7 @@ class MajorAdmin(admin.ModelAdmin):
     )
 
     # New object's slugs will be automatically set by code.
-    prepopulated_fields = {'slug': ('code',)}
+    prepopulated_fields = {'slug': ('student_code',)}
 
 
 class SemesterDateAdmin(admin.ModelAdmin):

@@ -43,7 +43,7 @@
     "model": "cae_home.department",
     "pk": 5,
     "fields": {
-        "name": "Civil and Construction Engineering",
+        "name": "Civil & Construction Engineering",
         "slug": "civil-and-construction",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"

@@ -140,26 +140,42 @@ class MajorTests(IntegrationTestCase):
     def setUp(self):
         self.test_major = models.Major.objects.create(
             department=self.department,
-            code='Test Code',
+            student_code='Test Student Code',
+            program_code='Test Program Code',
             name='Test Name',
-            undergrad=False,
+            degree_level=1,
             active=False,
             slug='test-code',
         )
 
     def test_model_creation(self):
         self.assertEqual(self.test_major.department, self.department)
-        self.assertEqual(self.test_major.code, 'Test Code')
+        self.assertEqual(self.test_major.student_code, 'Test Student Code')
+        self.assertEqual(self.test_major.program_code, 'Test Program Code')
         self.assertEqual(self.test_major.name, 'Test Name')
-        self.assertEqual(self.test_major.undergrad, False)
+        self.assertEqual(self.test_major.degree_level, 1)
         self.assertEqual(self.test_major.active, False)
 
     def test_string_representation(self):
-        self.assertEqual(str(self.test_major), 'Test Code - Test Name')
+        self.assertEqual(str(self.test_major), 'Test Student Code - Test Name')
 
     def test_plural_representation(self):
         self.assertEqual(str(self.test_major._meta.verbose_name), 'Major')
         self.assertEqual(str(self.test_major._meta.verbose_name_plural), 'Majors')
+
+    def test_get_degree_level_as_string(self):
+        self.assertEqual(models.Major.get_degree_level_as_string(0), 'Unknown')
+        self.assertEqual(models.Major.get_degree_level_as_string(1), 'Associates')
+        self.assertEqual(models.Major.get_degree_level_as_string(2), 'Bachelors')
+        self.assertEqual(models.Major.get_degree_level_as_string(3), 'Masters')
+        self.assertEqual(models.Major.get_degree_level_as_string(4), 'Phd')
+
+    def test_get_degree_level_as_int(self):
+        self.assertEqual(models.Major.get_degree_level_as_int('Unknown'), 0)
+        self.assertEqual(models.Major.get_degree_level_as_int('Associates'), 1)
+        self.assertEqual(models.Major.get_degree_level_as_int('Bachelors'), 2)
+        self.assertEqual(models.Major.get_degree_level_as_int('Masters'), 3)
+        self.assertEqual(models.Major.get_degree_level_as_int('Phd'), 4)
 
     def test_dummy_creation(self):
         # Test create.
