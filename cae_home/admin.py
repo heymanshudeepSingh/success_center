@@ -144,6 +144,40 @@ class UserIntermediaryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('bronco_net',)}
 
 
+class WmuUserAdmin(admin.ModelAdmin):
+    inlines = (MajorInline,)
+
+    def get_majors(self, obj):
+        return ' | '.join([major.student_code for major in obj.major.all()])
+
+    # Fields to display in admin list view.
+    list_display = ('bronco_net', 'winno', 'first_name', 'last_name', 'get_majors',)
+
+    # Fields to filter by in admin list view.
+    list_filter = ('active', 'wmuusermajorrelationship__major__name',)
+
+    # Fields to search in admin list view.
+    search_fields = ['bronco_net', 'winno', 'first_name', 'last_name',]
+
+    # Read only fields for admin detail view.
+    readonly_fields = ('id', 'date_created', 'date_modified', 'official_email', 'shorthand_email')
+
+    # Organize fieldsets for admin detail view.
+    fieldsets = (
+        (None, {
+            'fields': (
+                'user_type', 'bronco_net', 'winno', 'first_name', 'middle_name', 'last_name',
+            )}),
+        ('Contact Info', {
+            'fields': ('official_email', 'shorthand_email')
+        }),
+        ('Advanced', {
+            'classes': ('collapse',),
+            'fields': ('id', 'active', 'date_created', 'date_modified',),
+        }),
+    )
+
+
 class ProfileToUserListFilter(admin.SimpleListFilter):
     """
     Filter for ProfileAdmin to show profiles associated to valid site login accounts.
@@ -430,41 +464,6 @@ class SemesterDateAdmin(admin.ModelAdmin):
         }),
     )
 
-
-class WmuUserAdmin(admin.ModelAdmin):
-    inlines = (MajorInline,)
-
-    # self.test_wmu_user.major.all()
-
-    def get_majors(self, obj):
-        return ' | '.join([major.student_code for major in obj.major.all()])
-
-    # Fields to display in admin list view.
-    list_display = ('bronco_net', 'winno', 'first_name', 'last_name', 'get_majors',)
-
-    # Fields to filter by in admin list view.
-    list_filter = ('active', 'wmuusermajorrelationship__major__name',)
-
-    # Fields to search in admin list view.
-    search_fields = ['bronco_net', 'winno', 'first_name', 'last_name',]
-
-    # Read only fields for admin detail view.
-    readonly_fields = ('id', 'date_created', 'date_modified', 'official_email', 'shorthand_email')
-
-    # Organize fieldsets for admin detail view.
-    fieldsets = (
-        (None, {
-            'fields': (
-                'user_type', 'bronco_net', 'winno', 'first_name', 'middle_name', 'last_name',
-            )}),
-        ('Contact Info', {
-            'fields': ('official_email', 'shorthand_email')
-        }),
-        ('Advanced', {
-            'classes': ('collapse',),
-            'fields': ('id', 'active', 'date_created', 'date_modified',),
-        }),
-    )
 
 #endregion WMU Model Admin
 
