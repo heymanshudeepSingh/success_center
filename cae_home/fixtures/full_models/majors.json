@@ -93,6 +93,66 @@
     "model": "cae_home.major",
     "pk": 7,
     "fields": {
+        "department": 11,
+        "student_code": "ASPP",
+        "program_code": "ASPP",
+        "name": "Pre-Aerospace Engineering",
+        "degree_level": 1,
+        "active": true,
+        "slug": "aspp",
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 8,
+    "fields": {
+        "department": 11,
+        "student_code": "ASPJ",
+        "program_code": "ABSEASP-ASPJ",
+        "name": "Aerospace Engineering",
+        "degree_level": 2,
+        "active": true,
+        "slug": "aspj",
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 9,
+    "fields": {
+        "department": 11,
+        "student_code": "ASPM",
+        "program_code": "A-MS-ASPM",
+        "name": "Aerospace Engineering",
+        "degree_level": 3,
+        "active": true,
+        "slug": "aspm",
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 10,
+    "fields": {
+        "department": 11,
+        "student_code": "ASPQ",
+        "program_code": "A-MS-ASPQ",
+        "name": "Aerospace Engineering - Accelerated",
+        "degree_level": 3,
+        "active": true,
+        "slug": "aspq",
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 11,
+    "fields": {
         "department": 8,
         "student_code": "CEGP",
         "program_code": "CEGP",
@@ -106,7 +166,7 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 8,
+    "pk": 12,
     "fields": {
         "department": 8,
         "student_code": "CEGJ",
@@ -121,7 +181,7 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 9,
+    "pk": 13,
     "fields": {
         "department": 8,
         "student_code": "CENM",
@@ -136,7 +196,7 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 10,
+    "pk": 14,
     "fields": {
         "department": 8,
         "student_code": "CENQ",
@@ -151,7 +211,7 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 11,
+    "pk": 15,
     "fields": {
         "department": 5,
         "student_code": "CENP",
@@ -166,7 +226,7 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 12,
+    "pk": 16,
     "fields": {
         "department": 5,
         "student_code": "CENJ",
@@ -181,7 +241,7 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 13,
+    "pk": 17,
     "fields": {
         "department": 4,
         "student_code": "CHGP",
@@ -196,7 +256,7 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 14,
+    "pk": 18,
     "fields": {
         "department": 4,
         "student_code": "CHGJ",
@@ -211,7 +271,7 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 15,
+    "pk": 19,
     "fields": {
         "department": 4,
         "student_code": "CHGM",
@@ -226,7 +286,7 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 16,
+    "pk": 20,
     "fields": {
         "department": 4,
         "student_code": "CHGQ",
@@ -241,7 +301,7 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 17,
+    "pk": 21,
     "fields": {
         "department": 5,
         "student_code": "CIVP",
@@ -256,7 +316,7 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 18,
+    "pk": 22,
     "fields": {
         "department": 5,
         "student_code": "CIVJ",
@@ -271,7 +331,7 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 19,
+    "pk": 23,
     "fields": {
         "department": 5,
         "student_code": "CIVM",
@@ -286,7 +346,7 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 20,
+    "pk": 24,
     "fields": {
         "department": 5,
         "student_code": "CIVQ",
@@ -301,7 +361,22 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 21,
+    "pk": 25,
+    "fields": {
+        "department": 5,
+        "student_code": "CIVD",
+        "program_code": "A-PHD-CIVD",
+        "name": "Civil Engineering",
+        "degree_level": 4,
+        "active": true,
+        "slug": "civd",
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 26,
     "fields": {
         "department": 6,
         "student_code": "CSGJ",
@@ -316,7 +391,7 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 22,
+    "pk": 27,
     "fields": {
         "department": 6,
         "student_code": "CSIJ",
@@ -331,7 +406,7 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 23,
+    "pk": 28,
     "fields": {
         "department": 6,
         "student_code": "CSGM",
@@ -346,7 +421,7 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 24,
+    "pk": 29,
     "fields": {
         "department": 6,
         "student_code": "CSGQ",
@@ -361,7 +436,7 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 25,
+    "pk": 30,
     "fields": {
         "department": 6,
         "student_code": "CSGD",
@@ -376,7 +451,7 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 26,
+    "pk": 31,
     "fields": {
         "department": 6,
         "student_code": "CSTJ",
@@ -391,13 +466,13 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 27,
+    "pk": 32,
     "fields": {
         "department": 10,
         "student_code": "EDTP",
         "program_code": "EDTP",
         "name": "Pre-Engineering Design Technology",
-        "degree_level": 2,
+        "degree_level": 1,
         "active": true,
         "slug": "edtp",
         "date_created": "2018-01-01T08:00:00.000Z",
@@ -406,7 +481,7 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 28,
+    "pk": 33,
     "fields": {
         "department": 10,
         "student_code": "EDTJ",
@@ -421,7 +496,7 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 29,
+    "pk": 34,
     "fields": {
         "department": 8,
         "student_code": "EENP",
@@ -436,7 +511,7 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 30,
+    "pk": 35,
     "fields": {
         "department": 8,
         "student_code": "EENJ",
@@ -451,7 +526,7 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 31,
+    "pk": 36,
     "fields": {
         "department": 8,
         "student_code": "EENM",
@@ -466,7 +541,7 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 32,
+    "pk": 37,
     "fields": {
         "department": 8,
         "student_code": "EENQ",
@@ -481,7 +556,52 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 33,
+    "pk": 38,
+    "fields": {
+        "department": 8,
+        "student_code": "ELCD",
+        "program_code": "A-PHD-ELCD",
+        "name": "Electrical and Computer Engineering",
+        "degree_level": 4,
+        "active": true,
+        "slug": "elcd",
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 39,
+    "fields": {
+        "department": 8,
+        "student_code": "ENMM",
+        "program_code": "A-MS-ENMM",
+        "name": "Engineering Management",
+        "degree_level": 3,
+        "active": true,
+        "slug": "ennm",
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 40,
+    "fields": {
+        "department": 4,
+        "student_code": "GPRJ",
+        "program_code": "A-BS-GPRJ",
+        "name": "Graphic & Printing Science",
+        "degree_level": 2,
+        "active": true,
+        "slug": "gprj",
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 41,
     "fields": {
         "department": 5,
         "student_code": "IDNJ",
@@ -496,7 +616,37 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 34,
+    "pk": 42,
+    "fields": {
+        "department": 10,
+        "student_code": "IEEP",
+        "program_code": "IEEP",
+        "name": "Pre-Industrial and Entrepreneurial Engineering",
+        "degree_level": 1,
+        "active": true,
+        "slug": "ieep",
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 43,
+    "fields": {
+        "department": 10,
+        "student_code": "IEEJ",
+        "program_code": "ABSEIND-IEEJ",
+        "name": "Industrial and Entrepreneurial Engineering",
+        "degree_level": 2,
+        "active": true,
+        "slug": "ieej",
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 44,
     "fields": {
         "department": 10,
         "student_code": "IENP",
@@ -511,7 +661,7 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 35,
+    "pk": 45,
     "fields": {
         "department": 10,
         "student_code": "IENJ",
@@ -526,7 +676,7 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 36,
+    "pk": 46,
     "fields": {
         "department": 10,
         "student_code": "IENM",
@@ -541,7 +691,7 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 37,
+    "pk": 47,
     "fields": {
         "department": 10,
         "student_code": "IENQ",
@@ -556,7 +706,7 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 38,
+    "pk": 48,
     "fields": {
         "department": 10,
         "student_code": "IEND",
@@ -571,7 +721,7 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 39,
+    "pk": 49,
     "fields": {
         "department": 4,
         "student_code": "IMGJ",
@@ -586,7 +736,7 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 40,
+    "pk": 50,
     "fields": {
         "department": 11,
         "student_code": "MEGP",
@@ -601,7 +751,7 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 41,
+    "pk": 51,
     "fields": {
         "department": 11,
         "student_code": "MEGJ",
@@ -616,7 +766,7 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 42,
+    "pk": 52,
     "fields": {
         "department": 11,
         "student_code": "MEGM",
@@ -631,7 +781,7 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 43,
+    "pk": 53,
     "fields": {
         "department": 11,
         "student_code": "MEGQ",
@@ -646,7 +796,7 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 44,
+    "pk": 54,
     "fields": {
         "department": 11,
         "student_code": "MEGD",
@@ -661,7 +811,7 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 45,
+    "pk": 55,
     "fields": {
         "department": 9,
         "student_code": "MFNP",
@@ -676,7 +826,7 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 46,
+    "pk": 56,
     "fields": {
         "department": 9,
         "student_code": "MFNJ",
@@ -691,7 +841,67 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 47,
+    "pk": 57,
+    "fields": {
+        "department": 10,
+        "student_code": "MNEM",
+        "program_code": "A-MS-MNEM",
+        "name": "Manufacturing Engineering",
+        "degree_level": 3,
+        "active": true,
+        "slug": "mnem",
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 58,
+    "fields": {
+        "department": 10,
+        "student_code": "MFTP",
+        "program_code": "MFTP",
+        "name": "Pre-Manufacturing Engineering Technology",
+        "degree_level": 1,
+        "active": true,
+        "slug": "mftp",
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 59,
+    "fields": {
+        "department": 10,
+        "student_code": "MFTJ",
+        "program_code": "A-BS-MFTJ",
+        "name": "Manufacturing Engineering Technology",
+        "degree_level": 2,
+        "active": true,
+        "slug": "mftj",
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 60,
+    "fields": {
+        "department": 10,
+        "student_code": "MFSM",
+        "program_code": "MFSM",
+        "name": "Manufacturing Science",
+        "degree_level": 3,
+        "active": true,
+        "slug": "mfsm",
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 61,
     "fields": {
         "department": 4,
         "student_code": "PENP",
@@ -706,7 +916,7 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 48,
+    "pk": 62,
     "fields": {
         "department": 4,
         "student_code": "PENJ",
@@ -721,7 +931,82 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 49,
+    "pk": 63,
+    "fields": {
+        "department": 4,
+        "student_code": "PPRP",
+        "program_code": "PPRP",
+        "name": "Pre-Paper Engineering",
+        "degree_level": 1,
+        "active": true,
+        "slug": "pprp",
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 64,
+    "fields": {
+        "department": 4,
+        "student_code": "PPRJ",
+        "program_code": "ABSEPAP-PPRJ",
+        "name": "Paper Engineering",
+        "degree_level": 2,
+        "active": true,
+        "slug": "pprj",
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 65,
+    "fields": {
+        "department": 4,
+        "student_code": "PPSM",
+        "program_code": "A-MS-PPSM",
+        "name": "Paper & Printing Science",
+        "degree_level": 3,
+        "active": true,
+        "slug": "ppsm",
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 66,
+    "fields": {
+        "department": 4,
+        "student_code": "PPSQ",
+        "program_code": "A-MS-PPSQ",
+        "name": "Paper & Printing Science",
+        "degree_level": 3,
+        "active": true,
+        "slug": "ppsq",
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 67,
+    "fields": {
+        "department": 4,
+        "student_code": "PPSD",
+        "program_code": "A-PHD-PPSD",
+        "name": "Paper & Printing Science",
+        "degree_level": 4,
+        "active": true,
+        "slug": "ppsd",
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 68,
     "fields": {
         "department": 4,
         "student_code": "PSCJ",
@@ -736,7 +1021,7 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 50,
+    "pk": 69,
     "fields": {
         "department": 4,
         "student_code": "PSEM",
@@ -751,12 +1036,12 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 51,
+    "pk": 70,
     "fields": {
         "department": 10,
         "student_code": "UEMP",
         "program_code": "UEMP",
-        "name": "Engineering Management Technology",
+        "name": "Pre-Engineering Management Technology",
         "degree_level": 1,
         "active": true,
         "slug": "uemp",
@@ -766,7 +1051,7 @@
 },
 {
     "model": "cae_home.major",
-    "pk": 52,
+    "pk": 71,
     "fields": {
         "department": 10,
         "student_code": "UEMJ",
