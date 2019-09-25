@@ -75,6 +75,34 @@ def compare_user_and_wmuuser_models(uid):
 
 #region Models
 
+class WmuUserMajorRelationship(models.Model):
+    """
+    WmuUser and Major model many-to-many relationship.
+    """
+    # Relationship keys.
+    wmu_user = models.ForeignKey('WmuUser', on_delete=models.CASCADE)
+    major = models.ForeignKey('Major', on_delete=models.CASCADE)
+
+    # Additional Many-to-Many fields.
+    active = models.BooleanField(default=True)
+
+    # Self-setting/Non-user-editable fields.
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'WmuUser to Major Relationship'
+        verbose_name_plural = 'WmuUser to Major Relationships'
+
+    def save(self, *args, **kwargs):
+        """
+        Modify model save behavior.
+        """
+        # Save model.
+        self.full_clean()
+        super().save(*args, **kwargs)
+
+
 class User(AbstractUser):
     """
     An extension of Django's default user, allowing for additional functionality.
@@ -265,7 +293,7 @@ class WmuUser(models.Model):
     )
 
     # Relationship keys.
-    major = models.ForeignKey('Major', on_delete=models.CASCADE, blank=True)
+    major = models.ManyToManyField('Major', through=WmuUserMajorRelationship, blank=True)
 
     # Model fields.
     bronco_net = models.CharField(max_length=MAX_LENGTH, unique=True)
@@ -319,7 +347,6 @@ class WmuUser(models.Model):
                 winno=winno,
                 first_name=first_name,
                 last_name=last_name,
-                major=major,
             )
         except ObjectDoesNotExist:
             return WmuUser.objects.create(
@@ -327,7 +354,6 @@ class WmuUser(models.Model):
                 winno=winno,
                 first_name=first_name,
                 last_name=last_name,
-                major=major,
             )
 
 

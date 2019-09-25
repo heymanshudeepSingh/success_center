@@ -243,10 +243,6 @@ def create_wmu_users(style, model_count):
         # Loop attempt until 3 fails or model is created.
         # Model creation may fail due to randomness of bronco_net and unique requirement.
         while try_create_model:
-            # Get Major.
-            index = randint(0, len(majors) - 1)
-            major = majors[index]
-
             # Generate bronco net.
             bronco_net = '{0}{1}{2}{3}'.format(
                 chr(randint(97, 122)),
@@ -277,8 +273,7 @@ def create_wmu_users(style, model_count):
             # Attempt to create model seed.
             try:
                 with transaction.atomic():
-                    models.WmuUser.objects.create(
-                        major=major,
+                    wmu_user = models.WmuUser.objects.create(
                         bronco_net=bronco_net,
                         winno=winno,
                         first_name=faker_factory.first_name(),
@@ -286,6 +281,18 @@ def create_wmu_users(style, model_count):
                         user_type=user_type,
                         active=active,
                     )
+
+                    # Add between one and three majors to student.
+                    major_count = randint(1, 3)
+                    for x in range(major_count):
+                        # Get Major.
+                        index = randint(0, len(majors) - 1)
+                        major = majors[index]
+                        models.WmuUserMajorRelationship.objects.create(
+                            wmu_user=wmu_user,
+                            major=major,
+                            active=active,
+                        )
                     user_profile = models.Profile.get_profile(bronco_net)
                     user_profile.address = address
                     user_profile.phone_number = phone_number

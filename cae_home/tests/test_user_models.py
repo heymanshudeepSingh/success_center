@@ -32,13 +32,16 @@ class UserIntermediaryModelTests(IntegrationTestCase):
         # Set up for WmuUser model instance.
         cls.wmu_user_bronco_net = 'wmu_temporary'
         cls.wmu_user = models.WmuUser.objects.create(
-            major=cls.major,
             bronco_net=cls.wmu_user_bronco_net,
             winno=cls.wmu_user_bronco_net,
             first_name='Test First',
             middle_name='Test Middle',
             last_name='Test Last',
             user_type=cls.user_type,
+        )
+        models.WmuUserMajorRelationship.objects.create(
+            wmu_user=cls.wmu_user,
+            major=cls.major,
         )
 
         # Set up for instance with both User and WmuUser. User model created first.
@@ -49,7 +52,6 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             cls.dual_bronco_net_1,
         )
         cls.dual_wmu_user_1 = models.WmuUser.objects.create(
-            major=cls.major,
             bronco_net=cls.dual_bronco_net_1,
             winno=cls.dual_bronco_net_1,
             first_name='Test First',
@@ -57,17 +59,24 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             last_name='Test Last',
             user_type=cls.user_type,
         )
+        models.WmuUserMajorRelationship.objects.create(
+            wmu_user=cls.dual_wmu_user_1,
+            major=cls.major,
+        )
 
         # Set up for instance with both User and WmuUser. WmuUser model created first.
         cls.dual_bronco_net_2 = 'dual_2_temporary'
         cls.dual_wmu_user_2 = models.WmuUser.objects.create(
-            major=cls.major,
             bronco_net=cls.dual_bronco_net_2,
             winno=cls.dual_bronco_net_2,
             first_name='Test First',
             middle_name='Test Middle',
             last_name='Test Last',
             user_type=cls.user_type,
+        )
+        models.WmuUserMajorRelationship.objects.create(
+            wmu_user=cls.dual_wmu_user_2,
+            major=cls.major,
         )
         cls.dual_user_2 = get_user_model().objects.create_user(
             cls.dual_bronco_net_2,
@@ -429,23 +438,56 @@ class WmuUserTests(IntegrationTestCase):
     def setUp(self):
         self.bronco_net='abc1234'
         self.test_wmu_user = models.WmuUser.objects.create(
-            major=self.major,
             bronco_net=self.bronco_net,
             winno='123456789',
             first_name='Test First',
             last_name='Test Last',
             user_type=self.user_type,
         )
+        models.WmuUserMajorRelationship.objects.create(
+            wmu_user=self.test_wmu_user,
+            major=self.major,
+        )
         self.user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.bronco_net)
+        self.majors_for_student = self.test_wmu_user.major.all()
 
     def test_model_creation(self):
         self.assertEqual(self.user_intermediary.wmu_user, self.test_wmu_user)
-        self.assertEqual(self.test_wmu_user.major, self.major)
         self.assertEqual(self.test_wmu_user.bronco_net, 'abc1234')
         self.assertEqual(self.test_wmu_user.winno, '123456789')
         self.assertEqual(self.test_wmu_user.first_name, 'Test First')
         self.assertEqual(self.test_wmu_user.last_name, 'Test Last')
         self.assertEqual(self.test_wmu_user.user_type, self.user_type)
+        self.assertEqual(self.majors_for_student[0], self.major)
+
+    def test_multiple_majors(self):
+        # Test adding a second major.
+        new_major = models.Major.objects.create(
+            student_code='New Major',
+            program_code='New Major',
+            name='New Major',
+            slug='new-major',
+        )
+        models.WmuUserMajorRelationship.objects.create(
+            wmu_user=self.test_wmu_user,
+            major=new_major,
+        )
+
+        # Verify added correctly.
+        majors_for_student = self.test_wmu_user.major.all()
+        self.assertEqual(len(majors_for_student), 2)
+        self.assertEqual(majors_for_student[0], self.major)
+        self.assertEqual(majors_for_student[1], new_major)
+        self.assertEqual(majors_for_student[0].active, True)
+        self.assertEqual(majors_for_student[1].active, True)
+
+        # Now set first major to "inactive". Aka, student either finished major or changed to different one.
+        majors_for_student[0].active = False
+        majors_for_student[0].save()
+
+        majors_for_student = self.test_wmu_user.major.all()
+        self.assertEqual(majors_for_student[0].active, False)
+        self.assertEqual(majors_for_student[1].active, True)
 
     def test_string_representation(self):
         self.assertEqual(str(self.test_wmu_user), 'abc1234: Test First Test Last')
