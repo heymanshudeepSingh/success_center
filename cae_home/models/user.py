@@ -342,19 +342,25 @@ class WmuUser(models.Model):
         first_name = 'Dummy First'
         last_name = 'Dummy Last'
         try:
-            return WmuUser.objects.get(
+            wmu_user = WmuUser.objects.get(
                 bronco_net=bronco_net,
                 winno=winno,
                 first_name=first_name,
                 last_name=last_name,
             )
+            return wmu_user
         except ObjectDoesNotExist:
-            return WmuUser.objects.create(
+            wmu_user = WmuUser.objects.create(
                 bronco_net=bronco_net,
                 winno=winno,
                 first_name=first_name,
                 last_name=last_name,
             )
+            WmuUserMajorRelationship.objects.create(
+                wmu_user=wmu_user,
+                major=major,
+            )
+            return wmu_user
 
 
 @receiver(post_save, sender=WmuUser)
