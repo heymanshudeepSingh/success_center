@@ -511,6 +511,103 @@ class WmuUserTests(IntegrationTestCase):
         self.assertEqual(dummy_model_1, dummy_model_2)
 
 
+class WmuUserMajorRelationModelTests(IntegrationTestCase):
+    """
+    Tests to ensure valid WmuUserMajorRelation model creation/logic.
+    """
+    @classmethod
+    def setUpTestData(cls):
+        cls.user_type = models.WmuUser.STUDENT
+        cls.department = models.Department.create_dummy_model()
+        cls.wmu_user_1 = models.WmuUser.objects.create(
+            bronco_net='test_user_1',
+            winno='123456789',
+            first_name='Test User 1',
+            last_name='Test User 1',
+            user_type=cls.user_type,
+        )
+        cls.wmu_user_2 = models.WmuUser.objects.create(
+            bronco_net='test_user_2',
+            winno='987654321',
+            first_name='Test User 2',
+            last_name='Test User 2',
+            user_type=cls.user_type,
+        )
+        cls.major_1 = models.Major.objects.create(
+            department=cls.department,
+            student_code='major_1',
+            program_code='major_1',
+            name='Test Major 1',
+            slug='major-1',
+        )
+        cls.major_2 = models.Major.objects.create(
+            department=cls.department,
+            student_code='major_2',
+            program_code='major_2',
+            name='Test Major 2',
+            slug='major-2',
+        )
+
+    def test_check_if_user_has_major_active(self):
+        # First add Major 1 to Student 1.
+        models.WmuUserMajorRelationship.objects.create(
+            wmu_user=self.wmu_user_1,
+            major=self.major_1,
+        )
+
+        self.assertTrue(models.WmuUserMajorRelationship.check_if_user_has_major_active(self.wmu_user_1, self.major_1))
+        self.assertFalse(models.WmuUserMajorRelationship.check_if_user_has_major_active(self.wmu_user_2, self.major_1))
+        self.assertFalse(models.WmuUserMajorRelationship.check_if_user_has_major_active(self.wmu_user_1, self.major_2))
+        self.assertFalse(models.WmuUserMajorRelationship.check_if_user_has_major_active(self.wmu_user_2, self.major_2))
+
+        # Add Major 2 to Student 2.
+        models.WmuUserMajorRelationship.objects.create(
+            wmu_user=self.wmu_user_2,
+            major=self.major_2,
+        )
+
+        self.assertTrue(models.WmuUserMajorRelationship.check_if_user_has_major_active(self.wmu_user_1, self.major_1))
+        self.assertFalse(models.WmuUserMajorRelationship.check_if_user_has_major_active(self.wmu_user_2, self.major_1))
+        self.assertFalse(models.WmuUserMajorRelationship.check_if_user_has_major_active(self.wmu_user_1, self.major_2))
+        self.assertTrue(models.WmuUserMajorRelationship.check_if_user_has_major_active(self.wmu_user_2, self.major_2))
+
+        # Now give Student 1 all majors.
+        models.WmuUserMajorRelationship.objects.create(
+            wmu_user=self.wmu_user_1,
+            major=self.major_2,
+        )
+
+        self.assertTrue(models.WmuUserMajorRelationship.check_if_user_has_major_active(self.wmu_user_1, self.major_1))
+        self.assertFalse(models.WmuUserMajorRelationship.check_if_user_has_major_active(self.wmu_user_2, self.major_1))
+        self.assertTrue(models.WmuUserMajorRelationship.check_if_user_has_major_active(self.wmu_user_1, self.major_2))
+        self.assertTrue(models.WmuUserMajorRelationship.check_if_user_has_major_active(self.wmu_user_2, self.major_2))
+
+        # Now remove Major 2 from Student 1 by setting "active" field to False.
+        intermediary_relationship = models.WmuUserMajorRelationship.objects.get(
+            wmu_user=self.wmu_user_1,
+            major=self.major_2,
+        )
+        intermediary_relationship.active = False
+        intermediary_relationship.save()
+
+        self.assertTrue(models.WmuUserMajorRelationship.check_if_user_has_major_active(self.wmu_user_1, self.major_1))
+        self.assertFalse(models.WmuUserMajorRelationship.check_if_user_has_major_active(self.wmu_user_2, self.major_1))
+        self.assertFalse(models.WmuUserMajorRelationship.check_if_user_has_major_active(self.wmu_user_1, self.major_2))
+        self.assertTrue(models.WmuUserMajorRelationship.check_if_user_has_major_active(self.wmu_user_2, self.major_2))
+
+        # Finally, remove all Majors from Student 1 by setting "active" field to False.
+        intermediary_relationship = models.WmuUserMajorRelationship.objects.get(
+            wmu_user=self.wmu_user_1,
+            major=self.major_1,
+        )
+        intermediary_relationship.active = False
+        intermediary_relationship.save()
+
+        self.assertFalse(models.WmuUserMajorRelationship.check_if_user_has_major_active(self.wmu_user_1, self.major_1))
+        self.assertFalse(models.WmuUserMajorRelationship.check_if_user_has_major_active(self.wmu_user_2, self.major_1))
+        self.assertFalse(models.WmuUserMajorRelationship.check_if_user_has_major_active(self.wmu_user_1, self.major_2))
+        self.assertTrue(models.WmuUserMajorRelationship.check_if_user_has_major_active(self.wmu_user_2, self.major_2))
+
 class ProfileModelTests(IntegrationTestCase):
     """
     Tests to ensure valid Profile model creation/logic.

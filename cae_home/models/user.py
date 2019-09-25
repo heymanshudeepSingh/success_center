@@ -119,6 +119,21 @@ class WmuUserMajorRelationship(models.Model):
         self.full_clean()
         super().save(*args, **kwargs)
 
+    @staticmethod
+    def check_if_user_has_major_active(wmu_user, major):
+        """
+        Checks for relation where wmu_user is associated with major and actively pursuing it.
+        :param wmu_user: WmuUser model object to check against.
+        :param major: Major model object to check against.
+        :return: Boolean indicating if student is actively pursuing major.
+        """
+        if WmuUserMajorRelationship.objects.filter(wmu_user=wmu_user, major=major, active=True,).exists():
+            # relation exists where "active" field is True. User is actively pursuing major.
+            return True
+        else:
+            # Relation does not exist where active is True. User is not actively pursuing major.
+            return False
+
 
 class User(AbstractUser):
     """
