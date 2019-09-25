@@ -11,6 +11,7 @@ from django.conf import settings
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.utils import timezone
 from django.utils.text import slugify
 from phonenumber_field.modelfields import PhoneNumberField
 from os import devnull
@@ -85,6 +86,8 @@ class WmuUserMajorRelationship(models.Model):
 
     # Additional Many-to-Many fields.
     active = models.BooleanField(default=True)
+    date_started = models.DateTimeField(default=timezone.now)
+    date_stopped = models.DateTimeField(blank=True, null=True)
 
     # Self-setting/Non-user-editable fields.
     date_created = models.DateTimeField(auto_now_add=True)
@@ -93,6 +96,20 @@ class WmuUserMajorRelationship(models.Model):
     class Meta:
         verbose_name = 'WmuUser to Major Relationship'
         verbose_name_plural = 'WmuUser to Major Relationships'
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._previous_active_value = self.active
+
+    def clean(self, *args, **kwargs):
+        """
+        Custom cleaning implementation. Includes validation, setting fields, etc.
+        """
+        # Check if model's "active" field has changed, and is now inactive.
+        # Means WmuUser is no longer pursuing Major. Either they graduated and got the degree or switched majors.
+        if self.active != self._previous_active_value and not self.active:
+            # Set date when student stopped pursuing Major.
+            self.date_stopped = timezone.now()
 
     def save(self, *args, **kwargs):
         """

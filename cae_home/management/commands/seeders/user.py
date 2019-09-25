@@ -9,6 +9,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ValidationError
 from django.core.management import call_command
 from django.db import IntegrityError, transaction
+from django.utils import timezone
 from faker import Faker
 from faker_e164.providers import E164Provider
 from phonenumber_field.phonenumber import PhoneNumber
@@ -288,11 +289,20 @@ def create_wmu_users(style, model_count):
                         # Get Major.
                         index = randint(0, len(majors) - 1)
                         major = majors[index]
-                        models.WmuUserMajorRelationship.objects.create(
-                            wmu_user=wmu_user,
-                            major=major,
-                            active=active,
-                        )
+
+                        if active:
+                            models.WmuUserMajorRelationship.objects.create(
+                                wmu_user=wmu_user,
+                                major=major,
+                                active=active,
+                            )
+                        else:
+                            models.WmuUserMajorRelationship.objects.create(
+                                wmu_user=wmu_user,
+                                major=major,
+                                active=active,
+                                date_stopped=timezone.now(),
+                            )
                     user_profile = models.Profile.get_profile(bronco_net)
                     user_profile.address = address
                     user_profile.phone_number = phone_number
