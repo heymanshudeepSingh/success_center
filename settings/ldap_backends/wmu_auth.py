@@ -111,12 +111,10 @@ class CaeAuthBackend(AbstractWmuBackend):
             # Save model in case of error.
             login_user.save()
             if settings.AUTH_BACKEND_DEBUG:
-                logger.info(
-                    '{0} Auth Backend: Created user new user model {1}. Now setting groups...'.format(
-                        self.debug_class,
-                        uid,
-                    )
-                )
+                logger.info('{0} Auth Backend: Created user new user model {1}. Now setting groups...'.format(
+                    self.debug_class,
+                    uid,
+                ))
 
             # Set user group types.
             if ldap_user_groups['director']:
@@ -147,12 +145,10 @@ class CaeAuthBackend(AbstractWmuBackend):
             wmu_ldap.update_or_create_wmu_user_model(uid)
 
             if settings.AUTH_BACKEND_DEBUG:
-                logger.info(
-                    '{0} Auth Backend: Imported Main Campus user info. User creation complete for user {1}.'.format(
-                        self.debug_class,
-                        uid,
-                    )
-                )
+                logger.info('{0} Auth Backend: Imported Main Campus user info. User creation complete for user {1}.'.format(
+                    self.debug_class,
+                    uid,
+                ))
 
         else:
             # Error. This shouldn't ever happen.
@@ -273,22 +269,18 @@ class WmuAuthBackend(AbstractWmuBackend):
             # Save model in case of error.
             login_user.save()
             if settings.AUTH_BACKEND_DEBUG:
-                logger.info(
-                    '{0} Auth Backend: Created user new User model {1}. Now creating WmuUser model...'.format(
-                        self.debug_class,
-                        uid,
-                    )
-                )
+                logger.info('{0} Auth Backend: Created user new User model {1}. Now creating WmuUser model...'.format(
+                    self.debug_class,
+                    uid,
+                ))
 
             self.update_or_create_wmu_user_model(uid)
 
             if settings.AUTH_BACKEND_DEBUG:
-                logger.info(
-                    '{0} Auth Backend: Related WMU User model set. User creation complete for user {1}.'.format(
-                        self.debug_class,
-                        uid,
-                    )
-                )
+                logger.info('{0} Auth Backend: Related WMU User model set. User creation complete for user {1}.'.format(
+                    self.debug_class,
+                    uid,
+                ))
 
         else:
             # Error. This shouldn't ever happen.
@@ -330,29 +322,16 @@ class WmuAuthBackend(AbstractWmuBackend):
             wmu_user = models.WmuUser.objects.get(bronco_net=uid)
 
             if settings.AUTH_BACKEND_DEBUG:
-                logger.info(
-                    '{0} Auth Backend: WmuUser model found for "{1}". Attempting to update...'.format(
-                        self.debug_class,
-                        uid,
-                    )
-                )
+                logger.info('{0} Auth Backend: WmuUser model found for "{1}". Attempting to update...'.format(
+                    self.debug_class,
+                    uid,
+                ))
 
             # WmuUser model exists. Attempt to update information.
             adv_ldap = AdvisingAuthBackend()
 
             # Update major.
-            new_major = adv_ldap.get_student_major(uid)
-            if wmu_user.major != new_major:
-                if settings.AUTH_BACKEND_DEBUG:
-                    logger.info(
-                        '{0} Auth Backend: Django major "{1}" does not match new User\'s return value from ldap "{2}". Updating...'.format(
-                            self.debug_class,
-                            wmu_user.major,
-                            new_major,
-                        )
-                    )
-                wmu_user.major = new_major
-                wmu_user.save()
+            adv_ldap.add_or_update_major(uid)
 
             # Refresh all model data and return.
             return models.WmuUser.objects.get(bronco_net=uid)
@@ -360,12 +339,11 @@ class WmuAuthBackend(AbstractWmuBackend):
         except models.WmuUser.DoesNotExist:
             # Doesn't exist. Create new WmuUser model.
 
-            logger.info(
-                '{0} Auth Backend: Could not find WmuUser model for "{1}". Creating new one...'.format(
+            if settings.AUTH_BACKEND_DEBUG:
+                logger.info('{0} Auth Backend: Could not find WmuUser model for "{1}". Creating new one...'.format(
                     self.debug_class,
                     uid,
-                )
-            )
+                ))
 
             # Get win number info.
             if winno is None:
@@ -392,7 +370,7 @@ class WmuAuthBackend(AbstractWmuBackend):
                 official_email = '{0}@wmich.edu'.format(uid)
 
             adv_ldap = AdvisingAuthBackend()
-            major = adv_ldap.get_student_major(uid)
+            returned_majors = adv_ldap.get_student_major(uid)
 
             models.WmuUser.objects.create(
                 bronco_net=uid,
@@ -401,8 +379,10 @@ class WmuAuthBackend(AbstractWmuBackend):
                 middle_name=middle_name,
                 last_name=last_name,
                 official_email=official_email,
-                major=major,
             )
+
+            # Update major.
+            adv_ldap.add_or_update_major(uid)
 
         # Attempt to update user profile.
         user_profile = models.Profile.get_profile(uid)
@@ -559,107 +539,164 @@ class AdvisingAuthBackend(AbstractWmuBackend):
 
     # endregion User Permissions
 
+    def add_or_update_major(self, uid):
+        """
+        Checks with main campus and attempts to add/update related Majors for WmuUser.
+        Note: This assumes Django already has a WmuUser model for the associated uid. Will fail otherwise.
+        :param uid: BroncoNet value for WmuUser.
+        """
+        wmu_user = models.WmuUser.objects.get(bronco_net=uid)
+
+        returned_majors = self.get_student_major(uid)
+
+        # Check if student is currently associated with more than one major.
+        if isinstance(returned_majors, list):
+            # Student is associated with more than one major. Handle for all.
+            for returned_major in returned_majors:
+
+                # Check each major to see if relation is in django's models and active.
+                if not models.WmuUserMajorRelationship.check_if_user_has_major_active(wmu_user, returned_major):
+                    # Relation not found. Create new.
+                    if settings.AUTH_BACKEND_DEBUG:
+                        logger.info('{0} Auth Backend: Django major "{1}" does not match new User\'s return value '
+                                    'from ldap "{2}". Updating...'.format(
+                            self.debug_class,
+                            wmu_user.major.all(),
+                            returned_majors,
+                        ))
+                    models.WmuUserMajorRelationship.objects.create(
+                        wmu_user=wmu_user,
+                        major=returned_major,
+                    )
+
+        else:
+            # Student is only associated with one major.
+            returned_major = returned_majors
+
+            # Check if relation is in django's models and active.
+            if not models.WmuUserMajorRelationship.check_if_user_has_major_active(wmu_user, returned_major):
+                # Relation not found. Create new.
+                if settings.AUTH_BACKEND_DEBUG:
+                    logger.info('{0} Auth Backend: Django major "{1}" does not match new User\'s return value from '
+                                'ldap "{2}". Updating...'.format(
+                        self.debug_class,
+                        wmu_user.major.all(),
+                        returned_majors,
+                    ))
+                models.WmuUserMajorRelationship.objects.create(
+                    wmu_user=wmu_user,
+                    major=returned_major,
+                )
+
     def get_student_major(self, uid):
         """
-        Gets major for given student model.
+        Gets major(s) for given WmuUser model.
         :param uid: Bronconet corresponding to student.
         :return: Django Major model corresponding to student.
         """
         # Get win number info.
         winno = self.get_ldap_user_attribute(uid, 'wmuBannerID')
 
-        print('')
-        print('')
-        print('')
-        logger.info('Attempting to get student major for bronco "{0}", winno "{1}"'.format(uid, winno))
 
         # Attempt to get student major "ProgramCode".
         student_code = self.get_ldap_user_attribute(uid, 'wmuStudentMajor')
 
         # Check if program code was valid.
         if student_code is not None and student_code != '':
-            logger.info('Found student wmuProgramCode: {0}'.format(student_code))
+            if settings.AUTH_BACKEND_DEBUG:
+                logger.info('{0} Auth Backend: Found student wmuProgramCode: {1}'.format(self.debug_class, student_code))
 
             search_base = 'ou=Majors,ou=WMUCourses,o=wmich.edu,dc=wmich,dc=edu'
             search_filter = '(wmuStudentMajor={0})'.format(student_code)
             attributes = 'ALL_ATTRIBUTES'
 
-            logger.info('search_base: {0}'.format(search_base))
-            logger.info('search_filter: {0}'.format(search_filter))
-            logger.info('attributes: {0}'.format(attributes))
-
             if isinstance(student_code, list):
+                major_list = []
                 for code in student_code:
-                    self._get_student_major(code, search_base, search_filter, attributes)
-                    major = models.Major.objects.get(slug='unk')
+                    major_list.append(self._get_student_major(code, search_base, search_filter, attributes))
+                return major_list
             else:
                 major = self._get_student_major(student_code, search_base, search_filter, attributes)
 
             return major
         else:
-            logger.warn('Failed to get wmuStudentMajor LDAP field for {0}. Defaulting to "Unknown" major.'.format(uid))
+
+            if settings.AUTH_BACKEND_DEBUG:
+                logger.warning(
+                    '{0} Auth Backend: Failed to get wmuStudentMajor LDAP field for {1}. Defaulting to "Unknown" major.'.format(
+                        self.debug_class,
+                        uid
+                    ))
             return models.Major.objects.get(slug='unk')
 
     def _get_student_major(self, student_code, search_base, search_filter, attributes):
         """
-
-        :param student_code:
-        :param search_base:
-        :param search_filter:
-        :param attributes:
-        :return:
+        Get Django Major model for with provided information.
+        :param student_code: Student code to search for model of.
+        :param search_base: LDAP main campus search_base for Major info.
+        :param search_filter: LDAP main campus search_filter for Major info.
+        :param attributes: LDAP main campus attributes to get for Major info.
+        :return: Major model.
         """
-        self.ldap_lib.bind_server(get_info=self.get_info)
-        ldap_major = self.ldap_lib.search(
-            search_base=search_base,
-            search_filter=search_filter,
-            attributes=attributes,
-        )
-        self.ldap_lib.unbind_server()
+        # First check that a student code was passed.
+        if student_code is not None and student_code != '':
+            # Attempt to get full major info from LDAP.
+            self.ldap_lib.bind_server(get_info=self.get_info)
+            ldap_major = self.ldap_lib.search(
+                search_base=search_base,
+                search_filter=search_filter,
+                attributes=attributes,
+            )
+            self.ldap_lib.unbind_server()
 
-        if ldap_major is not None:
-            # Got valid response from LDAP.
-            logger.info('Found ldap_major: {0}'.format(ldap_major))
-
-            try:
-                # Attempt to get major.
-                major = models.Major.objects.get(student_code=student_code)
-                logger.info('Found Django Major: {0}'.format(major))
-                return major
-            except models.Major.DoesNotExist:
-                logger.info('Django Major does not exist. Creating new...')
-
-                # Get major's department.
-                department = self._get_major_department(ldap_major)
-
-                # Get major's program_code.
-                program_code = self._get_major_program_code(ldap_major)
-
-                # Get major's display_name.
-                display_name = self._get_major_display_name(ldap_major)
-
-                # Get major's degree_level.
-                degree_level = self._get_degree_level_from_program_code(program_code)
-
-                logger.info('Got all values. Attempting to create major....')
+            if ldap_major is not None:
+                # Got valid response from LDAP.
+                if settings.AUTH_BACKEND_DEBUG:
+                    logger.info('{0} Auth Backend: Found ldap_major: {1}'.format(self.debug_class, ldap_major))
 
                 try:
-                    major = models.Major.objects.create(
-                        department=department,
-                        student_code=student_code,
-                        program_code=program_code,
-                        name=display_name,
-                        degree_level=degree_level,
-                        slug=slugify(student_code),
-                    )
-                    logger.info('Created Django Major: {0}'.format(major))
+                    # Attempt to get major.
+                    major = models.Major.objects.get(student_code=student_code)
+                    if settings.AUTH_BACKEND_DEBUG:
+                        logger.info('{0} Auth Backend: Found Django Major: {1}'.format(self.debug_class, major))
                     return major
-                except Exception as err:
-                    logger.info('Failed to create major: {0}'.format(err))
-                    return models.Major.objects.get(slug='unk')
+                except models.Major.DoesNotExist:
+                    if settings.AUTH_BACKEND_DEBUG:
+                        logger.info('{0} Auth Backend: Django Major does not exist. Creating new...'.format(
+                        self.debug_class,
+                    ))
+
+                    # Get major's department.
+                    department = self._get_major_department(ldap_major)
+
+                    # Get major's program_code.
+                    program_code = self._get_major_program_code(ldap_major)
+
+                    # Get major's display_name.
+                    display_name = self._get_major_display_name(ldap_major)
+
+                    # Get major's degree_level.
+                    degree_level = self._get_degree_level_from_program_code(program_code)
+
+                    try:
+                        return models.Major.objects.create(
+                            department=department,
+                            student_code=student_code,
+                            program_code=program_code,
+                            name=display_name,
+                            degree_level=degree_level,
+                            slug=slugify(student_code),
+                        )
+                    except Exception as err:
+                        logger.error('Failed to create major: {0}'.format(err))
+                        return models.Major.objects.get(slug='unk')
+
+            else:
+                # Could not get valid response from LDAP. Default to unknown.
+                return models.Major.objects.get(slug='unk')
 
         else:
-            # Could not get valid response from LDAP. Default to unknown.
+            # Passed student code was not a real value. Skip fetch attempt and just return unknown major.
             return models.Major.objects.get(slug='unk')
 
     def _get_major_department(self, ldap_major):
@@ -730,7 +767,7 @@ class AdvisingAuthBackend(AbstractWmuBackend):
                 return str(ldap_major['wmuProgramCode'][0]).strip()
         except KeyError:
             # 'wmuProgramCode' field does not exist for entry. Default to student_code value.
-            return str(ldap_major['wmuProgramCode'][0]).strip()
+            return str(ldap_major['wmuStudentMajor'][0]).strip()
 
     def _get_degree_level_from_program_code(self, program_code):
         """
@@ -794,5 +831,8 @@ class AdvisingAuthBackend(AbstractWmuBackend):
 
         else:
             # Unkown program_code format.
-            logger.warning('Could not parse degree_level from program_code "{0}".'.format(program_code))
+            logger.warning('{0} Auth Backend: Could not parse degree_level from program_code "{1}".'.format(
+                self.debug_class,
+                program_code,
+            ))
             return models.Major.get_degree_level_as_int('Unknown')
