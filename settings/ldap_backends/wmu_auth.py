@@ -142,7 +142,7 @@ class CaeAuthBackend(AbstractWmuBackend):
                 logger.info('{0} Auth Backend: Attempting to get Main Campus user info...'.format(self.debug_class))
 
             wmu_ldap = WmuAuthBackend()
-            wmu_ldap.update_or_create_wmu_user_model(uid)
+            wmu_ldap.create_or_update_wmu_user_model(uid)
 
             if settings.AUTH_BACKEND_DEBUG:
                 logger.info('{0} Auth Backend: Imported Main Campus user info. User creation complete for user {1}.'.format(
@@ -274,7 +274,7 @@ class WmuAuthBackend(AbstractWmuBackend):
                     uid,
                 ))
 
-            self.update_or_create_wmu_user_model(uid)
+            self.create_or_update_wmu_user_model(uid)
 
             if settings.AUTH_BACKEND_DEBUG:
                 logger.info('{0} Auth Backend: Related WMU User model set. User creation complete for user {1}.'.format(
@@ -310,28 +310,42 @@ class WmuAuthBackend(AbstractWmuBackend):
         self.ldap_lib.unbind_server()
         return bronco_net
 
-    def update_or_create_wmu_user_model(self, uid, winno=None):
+    def create_or_update_wmu_user_model(self, uid, winno=None, only_create=False):
         """
-        Attempts to get and update WmuUser model with given bronconet.
+        Attempts to get and update WmuUser model with given BroncoNet.
         In the event that no such model exists, instead create it from scratch using ldap info from main campus.
         :param uid: Id of user to get.
+        :param winno: Optional winno field to eliminate a main campus LDAP call.
+        :param only_create: Boolean that prevents WmuUser model update attempts, if True.
         :return: Instance of WmuUser model.
         """
         # Attempt to get related model. Just to see if it exists or not. If it does exist, update if applicable.
         try:
             wmu_user = models.WmuUser.objects.get(bronco_net=uid)
 
-            if settings.AUTH_BACKEND_DEBUG:
-                logger.info('{0} Auth Backend: WmuUser model found for "{1}". Attempting to update...'.format(
-                    self.debug_class,
-                    uid,
-                ))
+            if not only_create:
+                # only_create bool is False. Proceeding to update WmuUser values, if possible.
 
-            # WmuUser model exists. Attempt to update information.
-            adv_ldap = AdvisingAuthBackend()
+                if settings.AUTH_BACKEND_DEBUG:
+                    logger.info('{0} Auth Backend: WmuUser model found for "{1}". Attempting to update...'.format(
+                        self.debug_class,
+                        uid,
+                    ))
 
-            # Update major.
-            adv_ldap.add_or_update_major(uid)
+                # WmuUser model exists. Attempt to update information.
+                adv_ldap = AdvisingAuthBackend()
+
+                # Update major.
+                adv_ldap.add_or_update_major(uid)
+
+            else:
+                # only_create bool is True. Skipping WmuUser update attempt.
+                if settings.AUTH_BACKEND_DEBUG:
+                    logger.info('{0} Auth Backend: WmuUser model found for "{1}". Bool "only_create" is True. '
+                                'Skipping update.'.format(
+                        self.debug_class,
+                        uid,
+                    ))
 
             # Refresh all model data and return.
             return models.WmuUser.objects.get(bronco_net=uid)

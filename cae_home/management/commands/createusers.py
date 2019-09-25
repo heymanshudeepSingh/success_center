@@ -122,7 +122,7 @@ class Command(BaseCommand):
             self.stdout.write(self.style.HTTP_INFO('Importing main campus user info...'))
 
             # Set related WMU User model info.
-            wmu_ldap.update_or_create_wmu_user_model(uid)
+            wmu_ldap.create_or_update_wmu_user_model(uid)
 
             self.stdout.write(self.style.HTTP_INFO('Main campus import complete. Starting next user...\n'))
 
