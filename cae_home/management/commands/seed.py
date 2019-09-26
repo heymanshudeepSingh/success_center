@@ -77,7 +77,7 @@ class Command(BaseCommand):
         self.stdout.write(self.style.HTTP_INFO('CAE_HOME: Seeding complete. Attempting to call imported apps.\n'))
         self.call_imported_app_seeders(model_count)
 
-        self.stdout.write(self.style.SUCCESS('Seeding complete.'))
+        self.stdout.write(self.style.SUCCESS('Randomized seeding complete.'))
 
     def call_imported_app_seeders(self, model_count):
         """
