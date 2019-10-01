@@ -59,10 +59,11 @@ ALLOWED_CAE_PROJECTS = {
             'cae_web_core': {
                 'config': 'apps.CaeWebCoreConfig',
             },
-            'cae_web_attendants': {},
+            'cae_web_checklists': {},
             'cae_web_scheduling': {
                 'config': 'apps.CaeWebSchedulingConfig',
             },
+            'cae_web_room_checkouts': {},
             'cae_web_shifts': {},
             'cae_web_work_log': {},
         },
