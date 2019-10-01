@@ -18,12 +18,21 @@ except ImportError:
     RoomEventInline = None
 
 
-#region User Model Admin
+#region Model Inlines
 
 class ProfileInline(admin.StackedInline):
     model = models.Profile
     can_delete = False
 
+
+class MajorInline(admin.TabularInline):
+    model = models.WmuUser.major.through
+    extra = 1
+
+#endregion Model Inlines
+
+
+#region User Model Admin
 
 class UserAdmin(BaseUserAdmin):
     # inlines = (ProfileInline, )
@@ -133,6 +142,40 @@ class UserIntermediaryAdmin(admin.ModelAdmin):
 
     # New object's slugs will be automatically set by bronco_net.
     prepopulated_fields = {'slug': ('bronco_net',)}
+
+
+class WmuUserAdmin(admin.ModelAdmin):
+    inlines = (MajorInline,)
+
+    def get_majors(self, obj):
+        return ' | '.join([major.student_code for major in obj.major.all()])
+
+    # Fields to display in admin list view.
+    list_display = ('bronco_net', 'winno', 'first_name', 'last_name', 'get_majors',)
+
+    # Fields to filter by in admin list view.
+    list_filter = ('active', 'wmuusermajorrelationship__major__name',)
+
+    # Fields to search in admin list view.
+    search_fields = ['bronco_net', 'winno', 'first_name', 'last_name',]
+
+    # Read only fields for admin detail view.
+    readonly_fields = ('id', 'date_created', 'date_modified', 'official_email', 'shorthand_email')
+
+    # Organize fieldsets for admin detail view.
+    fieldsets = (
+        (None, {
+            'fields': (
+                'user_type', 'bronco_net', 'winno', 'first_name', 'middle_name', 'last_name',
+            )}),
+        ('Contact Info', {
+            'fields': ('official_email', 'shorthand_email')
+        }),
+        ('Advanced', {
+            'classes': ('collapse',),
+            'fields': ('id', 'active', 'date_created', 'date_modified',),
+        }),
+    )
 
 
 class ProfileToUserListFilter(admin.SimpleListFilter):
@@ -365,13 +408,13 @@ class RoomAdmin(admin.ModelAdmin):
 
 class MajorAdmin(admin.ModelAdmin):
     # Fields to display in admin list view.
-    list_display = ('code', 'name', 'department', 'undergrad', 'active',)
+    list_display = ('student_code', 'program_code', 'name', 'degree_level', 'department', 'active',)
 
     # Fields to filter by in admin list view.
-    list_filter = ('undergrad', 'active',)
+    list_filter = ('degree_level', 'active',)
 
     # Fields to search in admin list view.
-    search_fields = ['department', 'code', 'name',]
+    search_fields = ['department', 'student_code', 'program_code', 'name',]
 
     # Read only fields for admin detail view.
     readonly_fields = ('id', 'date_created', 'date_modified')
@@ -380,7 +423,12 @@ class MajorAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
             'fields': (
-                'code', 'name', 'department', 'undergrad', 'active',
+                 'name', 'degree_level', 'department', 'active',
+            )
+        }),
+        ('Degree Codes', {
+            'fields': (
+                'student_code', 'program_code',
             )
         }),
         ('Advanced', {
@@ -390,7 +438,7 @@ class MajorAdmin(admin.ModelAdmin):
     )
 
     # New object's slugs will be automatically set by code.
-    prepopulated_fields = {'slug': ('code',)}
+    prepopulated_fields = {'slug': ('student_code',)}
 
 
 class SemesterDateAdmin(admin.ModelAdmin):
@@ -416,34 +464,6 @@ class SemesterDateAdmin(admin.ModelAdmin):
         }),
     )
 
-
-class WmuUserAdmin(admin.ModelAdmin):
-    # Fields to display in admin list view.
-    list_display = ('bronco_net', 'winno', 'first_name', 'last_name', 'major',)
-
-    # Fields to filter by in admin list view.
-    list_filter = ('active', 'major',)
-
-    # Fields to search in admin list view.
-    search_fields = ['bronco_net', 'winno', 'first_name', 'last_name',]
-
-    # Read only fields for admin detail view.
-    readonly_fields = ('id', 'date_created', 'date_modified', 'official_email', 'shorthand_email')
-
-    # Organize fieldsets for admin detail view.
-    fieldsets = (
-        (None, {
-            'fields': (
-                'user_type', 'bronco_net', 'winno', 'first_name', 'middle_name', 'last_name', 'major',
-            )}),
-        ('Contact Info', {
-            'fields': ('official_email', 'shorthand_email')
-        }),
-        ('Advanced', {
-            'classes': ('collapse',),
-            'fields': ('id', 'active', 'date_created', 'date_modified',),
-        }),
-    )
 
 #endregion WMU Model Admin
 

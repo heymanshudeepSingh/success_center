@@ -11,6 +11,7 @@ from sys import stdout
 
 # User Class Imports.
 from cae_home import models
+from cae_home.management.commands.fixtures import cae as cae_fixtures
 
 
 def generate_model_seeds(style, model_count):
@@ -26,6 +27,9 @@ def create_assets(style, model_count):
     """
     Create Asset models.
     """
+    # Load preset fixtures.
+    cae_fixtures.create_assets(style)
+
     # Create random data generator.
     faker_factory = Faker()
 

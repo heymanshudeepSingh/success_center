@@ -8,6 +8,7 @@ from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.conf import settings
 from django.db import models
+from django.utils import timezone
 from django.utils.text import slugify
 from phonenumber_field.modelfields import PhoneNumberField
 
@@ -70,6 +71,65 @@ def compare_user_and_wmuuser_models(uid):
 
 
 #region Models
+
+class WmuUserMajorRelationship(models.Model):
+    """
+    WmuUser and Major model many-to-many relationship.
+    """
+    # Relationship keys.
+    wmu_user = models.ForeignKey('WmuUser', on_delete=models.CASCADE)
+    major = models.ForeignKey('Major', on_delete=models.CASCADE)
+
+    # Additional Many-to-Many fields.
+    active = models.BooleanField(default=True)
+    date_started = models.DateTimeField(default=timezone.now)
+    date_stopped = models.DateTimeField(blank=True, null=True)
+
+    # Self-setting/Non-user-editable fields.
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'WmuUser to Major Relationship'
+        verbose_name_plural = 'WmuUser to Major Relationships'
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._previous_active_value = self.active
+
+    def clean(self, *args, **kwargs):
+        """
+        Custom cleaning implementation. Includes validation, setting fields, etc.
+        """
+        # Check if model's "active" field has changed, and is now inactive.
+        # Means WmuUser is no longer pursuing Major. Either they graduated and got the degree or switched majors.
+        if self.active != self._previous_active_value and not self.active:
+            # Set date when student stopped pursuing Major.
+            self.date_stopped = timezone.now()
+
+    def save(self, *args, **kwargs):
+        """
+        Modify model save behavior.
+        """
+        # Save model.
+        self.full_clean()
+        super().save(*args, **kwargs)
+
+    @staticmethod
+    def check_if_user_has_major_active(wmu_user, major):
+        """
+        Checks for relation where wmu_user is associated with major and actively pursuing it.
+        :param wmu_user: WmuUser model object to check against.
+        :param major: Major model object to check against.
+        :return: Boolean indicating if student is actively pursuing major.
+        """
+        if WmuUserMajorRelationship.objects.filter(wmu_user=wmu_user, major=major, active=True,).exists():
+            # relation exists where "active" field is True. User is actively pursuing major.
+            return True
+        else:
+            # Relation does not exist where active is True. User is not actively pursuing major.
+            return False
+
 
 class User(AbstractUser):
     """
@@ -194,7 +254,7 @@ class WmuUser(models.Model):
     )
 
     # Relationship keys.
-    major = models.ForeignKey('Major', on_delete=models.CASCADE, blank=True)
+    major = models.ManyToManyField('Major', through=WmuUserMajorRelationship, blank=True)
 
     # Model fields.
     bronco_net = models.CharField(max_length=MAX_LENGTH, unique=True)
@@ -243,21 +303,25 @@ class WmuUser(models.Model):
         first_name = 'Dummy First'
         last_name = 'Dummy Last'
         try:
-            return WmuUser.objects.get(
+            wmu_user = WmuUser.objects.get(
                 bronco_net=bronco_net,
                 winno=winno,
                 first_name=first_name,
                 last_name=last_name,
-                major=major,
             )
+            return wmu_user
         except ObjectDoesNotExist:
-            return WmuUser.objects.create(
+            wmu_user = WmuUser.objects.create(
                 bronco_net=bronco_net,
                 winno=winno,
                 first_name=first_name,
                 last_name=last_name,
+            )
+            WmuUserMajorRelationship.objects.create(
+                wmu_user=wmu_user,
                 major=major,
             )
+            return wmu_user
 
 
 class Profile(models.Model):

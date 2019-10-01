@@ -202,13 +202,28 @@ class Major(models.Model):
     """
     A major available at WMU.
     """
+    # Preset field choices.
+    UNKNOWN = 0
+    ASSOCIATES = 1
+    BACHELORS = 2
+    MASTERS = 3
+    PHD = 4
+    DEGREE_LEVEL_CHOICES = (
+        (UNKNOWN, 'Unknown'),
+        (ASSOCIATES, 'Associates'),
+        (BACHELORS, 'Bachelors'),
+        (MASTERS, 'Masters'),
+        (PHD, 'Phd'),
+    )
+
     # Relationship keys.
     department = models.ForeignKey('Department', on_delete=models.CASCADE, default=1)
 
     # Model fields.
-    code = models.CharField(max_length=MAX_LENGTH, unique=True)
+    student_code = models.CharField(max_length=MAX_LENGTH, unique=True)
+    program_code = models.CharField(max_length=MAX_LENGTH, unique=True)
     name = models.CharField(max_length=MAX_LENGTH)
-    undergrad = models.BooleanField(default=True)
+    degree_level = models.SmallIntegerField(choices=DEGREE_LEVEL_CHOICES, blank=True, default=0)
     active = models.BooleanField(default=True)
 
     # Self-setting/Non-user-editable fields.
@@ -224,10 +239,9 @@ class Major(models.Model):
         verbose_name = 'Major'
         verbose_name_plural = 'Majors'
         ordering = ('pk',)
-        unique_together = ('name', 'undergrad',)
 
     def __str__(self):
-        return '{0} - {1}'.format(self.code, self.name)
+        return '{0} - {1}'.format(self.student_code, self.name)
 
     def save(self, *args, **kwargs):
         """
@@ -236,6 +250,40 @@ class Major(models.Model):
         # Save model.
         self.full_clean()
         super(Major, self).save(*args, **kwargs)
+
+    @staticmethod
+    def get_degree_level_as_string(value):
+        """
+        Returns text description for degree level options.
+        """
+        if value == 1:
+            return 'Associates'
+        elif value == 2:
+            return 'Bachelors'
+        elif value == 3:
+            return 'Masters'
+        elif value == 4:
+            return 'Phd'
+        else:
+            return 'Unknown'
+
+    @staticmethod
+    def get_degree_level_as_int(value):
+        """
+        Returns int value for degree level options.
+        """
+        value = str(value).capitalize()
+
+        if value == 'Associates':
+            return 1
+        elif value == 'Bachelors':
+            return 2
+        elif value == 'Masters':
+            return 3
+        elif value == 'Phd':
+            return 4
+        else:
+            return 0
 
     @staticmethod
     def create_dummy_model():
@@ -249,14 +297,16 @@ class Major(models.Model):
         name = 'Dummy Major'
         try:
             return Major.objects.get(
-                code=code,
+                student_code=code,
+                program_code=code,
                 slug=slug,
                 name=name,
                 department=department,
             )
         except ObjectDoesNotExist:
             return Major.objects.create(
-                code=code,
+                student_code=code,
+                program_code=code,
                 slug=slug,
                 name=name,
                 department=department,
