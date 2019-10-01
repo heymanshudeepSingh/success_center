@@ -128,6 +128,41 @@ class RoomModelTests(IntegrationTestCase):
         # Test both are the same model instance.
         self.assertEqual(dummy_model_1, dummy_model_2)
 
+    def test_get_cae_center_rooms(self):
+        dummy_room = models.Room.create_dummy_model()
+
+        # Check that we get nothing, initially.
+        self.assertEqual(len(models.Room.get_cae_center_rooms()), 0)
+
+        # Create relation models.
+        cae_department = models.Department.objects.create(
+            name='cae-center',
+            slug='cae-center',
+        )
+        department_office = models.RoomType.objects.create(
+            name='department-office',
+            slug='department-office',
+        )
+
+        # Create CAE Department Office room.
+        cae_office = models.Room.objects.create(
+            room_type=department_office,
+            name='CAE Room',
+            slug='cae-room',
+        )
+        cae_office.department.add(cae_department)
+
+        # Verify that we get the department, but not the dummy room (Is not associated with CAE Center department).
+        self.assertIn(cae_office, models.Room.get_cae_center_rooms())
+        self.assertNotIn(dummy_room, models.Room.get_cae_center_rooms())
+
+        # Create other CAE Center room.
+        dummy_room.department.add(cae_department)
+
+        # Verify that we get the department, but not the dummy room (Is still not of room type lab/office).
+        self.assertIn(cae_office, models.Room.get_cae_center_rooms())
+        self.assertNotIn(dummy_room, models.Room.get_cae_center_rooms())
+
 
 class MajorTests(IntegrationTestCase):
     """

@@ -6,6 +6,7 @@ Definitions of "WMU" related Core Models.
 import datetime
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.db import models
+from django.db.models import Q
 from django.utils.text import slugify
 
 
@@ -180,6 +181,21 @@ class Room(models.Model):
             room.department.add(department)
             room.save()
             return room
+
+    @staticmethod
+    def get_cae_center_rooms():
+        """
+        Returns only computer labs/computer classrooms associated with the "CAE Center" department.
+        :return: The list of CAE Center labs.
+        """
+        cae_lab_query = (
+            (
+                Q(room_type__slug='classroom') | Q(room_type__slug='computer-classroom') |
+                Q(room_type__slug='department-office')
+            )
+            & Q(department__slug='cae-center')
+        )
+        return Room.objects.filter(cae_lab_query)
 
 
 class Major(models.Model):
