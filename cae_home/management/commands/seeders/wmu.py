@@ -1,10 +1,14 @@
 """
 Seeder for "WMU" related Core Models.
+
+Note that seeder methods will always call fixture methods first. Then attempt seeding afterwards.
 """
 
 # System Imports.
-from django.core.management import call_command
 from sys import stdout
+
+# User Class Imports.
+from cae_home.management.commands.fixtures import wmu as wmu_fixtures
 
 
 def generate_model_seeds(style, model_count):
@@ -23,8 +27,8 @@ def create_room_types(style):
     """
     Create Room Type models.
     """
-    # Load preset fixtures. No need to create random models.
-    call_command('loaddata', 'full_models/room_types')
+    # Load preset fixtures.
+    wmu_fixtures.create_room_types(style)
 
     stdout.write('Populated ' + style.SQL_FIELD('Room Type') + ' models.\n')
 
@@ -33,8 +37,8 @@ def create_departments(style):
     """
     Create Department models.
     """
-    # Load preset fixtures. No need to create random models.
-    call_command('loaddata', 'full_models/departments')
+    # Load preset fixtures.
+    wmu_fixtures.create_departments(style)
 
     stdout.write('Populated ' + style.SQL_FIELD('Department') + ' models.\n')
 
@@ -43,8 +47,8 @@ def create_rooms(style):
     """
     Create Room models.
     """
-    # Load preset fixtures. No need to create random models.
-    call_command('loaddata', 'full_models/rooms')
+    # Load preset fixtures.
+    wmu_fixtures.create_rooms(style)
 
     stdout.write('Populated ' + style.SQL_FIELD('Room') + ' models.\n')
 
@@ -53,8 +57,8 @@ def create_majors(style):
     """
     Create Major models.
     """
-    # Load preset fixtures. No need to create random models.
-    call_command('loaddata', 'full_models/majors')
+    # Load preset fixtures.
+    wmu_fixtures.create_majors(style)
 
     stdout.write('Populated ' + style.SQL_FIELD('Major') + ' models.\n')
 
@@ -63,7 +67,7 @@ def create_semester_dates(style):
     """
     Create Semester Date models.
     """
-    # Load preset fixtures. No need to create random models.
-    call_command('loaddata', 'full_models/semester_dates')
+    # Load preset fixtures.
+    wmu_fixtures.create_semester_dates(style)
 
     stdout.write('Populated ' + style.SQL_FIELD('Semester Date') + ' models.\n')

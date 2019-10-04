@@ -128,6 +128,41 @@ class RoomModelTests(IntegrationTestCase):
         # Test both are the same model instance.
         self.assertEqual(dummy_model_1, dummy_model_2)
 
+    def test_get_cae_center_rooms(self):
+        dummy_room = models.Room.create_dummy_model()
+
+        # Check that we get nothing, initially.
+        self.assertEqual(len(models.Room.get_cae_center_rooms()), 0)
+
+        # Create relation models.
+        cae_department = models.Department.objects.create(
+            name='cae-center',
+            slug='cae-center',
+        )
+        department_office = models.RoomType.objects.create(
+            name='department-office',
+            slug='department-office',
+        )
+
+        # Create CAE Department Office room.
+        cae_office = models.Room.objects.create(
+            room_type=department_office,
+            name='CAE Room',
+            slug='cae-room',
+        )
+        cae_office.department.add(cae_department)
+
+        # Verify that we get the department, but not the dummy room (Is not associated with CAE Center department).
+        self.assertIn(cae_office, models.Room.get_cae_center_rooms())
+        self.assertNotIn(dummy_room, models.Room.get_cae_center_rooms())
+
+        # Create other CAE Center room.
+        dummy_room.department.add(cae_department)
+
+        # Verify that we get the department, but not the dummy room (Is still not of room type lab/office).
+        self.assertIn(cae_office, models.Room.get_cae_center_rooms())
+        self.assertNotIn(dummy_room, models.Room.get_cae_center_rooms())
+
 
 class MajorTests(IntegrationTestCase):
     """
@@ -140,26 +175,42 @@ class MajorTests(IntegrationTestCase):
     def setUp(self):
         self.test_major = models.Major.objects.create(
             department=self.department,
-            code='Test Code',
+            student_code='Test Student Code',
+            program_code='Test Program Code',
             name='Test Name',
-            undergrad=False,
+            degree_level=1,
             active=False,
             slug='test-code',
         )
 
     def test_model_creation(self):
         self.assertEqual(self.test_major.department, self.department)
-        self.assertEqual(self.test_major.code, 'Test Code')
+        self.assertEqual(self.test_major.student_code, 'Test Student Code')
+        self.assertEqual(self.test_major.program_code, 'Test Program Code')
         self.assertEqual(self.test_major.name, 'Test Name')
-        self.assertEqual(self.test_major.undergrad, False)
+        self.assertEqual(self.test_major.degree_level, 1)
         self.assertEqual(self.test_major.active, False)
 
     def test_string_representation(self):
-        self.assertEqual(str(self.test_major), 'Test Code - Test Name')
+        self.assertEqual(str(self.test_major), 'Test Student Code - Test Name')
 
     def test_plural_representation(self):
         self.assertEqual(str(self.test_major._meta.verbose_name), 'Major')
         self.assertEqual(str(self.test_major._meta.verbose_name_plural), 'Majors')
+
+    def test_get_degree_level_as_string(self):
+        self.assertEqual(models.Major.get_degree_level_as_string(0), 'Unknown')
+        self.assertEqual(models.Major.get_degree_level_as_string(1), 'Associates')
+        self.assertEqual(models.Major.get_degree_level_as_string(2), 'Bachelors')
+        self.assertEqual(models.Major.get_degree_level_as_string(3), 'Masters')
+        self.assertEqual(models.Major.get_degree_level_as_string(4), 'Phd')
+
+    def test_get_degree_level_as_int(self):
+        self.assertEqual(models.Major.get_degree_level_as_int('Unknown'), 0)
+        self.assertEqual(models.Major.get_degree_level_as_int('Associates'), 1)
+        self.assertEqual(models.Major.get_degree_level_as_int('Bachelors'), 2)
+        self.assertEqual(models.Major.get_degree_level_as_int('Masters'), 3)
+        self.assertEqual(models.Major.get_degree_level_as_int('Phd'), 4)
 
     def test_dummy_creation(self):
         # Test create.

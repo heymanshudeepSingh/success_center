@@ -19,6 +19,11 @@ For more information, see the `documentation/readme.md` file.
 Otherwise, to get started, run `scripts/installers/first_time_setup.sh`.
 
 
+## Tests
+Run tests with `python manage.py test`.
+
+To skip Selenium (browser page tests, which can run slow/take a while), use the command
+`python manage.py test --exclude-tag=functional`.
 
 ---------
 

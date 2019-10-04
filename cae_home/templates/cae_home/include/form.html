@@ -23,6 +23,21 @@
     {% include 'cae_home/include/form_fields.html' %}
   {% endif %}
 
+  {% if formset %}
+    <hr>
+    {{ formset.management_form }}
+    {% for form in formset %}
+      {% if form.display_name %}
+        <h3 class="form-display-name">{{ form.display_name }}</h3>
+      {% endif %}
+      {% for error in form.non_field_errors %}
+        <div class="alert error">{{ error }}</div>
+      {% endfor %}
+      {% include 'cae_home/include/form_fields.html' %}
+      <hr>
+    {% endfor %}
+  {% endif %}
+
   {% if not exclude_buttons %}
     {% if button_text %}
       <input class="button primary" type="submit" value="{{ button_text }}">

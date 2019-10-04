@@ -19,6 +19,7 @@ from .user import WmuUser
 from .user import Profile
 from .user import Address
 from .user import SiteTheme
+from .user import WmuUserMajorRelationship
 
 # Models related to the CAE Center.
 # from .cae import Asset

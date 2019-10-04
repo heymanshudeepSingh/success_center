@@ -11,8 +11,9 @@ from django.core.management import call_command
 from django.core.management.base import BaseCommand, CommandError
 
 # User Class Imports.
-from .seeders import user as user_seeder
-from .seeders import wmu as wmu_seeder
+from .fixtures import cae as cae_fixtures
+from .fixtures import user as user_fixtures
+from .fixtures import wmu as wmu_fixtures
 
 
 class Command(BaseCommand):
@@ -45,19 +46,15 @@ class Command(BaseCommand):
         # Unconditionally seeds models in cae_home app, as that's always installed.
         # Generates in order of "user models", "wmu models", "cae models".
         self.stdout.write(self.style.HTTP_INFO('\nCAE_HOME: Load Fixture command has been called.'))
-        user_seeder.create_site_themes(self.style)
-        user_seeder.create_groups(self.style)
-        wmu_seeder.create_room_types(self.style)
-        wmu_seeder.create_departments(self.style)
-        wmu_seeder.create_rooms(self.style)
-        wmu_seeder.create_majors(self.style)
-        wmu_seeder.create_semester_dates(self.style)
+        wmu_fixtures.import_model_fixtures(self.style)
+        user_fixtures.import_model_fixtures(self.style)
+        cae_fixtures.import_model_fixtures(self.style)
 
         # Attempts to load fixtures for any additional apps it can find.
         self.stdout.write(self.style.HTTP_INFO('CAE_HOME: Fixture loading complete. Attempting to call imported apps.\n'))
         self.call_imported_app_fixtures()
 
-        self.stdout.write(self.style.SUCCESS('Seeding complete.'))
+        self.stdout.write(self.style.SUCCESS('Fixture seeding complete.'))
 
     def call_imported_app_fixtures(self):
         """
