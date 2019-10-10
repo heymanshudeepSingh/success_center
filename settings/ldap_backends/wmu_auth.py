@@ -465,8 +465,8 @@ class WmuAuthBackend(AbstractWmuBackend):
 
         if user_ldap_status is None:
             # User is not showing up in main campus ldap.
-            # If we called this method on the given uid, then we probably still want to create a model to preserve
-            # relational data to other models.
+            # If we called this method on the given uid, then we may still want to create a model to preserve
+            # relational data to other models?
             logger.warning('User with BroncoNet {0} does not seem to exist in main campus ldap anymore.'.format(uid))
             raise ValidationError('User does not exist in main campus ldap!')
         else:
