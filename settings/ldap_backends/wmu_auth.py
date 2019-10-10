@@ -5,10 +5,12 @@ Note that, to work, these need the simple_ldap_lib git submodule imported, and t
 """
 
 # System Imports.
+import datetime
 from abc import abstractmethod
 from django.conf import settings
 from django.contrib.auth.models import Group
 from django.core.exceptions import ValidationError
+from django.utils import timezone
 from django.utils.text import slugify
 from phonenumber_field.phonenumber import PhoneNumber
 
@@ -410,6 +412,76 @@ class WmuAuthBackend(AbstractWmuBackend):
         user_profile.save()
 
         return models.WmuUser.objects.get(bronco_net=uid)
+
+    def _verify_user_ldap_status_wmu_enrolled(self, ldap_info):
+        """
+        Checks status of user's main campus ldap 'wmuEnrolled' field.
+
+        For all checks, we force convert and parse as string to avoid accidental Python "string to bool" shenanigans.
+        Basically, only empty strings are false. (See https://docs.python.org/3/library/stdtypes.html for more info)
+
+        So if we read in the string "false" from ldap, that would technically evaluate to True.
+        Rather than dealing with that, we assume all fields may be strings, and just check for exact string match.
+
+        :param ldap_info: ALL_ATTRIBUTES of user's main campus ldap info.
+        :return: Tuple of (User is enrolled/active, User is within retention policy)
+        """
+        try:
+            # Check wmuEnrolled field.
+            if str(ldap_info['wmuEnrolled'][0]).strip().lower() == 'true':
+                # User is currently enrolled.
+                return (True, True)
+
+            else:
+                # User is not actively enrolled. We still want to check employee status, etc.
+
+                # Check iNetUserStatus field.
+                if ldap_info['inetUserStatus'][0] != 'active':
+                    # Not enrolled and not active. Can set user to inactive in Django.
+                    return (False, False)
+                else:
+                    # User is not enrolled but is active.
+
+                    # Get wmuEmployeeExpiration.
+                    try:
+                        employee_expiration = datetime.datetime.strptime(
+                            str(ldap_info['wmuEmployeeExpiration'][0]),
+                            '%Y%m%d%H%M%S%z',
+                        )
+
+                        # Check if falls within valid employment period.
+                        if employee_expiration is not None and employee_expiration >= timezone.now():
+                            # Not enrolled, but still employed.
+                            return (True, True)
+                    except KeyError:
+                        # Failed to get employee_expiration. Set to None.
+                        employee_expiration = None
+
+                    # Get wmuStudentExpiration.
+                    try:
+                        student_expiration = datetime.datetime.strptime(
+                            str(ldap_info['wmuStudentExpiration'][0]),
+                            '%Y%m%d%H%M%S%z',
+                        )
+                    except KeyError:
+                        # Failed to get student_expiration. Set to None.
+                        student_expiration = None
+
+                    # Check if both are out of retention policy (12 months).
+                    one_year_ago = (timezone.now() - timezone.timedelta(days=365))
+                    if (student_expiration is not None and student_expiration >= one_year_ago) or \
+                        (employee_expiration is not None and employee_expiration >= one_year_ago):
+
+                        # Not enrolled, but within either student or employee retention period.
+                        return (False, True)
+
+                    # Not enrolled and not within retention periods.
+                    return (False, False)
+
+        except KeyError as err:
+            # One or more relevant fields do not exist. Assuming we can set user to inactive in Django.
+            logger.info('Failed to find LDAP key for user during enrollment check: {0}'.format(err))
+            return (False, False)
 
     def get_backup_ldap_name(self, uid, first_name=False, last_name=False):
         """
