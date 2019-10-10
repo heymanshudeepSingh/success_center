@@ -104,7 +104,7 @@ class Command(BaseCommand):
 
                     # Set related WMU User model info.
                     try:
-                        wmu_ldap.update_or_create_wmu_user_model(uid, winno)
+                        wmu_ldap.create_or_update_wmu_user_model(uid, winno=winno, skip_update=True)
                     except ValidationError:
                         error_file = open('student_import_error_list.txt', 'a')
                         error_file.write('Student ID: {0}\n'.format(orig_id))
