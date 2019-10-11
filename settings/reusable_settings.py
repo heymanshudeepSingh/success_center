@@ -11,6 +11,23 @@ import os, sys
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
+def get_dynamic_app_path(app_file_name):
+    """
+    Call from app "apps.py" config file to get properly formatted config path.
+    :param app_file_name: The "__file__" parameter of config.
+    :return: Properly formatted config path.
+    """
+    # First get full project and app directory paths.
+    app_folder_path = os.path.dirname(os.path.realpath(app_file_name))
+    project_folder_path = os.path.dirname(app_folder_path)
+
+    # Parse to get the relevant folder names.
+    app_folder_name = os.path.basename(app_folder_path)
+    project_folder_name = os.path.basename(project_folder_path)
+
+    # Return properly formatted string.
+    return 'apps.{0}.{1}'.format(project_folder_name, app_folder_name)
+
 def debug_print(*args, **kwargs):
     """
     Method to print debug statements if using essential manage.py commands.
