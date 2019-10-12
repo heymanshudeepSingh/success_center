@@ -33,17 +33,15 @@ for project, project_settings in settings.INSTALLED_CAE_PROJECTS.items():
         try:
             # First, we dynamically import the new routes via the import_module function.
             # Then, add the new routing to url_routes.
-            app_routing = import_module('apps.{0}.{1}.routing'.format(project, app))
+            app_routing = import_module('{0}.routing'.format(app_name))
             url_routes.append(
                 url(r'^ws/{0}/'.format(url_prefix), URLRouter(app_routing.websocket_urlpatterns))
             )
         except ModuleNotFoundError:
-            logger.info("Assuming no routing to import for %s.%s", project, app)
+            logger.info("Assuming no routing to import for {0}".format(app_name))
         except:
             # No valid app routes. Skipping.
-            logger.exception(
-                "Error importing routing for %s.%s", project, app,
-                exc_info=True)
+            logger.exception("Error importing routing for {0}".format(app_name), exc_info=True)
 
 
 # Create actual routes, with authentication.
