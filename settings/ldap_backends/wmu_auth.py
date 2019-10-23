@@ -5,7 +5,7 @@ Note that, to work, these need the simple_ldap_lib git submodule imported, and t
 """
 
 # System Imports.
-import datetime
+import datetime, re
 from abc import abstractmethod
 from django.conf import settings
 from django.contrib.auth.models import Group
@@ -24,35 +24,7 @@ from settings import extra_settings
 logger = extra_settings.logging.getLogger(__name__)
 
 
-class AbstractWmuBackend(AbstractLDAPBackend):
-    """
-    Abstract child of "AbstractLDAPBackend".
-    The only difference is that it contains an additional method for creating a WMU user model.
-    This is used for both CAE and WMU Authentication.
-
-    Not included in the base abstract backend to keep it as generic and "universal" as possible.
-    """
-
-    # region Abstract Methods
-
-    @abstractmethod
-    def setup_abstract_class(self):
-        """
-        See parent class for description.
-        """
-        pass
-
-    @abstractmethod
-    def _create_new_user_from_ldap(self, uid, password):
-        """
-        See parent class for description.
-        """
-        pass
-
-    # endregion Abstract Methods
-
-
-class CaeAuthBackend(AbstractWmuBackend):
+class CaeAuthBackend(AbstractLDAPBackend):
     """
     Custom authentication through the CAE Center LDAP.
     """
@@ -216,7 +188,7 @@ class CaeAuthBackend(AbstractWmuBackend):
         return user_groups
 
 
-class WmuAuthBackend(AbstractWmuBackend):
+class WmuAuthBackend(AbstractLDAPBackend):
     """
     Custom authentication through the WMU main campus LDAP.
     """
@@ -245,6 +217,8 @@ class WmuAuthBackend(AbstractWmuBackend):
         )
         self.ldap_lib.set_search_base(settings.WMU_LDAP['user_search_base'])
         self.ldap_lib.set_uid_attribute(settings.WMU_LDAP['default_uid'])
+
+    #region User Create/Update Functions
 
     def _create_new_user_from_ldap(self, uid, password):
         """
@@ -292,26 +266,6 @@ class WmuAuthBackend(AbstractWmuBackend):
 
         return login_user
 
-    def get_bronconet_from_winno(self, winno):
-        """
-        Attempts to get bronconet from student winno.
-        :param winno: Student winno to use in search.
-        """
-        # Get value from server.
-        self.ldap_lib.bind_server(get_info=self.get_info)
-        bronco_net = self.ldap_lib.search(search_filter='(wmuBannerId={0})'.format(winno), attributes=['wmuUID'])
-
-        if bronco_net is not None:
-            bronco_net = bronco_net['wmuUID'][0]
-
-        # Check if bad bronco_net. Occurs in some older accounts.
-        if bronco_net is not None and len(bronco_net) > 8:
-            bronco_net = self.ldap_lib.search(search_filter='(wmuBannerId={0})'.format(winno), attributes=['uid'])
-            bronco_net = bronco_net['uid'][0]
-
-        self.ldap_lib.unbind_server()
-        return bronco_net
-
     def create_or_update_wmu_user_model(self, uid, winno=None, skip_update=False):
         """
         Attempts to get and update WmuUser model with given BroncoNet.
@@ -329,13 +283,11 @@ class WmuAuthBackend(AbstractWmuBackend):
             # If we got this far, then model exists. Check if we want to update it.
             if not skip_update:
                 # skip_update bool is False. Proceeding to update WmuUser values, if possible.
-
                 if settings.AUTH_BACKEND_DEBUG:
                     logger.info('{0} Auth Backend: WmuUser model found for "{1}". Attempting to update...'.format(
                         self.debug_class,
                         uid,
                     ))
-
                 self._update_wmu_user(uid)
 
             else:
@@ -352,16 +304,102 @@ class WmuAuthBackend(AbstractWmuBackend):
 
         except models.WmuUser.DoesNotExist:
             # WmuUser model doesn't exist. Create new WmuUser model.
-
             if settings.AUTH_BACKEND_DEBUG:
                 logger.info('{0} Auth Backend: Could not find WmuUser model for "{1}". Creating new one...'.format(
                     self.debug_class,
                     uid,
                 ))
-
             self._create_wmu_user(uid, winno=winno)
 
         return models.WmuUser.objects.get(bronco_net=uid)
+
+    def _create_wmu_user(self, uid, winno=None):
+        """
+        Creates new Wmu User model. Assumes that Django Wmu User model does not already exist for given uid.
+        Please invoke this method via the "create_or_update_wmu_user_model" function.
+        :param uid: BroncoNet of user to create.
+        :param winno: Optional winno field to eliminate a main campus LDAP call.
+        """
+        # First, verify if user ldap status, according to main campus.
+        user_ldap_status = self.verify_user_ldap_status(uid)
+
+        if user_ldap_status is None:
+            # User is not showing up in main campus ldap.
+            # If we called this method on the given uid, then we may still want to create a model to preserve
+            # relational data to other models?
+            logger.warning('User with BroncoNet {0} does not seem to exist in main campus ldap.'.format(uid))
+            raise ValidationError('User does not exist in main campus ldap!')
+
+        else:
+            # User is either still enrolled/employed, or within the retention period. Proceed with update attempt.
+            user_ldap_status_is_active = user_ldap_status[0]
+            user_ldap_status_in_retention = user_ldap_status[1]
+
+            # Get win number info.
+            if winno is None:
+                winno = self.get_ldap_user_attribute(uid, 'wmuBannerID')
+                if winno is None or winno == '':
+                    raise ValidationError('User {0} got empty winno from Main Campus LDAP.'.format(uid))
+
+            # Get first name info.
+            first_name = self.get_ldap_user_attribute(uid, 'wmuFirstName')
+            if first_name is None or first_name == '':
+                first_name = self.get_backup_ldap_name(uid, first_name=True)
+
+            # Get middle name info.
+            middle_name = self.get_ldap_user_attribute(uid, 'wmuMiddleName')
+
+            # Get last name info.
+            last_name = self.get_ldap_user_attribute(uid, 'wmuLastName')
+            if last_name is None or last_name == '':
+                last_name = self.get_backup_ldap_name(uid, last_name=True)
+
+            # Get email info.
+            official_email = self.get_ldap_user_attribute(uid, 'mail')
+            if official_email is None or official_email == '':
+                official_email = '{0}@wmich.edu'.format(uid)
+
+            # Create WmuUser model.
+            models.WmuUser.objects.create(
+                bronco_net=uid,
+                winno=winno,
+                first_name=first_name,
+                middle_name=middle_name,
+                last_name=last_name,
+                official_email=official_email,
+                active=user_ldap_status_in_retention,
+            )
+
+            # Add major.
+            adv_ldap = AdvisingAuthBackend()
+            adv_ldap.add_or_update_major(uid)
+
+            # Attempt to update user profile.
+            user_profile = models.Profile.get_profile(uid)
+            if user_profile is None:
+                raise ValueError('Could not find profile for user {0}.'.format(uid))
+
+            # Get phone number info.
+            phone_number = self.get_ldap_user_attribute(uid, 'homePhone')
+            if phone_number is not None and phone_number != '':
+                user_profile.phone_number = PhoneNumber.from_string(phone_number)
+            user_profile.save()
+
+    def _update_wmu_user(self, uid):
+        """
+        Updates Wmu User model. Assumes that Django Wmu User model already exists for given uid.
+        Please only invoke this method through the "create_or_update_wmu_user_model" function.
+        :param uid: BroncoNet of user to update.
+        """
+        # WmuUser model exists. Attempt to update information.
+        adv_ldap = AdvisingAuthBackend()
+
+        # Update major.
+        adv_ldap.add_or_update_major(uid)
+
+    #endregion User Create/Update Functions
+
+    #region User Ldap Status Functions
 
     def verify_user_ldap_status(self, uid):
         """
@@ -373,9 +411,7 @@ class WmuAuthBackend(AbstractWmuBackend):
             (False, False) if not enrolled/employed, and outside of retention period.
         """
         # Attempt to get full student info from LDAP.
-        self.ldap_lib.bind_server(get_info=self.get_info)
-        ldap_info = self.ldap_lib.search(search_filter='(uid={0})'.format(uid), attributes='ALL_ATTRIBUTES')
-        self.ldap_lib.unbind_server()
+        ldap_info = self._get_all_user_info_from_bronconet(uid)
 
         # Now parse user ldap info.
         if ldap_info is not None:
@@ -453,93 +489,98 @@ class WmuAuthBackend(AbstractWmuBackend):
             logger.info('Failed to find LDAP key for user during enrollment check: {0}'.format(err))
             return (False, False)
 
-    def _create_wmu_user(self, uid, winno=None):
+    #endregion User Ldap Status Functions
+
+    #region Ldap Get Attr Functions
+
+    def _get_all_user_info_from_bronconet(self, bronco_net):
         """
-        Creates new Wmu User model. Assumes that Django Wmu User model does not already exist for given uid.
-        Please invoke this method via the "create_or_update_wmu_user_model" function.
-        :param uid: BroncoNet of user to create.
-        :param winno: Optional winno field to eliminate a main campus LDAP call.
+        Attempts to get all student info from given BroncoNet.
+        :param bronco_net: Student BroncoNet to attempt with.
+        :return: All of student's LDAP info | None on failure.
         """
-        # First, verify if user ldap status, according to main campus.
-        user_ldap_status = self.verify_user_ldap_status(uid)
+        # Bind to server.
+        self.ldap_lib.bind_server(get_info=self.get_info)
 
-        if user_ldap_status is None:
-            # User is not showing up in main campus ldap.
-            # If we called this method on the given uid, then we may still want to create a model to preserve
-            # relational data to other models?
-            logger.warning('User with BroncoNet {0} does not seem to exist in main campus ldap anymore.'.format(uid))
-            raise ValidationError('User does not exist in main campus ldap!')
-        else:
-            # User is either still enrolled/employed, or within the retention period. Proceed with update attempt.
-            user_ldap_status_is_active = user_ldap_status[0]
-            user_ldap_status_in_retention = user_ldap_status[1]
+        # Attempt to get full student info from LDAP.
+        ldap_info = self.ldap_lib.search(search_filter='(uid={0})'.format(bronco_net), attributes='ALL_ATTRIBUTES')
 
-            # Get win number info.
-            if winno is None:
-                winno = self.get_ldap_user_attribute(uid, 'wmuBannerID')
-                if winno is None or winno == '':
-                    raise ValidationError('User {0} got empty winno from Main Campus LDAP.'.format(uid))
+        # Unbind and return values.
+        self.ldap_lib.unbind_server()
+        return ldap_info
 
-            # Get first name info.
-            first_name = self.get_ldap_user_attribute(uid, 'wmuFirstName')
-            if first_name is None or first_name == '':
-                first_name = self.get_backup_ldap_name(uid, first_name=True)
-
-            # Get middle name info.
-            middle_name = self.get_ldap_user_attribute(uid, 'wmuMiddleName')
-
-            # Get last name info.
-            last_name = self.get_ldap_user_attribute(uid, 'wmuLastName')
-            if last_name is None or last_name == '':
-                last_name = self.get_backup_ldap_name(uid, last_name=True)
-
-            # Get email info.
-            official_email = self.get_ldap_user_attribute(uid, 'mail')
-            if official_email is None or official_email == '':
-                official_email = '{0}@wmich.edu'.format(uid)
-
-            # Create WmuUser model.
-            models.WmuUser.objects.create(
-                bronco_net=uid,
-                winno=winno,
-                first_name=first_name,
-                middle_name=middle_name,
-                last_name=last_name,
-                official_email=official_email,
-                active=user_ldap_status_in_retention,
-            )
-
-            # Add major.
-            adv_ldap = AdvisingAuthBackend()
-            adv_ldap.add_or_update_major(uid)
-
-            # Attempt to update user profile.
-            user_profile = models.Profile.get_profile(uid)
-            if user_profile is None:
-                raise ValueError('Could not find profile for user {0}.'.format(uid))
-
-            # Get phone number info.
-            phone_number = self.get_ldap_user_attribute(uid, 'homePhone')
-            if phone_number is not None and phone_number != '':
-                user_profile.phone_number = PhoneNumber.from_string(phone_number)
-            user_profile.save()
-
-    def _update_wmu_user(self, uid):
+    def _get_all_user_info_from_winno(self, winno):
         """
-        Updates Wmu User model. Assumes that Django Wmu User model already exists for given uid.
-        Please invoke this method via the "create_or_update_wmu_user_model" function.
-        :param uid: BroncoNet of user to update.
+        Attempts to get all student info from given Winno.
+        :param winno: Student Winno to attempt with.
+        :return: All of student's LDAP info | None on failure.
         """
-        # WmuUser model exists. Attempt to update information.
-        adv_ldap = AdvisingAuthBackend()
+        # Bind to server.
+        self.ldap_lib.bind_server(get_info=self.get_info)
 
-        # Update major.
-        adv_ldap.add_or_update_major(uid)
+        # Attempt to get full student info from LDAP.
+        ldap_info = self.ldap_lib.search(search_filter='(wmuBannerID={0})'.format(winno), attributes='ALL_ATTRIBUTES')
+
+        # Unbind and return values.
+        self.ldap_lib.unbind_server()
+        return ldap_info
+
+    def get_winno_from_bronconet(self, bronco_net):
+        """
+        Attempts to get Winno from student BroncoNet.
+        :param bronco_net: Student BroncoNet to attempt with.
+        :return: Student Winno | None on failure.
+        """
+        # Bind to server.
+        self.ldap_lib.bind_server(get_info=self.get_info)
+
+        # Get value from server.
+        winno = self.ldap_lib.search(search_filter='(uid={0})'.format(bronco_net), attributes=['wmuBannerID'])
+
+        # Fallback if first attempt fails.
+        if winno is None:
+            winno = self.ldap_lib.search(search_filter='(wmuUID={0})'.format(bronco_net), attributes=['wmuBannerID'])
+
+        # Format value.
+        if winno is not None:
+            winno = winno['wmuBannerID'][0]
+
+        # Unbind and return value.
+        self.ldap_lib.unbind_server()
+        return winno
+
+    def get_bronconet_from_winno(self, winno):
+        """
+        Attempts to get BroncoNet from student Winno.
+        :param winno: Student Winno to attempt with.
+        :return: Student BroncoNet | None on failure.
+        """
+        # Bind to server.
+        self.ldap_lib.bind_server(get_info=self.get_info)
+
+        # Get value from server.
+        bronco_net = self.ldap_lib.search(search_filter='(wmuBannerId={0})'.format(winno), attributes=['wmuUID'])
+
+        # Format value.
+        if bronco_net is not None:
+            bronco_net = bronco_net['wmuUID'][0]
+
+        # Check if bad bronco_net. Occurs in some older accounts.
+        if bronco_net is not None and len(bronco_net) > 8:
+            bronco_net = self.ldap_lib.search(search_filter='(wmuBannerId={0})'.format(winno), attributes=['uid'])
+
+            # Format value.
+            if bronco_net is not None:
+                bronco_net = bronco_net['uid'][0]
+
+        # Unbind and return value.
+        self.ldap_lib.unbind_server()
+        return bronco_net
 
     def get_backup_ldap_name(self, uid, first_name=False, last_name=False):
         """
-        Function to get a "backup name" in case either first or last name fails to return from wmu main campus.
-        (First/last name values are required for WMUUser models).
+        Function to get a "backup name" in case either first or last name fails to return from Wmu Ldap response.
+        (First/last name values are required for Django WmuUser models).
 
         Attempts values in this order: givenName/sn, displayName, gecos, cn, bronconet_id.
         :param uid: User ID to search names for.
@@ -599,8 +640,9 @@ class WmuAuthBackend(AbstractWmuBackend):
 
         return backup_name
 
+    #endregion Ldap Get Attr Functions
 
-class AdvisingAuthBackend(AbstractWmuBackend):
+class AdvisingAuthBackend(AbstractLDAPBackend):
     """
     It seems the CAE Center credentials for WMU LDAP are missing some student fields.
     Thus, we need to use advising credentials at times, but we want to use only when absolutely necessary.
