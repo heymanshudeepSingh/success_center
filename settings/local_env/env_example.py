@@ -144,6 +144,19 @@ LOGGING_DIRECTORY = os.path.join(BASE_DIR, 'settings/local_env/logs/')
 #endregion General Site Settings
 
 
+#region Testing Settings
+
+# UnitTesting Settings.
+CAE_LDAP_TEST_NAME = ''
+CAE_LDAP_TEST_PASS = ''
+
+# Selenium Integration Test Settings.
+SELENIUM_TESTS_BROWSER = 'chrome'   # Set to 'firefox' to use firefox browser instead.
+SELENIUM_TESTS_HEADLESS = False     # Set to True to run selenium in headless mode (hides browser window).
+
+#enregion Testing Settings
+
+
 #region Third Party Library Settings
 
 # DjangoRest settings.
@@ -152,10 +165,5 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 20,
 }
-
-
-# Selenium Integration Test settings.
-SELENIUM_TESTS_BROWSER = 'chrome'   # Set to 'firefox' to use firefox browser instead.
-SELENIUM_TESTS_HEADLESS = False     # Set to True to run selenium in headless mode (hides browser window).
 
 #endregion Third Party Library Settings

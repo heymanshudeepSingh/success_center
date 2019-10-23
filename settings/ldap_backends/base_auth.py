@@ -53,7 +53,6 @@ class AbstractLDAPBackend(ABC):
 
         In this case, it should contain values to connect to LDAP for the SimpleLdapLibrary.
         If the "get_info" attribute should be anything other than "SCHEMA", also change that here.
-        :return: None.
         """
         pass
 
@@ -232,7 +231,7 @@ class AbstractLDAPBackend(ABC):
 
     #endregion User Auth
 
-    # region User Permissions
+    #region User Permissions
 
     def _get_user_permissions(self, user_obj):
         """
@@ -321,14 +320,13 @@ class AbstractLDAPBackend(ABC):
             for perm in self.get_all_permissions(user_obj)
         )
 
-    # endregion User Permissions
+    #endregion User Permissions
 
     #region User LDAP Attribute Methods
 
     def get_ldap_user_info(self, uid, attributes=None):
         """
         Gets attribute(s) info for given user. Can get multiple attributes at once (or all of them).
-
         WARNING: Returns None if any if any given attribute(s) does not exist.
         :param uid: User id to search for.
         :param attributes: Attributes to search for. If not provided, then gets all attributes for user.
