@@ -100,7 +100,7 @@ class Command(BaseCommand):
                     login_user = get_user_model().get_or_create_user(
                         uid,
                         '{0}@wmich.edu'.format(uid),
-                        'temppass2',
+                        '{0}'.format(settings.USER_SEED_PASSWORD),
                         inactive=True,
                     )
 
