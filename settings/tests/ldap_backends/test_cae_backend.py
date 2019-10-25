@@ -11,7 +11,8 @@ from django.utils import timezone
 from cae_home import models
 from cae_home.tests.utils import IntegrationTestCase
 from settings.ldap_backends.wmu_auth.cae_backend import CaeAuthBackend
-from settings.tests.utils import are_ldap_test_values_populated
+from settings.tests.utils import prog_or_student_test_account_is_populated
+from settings.tests.utils import prog_test_account_is_populated, student_test_account_is_populated
 
 
 class CaeAuthBackendTests(IntegrationTestCase):

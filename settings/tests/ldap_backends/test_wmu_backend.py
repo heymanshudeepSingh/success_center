@@ -11,7 +11,8 @@ from django.utils import timezone
 from cae_home import models
 from cae_home.tests.utils import IntegrationTestCase
 from settings.ldap_backends.wmu_auth.wmu_backend import WmuAuthBackend
-from settings.tests.utils import are_ldap_test_values_populated
+from settings.tests.utils import prog_or_student_test_account_is_populated
+from settings.tests.utils import prog_test_account_is_populated, student_test_account_is_populated
 
 
 class WmuAuthBackendTests(IntegrationTestCase):
@@ -40,21 +41,21 @@ class WmuAuthBackendTests(IntegrationTestCase):
 
     #region User Ldap Status Functions
 
-    @unittest.skipUnless(are_ldap_test_values_populated(), 'No Ldap User specified. Skipping Ldap tests.')
+    @unittest.skipUnless(prog_or_student_test_account_is_populated(), 'No Ldap User specified. Skipping Ldap tests.')
     def test__verify_user_ldap_status_wmu_enrolled(self):
-        # Two possible test types, based on env values.
-        if self.test_ldap_account_name == 'ceas_prog':
-            # Using the CAE Programmers account. Verify that is active.
+        # Tests based on CAE Center programmer account.
+        if prog_test_account_is_populated():
+            # Using the CAE Programmers account. Verify status.
             user_is_active, user_in_retention = self.wmu_backend.verify_user_ldap_status(
                 self.test_ldap_account_name,
                 set_model_active_fields=False,
             )
             self.assertFalse(user_is_active)
             self.assertFalse(user_in_retention)
-        else:
-            # Probably using a personal account.
-            # For now, we can assume the account is active and test the same as the CAE Programmer account.
-            # But technically we have no way to verify the given user is active. May want to change in the future?
+
+        # Tests based on active Student account.
+        if student_test_account_is_populated():
+            # Using an active student account. Verify status.
             user_is_active, user_in_retention = self.wmu_backend.verify_user_ldap_status(
                 self.test_ldap_account_name,
                 set_model_active_fields=False,
@@ -147,13 +148,13 @@ class WmuAuthBackendTests(IntegrationTestCase):
 
     #region Ldap Get Attr Functions
 
-    @unittest.skipUnless(are_ldap_test_values_populated(), 'No Ldap User specified. Skipping Ldap tests.')
+    @unittest.skipUnless(prog_or_student_test_account_is_populated(), 'No Ldap User specified. Skipping Ldap tests.')
     def test___get_all_user_info_from_bronconet(self):
         # Get ldap results.
         ldap_results = self.wmu_backend._get_all_user_info_from_bronconet(self.test_ldap_account_name)
 
-        # Two possible test types, based on env values.
-        if self.test_ldap_account_name == 'ceas_prog':
+        # Tests based on CAE Center programmer account.
+        if prog_test_account_is_populated():
             # Using the CAE Programmers account. Slightly more thorough testing.
             # Mostly just test a few common values to make sure we retrieved them.
             self.assertIsNotNone(ldap_results)
@@ -165,40 +166,46 @@ class WmuAuthBackendTests(IntegrationTestCase):
             self.assertEqual(ldap_results['displayName'][0], 'Programmers, CAE')
             self.assertEqual(ldap_results['mail'][0], 'cae-programmers@wmich.edu')
             self.assertEqual(ldap_results['inetUserStatus'][0], 'active')
-        else:
-            # Probably using a personal account. For privacy reasons, we can only test so much.
+
+        # Tests based on active Student account.
+        if student_test_account_is_populated():
+            # Using an active student account. For privacy reasons, we can only test so much.
             self.assertIsNotNone(ldap_results)
             self.assertGreater(len(ldap_results), 0)
             self.assertEqual(ldap_results['uid'][0], self.test_ldap_account_name)
             self.assertEqual(ldap_results['mail'][0][-10:], '@wmich.edu')
 
-    @unittest.skipUnless(are_ldap_test_values_populated(), 'No Ldap User specified. Skipping Ldap tests.')
+    @unittest.skipUnless(prog_or_student_test_account_is_populated(), 'No Ldap User specified. Skipping Ldap tests.')
     def test___get_all_user_info_from_winno(self):
-        # Two possible test types, based on env values.
-        if self.test_ldap_account_name == 'ceas_prog':
+        # Tests based on CAE Center programmer account.
+        if prog_test_account_is_populated():
             # Using the CAE Programmers account. Skip test.
             unittest.skip('Programmer account does not have an associated Winno. Cannot test.')
-        else:
+
+        # Tests based on active Student account.
+        if student_test_account_is_populated():
             # Get ldap results.
             ldap_results = self.wmu_backend._get_all_user_info_from_winno(self.test_ldap_account_name)
 
-            # Probably using a personal account. For privacy reasons, we can only test so much.
+            # Using an active student account. For privacy reasons, we can only test so much.
             self.assertIsNotNone(ldap_results)
             self.assertGreater(len(ldap_results), 0)
             self.assertEqual(ldap_results['uid'][0], self.test_ldap_account_name)
             self.assertEqual(ldap_results['mail'][0][-10:], '@wmich.edu')
 
-    @unittest.skipUnless(are_ldap_test_values_populated(), 'No Ldap User specified. Skipping Ldap tests.')
+    @unittest.skipUnless(prog_or_student_test_account_is_populated(), 'No Ldap User specified. Skipping Ldap tests.')
     def test__get_winno_from_bronconet(self):
-        # Two possible test types, based on env values.
-        if self.test_ldap_account_name == 'ceas_prog':
+        # Tests based on CAE Center programmer account.
+        if prog_test_account_is_populated():
             # Using the CAE Programmers account. Skip test.
             unittest.skip('Programmer account does not have an associated Winno. Cannot test.')
-        else:
+
+        # Tests based on active Student account.
+        if student_test_account_is_populated():
             # Get ldap Winno.
             winno = self.wmu_backend.get_winno_from_bronconet(self.test_ldap_account_name)
 
-            # Probably using a personal account. For privacy reasons, we can only test so much.
+            # Using an active student account. For privacy reasons, we can only test so much.
             # Check that we got a Winno.
             self.assertIsNotNone(winno)
 
@@ -206,14 +213,16 @@ class WmuAuthBackendTests(IntegrationTestCase):
             # Not sure what else we can test without direct comparison.
             self.assertGreater(len(winno), 0)
 
-    @unittest.skipUnless(are_ldap_test_values_populated(), 'No Ldap User specified. Skipping Ldap tests.')
+    @unittest.skipUnless(prog_or_student_test_account_is_populated(), 'No Ldap User specified. Skipping Ldap tests.')
     def test__get_bronconet_from_winno(self):
 
-        # Two possible test types, based on env values.
-        if self.test_ldap_account_name == 'ceas_prog':
+        # Tests based on CAE Center programmer account.
+        if prog_test_account_is_populated():
             # Using the CAE Programmers account. Skip test.
             unittest.skip('Programmer account does not have an associated Winno. Cannot test.')
-        else:
+
+        # Tests based on active Student account.
+        if student_test_account_is_populated():
             # Get ldap Winno to test with.
             winno = self.wmu_backend.get_winno_from_bronconet(self.test_ldap_account_name)
 
@@ -223,7 +232,7 @@ class WmuAuthBackendTests(IntegrationTestCase):
             # Get ldap BroncoNet.
             bronco_net = self.wmu_backend.get_bronconet_from_winno(winno)
 
-            # Probably using a personal account. For privacy reasons, we can only test so much.
+            # Using an active student account. For privacy reasons, we can only test so much.
             # Check that we got a BroncoNet.
             self.assertIsNotNone(bronco_net)
 
