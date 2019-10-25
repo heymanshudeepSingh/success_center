@@ -40,8 +40,8 @@ STATICFILES_DIRS = (
 
 # Set desired authentication backend. Defaults to standard Django auth.
 AUTHENTICATION_BACKENDS = (
-    # 'settings.ldap_backends.wmu_auth.CaeAuthBackend',
-    # 'settings.ldap_backends.wmu_auth.WmuAuthBackend',
+    # 'settings.ldap_backends.wmu_auth.cae_backend.CaeAuthBackend',
+    # 'settings.ldap_backends.wmu_auth.cae_backend.WmuAuthBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
 AUTH_BACKEND_DEBUG = False                      # Creates debugging output for ldap backends, if True.
