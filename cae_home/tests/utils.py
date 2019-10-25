@@ -1,5 +1,5 @@
 """
-Tests for CAE Home app Utility Functions/Classes.
+CAE Home app testing Utility Functions and Classes.
 """
 
 # System Imports.

@@ -1,15 +1,14 @@
 """
-Tests for CAE Home app Forms.
+Tests for Advising Authentication Backend.
 """
 
 # System Imports.
-import unittest
-from django.conf import settings
 
 # User Class Imports.
 from cae_home import models
 from cae_home.tests.utils import IntegrationTestCase
 from settings.ldap_backends.wmu_auth.adv_backend import AdvisingAuthBackend
+from settings.tests.utils import are_ldap_test_values_populated
 
 
 class AdvisingAuthBackendTests(IntegrationTestCase):

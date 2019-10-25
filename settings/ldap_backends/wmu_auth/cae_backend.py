@@ -5,7 +5,6 @@ Note that, to work, these need the simple_ldap_lib git submodule imported, and t
 """
 
 # System Imports.
-from django.conf import settings
 from django.contrib.auth.models import Group
 from django.core.exceptions import ValidationError
 

@@ -1,5 +1,5 @@
 """
-Tests for CAE Home app Forms.
+Tests for Wmu Authentication Backend.
 """
 
 # System Imports.
@@ -11,18 +11,7 @@ from django.utils import timezone
 from cae_home import models
 from cae_home.tests.utils import IntegrationTestCase
 from settings.ldap_backends.wmu_auth.wmu_backend import WmuAuthBackend
-
-
-def are_ldap_test_values_populated():
-    """
-    Checks if "test ldap account" values are populated in local env file.
-    Used to determine if Ldap tests should run or not.
-    :return: Bool indicating if values are populated.
-    """
-    if str(settings.CAE_LDAP_TEST_NAME) != '' and str(settings.CAE_LDAP_TEST_PASS) != '':
-        return True
-    else:
-        return False
+from settings.tests.utils import are_ldap_test_values_populated
 
 
 class WmuAuthBackendTests(IntegrationTestCase):
