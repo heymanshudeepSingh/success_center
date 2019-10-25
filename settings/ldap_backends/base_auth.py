@@ -57,7 +57,7 @@ class AbstractLDAPBackend(ABC):
         pass
 
     @abstractmethod
-    def _create_new_user_from_ldap(self, uid, password):
+    def create_or_update_user_model(self, uid, password):
         """
         Abstract method for creating a new user, using pulled ldap information.
 
@@ -89,33 +89,42 @@ class AbstractLDAPBackend(ABC):
             logger.info('{0} Auth Backend: User login failed.'.format(self.debug_class))
             return None
 
-        try:
-            # Attempt to get user object.
-            user = models.User.objects.get(**user_id)
+        # Check if we should use Django User Model passwords.
+        if settings.AUTH_BACKEND_USE_DJANGO_USER_PASSWORDS:
+            # Logic to use Django User Model passwords.
+            # Ldap is only used on first user login to create initial user model. Then Django User Model is used for all
+            # future logins.
+            try:
+                # Attempt to get user object.
+                user = models.User.objects.get(**user_id)
 
-            # Validate user object.
-            if user:
-                # User object found in local Django database. Use standard Django auth.
-                user = self._validate_django_user(user, password)
+                # Validate user object.
+                if user:
+                    # User object found in local Django database. Use standard Django auth.
+                    user = self._validate_django_user(user, password)
 
-                # Check that user is active.
-                if user and not self.user_can_authenticate(user):
+                    # Check that user is active.
+                    if user and not self.user_can_authenticate(user):
+                        user = None
+                else:
                     user = None
-            else:
-                user = None
 
-            if user is None:
-                # Failed user login attempt.
+                if user is None:
+                    # Failed user login attempt.
+                    if settings.AUTH_BACKEND_DEBUG:
+                        logger.info('{0} Auth Backend: User login failed.'.format(self.debug_class))
+                return user
+
+            except models.User.DoesNotExist:
+                # User object not found in local Django database. Attempt ldap query.
                 if settings.AUTH_BACKEND_DEBUG:
-                    logger.info('{0} Auth Backend: User login failed.'.format(self.debug_class))
-            return user
-
-        except models.User.DoesNotExist:
-            # User object not found in local Django database. Attempt ldap query.
-            if settings.AUTH_BACKEND_DEBUG:
-                logger.info('{0} Auth Backend: User not found in Django database.'.format(self.debug_class))
-            user = self._validate_ldap_user(user_id, password)
-            return user
+                    logger.info('{0} Auth Backend: User not found in Django database.'.format(self.debug_class))
+                user = self._validate_ldap_user(user_id, password)
+                return user
+        else:
+            # Logic to exclusively use Ldap User passwords.
+            # Ldap is used every time. Password info is never saved to Django User Models.
+            return self._validate_ldap_user(user_id, password)
 
     def _parse_username(self, username):
         """
@@ -194,7 +203,7 @@ class AbstractLDAPBackend(ABC):
             # User validated successfully through ldap. Create new django user.
             if settings.AUTH_BACKEND_DEBUG:
                 logger.info('{0} Auth Backend: {1}'.format(self.debug_class, auth_search_return[1]))
-            user = self._create_new_user_from_ldap(uid, password)
+            user = self.create_or_update_user_model(uid, password)
         else:
             # Invalid ldap credentials.
             if settings.AUTH_BACKEND_DEBUG:

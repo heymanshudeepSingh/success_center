@@ -56,14 +56,20 @@ class WmuAuthBackendTests(IntegrationTestCase):
         # Two possible test types, based on env values.
         if self.test_ldap_account_name == 'ceas_prog':
             # Using the CAE Programmers account. Verify that is active.
-            user_is_active, user_in_retention = self.wmu_backend.verify_user_ldap_status(self.test_ldap_account_name)
-            self.assertTrue(user_is_active)
-            self.assertTrue(user_in_retention)
+            user_is_active, user_in_retention = self.wmu_backend.verify_user_ldap_status(
+                self.test_ldap_account_name,
+                set_model_active_fields=False,
+            )
+            self.assertFalse(user_is_active)
+            self.assertFalse(user_in_retention)
         else:
             # Probably using a personal account.
             # For now, we can assume the account is active and test the same as the CAE Programmer account.
             # But technically we have no way to verify the given user is active. May want to change in the future?
-            user_is_active, user_in_retention = self.wmu_backend.verify_user_ldap_status(self.test_ldap_account_name)
+            user_is_active, user_in_retention = self.wmu_backend.verify_user_ldap_status(
+                self.test_ldap_account_name,
+                set_model_active_fields=False,
+            )
             self.assertTrue(user_is_active)
             self.assertTrue(user_in_retention)
 
@@ -72,14 +78,14 @@ class WmuAuthBackendTests(IntegrationTestCase):
             ldap_info = {
                 'wmuEnrolled': ['True'],
             }
-            self.assertEqual(self.wmu_backend._verify_user_ldap_status_wmu_enrolled(ldap_info), (True, True))
+            self.assertEqual(self.wmu_backend._verify_user_ldap_status(ldap_info), (True, True))
 
         with self.subTest('With wmuEnrolled field False, iNetUserStatus False.'):
             ldap_info = {
                 'wmuEnrolled': ['False'],
                 'inetUserStatus': [''],
             }
-            self.assertEqual(self.wmu_backend._verify_user_ldap_status_wmu_enrolled(ldap_info), (False, False))
+            self.assertEqual(self.wmu_backend._verify_user_ldap_status(ldap_info), (False, False))
 
         with self.subTest('With wmuEnrolled field False, iNetUserStatus True, and currently employed.'):
             # Aka wmuEmployeeExpiration equal to or after current date.
@@ -91,7 +97,7 @@ class WmuAuthBackendTests(IntegrationTestCase):
                 'inetUserStatus': ['active'],
                 'wmuEmployeeExpiration': [employee_expiration.strftime(self.time_format)],
             }
-            self.assertEqual(self.wmu_backend._verify_user_ldap_status_wmu_enrolled(ldap_info), (True, True))
+            self.assertEqual(self.wmu_backend._verify_user_ldap_status(ldap_info), (True, True))
 
         with self.subTest('With wmuEnrolled field False, iNetUserStatus True, and within Student Retention period.'):
             # (Aka, wmuStudentExpiration before current date, but within 1 year.)
@@ -103,7 +109,7 @@ class WmuAuthBackendTests(IntegrationTestCase):
                 'inetUserStatus': ['active'],
                 'wmuStudentExpiration': [student_expiration.strftime(self.time_format)],
             }
-            self.assertEqual(self.wmu_backend._verify_user_ldap_status_wmu_enrolled(ldap_info), (False, True))
+            self.assertEqual(self.wmu_backend._verify_user_ldap_status(ldap_info), (False, True))
 
             # Set to "11 months, 20 days ago" to check almost out of retention period.
             student_expiration = self.current_time - timezone.timedelta(days=((11 * (365/12)) + 20))
@@ -112,7 +118,7 @@ class WmuAuthBackendTests(IntegrationTestCase):
                 'inetUserStatus': ['active'],
                 'wmuStudentExpiration': [student_expiration.strftime(self.time_format)],
             }
-            self.assertEqual(self.wmu_backend._verify_user_ldap_status_wmu_enrolled(ldap_info), (False, True))
+            self.assertEqual(self.wmu_backend._verify_user_ldap_status(ldap_info), (False, True))
 
         with self.subTest('With wmuEnrolled field False, iNetUserStatus True, and within Employee Retention period.'):
             # Aka, wmuEmployeeExpiration before current date, but within 1 year.
@@ -124,7 +130,7 @@ class WmuAuthBackendTests(IntegrationTestCase):
                 'inetUserStatus': ['active'],
                 'wmuEmployeeExpiration': [employee_expiration.strftime(self.time_format)],
             }
-            self.assertEqual(self.wmu_backend._verify_user_ldap_status_wmu_enrolled(ldap_info), (False, True))
+            self.assertEqual(self.wmu_backend._verify_user_ldap_status(ldap_info), (False, True))
 
             # Set to "11 months, 20 days ago" to check almost out of retention period.
             employee_expiration = self.current_time - timezone.timedelta(days=((11 * (365/12)) + 20))
@@ -133,7 +139,7 @@ class WmuAuthBackendTests(IntegrationTestCase):
                 'inetUserStatus': ['active'],
                 'wmuEmployeeExpiration': [employee_expiration.strftime(self.time_format)],
             }
-            self.assertEqual(self.wmu_backend._verify_user_ldap_status_wmu_enrolled(ldap_info), (False, True))
+            self.assertEqual(self.wmu_backend._verify_user_ldap_status(ldap_info), (False, True))
 
         with self.subTest('With wmuEnrolled field False, iNetUserStatus True, and within neither Retention period.'):
             # Aka, neither wmuStudentExpiration or wmuEmployeeExpiration within 1 year.
@@ -146,7 +152,7 @@ class WmuAuthBackendTests(IntegrationTestCase):
                 'wmuStudentExpiration': [overall_expiration.strftime(self.time_format)],
                 'wmuEmployeeExpiration': [overall_expiration.strftime(self.time_format)],
             }
-            self.assertEqual(self.wmu_backend._verify_user_ldap_status_wmu_enrolled(ldap_info), (False, False))
+            self.assertEqual(self.wmu_backend._verify_user_ldap_status(ldap_info), (False, False))
 
     #endregion User Ldap Status Functions
 
@@ -248,7 +254,7 @@ class AdvisingAuthBackendTests(IntegrationTestCase):
 
     def test__create_new_user_from_ldap(self):
         with self.assertRaises(NotImplementedError):
-            self.adv_backend._create_new_user_from_ldap()
+            self.adv_backend.create_or_update_user_model()
 
     # region User Auth
 

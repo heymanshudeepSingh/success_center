@@ -53,83 +53,128 @@ class CaeAuthBackend(AbstractLDAPBackend):
         self.ldap_lib.set_search_base(settings.CAE_LDAP['user_search_base'])
         self.ldap_lib.set_uid_attribute(settings.CAE_LDAP['default_uid'])
 
-    def _create_new_user_from_ldap(self, uid, password):
+    def create_or_update_user_model(self, uid, password):
         """
-        Attempts to create new user, using pulled ldap information.
+        Attempts to get and update User model with given username.
+        In the event that no such model exists, instead create it from scratch using ldap info.
+
         Should only be called on known, valid and authenticated users.
         :param uid: Confirmed valid ldap uid.
         :param password: Confirmed valid ldap pass.
-        :return:
+        :return: Instance of User model.
+        """
+        try:
+            # Call model to verify existence.
+            user = models.User.objects.get(username=uid)
+
+            # If we got this far, then model exists. Update.
+            return self._update_user_model(uid)
+        except models.User.DoesNotExist:
+            # User model doesn't exist. Create new model.
+            return self._create_user_model(uid, password)
+
+    def _create_user_model(self, uid, password):
+        """
+        Creates new User model, using pulled ldap information.
+        Logic here should be "first time model creation" logic.
+
+        Should only be called on known, valid and authenticated users.
+        Should only invoke this method through the "_create_or_update_user_model" function.
+        :param uid: Confirmed valid ldap uid.
+        :param password: Confirmed valid ldap pass.
+        :return: Instance of User model.
         """
         if settings.AUTH_BACKEND_DEBUG:
             logger.info('{0} Auth Backend: Attempting to create new user model...'.format(self.debug_class))
 
-        # Connect to server and pull user's full info.
-        ldap_user_info = self.get_ldap_user_info(uid, attributes=['uid', 'givenName', 'sn',])
-        ldap_user_groups = self.get_ldap_user_groups(uid)
-
         # Create new user.
         login_user, created = models.User.objects.get_or_create(username=uid)
 
-        # Double check that user was created. If not, then duplicate user ids exist somehow. Error.
-        if created:
-            # Set password.
-            login_user.set_password(password)
-            login_user.save()
-
-            # Set general user values.
-            login_user.email = '{0}@wmich.edu'.format(uid)
-            login_user.first_name = ldap_user_info['givenName'][0].strip()
-            login_user.last_name = ldap_user_info['sn'][0].strip()
-
-            # Save model in case of error.
-            login_user.save()
-            if settings.AUTH_BACKEND_DEBUG:
-                logger.info('{0} Auth Backend: Created user new user model {1}. Now setting groups...'.format(
-                    self.debug_class,
-                    uid,
-                ))
-
-            # Set user group types.
-            if ldap_user_groups['director']:
-                login_user.groups.add(Group.object.get(name='CAE Director'))
-                if settings.AUTH_BACKEND_DEBUG:
-                    logger.info('{0} Auth Backend: Added user to CAE Director group.'.format(self.debug_class))
-            if ldap_user_groups['attendant']:
-                login_user.groups.add(Group.objects.get(name='CAE Attendant'))
-                if settings.AUTH_BACKEND_DEBUG:
-                    logger.info('{0} Auth Backend: Added user to CAE Attendant group.'.format(self.debug_class))
-            if ldap_user_groups['admin']:
-                login_user.groups.add(Group.objects.get(name='CAE Admin'))
-                if settings.AUTH_BACKEND_DEBUG:
-                    logger.info('{0} Auth Backend: Added user to CAE Admin group.'.format(self.debug_class))
-            if ldap_user_groups['programmer']:
-                login_user.groups.add(Group.objects.get(name='CAE Programmer'))
-                login_user.is_staff = True
-                if settings.AUTH_BACKEND_DEBUG:
-                    logger.info('{0} Auth Backend: Added user to CAE Programmer group.'.format(self.debug_class))
-
-            # Save model.
-            login_user.save()
-            if settings.AUTH_BACKEND_DEBUG:
-                logger.info('{0} Auth Backend: CAE Center User groups set for user {1}.'.format(self.debug_class, uid))
-                logger.info('{0} Auth Backend: Attempting to get Main Campus user info...'.format(self.debug_class))
-
-            wmu_ldap = WmuAuthBackend()
-            wmu_ldap.create_or_update_wmu_user_model(uid)
-
-            if settings.AUTH_BACKEND_DEBUG:
-                logger.info('{0} Auth Backend: Imported Main Campus user info. User creation complete for user {1}.'.format(
-                    self.debug_class,
-                    uid,
-                ))
-
-        else:
-            # Error. This shouldn't ever happen.
+        # Double check that user was created. If not, then duplicate user Id's exists.
+        if not created:
+            # Duplicate Id's exist.
+            # Most likely, there's a logic error in code and "_update_user_model" should have been called.
             login_user = None
             raise ValidationError('Error: Attempted to create user {0} but user with id already exists.'.format(uid))
 
+        # Connect to server and pull user's full info.
+        ldap_user_info = self.get_ldap_user_info(uid, attributes=['uid', 'givenName', 'sn', ])
+
+        # Set password based on AUTH_BACKEND_USE_DJANGO_USER_PASSWORDS setting.
+        if settings.AUTH_BACKEND_USE_DJANGO_USER_PASSWORDS:
+            login_user.set_password(password)
+            login_user.save()
+
+        # Set general user values.
+        login_user.email = '{0}@wmich.edu'.format(uid)
+        login_user.first_name = ldap_user_info['givenName'][0].strip()
+        login_user.last_name = ldap_user_info['sn'][0].strip()
+
+        # Save model.
+        login_user.save()
+
+        if settings.AUTH_BACKEND_DEBUG:
+            logger.info('{0} Auth Backend: Created user new user model {1}. Now setting groups...'.format(
+                self.debug_class,
+                uid,
+            ))
+
+        # Model created. Now run update logic to ensure all fields are properly set.
+        login_user = self._update_user_model(uid)
+
+        if settings.AUTH_BACKEND_DEBUG:
+            logger.info('{0} Auth Backend: Imported Main Campus user info. User creation complete for user {1}.'.format(
+                self.debug_class,
+                uid,
+            ))
+
         return login_user
+
+    def _update_user_model(self, uid):
+        """
+        Updates User model, using pulled Ldap information.
+        Logic here should be fine to potentially run on every user login instance (including first).
+
+        Should only be called on known, valid and authenticated users.
+        Should only invoke this method through the "create_or_update_user_model" function.
+        :param uid: Confirmed valid ldap uid.
+        :return: Instance of User model.
+        """
+        # Pull user info.
+        login_user = models.User.objects.get(username=uid)
+        ldap_user_groups = self.get_ldap_user_groups(uid)
+
+        # Set user group types.
+        if ldap_user_groups['director']:
+            login_user.groups.add(Group.object.get(name='CAE Director'))
+            if settings.AUTH_BACKEND_DEBUG:
+                logger.info('{0} Auth Backend: Added user to CAE Director group.'.format(self.debug_class))
+        if ldap_user_groups['attendant']:
+            login_user.groups.add(Group.objects.get(name='CAE Attendant'))
+            if settings.AUTH_BACKEND_DEBUG:
+                logger.info('{0} Auth Backend: Added user to CAE Attendant group.'.format(self.debug_class))
+        if ldap_user_groups['admin']:
+            login_user.groups.add(Group.objects.get(name='CAE Admin'))
+            if settings.AUTH_BACKEND_DEBUG:
+                logger.info('{0} Auth Backend: Added user to CAE Admin group.'.format(self.debug_class))
+        if ldap_user_groups['programmer']:
+            login_user.groups.add(Group.objects.get(name='CAE Programmer'))
+            login_user.is_staff = True
+            if settings.AUTH_BACKEND_DEBUG:
+                logger.info('{0} Auth Backend: Added user to CAE Programmer group.'.format(self.debug_class))
+
+        # Save model.
+        login_user.save()
+        if settings.AUTH_BACKEND_DEBUG:
+            logger.info('{0} Auth Backend: CAE Center User groups set for user {1}.'.format(self.debug_class, uid))
+            logger.info('{0} Auth Backend: Attempting to get Main Campus user info...'.format(self.debug_class))
+
+        # Check for associated Wmu User model.
+        wmu_ldap = WmuAuthBackend()
+        wmu_ldap.create_or_update_wmu_user_model(uid)
+
+        # Return fresh instance of model, in case instance was updated by check for Wmu User model.
+        return models.User.objects.get(username=uid)
 
     def get_ldap_user_groups(self, uid):
         """
@@ -220,12 +265,36 @@ class WmuAuthBackend(AbstractLDAPBackend):
 
     #region User Create/Update Functions
 
-    def _create_new_user_from_ldap(self, uid, password):
+    def create_or_update_user_model(self, uid, password):
         """
-        Attempts to create new user, using pulled ldap information.
+        Attempts to get and update User model with given username.
+        In the event that no such model exists, instead create it from scratch using ldap info.
+
         Should only be called on known, valid and authenticated users.
         :param uid: Confirmed valid ldap uid.
         :param password: Confirmed valid ldap pass.
+        :return: Instance of User model.
+        """
+        try:
+            # Call model to verify existence.
+            user = models.User.objects.get(username=uid)
+
+            # If we got this far, then model exists. Update.
+            return self._update_wmu_user_model(uid)
+        except models.User.DoesNotExist:
+            # User model doesn't exist. Create new model.
+            return self._create_user_model(uid, password)
+
+    def _create_user_model(self, uid, password):
+        """
+        Creates new User model, using pulled ldap information.
+        Logic here should be "first time model creation" logic.
+
+        Should only be called on known, valid and authenticated users.
+        Should only invoke this method through the "create_or_update_user_model" function.
+        :param uid: Confirmed valid ldap uid.
+        :param password: Confirmed valid ldap pass.
+        :return: Instance of User model.
         """
         if settings.AUTH_BACKEND_DEBUG:
             logger.info('{0} Auth Backend: Attempting to create new User model...'.format(self.debug_class))
@@ -233,52 +302,75 @@ class WmuAuthBackend(AbstractLDAPBackend):
         # Create new user.
         login_user, created = models.User.objects.get_or_create(username=uid)
 
-        # Double check that user was created. If not, then duplicate user ids exist somehow. Error.
-        if created:
-            # Set password.
+        # Double check that user was created. If not, then duplicate user Id's exists.
+        if not created:
+            # Duplicate Id's exist.
+            # Most likely, there's a logic error in code and "_update_user_model" should have been called.
+            login_user = None
+            raise ValidationError('Error: Attempted to create user {0} but user with id already exists.'.format(uid))
+
+        # Set password based on AUTH_BACKEND_USE_DJANGO_USER_PASSWORDS setting.
+        if settings.AUTH_BACKEND_USE_DJANGO_USER_PASSWORDS:
             login_user.set_password(password)
             login_user.save()
 
-            # Set general (login) user values.
-            login_user.email = '{0}@wmich.edu'.format(uid)
+        # Set general (login) user values.
+        login_user.email = '{0}@wmich.edu'.format(uid)
 
-            # Save model in case of error.
-            login_user.save()
-            if settings.AUTH_BACKEND_DEBUG:
-                logger.info('{0} Auth Backend: Created user new User model {1}. Now creating WmuUser model...'.format(
-                    self.debug_class,
-                    uid,
-                ))
+        # Save model.
+        login_user.save()
 
-            self.create_or_update_wmu_user_model(uid)
+        if settings.AUTH_BACKEND_DEBUG:
+            logger.info('{0} Auth Backend: Created user new User model {1}. Now creating WmuUser model...'.format(
+                self.debug_class,
+                uid,
+            ))
 
-            if settings.AUTH_BACKEND_DEBUG:
-                logger.info('{0} Auth Backend: Related WMU User model set. User creation complete for user {1}.'.format(
-                    self.debug_class,
-                    uid,
-                ))
+        # Model created. Now run update logic to ensure all fields are properly set.
+        login_user = self._update_user_model(uid)
 
-        else:
-            # Error. This shouldn't ever happen.
-            login_user = None
-            raise ValidationError(
-                'Error: Attempted to create user {0} but user with id already exists.'.format(uid))
+        if settings.AUTH_BACKEND_DEBUG:
+            logger.info('{0} Auth Backend: Related WMU User model set. User creation complete for user {1}.'.format(
+                self.debug_class,
+                uid,
+            ))
 
         return login_user
+
+    def _update_user_model(self, uid):
+        """
+        Updates User model, using pulled Ldap information.
+        Logic here should be fine to potentially run on every user login instance (including first).
+
+        Should only be called on known, valid and authenticated users.
+        Should only invoke this method through the "create_or_update_user_model" function.
+        :param uid: BroncoNet of user to update.
+        :return: Instance of User model.
+        """
+        # For now, just make sure the associated Wmu User model is created and up to date.
+        self.create_or_update_wmu_user_model(uid)
+
+        # Verify and set user ldap "active" status, according to main campus.
+        self.verify_user_ldap_status(uid)
+
+        # Return fresh instance of model, in case instance was updated by check for Wmu User model.
+        return models.User.objects.get(username=uid)
 
     def create_or_update_wmu_user_model(self, uid, winno=None, skip_update=False):
         """
         Attempts to get and update WmuUser model with given BroncoNet.
         In the event that no such model exists, instead create it from scratch using ldap info from main campus.
+
+        Should only be called on known, valid and authenticated users.
         :param uid: Id of user to get.
         :param winno: Optional winno field to eliminate a main campus LDAP call.
         :param skip_update: Boolean that prevents WmuUser model update attempts, if False.
-        :return: Instance of WmuUser model.
+        :return: Instance of Wmu User model.
         """
         # Attempt to get related model. Just to see if it exists or not. If it does exist, update if applicable.
         try:
-            # Call simply to verify existence.
-            models.WmuUser.objects.get(bronco_net=uid)
+            # Call model to verify existence.
+            wmu_user = models.WmuUser.objects.get(bronco_net=uid)
 
             # If we got this far, then model exists. Check if we want to update it.
             if not skip_update:
@@ -288,7 +380,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
                         self.debug_class,
                         uid,
                     ))
-                self._update_wmu_user(uid)
+                wmu_user = self._update_wmu_user_model(uid)
 
             else:
                 # skip_update bool is True. Skipping WmuUser update attempt.
@@ -299,9 +391,6 @@ class WmuAuthBackend(AbstractLDAPBackend):
                         uid,
                     ))
 
-            # Refresh all model data (in case we updated) and return.
-            return models.WmuUser.objects.get(bronco_net=uid)
-
         except models.WmuUser.DoesNotExist:
             # WmuUser model doesn't exist. Create new WmuUser model.
             if settings.AUTH_BACKEND_DEBUG:
@@ -309,87 +398,78 @@ class WmuAuthBackend(AbstractLDAPBackend):
                     self.debug_class,
                     uid,
                 ))
-            self._create_wmu_user(uid, winno=winno)
+            wmu_user = self._create_wmu_user_model(uid, winno=winno)
 
-        return models.WmuUser.objects.get(bronco_net=uid)
+        return wmu_user
 
-    def _create_wmu_user(self, uid, winno=None):
+    def _create_wmu_user_model(self, uid, winno=None):
         """
-        Creates new Wmu User model. Assumes that Django Wmu User model does not already exist for given uid.
-        Please invoke this method via the "create_or_update_wmu_user_model" function.
+        Creates new Wmu User model, using pulled Ldap information.
+        Logic here should be "first time model creation" logic.
+
+        Should only be called on known, valid and authenticated users.
+        Should only invoke this method through the "create_or_update_wmu_user_model" function.
         :param uid: BroncoNet of user to create.
         :param winno: Optional winno field to eliminate a main campus LDAP call.
+        :return: Instance of Wmu User model.
         """
-        # First, verify if user ldap status, according to main campus.
-        user_ldap_status = self.verify_user_ldap_status(uid)
+        # Get win number info.
+        if winno is None:
+            winno = self.get_ldap_user_attribute(uid, 'wmuBannerID')
+            if winno is None or winno == '':
+                raise ValidationError('User {0} got empty winno from Main Campus LDAP.'.format(uid))
 
-        if user_ldap_status is None:
-            # User is not showing up in main campus ldap.
-            # If we called this method on the given uid, then we may still want to create a model to preserve
-            # relational data to other models?
-            logger.warning('User with BroncoNet {0} does not seem to exist in main campus ldap.'.format(uid))
-            raise ValidationError('User does not exist in main campus ldap!')
+        # Get first name info.
+        first_name = self.get_ldap_user_attribute(uid, 'wmuFirstName')
+        if first_name is None or first_name == '':
+            first_name = self.get_backup_ldap_name(uid, first_name=True)
 
-        else:
-            # User is either still enrolled/employed, or within the retention period. Proceed with update attempt.
-            user_ldap_status_is_active = user_ldap_status[0]
-            user_ldap_status_in_retention = user_ldap_status[1]
+        # Get middle name info.
+        middle_name = self.get_ldap_user_attribute(uid, 'wmuMiddleName')
 
-            # Get win number info.
-            if winno is None:
-                winno = self.get_ldap_user_attribute(uid, 'wmuBannerID')
-                if winno is None or winno == '':
-                    raise ValidationError('User {0} got empty winno from Main Campus LDAP.'.format(uid))
+        # Get last name info.
+        last_name = self.get_ldap_user_attribute(uid, 'wmuLastName')
+        if last_name is None or last_name == '':
+            last_name = self.get_backup_ldap_name(uid, last_name=True)
 
-            # Get first name info.
-            first_name = self.get_ldap_user_attribute(uid, 'wmuFirstName')
-            if first_name is None or first_name == '':
-                first_name = self.get_backup_ldap_name(uid, first_name=True)
+        # Get email info.
+        official_email = self.get_ldap_user_attribute(uid, 'mail')
+        if official_email is None or official_email == '':
+            official_email = '{0}@wmich.edu'.format(uid)
 
-            # Get middle name info.
-            middle_name = self.get_ldap_user_attribute(uid, 'wmuMiddleName')
+        # Create WmuUser model.
+        models.WmuUser.objects.create(
+            bronco_net=uid,
+            winno=winno,
+            first_name=first_name,
+            middle_name=middle_name,
+            last_name=last_name,
+            official_email=official_email,
+        )
 
-            # Get last name info.
-            last_name = self.get_ldap_user_attribute(uid, 'wmuLastName')
-            if last_name is None or last_name == '':
-                last_name = self.get_backup_ldap_name(uid, last_name=True)
+        # Attempt to update user profile.
+        user_profile = models.Profile.get_profile(uid)
+        if user_profile is None:
+            raise ValueError('Could not find profile for user {0}.'.format(uid))
 
-            # Get email info.
-            official_email = self.get_ldap_user_attribute(uid, 'mail')
-            if official_email is None or official_email == '':
-                official_email = '{0}@wmich.edu'.format(uid)
+        # Get phone number info.
+        phone_number = self.get_ldap_user_attribute(uid, 'homePhone')
+        if phone_number is not None and phone_number != '':
+            user_profile.phone_number = PhoneNumber.from_string(phone_number)
+        user_profile.save()
 
-            # Create WmuUser model.
-            models.WmuUser.objects.create(
-                bronco_net=uid,
-                winno=winno,
-                first_name=first_name,
-                middle_name=middle_name,
-                last_name=last_name,
-                official_email=official_email,
-                active=user_ldap_status_in_retention,
-            )
+        # Model created. Now run update logic to ensure all fields are properly set.
+        return self._update_wmu_user_model(uid)
 
-            # Add major.
-            adv_ldap = AdvisingAuthBackend()
-            adv_ldap.add_or_update_major(uid)
-
-            # Attempt to update user profile.
-            user_profile = models.Profile.get_profile(uid)
-            if user_profile is None:
-                raise ValueError('Could not find profile for user {0}.'.format(uid))
-
-            # Get phone number info.
-            phone_number = self.get_ldap_user_attribute(uid, 'homePhone')
-            if phone_number is not None and phone_number != '':
-                user_profile.phone_number = PhoneNumber.from_string(phone_number)
-            user_profile.save()
-
-    def _update_wmu_user(self, uid):
+    def _update_wmu_user_model(self, uid):
         """
-        Updates Wmu User model. Assumes that Django Wmu User model already exists for given uid.
-        Please only invoke this method through the "create_or_update_wmu_user_model" function.
+        Updates Wmu User model, using pulled Ldap information.
+        Logic here should be fine to potentially run on every user login instance (including first).
+
+        Should only be called on known, valid and authenticated users.
+        Should only invoke this method through the "create_or_update_wmu_user_model" function.
         :param uid: BroncoNet of user to update.
+        :return: Instance of Wmu User model.
         """
         # WmuUser model exists. Attempt to update information.
         adv_ldap = AdvisingAuthBackend()
@@ -397,15 +477,19 @@ class WmuAuthBackend(AbstractLDAPBackend):
         # Update major.
         adv_ldap.add_or_update_major(uid)
 
+        # Return fresh instance of model, in case instance was updated by Advising Auth logic.
+        return models.WmuUser.objects.get(bronco_net=uid)
+
     #endregion User Create/Update Functions
 
     #region User Ldap Status Functions
 
-    def verify_user_ldap_status(self, uid):
+    def verify_user_ldap_status(self, uid, set_model_active_fields=True):
         """
         Verifies if student/employee is still enrolled/employed, according to main campus LDAP.
         If student is not enrolled/employed, we do a few extra checks to see if we can get useful data anyways.
         :param uid: BroncoNet of student to check.
+        :param set_model_active_fields: Bool indicating if user "active" fields should be set based on ldap status.
         :return: None if no ldap data returned | (True, True) if actively enrolled/employed |
             (False, True) if not enrolled/employed, but within retention period (12 months) |
             (False, False) if not enrolled/employed, and outside of retention period.
@@ -415,13 +499,50 @@ class WmuAuthBackend(AbstractLDAPBackend):
 
         # Now parse user ldap info.
         if ldap_info is not None:
-            return self._verify_user_ldap_status_wmu_enrolled(ldap_info)
+            user_ldap_status = self._verify_user_ldap_status(ldap_info)
+
+            # Check if we should update User and Wmu User model "active" fields.
+            if set_model_active_fields:
+                # Fields need updating.
+                user_ldap_status_is_active = user_ldap_status[0]
+                user_ldap_status_in_retention = user_ldap_status[1]
+
+                # Get models.
+                login_user = models.User.objects.get(username=uid)
+                wmu_user = models.WmuUser.objects.get(bronconet=uid)
+
+                # Set active fields.
+                login_user.active = user_ldap_status_is_active
+                wmu_user.active = user_ldap_status_in_retention
+
+                # Save models.
+                login_user.save()
+                wmu_user.save()
+
+            print('user_ldap_status: {0}'.format(user_ldap_status))
+            return user_ldap_status
         else:
+            # Ldap info failed to return.
+
+            # Check if we should update User and Wmu User model "active" fields.
+            if set_model_active_fields:
+                # Get models.
+                login_user = models.User.objects.get(username=uid)
+                wmu_user = models.WmuUser.objects.get(bronconet=uid)
+
+                # Set active fields.
+                login_user.active = False
+                wmu_user.active = False
+
+                # Save models.
+                login_user.save()
+                wmu_user.save()
+
             return None
 
-    def _verify_user_ldap_status_wmu_enrolled(self, ldap_info):
+    def _verify_user_ldap_status(self, ldap_info):
         """
-        Checks status of user's main campus ldap 'wmuEnrolled' field.
+        Checks user's "active" status, according to main campus ldap. Uses several fields to determine.
 
         For all checks, we force convert and parse as string to avoid accidental Python "string to bool" shenanigans.
         Basically, only empty strings are false. (See https://docs.python.org/3/library/stdtypes.html for more info)
@@ -433,17 +554,36 @@ class WmuAuthBackend(AbstractLDAPBackend):
         :return: Tuple of (User is enrolled/active, User is within retention policy)
         """
         try:
+            # Get wmuEnrolled field.
+            try:
+                # Handle for missing field.
+                field_to_check = str(ldap_info['wmuEnrolled'][0]).strip().lower()
+            except (KeyError, IndexError):
+                field_to_check = None
+
+            print('wmuEnrolled: {0}'.format(field_to_check))
+
             # Check wmuEnrolled field.
-            if str(ldap_info['wmuEnrolled'][0]).strip().lower() == 'true':
+            if field_to_check == 'true':
                 # User is currently enrolled.
                 return (True, True)
 
             else:
                 # User is not actively enrolled. We still want to check employee status, etc.
 
+                # Get iNetUserStatus field.
+                try:
+                    # Handle for missing field.
+                    field_to_check = str(ldap_info['inetUserStatus'][0]).strip().lower()
+                except (KeyError, IndexError):
+                    field_to_check = None
+
+                print('iNetUserStatus: {0}'.format(field_to_check))
+
                 # Check iNetUserStatus field.
-                if ldap_info['inetUserStatus'][0] != 'active':
+                if field_to_check != 'active':
                     # Not enrolled and not active. Can set user to inactive in Django.
+                    print('Not active??')
                     return (False, False)
                 else:
                     # User is not enrolled but is active.
@@ -459,7 +599,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
                         if employee_expiration is not None and employee_expiration >= timezone.now():
                             # Not enrolled, but still employed.
                             return (True, True)
-                    except KeyError:
+                    except (KeyError, IndexError):
                         # Failed to get employee_expiration. Set to None.
                         employee_expiration = None
 
@@ -469,9 +609,12 @@ class WmuAuthBackend(AbstractLDAPBackend):
                             str(ldap_info['wmuStudentExpiration'][0]),
                             '%Y%m%d%H%M%S%z',
                         )
-                    except KeyError:
+                    except (KeyError, IndexError):
                         # Failed to get student_expiration. Set to None.
                         student_expiration = None
+
+                    print('employee_expiration: {0}'.format(employee_expiration))
+                    print('student_expiration: {0}'.format(student_expiration))
 
                     # Check if both are out of retention policy (12 months).
                     one_year_ago = (timezone.now() - timezone.timedelta(days=365))
@@ -667,7 +810,7 @@ class AdvisingAuthBackend(AbstractLDAPBackend):
         self._not_implemented_string = 'This method is intentionally unimplemented for AdvisingAuthBackend. To use ' \
                                        'this method, please invoke from CaeAuthBackend or WmuAuthBackend instead.'
 
-    def _create_new_user_from_ldap(self, *args, **kwargs):
+    def create_or_update_user_model(self, *args, **kwargs):
         raise NotImplementedError(self._not_implemented_string)
 
     # region User Auth
