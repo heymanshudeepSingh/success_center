@@ -14,7 +14,7 @@ def prog_test_account_is_populated():
     Used to determine if some Ldap test sections should run or be skipped.
     :return: Bool indicating if values are populated.
     """
-    if settings.BACKEND_LDAP_TEST_PROG_NAME is not None and str(settings.BACKEND_LDAP_TEST_PROG_NAME) != '':
+    if settings.BACKEND_LDAP_TEST_PROG_ID is not None and str(settings.BACKEND_LDAP_TEST_PROG_ID) != '':
         return True
     else:
         return False
@@ -26,7 +26,7 @@ def student_test_account_is_populated():
     Used to determine if some Ldap test sections should run or be skipped.
     :return: Bool indicating if values are populated.
     """
-    if settings.BACKEND_LDAP_TEST_STUDENT_NAME is not None and str(settings.BACKEND_LDAP_TEST_STUDENT_NAME):
+    if settings.BACKEND_LDAP_TEST_STUDENT_ID is not None and str(settings.BACKEND_LDAP_TEST_STUDENT_ID) != '':
         return True
     else:
         return False

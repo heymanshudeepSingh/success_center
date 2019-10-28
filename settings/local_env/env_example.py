@@ -150,8 +150,8 @@ LOGGING_DIRECTORY = os.path.join(BASE_DIR, 'settings/local_env/logs/')
 # UnitTesting Settings.
 #   * Provided Prog account should be active for WMU ldap system.
 #   * Provided Student account should be active for both CAE and WMU ldap systems.
-BACKEND_LDAP_TEST_PROG_NAME = ''            # Name for CAE Center Ldap programmer account.
-BACKEND_LDAP_TEST_STUDENT_NAME = ''         # Name for current active Ldap student.
+BACKEND_LDAP_TEST_PROG_ID = ''          # Name for CAE Center Ldap programmer account.
+BACKEND_LDAP_TEST_STUDENT_ID = ''       # Name for current active Ldap student.
 
 # Selenium Integration Test Settings.
 SELENIUM_TESTS_BROWSER = 'chrome'   # Set to 'firefox' to use firefox browser instead.

@@ -202,6 +202,12 @@ class WmuAuthBackend(AbstractLDAPBackend):
         :param winno: Optional winno field to eliminate a main campus LDAP call.
         :return: Instance of Wmu User model.
         """
+        # Attempt to get related Django User model.
+        try:
+            login_user = models.User.objects.get(username=uid)
+        except models.User.DoesNotExist:
+            login_user = None
+
         # Get win number info.
         if winno is None:
             winno = self.get_ldap_user_attribute(uid, 'wmuBannerID')
@@ -209,22 +215,36 @@ class WmuAuthBackend(AbstractLDAPBackend):
                 raise ValidationError('User {0} got empty winno from Main Campus LDAP.'.format(uid))
 
         # Get first name info.
-        first_name = self.get_ldap_user_attribute(uid, 'wmuFirstName')
-        if first_name is None or first_name == '':
-            first_name = self.get_backup_ldap_name(uid, first_name=True)
+        if login_user is not None and login_user.first_name != '':
+            # Associated login user exists and has name info. Use that.
+            first_name = login_user.first_name
+        else:
+            # Associated login user does not exist or does not have name info. Check LDAP.
+            first_name = self.get_ldap_user_attribute(uid, 'wmuFirstName')
+            if first_name is None or first_name == '':
+                first_name = self.get_backup_ldap_name(uid, first_name=True)
 
         # Get middle name info.
         middle_name = self.get_ldap_user_attribute(uid, 'wmuMiddleName')
 
-        # Get last name info.
-        last_name = self.get_ldap_user_attribute(uid, 'wmuLastName')
-        if last_name is None or last_name == '':
-            last_name = self.get_backup_ldap_name(uid, last_name=True)
+        if login_user is not None and login_user.last_name != '':
+            # Associated login user exists and has name info. Use that.
+            last_name = login_user.last_name
+        else:
+            # Associated login user does not exist or does not have name info. Check LDAP.
+            last_name = self.get_ldap_user_attribute(uid, 'wmuLastName')
+            if last_name is None or last_name == '':
+                last_name = self.get_backup_ldap_name(uid, last_name=True)
 
         # Get email info.
-        official_email = self.get_ldap_user_attribute(uid, 'mail')
-        if official_email is None or official_email == '':
-            official_email = '{0}@wmich.edu'.format(uid)
+        if login_user is not None and login_user.email != '':
+            # Associated login user exists and has email info. Use that.
+            official_email = login_user.email
+        else:
+            # Associated login user does not exist or does not have email info. Check LDAP.
+            official_email = self.get_ldap_user_attribute(uid, 'mail')
+            if official_email is None or official_email == '':
+                official_email = '{0}@wmich.edu'.format(uid)
 
         # Create WmuUser model.
         models.WmuUser.objects.create(
@@ -235,6 +255,29 @@ class WmuAuthBackend(AbstractLDAPBackend):
             last_name=last_name,
             official_email=official_email,
         )
+
+        # Check all field values in User model. Set if they were not set.
+        if login_user is not None:
+            set_value = False
+
+            # Check first name.
+            if login_user.first_name != first_name:
+                login_user.first_name = first_name
+                set_value = True
+
+            # Check last name.
+            if login_user.last_name != last_name:
+                login_user.last_name = last_name
+                set_value = True
+
+            # Check email.
+            if login_user.email != official_email:
+                login_user.email = official_email
+                set_value = True
+
+            # If any User value was set, save changes.
+            if set_value:
+                login_user.save()
 
         # Attempt to update user profile.
         user_profile = models.Profile.get_profile(uid)
@@ -298,7 +341,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
 
                 # Get models.
                 login_user = models.User.objects.get(username=uid)
-                wmu_user = models.WmuUser.objects.get(bronconet=uid)
+                wmu_user = models.WmuUser.objects.get(bronco_net=uid)
 
                 # Set active fields.
                 login_user.active = user_ldap_status_is_active
@@ -308,7 +351,6 @@ class WmuAuthBackend(AbstractLDAPBackend):
                 login_user.save()
                 wmu_user.save()
 
-            print('user_ldap_status: {0}'.format(user_ldap_status))
             return user_ldap_status
         else:
             # Ldap info failed to return.
