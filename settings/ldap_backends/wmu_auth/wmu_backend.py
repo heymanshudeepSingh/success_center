@@ -64,17 +64,20 @@ class WmuAuthBackend(AbstractLDAPBackend):
         :param password: Confirmed valid ldap pass.
         :return: Instance of User model.
         """
+        # Get user's LDAP info.
+        user_ldap_info = self._get_all_user_info_from_bronconet(uid)
+
         try:
             # Call model to verify existence.
             user = models.User.objects.get(username=uid)
 
             # If we got this far, then model exists. Update.
-            return self._update_wmu_user_model(uid)
+            return self._update_user_model(uid, user_ldap_info)
         except models.User.DoesNotExist:
             # User model doesn't exist. Create new model.
-            return self._create_user_model(uid, password)
+            return self._create_user_model(uid, password, user_ldap_info)
 
-    def _create_user_model(self, uid, password):
+    def _create_user_model(self, uid, password, user_ldap_info):
         """
         Creates new User model, using pulled ldap information.
         Logic here should be "first time model creation" logic.
@@ -83,6 +86,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
         Should only invoke this method through the "create_or_update_user_model" function.
         :param uid: Confirmed valid ldap uid.
         :param password: Confirmed valid ldap pass.
+        :param user_ldap_info: User's info from LDAP.
         :return: Instance of User model.
         """
         if settings.AUTH_BACKEND_DEBUG:
@@ -116,7 +120,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
             ))
 
         # Model created. Now run update logic to ensure all fields are properly set.
-        login_user = self._update_user_model(uid)
+        login_user = self._update_user_model(uid, user_ldap_info)
 
         if settings.AUTH_BACKEND_DEBUG:
             logger.info('{0} Auth Backend: Related WMU User model set. User creation complete for user {1}.'.format(
@@ -126,7 +130,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
 
         return login_user
 
-    def _update_user_model(self, uid):
+    def _update_user_model(self, uid, user_ldap_info):
         """
         Updates User model, using pulled Ldap information.
         Logic here should be fine to potentially run on every user login instance (including first).
@@ -134,10 +138,11 @@ class WmuAuthBackend(AbstractLDAPBackend):
         Should only be called on known, valid and authenticated users.
         Should only invoke this method through the "create_or_update_user_model" function.
         :param uid: BroncoNet of user to update.
+        :param user_ldap_info: User's info from LDAP.
         :return: Instance of User model.
         """
         # For now, just make sure the associated Wmu User model is created and up to date.
-        self.create_or_update_wmu_user_model(uid)
+        self.create_or_update_wmu_user_model(uid, user_ldap_info=user_ldap_info)
 
         # Verify and set user ldap "active" status, according to main campus.
         self.verify_user_ldap_status(uid)
@@ -145,7 +150,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
         # Return fresh instance of model, in case instance was updated by check for Wmu User model.
         return models.User.objects.get(username=uid)
 
-    def create_or_update_wmu_user_model(self, uid, winno=None, skip_update=False):
+    def create_or_update_wmu_user_model(self, uid, winno=None, skip_update=False, user_ldap_info=None):
         """
         Attempts to get and update WmuUser model with given BroncoNet.
         In the event that no such model exists, instead create it from scratch using ldap info from main campus.
@@ -154,8 +159,13 @@ class WmuAuthBackend(AbstractLDAPBackend):
         :param uid: Id of user to get.
         :param winno: Optional winno field to eliminate a main campus LDAP call.
         :param skip_update: Boolean that prevents WmuUser model update attempts, if False.
+        :param user_ldap_info: User's info from LDAP.
         :return: Instance of Wmu User model.
         """
+        # Get user LDAP info, if not provided.
+        if user_ldap_info is None:
+            user_ldap_info = self._get_all_user_info_from_bronconet(uid)
+
         # Attempt to get related model. Just to see if it exists or not. If it does exist, update if applicable.
         try:
             # Call model to verify existence.
@@ -169,7 +179,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
                         self.debug_class,
                         uid,
                     ))
-                wmu_user = self._update_wmu_user_model(uid)
+                wmu_user = self._update_wmu_user_model(uid, user_ldap_info)
 
             else:
                 # skip_update bool is True. Skipping WmuUser update attempt.
@@ -187,11 +197,11 @@ class WmuAuthBackend(AbstractLDAPBackend):
                     self.debug_class,
                     uid,
                 ))
-            wmu_user = self._create_wmu_user_model(uid, winno=winno)
+            wmu_user = self._create_wmu_user_model(uid, user_ldap_info, winno=winno)
 
         return wmu_user
 
-    def _create_wmu_user_model(self, uid, winno=None):
+    def _create_wmu_user_model(self, uid, user_ldap_info, winno=None):
         """
         Creates new Wmu User model, using pulled Ldap information.
         Logic here should be "first time model creation" logic.
@@ -199,6 +209,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
         Should only be called on known, valid and authenticated users.
         Should only invoke this method through the "create_or_update_wmu_user_model" function.
         :param uid: BroncoNet of user to create.
+        :param user_ldap_info: User's LDAP info.
         :param winno: Optional winno field to eliminate a main campus LDAP call.
         :return: Instance of Wmu User model.
         """
@@ -210,7 +221,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
 
         # Get win number info.
         if winno is None:
-            winno = self.get_ldap_user_attribute(uid, 'wmuBannerID')
+            winno = self._parse_user_ldap_field(user_ldap_info, 'wmuBannerID')
             if winno is None or winno == '':
                 raise ValidationError('User {0} got empty winno from Main Campus LDAP.'.format(uid))
 
@@ -220,19 +231,19 @@ class WmuAuthBackend(AbstractLDAPBackend):
             first_name = login_user.first_name
         else:
             # Associated login user does not exist or does not have name info. Check LDAP.
-            first_name = self.get_ldap_user_attribute(uid, 'wmuFirstName')
+            first_name = self._parse_user_ldap_field(user_ldap_info, 'wmuFirstName')
             if first_name is None or first_name == '':
                 first_name = self.get_backup_ldap_name(uid, first_name=True)
 
         # Get middle name info.
-        middle_name = self.get_ldap_user_attribute(uid, 'wmuMiddleName')
+        middle_name = self._parse_user_ldap_field(user_ldap_info, 'wmuMiddleName')
 
         if login_user is not None and login_user.last_name != '':
             # Associated login user exists and has name info. Use that.
             last_name = login_user.last_name
         else:
             # Associated login user does not exist or does not have name info. Check LDAP.
-            last_name = self.get_ldap_user_attribute(uid, 'wmuLastName')
+            last_name = self._parse_user_ldap_field(user_ldap_info, 'wmuLastName')
             if last_name is None or last_name == '':
                 last_name = self.get_backup_ldap_name(uid, last_name=True)
 
@@ -242,7 +253,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
             official_email = login_user.email
         else:
             # Associated login user does not exist or does not have email info. Check LDAP.
-            official_email = self.get_ldap_user_attribute(uid, 'mail')
+            official_email = self._parse_user_ldap_field(user_ldap_info, 'mail')
             if official_email is None or official_email == '':
                 official_email = '{0}@wmich.edu'.format(uid)
 
@@ -285,15 +296,15 @@ class WmuAuthBackend(AbstractLDAPBackend):
             raise ValueError('Could not find profile for user {0}.'.format(uid))
 
         # Get phone number info.
-        phone_number = self.get_ldap_user_attribute(uid, 'homePhone')
+        phone_number = self._parse_user_ldap_field(user_ldap_info, 'homePhone')
         if phone_number is not None and phone_number != '':
             user_profile.phone_number = PhoneNumber.from_string(phone_number)
         user_profile.save()
 
         # Model created. Now run update logic to ensure all fields are properly set.
-        return self._update_wmu_user_model(uid)
+        return self._update_wmu_user_model(uid, user_ldap_info)
 
-    def _update_wmu_user_model(self, uid):
+    def _update_wmu_user_model(self, uid, user_ldap_info):
         """
         Updates Wmu User model, using pulled Ldap information.
         Logic here should be fine to potentially run on every user login instance (including first).
@@ -301,6 +312,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
         Should only be called on known, valid and authenticated users.
         Should only invoke this method through the "create_or_update_wmu_user_model" function.
         :param uid: BroncoNet of user to update.
+        :param user_ldap_info: User's LDAP info.
         :return: Instance of Wmu User model.
         """
         # WmuUser model exists. Attempt to update information.
@@ -491,6 +503,34 @@ class WmuAuthBackend(AbstractLDAPBackend):
         self.ldap_lib.unbind_server()
         return ldap_info
 
+    def _parse_user_ldap_field(self, user_ldap_info, field_name):
+        """
+        Gets given field from passed LDAP info.
+        :param user_ldap_info: User's LDAP info.
+        :return: Parsed field | None on parse error.
+        """
+        # Check that args are populated.
+        field_name = str(field_name).strip()
+        if user_ldap_info is None or field_name == '':
+            return None
+
+        # Attempt to get field values.
+        try:
+            ldap_field = user_ldap_info[field_name]
+            # Check how many values field has.
+            if len(ldap_field) == 0:
+                # Has no values.
+                return None
+            elif len(ldap_field) == 1:
+                # Only has one value. Return value.
+                return ldap_field[0]
+            else:
+                # Has more than 1 value. Return full tuple/list.
+                return ldap_field
+        except (KeyError, IndexError):
+            # Failed to parse.
+            return None
+
     def get_winno_from_bronconet(self, bronco_net):
         """
         Attempts to get Winno from student BroncoNet.
@@ -543,37 +583,38 @@ class WmuAuthBackend(AbstractLDAPBackend):
         self.ldap_lib.unbind_server()
         return bronco_net
 
-    def get_backup_ldap_name(self, uid, first_name=False, last_name=False):
+    def get_backup_ldap_name(self, uid, user_ldap_info, first_name=False, last_name=False):
         """
         Function to get a "backup name" in case either first or last name fails to return from Wmu Ldap response.
         (First/last name values are required for Django WmuUser models).
 
         Attempts values in this order: givenName/sn, displayName, gecos, cn, bronconet_id.
         :param uid: User ID to search names for.
+        :param user_ldap_info: User's LDAP info.
         :param first_name: Boolean indicating if is first name.
         :param last_name: Boolean indicating if is last name.
         :return: Name to use, or "Unknown" if all attempts failed.
         """
         # Attempt to get "givenName" or "sn" values. These seem to user first/last name values directly.
         if first_name:
-            backup_name = self._format_backup_name(self.get_ldap_user_attribute(uid, 'givenName'))
+            backup_name = self._format_backup_name(self._parse_user_ldap_field(user_ldap_info, 'givenName'))
         elif last_name:
-            backup_name = self._format_backup_name(self.get_ldap_user_attribute(uid, 'sn'))
+            backup_name = self._format_backup_name(self._parse_user_ldap_field(user_ldap_info, 'sn'))
         else:
             backup_name = None
 
         # Attempt to get "displayName" value. Attempts to be full user's name, in proper "display" format?
         if backup_name is None or backup_name == '':
-            backup_name = self._format_backup_name(self.get_ldap_user_attribute(uid, 'displayName'))
+            backup_name = self._format_backup_name(self._parse_user_ldap_field(user_ldap_info, 'displayName'))
 
         # Attempt to get "gecos" value. Seems to be an alternative to "givenName"?
         if backup_name is None or backup_name == '':
-            backup_name = self._format_backup_name(self.get_ldap_user_attribute(uid, 'gecos'))
+            backup_name = self._format_backup_name(self._parse_user_ldap_field(user_ldap_info, 'gecos'))
 
         # Attempt to get "cn" value as last fallback attempt. Seems to be array of multiple possible versions of the
         # user's full name.
         if backup_name is None or backup_name == '':
-            backup_name = self._format_backup_name(self.get_ldap_user_attribute(uid, 'cn'))
+            backup_name = self._format_backup_name(self._parse_user_ldap_field(user_ldap_info, 'cn'))
 
         # All above attempts failed. Default to uid.
         if backup_name is None or backup_name == '':
