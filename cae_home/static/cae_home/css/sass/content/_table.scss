@@ -248,7 +248,7 @@
         thead, tfoot {
             // Stylings specific to wmu theme.
             @if $theme == "wmu" {
-                background-color: theme-status($theme, 'secondary', 'primary');
+                background-color: theme-status($theme, 'primary', 'border');
             } @else {
                 background-color: theme-status($theme, 'primary', 'primary');
             }
