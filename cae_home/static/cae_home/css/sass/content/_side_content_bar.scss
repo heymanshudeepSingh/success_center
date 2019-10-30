@@ -34,7 +34,7 @@
 //===========================//
 
 .content-bar-left, .content-bar-right {
-    position: absolute;
+    position: relative;
     z-index: 5;
 
     @include display-flex;
@@ -42,6 +42,8 @@
 
     min-width: 100%;
     min-height: 100%;
+
+    padding-bottom: 0 !important;
 
     ul {
         padding-left: 0 !important;
@@ -63,8 +65,8 @@
             display: none;  // Safari and Chrome
         }
 
-        height: 100vh;
         padding: 10px;
+        padding-bottom: 0;
 
         @each $header_element in $header_element_list {
         > #{$header_element} {
