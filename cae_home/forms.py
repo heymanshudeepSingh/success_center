@@ -96,7 +96,7 @@ class Select2Widget(forms.Select):
         return attrs
 
 
-class Select2MultipleWidget(forms.Select):
+class Select2MultipleWidget(forms.SelectMultiple):
     """
     Widget for select2 "multiple selection" input.
     """
