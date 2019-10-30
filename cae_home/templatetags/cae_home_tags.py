@@ -38,3 +38,13 @@ def render_model_docstring(obj):
         return mark_safe('<p>{0}</p>'.format(obj.__doc__))
     else:
         return mark_safe('<p>No docstring.</p>')
+
+
+@register.filter(name='has_group')
+def has_group(user, group_name):
+    """
+    Template tag to determine if user belongs to provided group.
+    :param user: Current user.
+    :param group_name: Group to check membership of.
+    """
+    return user.groups.filter(name=group_name).exists()
