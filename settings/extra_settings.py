@@ -81,6 +81,61 @@ except FileExistsError:
 debug_print('{0}Logging folder{1}: {2}'.format(ConsoleColors.bold_blue, ConsoleColors.reset, LOGGING_DIRECTORY))
 
 
+# Logic to filter logs based on logging level.
+class _ExcludeWarningsFilter(logging.Filter):
+    """
+    Class to filter out any messages higher than log level 30.
+    See https://stackoverflow.com/a/53257669 for more info.
+    """
+    def filter(self, record):
+        """Filters out log messages with log level WARNING (numeric value: 30) or higher."""
+        return record.levelno < 30
+
+
+class _ExcludeChannelsFilter(logging.Filter):
+    """
+    Class to filter out any messages equal to level 25.
+    See https://stackoverflow.com/a/53257669 for more info.
+    """
+    def filter(self, record):
+        """Filters out log messages with log level CHANNELS (numeric value: 25)."""
+        return record.levelno != 25
+
+
+# Logic to add new, custom logging levels.
+def add_logging_level(levelName, levelNum, methodName=None):
+    """
+    Comprehensively adds a new logging level to the `logging` module and the currently configured logging class.
+    See https://stackoverflow.com/a/35804945 for details.
+    """
+    if not methodName:
+        methodName = levelName.lower()
+
+    if hasattr(logging, levelName):
+       raise AttributeError('{} already defined in logging module'.format(levelName))
+    if hasattr(logging, methodName):
+       raise AttributeError('{} already defined in logging module'.format(methodName))
+    if hasattr(logging.getLoggerClass(), methodName):
+       raise AttributeError('{} already defined in logger class'.format(methodName))
+
+    # This method was inspired by the answers to Stack Overflow post
+    # http://stackoverflow.com/q/2183233/2988730, especially
+    # http://stackoverflow.com/a/13638084/2988730
+    def logForLevel(self, message, *args, **kwargs):
+        if self.isEnabledFor(levelNum):
+            self._log(levelNum, message, args, **kwargs)
+    def logToRoot(message, *args, **kwargs):
+        logging.log(levelNum, message, *args, **kwargs)
+
+    logging.addLevelName(levelNum, levelName)
+    setattr(logging, levelName, levelNum)
+    setattr(logging.getLoggerClass(), methodName, logForLevel)
+    setattr(logging, methodName, logToRoot)
+
+# Add new logging level.
+add_logging_level('CHANNELS', 25)
+
+
 # Logging variables.
 handler_class = 'logging.handlers.RotatingFileHandler'
 handler_file_max_bytes = 1024*1024*10
@@ -89,6 +144,14 @@ handler_file_backup_count = 10
 # Set up logging configuration.
 LOGGING = {
     'version': 1,
+    'filters': {
+        'exclude_channels': {
+            '()': _ExcludeChannelsFilter,
+        },
+        'exclude_warnings': {
+            '()': _ExcludeWarningsFilter,
+        },
+    },
     'formatters': {
         # Simple logging. Includes message type and actual message.
         'simple': {
@@ -122,6 +185,7 @@ LOGGING = {
             'maxBytes': handler_file_max_bytes,
             'backupCount': handler_file_backup_count,
             'formatter': 'standard',
+            'filters': ['exclude_channels'],
         },
         'file_debug_connections': {
             'level': 'DEBUG',
@@ -171,6 +235,17 @@ LOGGING = {
             'maxBytes': handler_file_max_bytes,
             'backupCount': handler_file_backup_count,
             'formatter': 'standard',
+            'filters': ['exclude_channels'],
+        },
+        # Channels level - To file.
+        'file_channels': {
+            'level': 'CHANNELS',
+            'class': handler_class,
+            'filename': os.path.join(LOGGING_DIRECTORY, 'channels.log'),
+            'maxBytes': handler_file_max_bytes,
+            'backupCount': handler_file_backup_count,
+            'formatter': 'standard',
+            'filters': ['exclude_warnings'],
         },
         # Warn level - To file.
         'file_warn': {
@@ -200,99 +275,99 @@ LOGGING = {
     'loggers': {
         # Catch all for all other log types not found below (hopefully).
         '': {
-            'handlers': ['console', 'file_debug', 'file_info', 'file_warn', 'file_error', 'mail_error',],
-            'level': 'DEBUG',
-            'propagate': True,
+            'handlers': ['console', 'file_debug', 'file_info', 'file_channels', 'file_warn', 'file_error', 'mail_error',],
+            'level': 'NOTSET',
+            'propagate': False,
         },
         'main': {
-            'handlers': ['console', 'file_debug', 'file_info', 'file_warn', 'file_error', 'mail_error',],
-            'level': 'DEBUG',
-            'propagate': True,
+            'handlers': ['console', 'file_debug', 'file_info', 'file_channels', 'file_warn', 'file_error', 'mail_error',],
+            'level': 'NOTSET',
+            'propagate': False,
         },
 
         # Various debug logging, mostly associated with Daphne (Channels) or Redis.
         'asyncio': {
             'handlers': ['file_debug_connections'],
-            'level': 'DEBUG',
+            'level': 'NOTSET',
             'propagate': False,
         },
         'aioredis': {
             'handlers': ['file_debug_connections'],
-            'level': 'DEBUG',
+            'level': 'NOTSET',
             'propagate': False,
         },
         'daphne.http_protocol': {
             'handlers': ['file_debug_connections'],
-            'level': 'DEBUG',
+            'level': 'NOTSET',
             'propagate': False,
         },
         'daphne.ws_protocol': {
             'handlers': ['file_debug_connections'],
-            'level': 'DEBUG',
+            'level': 'NOTSET',
             'propagate': False,
         },
         'django.db.backends': {
             'handlers': ['file_debug_sql_queries'],
-            'level': 'DEBUG',
+            'level': 'NOTSET',
             'propagate': False,
         },
         'django.db.backends.schema': {
             'handlers': ['file_debug_sql_schema'],
-            'level': 'DEBUG',
+            'level': 'NOTSET',
             'propagate': False,
         },
         'django.template': {
             'handlers': ['file_debug_templates'],
-            'level': 'DEBUG',
+            'level': 'NOTSET',
             'propagate': False,
         },
         'django.utils.autoreload': {
             'handlers': ['null'],
-            'level': 'DEBUG',
+            'level': 'NOTSET',
             'propagate': False,
         },
         'selenium': {
             'handlers': ['file_debug_selenium'],
-            'level': 'DEBUG',
+            'level': 'NOTSET',
             'propagate': False,
         },
         'urllib3.connectionpool': {
             'handlers': ['file_debug_connections'],
-            'level': 'DEBUG',
+            'level': 'NOTSET',
             'propagate': False,
         },
 
         # Standard logging for Django.
         'django': {
             'handlers': ['console', 'file_debug', 'file_info', 'file_warn', 'file_error', 'mail_error',],
-            'level': 'DEBUG',
+            'level': 'NOTSET',
             'propagate': False,
         },
         'django.request': {
             'handlers': ['console', 'file_debug', 'file_info', 'file_warn', 'file_error', 'mail_error',],
-            'level': 'DEBUG',
+            'level': 'NOTSET',
             'propagate': False,
         },
         'django.server': {
             'handlers': ['console', 'file_debug', 'file_info', 'file_warn', 'file_error', 'mail_error',],
-            'level': 'DEBUG',
+            'level': 'NOTSET',
             'propagate': False,
         },
 
         # Standard logging for Django Channels.
         'django.channels': {
             'handlers': ['console', 'file_debug', 'file_info', 'file_warn', 'file_error', 'mail_error',],
-            'level': 'DEBUG',
+            'level': 'NOTSET',
             'propagate': False,
         },
         'django.channels.request': {
-            'handlers': ['console', 'file_debug', 'file_info', 'file_warn', 'file_error', 'mail_error', ],
-            'level': 'DEBUG',
+            'handlers': ['console', 'file_debug', 'file_info', 'file_warn', 'file_error', 'mail_error',],
+            'level': 'NOTSET',
             'propagate': False,
         },
         'django.channels.server': {
             'handlers': ['console', 'file_debug', 'file_info', 'file_warn', 'file_error', 'mail_error',],
-            'level': 'DEBUG',
+            'level': 'NOTSET',
             'propagate': False,
         },
     },
