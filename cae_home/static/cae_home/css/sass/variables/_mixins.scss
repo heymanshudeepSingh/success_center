@@ -20,6 +20,12 @@
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
+
+    // It seems that flexbox can break "print page" stylings, such as page breaks.
+    // Thus, prevent flexbox for print styles.
+    @media only print {
+        display: block;
+    }
 }
 
 @mixin flex-direction($value) {

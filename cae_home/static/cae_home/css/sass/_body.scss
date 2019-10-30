@@ -81,7 +81,9 @@ body {
 }
 
 body.grid {
-    display: grid;
+    @media only screen {
+        display: grid;
+    }
 
     grid-template-columns: 5% 45% 45% 5%;
 
@@ -192,9 +194,33 @@ body {
     overflow: hidden;
 }
 
+// See https://stackoverflow.com/a/42863348 for page break info.
+div.page-break {
+    display: block;
+    page-break-after: always;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    clear: both;
+}
+
 //===================================//
 //===== END Generic Class Block =====//
 //===================================//
+
+//====================================//
+//==== START Printer Styles Block ====//
+//====================================//
+
+body, header, main, footer, article {
+    @meda only print {
+        display: block !important;
+    }
+}
+
+//====================================//
+//===== END Printer Styles Block =====//
+//====================================//
 
 
 //================================================================================//
