@@ -184,6 +184,15 @@
                     color: theme-text($theme, 'link-hover');
                 }
             }
+
+            tr.error th, tr.error td {
+                > a {
+                    color: theme-status($theme, 'error', 'primary') !important;
+                }
+                > a:hover {
+                    color: theme-status($theme, 'error', 'primary-hover') !important;
+                }
+            }
         }
 
     }}
