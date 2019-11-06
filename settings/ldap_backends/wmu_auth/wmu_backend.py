@@ -233,7 +233,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
             # Associated login user does not exist or does not have name info. Check LDAP.
             first_name = self._parse_user_ldap_field(user_ldap_info, 'wmuFirstName')
             if first_name is None or first_name == '':
-                first_name = self.get_backup_ldap_name(uid, first_name=True)
+                first_name = self.get_backup_ldap_name(uid, first_name=True, user_ldap_info=user_ldap_info)
 
         # Get middle name info.
         middle_name = self._parse_user_ldap_field(user_ldap_info, 'wmuMiddleName')
@@ -245,7 +245,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
             # Associated login user does not exist or does not have name info. Check LDAP.
             last_name = self._parse_user_ldap_field(user_ldap_info, 'wmuLastName')
             if last_name is None or last_name == '':
-                last_name = self.get_backup_ldap_name(uid, last_name=True)
+                last_name = self.get_backup_ldap_name(uid, last_name=True, user_ldap_info=user_ldap_info)
 
         # Get email info.
         if login_user is not None and login_user.email != '':
@@ -482,6 +482,11 @@ class WmuAuthBackend(AbstractLDAPBackend):
 
         # Attempt to get full student info from LDAP.
         ldap_info = self.ldap_lib.search(search_filter='(uid={0})'.format(bronco_net), attributes='ALL_ATTRIBUTES')
+
+        # Check that info was returned.
+        if ldap_info is None:
+            # Nothing returned. Try again, but filter by "wmuUID" field. This should work if the "uid" field fails.
+            ldap_info = self.ldap_lib.search(search_filter='(wmuUID={0})'.format(bronco_net), attributes='ALL_ATTRIBUTES')
 
         # Unbind and return values.
         self.ldap_lib.unbind_server()

@@ -11,7 +11,7 @@ from django.core.management.base import BaseCommand
 
 # User Class Imports.
 from cae_home.models import WmuUser
-from settings.ldap_backends import wmu_auth
+from settings.ldap_backends.wmu_auth import wmu_backend
 from settings import extra_settings
 
 
@@ -60,7 +60,7 @@ class Command(BaseCommand):
         self.stdout.write(self.style.HTTP_INFO('\nCreate Student command has been called.'))
 
         # Initialize LDAP backend connector.
-        wmu_ldap = wmu_auth.WmuAuthBackend()
+        wmu_ldap = wmu_backend.WmuAuthBackend()
 
         # Open file.
         file_name = kwargs['file_name']

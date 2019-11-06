@@ -16,7 +16,7 @@ from django.core.management.base import BaseCommand
 
 # User Class Imports.
 from cae_home.models import User
-from settings.ldap_backends import wmu_auth
+from settings.ldap_backends.wmu_auth import cae_backend, wmu_backend
 from settings import extra_settings
 
 
@@ -65,8 +65,8 @@ class Command(BaseCommand):
         self.stdout.write(self.style.HTTP_INFO('\nCreate User command has been called.'))
 
         # Initialize LDAP backend connectors.
-        cae_ldap = wmu_auth.CaeAuthBackend()
-        wmu_ldap = wmu_auth.WmuAuthBackend()
+        cae_ldap = cae_backend.CaeAuthBackend()
+        wmu_ldap = wmu_backend.WmuAuthBackend()
 
         # Open file.
         file_name = kwargs['file_name']
@@ -120,6 +120,7 @@ class Command(BaseCommand):
 
                     if user_cae_groups['director']:
                         login_user.groups.add(Group.objects.get(name='CAE Director'))
+                        login_user.is_staff = True
                         self.stdout.write(self.style.HTTP_INFO('Set director group.'))
                     if user_cae_groups['attendant']:
                         login_user.groups.add(Group.objects.get(name='CAE Attendant'))
