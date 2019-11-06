@@ -23,6 +23,16 @@
     {% include 'cae_home/include/form_fields.html' %}
   {% endif %}
 
+  {% if name == "Edit Log Entry" %}
+  <script>
+    function delete(item = {{ form }})
+    {
+       var elem = document.getElementById(item);
+       from.delete()
+    }
+  </script>
+  <button onclick="delete()" >Delete</button>
+  {% endif %}
   {% if formset %}
     <hr>
     {{ formset.management_form }}
