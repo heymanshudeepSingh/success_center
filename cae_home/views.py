@@ -119,6 +119,14 @@ def logout(request):
 
 
 @login_required
+def helpful_resources(request):
+    """
+    "Useful links" page for CAE Center employees.
+    """
+    return TemplateResponse(request, 'cae_home/helpful_resources.html', {})
+
+
+@login_required
 def user_edit(request, slug):
     """
     Edit view for a single user.
