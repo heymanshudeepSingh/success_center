@@ -23,15 +23,9 @@
     {% include 'cae_home/include/form_fields.html' %}
   {% endif %}
 
-  {% if name == "Edit Log Entry" %}
-  <script>
-    function delete(item = {{ form }})
-    {
-       var elem = document.getElementById(item);
-       from.delete()
-    }
-  </script>
-  <button onclick="delete()" >Delete</button>
+  {% if delete_bool %}
+  <a href='{% url "cae_web_work_log:log_delete" pk=log_entry.pk %}'><input type="button" class="button primary"
+                                                                           value="Delete"></input></a>
   {% endif %}
   {% if formset %}
     <hr>
