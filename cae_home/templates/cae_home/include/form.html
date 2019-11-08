@@ -23,9 +23,8 @@
     {% include 'cae_home/include/form_fields.html' %}
   {% endif %}
 
-  {% if delete_bool %}
-  <a href='{% url "cae_web_work_log:log_delete" pk=log_entry.pk %}'><input type="button" class="button primary"
-                                                                           value="Delete"></input></a>
+  {% if delete_url %}
+    <a href="{{ delete_url }}" class="button primary">Delete</a>
   {% endif %}
   {% if formset %}
     <hr>
