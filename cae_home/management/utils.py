@@ -12,7 +12,7 @@ class ExpandedCommand(BaseCommand, ABC):
     """
     Expanded "BaseCommand" class with additional helper functions.
     """
-    def display_fixture_ouptut(self, model_name):
+    def display_fixture_output(self, model_name):
         """
         Displays output for after fixture finishes importing.
         """
