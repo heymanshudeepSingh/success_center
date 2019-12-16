@@ -23,9 +23,6 @@
     {% include 'cae_home/include/form_fields.html' %}
   {% endif %}
 
-  {% if delete_url %}
-    <a href="{{ delete_url }}" class="button primary">Delete</a>
-  {% endif %}
   {% if formset %}
     <hr>
     {{ formset.management_form }}
@@ -42,10 +39,20 @@
   {% endif %}
 
   {% if not exclude_buttons %}
-    {% if button_text %}
-      <input class="button primary" type="submit" value="{{ button_text }}">
-    {% else %}
-      <input class="button primary" type="submit" value="Submit">
-    {% endif %}
+    <div>
+      <p></p>
+
+      {% if button_text %}
+        <input class="button primary" type="submit" value="{{ button_text }}">
+      {% else %}
+        <input class="button primary" type="submit" value="Submit">
+      {% endif %}
+
+      {% if delete_url %}
+        <a href="{{ delete_url }}" class="button warning">Delete</a>
+      {% else %}
+        <p></p>
+      {% endif %}
+    </div>
   {% endif %}
 </form>
