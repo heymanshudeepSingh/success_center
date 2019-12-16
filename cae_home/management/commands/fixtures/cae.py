@@ -11,7 +11,7 @@ def import_model_fixtures(style):
     create_assets(style)
 
 
-def create_assets(style):
+def create_assets(style, display_output=False):
     """
     Imports fixtures for Asset models.
     """

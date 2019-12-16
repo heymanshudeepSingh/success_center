@@ -14,23 +14,24 @@ def import_model_fixtures(style):
     Calls individual fixture methods.
     """
     stdout.write(style.HTTP_NOT_MODIFIED('IMPORTING FIXTURES for User Model Group.\n'))
-    create_site_themes(style)
-    create_groups(style)
-    create_wmu_users(style)
-    create_addresses(style)
+    create_site_themes(style, display_output=True)
+    create_groups(style, display_output=True)
+    create_wmu_users(style, display_output=True)
+    create_addresses(style, display_output=True)
 
 
-def create_site_themes(style):
+def create_site_themes(style, display_output=False):
     """
     Imports fixtures for profile theme models.
     """
     # Load preset fixtures.
     call_command('loaddata', 'full_models/site_themes')
 
-    stdout.write('Imported fixtures for ' + style.SQL_FIELD('Site Theme') + ' models.\n')
+    if display_output and style is not None:
+        stdout.write('Imported fixtures for ' + style.SQL_FIELD('Site Theme') + ' models.\n')
 
 
-def create_groups(style=None):
+def create_groups(style=None, display_output=False):
     """
     Creates django "auth_group" models and allocates proper permissions.
     Technically not a fixture, but still pretty integral to site running, and has no random data.
@@ -67,7 +68,7 @@ def create_groups(style=None):
             filtered_permissions.append(permission)
     group_array[6].permissions.set(filtered_permissions)
 
-    if style is not None:
+    if display_output and style is not None:
         stdout.write('Populated ' + style.SQL_FIELD('Group') + ' models.\n')
 
 
@@ -130,17 +131,18 @@ def get_cae_center_permissions():
     return app_permisson_list
 
 
-def create_wmu_users(style):
+def create_wmu_users(style, display_output=False):
     """
     Imports fixtures for WMU User models.
     """
     # Load preset fixtures.
     call_command('loaddata', 'full_models/wmu_users')
 
-    stdout.write('Imported fixtures for ' + style.SQL_FIELD('Wmu User') + ' models.\n')
+    if display_output and style is not None:
+        stdout.write('Imported fixtures for ' + style.SQL_FIELD('Wmu User') + ' models.\n')
 
 
-def create_addresses(style):
+def create_addresses(style, display_output=False):
     """
     Imports fixtures for Address models.
     """
