@@ -78,8 +78,7 @@ def create_users(style):
     """
     # Create extra superusers for developers.
     models.User.get_or_create_superuser('brodriguez8774', '', default_password)  # Brandon
-    models.User.get_or_create_superuser('skd6970', '', default_password)  # Steven (Senior Design)
-    models.User.get_or_create_superuser('jbn6294', '', default_password)  # Josh (Senior Design)
+    models.User.get_or_create_superuser('jmeachum20', '', default_password) # Jesse
 
     create_permission_group_users(password=default_password)
 
