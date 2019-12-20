@@ -20,8 +20,9 @@ function main () {
     echo ""
     echo -e "${color_blue}Resetting migrations... ${color_reset}"
 
-    # Loop through all directories in 2nd and 4th levels.
-    for dir in ../*/* ../*/*/*/*
+
+    # Loop through all CAE Workspace migrations.
+    for dir in ../*/*
     do
         # Check if actually a directory.
         if [[ -d $dir ]];
@@ -36,12 +37,57 @@ function main () {
                     # Check that file follows migration name format.
                     if [[ $file == *"migrations/0"*".py" ]]
                     then
-                        # Finally purge selected files.
-                        echo "  Removing $file"
-                        rm -f $file
+                        # Check if migration file is commited. Only remove if not.
+                        if [[ $(git ls-files --error-unmatch $file 2>/dev/null) == "" ]]
+                        then
+                            # Finally purge selected files.
+                            echo "  Removing $file"
+                            rm -f $file
+                        fi
                     fi
                 done
             fi
+        fi
+    done
+
+
+    # Loop through all imported subproject migrations.
+    for dir in ../apps/*
+    do
+        # Check if actually a directory.
+        if [[ -d $dir ]]
+        then
+            cd $dir
+
+            # Get all directories in folder.
+            for sub_dir in $(pwd)/*/*
+            do
+                # Check if folder name ends in "migrations".
+                if [[ $sub_dir == *"migrations" ]]
+                then
+                    # Loop through all files in folder.
+                    for file in $sub_dir/*
+                    do
+                        # Check if actually a file.
+                        if [[ -f $file ]]
+                        then
+                            # Check that file follows migration name format.
+                            if [[ $file == *"migrations/0"*".py" ]]
+                            then
+                                # Check if migration file is commited. Only remove if not.
+                                if [[ $(git ls-files --error-unmatch $file 2>/dev/null) == "" ]]
+                                then
+                                    # Finally purge selected files.
+                                    echo "  Removing $file"
+                                    rm -f $file
+                                fi
+                            fi
+                        fi
+                    done
+
+                fi
+            done
+            cd ../../scripts/
         fi
     done
 
