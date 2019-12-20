@@ -17,7 +17,7 @@ trim_trailing_whitespace = true
 
 
 # Set properties for most file types.
-[*.{css,scss,py,js,json,php,jar,c}]
+[*.{css,scss,py,js,json,php,jar,c,sh}]
 # Set character encoding
 charset = utf-8
 
