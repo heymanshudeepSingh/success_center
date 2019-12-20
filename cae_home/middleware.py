@@ -3,7 +3,7 @@ Middleware for CAE Home app.
 """
 
 # System Imports.
-import pytz
+import pytz, re
 from django.conf import settings
 from django.contrib.sites.shortcuts import get_current_site
 from django.db.models import ObjectDoesNotExist
@@ -83,7 +83,6 @@ class GetProjectDetailMiddleware(object):
             except ObjectDoesNotExist:
                 pass
 
-
         return response
 
 
@@ -113,5 +112,25 @@ class GetUserSiteOptionsMiddleware(object):
                 response.context_data['site_theme'] = models.SiteTheme.objects.get(slug='wmu')
                 response.context_data['desktop_font_size'] = 'base'
                 response.context_data['mobile_font_size'] = 'base'
+
+        # Parse url. All we care about is the argument before the first "/" character.
+        url_split = re.split('^/([^/]*)/*', request.path)
+
+        # Check that at least one argument was found.
+        if len(url_split) > 1:
+            app_url = url_split[1]
+            try:
+                request.session['cae_workspace_main_nav_template_path'] = settings.INSTALLED_APP_URL_DICT[app_url]
+            except KeyError:
+                # Arg was not for subproject. Likely a page in cae_home, such as user profile edit page.
+                # Skip saving to session.
+                pass
+
+        # Get main nav template path from session.
+        try:
+            response.context_data['main_nav_template_path'] = request.session['cae_workspace_main_nav_template_path']
+        except KeyError:
+            # Session was not populated. Default to cae_home main nav path.
+            response.context_data['main_nav_template_path'] = 'cae_home/nav/default_app_nav.html'
 
         return response

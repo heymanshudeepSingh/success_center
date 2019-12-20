@@ -14,7 +14,9 @@ debug_print("===== Base Settings =====")
 
 # Application definition
 
-from settings.allowed_apps import INSTALLED_APPS, INSTALLED_CAE_PROJECTS, INSTALLED_APP_DETAILS, ADMIN_REORDER
+from settings.allowed_apps import (
+    INSTALLED_APPS, INSTALLED_CAE_PROJECTS, INSTALLED_APP_DETAILS, ADMIN_REORDER, INSTALLED_APP_URL_DICT
+)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

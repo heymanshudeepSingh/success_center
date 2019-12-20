@@ -105,6 +105,8 @@ ALLOWED_CAE_PROJECTS = casefolded_project_dict
 # Automatically populated for automatic url generation on home page. Do not edit.
 INSTALLED_CAE_PROJECTS = {}
 
+# Automatically populated url-based dict for installed apps. Used in app main nav template generation.
+INSTALLED_APP_URL_DICT = {}
 
 # Logic to automatically install a given allowed app, if found.
 installed_app_count = 1
@@ -170,6 +172,7 @@ for project_folder_name in project_folder_list:
                         app_name,
                         INSTALLED_CAE_PROJECTS[project_key_name]['url-prefix']
                     ))
+                    INSTALLED_APP_URL_DICT[INSTALLED_CAE_PROJECTS[project_key_name]['url-prefix']] = '{0}_core/app_nav.html'.format(project_key_name)
                     installed_app_count += 1
                     included_app_list.append(app_name)
                 else:
