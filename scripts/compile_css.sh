@@ -82,15 +82,19 @@ function main () {
                         # Loop through all files in sass subfolder.
                         for file in $dir/sass/*
                         do
-                            # Check that file follows sass compilation file naming convention.
-                            if [[ $file != *"/css/sass/_"*".scss" ]]
+                            # Check if actually a file.
+                            if [[ -f $file ]]
                             then
-                                # Add file to list of compile locations.
-                                filename=$(basename "${file%.*}")
-                                css_directories+=("$file:$dir/$filename.css")
-
-                                # Remove old file before compiling, if present.
-                                rm -f "$dir/$filename.css" "$dir/$filename.css.map"
+                                # Check that file follows sass compilation file naming convention.
+                                if [[ $file != *"/css/sass/_"*".scss" ]]
+                                then
+                                    # Add file to list of compile locations.
+                                    filename=$(basename "${file%.*}")
+                                    css_directories+=("$file:$dir/$filename.css")
+    
+                                    # Remove old file before compiling, if present.
+                                    rm -f "$dir/$filename.css" "$dir/$filename.css.map"
+                                fi
                             fi
                         done
                     fi
@@ -104,13 +108,17 @@ function main () {
                         # Loop through all files in sass subfolder.
                         for file in $dir/sass/*
                         do
-                            # Check that file follows sass compilation file naming convention.
-                            if [[ $file != *"/css/sass/_"*".scss" ]]
+                            # Check if actually a file.
+                            if [[ -f $file ]]
                             then
-                                filename=$(basename "${file%.*}")
+                                # Check that file follows sass compilation file naming convention.
+                                if [[ $file != *"/css/sass/_"*".scss" ]]
+                                then
+                                    filename=$(basename "${file%.*}")
 
-                                # Remove old file before compiling, if present.
-                                rm -f "$dir/$filename.css" "$dir/$filename.css.map"
+                                    # Remove old file before compiling, if present.
+                                    rm -f "$dir/$filename.css" "$dir/$filename.css.map"
+                                fi
                             fi
                         done
                     fi
