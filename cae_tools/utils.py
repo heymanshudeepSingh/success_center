@@ -13,7 +13,7 @@ def test_single_email():
     This function is acceptable when a single email is to be sent.
     """
 
-    logging.info('Sending test email...\n')
+    logging.info('Sending test single email...\n')
 
     # Compose email.
     email_from = 'cae-programmers@wmich.edu'
@@ -59,6 +59,32 @@ def test_mass_email():
         'congue ultrices malesuada est. Aliquam efficitur id mi eget malesuada. Mauris tempor leo nec mi blandit,' \
         'sed sagittis augue dapibus. Pellentesque sem leo, pulvinar eget tellus in, vehicula imperdiet dolor.' \
         'Donec nec pharetra nulla. Fusce ac nulla aliquet, pellentesque diam at, dictum tortor. '
+    email_2_message = 'This is a test mass email from the CAE Center.'
+
+    # Compose emails.
+    email_1 = (email_subject, email_1_message, email_from, [email_to, ])
+    email_2 = (email_subject, email_2_message, email_from, [email_to, ])
+
+    # Send emails.
+    send_mass_mail((email_1, email_2), fail_silently=False)
+
+    logging.info('Emails sent.\n')
+
+
+def worklog_mass_email(*args, **kwargs):
+    """
+    Tests sending of email with "send_mass_mail" function.
+    This function is far more efficient when sending multiple emails. We are likely to use this as the default.
+    Note that, despite the name, send_mass_email can still send a single email, if desired.
+    """
+
+    logging.info('Sending test emails...\n')
+
+    # Compose email contents.
+    email_from = 'cae-programmers@wmich.edu'
+    email_to = 'xaf8122@wmich.edu'
+    email_subject = kwargs.get('email1_subject')
+    email_1_message = kwargs.get('log_entries')
     email_2_message = 'This is a test email from the CAE Center.'
 
     # Compose emails.
