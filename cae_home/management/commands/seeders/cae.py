@@ -18,15 +18,16 @@ def generate_model_seeds(style, model_count):
     """
     Calls individual seeder methods.
     """
-    # stdout.write(style.HTTP_NOT_MODIFIED('SEEDING CAE Model Group.\n'))
-    # create_assets(style, model_count)
-    pass
+    stdout.write(style.HTTP_NOT_MODIFIED('SEEDING CAE Model Group.\n'))
+    create_assets(style, model_count)
 
 
 def create_assets(style, model_count):
     """
     Create Asset models.
     """
+    print(f"Model count: {model_count}")
+
     # Load preset fixtures.
     cae_fixtures.create_assets(style)
 
@@ -35,6 +36,7 @@ def create_assets(style, model_count):
 
     # Count number of models already created.
     pre_initialized_count = len(models.Asset.objects.all())
+    print(f"Pre-initialized count: {pre_initialized_count}")
 
     # Get all related models.
     rooms = models.Room.objects.all()
@@ -50,7 +52,7 @@ def create_assets(style, model_count):
         while try_create_model:
             # Get Room.
             index = randint(0, len(rooms) - 1)
-            room = rooms[index]
+            # room = rooms[index]
 
             # Generate Ip address. 50/50 chance of being ipv4 or ipv6
             if randint(0, 1) == 1:
@@ -61,7 +63,7 @@ def create_assets(style, model_count):
             # Attempt to create model seed.
             try:
                 models.Asset.objects.create(
-                    room=room,
+                    # room=room,
                     serial_number=faker_factory.isbn13(),
                     asset_tag=faker_factory.ean8(),
                     brand_name=faker_factory.domain_word(),
@@ -70,6 +72,8 @@ def create_assets(style, model_count):
                     device_name=faker_factory.last_name(),
                     description=faker_factory.sentence(),
                 )
+
+                try_create_model = False
             except (ValidationError, IntegrityError):
                 # Seed generation failed. Nothing can be done about this without removing the random generation aspect.
                 # If we want that, we should use fixtures instead.

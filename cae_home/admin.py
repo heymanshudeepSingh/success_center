@@ -472,10 +472,10 @@ class SemesterDateAdmin(admin.ModelAdmin):
 
 class AssetAdmin(admin.ModelAdmin):
     # Fields to display in admin list view.
-    list_display = ('room', 'brand_name', 'asset_tag', 'serial_number', 'mac_address', 'ip_address')
+    list_display = ('brand_name', 'asset_tag', 'serial_number', 'mac_address', 'ip_address')
 
     # Fields to filter by in admin list view.
-    list_filter = ('room', 'brand_name',)
+    list_filter = ('brand_name',)
 
     # Fields to search in admin list view.
     search_fields = ['asset_tag', 'serial_number', 'mac_address', 'ip_address',]
@@ -487,7 +487,7 @@ class AssetAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
             'fields': (
-                'room', 'brand_name', 'asset_tag', 'serial_number', 'mac_address', 'ip_address', 'device_name',
+                'brand_name', 'asset_tag', 'serial_number', 'mac_address', 'ip_address', 'device_name',
                 'description',
             )
         }),
@@ -516,4 +516,4 @@ admin.site.register(models.SemesterDate, SemesterDateAdmin)
 admin.site.register(models.WmuUser, WmuUserAdmin)
 
 # CAE Model Registration
-# admin.site.register(models.Asset, AssetAdmin)
+admin.site.register(models.Asset, AssetAdmin)
