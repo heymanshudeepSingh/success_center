@@ -2,8 +2,20 @@
 # Basic script to set (reset) project file permissions.
 
 
+# Abort on error.
+set -e
+
+
+# Global variables.
 color_reset='\033[0m'
 color_red='\033[1;31m'
+color_green='\033[1;32m'
+color_blue='\033[1;34m'
+color_cyan='\033[1;36m'
+
+
+# Get arguments.
+args=${@}
 
 
 function main () {
@@ -15,13 +27,43 @@ function main () {
         echo ""
         exit 0
     else
-        cd "$(dirname "$0")/../.."
+        # Default to project root, which is 2 directories up from script location.
+        directory_location="$(dirname "$0")/../.."
+        force_progress=""
+
+        # Handle args.
+        for arg in $args
+        do
+            # Handle if "force_progress" arg was passed.
+            if [[ $arg == "force_progress" || $arg == "-f" ]]
+            then
+                force_progress=True
+
+            # Handle everything else. Assume is directory location.
+            elif [[ -d $arg ]]
+            then
+                directory_location=$arg
+            fi
+        done
+
+        # Change directory.
+        cd $directory_location
+
+        # Display location and give user chance to cancel.
+        echo ""
+        echo -e "${color_blue}Setting permissions for directory and all sub-folders/sub-files:${color_reset}"
+        echo "$(pwd)"
+        echo ""
+        if [[ ! $force_progress ]]
+        then
+            echo -e "${color_cyan}Press enter to continue or ctrl+c to cancel.${color_reset}"
+            read user_input
+        fi
 
         echo "Setting project file ownership..."
         chown www-data:ceas_programmers -R ./
 
         echo "Setting project file permissions..."
-
         find . -type d -exec chmod u+rwx {} \;  # Set all directors to be read/write/executable by user owner.
         find . -type d -exec chmod g+rwx {} \;  # Set all directories to be read/write/executable by group owners.
         find . -type d -exec chmod o-rwx {} \;  # Remove directory write/executable access by other users.
