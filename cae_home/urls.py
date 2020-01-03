@@ -24,7 +24,7 @@ urlpatterns = [
     url(r'^user/edit/(?P<slug>[\w-]+)/$', views.user_edit, name='user_edit'),
 
     # CAE Home/Index page.
-    url(r'^helpful_resources/$', views.helpful_resources, name='helpful_resources'),
+    url(r'^user/helpful_resources/$', views.helpful_resources, name='helpful_resources'),
     url(r'^$', views.index, name='index'),
 ]
 
