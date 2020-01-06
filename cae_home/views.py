@@ -158,7 +158,7 @@ def user_edit(request, slug):
 
     form = forms.AddressModelForm(instance=address)
     form.display_name = 'Address'
-    form_list.append(form)
+    # form_list.append(form)
 
     form = forms.ProfileModelForm_OnlySiteOptions(instance=user_profile)
     form.display_name = 'Site Settings'
@@ -185,7 +185,7 @@ def user_edit(request, slug):
         form = forms.AddressModelForm(instance=address, data=request.POST)
         form.name = 'AddressForm'
         form.display_name = 'Address'
-        form_list.append(form)
+        # form_list.append(form)
 
         form = forms.ProfileModelForm_OnlySiteOptions(instance=user_profile, data=request.POST)
         form.name = 'SiteSettingsForm'
