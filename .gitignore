@@ -20,6 +20,9 @@ CICO.pyproj
 CICO.sln
 package-lock.json
 
+# Do not track static files
+static
+
 # Do not track python cache files.
 *.pyc
 
