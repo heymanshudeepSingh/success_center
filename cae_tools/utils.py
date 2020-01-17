@@ -71,27 +71,28 @@ def test_mass_email():
     logging.info('Emails sent.\n')
 
 
-def worklog_mass_email(*args, **kwargs):
+def worklog_mass_email(*args, email_subject=None, email_message=None, **kwargs):
     """
     Tests sending of email with "send_mass_mail" function.
     This function is far more efficient when sending multiple emails. We are likely to use this as the default.
     Note that, despite the name, send_mass_email can still send a single email, if desired.
     """
+    if email_subject is None:
+        raise TypeError("Email Subject Cannot Be None.")
+
+    if email_message is None:
+        raise TypeError("Email Message Cannot Be None.")
 
     logging.info('Sending test emails...\n')
 
     # Compose email contents.
     email_from = 'cae-programmers@wmich.edu'
     email_to = 'xaf8122@wmich.edu'
-    email_subject = kwargs.get('email1_subject')
-    email_1_message = kwargs.get('log_entries')
-    email_2_message = 'This is a test email from the CAE Center.'
 
     # Compose emails.
-    email_1 = (email_subject, email_1_message, email_from, [email_to, ])
-    email_2 = (email_subject, email_2_message, email_from, [email_to, ])
+    email_1 = (email_subject, email_message, email_from, [email_to, ])
 
     # Send emails.
-    send_mass_mail((email_1, email_2), fail_silently=False)
+    send_mass_mail((email_1, ), fail_silently=False)
 
     logging.info('Emails sent.\n')
