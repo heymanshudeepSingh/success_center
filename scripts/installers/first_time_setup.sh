@@ -73,7 +73,7 @@ function main() {
         echo ""
         echo ""
 
-        # Arch linux (manjaro).
+        # Arch linux (such as Manjaro).
         if [[ "$user_input" == "1" ]]
         then
             echo -e "NOTE: This script has been tested on ${color_blue}Manjaro XFCE 18.0.4${color_reset}."
