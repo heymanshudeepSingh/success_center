@@ -39,31 +39,50 @@ function main() {
     find /var/lib/mysql -type d -exec chmod g+rwx {} \;
     chmod g+rw -R /var/lib/mysql
 
+    # Check for location of "my.cnf" file on system.
+    config_file=""
+    if [[ -f /etc/mysql/my.cnf ]]
+    then
+        config_file="/etc/mysql/my.cnf"
+    elif [[ -f /etc/my.cnf ]]
+    then
+        config_file="/etc/my.cnf"
+    else
+        echo -e "${color_red}Could not find \"my.cnf\" file at either /etc/mysql or /etc directories.${color_reset}"
+        echo -e "${color_red}Config values cannot be set without a \"my.cnf\" file.${color_reset}"
+        echo -e "${color_red}Please check if any errors have occured before this point and try again.${color_reset}"
+        echo -e "${color_red}Terminating script.${color_reset}"
+    fi
+
+    echo ""
+    echo -e "${color_blue}Initial DB installation complete.${color_reset}"
+    echo -e "${color_blue}Setting up config located at \"$config_file\".${color_reset}"
+
     # Set extra database config values.
     # Note that mysql "utf8" is apparently only encoded in 3 bytes per character. Real utf8 is 4 bytes per.
     # To fix this, mysql "utf8mb4" was introduced that follows proper utf8 encoding standards.
     # See https://medium.com/@adamhooper/in-mysql-never-use-utf8-use-utf8mb4-11761243e434 for more info.
-    echo "" >> /etc/mysql/my.cnf
-    echo "#" >> /etc/mysql/my.cnf
-    echo "# Set default character set." >> /etc/mysql/my.cnf
-    echo "#" >> /etc/mysql/my.cnf
-    echo "[client]" >> /etc/mysql/my.cnf
-    echo "default-character-set = utf8mb4" >> /etc/mysql/my.cnf
-    echo "" >> /etc/mysql/my.cnf
-    echo "[mysqld]" >> /etc/mysql/my.cnf
-    echo "collation_server = utf8mb4_unicode_ci" >> /etc/mysql/my.cnf
-    echo "character_set_server = utf8mb4" >> /etc/mysql/my.cnf
-    echo "" >> /etc/mysql/my.cnf
-    echo "[mysql]" >> /etc/mysql/my.cnf
-    echo "default-character-set = utf8mb4" >> /etc/mysql/my.cnf
-    echo "" >> /etc/mysql/my.cnf
+    echo "" >> $config_file
+    echo "#" >> $config_file
+    echo "# Set default character set." >> $config_file
+    echo "#" >> $config_file
+    echo "[client]" >> $config_file
+    echo "default-character-set = utf8mb4" >> $config_file
+    echo "" >> $config_file
+    echo "[mysqld]" >> $config_file
+    echo "collation_server = utf8mb4_unicode_ci" >> $config_file
+    echo "character_set_server = utf8mb4" >> $config_file
+    echo "" >> $config_file
+    echo "[mysql]" >> $config_file
+    echo "default-character-set = utf8mb4" >> $config_file
+    echo "" >> $config_file
 
-    echo "" >> /etc/mysql/my.cnf
-    echo "#" >> /etc/mysql/my.cnf
-    echo "# Allow auto-completion in MySQL client." >> /etc/mysql/my.cnf
-    echo "#" >> /etc/mysql/my.cnf
-    echo "auto-rehash" >> /etc/mysql/my.cnf
-    echo "" >> /etc/mysql/my.cnf
+    echo "" >> $config_file
+    echo "#" >> $config_file
+    echo "# Allow auto-completion in MySQL client." >> $config_file
+    echo "#" >> $config_file
+    echo "auto-rehash" >> $config_file
+    echo "" >> $config_file
 
     # Restart database to read in modified setup.
     systemctl restart mariadb.service
