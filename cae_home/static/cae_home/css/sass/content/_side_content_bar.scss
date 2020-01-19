@@ -34,7 +34,7 @@
 //===========================//
 
 .content-bar-left, .content-bar-right {
-    position: relative;
+    position: absolute;
     z-index: 5;
 
     @include display-flex;
@@ -67,6 +67,8 @@
 
         padding: 10px;
         padding-bottom: 0;
+
+        height: 100vh;
 
         @each $header_element in $header_element_list {
         > #{$header_element} {
