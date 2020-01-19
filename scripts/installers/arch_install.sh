@@ -77,11 +77,7 @@ function main() {
         echo -e "${color_blue}Installing MySQL dependencies...${color_reset}"
 
         # Call MariaDB Arch install script.
-#        echo $(pwd)
-#        echo "$(pwd)/scripts/installers/misc/arch_maria_db_install.sh"
         sudo ./scripts/installers/misc/arch_maria_db_install.sh
-#        sudo ./scripts/installers/misc/arch_maria_db_install.sh
-#        sudo ./scripts/installers/ubuntu_install.sh
     fi
 
     echo ""
