@@ -701,8 +701,8 @@ header .header-bottom nav {
 }
 
 .mobile-nav-icon, .mobile-nav-icon hr {
-        @include transition(all 0.3s ease-out);
-    }
+    @include transition(all 0.3s ease-out);
+}
 
 //=====================================//
 //===== END Mobile Nav Icon Block =====//
