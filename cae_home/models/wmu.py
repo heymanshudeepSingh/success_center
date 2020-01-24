@@ -117,10 +117,21 @@ class RoomType(models.Model):
             )
 
 
+# class RoomManager(models.Manager):
+#     """
+#     Room Model Manager used by models that have a room foreign key and need
+#     to serialize the data to show foreign keys.
+#     """
+#     def get_by_natural_key(self, name):
+#         return self.get(name=name)
+
+
 class Room(models.Model):
     """
     A standard university room.
     """
+    # objects = RoomManager()  # For serializing of foreign keys
+
     # Relationship keys.
     department = models.ManyToManyField('Department', blank=True)
     room_type = models.ForeignKey('RoomType', on_delete=models.CASCADE)
@@ -138,6 +149,9 @@ class Room(models.Model):
     )
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
+
+    def natural_key(self):
+        return self.name
 
     class Meta:
         verbose_name = 'Room'
