@@ -34,7 +34,7 @@
 //===========================//
 
 .content-bar-left, .content-bar-right {
-    position: relative;
+    position: absolute;
     z-index: 5;
 
     @include display-flex;
@@ -67,6 +67,8 @@
 
         padding: 10px;
         padding-bottom: 0;
+
+        height: 100vh;
 
         @each $header_element in $header_element_list {
         > #{$header_element} {
@@ -329,12 +331,39 @@
             background-color: $color-trans-grey-25;
         }
 
+        // Font Awesome icons are weird in that their fill is sometimes the "font color" style.
+        // Since we're using this for background fill, putting the style here instead of the "Typography" block.
         .arrow-right:hover, .arrow-left:hover {
-            background-color: theme-status($theme, 'primary', 'primary');
+            color: theme-status($theme, 'primary', 'primary');
+            background-color: theme-background($theme, 'primary');
         }
 
     }}
 
+}
+
+.content-bar-left {
+    @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & {
+
+        // Make arrow more visible once content bar is shown.
+        .arrow-left {
+            background-color: theme-status($theme, 'primary', 'primary');
+        }
+
+    }}
+}
+
+.content-bar-right {
+    @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & {
+
+        // Make arrow more visible once content bar is shown.
+        .arrow-right {
+            background-color: theme-status($theme, 'primary', 'primary');
+        }
+
+    }}
 }
 
 //========================================================//
@@ -370,6 +399,10 @@
     > .bar-nav p {
         @include transition(color 0.5s, background-color 0.5s, border 0.5s);
         cursor: pointer;
+    }
+
+    .arrow-left, .arrow-right {
+        @include transition(all 0.3s ease-out);
     }
 }
 
