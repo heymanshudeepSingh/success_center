@@ -80,6 +80,7 @@ def create_users(style):
     models.User.get_or_create_superuser('brodriguez8774', '', default_password)  # Brandon
     models.User.get_or_create_superuser('jmeachum20', '', default_password) # Jesse
     models.User.get_or_create_superuser('a', '', default_password) # Singh
+    models.User.get_or_create_superuser('david', '', default_password) #David Mikovits
 
     create_permission_group_users(password=default_password)
 
