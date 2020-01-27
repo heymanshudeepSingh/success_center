@@ -592,15 +592,33 @@ header nav .mobile-nav-icon {
 //==== START "Mobile Nav Icon" Theme Colors Block ====//
 //====================================================//
 
+// Nav icon colors when not hovered/active.
 header nav .mobile-nav-icon {
 
     @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
-        border: 1px solid theme-background($theme, 'border');
+        border: 1px solid theme-background($theme, 'highlight');
 
         hr {
-            border-top: 1px solid theme-background($theme, 'border');
+            border-top: 1px solid theme-background($theme, 'highlight');
+        }
+
+    }}
+
+}
+
+// Nav icon colors when hovered/active.
+header nav .mobile-nav-icon:hover, header nav .mobile-nav-icon:active {
+
+    @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & {
+
+        background-color: theme-background($theme, 'highlight');
+        border: 1px solid theme-background($theme, 'primary');
+
+        hr {
+            border-top: 1px solid theme-background($theme, 'primary');
         }
 
     }}
@@ -643,6 +661,9 @@ header .header-bottom nav {
             border-bottom: 1px solid theme-background($theme, 'border');
         }
 
+        ul > li > ul > li {
+            border: 1px solid theme-background($theme, 'primary');
+        }
     }}
 
 }
@@ -677,6 +698,10 @@ header .header-bottom nav {
 
 .mobile-nav-icon {
     cursor: pointer;
+}
+
+.mobile-nav-icon, .mobile-nav-icon hr {
+    @include transition(all 0.3s ease-out);
 }
 
 //=====================================//

@@ -55,6 +55,17 @@ TEMPLATES = [
     },
 ]
 
+WEBPACK_LOADER = {
+    'CICO': {
+        'CACHE': not DEBUG,
+        'BUNDLE_DIR_NAME': os.path.join(BASE_DIR, '/apps/CICO/cico_core/static/cico_core/dist/'),  # must end with slash
+        'STATS_FILE': os.path.join(BASE_DIR, '/apps/CICO/cico_core/static/cico_core/webpack-stats.json'),
+        'POLL_INTERVAL': 0.1,
+        'TIMEOUT': None,
+        'IGNORE': [r'.+\.hot-update.js', r'.+\.map'],
+        'LOADER_CLASS': 'webpack_loader.loader.WebpackLoader',
+    }
+}
 
 ASGI_APPLICATION = 'settings.routing.application'
 WSGI_APPLICATION = 'settings.wsgi.application'

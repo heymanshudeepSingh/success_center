@@ -30,7 +30,6 @@ class Asset(models.Model):
     date_modified = models.DateTimeField(auto_now=True)
 
     class Meta:
-        verbose_name = "Asset"
         verbose_name_plural = "Assets"
         ordering = ('asset_tag',)
 

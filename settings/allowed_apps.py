@@ -29,6 +29,8 @@ INSTALLED_APPS = [
     'django_filters',
     'phonenumber_field',
     'rest_framework',
+
+    'webpack_loader',
 ]
 
 
