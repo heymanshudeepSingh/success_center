@@ -64,3 +64,5 @@ class ConsoleColors:
     bold_red = '\033[1;31m'
     bold_yellow = '\033[1;33m'
     bold_blue = '\033[1;34m'
+
+
