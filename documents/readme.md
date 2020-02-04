@@ -11,6 +11,8 @@ For information on how project CSS structure is setup, see `css.md`.
 
 For information on using React or Javascript, see `javascript_and_react.md`.
 
+For information on middleware, see `middleware.md`.
+
 For information on using datetime recurrence rules, see `datetime_recurrence_rules.md`.
 
 For information on production deployment, see `deployment.md`.
@@ -50,5 +52,5 @@ creating this SubProject and all related Apps.
 * Open up `settings/allowed_apps.py`.
 * Scroll down to `ALLOWED_CAE_APPS` and follow the example provided.
 * Once the new SubProject or App is added, it should automatically be imported from that point on, as long as it is
-present inside the `apps` folder. 
+present inside the `apps` folder.
 
