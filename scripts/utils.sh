@@ -198,6 +198,30 @@ function check_user () {
 
 
 ###
+ # Checks that user does NOT match provided argument.
+ ##
+function check_not_user () {
+    # Check that user value was provided by first arg.
+    if [[ "$1" == "" ]]
+    then
+        echo ""
+        echo -e "${color_red}No user passed in to \"check_user\" function. Terminating script.${color_reset}"
+        echo ""
+        exit 0
+    fi
+
+    # Check that users do not match.
+    if [[ "$USER" == "$1" ]]
+    then
+        echo ""
+        echo -e "${color_red}Please do not run script as \"$1\" user. Terminating script.${color_reset}"
+        echo ""
+        exit 0
+    fi
+}
+
+
+###
  # Display passed prompt and get user input.
  # If provided, first arg is used as output text.
  # Return true on "yes" or false otherwise.
