@@ -1,7 +1,21 @@
 #!/usr/bin/env bash
-# Utility script to provide helper functions/logic to other scripts.
-
-echo "Starting utility script."
+###
+ # Utility script to provide helper functions/logic to other scripts.
+ #
+ # Color Notes:
+ #      Use colors by adding the "-e" flag to echo, otherwise it will just print out the ascii values of the color.
+ #
+ #      Reset - Should be used at the end of every echo that uses a color.
+ #      Red - For errors.
+ #      Green - For critical success?
+ #      Blue - Headers to visually differentiate new sections of data to the user.
+ #      Cyan - For prompts that ask the user to input a value.
+ #
+ # return_value:
+ #      Used as a variable to save return values of functions.
+ #      Necessary or else we can only return integers. Also, any integer other than 0 will count as an "error flag" and
+ #          cause the scripts to terminate if the "set -e" flag is set.
+ ##
 
 
 # Global Variables.
@@ -11,6 +25,111 @@ color_red='\033[1;31m'
 color_green='\033[1;32m'
 color_blue='\033[1;34m'
 color_cyan='\033[1;36m'
+orig_args=${@}
+args=()
+declare -A kwargs
+
+
+###
+ # Processes all passed script args/kwargs.
+ #
+ # https://opensource.com/article/18/5/you-dont-know-bash-intro-bash-arrays
+ # https://stackoverflow.com/a/3467959
+ ##
+function proccess_args () {
+    key=""
+    for arg in $orig_args
+    do
+        # Check if we already have a key.
+        if [[ $key != "" ]]
+        then
+
+            # We have a key. Check that we don't have two in a row.
+            if [[ $arg == "--"* ]]
+            then
+                # Found a second key immediately after the first.
+                echo ""
+                echo -e "${color_red}Two keys were passed in a row. Expected key, value pairs. Terminating script.${color_reset}"
+                echo ""
+                exit 0
+            fi
+
+            # Save key value pair.
+            kwargs[$key]=$arg
+
+            # Reset key.
+            key=""
+        else
+            # We do not have a key.
+            # Check if value is kwarg key or standard arg.
+            if [[ $arg == "--"* ]]
+            then
+                # Handle for kwarg key. Save minus the "--" part.
+                key=${arg##*-}
+            else
+                # Handle for normal arg.
+                args+=($arg)
+            fi
+        fi
+    done
+    orig_args=""
+
+    # Check if we have a remaining key without an associated value.
+    if [[ $key != "" ]]
+    then
+        # Found remaining key.
+        echo ""
+        echo -e "${color_red}Found kwarg key without passed value. Terminating script.${color_reset}"
+        echo ""
+        exit 0
+    fi
+}
+
+
+###
+ # Prints all args and kwargs to console.
+ #
+ # Array (args):
+ #      Access all args with "${args[@]}"
+ # Dict (kwargs):
+ #      Access all keys with "${!kwargs[@]}".
+ #      Access all values with "${kwargs[@]}".
+ ##
+function display_args () {
+    echo -e "${color_blue}Displaying all passed script args and kwargs.${color_reset}"
+
+    # Check if args are present.
+    echo ""
+    if [[ ${#args[@]} -eq 0 ]]
+    then
+        echo "No args passed to script."
+    else
+        # One or more values exist. Display all.
+
+        echo "Args:"
+        for arg in ${args[@]}
+        do
+            echo "   $arg"
+        done
+    fi
+
+    # Check if kwargs are present.
+    echo ""
+    if [[ ${#kwargs[@]} -eq 0 ]]
+    then
+        echo "No kwargs passed to script."
+    else
+        # One or more values exist. Display all.
+
+        echo "Kwargs:"
+        for key in ${!kwargs[@]}
+        do
+            echo "    $key: ${kwargs[$key]}"
+        done
+    fi
+
+    echo ""
+}
 
 
 ###
@@ -48,7 +167,7 @@ function change_to_script_directory () {
 
 
 ###
- #
+ # Checks if user matches provided argument.
  ##
 function check_user () {
     # Check that user value was provided by first arg.
@@ -90,4 +209,5 @@ function user_confirmation () {
 }
 
 
-echo "Terminating utility script."
+# Process all args.
+proccess_args
