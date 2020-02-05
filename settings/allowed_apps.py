@@ -126,7 +126,6 @@ for project_folder_name in project_folder_list:
     # Check that project is defined through settings.
     project_defined_by_key = False
     project_defined_by_official_name = False
-    project_official_name = ALLOWED_CAE_PROJECTS[project_key_name]['official_name']
     if project_folder_name in ALLOWED_CAE_PROJECTS.keys():
         project_defined_by_key = True
     elif project_folder_name in [x['official_name'] for x in ALLOWED_CAE_PROJECTS.values()]:
