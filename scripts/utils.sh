@@ -64,8 +64,15 @@ function proccess_args () {
             # Check if value is kwarg key or standard arg.
             if [[ $arg == "--"* ]]
             then
-                # Handle for kwarg key. Save minus the "--" part.
-                key=${arg##*-}
+                # Check if arg is "--help". This is an exception and has no key/value relation.
+                if [[ $arg == "--help" ]]
+                then
+                    # Handle for --help arg.
+                    args+=("-h")
+                else
+                    # Handle for kwarg key. Save minus the "--" part.
+                    key=${arg##*-}
+                fi
             else
                 # Handle for normal arg.
                 args+=($arg)
