@@ -145,7 +145,7 @@ function normalize_directory () {
  # Change location of script's directory to the project's top level "scripts" folder.
  # Can help make logic more consistent, if location of terminal matters.
  ##
-function change_to_script_directory () {
+function change_to_scripts_directory () {
     # First normalize directory, so it doesn't matter where we called from in terminal..
     normalize_directory
 
