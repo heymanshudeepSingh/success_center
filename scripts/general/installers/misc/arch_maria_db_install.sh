@@ -1,25 +1,21 @@
 #!/usr/bin/env bash
-# Script to install MariaDB (a MySQL equivalent) dependencies on a Arch Linux system.
+###
+ # Script to install MariaDB (a MySQL equivalent) dependencies on a Arch Linux system.
+ ##
 
 
-return_value=""
-color_reset='\033[0m'
-color_red='\033[1;31m'
-color_green='\033[1;32m'
-color_blue='\033[1;34m'
-color_cyan='\033[1;36m'
+# Import utility script.
+source $(dirname $0)/../../../utils.sh
+
+
+# Standardize current terminal path to project "scripts" directory.
+change_to_scripts_directory
 
 
 function main() {
 
     # Make sure we are root.
-    if [ "$USER" != "root" ]
-    then
-        echo ""
-        echo -e "${color_red}Please run script as sudo user. Terminating script.${color_reset}"
-        echo ""
-        exit 0
-    fi
+    check_user "root"
 
     echo "Installing MariaDB (a MySQL equivalent) for Arch Linux..."
 
@@ -52,6 +48,7 @@ function main() {
         echo -e "${color_red}Config values cannot be set without a \"my.cnf\" file.${color_reset}"
         echo -e "${color_red}Please check if any errors have occured before this point and try again.${color_reset}"
         echo -e "${color_red}Terminating script.${color_reset}"
+        exit 0
     fi
 
     echo ""
