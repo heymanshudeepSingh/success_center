@@ -5,7 +5,7 @@
 
 
 # Import utility script.
-source $(dirname $0)/../utils.sh
+source $(dirname $0)/../../utils.sh
 
 
 # Standardize current terminal path to project "scripts" directory.
@@ -57,7 +57,7 @@ function main() {
         echo -e "${color_blue}Installing MySQL dependencies...${color_reset}"
 
         # Call MariaDB Arch install script.
-        sudo ./scripts/installers/misc/arch_maria_db_install.sh
+        sudo ./general/installers/misc/arch_maria_db_install.sh
     fi
 
     echo ""

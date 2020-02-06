@@ -5,7 +5,7 @@
 
 
 # Import utility script.
-source $(dirname $0)/../utils.sh
+source $(dirname $0)/../../utils.sh
 
 
 # Standardize current terminal path to project "scripts" directory.
@@ -54,7 +54,7 @@ function main() {
             echo "The script will ask for your password in a second..."
             echo ""
             echo -e "${color_blue}Installing ArchLinux package dependencies...${color_reset}"
-            sudo ./installers/arch_install.sh
+            sudo ./general/installers/arch_install.sh
             echo ""
             loop=false
 
@@ -65,7 +65,7 @@ function main() {
             echo "This script will ask for your password in a second..."
             echo ""
             echo -e "${color_blue}Installing Ubuntu package dependencies...${color_reset}"
-            sudo ./installers/ubuntu_install.sh
+            sudo ./general/installers/ubuntu_install.sh
             echo ""
             loop=false
 
@@ -114,9 +114,9 @@ function main() {
     echo -e "${color_blue}Compiling CSS files...${color_reset}"
     if [[ "$windows" == true ]]
     then
-        ./development/compile_css.sh
+        ./general/compile_css.sh
     else
-        sudo ./development/compile_css.sh
+        sudo ./general/compile_css.sh
     fi
     echo ""
 
@@ -136,8 +136,7 @@ function main() {
         do
             echo "Enter Python version for Project (Must be Python 3.6 or higher):"
             read user_input
-            if [[ $user_input = "3.6" ]] || [[ $user_input = "3.7" ]] || [[ $user_input = "3.8" ]]
-                || [[ $user_input == "3.9" ]]
+            if [[ $user_input = "3.6" ]] || [[ $user_input = "3.7" ]] || [[ $user_input = "3.8" ]] || [[ $user_input == "3.9" ]]
             then
                 echo ""
                 valid_python=true
