@@ -6,14 +6,12 @@
 set -e
 
 
-color_reset='\033[0m'
-color_green='\033[1;32m'
-color_blue='\033[1;34m'
+# Import utility script.
+source $(dirname $0)/../utils.sh
 
 
-# Change to location of script's directory.
-# Otherwise logic is inconsistent, based on where terminal initially is.
-cd "$(dirname "$0")"
+# Standardize current terminal path to project "scripts" directory.
+change_to_scripts_directory
 
 
 function main () {
@@ -95,15 +93,14 @@ function main () {
     echo ""
     echo -e "${color_green}Migrations have been purged.${color_reset}"
     echo ""
-    echo "For all projects that have committed migrations, you can get them back with a 'git reset --hard'."
-    echo "However, note that this command will also reset any uncommitted code."
-    echo "Be sure to commit first if you have anything you wish to preserve."
+    echo "Note that committed migrations are not touched by this script."
+    echo "Only uncommitted migrations have been reset."
     echo ""
 }
 
 
 # Warn user with prompt. Skips if arg of "force" was provided.
-if [[ $1 != "force" ]]
+if [[ ! ${args[@]} =~ "force" ]]
 then
     echo ""
     echo "Note: This will remove all migrations in CAE_Workspace, including ones in the apps subfolders."

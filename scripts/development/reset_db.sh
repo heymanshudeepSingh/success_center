@@ -7,22 +7,12 @@
 set -e
 
 
-# Global Variables.
-return_value=""
-color_reset='\033[0m'
-color_red='\033[1;31m'
-color_green='\033[1;32m'
-color_blue='\033[1;34m'
-color_cyan='\033[1;36m'
+# Import utility script.
+source $(dirname $0)/../utils.sh
 
 
-# Get passed script args.
-model_count="$1"
-
-
-# Change to location of script's directory.
-# Otherwise logic is inconsistent, based on where terminal initially is.
-cd "$(dirname "$0")"
+# Standardize current terminal path to project "scripts" directory.
+change_to_scripts_directory
 
 
 ###
@@ -45,7 +35,7 @@ function user_confirmation () {
 
 function main () {
     # Remove migrations.
-    ./reset_migrations.sh force
+    ./development/reset_migrations.sh force
 
     # Remove sqlite database if present.
     rm -f ../db.sqlite3
@@ -75,8 +65,10 @@ function main () {
     # Create seeded data. Attempts to used passed model_count arg.
     echo -e "${color_blue}Seeding data...${color_reset}"
 
+    model_count="$1"
+    echo "model_count: $model_count"
     re='^[0-9]+$'
-    if ! [[ $yournumber =~ $re ]]
+    if ! [[ $model_count =~ $re ]]
     then
         python ../manage.py seed $model_count --traceback
     else
@@ -89,7 +81,7 @@ function main () {
 
 
 # Warn user with prompt. Skips if arg of "force" was provided.
-if [[ $1 != "force" ]]
+if [[ ! ${args[@]} =~ "force" ]]
 then
     echo ""
     echo "Note: This will remove all migrations in CAE_Workspace, including ones in the apps subfolders."
@@ -104,10 +96,12 @@ then
     then
         echo ""
         echo ""
-        main
+        main "${args[0]}"
     fi
 
-    exit
 else
-    main
+    # Force command provided. Skipping prompt.
+    # First remove arg as it's no longer necessary.
+    args=${args[@]#force}
+    main "${args[0]}"
 fi
