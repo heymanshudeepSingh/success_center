@@ -1,48 +1,28 @@
 #!/usr/bin/env bash
-# Script to install required system (pacman) dependencies for project on a Arch Linux system.
-
-
-return_value=""
-color_reset='\033[0m'
-color_red='\033[1;31m'
-color_green='\033[1;32m'
-color_blue='\033[1;34m'
-color_cyan='\033[1;36m'
-
-
 ###
- # Display passed prompt and get user input.
- # Return true on "yes" or false otherwise.
+ # Script to install required system (pacman) dependencies for project on a Arch Linux system.
  ##
-function user_confirmation () {
 
-    echo -e "$1 ${color_cyan}[ Yes | No ]${color_reset}"
-    read user_input
 
-    if [[ "$user_input" = "yes" ]] || [[ "$user_input" = "y" ]] || [[ "$user_input" = "YES" ]] || [[ "$user_input" = "Y" ]]
-    then
-        return_value=true
-    else
-        return_value=false
-    fi
-}
+# Import utility script.
+source $(dirname $0)/../utils.sh
+
+
+# Standardize current terminal path to project "scripts" directory.
+change_to_scripts_directory
 
 
 function main() {
-
     # Make sure we are root.
-    if [ "$USER" != "root" ]
-    then
-        echo ""
-        echo -e "${color_red}Please run script as sudo user. Terminating script.${color_reset}"
-        echo ""
-        exit 0
-    else
-        echo ""
-        echo "Note: This script will install system packages."
-        echo "      To cancel, hit ctrl+c now. Otherwise hit enter to start."
-        read user_input
-    fi
+    check_user "root"
+
+
+    # Display friendly prompt to user.
+    echo ""
+    echo "Note: This script will install system packages."
+    echo -e "      ${color_cyan}To cancel, hit ctrl+c now. Otherwise hit enter to start.${color_reset}"
+    read user_input
+
 
     valid_python=""
     python_version=""

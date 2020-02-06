@@ -1,52 +1,26 @@
 #!/usr/bin/env bash
-# Script for first time setup of project.
-
-
-return_value=""
-color_reset='\033[0m'
-color_red='\033[1;31m'
-color_green='\033[1;32m'
-color_blue='\033[1;34m'
-color_cyan='\033[1;36m'
-
-
-# Change to location of script's directory.
-# Otherwise logic is inconsistent, based on where terminal initially is.
-cd "$(dirname "$0")/../.."
-
-
 ###
- # Display passed prompt and get user input.
- # Return true on "yes" or false otherwise.
+ # Script for first time setup of project.
  ##
-function user_confirmation () {
 
-    echo -e "$1 ${color_cyan}[ Yes | No ]${color_reset}"
-    read user_input
 
-    if [[ "$user_input" = "yes" ]] || [[ "$user_input" = "y" ]] || [[ "$user_input" = "YES" ]] || [[ "$user_input" = "Y" ]]
-    then
-        return_value=true
-    else
-        return_value=false
-    fi
-}
+# Import utility script.
+source $(dirname $0)/../utils.sh
+
+
+# Standardize current terminal path to project "scripts" directory.
+change_to_scripts_directory
 
 
 function main() {
     # Make sure we are root.
-    if [ "$USER" == "root" ]
-    then
-        echo ""
-        echo -e "${color_red}Please do not run script as sudo user. Terminating script.${color_reset}"
-        echo ""
-        exit 0
-    else
-        echo ""
-        echo "Note: This script will run first time project setup."
-        echo "      To cancel, hit ctrl+c now. Otherwise hit enter to start."
-        read user_input
-    fi
+    check_not_user "root"
+
+    # Display friendly prompt to user.
+    echo ""
+    echo "Note: This script will run first time project setup."
+    echo -e "      ${color_cyan}To cancel, hit ctrl+c now. Otherwise hit enter to start.${color_reset}"
+    read user_input
 
     user_confirmation "Run project in development mode?"
     if [[ "$return_value" = true ]]
@@ -58,17 +32,17 @@ function main() {
     fi
     echo ""
 
-    cp ./settings/local_env/env_example.py ./settings/local_env/env.py
+    cp ../settings/local_env/env_example.py ../settings/local_env/env.py
 
     loop=true
     windows=false
     while [[ "$loop" == true ]]
     do
         echo "Enter OS type:"
-        echo "   1) Arch Linux"
-        echo "   2) Ubunutu Linux"
-        echo "   3) Windows 10"
-        echo "   4) Other"
+        echo -e "   ${color_cyan}1${color_reset}) Arch Linux"
+        echo -e "   ${color_cyan}2${color_reset}) Ubunutu Linux"
+        echo -e "   ${color_cyan}3${color_reset}) Windows 10"
+        echo -e "   ${color_cyan}4${color_reset}) Other"
         read user_input
         echo ""
         echo ""
@@ -80,7 +54,7 @@ function main() {
             echo "The script will ask for your password in a second..."
             echo ""
             echo -e "${color_blue}Installing ArchLinux package dependencies...${color_reset}"
-            sudo ./scripts/installers/arch_install.sh
+            sudo ./installers/arch_install.sh
             echo ""
             loop=false
 
@@ -91,7 +65,7 @@ function main() {
             echo "This script will ask for your password in a second..."
             echo ""
             echo -e "${color_blue}Installing Ubuntu package dependencies...${color_reset}"
-            sudo ./scripts/installers/ubuntu_install.sh
+            sudo ./installers/ubuntu_install.sh
             echo ""
             loop=false
 
@@ -115,7 +89,7 @@ function main() {
         # Unsupported OS.
         elif [[ "$user_input" == "4" ]]
         then
-            echo -e "${color_red}Sorry, this script does not support any other OS types.${color_reset}"
+            echo -e "${color_red}Sorry, this script does not currently support any other OS types.${color_reset}"
             echo "To proceed:"
             echo "   * Load your desired python environment and install from requirements.txt."
             echo "      (This may require additional OS packages, depending on your system.)"
@@ -140,9 +114,9 @@ function main() {
     echo -e "${color_blue}Compiling CSS files...${color_reset}"
     if [[ "$windows" == true ]]
     then
-        ./scripts/compile_css.sh
+        ./development/compile_css.sh
     else
-        sudo ./scripts/compile_css.sh
+        sudo ./development/compile_css.sh
     fi
     echo ""
 
@@ -151,15 +125,19 @@ function main() {
     user_confirmation "Install local python environment in project root?"
     if [[ "$return_value" == true ]]
     then
+        cd ..
+
         # Get Python version. Should be in format of "#.#".
         valid_python=""
         python_version=""
 
+        # Loop until user provides a valid version of Python.
         while [[ ! $valid_python ]]
         do
             echo "Enter Python version for Project (Must be Python 3.6 or higher):"
             read user_input
             if [[ $user_input = "3.6" ]] || [[ $user_input = "3.7" ]] || [[ $user_input = "3.8" ]]
+                || [[ $user_input == "3.9" ]]
             then
                 echo ""
                 valid_python=true
