@@ -1,6 +1,8 @@
 #!/bin/bash
-# Script to reset database, including fresh migrations.
-# Currently only works with sqlite databases.
+###
+ # Script to reset database, including fresh, uncommitted migrations.
+ # Currently only works with sqlite databases.
+ ##
 
 
 # Abort on error

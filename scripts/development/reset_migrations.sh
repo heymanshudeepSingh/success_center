@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-# Script to remove all migrations.
+###
+ # Script to remove all uncommitted migrations.
+ ##
 
 
 # Abort on error

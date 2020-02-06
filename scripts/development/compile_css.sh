@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-# Script to compile all css files in all subprojects.
+###
+ # Script to compile all css files in all subprojects.
+ ##
 
 
 # Abort on error
