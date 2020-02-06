@@ -23,11 +23,6 @@ function main() {
     echo -e "      ${color_cyan}To cancel, hit ctrl+c now. Otherwise hit enter to start.${color_reset}"
     read user_input
 
-
-    valid_python=""
-    python_version=""
-    mysql=""
-
     user_confirmation "Install MySQL dependency requirements?"
     mysql=$return_value
     echo ""
