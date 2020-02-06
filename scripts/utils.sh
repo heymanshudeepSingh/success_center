@@ -2,14 +2,28 @@
 ###
  # Utility script to provide helper functions/logic to other scripts.
  #
+ #
+ # Args/Kwargs Notes:
+ #      Array (args):
+ #          Access all args with "${args[@]}"
+ #
+ #      Dict (kwargs):
+ #          Access all keys with "${!kwargs[@]}".
+ #          Access all values with "${kwargs[@]}".
+ #
+ #      Check if contains with =~
+ #          Ex: "${args[@]}" =~ "-h" to check if args contains "-h".
+ #
+ #
  # Color Notes:
  #      Use colors by adding the "-e" flag to echo, otherwise it will just print out the ascii values of the color.
  #
  #      Reset - Should be used at the end of every echo that uses a color.
  #      Red - For errors.
- #      Green - For critical success?
+ #      Green - For success notifications.
  #      Blue - Headers to visually differentiate new sections of data to the user.
  #      Cyan - For prompts that ask the user to input a value.
+ #
  #
  # return_value:
  #      Used as a variable to save return values of functions.
@@ -95,12 +109,6 @@ function proccess_args () {
 
 ###
  # Prints all args and kwargs to console.
- #
- # Array (args):
- #      Access all args with "${args[@]}"
- # Dict (kwargs):
- #      Access all keys with "${!kwargs[@]}".
- #      Access all values with "${kwargs[@]}".
  ##
 function display_args () {
     echo -e "${color_blue}Displaying all passed script args and kwargs.${color_reset}"
