@@ -6,34 +6,12 @@
 set -e
 
 
-# Change to location of script's directory.
-# Otherwise logic is inconsistent, based on where terminal initially is.
-cd "$(dirname "$0")"
+# Import utility script.
+source $(dirname $0)/../utils.sh
 
 
-# Global Variables.
-args=()
-
-
-###
- # Get passed script args. Seems this can't be done in a function.
- # Note that parameters are normally passed as $1, $2, $3...
- # To dynamically read all of them, some logic is needed
- ##
-# Get first parameters by using a counter as part of the arg name.
-counter=1
-parameter="$(eval echo "\$$counter")"
-
-# While arg is not empty.
-while [[ ! -z $parameter ]]
-do
-    # Save arg to parameter array.
-    args+=($parameter)
-
-    # Increment counter and use it to update arg name.
-    counter=$((counter+1))
-    parameter="$(eval echo "\$$counter")"
-done
+# Standardize current terminal path to project "scripts" directory.
+change_to_scripts_directory
 
 
 function main () {
@@ -50,19 +28,18 @@ function main () {
     css_directories=()
 
     # Determine command format from passed args.
-    for arg in ${args[*]}
-    do
-        if [[ $arg == "watch" ]]
-        then
-            watch="--watch"
-        elif [[ $arg == "dev" ]]
-        then
-            compress=""
-        elif [[ $arg == "trace" ]]
-        then
-            trace=" --trace"
-        fi
-    done
+    if [[ ${args[@]} =~ "watch" ]]
+    then
+        watch="--watch"
+    fi
+    if [[ ${args[@]} =~ "dev" ]]
+    then
+        compress=""
+    fi
+    if [[ ${args[@]} =~ "trace" ]]
+    then
+        trace=" --trace"
+    fi
 
     # Determine directories to compile.
     for dir in ../*/*/*/* ../*/*/*/*/*/*
@@ -91,7 +68,7 @@ function main () {
                                     # Add file to list of compile locations.
                                     filename=$(basename "${file%.*}")
                                     css_directories+=("$file:$dir/$filename.css")
-    
+
                                     # Remove old file before compiling, if present.
                                     rm -f "$dir/$filename.css" "$dir/$filename.css.map"
                                 fi
