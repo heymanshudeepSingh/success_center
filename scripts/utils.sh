@@ -102,7 +102,7 @@ function parse_args () {
         echo ""
         echo -e "${color_red}Found kwarg key without passed value. Terminating script.${color_reset}"
         echo ""
-        exit 0
+        exit 1
     fi
 }
 
@@ -176,7 +176,7 @@ function change_to_scripts_directory () {
             echo ""
             echo -e "${color_red}Could not find \"scripts\" directory. Terminating script.${color_reset}"
             echo ""
-            exit 0
+            exit 1
         fi
         cd ..
     done
@@ -193,7 +193,7 @@ function check_user () {
         echo ""
         echo -e "${color_red}No user passed in to \"check_user\" function. Terminating script.${color_reset}"
         echo ""
-        exit 0
+        exit 1
     fi
 
     # Check that users match.
@@ -202,7 +202,7 @@ function check_user () {
         echo ""
         echo -e "${color_red}Please run script as \"$1\" user. Terminating script.${color_reset}"
         echo ""
-        exit 0
+        exit 1
     fi
 }
 
@@ -217,7 +217,7 @@ function check_not_user () {
         echo ""
         echo -e "${color_red}No user passed in to \"check_user\" function. Terminating script.${color_reset}"
         echo ""
-        exit 0
+        exit 1
     fi
 
     # Check that users do not match.
@@ -226,7 +226,7 @@ function check_not_user () {
         echo ""
         echo -e "${color_red}Please do not run script as \"$1\" user. Terminating script.${color_reset}"
         echo ""
-        exit 0
+        exit 1
     fi
 }
 
