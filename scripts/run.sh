@@ -5,6 +5,7 @@
 
 
 # Import utility script.
+key_value_args=()
 source $(dirname $0)/utils.sh
 
 
@@ -25,8 +26,16 @@ function main () {
         # No values passed in. Display help menu.
         main_help
     else
-        # Run selected function.
-        $1
+        check_for_help_flags
+
+        if [[ $help_flag == true ]]
+        then
+            # Help flag set. Display helper text for function.
+            "${args[0]}"_help
+        else
+            # Help flag not set. Run selected function.
+            ${args[0]} "${@#${args[0]}}"
+        fi
     fi
     echo ""
     echo "Terminating \"scripts/run.sh\" script."
@@ -44,9 +53,9 @@ function main_help() {
     echo ""
     echo "General:"
     echo "    first_time_setup - Installs dependencies and sets up project for the first time on a machine."
+    echo "    compile_css - Compiles all SASS files to CSS."
     echo ""
     echo "Development:"
-    echo "    compile_css - Compiles all SASS files to CSS."
     echo "    reset_db - Resets the local project database. Only works for SqLite."
     echo "    reset_migrations - Removes all uncommited migration files."
     echo ""
@@ -61,7 +70,7 @@ function main_help() {
  # Runs the script for a first time project setup.
  ##
 function first_time_setup () {
-    ./installers/first_time_setup.sh
+    ./general/installers/first_time_setup.sh "${@}"
 }
 
 
@@ -77,7 +86,7 @@ function first_time_setup_help () {
  # Runs the script for compiling css.
  ##
 function compile_css () {
-    ./development/compile_css.sh
+    ./general/compile_css.sh "${@}"
 }
 
 
@@ -93,7 +102,7 @@ function compile_css_help () {
  # Runs the script for resetting the local project database. Only works for SqLite.
  ##
 function reset_db() {
-    ./development/reset_db.sh
+    ./development/reset_db.sh "${@}"
 }
 
 
@@ -109,7 +118,7 @@ function reset_db_help () {
  # Runs the script for removing all uncommited migration files from CAE Workspace and all included subprojects.
  ##
 function reset_migrations() {
-    ./development/reset_migrations.sh
+    ./development/reset_migrations.sh "${@}"
 }
 
 
@@ -125,7 +134,7 @@ function reset_migrations_help () {
  # Runs the script for restarting major Django processes in production environments.
  ##
 function restart_server() {
-    ./production/restart_server.sh
+    ./production/restart_server.sh "${@}"
 }
 
 
@@ -141,7 +150,7 @@ function restart_server_help () {
  # Runs the script for setting file permissions in production environments.
  ##
 function set_file_permissions() {
-    ./production/set_file_permissions.sh
+    ./production/set_file_permissions.sh "${@}"
 }
 
 

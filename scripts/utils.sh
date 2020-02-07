@@ -250,5 +250,33 @@ function user_confirmation () {
 }
 
 
+###
+ # Checks for help flags of "-h" or "--help".
+ # If present, sets "help_flag" variable to true.
+ ##
+function check_for_help_flags () {
+    help_flag=false
+    new_args=()
+
+    # Examine all args.
+    for arg in ${args[@]}
+    do
+        # Check if help flag.
+        if [[ $arg == "-h" || $arg == "--help" ]]
+        then
+            # Help flag found.
+            help_flag=true
+        else
+            # Not help flag. Preserve value for later.
+            new_args+=($arg)
+        fi
+    done
+
+    # Update args.
+    args=(${new_args[@]})
+    new_args=""
+}
+
+
 # Process all args.
 parse_args
