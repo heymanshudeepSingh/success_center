@@ -47,10 +47,16 @@ declare -A kwargs
 ###
  # Processes all passed script args/kwargs.
  #
+ # To set a value as a kwarg (key, value pair), first define a "key_value_args" array before calling the this function.
+ # Any values inside this "key_value_args" array will be considered a key. When these key args are found, the argument
+ # immediately following is considered to be the associated value.
+ #
+ # If two keys occur in a row, or a key occurs with no value following, then an error will raise.
+ #
  # https://opensource.com/article/18/5/you-dont-know-bash-intro-bash-arrays
  # https://stackoverflow.com/a/3467959
  ##
-function proccess_args () {
+function parse_args () {
     key=""
     for arg in $orig_args
     do
@@ -59,7 +65,7 @@ function proccess_args () {
         then
 
             # We have a key. Check that we don't have two in a row.
-            if [[ $arg == "--"* ]]
+            if [[ ! ${#key_value_args[@]} -eq 0 && ${key_value_args[@]} =~ $arg ]]
             then
                 # Found a second key immediately after the first.
                 echo ""
@@ -76,17 +82,11 @@ function proccess_args () {
         else
             # We do not have a key.
             # Check if value is kwarg key or standard arg.
-            if [[ $arg == "--"* ]]
+            # Key value pairs must be manually established by being defined in key_value_args.
+            if [[ ! ${#key_value_args[@]} -eq 0 && ${key_value_args[@]} =~ $arg ]]
             then
-                # Check if arg is "--help". This is an exception and has no key/value relation.
-                if [[ $arg == "--help" ]]
-                then
-                    # Handle for --help arg.
-                    args+=("-h")
-                else
-                    # Handle for kwarg key. Save minus the "--" part.
-                    key=${arg##*-}
-                fi
+                # Handle for kwarg key.
+                key=${arg}
             else
                 # Handle for normal arg.
                 args+=($arg)
@@ -136,11 +136,13 @@ function display_args () {
     else
         # One or more values exist. Display all.
 
+        orig_key=$key
         echo "Kwargs:"
         for key in ${!kwargs[@]}
         do
             echo "    $key: ${kwargs[$key]}"
         done
+        key=$orig_key
     fi
 
     echo ""
@@ -249,4 +251,4 @@ function user_confirmation () {
 
 
 # Process all args.
-proccess_args
+parse_args
