@@ -19,6 +19,7 @@ change_to_scripts_directory
 function main () {
     echo "Possible params:"
     echo "   * watch - Watches for changes."
+    echo ""
 
     # Variables.
     command=""
@@ -69,6 +70,15 @@ function main () {
             fi
         fi
     done
+
+    # Check that command is going to compile anything.
+    if [[ $command != "" ]]
+    then
+        echo -e "${color_blue}Installing npm depenencies.${color_reset}"
+        cd ..
+        npm install
+        cd ./scripts/
+    fi
 
     # Display command to user.
     echo ""
