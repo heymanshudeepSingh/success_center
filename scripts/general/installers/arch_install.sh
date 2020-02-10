@@ -46,6 +46,11 @@ function main() {
     pacman -S ruby-sass --noconfirm
     pacman -S ruby-rb-fsevent --noconfirm
 
+    echo ""
+    echo -e "${color_blue}Installing npm dependencies...${color_reset}"
+    pacman -S nodejs npm
+    sudo ./misc/npm_install.sh
+
     if [[ "$mysql" = true ]]
     then
         echo ""

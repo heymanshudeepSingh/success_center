@@ -78,6 +78,11 @@ function main () {
     echo -e "${color_blue}Installing sass dependencies...${color_reset}"
     apt-get install ruby-sass -y
 
+    echo ""
+    echo -e "${color_blue}Installing npm dependencies...${color_reset}"
+    apt-get install nodejs
+    sudo ./misc/npm_install.sh
+
     if [[ "$mysql" = true ]]
     then
         echo ""
@@ -134,7 +139,6 @@ function main () {
         echo ""
         echo -e "${color_blue}To enable Nginx on computer start, run \"sudo systemctl enable nginx\".${color_reset}"
         echo -e "${color_blue}To start Nginx now, run \"sudo systemctl start nginx\".${color_reset}"
-
     fi
 
     # Success. Exit script.
