@@ -17,8 +17,6 @@ change_to_scripts_directory
  # Script main.
  ##
 function main () {
-    echo "Starting \"scripts/run.sh\" script."
-    echo ""
 
     # Check if no args were passed.
     if [[ ${#args[@]} -eq 0 && ${#kwargs[@]} -eq 0 ]]
@@ -38,7 +36,6 @@ function main () {
         fi
     fi
     echo ""
-    echo "Terminating \"scripts/run.sh\" script."
 }
 
 
@@ -46,25 +43,26 @@ function main () {
  # Displays general helper text for main script.
  ##
 function main_help() {
-    echo "This script is provided for easy runtime/execution of all subscripts in the CAE Workspace project."
-    echo "For more details about an option, enter the option with the \"-h\" or \"--help\" flags."
+    echo ""
+    echo -e "${color_blue}run.sh${color_reset}"
+    echo "    This script is provided for easy runtime/execution of all subscripts in the CAE Workspace project."
+    echo "    For more details about an option, enter the option with the \"-h\" or \"--help\" flags."
     echo ""
     echo "Available options are:"
     echo ""
-    echo "General:"
+    echo -e "${color_blue}General${color_reset}:"
     echo "    first_time_setup - Installs dependencies and sets up project for the first time on a machine."
     echo "    compile_css - Compiles all SASS files to CSS."
     echo "    compile_react - Compiles all React files to JS."
     echo "    update_npm - Attempts to update all npm dependencies."
     echo ""
-    echo "Development:"
+    echo -e "${color_blue}Development${color_reset}:"
     echo "    reset_db - Resets the local project database. Only works for SqLite."
     echo "    reset_migrations - Removes all uncommited migration files."
     echo ""
-    echo "Production:"
+    echo -e "${color_blue}Production${color_reset}:"
     echo "    restart_server - Restarts all major processes for the Django project in a production environment."
     echo "    set_file_permissions - Sets all project file permissions for serving in a production environment."
-    echo ""
 }
 
 
@@ -80,7 +78,16 @@ function first_time_setup () {
  # Displays helper text for script.
  ##
 function first_time_setup_help () {
-    echo "Installs dependencies and sets up project for the first time on a machine."
+    echo ""
+    echo -e "${color_blue}Script${color_reset}: first_time_setup.sh"
+    echo "    Installs dependencies and sets up project for the first time on a machine."
+    echo ""
+    echo -e "${color_blue}Permissions:${color_reset} Run as non root/admin user (will ask for credentials though)."
+    echo ""
+    echo -e "${color_blue}Currently supports:${color_reset}"
+    echo "    * Arch Linux"
+    echo "    * Ubuntu Linux"
+    echo "    * Windows"
 }
 
 
@@ -96,7 +103,20 @@ function compile_css () {
  # Displays helper text for script.
  ##
 function compile_css_help () {
-    echo "Compiles all SASS files to CSS."
+    echo ""
+    echo -e "${color_blue}Script${color_reset}: compile_css.sh"
+    echo "    Compiles all project SASS files to CSS."
+    echo "    Includes both CAE Workspace and includes supbrojects in the \"apps\" directory."
+    echo ""
+    echo "    To be found, SASS files should be located in the \"<app_name>/static/<app_name>/css/sass/\" folder."
+    echo "    Located files will be compiled to the \"<app_name>/static/<app_name>/css/\" folder."
+    echo ""
+    echo -e "${color_blue}Permissions${color_reset}: Run as non root/admin user."
+    echo ""
+    echo -e "${color_blue}Params${color_reset}:"
+    echo "    * watch - Watches for changes."
+    echo "    * dev - Compile in human-legible format."
+    echo "    * trace - Adds backtracing to troubleshoot errors."
 }
 
 
@@ -112,7 +132,18 @@ function compile_react () {
  # Displays helper text for script.
  ##
 function compile_react_help () {
-    echo "Compiles all React files to JS."
+    echo ""
+    echo -e "${color_blue}Script${color_reset}: compile_react.sh"
+    echo "    Compiles all project React files to JS."
+    echo "    Includes both CAE Workspace and includes supbrojects in the \"apps\" directory."
+    echo ""
+    echo "    To be found, React files should be located in the \"<app_name>/static/<app_name>/js/react/\" folder."
+    echo "    Located files will be compiled to the \"<app_name>/static/<app_name>/js/\" folder."
+    echo ""
+    echo -e "${color_blue}Permissions${color_reset}: Run as non root/admin user."
+    echo ""
+    echo -e "${color_blue}Params${color_reset}:"
+    echo "    * watch - Watches for changes."
 }
 
 
@@ -128,7 +159,11 @@ function update_npm () {
  # Displays helper text for script.
  ##
 function update_npm_help () {
-    echo "Attempts to update all npm dependencies."
+    echo ""
+    echo -e "${color_blue}Script${color_reset}: update_npm.sh"
+    echo "    Attempts to update all npm dependencies."
+    echo ""
+    echo -e "${color_blue}Permissions${color_reset}: Run as non root/admin user."
 }
 
 
@@ -144,7 +179,12 @@ function reset_db() {
  # Displays helper text for script.
  ##
 function reset_db_help () {
-    echo "Resets the local project database. Only works for SqLite."
+    echo ""
+    echo -e "${color_blue}Script${color_reset}: reset_db.sh"
+    echo "    Resets the local project database. Currently only works for SqLite."
+    echo ""
+    echo -e "${color_blue}Params${color_reset}:"
+    echo "    * force - Forces script to skip user confirmation promps."
 }
 
 
@@ -160,7 +200,13 @@ function reset_migrations() {
  # Displays helper text for script.
  ##
 function reset_migrations_help () {
-    echo "Removes all uncommited migration files."
+    echo ""
+    echo -e "${color_blue}Script${color_reset}: reset_migrations.sh"
+    echo "    Removes all uncommited migration files."
+    echo ""
+    echo -e "${color_blue}Params${color_reset}:"
+    echo "    * force - Forces script to skip user confirmation promps."
+    echo "    * model_count - Number of models to create when seeding. Default is 100."
 }
 
 
@@ -176,7 +222,11 @@ function restart_server() {
  # Displays helper text for script.
  ##
 function restart_server_help () {
-    echo "Restarts all major processes for the Django project in a production environment."
+    echo ""
+    echo -e "${color_blue}Script${color_reset}: restart_server.sh"
+    echo "    Restarts all major processes for the Django project in a production environment."
+    echo ""
+    echo -e "${color_blue}Permissions${color_reset}: Run as root/admin user."
 }
 
 
@@ -192,7 +242,11 @@ function set_file_permissions() {
  # Displays helper text for script.
  ##
 function set_file_permissions_help () {
-    echo "Sets all project file permissions for serving in a production environment."
+    echo ""
+    echo -e "${color_blue}Script${color_reset}: set_file_permissions.sh"
+    echo "    Sets all project file permissions for serving in a production environment."
+    echo ""
+    echo -e "${color_blue}Permissions${color_reset}: Run as root/admin user."
 }
 
 
