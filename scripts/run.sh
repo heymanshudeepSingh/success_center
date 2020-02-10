@@ -55,6 +55,7 @@ function main_help() {
     echo "    first_time_setup - Installs dependencies and sets up project for the first time on a machine."
     echo "    compile_css - Compiles all SASS files to CSS."
     echo "    compile_react - Compiles all React files to JS."
+    echo "    update_npm - Attempts to update all npm dependencies."
     echo ""
     echo "Development:"
     echo "    reset_db - Resets the local project database. Only works for SqLite."
@@ -112,6 +113,22 @@ function compile_react () {
  ##
 function compile_react_help () {
     echo "Compiles all React files to JS."
+}
+
+
+###
+ # Runs the script for updating npm.
+ ##
+function update_npm () {
+    ./general/update_npm.sh "${@}"
+}
+
+
+###
+ # Displays helper text for script.
+ ##
+function update_npm_help () {
+    echo "Attempts to update all npm dependencies."
 }
 
 
