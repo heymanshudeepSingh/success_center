@@ -43,7 +43,6 @@ function main () {
  # Displays general helper text for main script.
  ##
 function main_help() {
-    echo ""
     echo -e "${color_blue}run.sh${color_reset}"
     echo "    This script is provided for easy runtime/execution of all subscripts in the CAE Workspace project."
     echo "    For more details about an option, enter the option with the \"-h\" or \"--help\" flags."
@@ -72,13 +71,24 @@ function main_help() {
 function first_time_setup () {
     ./general/installers/first_time_setup.sh "${@}"
 }
+###
+ # Aliases for "first_time_setup".
+ ##
+function install () {
+    first_time_setup
+}
+function first_time_install () {
+    first_time_setup
+}
+function setup () {
+    first_time_setup
+}
 
 
 ###
  # Displays helper text for script.
  ##
 function first_time_setup_help () {
-    echo ""
     echo -e "${color_blue}Script${color_reset}: first_time_setup.sh"
     echo "    Installs dependencies and sets up project for the first time on a machine."
     echo ""
@@ -88,6 +98,23 @@ function first_time_setup_help () {
     echo "    * Arch Linux"
     echo "    * Ubuntu Linux"
     echo "    * Windows"
+    echo ""
+    echo -e "${color_blue}Aliases${color_reset}:"
+    echo "    * install"
+    echo "    * first_time_install"
+    echo "    * setup"
+}
+###
+ # Aliases for "first_time_setup_help".
+ ##
+function install_help () {
+    first_time_setup_help
+}
+function first_time_install_help () {
+    first_time_setup_help
+}
+function setup_help () {
+    first_time_setup_help
 }
 
 
@@ -97,13 +124,24 @@ function first_time_setup_help () {
 function compile_css () {
     ./general/compile_css.sh "${@}"
 }
+###
+ # Aliases for "compile_css".
+ ##
+function css () {
+    compile_css
+}
+function compile_sass () {
+    compile_css
+}
+function sass () {
+    compile_css
+}
 
 
 ###
  # Displays helper text for script.
  ##
 function compile_css_help () {
-    echo ""
     echo -e "${color_blue}Script${color_reset}: compile_css.sh"
     echo "    Compiles all project SASS files to CSS."
     echo "    Includes both CAE Workspace and includes supbrojects in the \"apps\" directory."
@@ -117,6 +155,23 @@ function compile_css_help () {
     echo "    * watch - Watches for changes."
     echo "    * dev - Compile in human-legible format."
     echo "    * trace - Adds backtracing to troubleshoot errors."
+    echo ""
+    echo -e "${color_blue}Aliases${color_reset}:"
+    echo "    * css"
+    echo "    * sass"
+    echo "    * compile_sass"
+}
+###
+ # Aliases for "compile_css_help".
+ ##
+function css_help () {
+    compile_css_help
+}
+function compile_sass_help () {
+    compile_css_help
+}
+function sass_help () {
+    compile_css_help
 }
 
 
@@ -126,13 +181,30 @@ function compile_css_help () {
 function compile_react () {
     ./general/compile_react.sh "${@}"
 }
+###
+ # Aliases for "compile_react".
+ ##
+function react () {
+    compile_react
+}
+function js () {
+    compile_react
+}
+function compile_js () {
+    compile_react
+}
+function javascript () {
+    compile_react
+}
+function compile_javascript () {
+    compile_react
+}
 
 
 ###
  # Displays helper text for script.
  ##
 function compile_react_help () {
-    echo ""
     echo -e "${color_blue}Script${color_reset}: compile_react.sh"
     echo "    Compiles all project React files to JS."
     echo "    Includes both CAE Workspace and includes supbrojects in the \"apps\" directory."
@@ -144,6 +216,31 @@ function compile_react_help () {
     echo ""
     echo -e "${color_blue}Params${color_reset}:"
     echo "    * watch - Watches for changes."
+    echo ""
+    echo -e "${color_blue}Aliases${color_reset}:"
+    echo "    * react"
+    echo "    * js"
+    echo "    * compile_js"
+    echo "    * javascript"
+    echo "    * compile_javascript"
+}
+###
+ # Aliases for "compile_react_help".
+ ##
+function react_help () {
+    compile_react_help
+}
+function js_help () {
+    compile_react_help
+}
+function compile_js_help () {
+    compile_react_help
+}
+function javascript_help () {
+    compile_react_help
+}
+function compile_javascript_help () {
+    compile_react_help
 }
 
 
@@ -153,25 +250,58 @@ function compile_react_help () {
 function update_npm () {
     ./general/update_npm.sh "${@}"
 }
+###
+ # Aliases for "update_npm".
+ ##
+function npm () {
+    update_npm
+}
+function npm_update () {
+    update_npm
+}
 
 
 ###
  # Displays helper text for script.
  ##
 function update_npm_help () {
-    echo ""
     echo -e "${color_blue}Script${color_reset}: update_npm.sh"
     echo "    Attempts to update all npm dependencies."
     echo ""
     echo -e "${color_blue}Permissions${color_reset}: Run as non root/admin user."
+    echo ""
+    echo -e "${color_blue}Aliases${color_reset}:"
+    echo "    * npm"
+    echo "    * npm_update"
+}
+###
+ # Aliases for "update_npm_help".
+ ##
+function npm_help () {
+    update_npm_help
+}
+function npm_update_help () {
+    update_npm_help
 }
 
 
 ###
  # Runs the script for resetting the local project database. Only works for SqLite.
  ##
-function reset_db() {
+function reset_db () {
     ./development/reset_db.sh "${@}"
+}
+###
+ # Aliases for "reset_db".
+ ##
+function reset_database () {
+    reset_db
+}
+function db_reset () {
+    reset_db
+}
+function database_reset () {
+    reset_db
 }
 
 
@@ -179,12 +309,28 @@ function reset_db() {
  # Displays helper text for script.
  ##
 function reset_db_help () {
-    echo ""
     echo -e "${color_blue}Script${color_reset}: reset_db.sh"
     echo "    Resets the local project database. Currently only works for SqLite."
     echo ""
     echo -e "${color_blue}Params${color_reset}:"
     echo "    * force - Forces script to skip user confirmation promps."
+    echo ""
+    echo -e "${color_blue}Aliases${color_reset}:"
+    echo "    * reset_database"
+    echo "    * db_reset"
+    echo "    * database_reset"
+}
+###
+ # Aliases for "reset_db_help".
+ ##
+function reset_database_help () {
+    reset_db_help
+}
+function db_reset_help () {
+    reset_db_help
+}
+function database_reset_help () {
+    reset_db_help
 }
 
 
@@ -194,19 +340,33 @@ function reset_db_help () {
 function reset_migrations() {
     ./development/reset_migrations.sh "${@}"
 }
+###
+ # Aliases for "reset_migrations".
+ ##
+function migrations_reset () {
+    reset_migrations
+}
 
 
 ###
  # Displays helper text for script.
  ##
 function reset_migrations_help () {
-    echo ""
     echo -e "${color_blue}Script${color_reset}: reset_migrations.sh"
     echo "    Removes all uncommited migration files."
     echo ""
     echo -e "${color_blue}Params${color_reset}:"
     echo "    * force - Forces script to skip user confirmation promps."
     echo "    * model_count - Number of models to create when seeding. Default is 100."
+    echo ""
+    echo -e "${color_blue}Aliases${color_reset}:"
+    echo "    * migrations_reset"
+}
+###
+ # Aliases for "reset_migrations_help".
+ ##
+function migrations_reset_help () {
+    reset_migrations_help
 }
 
 
@@ -216,38 +376,67 @@ function reset_migrations_help () {
 function restart_server() {
     ./production/restart_server.sh "${@}"
 }
+###
+ # Aliases for "restart_server".
+ ##
+function server_restart () {
+    restart_server
+}
 
 
 ###
  # Displays helper text for script.
  ##
 function restart_server_help () {
-    echo ""
     echo -e "${color_blue}Script${color_reset}: restart_server.sh"
     echo "    Restarts all major processes for the Django project in a production environment."
     echo ""
     echo -e "${color_blue}Permissions${color_reset}: Run as root/admin user."
+    echo ""
+    echo -e "${color_blue}Aliases${color_reset}:"
+    echo "    * server_restart"
 }
+###
+ # Aliases for "restart_server_help".
+ ##
+function server_restart_help () {
+    restart_server_help
+}
+
 
 
 ###
  # Runs the script for setting file permissions in production environments.
  ##
-function set_file_permissions() {
+function set_file_permissions () {
     ./production/set_file_permissions.sh "${@}"
 }
+###
+ # Aliases for "set_file_permissions".
+ ##
+ function set_permissions () {
+    set_file_permissions
+ }
 
 
 ###
  # Displays helper text for script.
  ##
 function set_file_permissions_help () {
-    echo ""
     echo -e "${color_blue}Script${color_reset}: set_file_permissions.sh"
     echo "    Sets all project file permissions for serving in a production environment."
     echo ""
     echo -e "${color_blue}Permissions${color_reset}: Run as root/admin user."
+    echo ""
+    echo -e "${color_blue}Aliases${color_reset}:"
+    echo "    * set_permissions"
 }
+###
+ # Aliases for "set_file_permissions_help".
+ ##
+ function set_permissions_help () {
+    set_file_permissions_help
+ }
 
 
 main ${@}
