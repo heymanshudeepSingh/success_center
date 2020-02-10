@@ -22,9 +22,12 @@ function main () {
 
 
     # Remove node_modules directory to start from scratch.
-    cd ..
-    rm -r ./node_modules
-    cd ./scripts/
+    if [[ -d ../node_modules/ ]]
+    then
+        cd ..
+        rm -r ./node_modules
+        cd ./scripts/
+    fi
 
     # Update npm dependency versions.
     echo -e "${color_blue}Automatically updating npm package dependencies to newest versions.${color_reset}"
