@@ -13,8 +13,9 @@ change_to_scripts_directory
 
 
 function main() {
-    # Make sure we are root.
+    # Make sure we are not root.
     check_not_user "root"
+
 
     # Display friendly prompt to user.
     echo ""

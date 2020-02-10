@@ -13,9 +13,9 @@ change_to_scripts_directory
 
 
 function main() {
-
     # Make sure we are root.
     check_user "root"
+
 
     echo "Installing MariaDB (a MySQL equivalent) for Arch Linux..."
 

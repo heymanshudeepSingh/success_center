@@ -20,6 +20,7 @@ function main () {
     # Make sure we are root.
     check_user "root"
 
+
     # Default to project root, which is 1 directories up from scripts folder.
     directory_location="$(dirname "$0")/.."
     force_progress=""

@@ -16,6 +16,7 @@ function main () {
     # Make sure we are root.
     check_user "root"
 
+
     echo "Restarting Django server..."
 
     service nginx restart

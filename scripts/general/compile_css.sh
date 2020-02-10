@@ -17,6 +17,10 @@ change_to_scripts_directory
 
 
 function main () {
+    # Make sure we are not root.
+    check_not_user "root"
+
+
     echo "Possible params:"
     echo "   * watch - Watches for changes."
     echo "   * dev - Compile in human-legible format."

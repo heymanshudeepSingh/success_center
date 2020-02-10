@@ -18,8 +18,9 @@ change_to_scripts_directory
 
 
 function main () {
-    # Ensure we are root.
+    # Make sure we are root.
     check_user "root"
+
 
     # Update to latest version of npm.
     npm install npm@latest -g

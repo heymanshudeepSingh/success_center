@@ -17,6 +17,10 @@ change_to_scripts_directory
 
 
 function main () {
+    # Make sure we are not root.
+    check_not_user "root"
+
+
     # Remove node_modules directory to start from scratch.
     cd ..
     rm -r ./node_modules
