@@ -54,6 +54,7 @@ function main_help() {
     echo "General:"
     echo "    first_time_setup - Installs dependencies and sets up project for the first time on a machine."
     echo "    compile_css - Compiles all SASS files to CSS."
+    echo "    compile_react - Compiles all React files to JS."
     echo ""
     echo "Development:"
     echo "    reset_db - Resets the local project database. Only works for SqLite."
@@ -95,6 +96,22 @@ function compile_css () {
  ##
 function compile_css_help () {
     echo "Compiles all SASS files to CSS."
+}
+
+
+###
+ # Runs the script for compiling react.
+ ##
+function compile_react () {
+    ./general/compile_react.sh "${@}"
+}
+
+
+###
+ # Displays helper text for script.
+ ##
+function compile_react_help () {
+    echo "Compiles all React files to JS."
 }
 
 
