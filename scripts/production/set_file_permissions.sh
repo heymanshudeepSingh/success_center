@@ -9,7 +9,7 @@ set -e
 
 
 # Import utility script.
-source $(dirname $0)/utils.sh
+source $(dirname $0)/../utils.sh
 
 
 # Standardize current terminal path to project "scripts" directory.
