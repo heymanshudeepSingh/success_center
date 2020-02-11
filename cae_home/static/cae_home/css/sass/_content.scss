@@ -254,6 +254,50 @@
 //===== END Generic Class Block =====//
 //===================================//
 
+//==========================//
+//==== START Text Block ====//
+//==========================//
+
+@each $content_element in $content_element_list {
+#{$content_element} {
+
+    @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & {
+
+         // Loop through all possible status types.
+        @each $status, $status-dict in theme-status-dict($theme) {
+
+            p.#{$status}, .p.#{$status} {
+                color: theme-status($theme, $status, 'primary');
+            }
+             p.highlight.primary, .p.highlight.primary {
+                color: theme-text($theme,'text');
+            }
+            p.highlight.secondary, .p.highlight.secondary {
+                color: theme-text($theme,'primary');
+            }
+            p.highlight.info, .p.highlight.info {
+                color: theme-text($theme,'text');
+            }
+            p.highlight.success, .p.highlight.success {
+                color: theme-text($theme,'text');
+            }
+            p.highlight.warning, .p.highlight.warning, p.highlight.warn, .p.highlight.warn {
+                color: theme-text($theme,'text');
+            }
+            p.highlight.error, .p.highlight.error, p.highlight.danger, .p.highlight.danger {
+                color: theme-text($theme,'primary-hover');
+            }
+        }
+
+    }}
+
+}}
+
+
+//==========================//
+//===== END Text Block =====//
+//==========================//
 
 //================================================================================//
 //==================================== Visual ====================================//
@@ -390,6 +434,35 @@
 //==================================================//
 //===== END "Generic Class" Theme Colors Block =====//
 //==================================================//
+
+//==========================//
+//==== START Text Block ====//
+//==========================//
+
+@each $content_element in $content_element_list {
+#{$content_element} {
+
+    @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & {
+
+         // Loop through all possible status types.
+        @each $status, $status-dict in theme-status-dict($theme) {
+
+            p.highlight.#{$status}, .p.highlight.#{$status} {
+                background-color: theme-status($theme, $status, 'primary');
+                border: 1px solid theme-status($theme, $status, 'border');
+            }
+
+        }
+
+    }}
+
+}}
+
+
+//==========================//
+//===== END Text Block =====//
+//==========================//
 
 
 //================================================================================//
