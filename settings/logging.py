@@ -118,7 +118,7 @@ def _create_logging_dict(log_directory):
             },
             'exclude_auth': {
                 '()': _ExcludeAuthFilter,
-            }
+            },
         },
         'formatters': {
             # Minimal logging. Only includes message.
@@ -275,7 +275,7 @@ def _create_logging_dict(log_directory):
                 'level': 'ERROR',
                 'class': 'django.utils.log.AdminEmailHandler',
                 'formatter': 'verbose',
-            }
+            },
         },
         'loggers': {
             # Catch all for all other log types not found below (hopefully).
