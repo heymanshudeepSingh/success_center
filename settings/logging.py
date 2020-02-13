@@ -23,7 +23,7 @@ log_handler_file_max_bytes = 1024*1024*10
 log_handler_file_backup_count = 10
 
 
-def get_logger(caller, log_dir):
+def get_logger(caller, log_dir=None):
     """
     Returns an instance of the logger. Always pass the __name__ attribute.
     By calling through here, guarantees that logger will always have proper settings loaded.
@@ -44,6 +44,9 @@ def _initialize_logger_settings(log_dir, debug=False):
     Creates log directories (if not found) and initializes logging settings.
     :param debug: Boolean to indicate if test log messages should also be displayed after initialization.
     """
+    if log_dir is None:
+        raise ValueError('Logging dir is none. Cannot setup logging.')
+
     # Set up logging directories.
     auth_log_dir = os.path.join(log_dir, 'auth/')
     debug_log_dir = os.path.join(log_dir, 'debug/')
