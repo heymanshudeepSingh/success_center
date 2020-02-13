@@ -80,8 +80,7 @@ class CaeAuthBackend(AbstractLDAPBackend):
         :param password: Confirmed valid ldap pass.
         :return: Instance of User model.
         """
-        if settings.AUTH_BACKEND_DEBUG:
-            logger.info('{0} Auth Backend: Attempting to create new user model...'.format(self.debug_class))
+        logger.auth_info('{0} Auth Backend - {1}: Attempting to create new user model...'.format(self.debug_class, uid))
 
         # Create new user.
         login_user, created = models.User.objects.get_or_create(username=uid)
@@ -91,7 +90,12 @@ class CaeAuthBackend(AbstractLDAPBackend):
             # Duplicate Id's exist.
             # Most likely, there's a logic error in code and "_update_user_model" should have been called.
             login_user = None
-            raise ValidationError('Error: Attempted to create user {0} but user with id already exists.'.format(uid))
+            error_message = '{0} Auth Backend - {1}: Attempted to create user but user with id already exists.'.format(
+                self.debug_class,
+                uid,
+            )
+            logger.auth_error(error_message)
+            raise ValidationError(error_message)
 
         # Connect to server and pull user's full info.
         ldap_user_info = self.get_ldap_user_info(uid, attributes=['uid', 'givenName', 'sn', ])
@@ -109,20 +113,18 @@ class CaeAuthBackend(AbstractLDAPBackend):
         # Save model.
         login_user.save()
 
-        if settings.AUTH_BACKEND_DEBUG:
-            logger.info('{0} Auth Backend: Created user new user model {1}. Now setting groups...'.format(
-                self.debug_class,
-                uid,
-            ))
+        logger.auth_info('{0} Auth Backend - {1}: Created user new user model. Now setting groups...'.format(
+            self.debug_class,
+            uid,
+        ))
 
         # Model created. Now run update logic to ensure all fields are properly set.
         login_user = self._update_user_model(uid)
 
-        if settings.AUTH_BACKEND_DEBUG:
-            logger.info('{0} Auth Backend: Imported Main Campus user info. User creation complete for user {1}.'.format(
-                self.debug_class,
-                uid,
-            ))
+        logger.auth_info('{0} Auth Backend - {1}: Imported Main Campus user info. User creation complete.'.format(
+            self.debug_class,
+            uid,
+        ))
 
         return login_user
 
@@ -143,27 +145,28 @@ class CaeAuthBackend(AbstractLDAPBackend):
         # Set user group types.
         if ldap_user_groups['director']:
             login_user.groups.add(Group.object.get(name='CAE Director'))
-            if settings.AUTH_BACKEND_DEBUG:
-                logger.info('{0} Auth Backend: Added user to CAE Director group.'.format(self.debug_class))
+            logger.auth_info('{0} Auth Backend - {1}: Added user to CAE Director group.'.format(self.debug_class, uid))
         if ldap_user_groups['attendant']:
             login_user.groups.add(Group.objects.get(name='CAE Attendant'))
-            if settings.AUTH_BACKEND_DEBUG:
-                logger.info('{0} Auth Backend: Added user to CAE Attendant group.'.format(self.debug_class))
+            logger.auth_info('{0} Auth Backend - {1}: Added user to CAE Attendant group.'.format(self.debug_class, uid))
         if ldap_user_groups['admin']:
             login_user.groups.add(Group.objects.get(name='CAE Admin'))
-            if settings.AUTH_BACKEND_DEBUG:
-                logger.info('{0} Auth Backend: Added user to CAE Admin group.'.format(self.debug_class))
+            logger.auth_info('{0} Auth Backend - {1}: Added user to CAE Admin group.'.format(self.debug_class, uid))
         if ldap_user_groups['programmer']:
             login_user.groups.add(Group.objects.get(name='CAE Programmer'))
             login_user.is_staff = True
-            if settings.AUTH_BACKEND_DEBUG:
-                logger.info('{0} Auth Backend: Added user to CAE Programmer group.'.format(self.debug_class))
+            logger.auth_info('{0} Auth Backend - {1}: Added user to CAE Programmer group.'.format(
+                self.debug_class,
+                uid,
+            ))
 
         # Save model.
         login_user.save()
-        if settings.AUTH_BACKEND_DEBUG:
-            logger.info('{0} Auth Backend: CAE Center User groups set for user {1}.'.format(self.debug_class, uid))
-            logger.info('{0} Auth Backend: Attempting to get Main Campus user info...'.format(self.debug_class))
+        logger.auth_info('{0} Auth Backend - {1}: CAE Center User groups set for user.'.format(self.debug_class, uid))
+        logger.auth_info('{0} Auth Backend - {1}: Attempting to get Main Campus user info...'.format(
+            self.debug_class,
+            uid,
+        ))
 
         # Check for associated Wmu User model.
         wmu_ldap = WmuAuthBackend()

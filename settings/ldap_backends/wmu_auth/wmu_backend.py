@@ -89,8 +89,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
         :param user_ldap_info: User's info from LDAP.
         :return: Instance of User model.
         """
-        if settings.AUTH_BACKEND_DEBUG:
-            logger.info('{0} Auth Backend: Attempting to create new User model...'.format(self.debug_class))
+        logger.auth_info('{0} Auth Backend - {1}: Attempting to create new User model...'.format(self.debug_class, uid))
 
         # Create new user.
         login_user, created = models.User.objects.get_or_create(username=uid)
@@ -100,7 +99,12 @@ class WmuAuthBackend(AbstractLDAPBackend):
             # Duplicate Id's exist.
             # Most likely, there's a logic error in code and "_update_user_model" should have been called.
             login_user = None
-            raise ValidationError('Error: Attempted to create user {0} but user with id already exists.'.format(uid))
+            error_message = '{0} Auth Backend - {1}: Attempted to create user but uid already exists.'.format(
+                self.debug_class,
+                uid
+            )
+            logger.auth_error(error_message)
+            raise ValidationError(error_message)
 
         # Set password based on AUTH_BACKEND_USE_DJANGO_USER_PASSWORDS setting.
         if settings.AUTH_BACKEND_USE_DJANGO_USER_PASSWORDS:
@@ -113,20 +117,18 @@ class WmuAuthBackend(AbstractLDAPBackend):
         # Save model.
         login_user.save()
 
-        if settings.AUTH_BACKEND_DEBUG:
-            logger.info('{0} Auth Backend: Created user new User model {1}. Now creating WmuUser model...'.format(
-                self.debug_class,
-                uid,
-            ))
+        logger.auth_info('{0} Auth Backend - {1}: Set up "User" model. Now creating "WmuUser" model...'.format(
+            self.debug_class,
+            uid,
+        ))
 
         # Model created. Now run update logic to ensure all fields are properly set.
         login_user = self._update_user_model(uid, user_ldap_info)
 
-        if settings.AUTH_BACKEND_DEBUG:
-            logger.info('{0} Auth Backend: Related WMU User model set. User creation complete for user {1}.'.format(
-                self.debug_class,
-                uid,
-            ))
+        logger.auth_info('{0} Auth Backend - {1}: "WmuUser" model set. User creation complete.'.format(
+            self.debug_class,
+            uid,
+        ))
 
         return login_user
 
@@ -174,29 +176,26 @@ class WmuAuthBackend(AbstractLDAPBackend):
             # If we got this far, then model exists. Check if we want to update it.
             if not skip_update:
                 # skip_update bool is False. Proceeding to update WmuUser values, if possible.
-                if settings.AUTH_BACKEND_DEBUG:
-                    logger.info('{0} Auth Backend: WmuUser model found for "{1}". Attempting to update...'.format(
-                        self.debug_class,
-                        uid,
-                    ))
+                logger.auth_info('{0} Auth Backend - {1}: WmuUser model found for "{1}". Attempting to update...'.format(
+                    self.debug_class,
+                    uid,
+                ))
                 wmu_user = self._update_wmu_user_model(uid, user_ldap_info)
 
             else:
                 # skip_update bool is True. Skipping WmuUser update attempt.
-                if settings.AUTH_BACKEND_DEBUG:
-                    logger.info('{0} Auth Backend: WmuUser model found for "{1}". Bool "only_create" is True. '
-                                'Skipping update.'.format(
-                        self.debug_class,
-                        uid,
-                    ))
-
-        except models.WmuUser.DoesNotExist:
-            # WmuUser model doesn't exist. Create new WmuUser model.
-            if settings.AUTH_BACKEND_DEBUG:
-                logger.info('{0} Auth Backend: Could not find WmuUser model for "{1}". Creating new one...'.format(
+                logger.auth_info('{0} Auth Backend - {1}: WmuUser model found for "{1}". Bool "only_create" is True. '
+                            'Skipping update.'.format(
                     self.debug_class,
                     uid,
                 ))
+
+        except models.WmuUser.DoesNotExist:
+            # WmuUser model doesn't exist. Create new WmuUser model.
+            logger.auth_info('{0} Auth Backend - {1}: Could not find WmuUser model. Creating new one...'.format(
+                self.debug_class,
+                uid,
+            ))
             wmu_user = self._create_wmu_user_model(uid, user_ldap_info, winno=winno)
 
         return wmu_user
@@ -293,6 +292,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
         # Attempt to update user profile.
         user_profile = models.Profile.get_profile(uid)
         if user_profile is None:
+            logger.auth_error('{0} Auth Backend - {1}: Could not find profile for user.'.format(self.debug_class, uid))
             raise ValueError('Could not find profile for user {0}.'.format(uid))
 
         # Get phone number info.
@@ -343,7 +343,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
 
         # Now parse user ldap info.
         if ldap_info is not None:
-            user_ldap_status = self._verify_user_ldap_status(ldap_info)
+            user_ldap_status = self._verify_user_ldap_status(uid, ldap_info)
 
             # Check if we should update User and Wmu User model "active" fields.
             if set_model_active_fields:
@@ -383,7 +383,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
 
             return None
 
-    def _verify_user_ldap_status(self, ldap_info):
+    def _verify_user_ldap_status(self, uid, ldap_info):
         """
         Checks user's "active" status, according to main campus ldap. Uses several fields to determine.
 
@@ -393,6 +393,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
         So if we read in the string "false" from ldap, that would technically evaluate to True.
         Rather than dealing with that, we assume all fields may be strings, and just check for exact string match.
 
+        :param uid: BroncoNet of student to check.
         :param ldap_info: ALL_ATTRIBUTES of user's main campus ldap info.
         :return: Tuple of (User is enrolled/active, User is within retention policy)
         """
@@ -464,7 +465,11 @@ class WmuAuthBackend(AbstractLDAPBackend):
 
         except KeyError as err:
             # One or more relevant fields do not exist. Assuming we can set user to inactive in Django.
-            logger.info('Failed to find LDAP key for user during enrollment check: {0}'.format(err))
+            logger.auth_error('{0} Auth Backend - {1}: Failed to find LDAP key for user during enrollment check. {2}'.format(
+                self.debug_class,
+                uid,
+                err,
+            ))
             return (False, False)
 
     #endregion User Ldap Status Functions

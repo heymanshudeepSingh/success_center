@@ -114,13 +114,13 @@ class AdvisingAuthBackend(AbstractLDAPBackend):
                 # Check each major to see if relation is in django's models and active.
                 if not models.WmuUserMajorRelationship.check_if_user_has_major_active(wmu_user, returned_major):
                     # Relation not found. Create new.
-                    if settings.AUTH_BACKEND_DEBUG:
-                        logger.info('{0} Auth Backend: Django major "{1}" does not match new User\'s return value '
-                                    'from ldap "{2}". Updating...'.format(
-                            self.debug_class,
-                            wmu_user.major.all(),
-                            returned_majors,
-                        ))
+                    logger.auth_info('{0} Auth Backend - {1}: Django major "{2}" does not match new User\'s return '
+                                'value from ldap "{3}". Updating...'.format(
+                        self.debug_class,
+                        uid,
+                        wmu_user.major.all(),
+                        returned_majors,
+                    ))
                     models.WmuUserMajorRelationship.objects.create(
                         wmu_user=wmu_user,
                         major=returned_major,
@@ -133,13 +133,13 @@ class AdvisingAuthBackend(AbstractLDAPBackend):
             # Check if relation is in django's models and active.
             if not models.WmuUserMajorRelationship.check_if_user_has_major_active(wmu_user, returned_major):
                 # Relation not found. Create new.
-                if settings.AUTH_BACKEND_DEBUG:
-                    logger.info('{0} Auth Backend: Django major "{1}" does not match new User\'s return value from '
-                                'ldap "{2}". Updating...'.format(
-                        self.debug_class,
-                        wmu_user.major.all(),
-                        returned_majors,
-                    ))
+                logger.auth_info('{0} Auth Backend - {1}: Django major "{2}" does not match new User\'s return value '
+                            'from ldap "{3}". Updating...'.format(
+                    self.debug_class,
+                    uid,
+                    wmu_user.major.all(),
+                    returned_majors,
+                ))
                 models.WmuUserMajorRelationship.objects.create(
                     wmu_user=wmu_user,
                     major=returned_major,
@@ -159,8 +159,11 @@ class AdvisingAuthBackend(AbstractLDAPBackend):
 
         # Check if program code was valid.
         if student_code is not None and student_code != '':
-            if settings.AUTH_BACKEND_DEBUG:
-                logger.info('{0} Auth Backend: Found student wmuProgramCode: {1}'.format(self.debug_class, student_code))
+            logger.auth_info('{0} Auth Backend - {1}: Found student wmuProgramCode: {2}'.format(
+                self.debug_class,
+                uid,
+                student_code,
+            ))
 
             search_base = 'ou=Majors,ou=WMUCourses,o=wmich.edu,dc=wmich,dc=edu'
             search_filter = '(wmuStudentMajor={0})'.format(student_code)
@@ -169,25 +172,25 @@ class AdvisingAuthBackend(AbstractLDAPBackend):
             if isinstance(student_code, list):
                 major_list = []
                 for code in student_code:
-                    major_list.append(self._get_student_major(code, search_base, search_filter, attributes))
+                    major_list.append(self._get_student_major(uid, code, search_base, search_filter, attributes))
                 return major_list
             else:
-                major = self._get_student_major(student_code, search_base, search_filter, attributes)
+                major = self._get_student_major(uid, student_code, search_base, search_filter, attributes)
 
             return major
         else:
 
-            if settings.AUTH_BACKEND_DEBUG:
-                logger.warning(
-                    '{0} Auth Backend: Failed to get wmuStudentMajor LDAP field for {1}. Defaulting to "Unknown" major.'.format(
-                        self.debug_class,
-                        uid
-                    ))
+            logger.auth_warning(
+                '{0} Auth Backend - {1}: Failed to get wmuStudentMajor LDAP field. Defaulting to "Unknown" major.'.format(
+                    self.debug_class,
+                    uid
+                ))
             return models.Major.objects.get(slug='unk')
 
-    def _get_student_major(self, student_code, search_base, search_filter, attributes):
+    def _get_student_major(self, uid, student_code, search_base, search_filter, attributes):
         """
         Get Django Major model for with provided information.
+        :param uid: Bronconet corresponding to student.
         :param student_code: Student code to search for model of.
         :param search_base: LDAP main campus search_base for Major info.
         :param search_filter: LDAP main campus search_filter for Major info.
@@ -207,19 +210,25 @@ class AdvisingAuthBackend(AbstractLDAPBackend):
 
             if ldap_major is not None:
                 # Got valid response from LDAP.
-                if settings.AUTH_BACKEND_DEBUG:
-                    logger.info('{0} Auth Backend: Found ldap_major: {1}'.format(self.debug_class, ldap_major))
+                logger.auth_info('{0} Auth Backend - {1}: Found major in LDAP: {2}'.format(
+                    self.debug_class,
+                    uid,
+                    ldap_major,
+                ))
 
                 try:
                     # Attempt to get major.
                     major = models.Major.objects.get(student_code=student_code)
-                    if settings.AUTH_BACKEND_DEBUG:
-                        logger.info('{0} Auth Backend: Found Django Major: {1}'.format(self.debug_class, major))
+                    logger.auth_info('{0} Auth Backend - {1}: Found Django Major "{2}"'.format(
+                        self.debug_class,
+                        uid,
+                        major,
+                    ))
                     return major
                 except models.Major.DoesNotExist:
-                    if settings.AUTH_BACKEND_DEBUG:
-                        logger.info('{0} Auth Backend: Django Major does not exist. Creating new...'.format(
+                    logger.auth_info('{0} Auth Backend - {1}: Django Major does not exist. Creating new...'.format(
                         self.debug_class,
+                        uid,
                     ))
 
                     # Get major's department.
@@ -232,7 +241,7 @@ class AdvisingAuthBackend(AbstractLDAPBackend):
                     display_name = self._get_major_display_name(ldap_major)
 
                     # Get major's degree_level.
-                    degree_level = self._get_degree_level_from_program_code(program_code)
+                    degree_level = self._get_degree_level_from_program_code(uid, program_code)
 
                     try:
                         return models.Major.objects.create(
@@ -244,7 +253,11 @@ class AdvisingAuthBackend(AbstractLDAPBackend):
                             slug=slugify(student_code),
                         )
                     except Exception as err:
-                        logger.error('Failed to create major: {0}'.format(err))
+                        logger.auth_error('{0} Auth Backend - {1}: Failed to create major: {2}'.format(
+                            self.debug_class,
+                            uid,
+                            err,
+                        ))
                         return models.Major.objects.get(slug='unk')
 
             else:
@@ -325,9 +338,10 @@ class AdvisingAuthBackend(AbstractLDAPBackend):
             # 'wmuProgramCode' field does not exist for entry. Default to student_code value.
             return str(ldap_major['wmuStudentMajor'][0]).strip()
 
-    def _get_degree_level_from_program_code(self, program_code):
+    def _get_degree_level_from_program_code(self, uid, program_code):
         """
         Attempts to parse degree_level from program_code.
+        :param uid: Bronconet corresponding to student.
         :param program_code: The LDAP program_code for the Major.
         :return: The Major's degree_level.
         """
@@ -387,8 +401,9 @@ class AdvisingAuthBackend(AbstractLDAPBackend):
 
         else:
             # Unkown program_code format.
-            logger.warning('{0} Auth Backend: Could not parse degree_level from program_code "{1}".'.format(
+            logger.auth_warning('{0} Auth Backend - {1}: Could not parse degree_level from program_code "{2}".'.format(
                 self.debug_class,
+                uid,
                 program_code,
             ))
             return models.Major.get_degree_level_as_int('Unknown')
