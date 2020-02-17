@@ -383,6 +383,11 @@ def _create_logging_dict(log_directory):
                 'level': 'NOTSET',
                 'propagate': False,
             },
+            'django.security': {
+                'handlers': ['console', 'file_debug', 'file_info', 'file_warn', 'file_error', 'mail_error', ],
+                'level': 'NOTSET',
+                'propagate': False,
+            },
 
             # Standard logging for Django Channels.
             'django.channels': {
