@@ -78,49 +78,53 @@ class AbstractLDAPBackend(ABC):
         :param password: Value from password field.
         :return: Valid user object on success. | None on failure.
         """
-        logger.auth_info('{0}: Attempting user login...'.format(username))
+        try:
+            logger.auth_info('{0}: Attempting user login...'.format(username))
 
-        # Check what format username was provided as.
-        user_id = self._parse_username(username)
+            # Check what format username was provided as.
+            user_id = self._parse_username(username)
 
-        if user_id is None:
-            logger.auth_warning('{0}: User login failed.'.format(username))
-            return None
+            if user_id is None:
+                logger.auth_warning('{0}: User login failed.'.format(username))
+                return None
 
-        # Check if we should use Django User Model passwords.
-        if settings.AUTH_BACKEND_USE_DJANGO_USER_PASSWORDS:
-            # Logic to use Django User Model passwords.
-            # Ldap is only used on first user login to create initial user model. Then Django User Model is used for all
-            # future logins.
-            try:
-                # Attempt to get user object.
-                user = models.User.objects.get(**user_id)
+            # Check if we should use Django User Model passwords.
+            if settings.AUTH_BACKEND_USE_DJANGO_USER_PASSWORDS:
+                # Logic to use Django User Model passwords.
+                # Ldap is only used on first user login to create initial user model. Then Django User Model is used for all
+                # future logins.
+                try:
+                    # Attempt to get user object.
+                    user = models.User.objects.get(**user_id)
 
-                # Validate user object.
-                if user:
-                    # User object found in local Django database. Use standard Django auth.
-                    user = self._validate_django_user(user, password)
+                    # Validate user object.
+                    if user:
+                        # User object found in local Django database. Use standard Django auth.
+                        user = self._validate_django_user(user, password)
 
-                    # Check that user is active.
-                    if user and not self.user_can_authenticate(user):
+                        # Check that user is active.
+                        if user and not self.user_can_authenticate(user):
+                            user = None
+                    else:
                         user = None
-                else:
-                    user = None
 
-                if user is None:
-                    # Failed user login attempt.
-                    logger.auth_warning('{0}: User login failed.'.format(username))
-                return user
+                    if user is None:
+                        # Failed user login attempt.
+                        logger.auth_warning('{0}: User login failed.'.format(username))
+                    return user
 
-            except models.User.DoesNotExist:
-                # User object not found in local Django database. Attempt ldap query.
-                logger.auth_info('{0}: User not found in Django database.'.format(username))
-                user = self._validate_ldap_user(user_id, password)
-                return user
-        else:
-            # Logic to exclusively use Ldap User passwords.
-            # Ldap is used every time. Password info is never saved to Django User Models.
-            return self._validate_ldap_user(user_id, password)
+                except models.User.DoesNotExist:
+                    # User object not found in local Django database. Attempt ldap query.
+                    logger.auth_info('{0}: User not found in Django database.'.format(username))
+                    user = self._validate_ldap_user(user_id, password)
+                    return user
+            else:
+                # Logic to exclusively use Ldap User passwords.
+                # Ldap is used every time. Password info is never saved to Django User Models.
+                return self._validate_ldap_user(user_id, password)
+        except Exception as err:
+            logger.auth_error('Error during auth: {0}'.format(err), exc_info=True)
+            raise (err)
 
     def _parse_username(self, username):
         """
