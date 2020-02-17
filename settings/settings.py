@@ -43,6 +43,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [],
+        # 'DIRS': [TEMPLATE_DIR, ERR_TEMPLATE_DIR],
         # 'DIRS': [os.path.join(BASE_DIR, 'cae_home/templates/cae_home/errors')], # Internal error views.
         # 'DIRS': [os.path.join(BASE_DIR, 'cae_home/templates/error_views')],   # External error views.
         'APP_DIRS': True,

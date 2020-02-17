@@ -9,6 +9,8 @@ import os, sys
 
 # Get base directory.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
+ERR_TEMPLATE_DIR = os.path.join(BASE_DIR, 'cae_home/errors/')
 
 
 def get_dynamic_app_path(app_file_name):
