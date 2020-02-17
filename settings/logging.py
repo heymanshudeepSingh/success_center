@@ -18,8 +18,8 @@ from settings.reusable_settings import *
 LOG_VERSION = 2.1
 first_logging_call = True
 log_handler_class = 'logging.handlers.RotatingFileHandler'
-log_handler_file_max_bytes = 1024*1024*10
-log_handler_file_backup_count = 10
+log_handler_file_max_bytes = 1024 * 1024  # Roughly 1 MB.
+log_handler_file_backup_count = 20
 
 
 def get_logger(caller, log_dir=None):
