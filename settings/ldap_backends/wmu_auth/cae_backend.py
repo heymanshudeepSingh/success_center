@@ -131,19 +131,28 @@ class CaeAuthBackend(AbstractLDAPBackend):
         ldap_user_groups = self.get_ldap_user_groups(uid)
 
         # Set user group types.
+        user_groups = login_user.groups.all().values_list('name', flat=True)
         if ldap_user_groups['director']:
-            login_user.groups.add(Group.object.get(name='CAE Director'))
-            logger.auth_info('{0}: Added user to CAE Director group.'.format(uid))
+            # Check if user is already in group.
+            if 'CAE Director' not in user_groups:
+                login_user.groups.add(Group.object.get(name='CAE Director'))
+                logger.auth_info('{0}: Added user to CAE Director group.'.format(uid))
         if ldap_user_groups['attendant']:
-            login_user.groups.add(Group.objects.get(name='CAE Attendant'))
-            logger.auth_info('{0}: Added user to CAE Attendant group.'.format(uid))
+            # Check if user is already in group.
+            if 'CAE Attendant' not in user_groups:
+                login_user.groups.add(Group.objects.get(name='CAE Attendant'))
+                logger.auth_info('{0}: Added user to CAE Attendant group.'.format(uid))
         if ldap_user_groups['admin']:
-            login_user.groups.add(Group.objects.get(name='CAE Admin'))
-            logger.auth_info('{0}: Added user to CAE Admin group.'.format(uid))
+            # Check if user is already in group.
+            if 'CAE Admin' not in user_groups:
+                login_user.groups.add(Group.objects.get(name='CAE Admin'))
+                logger.auth_info('{0}: Added user to CAE Admin group.'.format(uid))
         if ldap_user_groups['programmer']:
-            login_user.groups.add(Group.objects.get(name='CAE Programmer'))
-            login_user.is_staff = True
-            logger.auth_info('{0}: Added user to CAE Programmer group.'.format(uid))
+            # Check if user is already in group.
+            if 'CAE Programmer' not in user_groups:
+                login_user.groups.add(Group.objects.get(name='CAE Programmer'))
+                login_user.is_staff = True
+                logger.auth_info('{0}: Added user to CAE Programmer group.'.format(uid))
 
         # Save model.
         login_user.save()
