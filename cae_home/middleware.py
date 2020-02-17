@@ -150,7 +150,6 @@ class HandleExceptionsMiddleware(object):
     """
     def __init__(self, get_response):
         self.get_response = get_response
-        logger.info('Aaa')
 
     def __call__(self, request, *args, **kwargs):
         # Resume view call as normal.
