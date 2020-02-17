@@ -8,7 +8,6 @@ Note: Standard log priority is "NOTSET" > "DEBUG" > "INFO" > "WARNING" > "ERROR"
 """
 
 # System Imports.
-import os
 import logging.config
 
 # User Class Imports.
@@ -16,7 +15,7 @@ from settings.reusable_settings import *
 
 
 # Variables to help run logging.
-LOG_VERSION = 2.0
+LOG_VERSION = 2.1
 first_logging_call = True
 log_handler_class = 'logging.handlers.RotatingFileHandler'
 log_handler_file_max_bytes = 1024*1024*10
@@ -122,20 +121,24 @@ def _create_logging_dict(log_directory):
         },
         'formatters': {
             # Minimal logging. Only includes message.
+            # Generally meant for terminal "end user" interface display.
             'minimal': {
                 'format': '%(message)s',
             },
             # Simple logging. Includes message type and actual message.
+            # Generally meant for console logging.
             'simple': {
-                'format': '[%(levelname)s]: %(message)s',
+                'format': '[%(levelname)s] [%(filename)s %(lineno)d]: %(message)s',
             },
             # Basic logging. Includes date, message type, file originated, and actual message.
+            # Generally meant for file logging.
             'standard': {
-                'format': '%(asctime)s [%(levelname)s] %(name)s: %(message)s',
+                'format': '%(asctime)s [%(levelname)s] [%(name)s %(lineno)d]: %(message)s',
             },
             # Verbose logging. Includes standard plus the process number and thread id.
+            # For when you wanna be really verbose.
             'verbose': {
-                'format': '%(asctime)s [%(levelname)s] %(name)s || %(process)d %(thread)d || %(message)s',
+                'format': '%(asctime)s [%(levelname)s] [%(name)s %(lineno)d] || %(process)d %(thread)d || %(message)s'
             },
         },
         'handlers': {
@@ -147,7 +150,7 @@ def _create_logging_dict(log_directory):
             'console': {
                 'level': 'INFO',
                 'class': 'logging.StreamHandler',
-                'formatter': 'standard',
+                'formatter': 'simple',
             },
             # Debug level - To file.
             'file_debug': {
@@ -229,6 +232,16 @@ def _create_logging_dict(log_directory):
                 'backupCount': log_handler_file_backup_count,
                 'formatter': 'standard',
                 'filters': ['include_only_auth'],
+            },
+            # Simple Ldap Lib - To file.
+            'simple_ldap_info': {
+                'level': 'INFO',
+                'class': log_handler_class,
+                'filename': os.path.join(log_directory, 'debug/simple_ldap.log'),
+                'maxBytes': log_handler_file_max_bytes,
+                'backupCount': log_handler_file_backup_count,
+                'formatter': 'standard',
+                'filters': ['exclude_auth'],
             },
             # Warn level - To file.
             'file_warn': {
@@ -387,6 +400,13 @@ def _create_logging_dict(log_directory):
                 'level': 'NOTSET',
                 'propagate': False,
             },
+
+            # Logging for custom libraries.
+            'simple_ldap_lib': {
+                'handlers': ['simple_ldap_info'],
+                'level': 'NOTSET',
+                'propagate': False,
+            }
         },
     }
 
