@@ -9,8 +9,16 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.db.models import ObjectDoesNotExist
 from django.utils import timezone
 
+
+from django.core.handlers.exception import response_for_exception
+
 # User Class Imports.
 from cae_home import models
+from settings import logging as init_logging
+
+
+# Import logger.
+logger = init_logging.get_logger(__name__)
 
 
 class GetUserProfileMiddleware(object):
@@ -134,3 +142,24 @@ class GetUserSiteOptionsMiddleware(object):
             response.context_data['main_nav_template_path'] = 'cae_home/nav/default_app_nav.html'
 
         return response
+
+
+class HandleExceptionsMiddleware(object):
+    """
+    Handles all exceptions.
+    """
+    def __init__(self, get_response):
+        self.get_response = get_response
+        logger.info('Aaa')
+
+    def __call__(self, request, *args, **kwargs):
+        # Resume view call as normal.
+        response = self.get_response(request)
+        return response
+
+    def process_exception(self, request, exception):
+        logger.error('{0}'.format(exception), exc_info=True)
+
+        # Call standard Django response handling for given exception.
+        return response_for_exception(request, exception)
+

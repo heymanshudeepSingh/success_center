@@ -34,6 +34,7 @@ MIDDLEWARE = [
     'cae_home.middleware.GetUserSiteOptionsMiddleware',
     'cae_home.middleware.SetTimezoneMiddleware',
 
+    'cae_home.middleware.HandleExceptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'settings.urls'
@@ -41,7 +42,8 @@ ROOT_URLCONF = 'settings.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'cae_home/templates/cae_home/errors')], # Internal error views.
+        'DIRS': [],
+        # 'DIRS': [os.path.join(BASE_DIR, 'cae_home/templates/cae_home/errors')], # Internal error views.
         # 'DIRS': [os.path.join(BASE_DIR, 'cae_home/templates/error_views')],   # External error views.
         'APP_DIRS': True,
         'OPTIONS': {
