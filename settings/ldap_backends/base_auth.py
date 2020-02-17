@@ -16,11 +16,11 @@ from django.core.validators import validate_email
 # User Class Imports.
 from cae_home import models
 from settings import simple_ldap_lib
-from settings import extra_settings
+from settings import logging as init_logging
 
 
 # Import logger.
-logger = extra_settings.logging.getLogger(__name__)
+logger = init_logging.get_logger(__name__)
 
 
 class AbstractLDAPBackend(ABC):
@@ -37,7 +37,6 @@ class AbstractLDAPBackend(ABC):
         If necessary, can adjust/override any values in the "setup_abstract_class" method for inheriting children.
         """
         self.regex_username_match = r'([a-zA-Z0-9]+)(($)|(@{0}$))'    # Regex to compare username to.
-        self.debug_class = ''       # Class name to put into debug logging messages.
         self.get_info = 'SCHEMA'    # "get_info" value used in LDAP connection binds.
 
         self.ldap_lib = simple_ldap_lib.SimpleLdap()
@@ -79,13 +78,13 @@ class AbstractLDAPBackend(ABC):
         :param password: Value from password field.
         :return: Valid user object on success. | None on failure.
         """
-        logger.auth_info('{0} Auth Backend - {1}: Attempting user login...'.format(self.debug_class, username))
+        logger.auth_info('{0}: Attempting user login...'.format(username))
 
         # Check what format username was provided as.
         user_id = self._parse_username(username)
 
         if user_id is None:
-            logger.auth_warning('{0} Auth Backend - {1}: User login failed.'.format(self.debug_class, username))
+            logger.auth_warning('{0}: User login failed.'.format(username))
             return None
 
         # Check if we should use Django User Model passwords.
@@ -110,15 +109,12 @@ class AbstractLDAPBackend(ABC):
 
                 if user is None:
                     # Failed user login attempt.
-                    logger.auth_warning('{0} Auth Backend, {1}: User login failed.'.format(self.debug_class, username))
+                    logger.auth_warning('{0}: User login failed.'.format(username))
                 return user
 
             except models.User.DoesNotExist:
                 # User object not found in local Django database. Attempt ldap query.
-                logger.auth_info('{0} Auth Backend - {1}: User not found in Django database.'.format(
-                    self.debug_class,
-                    username,
-                ))
+                logger.auth_info('{0}: User not found in Django database.'.format(username))
                 user = self._validate_ldap_user(user_id, password)
                 return user
         else:
@@ -132,15 +128,12 @@ class AbstractLDAPBackend(ABC):
         :param username: String user entered into "username" field.
         :return: Dictionary of values to attempt auth with.
         """
-        logger.auth_info('{0} Auth Backend - {1}: Parsing username...'.format(self.debug_class, username))
+        logger.auth_info('{0}: Parsing username...'.format(username))
 
         # Check for any nonstandard characters. If so, skip login.
         # (Should be standard numbers/letters, optionally with "@wmich.edu" appended.)
         if not re.match(self.regex_username_match, username):
-            logger.auth_info('{0} Auth Backend - {1}: Attempted login with invalid characters.'.format(
-                self.debug_class,
-                username,
-            ))
+            logger.auth_info('{0}: Attempted login with invalid characters.'.format(username))
             return None
         else:
             # Remove whitespace and set all characters to lowercase.
@@ -166,22 +159,22 @@ class AbstractLDAPBackend(ABC):
         :param user:
         :return: Valid user | None on failure
         """
-        logger.auth_info('{0} Auth Backend - {1}: Attempting Django validation...'.format(self.debug_class, user))
+        logger.auth_info('{0}: Attempting Django validation...'.format(user))
 
         # Check password.
         if user.check_password(password):
-            logger.auth_info('{0} Auth Backend - {1}: Logging in...'.format(self.debug_class, user))
+            logger.auth_info('{0}: Logging in...'.format(user))
             return user
         else:
             # Bad password.
-            logger.auth_info('{0} Auth Backend - {1}: Bad password. Cancelling login.'.format(self.debug_class, user))
+            logger.auth_info('{0}: Bad password. Cancelling login.'.format(user))
             return None
 
     def _validate_ldap_user(self, user_id, password):
         """
         Attempts to validate user through ldap. If found, will create a new user account using ldap info.
         """
-        logger.auth_info('{0} Auth Backend - {1}: Attempting Ldap validation...'.format(self.debug_class, user_id))
+        logger.auth_info('{0}: Attempting Ldap validation...'.format(user_id))
 
         # Check if input was email or username. Parse to uid accordingly.
         # Note that if email, it should always be a wmu email. Thus the parse should get a bronconet id.
@@ -199,11 +192,11 @@ class AbstractLDAPBackend(ABC):
 
         if auth_search_return[0]:
             # User validated successfully through ldap. Create new django user.
-            logger.auth_info('{0} Auth Backend - {1}: {2}'.format(self.debug_class, user_id, auth_search_return[1]))
+            logger.auth_info('{0}: {1}'.format(user_id, auth_search_return[1]))
             user = self.create_or_update_user_model(uid, password)
         else:
             # Invalid ldap credentials.
-            logger.auth_info('{0} Auth Backend - {1}: {2}'.format(self.debug_class, user_id, auth_search_return[1]))
+            logger.auth_info('{0}: {1}'.format(user_id, auth_search_return[1]))
             user = None
 
         return user
@@ -231,7 +224,7 @@ class AbstractLDAPBackend(ABC):
             user = None
 
         if user is None and settings.AUTH_BACKEND_DEBUG:
-            logger.auth_info('{0} Auth Backend - {1}: User not found.'.format(self.debug_class, user_id))
+            logger.auth_info('{0}: User not found.'.format(user_id))
         return user
 
     #endregion User Auth
@@ -350,8 +343,8 @@ class AbstractLDAPBackend(ABC):
 
         # Check server response.
         if user_attributes is None:
-            warn_message = '{0} Auth Backend - {1}: Search returned no results. Double check that the uid was correct.' \
-                           ' Otherwise, attribute did not exist for entry.'.format(self.debug_class, uid)
+            warn_message = '{0}: Search returned no results. Double check that the uid was correct.Otherwise, '\
+                'attribute did not exist for entry.'.format(uid)
             logger.auth_warning(warn_message)
         return user_attributes
 
@@ -377,8 +370,8 @@ class AbstractLDAPBackend(ABC):
 
         # Check server response.
         if user_attribute is None:
-            warn_message = '{0} Auth Backend - {1}: Search returned no results. Double check that the uid was correct.'\
-                            ' Otherwise, attribute did not exist for entry.'.format(self.debug_class, uid)
+            warn_message = '{0}: Search returned no results. Double check that the uid was correct. Otherwise, '\
+                ' attribute did not exist for entry.'.format(uid)
             logger.auth_warning(warn_message)
         else:
             # Format server response.

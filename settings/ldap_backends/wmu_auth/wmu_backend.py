@@ -13,13 +13,13 @@ from phonenumber_field.phonenumber import PhoneNumber
 
 # User Class Imports.
 from cae_home import models
-from settings import extra_settings
+from settings import logging as init_logging
 from settings.ldap_backends.base_auth import AbstractLDAPBackend
 from settings.ldap_backends.wmu_auth.adv_backend import AdvisingAuthBackend
 
 
 # Import logger.
-logger = extra_settings.logging.getLogger(__name__)
+logger = init_logging.get_logger(__name__)
 
 
 class WmuAuthBackend(AbstractLDAPBackend):
@@ -34,9 +34,6 @@ class WmuAuthBackend(AbstractLDAPBackend):
             When set to active in settings, this backend is used every time a page needs to check permissions. So
             enabling "check_credentials" would potentially add a lot of extra time to each page load.
         """
-        # Set debug logging class name.
-        self.debug_class = 'WMU'
-
         # Set allowed email value in username.
         self.regex_username_match = self.regex_username_match.format('wmich.edu')
 
@@ -89,7 +86,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
         :param user_ldap_info: User's info from LDAP.
         :return: Instance of User model.
         """
-        logger.auth_info('{0} Auth Backend - {1}: Attempting to create new User model...'.format(self.debug_class, uid))
+        logger.auth_info('{0}: Attempting to create new User model...'.format(uid))
 
         # Create new user.
         login_user, created = models.User.objects.get_or_create(username=uid)
@@ -99,10 +96,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
             # Duplicate Id's exist.
             # Most likely, there's a logic error in code and "_update_user_model" should have been called.
             login_user = None
-            error_message = '{0} Auth Backend - {1}: Attempted to create user but uid already exists.'.format(
-                self.debug_class,
-                uid
-            )
+            error_message = '{0}: Attempted to create user but uid already exists.'.format(uid)
             logger.auth_error(error_message)
             raise ValidationError(error_message)
 
@@ -117,18 +111,12 @@ class WmuAuthBackend(AbstractLDAPBackend):
         # Save model.
         login_user.save()
 
-        logger.auth_info('{0} Auth Backend - {1}: Set up "User" model. Now creating "WmuUser" model...'.format(
-            self.debug_class,
-            uid,
-        ))
+        logger.auth_info('{0}: Set up "User" model. Now creating "WmuUser" model...'.format(uid))
 
         # Model created. Now run update logic to ensure all fields are properly set.
         login_user = self._update_user_model(uid, user_ldap_info)
 
-        logger.auth_info('{0} Auth Backend - {1}: "WmuUser" model set. User creation complete.'.format(
-            self.debug_class,
-            uid,
-        ))
+        logger.auth_info('{0}: "WmuUser" model set. User creation complete.'.format(uid))
 
         return login_user
 
@@ -148,6 +136,8 @@ class WmuAuthBackend(AbstractLDAPBackend):
 
         # Verify and set user ldap "active" status, according to main campus.
         self.verify_user_ldap_status(uid)
+
+        logger.auth_info('{0}: User model has been updated.'.format(uid))
 
         # Return fresh instance of model, in case instance was updated by check for Wmu User model.
         return models.User.objects.get(username=uid)
@@ -176,26 +166,18 @@ class WmuAuthBackend(AbstractLDAPBackend):
             # If we got this far, then model exists. Check if we want to update it.
             if not skip_update:
                 # skip_update bool is False. Proceeding to update WmuUser values, if possible.
-                logger.auth_info('{0} Auth Backend - {1}: WmuUser model found for "{1}". Attempting to update...'.format(
-                    self.debug_class,
-                    uid,
-                ))
+                logger.auth_info('{0}: WmuUser model found. Attempting to update...'.format(uid))
                 wmu_user = self._update_wmu_user_model(uid, user_ldap_info)
 
             else:
                 # skip_update bool is True. Skipping WmuUser update attempt.
-                logger.auth_info('{0} Auth Backend - {1}: WmuUser model found for "{1}". Bool "only_create" is True. '
-                            'Skipping update.'.format(
-                    self.debug_class,
+                logger.auth_info('{0}: WmuUser model found, but Bool "only_create" is True. Skipping update.'.format(
                     uid,
                 ))
 
         except models.WmuUser.DoesNotExist:
             # WmuUser model doesn't exist. Create new WmuUser model.
-            logger.auth_info('{0} Auth Backend - {1}: Could not find WmuUser model. Creating new one...'.format(
-                self.debug_class,
-                uid,
-            ))
+            logger.auth_info('{0}: Could not find WmuUser model. Creating new one...'.format(uid))
             wmu_user = self._create_wmu_user_model(uid, user_ldap_info, winno=winno)
 
         return wmu_user
@@ -292,7 +274,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
         # Attempt to update user profile.
         user_profile = models.Profile.get_profile(uid)
         if user_profile is None:
-            logger.auth_error('{0} Auth Backend - {1}: Could not find profile for user.'.format(self.debug_class, uid))
+            logger.auth_error('{0}: Could not find profile for user.'.format(uid))
             raise ValueError('Could not find profile for user {0}.'.format(uid))
 
         # Get phone number info.
@@ -320,6 +302,8 @@ class WmuAuthBackend(AbstractLDAPBackend):
 
         # Update major.
         adv_ldap.add_or_update_major(uid)
+
+        logger.auth_info('{0}: WmuUser model has been updated.'.format(uid))
 
         # Return fresh instance of model, in case instance was updated by Advising Auth logic.
         return models.WmuUser.objects.get(bronco_net=uid)
@@ -465,11 +449,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
 
         except KeyError as err:
             # One or more relevant fields do not exist. Assuming we can set user to inactive in Django.
-            logger.auth_error('{0} Auth Backend - {1}: Failed to find LDAP key for user during enrollment check. {2}'.format(
-                self.debug_class,
-                uid,
-                err,
-            ))
+            logger.auth_error('{0}: Failed to find LDAP key for user during enrollment check. {1}'.format(uid, err))
             return (False, False)
 
     #endregion User Ldap Status Functions

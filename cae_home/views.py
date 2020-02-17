@@ -3,7 +3,6 @@ Views for CAE Home app.
 """
 
 # System Imports.
-import logging
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import views as auth_views
@@ -20,10 +19,11 @@ from rest_framework import viewsets, permissions
 # User Class Imports.
 from . import forms, models
 from .rest import filters, serializers
+from settings import logging as init_logging
 
 
 # Import logger.
-logger = logging.getLogger(__name__)
+logger = init_logging.get_logger(__name__)
 
 
 # CAE Center specific User Group names.
@@ -113,6 +113,8 @@ def logout(request):
                 if cae_group in user_groups:
                     logout_redirect_url = redirect('cae_web_core:index')
                     url_set = True
+
+        logger.auth_info('{0}: Logging user out.'.format(request.user))
 
         # Call Django's standard logout function.
         return auth_views.LogoutView.as_view(next_page=logout_redirect_url.url)(request)

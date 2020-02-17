@@ -11,13 +11,13 @@ from django.core.exceptions import ValidationError
 
 # User Class Imports.
 from cae_home import models
-from settings import extra_settings
+from settings import logging as init_logging
 from settings.ldap_backends.base_auth import AbstractLDAPBackend
 from settings.ldap_backends.wmu_auth.wmu_backend import WmuAuthBackend
 
 
 # Import logger.
-logger = extra_settings.logging.getLogger(__name__)
+logger = init_logging.get_logger(__name__)
 
 
 class CaeAuthBackend(AbstractLDAPBackend):
@@ -32,9 +32,6 @@ class CaeAuthBackend(AbstractLDAPBackend):
             When set to active in settings, this backend is used every time a page needs to check permissions. So
             enabling "check_credentials" would potentially add a lot of extra time to each page load.
         """
-        # Set debug logging class name.
-        self.debug_class = 'CAE'
-
         # Set allowed email value in username.
         self.regex_username_match = self.regex_username_match.format('wmich.edu')
 
@@ -80,7 +77,7 @@ class CaeAuthBackend(AbstractLDAPBackend):
         :param password: Confirmed valid ldap pass.
         :return: Instance of User model.
         """
-        logger.auth_info('{0} Auth Backend - {1}: Attempting to create new user model...'.format(self.debug_class, uid))
+        logger.auth_info('{0}: Attempting to create new user model...'.format(uid))
 
         # Create new user.
         login_user, created = models.User.objects.get_or_create(username=uid)
@@ -90,10 +87,7 @@ class CaeAuthBackend(AbstractLDAPBackend):
             # Duplicate Id's exist.
             # Most likely, there's a logic error in code and "_update_user_model" should have been called.
             login_user = None
-            error_message = '{0} Auth Backend - {1}: Attempted to create user but user with id already exists.'.format(
-                self.debug_class,
-                uid,
-            )
+            error_message = '{0}: Attempted to create user but user with id already exists.'.format(uid)
             logger.auth_error(error_message)
             raise ValidationError(error_message)
 
@@ -113,18 +107,12 @@ class CaeAuthBackend(AbstractLDAPBackend):
         # Save model.
         login_user.save()
 
-        logger.auth_info('{0} Auth Backend - {1}: Created user new user model. Now setting groups...'.format(
-            self.debug_class,
-            uid,
-        ))
+        logger.auth_info('{0}: Created user new user model. Now setting groups...'.format(uid))
 
         # Model created. Now run update logic to ensure all fields are properly set.
         login_user = self._update_user_model(uid)
 
-        logger.auth_info('{0} Auth Backend - {1}: Imported Main Campus user info. User creation complete.'.format(
-            self.debug_class,
-            uid,
-        ))
+        logger.auth_info('{0}: Imported Main Campus user info. User creation complete.'.format(uid))
 
         return login_user
 
@@ -145,32 +133,28 @@ class CaeAuthBackend(AbstractLDAPBackend):
         # Set user group types.
         if ldap_user_groups['director']:
             login_user.groups.add(Group.object.get(name='CAE Director'))
-            logger.auth_info('{0} Auth Backend - {1}: Added user to CAE Director group.'.format(self.debug_class, uid))
+            logger.auth_info('{0}: Added user to CAE Director group.'.format(uid))
         if ldap_user_groups['attendant']:
             login_user.groups.add(Group.objects.get(name='CAE Attendant'))
-            logger.auth_info('{0} Auth Backend - {1}: Added user to CAE Attendant group.'.format(self.debug_class, uid))
+            logger.auth_info('{0}: Added user to CAE Attendant group.'.format(uid))
         if ldap_user_groups['admin']:
             login_user.groups.add(Group.objects.get(name='CAE Admin'))
-            logger.auth_info('{0} Auth Backend - {1}: Added user to CAE Admin group.'.format(self.debug_class, uid))
+            logger.auth_info('{0}: Added user to CAE Admin group.'.format(uid))
         if ldap_user_groups['programmer']:
             login_user.groups.add(Group.objects.get(name='CAE Programmer'))
             login_user.is_staff = True
-            logger.auth_info('{0} Auth Backend - {1}: Added user to CAE Programmer group.'.format(
-                self.debug_class,
-                uid,
-            ))
+            logger.auth_info('{0}: Added user to CAE Programmer group.'.format(uid))
 
         # Save model.
         login_user.save()
-        logger.auth_info('{0} Auth Backend - {1}: CAE Center User groups set for user.'.format(self.debug_class, uid))
-        logger.auth_info('{0} Auth Backend - {1}: Attempting to get Main Campus user info...'.format(
-            self.debug_class,
-            uid,
-        ))
+        logger.auth_info('{0}: CAE Center User groups set for user.'.format(uid))
+        logger.auth_info('{0}: Attempting to get Main Campus user info...'.format(uid))
 
         # Check for associated Wmu User model.
         wmu_ldap = WmuAuthBackend()
         wmu_ldap.create_or_update_wmu_user_model(uid)
+
+        logger.auth_info('{0}: User model has been updated.'.format(uid))
 
         # Return fresh instance of model, in case instance was updated by check for Wmu User model.
         return models.User.objects.get(username=uid)
