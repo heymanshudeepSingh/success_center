@@ -313,7 +313,7 @@ def test_single_email(request):
     This function is acceptable when a single email is to be sent.
     """
     if settings.DEBUG:
-        logging.info('Sending test email...\n')
+        logger.info('Sending test email...\n')
 
         # Compose email.
         email_from = 'cae-programmers@wmich.edu'
@@ -336,7 +336,7 @@ def test_single_email(request):
             fail_silently=False,
         )
 
-        logging.info('Email sent.\n')
+        logger.info('Email sent.\n')
 
         # Redirect to home.
         return redirect('cae_home:index')
@@ -351,7 +351,7 @@ def test_mass_email(request):
     Note that, despite the name, send_mass_email can still send a single email, if desired.
     """
     if settings.DEBUG:
-        logging.info('Sending test emails...\n')
+        logger.info('Sending test emails...\n')
 
         # Compose email contents.
         email_from = 'cae-programmers@wmich.edu'
@@ -373,7 +373,7 @@ def test_mass_email(request):
         # Send emails.
         send_mass_mail((email_1, email_2), fail_silently=False)
 
-        logging.info('Emails sent.\n')
+        logger.info('Emails sent.\n')
 
         # Redirect to home.
         return redirect('cae_home:index')
