@@ -72,6 +72,7 @@ function main () {
 
     echo ""
     echo -e "${color_blue}Installing Python$python_version dependencies...${color_reset}"
+    apt-get install python3 python3-dev python3-venv
     apt-get install "python$python_version" "python$python_version-dev" "python$python_version-venv" -y
 
     echo ""
