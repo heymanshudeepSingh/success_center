@@ -113,12 +113,7 @@ function main() {
 
     # Compile CSS.
     echo -e "${color_blue}Compiling CSS files...${color_reset}"
-    if [[ "$windows" == true ]]
-    then
-        ./general/compile_css.sh
-    else
-        sudo ./general/compile_css.sh
-    fi
+    ./general/compile_css.sh
     echo ""
 
 

@@ -81,7 +81,7 @@ function main () {
     echo ""
     echo -e "${color_blue}Installing npm dependencies...${color_reset}"
     apt-get install nodejs
-    sudo ./misc/npm_install.sh
+    sudo ./misc/npm_install.sh -y
 
     if [[ "$mysql" = true ]]
     then
