@@ -10,7 +10,7 @@ set -e
 
 
 # Import utility script.
-source $(dirname $0)/../utils.sh
+source $(dirname $0)/../../../utils.sh
 
 
 # Standardize current terminal path to project "scripts" directory.
@@ -20,7 +20,6 @@ change_to_scripts_directory
 function main () {
     # Make sure we are root.
     check_user "root"
-
 
     # Update to latest version of npm.
     npm install npm@latest -g
