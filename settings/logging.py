@@ -411,7 +411,7 @@ def _create_logging_dict(log_directory):
                 'handlers': ['simple_ldap_info'],
                 'level': 'NOTSET',
                 'propagate': False,
-            }
+            },
         },
     }
 
