@@ -75,13 +75,13 @@ function first_time_setup () {
  # Aliases for "first_time_setup".
  ##
 function install () {
-    first_time_setup
+    first_time_setup "${@}"
 }
 function first_time_install () {
-    first_time_setup
+    first_time_setup "${@}"
 }
 function setup () {
-    first_time_setup
+    first_time_setup "${@}"
 }
 
 
@@ -108,13 +108,13 @@ function first_time_setup_help () {
  # Aliases for "first_time_setup_help".
  ##
 function install_help () {
-    first_time_setup_help
+    first_time_setup_help "${@}"
 }
 function first_time_install_help () {
-    first_time_setup_help
+    first_time_setup_help "${@}"
 }
 function setup_help () {
-    first_time_setup_help
+    first_time_setup_help "${@}"
 }
 
 
@@ -128,13 +128,13 @@ function compile_css () {
  # Aliases for "compile_css".
  ##
 function css () {
-    compile_css
+    compile_css "${@}"
 }
 function compile_sass () {
-    compile_css
+    compile_css "${@}"
 }
 function sass () {
-    compile_css
+    compile_css "${@}"
 }
 
 
@@ -165,13 +165,13 @@ function compile_css_help () {
  # Aliases for "compile_css_help".
  ##
 function css_help () {
-    compile_css_help
+    compile_css_help "${@}"
 }
 function compile_sass_help () {
-    compile_css_help
+    compile_css_help "${@}"
 }
 function sass_help () {
-    compile_css_help
+    compile_css_help "${@}"
 }
 
 
@@ -185,19 +185,19 @@ function compile_react () {
  # Aliases for "compile_react".
  ##
 function react () {
-    compile_react
+    compile_react "${@}"
 }
 function js () {
-    compile_react
+    compile_react "${@}"
 }
 function compile_js () {
-    compile_react
+    compile_react "${@}"
 }
 function javascript () {
-    compile_react
+    compile_react "${@}"
 }
 function compile_javascript () {
-    compile_react
+    compile_react "${@}"
 }
 
 
@@ -228,19 +228,19 @@ function compile_react_help () {
  # Aliases for "compile_react_help".
  ##
 function react_help () {
-    compile_react_help
+    compile_react_help "${@}"
 }
 function js_help () {
-    compile_react_help
+    compile_react_help "${@}"
 }
 function compile_js_help () {
-    compile_react_help
+    compile_react_help "${@}"
 }
 function javascript_help () {
-    compile_react_help
+    compile_react_help "${@}"
 }
 function compile_javascript_help () {
-    compile_react_help
+    compile_react_help "${@}"
 }
 
 
@@ -254,10 +254,10 @@ function update_npm () {
  # Aliases for "update_npm".
  ##
 function npm () {
-    update_npm
+    update_npm "${@}"
 }
 function npm_update () {
-    update_npm
+    update_npm "${@}"
 }
 
 
@@ -278,10 +278,10 @@ function update_npm_help () {
  # Aliases for "update_npm_help".
  ##
 function npm_help () {
-    update_npm_help
+    update_npm_help "${@}"
 }
 function npm_update_help () {
-    update_npm_help
+    update_npm_help "${@}"
 }
 
 
@@ -295,13 +295,13 @@ function reset_db () {
  # Aliases for "reset_db".
  ##
 function reset_database () {
-    reset_db
+    reset_db "${@}"
 }
 function db_reset () {
-    reset_db
+    reset_db "${@}"
 }
 function database_reset () {
-    reset_db
+    reset_db "${@}"
 }
 
 
@@ -324,13 +324,13 @@ function reset_db_help () {
  # Aliases for "reset_db_help".
  ##
 function reset_database_help () {
-    reset_db_help
+    reset_db_help "${@}"
 }
 function db_reset_help () {
-    reset_db_help
+    reset_db_help "${@}"
 }
 function database_reset_help () {
-    reset_db_help
+    reset_db_help "${@}"
 }
 
 
@@ -344,7 +344,7 @@ function reset_migrations() {
  # Aliases for "reset_migrations".
  ##
 function migrations_reset () {
-    reset_migrations
+    reset_migrations "${@}"
 }
 
 
@@ -366,7 +366,7 @@ function reset_migrations_help () {
  # Aliases for "reset_migrations_help".
  ##
 function migrations_reset_help () {
-    reset_migrations_help
+    reset_migrations_help "${@}"
 }
 
 
@@ -380,7 +380,7 @@ function restart_server() {
  # Aliases for "restart_server".
  ##
 function server_restart () {
-    restart_server
+    restart_server "${@}"
 }
 
 
@@ -400,7 +400,7 @@ function restart_server_help () {
  # Aliases for "restart_server_help".
  ##
 function server_restart_help () {
-    restart_server_help
+    restart_server_help "${@}"
 }
 
 
@@ -415,7 +415,7 @@ function set_file_permissions () {
  # Aliases for "set_file_permissions".
  ##
  function set_permissions () {
-    set_file_permissions
+    set_file_permissions "${@}"
  }
 
 
@@ -435,7 +435,7 @@ function set_file_permissions_help () {
  # Aliases for "set_file_permissions_help".
  ##
  function set_permissions_help () {
-    set_file_permissions_help
+    set_file_permissions_help "${@}"
  }
 
 
