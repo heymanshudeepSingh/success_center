@@ -78,6 +78,9 @@ class GetProjectDetailMiddleware(object):
         # Check to ensure DjangoRest views don't error.
         if response.context_data is not None:
 
+            # Get site serve type (HTTP or HTTPS). HTTP should be for development, HTTPS for production.
+            response.context_data['https'] = request.is_secure()
+
             # Get site domain.
             response.context_data['domain'] = get_current_site(request)
 
