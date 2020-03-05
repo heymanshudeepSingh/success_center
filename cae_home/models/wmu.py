@@ -140,6 +140,7 @@ class Room(models.Model):
     name = models.CharField(max_length=MAX_LENGTH, unique=True)
     description = models.CharField(max_length=MAX_LENGTH, default='', blank=True)
     capacity = models.PositiveSmallIntegerField(default=0)
+    is_row = models.BooleanField(null=True)
 
     # Self-setting/Non-user-editable fields.
     slug = models.SlugField(
