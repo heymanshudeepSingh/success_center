@@ -3,7 +3,7 @@
 
 # -- Python Libraries --
 # Core Django framework.
-Django==3.0.4
+Django==2.2.9
 # Support for websocket connections.
 channels==2.4.0
 channels-redis==2.4.2
