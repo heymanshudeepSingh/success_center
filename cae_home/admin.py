@@ -393,7 +393,7 @@ class RoomAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
             'fields': (
-                'name', 'room_type', 'department', 'description', 'capacity',
+                'name', 'room_type', 'department', 'description', 'capacity', 'is_row'
             )
         }),
         ('Advanced', {
