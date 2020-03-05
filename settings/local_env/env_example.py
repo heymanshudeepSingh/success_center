@@ -92,6 +92,7 @@ DATABASES = {
         'HOST': '',
         'PORT': '',
         'default-character-set': 'utf8',
+        'CONN_MAX_AGE': 600,    # See http://www.programmersought.com/article/1815911998/ for info.
         'TEST': {
             'NAME': 'testdb.sqlite3',
         },
