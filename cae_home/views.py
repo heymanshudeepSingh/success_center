@@ -20,6 +20,8 @@ from rest_framework import viewsets, permissions
 from . import forms, models
 from .rest import filters, serializers
 from settings import logging as init_logging
+from cae_tools.utils import test_mass_email as utils_test_mass_email
+from cae_tools.utils import test_single_email as utils_test_single_email
 
 
 # Import logger.
@@ -313,30 +315,8 @@ def test_single_email(request):
     This function is acceptable when a single email is to be sent.
     """
     if settings.DEBUG:
-        logger.info('Sending test email...\n')
-
-        # Compose email.
-        email_from = 'cae-programmers@wmich.edu'
-        email_to = 'cae-programmers@wmich.edu'
-        email_subject = 'Test Email from CAE Workspace Project'
-        email_message = \
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi bibendum est a nisl convallis, at laoreet' \
-            'lorem vehicula. Phasellus nulla magna, vulputate vel ex vel, suscipit convallis diam. Aenean nec velit' \
-            'velit. Cras dictum bibendum erat, et rutrum quam scelerisque in. Integer sed nunc non velit lobortis' \
-            'congue ultrices malesuada est. Aliquam efficitur id mi eget malesuada. Mauris tempor leo nec mi blandit,' \
-            'sed sagittis augue dapibus. Pellentesque sem leo, pulvinar eget tellus in, vehicula imperdiet dolor.' \
-            'Donec nec pharetra nulla. Fusce ac nulla aliquet, pellentesque diam at, dictum tortor. '
-
-        # Send email.
-        send_mail(
-            email_subject,
-            email_message,
-            email_from,
-            [email_to,],
-            fail_silently=False,
-        )
-
-        logger.info('Email sent.\n')
+        # Run test.
+        utils_test_single_email()
 
         # Redirect to home.
         return redirect('cae_home:index')
@@ -351,29 +331,8 @@ def test_mass_email(request):
     Note that, despite the name, send_mass_email can still send a single email, if desired.
     """
     if settings.DEBUG:
-        logger.info('Sending test emails...\n')
-
-        # Compose email contents.
-        email_from = 'cae-programmers@wmich.edu'
-        email_to = 'cae-programmers@wmich.edu'
-        email_subject = 'Test Email from CAE Workspace Project'
-        email_1_message = \
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi bibendum est a nisl convallis, at laoreet' \
-            'lorem vehicula. Phasellus nulla magna, vulputate vel ex vel, suscipit convallis diam. Aenean nec velit' \
-            'velit. Cras dictum bibendum erat, et rutrum quam scelerisque in. Integer sed nunc non velit lobortis' \
-            'congue ultrices malesuada est. Aliquam efficitur id mi eget malesuada. Mauris tempor leo nec mi blandit,' \
-            'sed sagittis augue dapibus. Pellentesque sem leo, pulvinar eget tellus in, vehicula imperdiet dolor.' \
-            'Donec nec pharetra nulla. Fusce ac nulla aliquet, pellentesque diam at, dictum tortor. '
-        email_2_message = 'This is a test email from the CAE Center.'
-
-        # Compose emails.
-        email_1 = (email_subject, email_1_message, email_from, [email_to,])
-        email_2 = (email_subject, email_2_message, email_from, [email_to,])
-
-        # Send emails.
-        send_mass_mail((email_1, email_2), fail_silently=False)
-
-        logger.info('Emails sent.\n')
+        # Run test.
+        utils_test_mass_email()
 
         # Redirect to home.
         return redirect('cae_home:index')
