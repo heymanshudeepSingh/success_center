@@ -44,7 +44,7 @@ class UserAdmin(BaseUserAdmin):
     old_list = BaseUserAdmin.fieldsets[2][1]['fields']
     new_list = ()
     for item in old_list:
-        if item is not 'user_permissions':
+        if item != 'user_permissions':
             new_list += (item,)
     BaseUserAdmin.fieldsets[2][1]['fields'] = new_list
 

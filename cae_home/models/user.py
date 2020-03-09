@@ -389,15 +389,15 @@ class Profile(models.Model):
         """
         Return text description for font size options.
         """
-        if value is 0:
+        if value == 0:
             return 'xs'
-        elif value is 1:
+        elif value == 1:
             return 'sm'
-        elif value is 3:
+        elif value == 3:
             return 'md'
-        elif value is 4:
+        elif value == 4:
             return 'lg'
-        elif value is 5:
+        elif value == 5:
             return 'xl'
         else:
             return 'base'
