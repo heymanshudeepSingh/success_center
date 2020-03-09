@@ -438,5 +438,54 @@ function set_file_permissions_help () {
     set_file_permissions_help "${@}"
  }
 
+ ###
+ # Runs the script for generating ssh keys .
+ ##
+function ssh_generate () {
+    ./general/ssh_generate.sh "${@}"
+}
+###
+ # Aliases for "ssh_generate_help".
+ ##
+function ssh () {
+    ssh_generate "${@}"
+}
+function ssh_key () {
+    ssh_generate "${@}"
+}
+function generate_key () {
+    ssh_generate "${@}"
+}
+
+
+###
+ # Displays helper text for script.
+ ##
+function ssh_generate_help () {
+    echo -e "${color_blue}Script${color_reset}: ssh_generate.sh"
+    echo "    generates ssh keys based on OS system."
+    echo ""
+    echo -e "${color_blue}Currently supports:${color_reset}"
+    echo "    * Ubuntu 16.04"
+    echo "    * Ubuntu 18.04"
+    echo ""
+    echo -e "${color_blue}Aliases${color_reset}:"
+    echo "    * ssh"
+    echo "    * ssh_key"
+    echo "    * generate_key"
+}
+###
+ # Aliases for "ssh_generate_help".
+ ##
+function ssh_help () {
+    ssh_generate_help "${@}"
+}
+function keys_help () {
+    ssh_generate_help "${@}"
+}
+function ssh_generate_help () {
+    ssh_generate_help "${@}"
+}
+
 
 main ${@}
