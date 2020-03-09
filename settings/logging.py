@@ -8,16 +8,18 @@ Note: Standard log priority is "NOTSET" > "DEBUG" > "INFO" > "WARNING" > "ERROR"
 """
 
 # System Imports.
+import time
 import logging.config
+from logging.handlers import RotatingFileHandler, TimedRotatingFileHandler
 
 # User Class Imports.
 from settings.reusable_settings import *
 
 
 # Variables to help run logging.
-LOG_VERSION = 2.1
+LOG_VERSION = 2.2
 first_logging_call = True
-log_handler_class = 'logging.handlers.RotatingFileHandler'
+log_handler_class = 'settings.logging.EnhancedRotatingFileHandler'
 log_handler_file_max_bytes = 1024 * 1024  # Roughly 1 MB.
 log_handler_file_backup_count = 20
 
@@ -550,3 +552,55 @@ class _ExcludeAuthFilter(logging.Filter):
         return (record.levelno != 25 and record.levelno != 35 and record.levelno != 45)
 
 #endregion Logging Filters
+
+
+#region File Handlers
+
+class EnhancedRotatingFileHandler(RotatingFileHandler, TimedRotatingFileHandler):
+    """
+    Our "enhanced" and improved rotating file handler.
+    Should behave identically to a standard RotatingFileHandler, except that it also rotates on time interval.
+
+    Based off of Rotating and TimedRotating handlers, as of Python version 3.8.
+    """
+    def __init__(self, filename, maxBytes=0, when='h', interval=1, backupCount=0, encoding=None, delay=False,
+                 utc=False, atTime=None):
+        # Call TimedRotatingFileHandler init because it does much more t han RotatingFileHandler.
+        TimedRotatingFileHandler.__init__(
+            self,
+            filename,
+            when=when,
+            interval=interval,
+            backupCount=backupCount,
+            encoding=encoding,
+            delay=delay,
+            utc=utc,
+            atTime=atTime,
+        )
+
+        # This is the only line that TimedRotatingFileHandler misses.
+        self.maxBytes = maxBytes
+
+    def shouldRollover(self, record):
+        """
+        This is the only function we need to override.
+        Logic is copied from Python3.8 source code.
+        See https://github.com/python/cpython/blob/3.8/Lib/logging/handlers.py for source code.
+        """
+        if self.stream is None:  # delay was set...
+            self.stream = self._open()
+        t = int(time.time())
+
+        # Check if rolling over due to file size.
+        if self.maxBytes > 0:
+            msg = "%s\n" % self.format(record)
+            self.stream.seek(0, 2)  # due to non-posix-compliant Windows feature
+            if self.stream.tell() + len(msg) >= self.maxBytes:
+                return 1
+
+        # Check if rolling over due to timestamps.
+        elif t >= self.rolloverAt:
+            return 1
+        return 0
+
+#endregion File Handlers
