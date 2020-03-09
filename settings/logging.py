@@ -560,11 +560,12 @@ class EnhancedRotatingFileHandler(RotatingFileHandler, TimedRotatingFileHandler)
     """
     Our "enhanced" and improved rotating file handler.
     Should behave identically to a standard RotatingFileHandler, except that it also rotates on time interval.
+    Based off of Rotating and TimedRotating handlers, Python version 3.8.
 
-    Based off of Rotating and TimedRotating handlers, as of Python version 3.8.
+    Defaults to rotating every monday at midnight (UTC time).
     """
-    def __init__(self, filename, maxBytes=0, when='h', interval=1, backupCount=0, encoding=None, delay=False,
-                 utc=False, atTime=None):
+    def __init__(self, filename, maxBytes=0, when='W0', interval=1, backupCount=0, encoding=None, delay=False,
+                 utc=True, atTime=None):
         # Call TimedRotatingFileHandler init because it does much more t han RotatingFileHandler.
         TimedRotatingFileHandler.__init__(
             self,
@@ -599,8 +600,10 @@ class EnhancedRotatingFileHandler(RotatingFileHandler, TimedRotatingFileHandler)
                 return 1
 
         # Check if rolling over due to timestamps.
-        elif t >= self.rolloverAt:
+        if t >= self.rolloverAt:
             return 1
+
+        # No rollover requirements met.
         return 0
 
 #endregion File Handlers
