@@ -26,7 +26,7 @@ function main() {
     user_confirmation "Run project in development mode?"
     if [[ "$return_value" = true ]]
     then
-        touch DEBUG
+        touch ../DEBUG
         echo "To run in production, delete the \"DEBUG\" file located at project root."
     else
         echo "To run in development, create an empty file called \"DEBUG\" at project root."
