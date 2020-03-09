@@ -116,6 +116,7 @@ SERVER_EMAIL = 'root@localhost'             # Default email address for admin er
 
 
 # Admins to send emails to on error (Only sends if debug = False).
+# Should be a list of tuples, one tuple for each admin, where each tuple is format (<user_name>, <user_email>).
 ADMINS = []
 
 #endregion Email Settings
