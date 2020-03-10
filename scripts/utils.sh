@@ -278,5 +278,33 @@ function check_for_help_flags () {
 }
 
 
+###
+ # Converts string to upper case.
+ ##
+function string_to_upper () {
+    if [[ $1 != "" ]]
+    then
+        return_value="$(echo $1 | tr [':lower:'] [':upper:'])"
+    else
+        echo -e "${color_red}No value was passed. Cannot convert to upper case.${color_reset}"
+        return_value=""
+    fi
+}
+
+
+###
+ # Converts string to lower case.
+ ##
+function string_to_lower () {
+    if [[ $1 != "" ]]
+    then
+        return_value="$(echo $1 | tr [':upper:'] [':lower:'])"
+    else
+        echo -e "${color_red}No value was passed. Cannot convert to lower case.${color_reset}"
+        return_value=""
+    fi
+}
+
+
 # Process all args.
 parse_args
