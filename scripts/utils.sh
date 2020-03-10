@@ -155,7 +155,7 @@ function string_to_lower () {
 #region Directory Management Functions
 
 ###
- # Change to location of script's directory to the same directory script resides in..
+ # Change to location of script's directory to the same directory script resides in.
  # Can help make logic more consistent, if location of terminal matters.
  ##
 function normalize_directory () {
@@ -168,7 +168,7 @@ function normalize_directory () {
  # Can help make logic more consistent, if location of terminal matters.
  ##
 function change_to_scripts_directory () {
-    # First normalize directory, so it doesn't matter where we called from in terminal..
+    # First normalize directory, so it doesn't matter where we called from in terminal.
     normalize_directory
 
     # Recursively cd upwards until we find the "scripts" directory.
