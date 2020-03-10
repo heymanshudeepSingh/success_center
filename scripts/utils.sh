@@ -238,10 +238,19 @@ function check_not_user () {
  ##
 function user_confirmation () {
 
+    # Get user's input.
     echo -e "$1 ${color_cyan}[ Yes | No ]${color_reset}"
     read user_input
 
-    if [[ "$user_input" = "yes" ]] || [[ "$user_input" = "y" ]] || [[ "$user_input" = "YES" ]] || [[ "$user_input" = "Y" ]]
+    # Convert to lower case.
+    if [[ $user_input != "" ]]
+    then
+        string_to_lower $user_input
+    else
+        return_value=""
+    fi
+
+    if [[ "$return_value" = "yes" ]] || [[ "$return_value" = "ye" ]] || [[ "$return_value" = "y" ]]
     then
         return_value=true
     else
