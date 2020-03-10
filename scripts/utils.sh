@@ -187,6 +187,21 @@ function change_to_scripts_directory () {
     done
 }
 
+
+###
+ # Gets absolute path of provided file/directory.
+ ##
+function get_absolute_path () {
+    # First check if valid file or directory.
+    if [[ -d $1 || -f $1 ]]
+    then
+        return_value="$(cd "$(dirname "$1")" && pwd)/$(basename "$1")"
+    else
+        echo -e "${color_red}Passed value ($1) does not appear to be a file or directory.${color_reset}"
+        return_value=""
+    fi
+}
+
 #endregion Directory Management Functions
 
 
