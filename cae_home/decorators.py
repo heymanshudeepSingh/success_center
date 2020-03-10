@@ -3,10 +3,26 @@ View permission decorators for CAE Home app.
 """
 
 # System Imports.
+from channels.db import close_old_connections as _term_conns
 from django.contrib import messages
 from django.contrib.auth.views import redirect_to_login
 from django.core.exceptions import PermissionDenied
 from functools import wraps
+
+
+def close_old_db_connections(func):
+    """
+    Decorator for functions that connect to the database.
+    According to http://www.programmersought.com/article/1815911998/, may be a solution for the "channels sockets
+    stopped connecting" error that's been plaguing us.
+
+    More on error: https://dev.mysql.com/doc/refman/8.0/en/gone-away.html
+    """
+    def wrapper(*args, **kwargs):
+        _term_conns()
+        return func(*args, **kwargs)
+
+    return wrapper
 
 
 def group_required(*required_groups):
