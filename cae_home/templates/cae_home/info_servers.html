@@ -1,0 +1,118 @@
+{% extends 'cae_home/main.html' %}
+
+
+{% block title_page_name %}Maintained Software | {% endblock title_page_name %}
+
+
+{% block content %}
+  <h1>CAE Center Maintained Servers</h1>
+  <div style="display: flex; flex-direction: row; justify-content: space-between">
+    <p>General Contact: <a href="mailto: ceas-cae@wmich.edu">ceas-cae@wmich.edu</a></p>
+    <p>See also: <a href="{% url 'cae_home:info_schedules' %}">CAE Center Schedules</a></p>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Project</th>
+        <th>Description</th>
+        <th>Primary Contact</th>
+        <th>Secondary Contact</th>
+        <th>Tertiary Contact</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="center"><p><a href="https://wiki.ceas.wmich.edu/">CAE Center Wiki</a></p></td>
+        <td><p>CAE Center Internal Wiki</p></td>
+        <td class="center"><p>{{ contact_kira | safe }}</p></td>
+        <td class="center"><p>{{ contact_mandroo | safe }}</p></td>
+        <td class="center"><p>{{ contact_shagun | safe }}</p></td>
+      </tr>
+      <tr>
+        <td class="center"><p><a href="https://redmine.ceas.wmich.edu/">CAE Center Redmine</a></p></td>
+        <td><p>Internal Ticketing System for CAE Center</p></td>
+        <td class="center"><p>{{ contact_mandroo | safe }}</p></td>
+        <td class="center"><p>{{ contact_kira | safe }}</p></td>
+        <td class="center"><p>{{ contact_hussein | safe }}</p></td>
+      </tr>
+      <tr>
+        <td class="center"><p><a href="https://ceas.wmich.edu/">CAE Center Web Host Server</a></p></td>
+        <td><p>External facing CAE Center website hosting server</p></td>
+        <td class="center"><p>{{ contact_phillip | safe }}</p></td>
+        <td class="center"><p>{{ contact_musaab | safe }}</p></td>
+        <td class="center"><p>{{ contact_kira | safe }}</p></td>
+      </tr>
+      <tr>
+        <td class="center"><p>CAE Center File Server</p></td>
+        <td><p>Server for important CAE Center files and student drives</p></td>
+        <td class="center"><p>{{ contact_shagun | safe }}</p></td>
+        <td class="center"><p>{{ contact_kira | safe }}</p></td>
+        <td class="center"><p>{{ contact_hussein | safe }}</p></td>
+      </tr>
+      <tr>
+        <td class="center"><p>CAE Center Student Print Server</p></td>
+        <td><p>Printer connection and student print count management server</p></td>
+        <td class="center"><p>{{ contact_hussein | safe }}</p></td>
+        <td class="center"><p>{{ contact_phillip | safe }}</p></td>
+        <td class="center"><p>{{ contact_mandroo | safe }}</p></td>
+      </tr>
+      <tr>
+        <td class="center"><p>CAE Center Backup Server</p></td>
+        <td><p>Holds backup information in event of catastrophic server failure</p></td>
+        <td class="center"><p>{{ contact_mandroo | safe }}</p></td>
+        <td class="center"><p>{{ contact_kira | safe }}</p></td>
+        <td class="center"><p>{{ contact_phillip | safe }}</p></td>
+      </tr>
+      <tr>
+        <td class="center"><p>CAE Center Nagios Server</p></td>
+        <td><p>Monitor for all other CAE Center servers</p></td>
+        <td class="center"><p>{{ contact_musaab | safe }}</p></td>
+        <td class="center"><p>{{ contact_mandroo | safe }}</p></td>
+        <td class="center"><p>{{ contact_kira | safe }}</p></td>
+      </tr>
+      <tr>
+        <td class="center"><p>CAE Center vSphere Server</p></td>
+        <td><p>VMware Management Server for CAE Center Cluster</p></td>
+        <td class="center"><p>{{ contact_phillip | safe }}</p></td>
+        <td class="center"><p>{{ contact_musaab | safe }}</p></td>
+        <td class="center"><p>{{ contact_mandroo | safe }}</p></td>
+      </tr>
+      <tr>
+        <td class="center"><p>CAE Center Virtual Server Hosts</p></td>
+        <td><p>Physical hosts for CAE Center VMs</p></td>
+        <td class="center"><p>{{ contact_musaab | safe }}</p></td>
+        <td class="center"><p>{{ contact_mandroo | safe }}</p></td>
+        <td class="center"><p>{{ contact_hussein | safe }}</p></td>
+      </tr>
+      <tr>
+        <td class="center"><p>CAE Center Database Server</p></td>
+        <td><p>Separate database servers, for redundancy in event of catastrophic server failure</p></td>
+        <td class="center"><p>{{ contact_mandroo | safe }}</p></td>
+        <td class="center"><p>{{ contact_phillip | safe }}</p></td>
+        <td class="center"><p>{{ contact_musaab | safe }}</p></td>
+      </tr>
+      <tr>
+        <td class="center"><p>Solar Garden Data Collection Server</p></td>
+        <td><p>Data collection server for the Engineering Campus Solar Garden</p></td>
+        <td class="center"><p>{{ contact_kira | safe }}</p></td>
+        <td class="center"><p>{{ contact_hussein | safe }}</p></td>
+        <td class="center"><p>{{ contact_shagun | safe }}</p></td>
+      </tr>
+      <tr>
+        <td class="center"><p>Locally Hosted License Servers</p></td>
+        <td><p>Licenses maintained by the CAE Center, hosted on the Engineering Campus</p></td>
+        <td class="center"><p>{{ contact_shagun | safe }}</p></td>
+        <td class="center"><p>{{ contact_hussein | safe }}</p></td>
+        <td class="center"><p>{{ contact_kira | safe }}</p></td>
+      </tr>
+      <tr>
+        <td class="center"><p>Main Campus Hosted License Servers</p></td>
+        <td><p>Licenses maintained by the CAE Center, hosted on Main Campus</p></td>
+        <td class="center"><p>{{ contact_hussein | safe }}</p></td>
+        <td class="center"><p>{{ contact_shagun | safe }}</p></td>
+        <td class="center"><p>{{ contact_phillip | safe }}</p></td>
+      </tr>
+    </tbody>
+  </table>
+
+{% endblock content %}

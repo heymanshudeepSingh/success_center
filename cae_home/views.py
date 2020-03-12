@@ -127,6 +127,19 @@ def info_schedules(request):
     """
     return TemplateResponse(request, 'cae_home/info_schedules.html', {})
 
+def info_servers(request):
+    """
+    Temporary page to publicly display servers maintained by admins.
+    """
+    return TemplateResponse(request, 'cae_home/info_servers.html', {
+        'contact_mandroo': 'Andrew Barnes<br>znd7233@wmich.edu',
+        'contact_hussein': 'Hussein Sheakh<br>hbn2774@wmich.edu',
+        'contact_kira': 'Kira Hamelink<br>kdr1002@wmich.edu',
+        'contact_musaab': 'Musaab Yousif<br>myn8219@wmich.edu',
+        'contact_shagun': 'Shagun Choudhary<br>sgk8005@wmich.edu',
+        'contact_phillip': 'Phillip Varner<br>pgs8661@wmich.edu',
+    })
+
 
 def info_software(request):
     """

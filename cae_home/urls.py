@@ -21,6 +21,7 @@ urlpatterns = [
 
     # Info pages.
     url(r'^info/schedules/$', views.info_schedules, name='info_schedules'),
+    url(r'^info/servers/$', views.info_servers, name='info_servers'),
     url(r'^info/software/$', views.info_software, name='info_software'),
 
     # User pages.

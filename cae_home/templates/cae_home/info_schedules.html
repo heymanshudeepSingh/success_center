@@ -15,7 +15,13 @@
   <h2>CAE Admins</h2>
   <div style="display: flex; flex-direction: row; justify-content: space-between">
     <p>General Contact: <a href="mailto: ceas-cae@wmich.edu">ceas-cae@wmich.edu</a></p>
-    <p>See also: <a href="https://ceas.wmich.edu/dropoff/university/create">Submit an Issue</a></p>
+    <div style="display:flex; flex-direction: row;">
+      <p>See also: &nbsp;</p>
+      <div style="display:flex; flex-direction: column;">
+        <a href="{% url 'cae_home:info_servers' %}">Maintained Servers</a>
+        <a href="https://ceas.wmich.edu/dropoff/university/create">Submit an Issue</a>
+      </div>
+    </div>
   </div>
   <table>
     <thead>
