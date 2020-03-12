@@ -87,6 +87,9 @@ class GetProjectDetailMiddleware(object):
             # Get installed project/app details.
             response.context_data['imported_projects'] = settings.INSTALLED_APP_DETAILS
 
+            # Check if CAE Web is installed.
+            response.context_data['caeweb_installed'] = 'apps.CAE_Web.cae_web_core.apps.CaeWebCoreConfig' in settings.INSTALLED_APPS
+
             # Get CAE Programmer email (For footer).
             try:
                 prog_email = models.WmuUser.objects.get(bronco_net='ceas_prog').official_email
