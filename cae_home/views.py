@@ -7,7 +7,6 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
-from django.core.mail import send_mail, send_mass_mail
 from django.db.models import ObjectDoesNotExist
 from django.http import Http404
 from django.http.response import HttpResponseRedirect
@@ -120,6 +119,24 @@ def logout(request):
 
         # Call Django's standard logout function.
         return auth_views.LogoutView.as_view(next_page=logout_redirect_url.url)(request)
+
+
+def info_schedules(request):
+    """
+    Temporary page to publicly display schedules of users.
+    """
+    return TemplateResponse(request, 'cae_home/info_schedules.html', {})
+
+
+def info_software(request):
+    """
+    Temporary page to publicly display software maintained by programmers.
+    """
+    return TemplateResponse(request, 'cae_home/info_software.html', {
+        'contact_brandon': 'Brandon Rodriguez<br>bfp5870@wmich.edu',
+        'contact_jesse': 'Jesse Meachum<br>jdc4014@wmich.edu',
+        'contact_singh': 'Simar Singh<br>hfv6838@wmich.edu'
+    })
 
 
 @login_required

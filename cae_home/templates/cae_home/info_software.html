@@ -1,0 +1,90 @@
+{% extends 'cae_home/main.html' %}
+
+
+{% block title_page_name %}Maintained Software | {% endblock title_page_name %}
+
+
+{% block content %}
+  <h1>CAE Center Maintained Software</h1>
+  <div style="display: flex; flex-direction: row; justify-content: space-between">
+    <p>General Contact: <a href="mailto:{{ cae_prog_email }}">{{ cae_prog_email }}</a></p>
+    <p>See also: <a href="{% url 'cae_home:info_schedules' %}">CAE Center Schedules</a></p>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Project</th>
+        <th>Description</th>
+        <th>Primary Contact</th>
+        <th>Secondary Contact</th>
+        <th>Tertiary Contact</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="center"><p><a href="https://ceas.wmich.edu/west/">West Advising</a></p></td>
+        <td><p>Engineering Campus Advising Tools</p></td>
+        <td class="center"><p>{{ contact_brandon | safe }}</p></td>
+        <td class="center"><p>{{ contact_jesse | safe }}</p></td>
+        <td class="center"><p>{{ contact_singh | safe }}</p></td>
+      </tr>
+      <tr>
+        <td class="center"><p><a href="https://ceas.wmich.edu/successctr/">Success Center</a></p></td>
+        <td><p>STEP Tutoring Records and Management</p></td>
+        <td class="center"><p>{{ contact_brandon | safe }}</p></td>
+        <td class="center"><p>{{ contact_singh | safe }}</p></td>
+        <td class="center"><p>{{ contact_jesse | safe }}</p></td>
+      </tr>
+      <tr>
+        <td class="center"><p><a href="https://ceas.wmich.edu/successctrtimesheet/">Success Center Timesheets</a></p></td>
+        <td><p>Employee Site for Success Center Tutors</p></td>
+        <td class="center"><p>{{ contact_singh | safe }}</p></td>
+        <td class="center"><p>{{ contact_jesse | safe }}</p></td>
+        <td class="center"><p>{{ contact_brandon | safe }}</p></td>
+      </tr>
+      <tr>
+        <td class="center"><p><a href="https://ceas.wmich.edu/dropoff/">Dropoff</a></p></td>
+        <td><p>Submit Issues/Request Help from the CAE Center</p></td>
+        <td class="center"><p>{{ contact_brandon | safe }}</p></td>
+        <td class="center"><p>{{ contact_singh | safe }}</p></td>
+        <td class="center"><p>{{ contact_jesse | safe }}</p></td>
+      </tr>
+      <tr>
+        <td class="center"><p><a href="https://cae.ceas.wmich.edu/caeweb/">CAEWeb</a></p></td>
+        <td><p>Internal CAE Center Management</p></td>
+        <td class="center"><p>{{ contact_singh | safe }}</p></td>
+        <td class="center"><p>{{ contact_jesse | safe }}</p></td>
+        <td class="center"><p>{{ contact_brandon | safe }}</p></td>
+      </tr>
+      <tr>
+        <td class="center"><p>CAEMon</p></td>
+        <td><p>CAE Center Printer and Network Drive Connector</p></td>
+        <td class="center"><p>{{ contact_jesse | safe }}</p></td>
+        <td class="center"><p>{{ contact_singh | safe }}</p></td>
+        <td class="center"><p>{{ contact_brandon | safe }}</p></td>
+      </tr>
+      <tr>
+        <td class="center"><p>Check In Check Out</p></td>
+        <td><p>Management and Records for CAE Center Main Lab Usage</p></td>
+        <td class="center"><p>{{ contact_jesse | safe }}</p></td>
+        <td class="center"><p>{{ contact_singh | safe }}</p></td>
+        <td class="center"><p>{{ contact_brandon | safe }}</p></td>
+      </tr>
+      <tr>
+        <td class="center"><p><a href="https://ceas.wmich.edu/softwarelist/">Software List</a></p></td>
+        <td><p>List of CAE Center lab software</p></td>
+        <td class="center"><p>{{ contact_brandon | safe }}</p></td>
+        <td class="center"><p>{{ contact_jesse | safe }}</p></td>
+        <td class="center"><p>{{ contact_singh | safe }}</p></td>
+      </tr>
+      <tr>
+        <td class="center"><p><a href="https://ceas.wmich.edu/georgeau/">Georgeau Center</a></p></td>
+        <td><p>Website for the Georgeau Construction Research Center</p></td>
+        <td class="center"><p>{{ contact_singh | safe }}</p></td>
+        <td class="center"><p>{{ contact_jesse | safe }}</p></td>
+        <td class="center"><p>{{ contact_brandon | safe }}</p></td>
+      </tr>
+    </tbody>
+  </table>
+
+{% endblock content %}

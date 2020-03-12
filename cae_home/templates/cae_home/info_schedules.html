@@ -1,0 +1,133 @@
+{% extends 'cae_home/main.html' %}
+
+
+{% block title_page_name %}CAE Center Schedules | {% endblock title_page_name %}
+
+
+{% block content %}
+  <h1>CAE Center Schedules</h1>
+
+  <p>This page denotes expected schedules of CAE Center employees.</p>
+  <br>
+  <p>Abbreviations are as follows:</p>
+  <p>M - Monday &nbsp; T - Tuesday &nbsp; W - Wednesday &nbsp; T - Thursday &nbsp; F - Friday</p>
+
+  <h2>CAE Admins</h2>
+  <div style="display: flex; flex-direction: row; justify-content: space-between">
+    <p>General Contact: <a href="mailto: ceas-cae@wmich.edu">ceas-cae@wmich.edu</a></p>
+    <p>See also: <a href="https://ceas.wmich.edu/dropoff/university/create">Submit an Issue</a></p>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Employee</th>
+        <th>Contact Info</th>
+        <th>Availability</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="center"><p>Andrew Barnes</p></td>
+        <td class="center"><p>znd7233@wmich.edu</p></td>
+        <td style="padding-left: 10px">
+          <p><b>M</b>: 9:00 am - 12:30 pm</p>
+          <p><b>T</b>: 8:00 am - 11:30 am</p>
+          <p><b>R</b>: 8:00 am - 11:30 am, 3:30 pm - 7:00 pm</p>
+          <p><b>F</b>: 9:00 am - 3:00 pm</p>
+        </td>
+      </tr>
+      <tr>
+        <td class="center"><p>Kira Hamelink</p></td>
+        <td class="center"><p>kdr1002@wmich.edu</p></td>
+        <td style="padding-left: 10px">
+          <p><b>MW</b>: 10:00 am - 2:00 pm</p>
+          <p><b>R</b>: 9:30 am - 1:00 pm</p>
+          <p><b>F</b> 10:00 am - 4:00 pm</p>
+        </td>
+      </tr>
+      <tr>
+        <td class="center"><p>Musaab Yousif</p></td>
+        <td class="center"><p>myn8219@wmich.edu</p></td>
+        <td style="padding-left: 10px">
+          <p><b>M</b>: 3:45 pm - 7:00 pm</p>
+          <p><b>TR</b>: 11:15 am - 4:30 pm</p>
+          <p><b>F</b>: 12:15 pm - 5:00 pm</p>
+        </td>
+      </tr>
+      <tr>
+        <td class="center"><p>Phillip Varner</p></td>
+        <td class="center"><p>pgs8661@wmich.edu</p></td>
+        <td style="padding-left: 10px">
+          <p><b>MW</b>: 8:00 am - 10:20 am, 12:25 pm - 3:30 pm</p>
+          <p><b>F</b>: 8:00 am - 2:00 pm</p>
+        </td>
+      </tr>
+     <tr>
+        <td class="center"><p>Husseign Salim Qasim Al Sheakh</p></td>
+        <td class="center"><p>hbn2774@wmich.edu</p></td>
+        <td style="padding-left: 10px">
+          <p><b>TW</b>: 12:10 pm - 7:00 pm</p>
+        </td>
+      </tr>
+      <tr>
+        <td class="center"><p>Shagun Choudhary</p></td>
+        <td class="center"><p>sgk8005@wmich.edu</p></td>
+        <td style="padding-left: 10px">
+          <p><b>MTRF</b>: 12:30 pm - 4:30 pm</p>
+        </td>
+      </tr>
+      <tr>
+        <td class="center"><p>James Rhodes</p></td>
+        <td class="center"><p>j0rhodes@wmich.edu</p></td>
+        <td style="padding-left: 10px">
+          <p><b>M</b>: 11:00 am - 3:00 pm</p>
+          <p><b>T</b>: 8:00 am - 11:50 am, 3:00pm - 5:00 pm</p>
+          <p><b>W</b>: 3:00 pm - 5:00 pm</p>
+          <p><b>RF</b>: 8:00 am - 11:50 am</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>CAE Programmers</h2>
+  <div style="display: flex; flex-direction: row; justify-content: space-between">
+    <p>General Contact: <a href="mailto:{{ cae_prog_email }}">{{ cae_prog_email }}</a></p>
+    <p>See also: <a href="{% url 'cae_home:info_software' %}">Maintained Software</a></p>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Employee</th>
+        <th>Contact Info</th>
+        <th>Availability</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="center"><p>Brandon Rodriguez</p></td>
+        <td class="center"><p>bfp5870@wmich.edu</p></td>
+        <td style="padding-left: 10px">
+          <p><b>TRF</b>: 10:00 am - 5:00 pm</p>
+          <p><b>F</b>: 10:00 am - 4:00 pm</p>
+        </td>
+      </tr>
+      <tr>
+        <td class="center"><p>Jesse Meachum</p></td>
+        <td class="center"><p>jdc4014@wmich.edu</p></td>
+        <td style="padding-left: 10px">
+          <p><b>MW</b>: 12:15 pm - 5:30 pm</p>
+          <p><b>F</b>: 11:00 am - 4:30 pm</p>
+        </td>
+      </tr>
+      <tr>
+        <td class="center"><p>Simar Singh</p></td>
+        <td class="center"><p>hfv6838@wmich.edu</p></td>
+        <td style="padding-left: 10px">
+          <p><b>MW</b>: 9:30 am - 3:30 pm</p>
+          <p><b>TR</b>: 3:45 pm - 6:15 pm</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+{% endblock content %}

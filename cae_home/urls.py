@@ -14,11 +14,14 @@ from . import views
 # General url handling.
 app_name = 'cae_home'
 urlpatterns = [
-
     # Auth pages.
     url(r'^user/login/$', views.login, name='login'),
     url(r'^user/login_redirect/$', views.login_redirect, name='login_redirect'),
     url(r'^user/logout/$', views.logout, name='logout'),
+
+    # Info pages.
+    url(r'^info/schedules/$', views.info_schedules, name='info_schedules'),
+    url(r'^info/software/$', views.info_software, name='info_software'),
 
     # User pages.
     url(r'^user/edit/(?P<slug>[\w-]+)/$', views.user_edit, name='user_edit'),
