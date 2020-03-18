@@ -69,8 +69,7 @@
             > div {
                 margin: 5px;
                 width: 70%;
-                filter: brightness(85%);
-
+//                 filter: brightness(85%);
                 text-align: left;
 
                 @media only screen and (min-width: $screen-tablet-mid) {
@@ -272,6 +271,26 @@
 
 
 //==================================================//
+//==== General Form theme colors ===================//
+//==================================================//
+
+main form{
+    input{
+        @each $theme, $theme-dict in $theme-colors{
+        .theme-#{$theme} & {
+            background-color: theme-background($theme, 'form-background');
+            color: theme-text($theme,"primary");
+            padding: 3px;
+            border-radius:5px;
+            border: 1px solid theme-background($theme,"border")
+
+            }
+        }
+    }
+}
+
+
+//==================================================//
 //==== START "Standard Widget" Theme Colors Block ====//
 //==================================================//
 
@@ -297,6 +316,12 @@
         .select2-results__options{
             background: theme-background($theme,'primary');
 
+        }
+        .select2-results__options .selected{
+        background:theme-background($theme,"primary-hover")
+        }
+        .select2-container--default .select2-results__option[aria-selected=true] {
+        background-color: red;
         }
 
     }}
