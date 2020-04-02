@@ -34,6 +34,41 @@ class MajorInline(admin.TabularInline):
 
 #region Custom Filters
 
+class UserCAECenterEmployeeFilter(admin.SimpleListFilter):
+    """
+    Filter for (login) User model Admin to show models associated with a CAE Center employee.
+    """
+    # Label to display for filter.
+    title = 'Is CAE Employee'
+
+    # Doesn't seem to do anything if you define the "queryset" method. Still mandatory to define though.
+    parameter_name = ''
+
+    def lookups(self, request, model_admin):
+        """
+        This defines the filter options.
+        """
+        return (
+            ('yes', 'Yes'),
+            ('no', 'No'),
+        )
+
+    def queryset(self, request, queryset):
+        """
+        This processes the filter option (defined above, in "lookups") when selected by a user.
+        """
+        cae_center_groups = [
+            'CAE Director', 'CAE Building Coordinator',
+            'CAE Admin GA', 'CAE Admin',
+            'CAE Programmer GA', 'CAE Programmer',
+            'CAE Attendant',
+        ]
+        if self.value() == 'yes':
+            return queryset.filter(groups__name__in=cae_center_groups)
+        if self.value() == 'no':
+            return queryset.exclude(groups__name__in=cae_center_groups)
+
+
 class UserIntermediaryToUserListFilter(admin.SimpleListFilter):
     """
     Filter for UserIntermediary model Admin to show models associated with a valid (login) User model.
@@ -130,6 +165,11 @@ class UserAdmin(BaseUserAdmin):
 
     # Fields to display in admin list view.
     list_display = ('username', 'first_name', 'last_name', 'user_type')
+
+    # Fields to filter by in admin list view.
+    list_filter = (
+        'is_active', UserCAECenterEmployeeFilter, 'groups', 'is_staff', 'is_superuser',
+    )
 
     # Remove individual permission list from admin detail view. Should only ever use group permissions.
     old_list = BaseUserAdmin.fieldsets[2][1]['fields']
