@@ -70,7 +70,7 @@ def compare_user_and_wmuuser_models(uid):
 #endregion Model Functions
 
 
-#region Models
+#region Model Intermediaries
 
 class WmuUserMajorRelationship(models.Model):
     """
@@ -130,6 +130,10 @@ class WmuUserMajorRelationship(models.Model):
             # Relation does not exist where active is True. User is not actively pursuing major.
             return False
 
+#endregion Model Intermediaries
+
+
+#region Models
 
 class User(AbstractUser):
     """
