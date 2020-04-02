@@ -32,13 +32,104 @@ class MajorInline(admin.TabularInline):
 #endregion Model Inlines
 
 
+#region Custom Filters
+
+class UserIntermediaryToUserListFilter(admin.SimpleListFilter):
+    """
+    Filter for UserIntermediary model Admin to show models associated with a valid (login) User model.
+    """
+    # Label to display for filter.
+    title = 'Associated with Login User'
+
+    # Doesn't seem to do anything if you define the "queryset" method. Still mandatory to define though.
+    parameter_name = ''
+
+    def lookups(self, request, model_admin):
+        """
+        This defines the filter options.
+        """
+        return (
+            ('Yes', ('Yes')),
+            ('No', ('No')),
+        )
+
+    def queryset(self, request, queryset):
+        """
+        This processes the filter option (defined above, in "lookups") when selected by a user.
+        """
+        if self.value() == 'Yes':
+            return queryset.filter(user__isnull=False)
+        if self.value() == 'No':
+            return queryset.filter(user__isnull=True)
+
+
+class UserIntermediaryToWmuUserListFilter(admin.SimpleListFilter):
+    """
+    Filter for UserIntermediary model Admin to show models associated with a valid WmuUser model.
+    """
+    # Label to display for filter.
+    title = 'Associated with WMU User'
+
+    # Doesn't seem to do anything if you define the "queryset" method. Still mandatory to define though.
+    parameter_name = ''
+
+    def lookups(self, request, model_admin):
+        """
+        This defines the filter options.
+        """
+        return (
+            ('Yes', ('Yes')),
+            ('No', ('No')),
+        )
+
+    def queryset(self, request, queryset):
+        """
+        This processes the filter option (defined above, in "lookups") when selected by a user.
+        """
+        if self.value() == 'Yes':
+            return queryset.filter(wmu_user__isnull=False)
+        if self.value() == 'No':
+            return queryset.filter(wmu_user__isnull=True)
+
+
+class ProfileToUserListFilter(admin.SimpleListFilter):
+    """
+    Filter for Profile model Admin to show models associated with a valid (login) User model.
+    """
+    # Label to display for filter.
+    title = 'Associated with Login User'
+
+    # Doesn't seem to do anything if you define the "queryset" method. Still mandatory to define though.
+    parameter_name = ''
+
+    def lookups(self, request, model_admin):
+        """
+        This defines the filter options.
+        """
+        return (
+            ('Yes', ('Yes')),
+            ('No', ('No')),
+        )
+
+    def queryset(self, request, queryset):
+        """
+        This processes the filter option (defined above, in "lookups") when selected by a user.
+        """
+        if self.value() == 'Yes':
+            return queryset.filter(userintermediary__user__isnull=False)
+        if self.value() == 'No':
+            return queryset.filter(userintermediary__user__isnull=True)
+
+#endregion Custom Filters
+
+
 #region User Model Admin
 
 class UserAdmin(BaseUserAdmin):
     # inlines = (ProfileInline, )
 
     # Fields to display in admin list view.
-    BaseUserAdmin.list_display = ('username', 'first_name', 'last_name', 'user_type')
+    list_display = ('username', 'first_name', 'last_name', 'user_type')
 
     # Remove individual permission list from admin detail view. Should only ever use group permissions.
     old_list = BaseUserAdmin.fieldsets[2][1]['fields']
@@ -63,46 +154,6 @@ class UserAdmin(BaseUserAdmin):
         for group in obj.groups.all():
             groups.append(group.name)
         return ', '.join(groups)
-
-
-class UserIntermediaryToUserListFilter(admin.SimpleListFilter):
-    """
-    Filter for ProfileAdmin to show profiles associated to valid site login accounts.
-    """
-    title = ('Associated with Login User')
-    parameter_name = 'login_user'
-
-    def lookups(self, request, model_admin):
-        return (
-            ('Yes', ('Yes')),
-            ('No', ('No')),
-        )
-
-    def queryset(self, request, queryset):
-        if self.value() == 'Yes':
-            return queryset.filter(user__isnull=False)
-        if self.value() == 'No':
-            return queryset.filter(user__isnull=True)
-
-
-class UserIntermediaryToWmuUserListFilter(admin.SimpleListFilter):
-    """
-    Filter for ProfileAdmin to show profiles associated to valid site login accounts.
-    """
-    title = ('Associated with WMU User')
-    parameter_name = 'wmu_user'
-
-    def lookups(self, request, model_admin):
-        return (
-            ('Yes', ('Yes')),
-            ('No', ('No')),
-        )
-
-    def queryset(self, request, queryset):
-        if self.value() == 'Yes':
-            return queryset.filter(wmu_user__isnull=False)
-        if self.value() == 'No':
-            return queryset.filter(wmu_user__isnull=True)
 
 
 class UserIntermediaryAdmin(admin.ModelAdmin):
@@ -176,26 +227,6 @@ class WmuUserAdmin(admin.ModelAdmin):
             'fields': ('id', 'active', 'date_created', 'date_modified',),
         }),
     )
-
-
-class ProfileToUserListFilter(admin.SimpleListFilter):
-    """
-    Filter for ProfileAdmin to show profiles associated to valid site login accounts.
-    """
-    title = ('Associated with Login User')
-    parameter_name = 'login_user'
-
-    def lookups(self, request, model_admin):
-        return (
-            ('Yes', ('Yes')),
-            ('No', ('No')),
-        )
-
-    def queryset(self, request, queryset):
-        if self.value() == 'Yes':
-            return queryset.filter(userintermediary__user__isnull=False)
-        if self.value() == 'No':
-            return queryset.filter(userintermediary__user__isnull=True)
 
 
 class ProfileAdmin(admin.ModelAdmin):
