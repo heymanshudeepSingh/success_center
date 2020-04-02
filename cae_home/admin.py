@@ -448,7 +448,7 @@ class ProfileAdmin(admin.ModelAdmin):
     list_display = ('get_bronco_net', 'get_winno', 'get_first_name', 'get_last_name', 'phone_number', 'site_theme')
 
     # Fields to search in admin list view.
-    search_fields = ('userintermediary__bronco_net',)
+    search_fields = ('userintermediary__bronco_net', 'userintermediary__wmu_user__winno')
 
     # Fields to filter by in admin list view.
     list_filter = (ProfileToUserListFilter, ProfileToWmuUserListFilter)
@@ -518,7 +518,7 @@ class AddressAdmin(admin.ModelAdmin):
     list_display = ('street', 'optional_street', 'city', 'state', 'zip')
 
     # Fields to search in admin list view.
-    search_fields = ('street', 'city', 'zip')
+    search_fields = ('street', 'optional_street', 'city', 'zip')
 
     # Fields to filter by in admin list view.
     list_filter = ('city', 'state')
@@ -629,7 +629,7 @@ class RoomAdmin(admin.ModelAdmin):
     list_filter = ('room_type', 'department')
 
     # Fields to search in admin list view.
-    search_fields = ('name', 'capacity')
+    search_fields = ('name',)
 
     # Select2 search fields for admin detail view.
     autocomplete_fields = ('department',)
@@ -670,7 +670,8 @@ class MajorAdmin(admin.ModelAdmin):
     list_filter = ('active', 'degree_level', MajorToDepartmentListFilter)
 
     # Fields to search in admin list view.
-    search_fields = ('department', 'student_code', 'program_code', 'name')
+    #search_fields = ('department', 'student_code', 'program_code', 'name')
+    search_fields = ('student_code', 'program_code', 'name', 'department__name')
 
     # Read only fields for admin detail view.
     readonly_fields = ('id', 'date_created', 'date_modified')
