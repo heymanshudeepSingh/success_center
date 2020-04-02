@@ -3,6 +3,7 @@ Admin view for CAE Home app.
 """
 
 # System Imports.
+from django.conf import settings
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
@@ -286,10 +287,12 @@ class SemesterDateToYearListFilter(admin.SimpleListFilter):
 #region User Model Admin
 
 class UserAdmin(BaseUserAdmin):
-    # inlines = (ProfileInline, )
+    # inlines = (ProfileInline,)
 
     # Fields to display in admin list view.
     list_display = ('username', 'get_winno', 'first_name', 'last_name', 'get_user_groups')
+    if settings.DEBUG:
+        list_display = ('id',) + list_display
 
     # Fields to filter by in admin list view.
     list_filter = ('is_active', UserToCAECenterEmployeeListFilter, 'groups', 'is_staff', 'is_superuser')
@@ -334,12 +337,14 @@ class UserAdmin(BaseUserAdmin):
 class UserIntermediaryAdmin(admin.ModelAdmin):
     # Fields to display in admin list view.
     list_display = ('bronco_net', 'get_winno', 'get_first_name', 'get_last_name')
-
-    # Fields to search in admin list view.
-    search_fields = ('bronco_net', 'wmu_user__winno')
+    if settings.DEBUG:
+        list_display = ('id',) + list_display
 
     # Fields to filter by in admin list view.
     list_filter = (UserIntermediaryToUserListFilter, UserIntermediaryToWmuUserListFilter)
+
+    # Fields to search in admin list view.
+    search_fields = ('bronco_net', 'wmu_user__winno')
 
     # Read only fields for admin detail view.
     readonly_fields = ('id', 'date_created', 'date_modified')
@@ -398,6 +403,8 @@ class WmuUserAdmin(admin.ModelAdmin):
 
     # Fields to display in admin list view.
     list_display = ('bronco_net', 'winno', 'first_name', 'last_name', 'get_majors', 'get_user_groups')
+    if settings.DEBUG:
+        list_display = ('id',) + list_display
 
     # Fields to filter by in admin list view.
     list_filter = ('active', WmuUserToMajorListFilter)
@@ -446,12 +453,14 @@ class WmuUserAdmin(admin.ModelAdmin):
 class ProfileAdmin(admin.ModelAdmin):
     # Fields to display in admin list view.
     list_display = ('get_bronco_net', 'get_winno', 'get_first_name', 'get_last_name', 'phone_number', 'site_theme')
-
-    # Fields to search in admin list view.
-    search_fields = ('userintermediary__bronco_net', 'userintermediary__wmu_user__winno')
+    if settings.DEBUG:
+        list_display = ('id',) + list_display
 
     # Fields to filter by in admin list view.
     list_filter = (ProfileToUserListFilter, ProfileToWmuUserListFilter)
+
+    # Fields to search in admin list view.
+    search_fields = ('userintermediary__bronco_net', 'userintermediary__wmu_user__winno')
 
     # Read only fields for admin detail view.
     readonly_fields = ('id', 'date_created', 'date_modified')
@@ -516,12 +525,14 @@ class ProfileAdmin(admin.ModelAdmin):
 class AddressAdmin(admin.ModelAdmin):
     # Fields to display in admin list view.
     list_display = ('street', 'optional_street', 'city', 'state', 'zip')
-
-    # Fields to search in admin list view.
-    search_fields = ('street', 'optional_street', 'city', 'zip')
+    if settings.DEBUG:
+        list_display = ('id',) + list_display
 
     # Fields to filter by in admin list view.
     list_filter = ('city', 'state')
+
+    # Fields to search in admin list view.
+    search_fields = ('street', 'optional_street', 'city', 'zip')
 
     # Read only fields for admin detail view.
     readonly_fields = ('id', 'date_created', 'date_modified')
@@ -541,6 +552,11 @@ class AddressAdmin(admin.ModelAdmin):
 class SiteThemeAdmin(admin.ModelAdmin):
     # Fields to display in admin list view.
     list_display = ('display_name', 'file_name', 'gold_logo')
+    if settings.DEBUG:
+        list_display = ('id',) + list_display
+
+    # Fields to filter by in admin list view.
+    list_filter = ()
 
     # Fields to search in admin list view.
     search_fields = ('display_name', 'file_name')
@@ -570,6 +586,11 @@ class SiteThemeAdmin(admin.ModelAdmin):
 class DepartmentAdmin(admin.ModelAdmin):
     # Fields to display in admin list view.
     list_display = ('name',)
+    if settings.DEBUG:
+        list_display = ('id',) + list_display
+
+    # Fields to filter by in admin list view.
+    list_filter = ()
 
     # Fields to search in admin list view.
     search_fields = ('name',)
@@ -595,6 +616,11 @@ class DepartmentAdmin(admin.ModelAdmin):
 class RoomTypeAdmin(admin.ModelAdmin):
     # Fields to display in admin list view.
     list_display = ('name',)
+    if settings.DEBUG:
+        list_display = ('id',) + list_display
+
+    # Fields to filter by in admin list view.
+    list_filter = ()
 
     # Fields to search in admin list view.
     search_fields = ('name',)
@@ -620,10 +646,12 @@ class RoomTypeAdmin(admin.ModelAdmin):
 class RoomAdmin(admin.ModelAdmin):
     # Check that the inline import succeeded.
     if RoomEventInline is not None:
-        inlines = [RoomEventInline]
+        inlines = (RoomEventInline,)
 
     # Fields to display in admin list view.
     list_display = ('name', 'room_type', 'get_departments')
+    if settings.DEBUG:
+        list_display = ('id',) + list_display
 
     # Fields to filter by in admin list view.
     list_filter = ('room_type', 'department')
@@ -665,12 +693,13 @@ class RoomAdmin(admin.ModelAdmin):
 class MajorAdmin(admin.ModelAdmin):
     # Fields to display in admin list view.
     list_display = ('student_code', 'program_code', 'name', 'degree_level', 'department', 'active')
+    if settings.DEBUG:
+        list_display = ('id',) + list_display
 
     # Fields to filter by in admin list view.
     list_filter = ('active', 'degree_level', MajorToDepartmentListFilter)
 
     # Fields to search in admin list view.
-    #search_fields = ('department', 'student_code', 'program_code', 'name')
     search_fields = ('student_code', 'program_code', 'name', 'department__name')
 
     # Read only fields for admin detail view.
@@ -697,6 +726,8 @@ class MajorAdmin(admin.ModelAdmin):
 class SemesterDateAdmin(admin.ModelAdmin):
     # Fields to display in admin list view.
     list_display = ('name', 'start_date', 'end_date')
+    if settings.DEBUG:
+        list_display = ('id',) + list_display
 
     # Fields to filter by in admin list view.
     list_filter = (SemesterDateToYearListFilter,)
@@ -726,6 +757,8 @@ class SemesterDateAdmin(admin.ModelAdmin):
 class AssetAdmin(admin.ModelAdmin):
     # Fields to display in admin list view.
     list_display = ('brand_name', 'asset_tag', 'serial_number', 'mac_address', 'ip_address')
+    if settings.DEBUG:
+        list_display = ('id',) + list_display
 
     # Fields to filter by in admin list view.
     list_filter = ('brand_name',)
@@ -752,14 +785,14 @@ class AssetAdmin(admin.ModelAdmin):
 #endregion CAE Model Admin
 
 
-# User Model Registration
+# User Model Registration.
 admin.site.register(models.User, UserAdmin)
 admin.site.register(models.UserIntermediary, UserIntermediaryAdmin)
 admin.site.register(models.Profile, ProfileAdmin)
 admin.site.register(models.Address, AddressAdmin)
 admin.site.register(models.SiteTheme, SiteThemeAdmin)
 
-# WMU Model Registration
+# WMU Model Registration.
 admin.site.register(models.Department, DepartmentAdmin)
 admin.site.register(models.RoomType, RoomTypeAdmin)
 admin.site.register(models.Room, RoomAdmin)
@@ -767,5 +800,5 @@ admin.site.register(models.Major, MajorAdmin)
 admin.site.register(models.SemesterDate, SemesterDateAdmin)
 admin.site.register(models.WmuUser, WmuUserAdmin)
 
-# CAE Model Registration
+# CAE Model Registration.
 admin.site.register(models.Asset, AssetAdmin)
