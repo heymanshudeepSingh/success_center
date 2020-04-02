@@ -69,7 +69,7 @@
             > div {
                 margin: 5px;
                 width: 70%;
-//                 filter: brightness(85%);
+
                 text-align: left;
 
                 @media only screen and (min-width: $screen-tablet-mid) {
@@ -88,11 +88,6 @@
 
         margin-right: auto;
         margin-left: auto;
-    }
-
-    span.select2-container {
-        width:100% !important;
-        max-width:200px;
     }
 }
 
@@ -269,69 +264,6 @@
 // zoom                                                                           //
 //================================================================================//
 
-
-//==================================================//
-//==== General Form theme colors ===================//
-//==================================================//
-
-main form{
-    input{
-        @each $theme, $theme-dict in $theme-colors{
-        .theme-#{$theme} & {
-            background-color: theme-background($theme, 'form-background');
-            color: theme-text($theme,"primary");
-            padding: 3px;
-            border-radius:5px;
-            border: 1px solid theme-background($theme,"border")
-
-            }
-        }
-    }
-}
-
-
-//==================================================//
-//==== START "Standard Widget" Theme Colors Block ====//
-//==================================================//
-
-
-// .main-content form {
-//
-//     @each $theme, $theme-dict in $theme-colors {
-//     .theme-#{$theme} & {
-//
-//         input{
-//         background:theme-background($theme,'content');
-//         font-size: 1rem;
-//          vertical-align: baseline;
-//          border: 0;
-//         }
-//
-//     }}
-// }
-
-.select2-container {
-    @each $theme, $theme-dict in $theme-colors {
-    .theme-#{$theme} & {
-        .select2-results__options{
-            background: theme-background($theme,'primary');
-
-        }
-        .select2-results__options .selected{
-        background:theme-background($theme,"primary-hover")
-        }
-        .select2-container--default .select2-results__option[aria-selected=true] {
-        background-color: red;
-        }
-
-    }}
-}
-
-//==================================================//
-//===== END "Standard Widget" Theme Colors Block =====//
-//==================================================//
-
-
 //===================================//
 //==== START Custom Widget Block ====//
 //===================================//
@@ -370,10 +302,6 @@ main form{
             .select-item.selected {
                 background: theme-status($theme, 'primary', 'primary');
                 border: 3px solid theme-status($theme, 'primary', 'border');
-            }
-            .form-inputs .form-input{
-                background: theme-background($theme,'primary')
-
             }
 
         }}
