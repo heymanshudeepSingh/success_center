@@ -34,15 +34,16 @@ class MajorInline(admin.TabularInline):
 
 #region Custom Filters
 
-class UserCAECenterEmployeeFilter(admin.SimpleListFilter):
+class UserToCAECenterEmployeeListFilter(admin.SimpleListFilter):
     """
     Filter for (login) User model Admin to show models associated with a CAE Center employee.
     """
     # Label to display for filter.
     title = 'Is CAE Employee'
 
-    # Doesn't seem to do anything if you define the "queryset" method. Still mandatory to define though.
-    parameter_name = ''
+    # This is the name used in the url for this filter.
+    # Can be set to anything you want, as long as it's unique to other filters in this model.
+    parameter_name = 'cae_user'
 
     def lookups(self, request, model_admin):
         """
@@ -76,8 +77,9 @@ class UserIntermediaryToUserListFilter(admin.SimpleListFilter):
     # Label to display for filter.
     title = 'Associated with Login User'
 
-    # Doesn't seem to do anything if you define the "queryset" method. Still mandatory to define though.
-    parameter_name = ''
+    # This is the name used in the url for this filter.
+    # Can be set to anything you want, as long as it's unique to other filters in this model.
+    parameter_name = 'login_user'
 
     def lookups(self, request, model_admin):
         """
@@ -105,8 +107,9 @@ class UserIntermediaryToWmuUserListFilter(admin.SimpleListFilter):
     # Label to display for filter.
     title = 'Associated with WMU User'
 
-    # Doesn't seem to do anything if you define the "queryset" method. Still mandatory to define though.
-    parameter_name = ''
+    # This is the name used in the url for this filter.
+    # Can be set to anything you want, as long as it's unique to other filters in this model.
+    parameter_name = 'wmu_user'
 
     def lookups(self, request, model_admin):
         """
@@ -127,6 +130,36 @@ class UserIntermediaryToWmuUserListFilter(admin.SimpleListFilter):
             return queryset.filter(wmu_user__isnull=True)
 
 
+class WmuUserToMajorListFilter(admin.SimpleListFilter):
+    """
+    Filter for WmuUser model Admin to show models associated with a Major model.
+    """
+    # Label to display for filter.
+    title = 'Major'
+
+    # This is the name used in the url for this filter.
+    # Can be set to anything you want, as long as it's unique to other filters in this model.
+    parameter_name = 'major'
+
+    def lookups(self, request, model_admin):
+        """
+        This defines the filter options.
+        """
+        majors = models.Major.objects.all()
+        major_list = []
+        for major in majors:
+            major_list.append((major.slug, major.name))
+        return major_list
+
+    def queryset(self, request, queryset):
+        """
+        This processes the filter option (defined above, in "lookups") when selected by a user.
+        """
+        major_filter = request.GET.get('major', '')
+        if major_filter != '':
+            return queryset.filter(major__slug=major_filter)
+
+
 class ProfileToUserListFilter(admin.SimpleListFilter):
     """
     Filter for Profile model Admin to show models associated with a valid (login) User model.
@@ -134,8 +167,9 @@ class ProfileToUserListFilter(admin.SimpleListFilter):
     # Label to display for filter.
     title = 'Associated with Login User'
 
-    # Doesn't seem to do anything if you define the "queryset" method. Still mandatory to define though.
-    parameter_name = ''
+    # This is the name used in the url for this filter.
+    # Can be set to anything you want, as long as it's unique to other filters in this model.
+    parameter_name = 'login_user'
 
     def lookups(self, request, model_admin):
         """
@@ -155,6 +189,97 @@ class ProfileToUserListFilter(admin.SimpleListFilter):
         if self.value() == 'no':
             return queryset.filter(userintermediary__user__isnull=True)
 
+
+class ProfileToWmuUserListFilter(admin.SimpleListFilter):
+    """
+    Filter for Profile model Admin to show models associated with a valid (login) User model.
+    """
+    # Label to display for filter.
+    title = 'Associated with WMU User'
+
+    # This is the name used in the url for this filter.
+    # Can be set to anything you want, as long as it's unique to other filters in this model.
+    parameter_name = 'wmu_user'
+
+    def lookups(self, request, model_admin):
+        """
+        This defines the filter options.
+        """
+        return (
+            ('yes', 'Yes'),
+            ('no', 'No'),
+        )
+
+    def queryset(self, request, queryset):
+        """
+        This processes the filter option (defined above, in "lookups") when selected by a user.
+        """
+        if self.value() == 'yes':
+            return queryset.filter(userintermediary__wmu_user__isnull=False)
+        if self.value() == 'no':
+            return queryset.filter(userintermediary__wmu_user__isnull=True)
+
+
+class MajorToDepartmentListFilter(admin.SimpleListFilter):
+    """
+    Filter for Major model Admin to show models associated with Department.
+    """
+    # Label to display for filter.
+    title = 'Department'
+
+    # This is the name used in the url for this filter.
+    # Can be set to anything you want, as long as it's unique to other filters in this model.
+    parameter_name = 'department'
+
+    def lookups(self, request, model_admin):
+        """
+        This defines the filter options.
+        """
+        departments = models.Department.objects.all()
+        department_list = []
+        for department in departments:
+            department_list.append((department.slug, department.name))
+        return department_list
+
+    def queryset(self, request, queryset):
+        """
+        This processes the filter option (defined above, in "lookups") when selected by a user.
+        """
+        department_filter = request.GET.get('department', '')
+        if department_filter != '':
+            return queryset.filter(department__slug=department_filter)
+
+class SemesterDateToYearListFilter(admin.SimpleListFilter):
+    """
+    Filter for Semester Date model Admin to show models associated with a given year.
+    """
+    # Label to display for filter.
+    title = 'Year'
+
+    # This is the name used in the url for this filter.
+    # Can be set to anything you want, as long as it's unique to other filters in this model.
+    parameter_name = 'year'
+
+    def lookups(self, request, model_admin):
+        """
+        This defines the filter options.
+        """
+        semester_dates = models.SemesterDate.objects.all()
+        year_list = []
+        for semester_date in semester_dates:
+            year = semester_date.start_date.year
+            if (year, year) not in year_list:
+                year_list.append((year, year))
+        return year_list
+
+    def queryset(self, request, queryset):
+        """
+        This processes the filter option (defined above, in "lookups") when selected by a user.
+        """
+        year_filter = request.GET.get('year', '')
+        if year_filter != '':
+            return queryset.filter(start_date__year=year_filter)
+
 #endregion Custom Filters
 
 
@@ -164,10 +289,10 @@ class UserAdmin(BaseUserAdmin):
     # inlines = (ProfileInline, )
 
     # Fields to display in admin list view.
-    list_display = ('username', 'first_name', 'last_name', 'user_type')
+    list_display = ('username', 'get_winno', 'first_name', 'last_name', 'get_user_groups')
 
     # Fields to filter by in admin list view.
-    list_filter = ('is_active', UserCAECenterEmployeeFilter, 'groups', 'is_staff', 'is_superuser')
+    list_filter = ('is_active', UserToCAECenterEmployeeListFilter, 'groups', 'is_staff', 'is_superuser')
 
     # Remove individual permission list from admin detail view. Should only ever use group permissions.
     old_list = BaseUserAdmin.fieldsets[2][1]['fields']
@@ -184,7 +309,18 @@ class UserAdmin(BaseUserAdmin):
             new_list += (item,)
     BaseUserAdmin.fieldsets = new_list
 
-    def user_type(self, obj):
+    def get_winno(self, obj):
+        """
+        Return associated winno from WmuUser model, if present.
+        """
+        try:
+            return '{0}'.format(obj.userintermediary.wmu_user.winno)
+        except AttributeError:
+            return ''
+    get_winno.short_description = 'Winno'
+    get_winno.admin_order_field = 'userintermediary__wmu_user__winno'
+
+    def get_user_groups(self, obj):
         """
         Return list of user-associated group(s).
         """
@@ -192,14 +328,15 @@ class UserAdmin(BaseUserAdmin):
         for group in obj.groups.all():
             groups.append(group.name)
         return ', '.join(groups)
+    get_user_groups.short_description = 'User Groups'
 
 
 class UserIntermediaryAdmin(admin.ModelAdmin):
     # Fields to display in admin list view.
-    list_display = ('bronco_net',)
+    list_display = ('bronco_net', 'get_winno', 'get_first_name', 'get_last_name')
 
     # Fields to search in admin list view.
-    search_fields = ('bronco_net',)
+    search_fields = ('bronco_net', 'wmu_user__winno')
 
     # Fields to filter by in admin list view.
     list_filter = (UserIntermediaryToUserListFilter, UserIntermediaryToWmuUserListFilter)
@@ -224,18 +361,46 @@ class UserIntermediaryAdmin(admin.ModelAdmin):
     # New object's slugs will be automatically set by bronco_net.
     prepopulated_fields = {'slug': ('bronco_net',)}
 
+    def get_winno(self, obj):
+        """
+        Return associated winno from WmuUser model, if present.
+        """
+        try:
+            return '{0}'.format(obj.wmu_user.winno)
+        except AttributeError:
+            return ''
+    get_winno.short_description = 'Winno'
+    get_winno.admin_order_field = 'wmu_user__winno'
+
+    def get_first_name(self, obj):
+        """
+        Return associated First Name.
+        """
+        user_model = obj.user
+        if user_model is None:
+            user_model = obj.wmu_user
+        return '{0}'.format(user_model.first_name)
+    get_first_name.short_description = 'First Name'
+
+    def get_last_name(self, obj):
+        """
+        Return associated Last Name.
+        """
+        user_model = obj.user
+        if user_model is None:
+            user_model = obj.wmu_user
+        return '{0}'.format(user_model.last_name)
+    get_last_name.short_description = 'Last Name'
+
 
 class WmuUserAdmin(admin.ModelAdmin):
     inlines = (MajorInline,)
 
-    def get_majors(self, obj):
-        return ' | '.join([major.student_code for major in obj.major.all()])
-
     # Fields to display in admin list view.
-    list_display = ('bronco_net', 'winno', 'first_name', 'last_name', 'get_majors')
+    list_display = ('bronco_net', 'winno', 'first_name', 'last_name', 'get_majors', 'get_user_groups')
 
     # Fields to filter by in admin list view.
-    list_filter = ('active', 'wmuusermajorrelationship__major__name')
+    list_filter = ('active', WmuUserToMajorListFilter)
 
     # Fields to search in admin list view.
     search_fields = ('bronco_net', 'winno', 'first_name', 'last_name')
@@ -257,23 +422,36 @@ class WmuUserAdmin(admin.ModelAdmin):
         }),
     )
 
+    def get_majors(self, obj):
+        """
+        Return list of user's majors.
+        """
+        return ' | '.join([major.student_code for major in obj.major.all()])
+    get_majors.short_description = 'Majors'
+
+    def get_user_groups(self, obj):
+        """
+        Return list of user-associated group(s).
+        """
+        try:
+            groups = []
+            for group in obj.userintermediary.user.groups.all():
+                groups.append(group.name)
+            return ', '.join(groups)
+        except AttributeError:
+            return ''
+    get_user_groups.short_description = 'User Groups'
+
 
 class ProfileAdmin(admin.ModelAdmin):
-
-    # Needed for related field list display.
-    def get_bronco_net(self, obj):
-        return obj.userintermediary.bronco_net
-    get_bronco_net.short_description = 'Bronco Net'
-    get_bronco_net.admin_order_field = 'userintermediary__bronco_net'
-
     # Fields to display in admin list view.
-    list_display = ('get_bronco_net', 'address', 'phone_number', 'site_theme')
+    list_display = ('get_bronco_net', 'get_winno', 'get_first_name', 'get_last_name', 'phone_number', 'site_theme')
 
     # Fields to search in admin list view.
     search_fields = ('userintermediary__bronco_net',)
 
     # Fields to filter by in admin list view.
-    list_filter = (ProfileToUserListFilter,)
+    list_filter = (ProfileToUserListFilter, ProfileToWmuUserListFilter)
 
     # Read only fields for admin detail view.
     readonly_fields = ('id', 'date_created', 'date_modified')
@@ -294,6 +472,45 @@ class ProfileAdmin(admin.ModelAdmin):
             'fields': ('id', 'date_created', 'date_modified'),
         }),
     )
+
+    def get_bronco_net(self, obj):
+        """
+        Return associated BroncoNet.
+        """
+        return '{0}'.format(obj.userintermediary.bronco_net)
+    get_bronco_net.short_description = 'Bronco Net'
+    get_bronco_net.admin_order_field = 'userintermediary__bronco_net'
+
+    def get_winno(self, obj):
+        """
+        Return associated winno from WmuUser model, if present.
+        """
+        try:
+            return '{0}'.format(obj.userintermediary.wmu_user.winno)
+        except AttributeError:
+            return ''
+    get_winno.short_description = 'Winno'
+    get_winno.admin_order_field = 'userintermediary__wmu_user__winno'
+
+    def get_first_name(self, obj):
+        """
+        Return associated First Name.
+        """
+        user_model = obj.userintermediary.user
+        if user_model is None:
+            user_model = obj.userintermediary.wmu_user
+        return '{0}'.format(user_model.first_name)
+    get_first_name.short_description = 'First Name'
+
+    def get_last_name(self, obj):
+        """
+        Return associated Last Name.
+        """
+        user_model = obj.userintermediary.user
+        if user_model is None:
+            user_model = obj.userintermediary.wmu_user
+        return '{0}'.format(user_model.last_name)
+    get_last_name.short_description = 'Last Name'
 
 
 class AddressAdmin(admin.ModelAdmin):
@@ -401,13 +618,6 @@ class RoomTypeAdmin(admin.ModelAdmin):
 
 
 class RoomAdmin(admin.ModelAdmin):
-
-    def get_departments(self, obj):
-        dept_list = ''
-        for department in obj.department.all():
-            dept_list += '{0} | '.format(department.name)
-        return dept_list[:-3]
-
     # Check that the inline import succeeded.
     if RoomEventInline is not None:
         inlines = [RoomEventInline]
@@ -441,13 +651,23 @@ class RoomAdmin(admin.ModelAdmin):
     # New object's slugs will be automatically set by name.
     prepopulated_fields = {'slug': ('name',)}
 
+    def get_departments(self, obj):
+        """
+        Return associated Department.
+        """
+        dept_list = ''
+        for department in obj.department.all():
+            dept_list += '{0} | '.format(department.name)
+        return dept_list[:-3]
+    get_departments.short_description = 'Departments'
+
 
 class MajorAdmin(admin.ModelAdmin):
     # Fields to display in admin list view.
     list_display = ('student_code', 'program_code', 'name', 'degree_level', 'department', 'active')
 
     # Fields to filter by in admin list view.
-    list_filter = ('degree_level', 'active')
+    list_filter = ('active', 'degree_level', MajorToDepartmentListFilter)
 
     # Fields to search in admin list view.
     search_fields = ('department', 'student_code', 'program_code', 'name')
@@ -477,6 +697,9 @@ class SemesterDateAdmin(admin.ModelAdmin):
     # Fields to display in admin list view.
     list_display = ('name', 'start_date', 'end_date')
 
+    # Fields to filter by in admin list view.
+    list_filter = (SemesterDateToYearListFilter,)
+
     # Fields to search in admin list view.
     search_fields = ('name', 'start_date', 'end_date')
 
@@ -493,7 +716,6 @@ class SemesterDateAdmin(admin.ModelAdmin):
             'fields': ('id', 'date_created', 'date_modified'),
         }),
     )
-
 
 #endregion WMU Model Admin
 
