@@ -478,16 +478,16 @@ class WmuUserTests(IntegrationTestCase):
         self.assertEqual(len(majors_for_student), 2)
         self.assertEqual(majors_for_student[0], self.major)
         self.assertEqual(majors_for_student[1], new_major)
-        self.assertEqual(majors_for_student[0].active, True)
-        self.assertEqual(majors_for_student[1].active, True)
+        self.assertEqual(majors_for_student[0].is_active, True)
+        self.assertEqual(majors_for_student[1].is_active, True)
 
         # Now set first major to "inactive". Aka, student either finished major or changed to different one.
-        majors_for_student[0].active = False
+        majors_for_student[0].is_active = False
         majors_for_student[0].save()
 
         majors_for_student = self.test_wmu_user.major.all()
-        self.assertEqual(majors_for_student[0].active, False)
-        self.assertEqual(majors_for_student[1].active, True)
+        self.assertEqual(majors_for_student[0].is_active, False)
+        self.assertEqual(majors_for_student[1].is_active, True)
 
     def test_string_representation(self):
         self.assertEqual(str(self.test_wmu_user), 'abc1234: Test First Test Last')
@@ -587,7 +587,7 @@ class WmuUserMajorRelationModelTests(IntegrationTestCase):
             wmu_user=self.wmu_user_1,
             major=self.major_2,
         )
-        intermediary_relationship.active = False
+        intermediary_relationship.is_active = False
         intermediary_relationship.save()
 
         self.assertTrue(models.WmuUserMajorRelationship.check_if_user_has_major_active(self.wmu_user_1, self.major_1))
@@ -600,7 +600,7 @@ class WmuUserMajorRelationModelTests(IntegrationTestCase):
             wmu_user=self.wmu_user_1,
             major=self.major_1,
         )
-        intermediary_relationship.active = False
+        intermediary_relationship.is_active = False
         intermediary_relationship.save()
 
         self.assertFalse(models.WmuUserMajorRelationship.check_if_user_has_major_active(self.wmu_user_1, self.major_1))

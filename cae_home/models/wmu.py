@@ -186,12 +186,14 @@ class Room(models.Model):
                 slug=slug,
                 department=department,
                 room_type=room_type,
+                is_row=False,
             )
         except ObjectDoesNotExist:
             room = Room.objects.create(
                 name=name,
                 slug=slug,
                 room_type=room_type,
+                is_row=False,
             )
             room.department.add(department)
             room.save()
