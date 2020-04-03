@@ -10,9 +10,11 @@ from django.utils import timezone
 # User Class Imports.
 from cae_home import models
 from cae_home.tests.utils import IntegrationTestCase
-from settings.ldap_backends.wmu_auth.wmu_backend import WmuAuthBackend
+from settings.tests.utils import run_ldap_tests
 from settings.tests.utils import prog_or_student_test_account_is_populated
 from settings.tests.utils import prog_test_account_is_populated, student_test_account_is_populated
+if run_ldap_tests():
+    from settings.ldap_backends.wmu_auth.wmu_backend import WmuAuthBackend
 
 
 class WmuAuthBackendTests(IntegrationTestCase):
@@ -21,18 +23,20 @@ class WmuAuthBackendTests(IntegrationTestCase):
     """
     @classmethod
     def setUpTestData(cls):
-        cls.wmu_backend = WmuAuthBackend()
-        cls.current_time = timezone.now()
-        cls.time_format = '%Y%m%d%H%M%S%z'
+        if run_ldap_tests():
+            cls.wmu_backend = WmuAuthBackend()
+            cls.current_time = timezone.now()
+            cls.time_format = '%Y%m%d%H%M%S%z'
 
-        # Get optional environment test accounts.
-        if student_test_account_is_populated():
-            cls.test_ceas_prog_account = str(settings.BACKEND_LDAP_TEST_PROG_ID)
-        if prog_test_account_is_populated():
-            cls.test_student_account = str(settings.BACKEND_LDAP_TEST_STUDENT_ID)
+            # Get optional environment test accounts.
+            if student_test_account_is_populated():
+                cls.test_ceas_prog_account = str(settings.BACKEND_LDAP_TEST_PROG_ID)
+            if prog_test_account_is_populated():
+                cls.test_student_account = str(settings.BACKEND_LDAP_TEST_STUDENT_ID)
 
     #region User Create/Update Functions
 
+    @unittest.skipUnless(run_ldap_tests(), 'Missing criteria for LDAP. Skipping Ldap tests.')
     @unittest.skipUnless(prog_or_student_test_account_is_populated(), 'No Ldap User specified. Skipping Ldap tests.')
     def test__create_user_model(self):
         """
@@ -62,6 +66,7 @@ class WmuAuthBackendTests(IntegrationTestCase):
         # we're accessing).
         self.assertEqual(updated_login_user, login_user)
 
+    @unittest.skipUnless(run_ldap_tests(), 'Missing criteria for LDAP. Skipping Ldap tests.')
     @unittest.skipUnless(prog_or_student_test_account_is_populated(), 'No Ldap User specified. Skipping Ldap tests.')
     def test__create_wmu_user_model(self):
         """
@@ -97,6 +102,7 @@ class WmuAuthBackendTests(IntegrationTestCase):
 
     #region User Ldap Status Functions
 
+    @unittest.skipUnless(run_ldap_tests(), 'Missing criteria for LDAP. Skipping Ldap tests.')
     @unittest.skipUnless(prog_or_student_test_account_is_populated(), 'No Ldap User specified. Skipping Ldap tests.')
     def test__verify_user_ldap_status_wmu_enrolled(self):
         # Tests based on CAE Center programmer account.
@@ -119,6 +125,7 @@ class WmuAuthBackendTests(IntegrationTestCase):
             self.assertTrue(user_is_active)
             self.assertTrue(user_in_retention)
 
+    @unittest.skipUnless(run_ldap_tests(), 'Missing criteria for LDAP. Skipping Ldap tests.')
     def test___verify_user_ldap_status_wmu_enrolled(self):
         with self.subTest('With wmuEnrolled field True.'):
             ldap_info = {
@@ -204,6 +211,7 @@ class WmuAuthBackendTests(IntegrationTestCase):
 
     #region Ldap Get Attr Functions
 
+    @unittest.skipUnless(run_ldap_tests(), 'Missing criteria for LDAP. Skipping Ldap tests.')
     @unittest.skipUnless(prog_or_student_test_account_is_populated(), 'No Ldap User specified. Skipping Ldap tests.')
     def test___get_all_user_info_from_bronconet(self):
         # Tests based on CAE Center programmer account.
@@ -238,6 +246,7 @@ class WmuAuthBackendTests(IntegrationTestCase):
             self.assertEqual(ldap_results['uid'][0], self.test_student_account)
             self.assertEqual(ldap_results['mail'][0][-10:], '@wmich.edu')
 
+    @unittest.skipUnless(run_ldap_tests(), 'Missing criteria for LDAP. Skipping Ldap tests.')
     @unittest.skipUnless(prog_or_student_test_account_is_populated(), 'No Ldap User specified. Skipping Ldap tests.')
     def test___get_all_user_info_from_winno(self):
         # Tests based on CAE Center programmer account.
@@ -259,6 +268,7 @@ class WmuAuthBackendTests(IntegrationTestCase):
             self.assertEqual(ldap_results['uid'][0], self.test_student_account)
             self.assertEqual(ldap_results['mail'][0][-10:], '@wmich.edu')
 
+    @unittest.skipUnless(run_ldap_tests(), 'Missing criteria for LDAP. Skipping Ldap tests.')
     @unittest.skipUnless(prog_or_student_test_account_is_populated(), 'No Ldap User specified. Skipping Ldap tests.')
     def test__get_winno_from_bronconet(self):
         # Tests based on CAE Center programmer account.
@@ -279,6 +289,7 @@ class WmuAuthBackendTests(IntegrationTestCase):
             # Not sure what else we can test without direct comparison.
             self.assertGreater(len(winno), 0)
 
+    @unittest.skipUnless(run_ldap_tests(), 'Missing criteria for LDAP. Skipping Ldap tests.')
     @unittest.skipUnless(prog_or_student_test_account_is_populated(), 'No Ldap User specified. Skipping Ldap tests.')
     def test__get_bronconet_from_winno(self):
 
