@@ -239,7 +239,7 @@ class Major(models.Model):
     program_code = models.CharField(max_length=MAX_LENGTH, unique=True)
     name = models.CharField(max_length=MAX_LENGTH)
     degree_level = models.SmallIntegerField(choices=DEGREE_LEVEL_CHOICES, blank=True, default=0)
-    active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=True)
 
     # Self-setting/Non-user-editable fields.
     slug = models.SlugField(

@@ -352,7 +352,7 @@ class UserIntermediaryAdmin(admin.ModelAdmin):
         }),
         ('Advanced', {
             'classes': ('collapse',),
-            'fields': ('id', 'slug', 'date_created', 'date_modified'),
+            'fields': ('id', 'is_active', 'slug', 'date_created', 'date_modified'),
         }),
     )
 
@@ -380,7 +380,7 @@ class WmuUserAdmin(admin.ModelAdmin):
         list_display = ('id',) + list_display
 
     # Fields to filter by in admin list view.
-    list_filter = ('active', WmuUserToMajorListFilter)
+    list_filter = ('is_active', WmuUserToMajorListFilter)
 
     # Fields to search in admin list view.
     search_fields = ('bronco_net', 'winno', 'first_name', 'last_name')
@@ -398,7 +398,7 @@ class WmuUserAdmin(admin.ModelAdmin):
         }),
         ('Advanced', {
             'classes': ('collapse',),
-            'fields': ('id', 'active', 'date_created', 'date_modified'),
+            'fields': ('id', 'is_active', 'date_created', 'date_modified'),
         }),
     )
 
@@ -666,12 +666,12 @@ class RoomAdmin(admin.ModelAdmin):
 
 class MajorAdmin(admin.ModelAdmin):
     # Fields to display in admin list view.
-    list_display = ('student_code', 'program_code', 'name', 'degree_level', 'department', 'active')
+    list_display = ('student_code', 'program_code', 'name', 'degree_level', 'department', 'is_active')
     if settings.DEBUG:
         list_display = ('id',) + list_display
 
     # Fields to filter by in admin list view.
-    list_filter = ('active', 'degree_level', MajorToDepartmentListFilter)
+    list_filter = ('is_active', 'degree_level', MajorToDepartmentListFilter)
 
     # Fields to search in admin list view.
     search_fields = ('student_code', 'program_code', 'name', 'department__name')
@@ -682,7 +682,7 @@ class MajorAdmin(admin.ModelAdmin):
     # Organize fieldsets for admin detail view.
     fieldsets = (
         (None, {
-            'fields': ('name', 'degree_level', 'department', 'active'),
+            'fields': ('name', 'degree_level', 'department', 'is_active'),
         }),
         ('Degree Codes', {
             'fields': ('student_code', 'program_code'),
