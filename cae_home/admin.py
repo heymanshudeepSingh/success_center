@@ -21,11 +21,6 @@ except ImportError:
 
 #region Model Inlines
 
-class ProfileInline(admin.StackedInline):
-    model = models.Profile
-    can_delete = False
-
-
 class MajorInline(admin.TabularInline):
     model = models.WmuUser.major.through
     extra = 1
@@ -287,8 +282,6 @@ class SemesterDateToYearListFilter(admin.SimpleListFilter):
 #region User Model Admin
 
 class UserAdmin(BaseUserAdmin):
-    # inlines = (ProfileInline,)
-
     # Fields to display in admin list view.
     list_display = ('username', 'get_winno', 'first_name', 'last_name', 'get_user_groups')
     if settings.DEBUG:
@@ -336,7 +329,7 @@ class UserAdmin(BaseUserAdmin):
 
 class UserIntermediaryAdmin(admin.ModelAdmin):
     # Fields to display in admin list view.
-    list_display = ('bronco_net', 'get_winno', 'get_first_name', 'get_last_name')
+    list_display = ('bronco_net', 'get_winno', 'first_name', 'last_name')
     if settings.DEBUG:
         list_display = ('id',) + list_display
 
@@ -344,7 +337,7 @@ class UserIntermediaryAdmin(admin.ModelAdmin):
     list_filter = (UserIntermediaryToUserListFilter, UserIntermediaryToWmuUserListFilter)
 
     # Fields to search in admin list view.
-    search_fields = ('bronco_net', 'wmu_user__winno')
+    search_fields = ('bronco_net', 'wmu_user__winno', 'first_name', 'last_name')
 
     # Read only fields for admin detail view.
     readonly_fields = ('id', 'date_created', 'date_modified')
@@ -376,26 +369,6 @@ class UserIntermediaryAdmin(admin.ModelAdmin):
             return ''
     get_winno.short_description = 'Winno'
     get_winno.admin_order_field = 'wmu_user__winno'
-
-    def get_first_name(self, obj):
-        """
-        Return associated First Name.
-        """
-        user_model = obj.user
-        if user_model is None:
-            user_model = obj.wmu_user
-        return '{0}'.format(user_model.first_name)
-    get_first_name.short_description = 'First Name'
-
-    def get_last_name(self, obj):
-        """
-        Return associated Last Name.
-        """
-        user_model = obj.user
-        if user_model is None:
-            user_model = obj.wmu_user
-        return '{0}'.format(user_model.last_name)
-    get_last_name.short_description = 'Last Name'
 
 
 class WmuUserAdmin(admin.ModelAdmin):
@@ -460,7 +433,12 @@ class ProfileAdmin(admin.ModelAdmin):
     list_filter = (ProfileToUserListFilter, ProfileToWmuUserListFilter)
 
     # Fields to search in admin list view.
-    search_fields = ('userintermediary__bronco_net', 'userintermediary__wmu_user__winno')
+    search_fields = (
+        'userintermediary__bronco_net',
+        'userintermediary__wmu_user__winno',
+        'userintermediary__first_name',
+        'userintermediary__last_name',
+    )
 
     # Read only fields for admin detail view.
     readonly_fields = ('id', 'date_created', 'date_modified')
@@ -505,21 +483,17 @@ class ProfileAdmin(admin.ModelAdmin):
         """
         Return associated First Name.
         """
-        user_model = obj.userintermediary.user
-        if user_model is None:
-            user_model = obj.userintermediary.wmu_user
-        return '{0}'.format(user_model.first_name)
+        return '{0}'.format(obj.userintermediary.first_name)
     get_first_name.short_description = 'First Name'
+    get_first_name.admin_order_field = 'userintermediary__first_name'
 
     def get_last_name(self, obj):
         """
         Return associated Last Name.
         """
-        user_model = obj.userintermediary.user
-        if user_model is None:
-            user_model = obj.userintermediary.wmu_user
-        return '{0}'.format(user_model.last_name)
+        return '{0}'.format(obj.userintermediary.last_name)
     get_last_name.short_description = 'Last Name'
+    get_last_name.admin_order_field = 'userintermediary__last_name'
 
 
 class AddressAdmin(admin.ModelAdmin):
@@ -801,4 +775,4 @@ admin.site.register(models.SemesterDate, SemesterDateAdmin)
 admin.site.register(models.WmuUser, WmuUserAdmin)
 
 # CAE Model Registration.
-admin.site.register(models.Asset, AssetAdmin)
+#admin.site.register(models.Asset, AssetAdmin)

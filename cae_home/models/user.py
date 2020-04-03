@@ -67,6 +67,24 @@ def compare_user_and_wmuuser_models(uid):
     except ObjectDoesNotExist:
         pass    # User account is not associated with both models. This is fine, we can skip validation then.
 
+    # Now update UserIntermediary.
+    user_intermediary = UserIntermediary.objects.get(bronco_net=uid)
+
+    # Get either (login) User model or WmuUser model. We don't care which one, as they both have what we need.
+    related_model = user_intermediary.user
+    if related_model is None:
+        related_model = user_intermediary.wmu_user
+
+    # Update first name if not matching.
+    if user_intermediary.first_name != related_model.first_name:
+        user_intermediary.first_name = related_model.first_name
+        user_intermediary.save()
+
+    # Update last name if not matching.
+    if user_intermediary.last_name != related_model.last_name:
+        user_intermediary.last_name = related_model.last_name
+        user_intermediary.save()
+
 #endregion Model Functions
 
 
@@ -189,6 +207,8 @@ class UserIntermediary(models.Model):
 
     # Model fields.
     bronco_net = models.CharField(max_length=MAX_LENGTH, blank=True, unique=True)
+    first_name = models.CharField(max_length=MAX_LENGTH, blank=True)
+    last_name = models.CharField(max_length=MAX_LENGTH, blank=True)
 
     # Self-setting/Non-user-editable fields.
     slug = models.SlugField(
