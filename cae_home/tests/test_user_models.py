@@ -158,179 +158,207 @@ class UserIntermediaryModelTests(IntegrationTestCase):
 
     def test_shared_first_name_field(self):
         """
-        Note that both User and WmuUser models essentially share a first_name field.
+        Note that User, WmuUser, and UserIntermediary models essentially share a first_name field.
         The WmuUser model is intended to manage this field, so in the event that a User has both model types, then
         the WmuUser version should take priority and handle management of this field.
         """
-        with self.subTest('Test first_name value when associated with both User and WmuUser. User model created first.'):
-            test_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
+        with self.subTest('Associated with (login) User model only.'):
+            # Verify original values.
+            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.user_bronco_net)
+            self.assertEqual(self.user.first_name, '')
+            self.assertEqual(self.user.first_name, user_intermediary.first_name)
 
-            # Models were not created with the same values, but should be identical now.
-            self.assertEqual(test_intermediary.user.first_name, 'Test First')
-            self.assertEqual(test_intermediary.wmu_user.first_name, 'Test First')
-            self.assertEqual(test_intermediary.user.first_name, test_intermediary.wmu_user.first_name)
+            # Test updating values.
+            self.user.first_name = 'Updated first name - User'
+            self.user.save()
+            user = models.User.objects.get(username=self.user_bronco_net)
+            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.user_bronco_net)
 
-        with self.subTest('Test first_name value when associated with both User and WmuUser. WmuUser model created first.'):
-            test_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_2)
+            self.assertEqual(user.first_name, 'Updated first name - User')
+            self.assertEqual(user.first_name, user_intermediary.first_name)
 
-            # Models were not created with the same values, but should be identical now.
-            self.assertEqual(test_intermediary.user.first_name, 'Test First')
-            self.assertEqual(test_intermediary.wmu_user.first_name, 'Test First')
-            self.assertEqual(test_intermediary.user.first_name, test_intermediary.wmu_user.first_name)
+            # Revert back to original values for next tests. While we're at it, verify correctness.
+            self.user.first_name = 'Test First'
+            self.user.save()
+            user = models.User.objects.get(username=self.user_bronco_net)
+            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.user_bronco_net)
 
-        with self.subTest('Test first_name change when associated with User only.'):
-            # Check if started with expected values (subtests don't run in separate database transactions, unfortunately).
-            test_intermediary = models.UserIntermediary.objects.get(bronco_net=self.user_bronco_net)
-            test_user = get_user_model().objects.get(username=self.user_bronco_net)
-            self.assertEqual(test_intermediary.user.first_name, '')
-            self.assertEqual(test_intermediary.wmu_user, None)
+            self.assertEqual(user.first_name, 'Test First')
+            self.assertEqual(user.first_name, user_intermediary.first_name)
 
-            # Change name on User model. Should succeed since there's no associated WmuUser model.
-            test_user.first_name = 'Changed First Name'
-            test_user.save()
-            test_intermediary = models.UserIntermediary.objects.get(bronco_net=self.user_bronco_net)
+        with self.subTest('Associated with WmuUser model only.'):
+            # Verify original values.
+            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.wmu_user_bronco_net)
+            self.assertEqual(self.wmu_user.first_name, 'Test First')
+            self.assertEqual(self.wmu_user.first_name, user_intermediary.first_name)
 
-            self.assertEqual(test_intermediary.user.first_name, 'Changed First Name')
-            self.assertEqual(test_intermediary.wmu_user, None)
+            # Test updating values.
+            self.wmu_user.first_name = 'Updated first name - WmuUser'
+            self.wmu_user.save()
+            wmu_user = models.WmuUser.objects.get(bronco_net=self.wmu_user_bronco_net)
+            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.wmu_user_bronco_net)
 
-        with self.subTest('Test first_name change when associated with WmuUser only.'):
-            # Check if started with expected values (subtests don't run in separate database transactions, unfortunately).
-            test_intermediary = models.UserIntermediary.objects.get(bronco_net=self.wmu_user_bronco_net)
-            test_wmu_user = models.WmuUser.objects.get(bronco_net=self.wmu_user_bronco_net)
-            self.assertEqual(test_intermediary.user, None)
-            self.assertEqual(test_intermediary.wmu_user.first_name, 'Test First')
+            self.assertEqual(wmu_user.first_name, 'Updated first name - WmuUser')
+            self.assertEqual(wmu_user.first_name, user_intermediary.first_name)
 
-            # Change name on User model. Should succeed since there's no associated WmuUser model.
-            test_wmu_user.first_name = 'Changed First Name'
-            test_wmu_user.save()
-            test_intermediary = models.UserIntermediary.objects.get(bronco_net=self.wmu_user_bronco_net)
+            # Revert back to original values for next tests. While we're at it, verify correctness.
+            self.wmu_user.first_name = 'Test First'
+            self.wmu_user.save()
+            wmu_user = models.WmuUser.objects.get(bronco_net=self.wmu_user_bronco_net)
+            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.wmu_user_bronco_net)
 
-            self.assertEqual(test_intermediary.user, None)
-            self.assertEqual(test_intermediary.wmu_user.first_name, 'Changed First Name')
+            self.assertEqual(wmu_user.first_name, 'Test First')
+            self.assertEqual(wmu_user.first_name, user_intermediary.first_name)
 
-        with self.subTest('Test first_name change when associated with both User and WmuUser. Save on User model.'):
-            # Check if started with expected values (subtests don't run in separate database transactions, unfortunately).
-            test_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
-            test_user = get_user_model().objects.get(username=self.dual_bronco_net_1)
-            self.assertEqual(test_intermediary.user.first_name, 'Test First')
-            self.assertEqual(test_intermediary.wmu_user.first_name, 'Test First')
+        with self.subTest('Associated with both User and WmuUser models. Save on User model.'):
+            # Verify original values.
+            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
+            self.assertEqual(self.dual_wmu_user_1.first_name, 'Test First')
+            self.assertEqual(self.dual_wmu_user_1.first_name, user_intermediary.first_name)
+            self.assertEqual(self.dual_wmu_user_1.first_name, self.dual_user_1.first_name)
 
-            # Change name on User model. Should fail/default to WmuUser value (WmuUser model name fields get priority).
-            test_user.first_name = 'Changed First Name'
-            test_user.save()
-            test_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
+            # Test updating values.
+            # This should fail and keep the same value, because WmuUser gets precedence.
+            self.dual_user_1.first_name = 'Updated first name - dual, User'
+            self.dual_user_1.save()
+            user = models.User.objects.get(username=self.dual_bronco_net_1)
+            wmu_user = models.WmuUser.objects.get(bronco_net=self.dual_bronco_net_1)
+            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
 
-            self.assertEqual(test_intermediary.user.first_name, 'Test First')
-            self.assertEqual(test_intermediary.wmu_user.first_name, 'Test First')
-            self.assertEqual(test_intermediary.user.first_name, test_intermediary.wmu_user.first_name)
+            self.assertEqual(user.first_name, 'Test First')
+            self.assertEqual(user.first_name, user_intermediary.first_name)
+            self.assertEqual(user.first_name, wmu_user.first_name)
 
-        with self.subTest('Test first_name change when associated with both User and WmuUser. Save on WmuUser model.'):
-            # Check if started with expected values (subtests don't run in separate database transactions, unfortunately).
-            test_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
-            test_wmu_user = models.WmuUser.objects.get(bronco_net=self.dual_bronco_net_1)
-            self.assertEqual(test_intermediary.user.first_name, 'Test First')
-            self.assertEqual(test_intermediary.wmu_user.first_name, 'Test First')
+        with self.subTest('Associated with both User and WmuUser models. Save on WmuUser model.'):
+            # Verify original values.
+            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_2)
+            self.assertEqual(self.dual_wmu_user_2.first_name, 'Test First')
+            self.assertEqual(self.dual_wmu_user_2.first_name, user_intermediary.first_name)
+            self.assertEqual(self.dual_wmu_user_2.first_name, self.dual_user_2.first_name)
 
-            # Change name on WmuUser model. Should succeed (WmuUser model name fields get priority).
-            test_wmu_user.first_name = 'Changed First Name'
-            test_wmu_user.save()
-            test_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
+            # Test updating values.
+            self.dual_wmu_user_2.first_name = 'Updated first name - dual, WmuUser first'
+            self.dual_wmu_user_2.save()
+            user = models.User.objects.get(username=self.dual_bronco_net_2)
+            wmu_user = models.WmuUser.objects.get(bronco_net=self.dual_bronco_net_2)
+            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_2)
 
-            self.assertEqual(test_intermediary.user.first_name, 'Changed First Name')
-            self.assertEqual(test_intermediary.wmu_user.first_name, 'Changed First Name')
-            self.assertEqual(test_intermediary.user.first_name, test_intermediary.wmu_user.first_name)
+            self.assertEqual(wmu_user.first_name, 'Updated first name - dual, WmuUser first')
+            self.assertEqual(wmu_user.first_name, user_intermediary.first_name)
+            self.assertEqual(wmu_user.first_name, user.first_name)
 
-            # Reset for other subtests (subtests don't run in separate database transactions, unfortunately).
-            self.dual_wmu_user_1.first_name = 'Test First'
-            self.dual_wmu_user_1.save()
+            # Revert back to original values for next tests. While we're at it, verify correctness.
+            self.dual_wmu_user_2.first_name = 'Test First'
+            self.dual_wmu_user_2.save()
+            user = models.User.objects.get(username=self.dual_bronco_net_2)
+            wmu_user = models.WmuUser.objects.get(bronco_net=self.dual_bronco_net_2)
+            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_2)
+
+            self.assertEqual(wmu_user.first_name, 'Test First')
+            self.assertEqual(wmu_user.first_name, user_intermediary.first_name)
+            self.assertEqual(wmu_user.first_name, user.first_name)
 
     def test_shared_last_name_field(self):
         """
-        Note that both User and WmuUser models essentially share a last_name field.
+        Note that User, WmuUser, and UserIntermediary models essentially share a last_name field.
         The WmuUser model is intended to manage this field, so in the event that a User has both model types, then
         the WmuUser version should take priority and handle management of this field.
         """
-        with self.subTest('Test last_name value when associated with both User and WmuUser. User model created first.'):
-            test_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
+        with self.subTest('Associated with (login) User model only.'):
+            # Verify original values.
+            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.user_bronco_net)
+            self.assertEqual(self.user.last_name, '')
+            self.assertEqual(self.user.last_name, user_intermediary.last_name)
 
-            # Models were not created with the same values, but should be identical now.
-            self.assertEqual(test_intermediary.user.last_name, 'Test Last')
-            self.assertEqual(test_intermediary.wmu_user.last_name, 'Test Last')
-            self.assertEqual(test_intermediary.user.last_name, test_intermediary.wmu_user.last_name)
+            # Test updating values.
+            self.user.last_name = 'Updated last name - User'
+            self.user.save()
+            user = models.User.objects.get(username=self.user_bronco_net)
+            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.user_bronco_net)
 
-        with self.subTest('Test last_name value when associated with both User and WmuUser. WmuUser model created first.'):
-            test_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_2)
+            self.assertEqual(user.last_name, 'Updated last name - User')
+            self.assertEqual(user.last_name, user_intermediary.last_name)
 
-            # Models were not created with the same values, but should be identical now.
-            self.assertEqual(test_intermediary.user.last_name, 'Test Last')
-            self.assertEqual(test_intermediary.wmu_user.last_name, 'Test Last')
-            self.assertEqual(test_intermediary.user.last_name, test_intermediary.wmu_user.last_name)
+            # Revert back to original values for next tests. While we're at it, verify correctness.
+            self.user.last_name = 'Test Last'
+            self.user.save()
+            user = models.User.objects.get(username=self.user_bronco_net)
+            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.user_bronco_net)
 
-        with self.subTest('Test last_name change when associated with User only.'):
-            # Check if started with expected values (subtests don't run in separate database transactions, unfortunately).
-            test_intermediary = models.UserIntermediary.objects.get(bronco_net=self.user_bronco_net)
-            test_user = get_user_model().objects.get(username=self.user_bronco_net)
-            self.assertEqual(test_intermediary.user.last_name, '')
-            self.assertEqual(test_intermediary.wmu_user, None)
+            self.assertEqual(user.last_name, 'Test Last')
+            self.assertEqual(user.last_name, user_intermediary.last_name)
 
-            # Change name on User model. Should succeed since there's no associated WmuUser model.
-            test_user.last_name = 'Changed Last Name'
-            test_user.save()
-            test_intermediary = models.UserIntermediary.objects.get(bronco_net=self.user_bronco_net)
+        with self.subTest('Associated with WmuUser model only.'):
+            # Verify original values.
+            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.wmu_user_bronco_net)
+            self.assertEqual(self.wmu_user.last_name, 'Test Last')
+            self.assertEqual(self.wmu_user.last_name, user_intermediary.last_name)
 
-            self.assertEqual(test_intermediary.user.last_name, 'Changed Last Name')
-            self.assertEqual(test_intermediary.wmu_user, None)
+            # Test updating values.
+            self.wmu_user.last_name = 'Updated last name - WmuUser'
+            self.wmu_user.save()
+            wmu_user = models.WmuUser.objects.get(bronco_net=self.wmu_user_bronco_net)
+            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.wmu_user_bronco_net)
 
-        with self.subTest('Test last_name change when associated with WmuUser only.'):
-            # Check if started with expected values (subtests don't run in separate database transactions, unfortunately).
-            test_intermediary = models.UserIntermediary.objects.get(bronco_net=self.wmu_user_bronco_net)
-            test_wmu_user = models.WmuUser.objects.get(bronco_net=self.wmu_user_bronco_net)
-            self.assertEqual(test_intermediary.user, None)
-            self.assertEqual(test_intermediary.wmu_user.last_name, 'Test Last')
+            self.assertEqual(wmu_user.last_name, 'Updated last name - WmuUser')
+            self.assertEqual(wmu_user.last_name, user_intermediary.last_name)
 
-            # Change name on User model. Should succeed since there's no associated WmuUser model.
-            test_wmu_user.last_name = 'Changed Last Name'
-            test_wmu_user.save()
-            test_intermediary = models.UserIntermediary.objects.get(bronco_net=self.wmu_user_bronco_net)
+            # Revert back to original values for next tests. While we're at it, verify correctness.
+            self.wmu_user.last_name = 'Test Last'
+            self.wmu_user.save()
+            wmu_user = models.WmuUser.objects.get(bronco_net=self.wmu_user_bronco_net)
+            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.wmu_user_bronco_net)
 
-            self.assertEqual(test_intermediary.user, None)
-            self.assertEqual(test_intermediary.wmu_user.last_name, 'Changed Last Name')
+            self.assertEqual(wmu_user.last_name, 'Test Last')
+            self.assertEqual(wmu_user.last_name, user_intermediary.last_name)
 
-        with self.subTest('Test last_name change when associated with both User and WmuUser. Save on User model.'):
-            # Check if started with expected values (subtests don't run in separate database transactions, unfortunately).
-            test_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
-            test_user = get_user_model().objects.get(username=self.dual_bronco_net_1)
-            self.assertEqual(test_intermediary.user.last_name, 'Test Last')
-            self.assertEqual(test_intermediary.wmu_user.last_name, 'Test Last')
+        with self.subTest('Associated with both User and WmuUser models. Save on User model.'):
+            # Verify original values.
+            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
+            self.assertEqual(self.dual_wmu_user_1.last_name, 'Test Last')
+            self.assertEqual(self.dual_wmu_user_1.last_name, user_intermediary.last_name)
+            self.assertEqual(self.dual_wmu_user_1.last_name, self.dual_user_1.last_name)
 
-            # Change name on User model. Should fail/default to WmuUser value (WmuUser model name fields get priority).
-            test_user.last_name = 'Changed Last Name'
-            test_user.save()
-            test_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
+            # Test updating values.
+            # This should fail and keep the same value, because WmuUser gets precedence.
+            self.dual_user_1.last_name = 'Updated last name - dual, User'
+            self.dual_user_1.save()
+            user = models.User.objects.get(username=self.dual_bronco_net_1)
+            wmu_user = models.WmuUser.objects.get(bronco_net=self.dual_bronco_net_1)
+            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
 
-            self.assertEqual(test_intermediary.user.last_name, 'Test Last')
-            self.assertEqual(test_intermediary.wmu_user.last_name, 'Test Last')
-            self.assertEqual(test_intermediary.user.last_name, test_intermediary.wmu_user.last_name)
+            self.assertEqual(user.last_name, 'Test Last')
+            self.assertEqual(user.last_name, user_intermediary.last_name)
+            self.assertEqual(user.last_name, wmu_user.last_name)
 
-        with self.subTest('Test last_name change when associated with both User and WmuUser. Save on WmuUser model.'):
-            # Check if started with expected values (subtests don't run in separate database transactions, unfortunately).
-            test_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
-            test_wmu_user = models.WmuUser.objects.get(bronco_net=self.dual_bronco_net_1)
-            self.assertEqual(test_intermediary.user.last_name, 'Test Last')
-            self.assertEqual(test_intermediary.wmu_user.last_name, 'Test Last')
+        with self.subTest('Associated with both User and WmuUser models. Save on WmuUser model.'):
+            # Verify original values.
+            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_2)
+            self.assertEqual(self.dual_wmu_user_2.last_name, 'Test Last')
+            self.assertEqual(self.dual_wmu_user_2.last_name, user_intermediary.last_name)
+            self.assertEqual(self.dual_wmu_user_2.last_name, self.dual_user_2.last_name)
 
-            # Change name on WmuUser model. Should succeed (WmuUser model name fields get priority).
-            test_wmu_user.last_name = 'Changed Last Name'
-            test_wmu_user.save()
-            test_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
+            # Test updating values.
+            self.dual_wmu_user_2.last_name = 'Updated last name - dual, WmuUser first'
+            self.dual_wmu_user_2.save()
+            user = models.User.objects.get(username=self.dual_bronco_net_2)
+            wmu_user = models.WmuUser.objects.get(bronco_net=self.dual_bronco_net_2)
+            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_2)
 
-            self.assertEqual(test_intermediary.user.last_name, 'Changed Last Name')
-            self.assertEqual(test_intermediary.wmu_user.last_name, 'Changed Last Name')
-            self.assertEqual(test_intermediary.user.last_name, test_intermediary.wmu_user.last_name)
+            self.assertEqual(wmu_user.last_name, 'Updated last name - dual, WmuUser first')
+            self.assertEqual(wmu_user.last_name, user_intermediary.last_name)
+            self.assertEqual(wmu_user.last_name, user.last_name)
 
-            # Reset for other subtests (subtests don't run in separate database transactions, unfortunately).
-            self.dual_wmu_user_1.last_name = 'Test Last'
-            self.dual_wmu_user_1.save()
+            # Revert back to original values for next tests. While we're at it, verify correctness.
+            self.dual_wmu_user_2.last_name = 'Test Last'
+            self.dual_wmu_user_2.save()
+            user = models.User.objects.get(username=self.dual_bronco_net_2)
+            wmu_user = models.WmuUser.objects.get(bronco_net=self.dual_bronco_net_2)
+            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_2)
+
+            self.assertEqual(wmu_user.last_name, 'Test Last')
+            self.assertEqual(wmu_user.last_name, user_intermediary.last_name)
+            self.assertEqual(wmu_user.last_name, user.last_name)
 
     def test_shared_email_field(self):
         """
@@ -338,55 +366,134 @@ class UserIntermediaryModelTests(IntegrationTestCase):
         However, WmuUser model's version is a method that cannot be changed. It should always be correct, and override
         the User model when variations exist.
         """
-        with self.subTest('Test email value when associated with both User and WmuUser. User model created first.'):
-            test_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
+        with self.subTest('Associated with User model only.'):
+            # Change name on User model. Should succeed since there's no associated WmuUser model.
+            self.user.email = 'ChangedEmail@wmich.edu'
+            self.user.save()
+            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.user_bronco_net)
+
+            self.assertEqual(user_intermediary.user.email, 'ChangedEmail@wmich.edu')
+            self.assertEqual(user_intermediary.wmu_user, None)
+
+        with self.subTest('Associated with both User and WmuUser models. Save on User model.'):
+            expected_email = '{0}@wmich.edu'.format(self.dual_bronco_net_1)
+            self.assertEqual(self.dual_user_1.email, expected_email)
+            self.assertEqual(self.dual_wmu_user_1.shorthand_email(), expected_email)
+
+            # Change name on User model.
+            # This should fail and keep the same value, because WmuUser gets precedence.
+            self.dual_user_1.email = 'ChangedEmail@wmich.edu'
+            self.dual_user_1.save()
+            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
+
+            self.assertEqual(user_intermediary.user.email, expected_email)
+            self.assertEqual(user_intermediary.wmu_user.shorthand_email(), expected_email)
+            self.assertEqual(user_intermediary.user.email, user_intermediary.wmu_user.shorthand_email())
+
+        with self.subTest('Associated with both User and WmuUser models. User model created first.'):
+            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
             expected_email = '{0}@wmich.edu'.format(self.dual_bronco_net_1)
 
             # Models were not created with the same values, but should be identical now.
-            self.assertEqual(test_intermediary.user.email, expected_email)
-            self.assertEqual(test_intermediary.wmu_user.shorthand_email(), expected_email)
-            self.assertEqual(test_intermediary.user.email, test_intermediary.wmu_user.shorthand_email())
+            self.assertEqual(user_intermediary.user.email, expected_email)
+            self.assertEqual(user_intermediary.wmu_user.shorthand_email(), expected_email)
+            self.assertEqual(user_intermediary.user.email, user_intermediary.wmu_user.shorthand_email())
 
-        with self.subTest('Test email value when associated with both User and WmuUser. WmuUser model created first.'):
-            test_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_2)
+        with self.subTest('Associated with both User and WmuUser models. WmuUser model created first.'):
+            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_2)
             expected_email = '{0}@wmich.edu'.format(self.dual_bronco_net_2)
 
             # Models were not created with the same values, but should be identical now.
-            self.assertEqual(test_intermediary.user.email, expected_email)
-            self.assertEqual(test_intermediary.wmu_user.shorthand_email(), expected_email)
-            self.assertEqual(test_intermediary.user.email, test_intermediary.wmu_user.shorthand_email())
+            self.assertEqual(user_intermediary.user.email, expected_email)
+            self.assertEqual(user_intermediary.wmu_user.shorthand_email(), expected_email)
+            self.assertEqual(user_intermediary.user.email, user_intermediary.wmu_user.shorthand_email())
 
-        with self.subTest('Test email change when associated with User only.'):
-            # Check if started with expected values (subtests don't run in separate database transactions, unfortunately).
-            test_intermediary = models.UserIntermediary.objects.get(bronco_net=self.user_bronco_net)
-            test_user = get_user_model().objects.get(username=self.user_bronco_net)
-            self.assertEqual(test_intermediary.user.email, '{0}@wmich.edu'.format(self.user_bronco_net))
-            self.assertEqual(test_intermediary.wmu_user, None)
+    def test_shared_is_active_field(self):
+        """
+        Note that User, WmuUser, and UserIntermediary models essentially share an is_active field.
+        Most users will have both a User and WmuUser account active at the same time.
+        If either model is_active is true, then UserIntermediary is_active should be true.
+        If User and WmuUser models are missing or inactive, then UserIntermediary is_active should be false.
+        """
+        with self.subTest('Associated with (login) User model only.'):
+            # Verify when only (login) User exists.
+            self.user.is_active = False
+            self.user.save()
+            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.user_bronco_net)
+            self.assertFalse(self.user.is_active)
+            self.assertFalse(user_intermediary.is_active)
 
-            # Change name on User model. Should succeed since there's no associated WmuUser model.
-            test_user.email = 'ChangedEmail@wmich.edu'
-            test_user.save()
-            test_intermediary = models.UserIntermediary.objects.get(bronco_net=self.user_bronco_net)
+            # Revert back to original values for next tests. While we're at it, verify correctness.
+            self.user.is_active = True
+            self.user.save()
+            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.user_bronco_net)
+            self.assertTrue(self.user.is_active)
+            self.assertTrue(user_intermediary.is_active)
 
-            self.assertEqual(test_intermediary.user.email, 'ChangedEmail@wmich.edu')
-            self.assertEqual(test_intermediary.wmu_user, None)
+        with self.subTest('Associated with WmuUser model only.'):
+            # Verify for when only WmuUser exists.
+            self.wmu_user.is_active = False
+            self.wmu_user.save()
+            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.wmu_user_bronco_net)
+            self.assertFalse(self.wmu_user.is_active)
+            self.assertFalse(user_intermediary.is_active)
 
-        with self.subTest('Test email change when associated with both User and WmuUser. Save on User model.'):
-            # Check if started with expected values (subtests don't run in separate database transactions, unfortunately).
-            test_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
-            test_user = get_user_model().objects.get(username=self.dual_bronco_net_1)
-            expected_email = '{0}@wmich.edu'.format(self.dual_bronco_net_1)
-            self.assertEqual(test_intermediary.user.email, expected_email)
-            self.assertEqual(test_intermediary.wmu_user.shorthand_email(), expected_email)
+            # Revert back to original values for next tests. While we're at it, verify correctness.
+            self.wmu_user.is_active = True
+            self.wmu_user.save()
+            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.wmu_user_bronco_net)
+            self.assertTrue(self.wmu_user.is_active)
+            self.assertTrue(user_intermediary.is_active)
 
-            # Change name on User model. Should fail/default to WmuUser value (WmuUser model name fields get priority).
-            test_user.email = 'ChangedEmail@wmich.edu'
-            test_user.save()
-            test_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
+        with self.subTest('Associated with both User and WmuUser models. Save on User model.'):
+            # Verify for when both (login) User and WmuUser exists. With User updated first.
+            self.dual_user_1.is_active = False
+            self.dual_user_1.save()
+            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
+            self.assertFalse(self.dual_user_1.is_active)
+            self.assertTrue(user_intermediary.is_active)
+            self.dual_wmu_user_1.is_active = False
+            self.dual_wmu_user_1.save()
+            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
+            self.assertFalse(self.dual_wmu_user_1.is_active)
+            self.assertFalse(user_intermediary.is_active)
 
-            self.assertEqual(test_intermediary.user.email, expected_email)
-            self.assertEqual(test_intermediary.wmu_user.shorthand_email(), expected_email)
-            self.assertEqual(test_intermediary.user.email, test_intermediary.wmu_user.shorthand_email())
+            # Revert back to original values for next tests. While we're at it, verify correctness.
+            self.dual_user_1.is_active = True
+            self.dual_user_1.save()
+            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
+            self.assertTrue(self.dual_user_1.is_active)
+            self.assertTrue(user_intermediary.is_active)
+            self.dual_wmu_user_1.is_active = True
+            self.dual_wmu_user_1.save()
+            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
+            self.assertTrue(self.dual_wmu_user_1.is_active)
+            self.assertTrue(user_intermediary.is_active)
+
+        with self.subTest('Associated with both User and WmuUser models. Save on WmuUser model.'):
+            # Verify for when both (login) User and WmuUser exists. With WmuUser updated first.
+            self.dual_wmu_user_2.is_active = False
+            self.dual_wmu_user_2.save()
+            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_2)
+            self.assertFalse(self.dual_wmu_user_2.is_active)
+            self.assertTrue(user_intermediary.is_active)
+            self.dual_user_2.is_active = False
+            self.dual_user_2.save()
+            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_2)
+            self.assertFalse(self.dual_user_2.is_active)
+            self.assertFalse(user_intermediary.is_active)
+
+            # Revert back to original values for next tests. While we're at it, verify correctness.
+            self.dual_wmu_user_2.is_active = True
+            self.dual_wmu_user_2.save()
+            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_2)
+            self.assertTrue(self.dual_wmu_user_2.is_active)
+            self.assertTrue(user_intermediary.is_active)
+            self.dual_user_2.is_active = True
+            self.dual_user_2.save()
+            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_2)
+            self.assertTrue(self.dual_user_2.is_active)
+            self.assertTrue(user_intermediary.is_active)
 
     def test_string_representation_with_user(self):
         self.assertEqual(str(self.test_intermediary_with_user), str(self.test_intermediary_with_user.bronco_net))
