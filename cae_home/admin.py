@@ -333,6 +333,9 @@ class UserIntermediaryAdmin(admin.ModelAdmin):
     if settings.DEBUG:
         list_display = ('id',) + list_display
 
+    # Default field ordering in admin list view.
+    ordering = ('-is_active', 'bronco_net')
+
     # Fields to filter by in admin list view.
     list_filter = (UserIntermediaryToUserListFilter, UserIntermediaryToWmuUserListFilter)
 
@@ -340,7 +343,7 @@ class UserIntermediaryAdmin(admin.ModelAdmin):
     search_fields = ('bronco_net', 'wmu_user__winno', 'first_name', 'last_name')
 
     # Read only fields for admin detail view.
-    readonly_fields = ('id', 'date_created', 'date_modified')
+    readonly_fields = ('id', 'date_created', 'date_modified', 'is_active')
 
     # Fieldset organization for admin detail view.
     fieldsets = (
@@ -378,6 +381,9 @@ class WmuUserAdmin(admin.ModelAdmin):
     list_display = ('bronco_net', 'winno', 'first_name', 'last_name', 'get_majors', 'get_user_groups')
     if settings.DEBUG:
         list_display = ('id',) + list_display
+
+    # Default field ordering in admin list view.
+    ordering = ('-is_active', 'bronco_net')
 
     # Fields to filter by in admin list view.
     list_filter = ('is_active', WmuUserToMajorListFilter)
@@ -428,6 +434,9 @@ class ProfileAdmin(admin.ModelAdmin):
     list_display = ('get_bronco_net', 'get_winno', 'get_first_name', 'get_last_name', 'phone_number', 'site_theme')
     if settings.DEBUG:
         list_display = ('id',) + list_display
+
+    # Default field ordering in admin list view.
+    ordering = ('-userintermediary__is_active', 'userintermediary__bronco_net')
 
     # Fields to filter by in admin list view.
     list_filter = (ProfileToUserListFilter, ProfileToWmuUserListFilter)
@@ -502,6 +511,9 @@ class AddressAdmin(admin.ModelAdmin):
     if settings.DEBUG:
         list_display = ('id',) + list_display
 
+    # Default field ordering in admin list view.
+    ordering = ('state', 'city', 'street', 'optional_street')
+
     # Fields to filter by in admin list view.
     list_filter = ('city', 'state')
 
@@ -528,6 +540,9 @@ class SiteThemeAdmin(admin.ModelAdmin):
     list_display = ('display_name', 'file_name', 'gold_logo')
     if settings.DEBUG:
         list_display = ('id',) + list_display
+
+    # Default field ordering in admin list view.
+    ordering = ('display_name',)
 
     # Fields to filter by in admin list view.
     list_filter = ()
@@ -563,6 +578,9 @@ class DepartmentAdmin(admin.ModelAdmin):
     if settings.DEBUG:
         list_display = ('id',) + list_display
 
+    # Default field ordering in admin list view.
+    ordering = ('name',)
+
     # Fields to filter by in admin list view.
     list_filter = ()
 
@@ -592,6 +610,9 @@ class RoomTypeAdmin(admin.ModelAdmin):
     list_display = ('name',)
     if settings.DEBUG:
         list_display = ('id',) + list_display
+
+    # Default field ordering in admin list view.
+    ordering = ('name',)
 
     # Fields to filter by in admin list view.
     list_filter = ()
@@ -628,7 +649,7 @@ class RoomAdmin(admin.ModelAdmin):
         list_display = ('id',) + list_display
 
     # Fields to filter by in admin list view.
-    list_filter = ('room_type', 'department')
+    list_filter = ('name',)
 
     # Fields to search in admin list view.
     search_fields = ('name',)
@@ -670,6 +691,9 @@ class MajorAdmin(admin.ModelAdmin):
     if settings.DEBUG:
         list_display = ('id',) + list_display
 
+    # Default field ordering in admin list view.
+    ordering = ('department', 'program_code')
+
     # Fields to filter by in admin list view.
     list_filter = ('is_active', 'degree_level', MajorToDepartmentListFilter)
 
@@ -702,6 +726,9 @@ class SemesterDateAdmin(admin.ModelAdmin):
     list_display = ('name', 'start_date', 'end_date')
     if settings.DEBUG:
         list_display = ('id',) + list_display
+
+    # Default field ordering in admin list view.
+    ordering = ('-start_date', '-end_date')
 
     # Fields to filter by in admin list view.
     list_filter = (SemesterDateToYearListFilter,)
