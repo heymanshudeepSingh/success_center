@@ -199,9 +199,9 @@ def create_wmu_users(style, model_count):
 
             # Determine if active. 70% change of being true.
             if randint(0, 9) < 7:
-                active = True
+                is_active = True
             else:
-                active = False
+                is_active = False
 
             # Attempt to create model seed.
             try:
@@ -212,7 +212,7 @@ def create_wmu_users(style, model_count):
                         first_name=faker_factory.first_name(),
                         last_name=faker_factory.last_name(),
                         user_type=user_type,
-                        active=active,
+                        is_active=is_active,
                     )
 
                     # Add between one and three majors to student.
@@ -222,17 +222,17 @@ def create_wmu_users(style, model_count):
                         index = randint(0, len(majors) - 1)
                         major = majors[index]
 
-                        if active:
+                        if is_active:
                             models.WmuUserMajorRelationship.objects.create(
                                 wmu_user=wmu_user,
                                 major=major,
-                                active=active,
+                                is_active=is_active,
                             )
                         else:
                             models.WmuUserMajorRelationship.objects.create(
                                 wmu_user=wmu_user,
                                 major=major,
-                                active=active,
+                                is_active=is_active,
                                 date_stopped=timezone.now(),
                             )
                     user_profile = models.Profile.get_profile(bronco_net)

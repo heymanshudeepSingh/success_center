@@ -8,7 +8,7 @@
         "program_code": "UNK",
         "name": "Unknown",
         "degree_level": 0,
-        "active": true,
+        "is_active": true,
         "slug": "unk",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -23,7 +23,7 @@
         "program_code": "P-PDP-UNDP",
         "name": "Undecided",
         "degree_level": 0,
-        "active": true,
+        "is_active": true,
         "slug": "undp",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -38,7 +38,7 @@
         "program_code": "UND",
         "name": "Undecided - General",
         "degree_level": 0,
-        "active": true,
+        "is_active": true,
         "slug": "und",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -53,7 +53,7 @@
         "program_code": "PREJ",
         "name": "Pre-Engineering Undecided",
         "degree_level": 1,
-        "active": true,
+        "is_active": true,
         "slug": "prej",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -68,7 +68,7 @@
         "program_code": "AERP",
         "name": "Pre-Aeronautical Engineering",
         "degree_level": 1,
-        "active": true,
+        "is_active": true,
         "slug": "aerp",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -83,7 +83,7 @@
         "program_code": "A-BSE-AERJ",
         "name": "Aeronautical Engineering",
         "degree_level": 2,
-        "active": true,
+        "is_active": true,
         "slug": "aerj",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -98,7 +98,7 @@
         "program_code": "ASPP",
         "name": "Pre-Aerospace Engineering",
         "degree_level": 1,
-        "active": true,
+        "is_active": true,
         "slug": "aspp",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -113,7 +113,7 @@
         "program_code": "ABSEASP-ASPJ",
         "name": "Aerospace Engineering",
         "degree_level": 2,
-        "active": true,
+        "is_active": true,
         "slug": "aspj",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -128,7 +128,7 @@
         "program_code": "A-MS-ASPM",
         "name": "Aerospace Engineering",
         "degree_level": 3,
-        "active": true,
+        "is_active": true,
         "slug": "aspm",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -143,7 +143,7 @@
         "program_code": "A-MS-ASPQ",
         "name": "Aerospace Engineering - Accelerated",
         "degree_level": 3,
-        "active": true,
+        "is_active": true,
         "slug": "aspq",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -158,7 +158,7 @@
         "program_code": "CEGP",
         "name": "Pre-Computer Engineering",
         "degree_level": 1,
-        "active": true,
+        "is_active": true,
         "slug": "cegp",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -173,7 +173,7 @@
         "program_code": "A-BSE-CEGJ",
         "name": "Computer Engineering",
         "degree_level": 2,
-        "active": true,
+        "is_active": true,
         "slug": "cegj",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -188,7 +188,7 @@
         "program_code": "A-MSE-CENM",
         "name": "Computer Engineering",
         "degree_level": 3,
-        "active": true,
+        "is_active": true,
         "slug": "cenm",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -203,7 +203,7 @@
         "program_code": "AMSECEG-CENQ",
         "name": "Computer Engineering - Accelerated",
         "degree_level": 3,
-        "active": true,
+        "is_active": true,
         "slug": "cenq",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -218,7 +218,7 @@
         "program_code": "CENP",
         "name": "Pre-Construction Engineering",
         "degree_level": 1,
-        "active": true,
+        "is_active": true,
         "slug": "cenp",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -233,7 +233,7 @@
         "program_code": "A-BSE-CENJ",
         "name": "Construction Engineering",
         "degree_level": 2,
-        "active": true,
+        "is_active": true,
         "slug": "cenj",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -248,7 +248,7 @@
         "program_code": "CHGP",
         "name": "Pre-Chemical Engineering",
         "degree_level": 1,
-        "active": true,
+        "is_active": true,
         "slug": "chgp",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -263,7 +263,7 @@
         "program_code": "A-BSE-CHGJ",
         "name": "Chemical Engineering",
         "degree_level": 2,
-        "active": true,
+        "is_active": true,
         "slug": "chgj",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -278,7 +278,7 @@
         "program_code": "AMSECHG-CHGM",
         "name": "Chemical Engineering",
         "degree_level": 3,
-        "active": true,
+        "is_active": true,
         "slug": "chgm",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -293,7 +293,7 @@
         "program_code": "AMSECHG-CHGQ",
         "name": "Chemical Engineering - Accelerated",
         "degree_level": 3,
-        "active": true,
+        "is_active": true,
         "slug": "chgq",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -308,7 +308,7 @@
         "program_code": "CIVP",
         "name": "Pre-Civil Engineering",
         "degree_level": 1,
-        "active": true,
+        "is_active": true,
         "slug": "civp",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -323,7 +323,7 @@
         "program_code": "A-BSE-CIVJ",
         "name": "Civil Engineering",
         "degree_level": 2,
-        "active": true,
+        "is_active": true,
         "slug": "civj",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -338,7 +338,7 @@
         "program_code": "A-MSE-CIVM",
         "name": "Civil Engineering",
         "degree_level": 3,
-        "active": true,
+        "is_active": true,
         "slug": "civm",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -353,7 +353,7 @@
         "program_code": "AMSECIV-CIVQ",
         "name": "Civil Engineering - Accelerated",
         "degree_level": 3,
-        "active": true,
+        "is_active": true,
         "slug": "civq",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -368,7 +368,7 @@
         "program_code": "A-PHD-CIVD",
         "name": "Civil Engineering",
         "degree_level": 4,
-        "active": true,
+        "is_active": true,
         "slug": "civd",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -383,7 +383,7 @@
         "program_code": "A-BS-CSGJ",
         "name": "Computer Science - General",
         "degree_level": 2,
-        "active": true,
+        "is_active": true,
         "slug": "csgj",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -398,7 +398,7 @@
         "program_code": "A-BS-CSIJ",
         "name": "Computer Science",
         "degree_level": 2,
-        "active": true,
+        "is_active": true,
         "slug": "csij",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -413,7 +413,7 @@
         "program_code": "A-MS-CSGM",
         "name": "Computer Science",
         "degree_level": 3,
-        "active": true,
+        "is_active": true,
         "slug": "csgm",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -428,7 +428,7 @@
         "program_code": "A-MS-CSGQ",
         "name": "Computer Science - Accelerated",
         "degree_level": 3,
-        "active": true,
+        "is_active": true,
         "slug": "csgq",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -443,7 +443,7 @@
         "program_code": "A-PHD-CSGD",
         "name": "Computer Science",
         "degree_level": 4,
-        "active": true,
+        "is_active": true,
         "slug": "csgd",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -458,7 +458,7 @@
         "program_code": "A-BS-CSTJ",
         "name": "Computer Science - Theory & Analysis",
         "degree_level": 2,
-        "active": true,
+        "is_active": true,
         "slug": "cstj",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -473,7 +473,7 @@
         "program_code": "EDTP",
         "name": "Pre-Engineering Design Technology",
         "degree_level": 1,
-        "active": true,
+        "is_active": true,
         "slug": "edtp",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -488,7 +488,7 @@
         "program_code": "A-BS-EDTJ",
         "name": "Engineering Design Technology",
         "degree_level": 2,
-        "active": true,
+        "is_active": true,
         "slug": "edtj",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -503,7 +503,7 @@
         "program_code": "EENP",
         "name": "Pre-Electrical Engineering",
         "degree_level": 1,
-        "active": true,
+        "is_active": true,
         "slug": "eenp",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -518,7 +518,7 @@
         "program_code": "A-BSE-EENJ",
         "name": "Electrical Engineering",
         "degree_level": 2,
-        "active": true,
+        "is_active": true,
         "slug": "eenj",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -533,7 +533,7 @@
         "program_code": "A-MSE-EENM",
         "name": "Electrical Engineering",
         "degree_level": 3,
-        "active": true,
+        "is_active": true,
         "slug": "eenm",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -548,7 +548,7 @@
         "program_code": "AMSEELE-EENQ",
         "name": "Electrical Engineering - Accelerated",
         "degree_level": 3,
-        "active": true,
+        "is_active": true,
         "slug": "eenq",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -563,7 +563,7 @@
         "program_code": "A-PHD-ELCD",
         "name": "Electrical and Computer Engineering",
         "degree_level": 4,
-        "active": true,
+        "is_active": true,
         "slug": "elcd",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -578,7 +578,7 @@
         "program_code": "A-MS-ENMM",
         "name": "Engineering Management",
         "degree_level": 3,
-        "active": true,
+        "is_active": true,
         "slug": "ennm",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -593,7 +593,7 @@
         "program_code": "A-BS-GPRJ",
         "name": "Graphic & Printing Science",
         "degree_level": 2,
-        "active": true,
+        "is_active": true,
         "slug": "gprj",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -608,7 +608,7 @@
         "program_code": "A-BS-IDNJ",
         "name": "Industrial Design",
         "degree_level": 2,
-        "active": true,
+        "is_active": true,
         "slug": "idnj",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -623,7 +623,7 @@
         "program_code": "IEEP",
         "name": "Pre-Industrial and Entrepreneurial Engineering",
         "degree_level": 1,
-        "active": true,
+        "is_active": true,
         "slug": "ieep",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -638,7 +638,7 @@
         "program_code": "ABSEIND-IEEJ",
         "name": "Industrial and Entrepreneurial Engineering",
         "degree_level": 2,
-        "active": true,
+        "is_active": true,
         "slug": "ieej",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -653,7 +653,7 @@
         "program_code": "IENP",
         "name": "Pre-Industrial Engineering",
         "degree_level": 1,
-        "active": true,
+        "is_active": true,
         "slug": "ienp",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -668,7 +668,7 @@
         "program_code": "A-BSE-IENJ",
         "name": "Industrial Engineering",
         "degree_level": 2,
-        "active": true,
+        "is_active": true,
         "slug": "ienj",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -683,7 +683,7 @@
         "program_code": "A-MSE-IENM",
         "name": "Industrial Engineering",
         "degree_level": 3,
-        "active": true,
+        "is_active": true,
         "slug": "ienm",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -698,7 +698,7 @@
         "program_code": "AMSEIND-IENQ",
         "name": "Industrial Engineering - Accelerated",
         "degree_level": 3,
-        "active": true,
+        "is_active": true,
         "slug": "ienq",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -713,7 +713,7 @@
         "program_code": "A-PHD-IEND",
         "name": "Industrial Engineering",
         "degree_level": 4,
-        "active": true,
+        "is_active": true,
         "slug": "iend",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -728,7 +728,7 @@
         "program_code": "A-BS-IMGJ",
         "name": "Imaging/Graphic and Printing Science",
         "degree_level": 2,
-        "active": true,
+        "is_active": true,
         "slug": "imgj",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -743,7 +743,7 @@
         "program_code": "MEGP",
         "name": "Pre-Mechanical Engineering",
         "degree_level": 1,
-        "active": true,
+        "is_active": true,
         "slug": "megp",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -758,7 +758,7 @@
         "program_code": "A-BSE-MEGJ",
         "name": "Mechanical Engineering",
         "degree_level": 2,
-        "active": true,
+        "is_active": true,
         "slug": "megj",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -773,7 +773,7 @@
         "program_code": "A-MSE-MEGM",
         "name": "Mechanical Engineering",
         "degree_level": 3,
-        "active": true,
+        "is_active": true,
         "slug": "megm",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -788,7 +788,7 @@
         "program_code": "AMSEMCH-MEGQ",
         "name": "Mechanical Engineering - Accelerated",
         "degree_level": 3,
-        "active": true,
+        "is_active": true,
         "slug": "megq",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -803,7 +803,7 @@
         "program_code": "A-PHD-MEGD",
         "name": "Mechanical Engineering",
         "degree_level": 4,
-        "active": true,
+        "is_active": true,
         "slug": "megd",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -818,7 +818,7 @@
         "program_code": "MFNP",
         "name": "Pre-Manufacturing Engineering",
         "degree_level": 1,
-        "active": true,
+        "is_active": true,
         "slug": "mfnp",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -833,7 +833,7 @@
         "program_code": "A-BSE-MFNJ",
         "name": "Manufacturing Engineering",
         "degree_level": 2,
-        "active": true,
+        "is_active": true,
         "slug": "mfnj",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -848,7 +848,7 @@
         "program_code": "A-MS-MNEM",
         "name": "Manufacturing Engineering",
         "degree_level": 3,
-        "active": true,
+        "is_active": true,
         "slug": "mnem",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -863,7 +863,7 @@
         "program_code": "MFTP",
         "name": "Pre-Manufacturing Engineering Technology",
         "degree_level": 1,
-        "active": true,
+        "is_active": true,
         "slug": "mftp",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -878,7 +878,7 @@
         "program_code": "A-BS-MFTJ",
         "name": "Manufacturing Engineering Technology",
         "degree_level": 2,
-        "active": true,
+        "is_active": true,
         "slug": "mftj",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -893,7 +893,7 @@
         "program_code": "MFSM",
         "name": "Manufacturing Science",
         "degree_level": 3,
-        "active": true,
+        "is_active": true,
         "slug": "mfsm",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -908,7 +908,7 @@
         "program_code": "PENP",
         "name": "Pre-Paper Engineering",
         "degree_level": 1,
-        "active": true,
+        "is_active": true,
         "slug": "penp",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -923,7 +923,7 @@
         "program_code": "A-BSE-PENJ",
         "name": "Paper Engineering",
         "degree_level": 2,
-        "active": true,
+        "is_active": true,
         "slug": "penj",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -938,7 +938,7 @@
         "program_code": "PPRP",
         "name": "Pre-Paper Engineering",
         "degree_level": 1,
-        "active": true,
+        "is_active": true,
         "slug": "pprp",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -953,7 +953,7 @@
         "program_code": "ABSEPAP-PPRJ",
         "name": "Paper Engineering",
         "degree_level": 2,
-        "active": true,
+        "is_active": true,
         "slug": "pprj",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -968,7 +968,7 @@
         "program_code": "A-MS-PPSM",
         "name": "Paper & Printing Science",
         "degree_level": 3,
-        "active": true,
+        "is_active": true,
         "slug": "ppsm",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -983,7 +983,7 @@
         "program_code": "A-MS-PPSQ",
         "name": "Paper & Printing Science",
         "degree_level": 3,
-        "active": true,
+        "is_active": true,
         "slug": "ppsq",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -998,7 +998,7 @@
         "program_code": "A-PHD-PPSD",
         "name": "Paper & Printing Science",
         "degree_level": 4,
-        "active": true,
+        "is_active": true,
         "slug": "ppsd",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -1013,7 +1013,7 @@
         "program_code": "A-BS-PSCJ",
         "name": "Paper Science",
         "degree_level": 2,
-        "active": true,
+        "is_active": true,
         "slug": "pscj",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -1028,7 +1028,7 @@
         "program_code": "A-MS-PSEM",
         "name": "Paper Science",
         "degree_level": 3,
-        "active": true,
+        "is_active": true,
         "slug": "psem",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -1043,7 +1043,7 @@
         "program_code": "UEMP",
         "name": "Pre-Engineering Management Technology",
         "degree_level": 1,
-        "active": true,
+        "is_active": true,
         "slug": "uemp",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
@@ -1058,7 +1058,7 @@
         "program_code": "A-BS-UEMJ",
         "name": "Engineering Management Technology",
         "degree_level": 2,
-        "active": true,
+        "is_active": true,
         "slug": "uemj",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
