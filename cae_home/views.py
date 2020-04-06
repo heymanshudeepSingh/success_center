@@ -34,6 +34,11 @@ cae_employee_groups = [
     'CAE Attendant',
     'CAE Admin',
     'CAE Programmer',
+    'CAE Director Inactive',
+    'CAE Building Coordinator Inactive',
+    'CAE Attendant Inactive',
+    'CAE Admin Inactive',
+    'CAE Programmer Inactive',
 ]
 
 

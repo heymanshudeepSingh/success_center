@@ -137,22 +137,35 @@ class CaeAuthBackend(AbstractLDAPBackend):
             if 'CAE Director' not in user_groups:
                 login_user.groups.add(Group.object.get(name='CAE Director'))
                 logger.auth_info('{0}: Added user to CAE Director group.'.format(uid))
+            if 'CAE Director Inactive' not in user_groups:
+                login_user.groups.add(Group.object.get(name='CAE Director Inactive'))
+                logger.auth_info('{0}: Added user to CAE Director Inactive group.'.format(uid))
         if ldap_user_groups['attendant']:
             # Check if user is already in group.
             if 'CAE Attendant' not in user_groups:
                 login_user.groups.add(Group.objects.get(name='CAE Attendant'))
                 logger.auth_info('{0}: Added user to CAE Attendant group.'.format(uid))
+            if 'CAE Attendant Inactive' not in user_groups:
+                login_user.groups.add(Group.objects.get(name='CAE Attendant Inactive'))
+                logger.auth_info('{0}: Added user to CAE Attendant Inactive group.'.format(uid))
         if ldap_user_groups['admin']:
             # Check if user is already in group.
             if 'CAE Admin' not in user_groups:
                 login_user.groups.add(Group.objects.get(name='CAE Admin'))
                 logger.auth_info('{0}: Added user to CAE Admin group.'.format(uid))
+            if 'CAE Admin Inactive' not in user_groups:
+                login_user.groups.add(Group.objects.get(name='CAE Admin Inactive'))
+                logger.auth_info('{0}: Added user to CAE Admin Inactive group.'.format(uid))
         if ldap_user_groups['programmer']:
             # Check if user is already in group.
             if 'CAE Programmer' not in user_groups:
                 login_user.groups.add(Group.objects.get(name='CAE Programmer'))
                 login_user.is_staff = True
                 logger.auth_info('{0}: Added user to CAE Programmer group.'.format(uid))
+            if 'CAE Programmer Inactive' not in user_groups:
+                login_user.groups.add(Group.objects.get(name='CAE Programmer Inactive'))
+                login_user.is_staff = True
+                logger.auth_info('{0}: Added user to CAE Programmer Inactive group.'.format(uid))
 
         # Save model.
         login_user.save()
