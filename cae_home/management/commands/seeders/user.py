@@ -147,21 +147,13 @@ def create_permission_group_users(password=default_password, with_names=True):
 
 
     # Add permission groups to users.
-    cae_director.groups.add(Group.objects.get(name='CAE Director'))
+    cae_director.groups.add(Group.objects.get(name='CAE Director')),cae_director.groups.permissions.add(Group.objects.get(cae_director_inactive))
     cae_building_coordinator.groups.add(Group.objects.get(name='CAE Building Coordinator'))
     cae_admin_ga.groups.add(Group.objects.get(name='CAE Admin GA'), Group.objects.get(name='CAE Admin'))
     cae_programmer_ga.groups.add(Group.objects.get(name='CAE Programmer GA'), Group.objects.get(name='CAE Programmer'))
     cae_admin.groups.add(Group.objects.get(name='CAE Admin'))
     cae_programmer.groups.add(Group.objects.get(name='CAE Programmer'))
     cae_attendant.groups.add(Group.objects.get(name='CAE Attendant'))
-    # Inactive Users
-    cae_director_inactive.groups.add(Group.objects.get(name='CAE Director Inactive'))
-    cae_building_coordinator_inactive.groups.add(Group.objects.get(name='CAE Building Coordinator Inactive'))
-    cae_admin_ga_inactive.groups.add(Group.objects.get(name='CAE Admin GA'), Group.objects.get(name='CAE Admin Inactive'))
-    cae_programmer_ga_inactive.groups.add(Group.objects.get(name='CAE Programmer GA'), Group.objects.get(name='CAE Programmer Inactive'))
-    cae_admin_inactive.groups.add(Group.objects.get(name='CAE Admin Inactive'))
-    cae_programmer_inactive.groups.add(Group.objects.get(name='CAE Programmer Inactive'))
-    cae_attendant_inactive.groups.add(Group.objects.get(name='CAE Attendant Inactive'))
 
     # Create and add to array. Used in testing.
     user_array = []                                 # Index Num:
