@@ -20,7 +20,6 @@ from sys import stdout
 from cae_home import models
 from cae_home.management.commands.fixtures import user as user_fixtures
 
-
 default_password = settings.USER_SEED_PASSWORD
 
 
@@ -78,9 +77,9 @@ def create_users(style):
     """
     # Create extra superusers for developers.
     models.User.get_or_create_superuser('brodriguez8774', '', default_password)  # Brandon
-    models.User.get_or_create_superuser('jmeachum20', '', default_password) # Jesse
-    models.User.get_or_create_superuser('a', '', 'a') # Singh
-    models.User.get_or_create_superuser('david', '', default_password) #David Mikovits
+    models.User.get_or_create_superuser('jmeachum20', '', default_password)  # Jesse
+    models.User.get_or_create_superuser('a', '', 'a')  # Singh
+    models.User.get_or_create_superuser('david', '', default_password)  # David Mikovits
 
     create_permission_group_users(password=default_password)
 
@@ -104,7 +103,8 @@ def create_permission_group_users(password=default_password, with_names=True):
     cae_programmer = models.User.get_or_create_user('cae_programmer', '', password)
     cae_attendant = models.User.get_or_create_user('cae_attendant', '', password)
 
-    cae_building_coordinator_inactive = models.User.get_or_create_user('cae_building_coordinator_inactive', '', password)
+    cae_building_coordinator_inactive = models.User.get_or_create_user('cae_building_coordinator_inactive', '',
+                                                                       password)
     cae_admin_ga_inactive = models.User.get_or_create_user('cae_admin_ga_inactive', '', password)
     cae_programmer_ga_inactive = models.User.get_or_create_user('cae_programmer_ga_inactive', '', password)
     cae_admin_inactive = models.User.get_or_create_user('cae_admin_inactive', '', password)
@@ -115,18 +115,23 @@ def create_permission_group_users(password=default_password, with_names=True):
     if with_names:
         cae_admin.first_name = "Gumball"
         cae_admin.last_name = "Watterson"
+        cae_admin.is_active = True
         cae_admin.save()
         cae_admin_ga.first_name = "Homer"
         cae_admin_ga.last_name = "Simpson"
+        cae_admin.is_active = True
         cae_admin_ga.save()
         cae_attendant.first_name = "Darwin"
         cae_attendant.last_name = "Watterson"
+        cae_admin.is_active = True
         cae_attendant.save()
         cae_programmer.first_name = "Phillip"
         cae_programmer.last_name = "Fry"
+        cae_admin.is_active = True
         cae_programmer.save()
         cae_programmer_ga.first_name = "Chosen"
         cae_programmer_ga.last_name = "One"
+        cae_admin.is_active = True
         cae_programmer_ga.save()
 
     # Set inactive values.
@@ -145,9 +150,11 @@ def create_permission_group_users(password=default_password, with_names=True):
     cae_attendant_inactive.is_active = False
     cae_attendant_inactive.save()
 
-
+    # set active values
+    cae_admin.is_active=True
+    
     # Add permission groups to users.
-    cae_director.groups.add(Group.objects.get(name='CAE Director')),cae_director.groups.permissions.add(Group.objects.get(cae_director_inactive))
+    cae_director.groups.add(Group.objects.get(name='CAE Director'))
     cae_building_coordinator.groups.add(Group.objects.get(name='CAE Building Coordinator'))
     cae_admin_ga.groups.add(Group.objects.get(name='CAE Admin GA'), Group.objects.get(name='CAE Admin'))
     cae_programmer_ga.groups.add(Group.objects.get(name='CAE Programmer GA'), Group.objects.get(name='CAE Programmer'))
@@ -156,14 +163,14 @@ def create_permission_group_users(password=default_password, with_names=True):
     cae_attendant.groups.add(Group.objects.get(name='CAE Attendant'))
 
     # Create and add to array. Used in testing.
-    user_array = []                                 # Index Num:
-    user_array.append(cae_director)                 # 0
-    user_array.append(cae_building_coordinator)     # 1
-    user_array.append(cae_admin_ga)                 # 2
-    user_array.append(cae_programmer_ga)            # 3
-    user_array.append(cae_admin)                    # 4
-    user_array.append(cae_programmer)               # 5
-    user_array.append(cae_attendant)                # 6
+    user_array = []  # Index Num:
+    user_array.append(cae_director)  # 0
+    user_array.append(cae_building_coordinator)  # 1
+    user_array.append(cae_admin_ga)  # 2
+    user_array.append(cae_programmer_ga)  # 3
+    user_array.append(cae_admin)  # 4
+    user_array.append(cae_programmer)  # 5
+    user_array.append(cae_attendant)  # 6
     return user_array
 
 
