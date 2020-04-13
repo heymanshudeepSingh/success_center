@@ -152,7 +152,7 @@ def create_permission_group_users(password=default_password, with_names=True):
 
     # set active values
     cae_admin.is_active=True
-    
+
     # Add permission groups to users.
     cae_director.groups.add(Group.objects.get(name='CAE Director'))
     cae_building_coordinator.groups.add(Group.objects.get(name='CAE Building Coordinator'))
@@ -163,14 +163,14 @@ def create_permission_group_users(password=default_password, with_names=True):
     cae_attendant.groups.add(Group.objects.get(name='CAE Attendant'))
 
     # Create and add to array. Used in testing.
-    user_array = []  # Index Num:
-    user_array.append(cae_director)  # 0
-    user_array.append(cae_building_coordinator)  # 1
-    user_array.append(cae_admin_ga)  # 2
-    user_array.append(cae_programmer_ga)  # 3
-    user_array.append(cae_admin)  # 4
-    user_array.append(cae_programmer)  # 5
-    user_array.append(cae_attendant)  # 6
+    user_array = []                               # Index Num:
+    user_array.append(cae_director)               # 0
+    user_array.append(cae_building_coordinator)   # 1
+    user_array.append(cae_admin_ga)               # 2
+    user_array.append(cae_programmer_ga)          # 3
+    user_array.append(cae_admin)                  # 4
+    user_array.append(cae_programmer)             # 5
+    user_array.append(cae_attendant)              # 6
     return user_array
 
 
