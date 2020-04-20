@@ -3,13 +3,17 @@ Tests for Advising Authentication Backend.
 """
 
 # System Imports.
+import unittest
 
 # User Class Imports.
 from cae_home import models
 from cae_home.tests.utils import IntegrationTestCase
-from settings.ldap_backends.wmu_auth.adv_backend import AdvisingAuthBackend
+from settings.tests.utils import run_ldap_tests
 from settings.tests.utils import prog_or_student_test_account_is_populated
 from settings.tests.utils import prog_test_account_is_populated, student_test_account_is_populated
+if run_ldap_tests():
+    from settings.ldap_backends.wmu_auth.adv_backend import AdvisingAuthBackend
+
 
 
 class AdvisingAuthBackendTests(IntegrationTestCase):
@@ -18,34 +22,42 @@ class AdvisingAuthBackendTests(IntegrationTestCase):
     """
     @classmethod
     def setUpTestData(cls):
-        cls.adv_backend = AdvisingAuthBackend()
+        if run_ldap_tests():
+            cls.adv_backend = AdvisingAuthBackend()
 
+    @unittest.skipUnless(run_ldap_tests(), 'Missing criteria for LDAP. Skipping Ldap tests.')
     def test__create_new_user_from_ldap(self):
         with self.assertRaises(NotImplementedError):
             self.adv_backend.create_or_update_user_model()
 
     # region User Auth
 
+    @unittest.skipUnless(run_ldap_tests(), 'Missing criteria for LDAP. Skipping Ldap tests.')
     def test_authenticate(self):
         with self.assertRaises(NotImplementedError):
             self.adv_backend.authenticate()
 
+    @unittest.skipUnless(run_ldap_tests(), 'Missing criteria for LDAP. Skipping Ldap tests.')
     def test__parse_username(self):
         with self.assertRaises(NotImplementedError):
             self.adv_backend._parse_username()
 
+    @unittest.skipUnless(run_ldap_tests(), 'Missing criteria for LDAP. Skipping Ldap tests.')
     def test__validate_django_user(self):
         with self.assertRaises(NotImplementedError):
             self.adv_backend._validate_django_user()
 
+    @unittest.skipUnless(run_ldap_tests(), 'Missing criteria for LDAP. Skipping Ldap tests.')
     def test__validate_ldap_user(self):
         with self.assertRaises(NotImplementedError):
             self.adv_backend._validate_ldap_user()
 
+    @unittest.skipUnless(run_ldap_tests(), 'Missing criteria for LDAP. Skipping Ldap tests.')
     def test_user_can_authenticate(self):
         with self.assertRaises(NotImplementedError):
             self.adv_backend.user_can_authenticate()
 
+    @unittest.skipUnless(run_ldap_tests(), 'Missing criteria for LDAP. Skipping Ldap tests.')
     def test_get_user(self):
         with self.assertRaises(NotImplementedError):
             self.adv_backend.get_user()
@@ -54,40 +66,49 @@ class AdvisingAuthBackendTests(IntegrationTestCase):
 
     # region User Permissions
 
+    @unittest.skipUnless(run_ldap_tests(), 'Missing criteria for LDAP. Skipping Ldap tests.')
     def test__get_user_permissions(self):
         with self.assertRaises(NotImplementedError):
             self.adv_backend._get_user_permissions()
 
+    @unittest.skipUnless(run_ldap_tests(), 'Missing criteria for LDAP. Skipping Ldap tests.')
     def test__get_group_permissions(self):
         with self.assertRaises(NotImplementedError):
             self.adv_backend._get_group_permissions()
 
+    @unittest.skipUnless(run_ldap_tests(), 'Missing criteria for LDAP. Skipping Ldap tests.')
     def test__get_permissions(self):
         with self.assertRaises(NotImplementedError):
             self.adv_backend._get_permissions()
 
+    @unittest.skipUnless(run_ldap_tests(), 'Missing criteria for LDAP. Skipping Ldap tests.')
     def test_get_user_permissions(self):
         with self.assertRaises(NotImplementedError):
             self.adv_backend._get_user_permissions()
 
+    @unittest.skipUnless(run_ldap_tests(), 'Missing criteria for LDAP. Skipping Ldap tests.')
     def test_get_group_permissions(self):
         with self.assertRaises(NotImplementedError):
             self.adv_backend._get_group_permissions()
 
+    @unittest.skipUnless(run_ldap_tests(), 'Missing criteria for LDAP. Skipping Ldap tests.')
     def test_get_all_permissions(self):
         with self.assertRaises(NotImplementedError):
             self.adv_backend.get_all_permissions()
 
+    @unittest.skipUnless(run_ldap_tests(), 'Missing criteria for LDAP. Skipping Ldap tests.')
     def test_has_perm(self):
         with self.assertRaises(NotImplementedError):
             self.adv_backend.has_perm()
 
+    @unittest.skipUnless(run_ldap_tests(), 'Missing criteria for LDAP. Skipping Ldap tests.')
     def test_has_module_perms(self):
         with self.assertRaises(NotImplementedError):
             self.adv_backend.has_module_perms()
 
     # endregion User Permissions
 
+    @unittest.skipUnless(run_ldap_tests(), 'Missing criteria for LDAP. Skipping Ldap tests.')
     def test__get_major_department(self):
         na_department = models.Department.objects.create(name='NA/Unknown', slug='na-unknown')
 
@@ -124,6 +145,7 @@ class AdvisingAuthBackendTests(IntegrationTestCase):
             }
             self.assertEqual(self.adv_backend._get_major_department(ldap_major), na_department)
 
+    @unittest.skipUnless(run_ldap_tests(), 'Missing criteria for LDAP. Skipping Ldap tests.')
     def test__get_major_display_name(self):
         with self.subTest('"displayName" field is present.'):
             # Create mock ldap object.
@@ -146,6 +168,7 @@ class AdvisingAuthBackendTests(IntegrationTestCase):
             }
             self.assertEqual(self.adv_backend._get_major_display_name(ldap_major), 'Test Code')
 
+    @unittest.skipUnless(run_ldap_tests(), 'Missing criteria for LDAP. Skipping Ldap tests.')
     def test__get_major_program_code(self):
         with self.subTest('Single program_code in ldap object.'):
             # Create mock ldap object.
@@ -168,6 +191,7 @@ class AdvisingAuthBackendTests(IntegrationTestCase):
             }
             self.assertEqual(self.adv_backend._get_major_program_code(ldap_major), 'ABSEIND-IENJ')
 
+    @unittest.skipUnless(run_ldap_tests(), 'Missing criteria for LDAP. Skipping Ldap tests.')
     def test__get_degree_level_from_program_code(self):
         # Test with preferred code format.
         self.assertEqual(self.adv_backend._get_degree_level_from_program_code('A-BSE-IENJ'), 2)

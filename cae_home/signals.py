@@ -124,6 +124,3 @@ def wmuuser_model_post_save(sender, instance, created, **kwargs):
     post_save.connect(user_model_post_save, sender=models.User)
     post_save.connect(userintermediary_model_post_save, sender=models.UserIntermediary)
     post_save.connect(wmuuser_model_post_save, sender=models.WmuUser)
-
-
-

@@ -69,7 +69,6 @@
             > div {
                 margin: 5px;
                 width: 70%;
-                filter: brightness(85%);
 
                 text-align: left;
 
@@ -89,11 +88,6 @@
 
         margin-right: auto;
         margin-left: auto;
-    }
-
-    span.select2-container {
-        width:100% !important;
-        max-width:200px;
     }
 }
 
@@ -270,43 +264,6 @@
 // zoom                                                                           //
 //================================================================================//
 
-
-//==================================================//
-//==== START "Standard Widget" Theme Colors Block ====//
-//==================================================//
-
-
-// .main-content form {
-//
-//     @each $theme, $theme-dict in $theme-colors {
-//     .theme-#{$theme} & {
-//
-//         input{
-//         background:theme-background($theme,'content');
-//         font-size: 1rem;
-//          vertical-align: baseline;
-//          border: 0;
-//         }
-//
-//     }}
-// }
-
-.select2-container {
-    @each $theme, $theme-dict in $theme-colors {
-    .theme-#{$theme} & {
-        .select2-results__options{
-            background: theme-background($theme,'primary');
-
-        }
-
-    }}
-}
-
-//==================================================//
-//===== END "Standard Widget" Theme Colors Block =====//
-//==================================================//
-
-
 //===================================//
 //==== START Custom Widget Block ====//
 //===================================//
@@ -345,10 +302,6 @@
             .select-item.selected {
                 background: theme-status($theme, 'primary', 'primary');
                 border: 3px solid theme-status($theme, 'primary', 'border');
-            }
-            .form-inputs .form-input{
-                background: theme-background($theme,'primary')
-
             }
 
         }}

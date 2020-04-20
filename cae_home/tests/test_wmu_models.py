@@ -92,6 +92,7 @@ class RoomModelTests(IntegrationTestCase):
             capacity=30,
             description='Test Room Description',
             slug='test-room',
+            is_row=False,
         )
         self.test_room.department.add(self.department)
         self.test_room.save()
@@ -149,6 +150,7 @@ class RoomModelTests(IntegrationTestCase):
             room_type=department_office,
             name='CAE Room',
             slug='cae-room',
+            is_row=False,
         )
         cae_office.department.add(cae_department)
 
@@ -179,7 +181,7 @@ class MajorTests(IntegrationTestCase):
             program_code='Test Program Code',
             name='Test Name',
             degree_level=1,
-            active=False,
+            is_active=False,
             slug='test-code',
         )
 
@@ -189,7 +191,7 @@ class MajorTests(IntegrationTestCase):
         self.assertEqual(self.test_major.program_code, 'Test Program Code')
         self.assertEqual(self.test_major.name, 'Test Name')
         self.assertEqual(self.test_major.degree_level, 1)
-        self.assertEqual(self.test_major.active, False)
+        self.assertEqual(self.test_major.is_active, False)
 
     def test_string_representation(self):
         self.assertEqual(str(self.test_major), 'Test Student Code - Test Name')

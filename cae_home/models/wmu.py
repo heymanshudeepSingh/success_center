@@ -186,12 +186,14 @@ class Room(models.Model):
                 slug=slug,
                 department=department,
                 room_type=room_type,
+                is_row=False,
             )
         except ObjectDoesNotExist:
             room = Room.objects.create(
                 name=name,
                 slug=slug,
                 room_type=room_type,
+                is_row=False,
             )
             room.department.add(department)
             room.save()
@@ -239,7 +241,7 @@ class Major(models.Model):
     program_code = models.CharField(max_length=MAX_LENGTH, unique=True)
     name = models.CharField(max_length=MAX_LENGTH)
     degree_level = models.SmallIntegerField(choices=DEGREE_LEVEL_CHOICES, blank=True, default=0)
-    active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=True)
 
     # Self-setting/Non-user-editable fields.
     slug = models.SlugField(

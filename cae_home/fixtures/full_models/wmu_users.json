@@ -10,7 +10,7 @@
         "last_name": "Center",
         "official_email": "ceas-cae@wmich.edu",
         "user_type": 3,
-        "active": true,
+        "is_active": true,
         "date_created": "2019-04-01T22:03:30.466Z",
         "date_modified": "2019-04-01T22:03:30.466Z"
     }
@@ -26,7 +26,7 @@
         "last_name": "Programmers",
         "official_email": "cae-programmers@wmich.edu",
         "user_type": 3,
-        "active": true,
+        "is_active": true,
         "date_created": "2019-04-01T22:03:30.466Z",
         "date_modified": "2019-04-01T22:03:30.466Z"
     }

@@ -19,7 +19,7 @@ from settings.reusable_settings import *
 # Variables to help run logging.
 LOG_VERSION = 2.2
 first_logging_call = True
-log_handler_class = 'settings.logging.EnhancedRotatingFileHandler'
+log_handler_class = 'settings.logging.RotatingFileHandler'
 log_handler_file_max_bytes = 1024 * 1024  # Roughly 1 MB.
 log_handler_file_backup_count = 20
 

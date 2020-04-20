@@ -20,7 +20,6 @@ from sys import stdout
 from cae_home import models
 from cae_home.management.commands.fixtures import user as user_fixtures
 
-
 default_password = settings.USER_SEED_PASSWORD
 
 
@@ -78,9 +77,9 @@ def create_users(style):
     """
     # Create extra superusers for developers.
     models.User.get_or_create_superuser('brodriguez8774', '', default_password)  # Brandon
-    models.User.get_or_create_superuser('jmeachum20', '', default_password) # Jesse
-    models.User.get_or_create_superuser('a', '', default_password) # Singh
-    models.User.get_or_create_superuser('david', '', default_password) #David Mikovits
+    models.User.get_or_create_superuser('jmeachum20', '', default_password)  # Jesse
+    models.User.get_or_create_superuser('a', '', 'a')  # Singh
+    models.User.get_or_create_superuser('david', '', default_password)  # David Mikovits
 
     create_permission_group_users(password=default_password)
 
@@ -96,12 +95,19 @@ def create_permission_group_users(password=default_password, with_names=True):
     """
     # Create normal users for every main permission group.
     cae_director = models.User.get_or_create_user('cae_director', '', password)
+    cae_director_inactive = models.User.get_or_create_user('cae_director_inactive', '', password)
     cae_building_coordinator = models.User.get_or_create_user('cae_building_coordinator', '', password)
+    cae_building_coordinator_inactive = models.User.get_or_create_user('cae_building_coordinator_inactive', '', password)
     cae_admin_ga = models.User.get_or_create_user('cae_admin_ga', '', password)
+    cae_admin_ga_inactive = models.User.get_or_create_user('cae_admin_ga_inactive', '', password)
     cae_programmer_ga = models.User.get_or_create_user('cae_programmer_ga', '', password)
+    cae_programmer_ga_inactive = models.User.get_or_create_user('cae_programmer_ga_inactive', '', password)
     cae_admin = models.User.get_or_create_user('cae_admin', '', password)
+    cae_admin_inactive = models.User.get_or_create_user('cae_admin_inactive', '', password)
     cae_programmer = models.User.get_or_create_user('cae_programmer', '', password)
+    cae_programmer_inactive = models.User.get_or_create_user('cae_programmer_inactive', '', password)
     cae_attendant = models.User.get_or_create_user('cae_attendant', '', password)
+    cae_attendant_inactive = models.User.get_or_create_user('cae_attendant_inactive', '', password)
 
     # Set their names.
     if with_names:
@@ -121,24 +127,49 @@ def create_permission_group_users(password=default_password, with_names=True):
         cae_programmer_ga.last_name = "One"
         cae_programmer_ga.save()
 
+    # Set inactive values.
+    cae_director_inactive.is_active = False
+    cae_director_inactive.save()
+    cae_building_coordinator_inactive.is_active = False
+    cae_building_coordinator_inactive.save()
+    cae_admin_ga_inactive.is_active = False
+    cae_admin_ga_inactive.save()
+    cae_admin_inactive.is_active = False
+    cae_admin_inactive.save()
+    cae_programmer_ga_inactive.is_active = False
+    cae_programmer_ga_inactive.save()
+    cae_programmer_inactive.is_active = False
+    cae_programmer_inactive.save()
+    cae_attendant_inactive.is_active = False
+    cae_attendant_inactive.save()
+
+
+
     # Add permission groups to users.
     cae_director.groups.add(Group.objects.get(name='CAE Director'))
+    cae_director_inactive.groups.add(Group.objects.get(name='CAE Director'))
     cae_building_coordinator.groups.add(Group.objects.get(name='CAE Building Coordinator'))
+    cae_building_coordinator_inactive.groups.add(Group.objects.get(name='CAE Building Coordinator'))
     cae_admin_ga.groups.add(Group.objects.get(name='CAE Admin GA'), Group.objects.get(name='CAE Admin'))
+    cae_admin_ga_inactive.groups.add(Group.objects.get(name='CAE Admin GA'), Group.objects.get(name='CAE Admin'))
     cae_programmer_ga.groups.add(Group.objects.get(name='CAE Programmer GA'), Group.objects.get(name='CAE Programmer'))
+    cae_programmer_ga_inactive.groups.add(Group.objects.get(name='CAE Programmer GA'), Group.objects.get(name='CAE Programmer'))
     cae_admin.groups.add(Group.objects.get(name='CAE Admin'))
+    cae_admin_inactive.groups.add(Group.objects.get(name='CAE Admin'))
     cae_programmer.groups.add(Group.objects.get(name='CAE Programmer'))
+    cae_programmer_inactive.groups.add(Group.objects.get(name='CAE Programmer'))
     cae_attendant.groups.add(Group.objects.get(name='CAE Attendant'))
+    cae_attendant_inactive.groups.add(Group.objects.get(name='CAE Attendant'))
 
     # Create and add to array. Used in testing.
-    user_array = []                                 # Index Num:
-    user_array.append(cae_director)                 # 0
-    user_array.append(cae_building_coordinator)     # 1
-    user_array.append(cae_admin_ga)                 # 2
-    user_array.append(cae_programmer_ga)            # 3
-    user_array.append(cae_admin)                    # 4
-    user_array.append(cae_programmer)               # 5
-    user_array.append(cae_attendant)                # 6
+    user_array = []                               # Index Num:
+    user_array.append(cae_director)               # 0
+    user_array.append(cae_building_coordinator)   # 1
+    user_array.append(cae_admin_ga)               # 2
+    user_array.append(cae_programmer_ga)          # 3
+    user_array.append(cae_admin)                  # 4
+    user_array.append(cae_programmer)             # 5
+    user_array.append(cae_attendant)              # 6
     return user_array
 
 
@@ -199,9 +230,9 @@ def create_wmu_users(style, model_count):
 
             # Determine if active. 70% change of being true.
             if randint(0, 9) < 7:
-                active = True
+                is_active = True
             else:
-                active = False
+                is_active = False
 
             # Attempt to create model seed.
             try:
@@ -212,7 +243,7 @@ def create_wmu_users(style, model_count):
                         first_name=faker_factory.first_name(),
                         last_name=faker_factory.last_name(),
                         user_type=user_type,
-                        active=active,
+                        is_active=is_active,
                     )
 
                     # Add between one and three majors to student.
@@ -222,17 +253,17 @@ def create_wmu_users(style, model_count):
                         index = randint(0, len(majors) - 1)
                         major = majors[index]
 
-                        if active:
+                        if is_active:
                             models.WmuUserMajorRelationship.objects.create(
                                 wmu_user=wmu_user,
                                 major=major,
-                                active=active,
+                                is_active=is_active,
                             )
                         else:
                             models.WmuUserMajorRelationship.objects.create(
                                 wmu_user=wmu_user,
                                 major=major,
-                                active=active,
+                                is_active=is_active,
                                 date_stopped=timezone.now(),
                             )
                     user_profile = models.Profile.get_profile(bronco_net)

@@ -24,53 +24,150 @@ MAX_LENGTH = 255
 def compare_user_and_wmuuser_models(uid):
     """
     Validates user info between login_user model and wmu_user model.
-    :param uid: Id (bronconet) of user to validate.
+    :param uid: Id (BroncoNet) of user to validate.
     """
+    has_login_user = False
+    has_wmu_user = False
+
+    # Attempt to get associated (login) User model.
     try:
         user_model = User.objects.get(username=uid)
+        has_login_user = True
+    except ObjectDoesNotExist:
+        pass    # BroncoNet does not have an associated (login) User model.
+
+    # Attempt to get associated WmuUser model.
+    try:
         wmu_user_model = WmuUser.objects.get(bronco_net=uid)
+        has_wmu_user = True
+    except ObjectDoesNotExist:
+        pass    # BroncoNet does not have an associated WmuUser model.
+
+    model_updated = False
+    if has_login_user and has_wmu_user:
+        # Logic for when both models exist.
+        user_intermediary = UserIntermediary.objects.get(bronco_net=uid)
 
         # Check that first_name values are the same.
         if user_model.first_name != wmu_user_model.first_name:
             # WmuUser model has priority for this field. If empty for WmuUser model, fallback to User model value.
+            model_updated = True
             if wmu_user_model.first_name != '':
                 user_model.first_name = wmu_user_model.first_name
-                user_model.save()
             else:
                 wmu_user_model.first_name = user_model.first_name
-                wmu_user_model.save()
 
-            # Ensure models in memory are up to date for next check.
-            user_model = User.objects.get(username=uid)
-            wmu_user_model = WmuUser.objects.get(bronco_net=uid)
+        # Also compare first_name in UserIntermediary.
+        if user_intermediary.first_name != user_model.first_name:
+            user_intermediary.first_name = user_model.first_name
+            model_updated = True
 
         # Check that last_name values are the same.
         if user_model.last_name != wmu_user_model.last_name:
             # WmuUser model has priority for this field. If empty for WmuUser model, fallback to User model value.
+            model_updated = True
             if wmu_user_model.last_name != '':
                 user_model.last_name = wmu_user_model.last_name
-                user_model.save()
             else:
                 wmu_user_model.last_name = user_model.last_name
-                wmu_user_model.save()
 
-            # Ensure models in memory are up to date for next check.
-            user_model = User.objects.get(username=uid)
-            wmu_user_model = WmuUser.objects.get(bronco_net=uid)
+        # Also compare last_name in UserIntermediary.
+        if user_intermediary.last_name != user_model.last_name:
+            user_intermediary.last_name = user_model.last_name
+            model_updated = True
 
         # Check that email values are the same.
         if user_model.email != wmu_user_model.shorthand_email():
             # WmuUser shorthand should always be correct (<bronconet>@wmich.edu). Use that unconditionally.
             user_model.email = wmu_user_model.shorthand_email()
-            user_model.save()
+            model_updated = True
 
-    except ObjectDoesNotExist:
-        pass    # User account is not associated with both models. This is fine, we can skip validation then.
+        # Check is_active values.
+        if user_model.is_active or wmu_user_model.is_active:
+            # At least one of User or WmuUser models is active.
+            if not user_intermediary.is_active:
+                user_intermediary.is_active = True
+                model_updated = True
+        else:
+            # Neither User or WmuUser model is active.
+            if user_intermediary.is_active:
+                user_intermediary.is_active = False
+                model_updated = True
+
+        # Check if models were updated. If so, save.
+        if model_updated:
+            user_model.save()
+            wmu_user_model.save()
+            user_intermediary.save()
+
+    elif has_login_user:
+        # Logic for when BroncoNet only has associated (login) User model.
+        user_intermediary = UserIntermediary.objects.get(bronco_net=uid)
+
+        # Update first name if not matching.
+        if user_intermediary.first_name != user_model.first_name:
+            user_intermediary.first_name = user_model.first_name
+            model_updated = True
+
+        # Update last name if not matching.
+        if user_intermediary.last_name != user_model.last_name:
+            user_intermediary.last_name = user_model.last_name
+            model_updated = True
+
+        # Check is_active values.
+        if user_model.is_active:
+            if not user_intermediary.is_active:
+                # User model is active. Update UserIntermediary accordingly.
+                user_intermediary.is_active = True
+                model_updated = True
+        else:
+            if user_intermediary.is_active:
+                # User model is inactive. Update UserIntermediary accordingly.
+                user_intermediary.is_active = False
+                model_updated = True
+
+        # Check if models were updated. If so, save.
+        if model_updated:
+            user_intermediary.save()
+
+    elif has_wmu_user:
+        # Logic for when BroncoNet only has associated WmuUser model.
+        user_intermediary = UserIntermediary.objects.get(bronco_net=uid)
+
+        # Update first name if not matching.
+        if user_intermediary.first_name != wmu_user_model.first_name:
+            user_intermediary.first_name = wmu_user_model.first_name
+            model_updated = True
+
+        # Update last name if not matching.
+        if user_intermediary.last_name != wmu_user_model.last_name:
+            user_intermediary.last_name = wmu_user_model.last_name
+            model_updated = True
+
+        # Check is_active values.
+        if wmu_user_model.is_active:
+            if not user_intermediary.is_active:
+                # User model is active. Update UserIntermediary accordingly.
+                user_intermediary.is_active = True
+                model_updated = True
+        else:
+            if user_intermediary.is_active:
+                # User model is inactive. Update UserIntermediary accordingly.
+                user_intermediary.is_active = False
+                model_updated = True
+
+        # Check if models were updated. If so, save.
+        if model_updated:
+            user_intermediary.save()
+
+    else:
+        # BroncoNet somehow does not have an associated (login) User model or WmuUser model.
+        raise ValidationError('Could not find associated user models for BroncoNet {0}.'.format(id))
 
 #endregion Model Functions
 
 
-#region Models
+#region Model Intermediaries
 
 class WmuUserMajorRelationship(models.Model):
     """
@@ -80,8 +177,8 @@ class WmuUserMajorRelationship(models.Model):
     wmu_user = models.ForeignKey('WmuUser', on_delete=models.CASCADE)
     major = models.ForeignKey('Major', on_delete=models.CASCADE)
 
-    # Additional Many-to-Many fields.
-    active = models.BooleanField(default=True)
+    # Model fields.
+    is_active = models.BooleanField(default=True)
     date_started = models.DateTimeField(default=timezone.now)
     date_stopped = models.DateTimeField(blank=True, null=True)
 
@@ -95,7 +192,7 @@ class WmuUserMajorRelationship(models.Model):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self._previous_active_value = self.active
+        self._previous_active_value = self.is_active
 
     def clean(self, *args, **kwargs):
         """
@@ -103,7 +200,7 @@ class WmuUserMajorRelationship(models.Model):
         """
         # Check if model's "active" field has changed, and is now inactive.
         # Means WmuUser is no longer pursuing Major. Either they graduated and got the degree or switched majors.
-        if self.active != self._previous_active_value and not self.active:
+        if self.is_active != self._previous_active_value and not self.is_active:
             # Set date when student stopped pursuing Major.
             self.date_stopped = timezone.now()
 
@@ -123,13 +220,17 @@ class WmuUserMajorRelationship(models.Model):
         :param major: Major model object to check against.
         :return: Boolean indicating if student is actively pursuing major.
         """
-        if WmuUserMajorRelationship.objects.filter(wmu_user=wmu_user, major=major, active=True,).exists():
+        if WmuUserMajorRelationship.objects.filter(wmu_user=wmu_user, major=major, is_active=True,).exists():
             # relation exists where "active" field is True. User is actively pursuing major.
             return True
         else:
             # Relation does not exist where active is True. User is not actively pursuing major.
             return False
 
+#endregion Model Intermediaries
+
+
+#region Models
 
 class User(AbstractUser):
     """
@@ -185,6 +286,9 @@ class UserIntermediary(models.Model):
 
     # Model fields.
     bronco_net = models.CharField(max_length=MAX_LENGTH, blank=True, unique=True)
+    first_name = models.CharField(max_length=MAX_LENGTH, blank=True)
+    last_name = models.CharField(max_length=MAX_LENGTH, blank=True)
+    is_active = models.BooleanField(default=True)
 
     # Self-setting/Non-user-editable fields.
     slug = models.SlugField(
@@ -263,7 +367,7 @@ class WmuUser(models.Model):
     middle_name = models.CharField(max_length=MAX_LENGTH, blank=True, null=True)
     last_name = models.CharField(max_length=MAX_LENGTH)
     user_type = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES, default=0)
-    active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=True)
 
     # Self-setting/Non-user-editable fields.
     official_email = models.EmailField(blank=True, null=True)

@@ -12,12 +12,12 @@ from django.db.models import ObjectDoesNotExist
 from django.http import QueryDict
 from django.test import TestCase
 from django.urls import reverse
-from django.utils.six.moves.urllib.parse import ParseResult, urlparse
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
+from urllib.parse import ParseResult, urlparse
 
 # User Class Imports.
 from .. import models

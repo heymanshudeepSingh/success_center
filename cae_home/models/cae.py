@@ -33,6 +33,13 @@ class Asset(models.Model):
         verbose_name_plural = "Assets"
         ordering = ('asset_tag',)
 
+    def natural_key(self):
+        values = []
+        values.append(self.asset_tag)
+        values.append(self.device_name)
+
+        return values
+
     def __str__(self):
         return '{0} {1} - {2}'.format(self.brand_name, self.asset_tag, self.serial_number)
 
