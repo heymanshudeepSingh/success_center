@@ -52,14 +52,6 @@
             @include flex-direction(row);
             @include justify-content(center);
 
-//         @each $theme, $theme-dict in $theme-colors {
-//         .theme-#{$theme} & {
-//         .form-input{
-//             background: theme-background($theme,'primary');
-//         }
-//
-//          }
-
             width: 100%;
 
             > label {
@@ -78,11 +70,8 @@
                 margin: 5px;
                 width: 70%;
                 filter: brightness(85%);
+
                 text-align: left;
-                border-radius: 6px;
-                // using inline-flex will make boxes huge
-                display:inline-block;
-                overflow:hidden;
 
                 @media only screen and (min-width: $screen-tablet-mid) {
                     width: 57.5%;
@@ -93,7 +82,6 @@
 
     input {
         max-width: 90%;
-        border-radius: 6px;
     }
 
     .alert {
@@ -310,10 +298,6 @@
             background: theme-background($theme,'primary');
 
         }
-
-         .select2-results__option[aria-selected=true] {
-                background-color: theme-background($theme,'highlight');
-            }
 
     }}
 }
