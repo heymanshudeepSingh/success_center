@@ -51,6 +51,7 @@
             padding-left: 10px;
         }
 
+        // Panel header formatting.
         @each $panel_header_element in $panel_header_element_list {
         > #{$panel_header_element} {
 
@@ -71,6 +72,28 @@
 
         }}
 
+        // Panel sub-header formatting.
+        @each $panel_sub_header_element in $panel_sub_header_element_list {
+        > #{$panel_sub_header_element} {
+
+            @include display-flex;
+            @include flex-direction(row);
+            @include justify-content(space-between);
+            @include align-items(center);
+            @include flex-wrap(wrap);
+
+            padding: 10px;
+
+            @each $header_element in $header_element_list {
+            > #{$header_element} {
+
+                padding-top: 0;
+
+            }}
+
+        }}
+
+        // Panel body/content formatting.
         @each $panel_content_element in $panel_content_element_list {
         > #{$panel_content_element} {
 
@@ -85,6 +108,7 @@
 
         }}
 
+        // Panel footer formatting.
         @each $panel_footer_element in $panel_footer_element_list {
         > #{$panel_footer_element} {
 
