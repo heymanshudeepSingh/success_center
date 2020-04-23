@@ -16,12 +16,10 @@ apps/
 env/
 node_modules/
 settings/local_env/
+temp/
 CICO.pyproj
 CICO.sln
 package-lock.json
-
-# Do not track static files
-static
 
 # Do not track python cache files.
 *.pyc

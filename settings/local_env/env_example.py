@@ -26,9 +26,9 @@ ALLOWED_HOSTS = [
 # Static/Media file locations.
 # Static refers to CSS, JavaScript, Images, etc provided by project. Media refers to any user-uploaded files.
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'temp/static/')
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'temp/media/')
 STATICFILES_DIRS = (
     # Path to any additional, non-standard static directories.
 )
