@@ -61,6 +61,7 @@ function main () {
     # Install apt-get packages.
     echo -e "${color_blue}Updating apt package list...${color_reset}"
     apt-get update
+    apt-get install curl
 
     echo ""
     echo -e "${color_blue}Installing apache dependencies...${color_reset}"
@@ -81,7 +82,9 @@ function main () {
 
     echo ""
     echo -e "${color_blue}Installing npm dependencies...${color_reset}"
-    apt-get install nodejs npm -y
+    curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+    apt-get install nodejs -y
+    apt-get install npm -y
     sudo ./general/installers/misc/npm_install.sh
 
     if [[ "$mysql" = true ]]
