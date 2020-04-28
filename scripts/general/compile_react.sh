@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 ###
  # Script to compile all css files in all subprojects.
+ #
+ # Note that complicated array syntax is acquired from https://github.com/koalaman/shellcheck/wiki/SC2089
+ # Was required in order to make the code execute without errors.
  ##
 
 
@@ -63,10 +66,13 @@ function main () {
                             # Check if previous command exists.
                             if [[ $command == "" ]]
                             then
-                                # Previous command exists. Append.
-                                command="$command && $new_command"
+                                # Does not exist. Create.
+                                command=(npx concurrently "$new_command")
+#                                echo "Created command: $command"
                             else
-                                command="$new_command"
+                                # Previous command exists. Append.
+                                command+=(" $new_command")
+#                                echo "Updated command: $command"
                             fi
                         fi
                     done
@@ -87,9 +93,9 @@ function main () {
     # Display command to user.
     echo ""
     echo "Running command:"
-    echo $command
+    echo "${command[@]}"
     echo ""
-    $command
+    "${command[@]}"
     echo ""
 }
 
