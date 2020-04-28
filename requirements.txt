@@ -3,7 +3,7 @@
 
 # -- Python Libraries --
 # Core Django framework.
-Django==2.2.9
+Django==3.0.5
 # Support for websocket connections.
 channels==2.4.0
 channels-redis==2.4.2
@@ -11,14 +11,14 @@ channels-redis==2.4.2
 django-modeladmin-reorder==0.3.1
 # Third party apps for phone number fields and phone number seeding.
 django-phonenumber-field==4.0.0
-phonenumbers==8.11.5
+phonenumbers==8.12.2
 faker-e164==0.1.0
 # Support for easy model API access.
 djangorestframework==3.11.0
 # DjangoRest model filtering support.
 django-filter==2.2.0
 # Faker library for automatic model seeding.
-Faker==4.0.1
+Faker==4.0.3
 # Read .xls and .xlsx Excel files (Deprecated, but required for .xls)
 xlrd==1.2.0
 
@@ -43,34 +43,35 @@ django-webpack-loader
 
 # -- Pip Freeze: $ pip freeze -r requirements.txt --
 aioredis==1.3.1
-asgiref==3.2.3
+asgiref==3.2.7
 async-timeout==3.0.1
 attrs==19.3.0
-autobahn==20.3.1
+autobahn==20.4.3
 Automat==20.2.0
 Babel==2.8.0
 cffi==1.14.0
 constantly==15.1.0
-cryptography==2.8
-daphne==2.4.1
+cryptography==2.9.2
+daphne==2.5.0
 hiredis==1.0.1
 hyperlink==19.0.0
 idna==2.9
 incremental==17.5.0
 msgpack==0.6.2
-phonenumberslite==8.11.5
+phonenumberslite==8.12.2
+pkg-resources==0.0.0
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
 pycparser==2.20
 PyHamcrest==2.0.2
 pyOpenSSL==19.1.0
 python-dateutil==2.8.1
-pytz==2019.3
+pytz==2020.1
 service-identity==18.1.0
 six==1.14.0
 sqlparse==0.3.1
 text-unidecode==1.3
-Twisted==19.10.0
-txaio==20.1.1
-urllib3==1.25.8
-zope.interface==4.7.1
+Twisted==20.3.0
+txaio==20.4.1
+urllib3==1.25.9
+zope.interface==5.1.0
