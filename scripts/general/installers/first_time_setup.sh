@@ -117,6 +117,12 @@ function main() {
     echo ""
 
 
+    # Compile JS.
+    echo -e "${color_blue}Compiling JS files...${color_reset}"
+    ./general/compile_react.sh
+    echo ""
+
+
     # Attempt to set up Python for user.
     user_confirmation "Install local python environment in project root?"
     if [[ "$return_value" == true ]]
