@@ -58,7 +58,7 @@ function main () {
                             filename=$(basename "${file%.*}")
 
                             # Create command.
-                            new_command="npx $watch -t [ babelify --presets [env react] ] $file -o $js_dir/$filename.js"
+                            new_command="npx $watch -t [ babelify --presets [@babel/env @babel/react] ] $file -o $js_dir/$filename.js"
 
                             # Check if previous command exists.
                             if [[ $command == "" ]]
