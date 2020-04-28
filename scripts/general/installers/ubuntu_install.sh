@@ -61,7 +61,7 @@ function main () {
     # Install apt-get packages.
     echo -e "${color_blue}Updating apt package list...${color_reset}"
     apt-get update
-    apt-get install curl
+    apt-get install curl -y
 
     echo ""
     echo -e "${color_blue}Installing apache dependencies...${color_reset}"
