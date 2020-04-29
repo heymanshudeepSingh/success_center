@@ -61,18 +61,16 @@ function main () {
                             filename=$(basename "${file%.*}")
 
                             # Create command.
-                            new_command="npx $watch -t [ babelify --presets [@babel/env @babel/react] ] $file -o $js_dir/$filename.js"
+                            new_command="npx $watch -t [ babelify --presets [@babel/preset-env @babel/preset-react] ] $file -o $js_dir/$filename.js"
 
                             # Check if previous command exists.
                             if [[ $command == "" ]]
                             then
                                 # Does not exist. Create.
                                 command=(npx concurrently "$new_command")
-#                                echo "Created command: $command"
                             else
                                 # Previous command exists. Append.
                                 command+=(" $new_command")
-#                                echo "Updated command: $command"
                             fi
                         fi
                     done
