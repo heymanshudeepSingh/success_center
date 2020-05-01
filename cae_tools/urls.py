@@ -2,14 +2,14 @@
 Urls for CAE Tools app.
 """
 
-from django.conf.urls import url
+from django.urls import path
 
 from . import views
 
 
 app_name = 'cae_tools'
 urlpatterns = [
-    url(r'css_examples/$', views.css_examples, name='css_examples'),
-    url(r'color/$', views.color_tool, name='color_tool'),
-    url(r'$', views.index, name='index'),
+    path('css_examples/', views.css_examples, name='css_examples'),
+    path('color/', views.color_tool, name='color_tool'),
+    path('', views.index, name='index'),
 ]
