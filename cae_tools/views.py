@@ -6,6 +6,9 @@ Views for CAE Tools app.
 from django.shortcuts import redirect
 from django.template.response import TemplateResponse
 
+# User Imports.
+from . import forms
+
 
 def index(request):
     """
@@ -13,6 +16,21 @@ def index(request):
     Currently only redirects to color tool
     """
     return redirect('cae_tools:color_tool')
+
+
+def css_examples(request):
+    """
+    Displays examples of custom HTML/CSS layout and stylings used in site.
+    """
+    # Get example forms.
+    form = forms.ExampleForm()
+    if request.method == 'POST':
+        form = forms.ExampleForm(request.POST)
+
+    # Render template to user.
+    return TemplateResponse(request, 'cae_tools/css_example.html', {
+        'form': form,
+    })
 
 
 def color_tool(request):

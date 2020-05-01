@@ -315,20 +315,11 @@ def index(request):
 
 def internal_dev_index(request):
     """
-    The internal (cae home) index page.
-    Displays front-end information/examples specific to the internal site layout and stylings.
+    The internal (cae home) development index page.
     This should only be accessible in development environments.
     """
     if settings.DEV_URLS:
-        # Get example forms.
-        form = forms.ExampleForm()
-        if request.method == 'POST':
-            form = forms.ExampleForm(request.POST)
-
-        # Render template to user.
-        return TemplateResponse(request, 'cae_home/css_example.html', {
-            'form': form,
-        })
+        return redirect('cae_tools:css_examples')
     else:
         raise Http404()
 

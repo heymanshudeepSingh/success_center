@@ -122,15 +122,7 @@ class AuthenticationForm(auth_form):
     remember_me = forms.BooleanField(required=False, label='Keep Me Logged In:')
 
 
-class ExampleForm(forms.Form):
-    """
-    An example form, used in the css examples page.
-    Should not actually submit any data.
-    """
-    name = forms.CharField()
-    date_widget = forms.DateField(widget=DatePickerWidget)
-    time_widget = forms.TimeField(widget=TimePickerWidget)
-    check_me = forms.BooleanField(required=False)
+
 
 
 class UserModelForm(forms.ModelForm):
