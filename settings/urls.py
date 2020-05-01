@@ -30,10 +30,15 @@ urlpatterns = [
 
     # CAE_Home app views.
     url(r'^', include('cae_home.urls')),
-
-    # CAE Tools app views.
-    url(r'^cae_tools/', include('cae_tools.urls')),
 ]
+
+
+# Debug only urls.
+if settings.DEV_URLS:
+    urlpatterns += [
+        # CAE Tools app views.
+        url(r'^cae_tools/', include('cae_tools.urls')),
+    ]
 
 
 # Dynamically grab app urls for urlpatterns variable. Essentially the same logic as routing.py.
