@@ -62,7 +62,7 @@ function main() {
         # Ubuntu.
         elif [[ "$user_input" == "2" ]]
         then
-            echo -e "NOTE: This script has been tested on ${color_blue}Ubuntu Desktop 16.04${color_reset}."
+            echo -e "NOTE: This script has been tested on ${color_blue}Ubuntu Desktop 16.04 and 18.04${color_reset}."
             echo "This script will ask for your password in a second..."
             echo ""
             echo -e "${color_blue}Installing Ubuntu package dependencies...${color_reset}"
@@ -170,6 +170,7 @@ function main() {
         else
             source ./.venv/bin/activate
             pip install --upgrade pip
+            pip install wheel
             pip install -r requirements.txt
         fi
         echo ""
