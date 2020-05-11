@@ -3,6 +3,16 @@
 ## Description
 Instructions for using Javascript/React within the project.
 
+
+## Accessing Django Middleware Values in JavaScript
+Some "generally useful" Django values are passed to template via middleware (see `cae_home/middleware.py`).
+
+Then these values are passed to JavaScript via a global variable (see `cae_home/templates/cae_home/base.html`).
+
+To try to avoid global namespacing problems, these are all provided under `window.django_middleware`. Thus, they can be
+accessed in JavaScript via `window.django_middleware.<variable>`.
+
+
 ## How Do I know When to Use React Vs Plain JavaScript?
 Both are a form of JavaScript. React is just an extension of JavaScript that's meant to make it easier to develop large
 pages/apps. Technically, React can be used as a framework to create an entire site, but we want to use Python and
@@ -16,6 +26,7 @@ element may make several other elements dynamically update. In such a case, Reac
 maintainable, long term.
 
 Ultimately, there's not really a hard rule for when to use which, so use what seems to make more sense for the page.
+
 
 ## JavaScript
 Any JavaScript code can be added to the project with relatively few steps. The biggest hurdle is just getting it to load
@@ -43,6 +54,7 @@ loaded on that page's template.
 Similarly to above, you should add it to the `extra_scripts` block or the `extra_scripts_body` block.<br>
 Just as before, `extra_scripts` will load before moast page html elements, while `extra_scripts_block` will load after
 most html elements.
+
 
 ## React
 Unfortunately, React uses a syntax that browsers do not intially understand, similarly to SASS. As such, React files
