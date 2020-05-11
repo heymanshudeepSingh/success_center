@@ -78,7 +78,14 @@ class GetProjectDetailMiddleware(object):
         # Check to ensure DjangoRest views don't error.
         if response.context_data is not None:
 
-            # Get site serve type (HTTP or HTTPS). HTTP should be for development, HTTPS for production.
+            # Get if site is being served as development or production mode.
+            # Note we get "DEV_URLS" instead of "DEBUG" because Django has special, built-in extra logic for "DEBUG".
+            # (See settings/extra_settings file for more info.)
+            # Using an equivalent custom settings variable saves potential future headache.
+            response.context_data['debug'] = settings.DEV_URLS
+
+            # Get site serve type (HTTP or HTTPS).
+            # Generally speaking though, the site serves HTTP for development, and HTTPS for production.
             response.context_data['https'] = request.is_secure()
 
             # Get site domain.
@@ -87,7 +94,7 @@ class GetProjectDetailMiddleware(object):
             # Get installed project/app details.
             response.context_data['imported_projects'] = settings.INSTALLED_APP_DETAILS
 
-            # Check if CAE Web is installed.
+            # Check if CAE Web is installed. Needed for setting the "default" header nav.
             response.context_data['caeweb_installed'] = 'apps.CAE_Web.cae_web_core.apps.CaeWebCoreConfig' in settings.INSTALLED_APPS
 
             # Get CAE Programmer email (For footer).
