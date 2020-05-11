@@ -83,6 +83,9 @@ else:
 
 # Set custom "development mode url" variable, based on DEBUG.
 # Necessary for unit testing, or else tests referring to development urls will automatically fail.
+# DEBUG may potentially have other unexpected logic set by Django, in the future.
+# Thus setting a custom equivalent here saves potential future headache.
+# This value is effectively a custom variable that's equivalent to DEBUG, but minus the extra logic Django provides.
 if DEBUG:
     DEV_URLS = True
 else:
