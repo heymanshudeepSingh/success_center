@@ -130,6 +130,16 @@
         <script src="{% static 'cae_home/js/overlay_modal.js' %}"></script>
         <script src="{% static 'cae_home/js/tabbed_panel.js' %}"></script>
         <script src="{% static 'cae_home/js/flat_picker_widgets.js' %}"></script>
+
+        <script>
+          // Pass middleware template values in to JavaScript as variables.
+          // We use window.django_middleware scope so our global variables hopefully don't conflict with anything else.
+          window.django_middleware = {
+            debug: "{{ debug }}",
+            https: "{{ https }}",
+            domain: "{{ domain }}",
+          }
+        </script>
       {% endblock base_scripts_body %}
       {% block extra_scripts_body %}{% endblock extra_scripts_body %}
     </body>
