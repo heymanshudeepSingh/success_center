@@ -56,8 +56,9 @@ def login(request, *args, **kwargs):
 
         # See if remember_me box is checked.
         if request.POST.get('remember_me', None):
-            # Remember me is checked. Hold user session indefinitely.
-            request.session.set_expiry(0)
+            # Remember me is checked. Hold user session for 604800 seconds (7 days).
+            # Set to 0 to hold indefinitely (not recommended).
+            request.session.set_expiry(604800)
         else:
             # Remember me is not checked. Set session to time out in 3600 seconds (1 hour).
             request.session.set_expiry(3600)
