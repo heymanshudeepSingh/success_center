@@ -133,7 +133,7 @@ class AbstractLDAPBackend(ABC):
                 user = self._validate_ldap_user(user_id, password)
 
                 # Run login hook logic for user.
-                self.run_user_login_hooks(user)
+                self.run_user_login_hooks(request, user)
 
                 return user
         except Exception as err:
@@ -245,10 +245,11 @@ class AbstractLDAPBackend(ABC):
             logger.auth_info('{0}: User not found.'.format(user_id))
         return user
 
-    def run_user_login_hooks(self, user):
+    def run_user_login_hooks(self, request, user):
         """
         Runs user login hooks for included apps.
         Allows apps to run additional, custom logic for user.
+        :param request: Associated web request object.
         :param user: User model of newly authenticated user.
         """
         # Check if login was successful.
@@ -265,7 +266,7 @@ class AbstractLDAPBackend(ABC):
                 try:
                     # Attempt to call app hook.
                     app_hook = import_module('{0}.management.user_hooks'.format(app_name))
-                    app_hook.LoginHooks(user)
+                    app_hook.LoginHooks(request, user)
                 except ModuleNotFoundError:
                     # User login hooks do not exist for app. Skip.
                     pass
