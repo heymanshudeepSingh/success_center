@@ -12,6 +12,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Permission
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
+from importlib import import_module
 
 # User Class Imports.
 from cae_home import models
@@ -69,6 +70,7 @@ class AbstractLDAPBackend(ABC):
 
     #endregion Abstract Methods
 
+
     #region User Auth
 
     def authenticate(self, request, username=None, password=None):
@@ -91,8 +93,8 @@ class AbstractLDAPBackend(ABC):
             # Check if we should use Django User Model passwords.
             if settings.AUTH_BACKEND_USE_DJANGO_USER_PASSWORDS:
                 # Logic to use Django User Model passwords.
-                # Ldap is only used on first user login to create initial user model. Then Django User Model is used for all
-                # future logins.
+                # Ldap is only used on first user login to create initial user model. Then Django User Model is used for
+                # all future logins.
                 try:
                     # Attempt to get user object.
                     user = models.User.objects.get(**user_id)
@@ -111,17 +113,29 @@ class AbstractLDAPBackend(ABC):
                     if user is None:
                         # Failed user login attempt.
                         logger.auth_warning('{0}: User login failed.'.format(username))
+                    else:
+                        # Run login hook logic for user.
+                        self.run_user_login_hooks(user)
                     return user
 
                 except models.User.DoesNotExist:
                     # User object not found in local Django database. Attempt ldap query.
                     logger.auth_info('{0}: User not found in Django database.'.format(username))
                     user = self._validate_ldap_user(user_id, password)
+
+                    # Run login hook logic for user.
+                    self.run_user_login_hooks(user)
+
                     return user
             else:
                 # Logic to exclusively use Ldap User passwords.
                 # Ldap is used every time. Password info is never saved to Django User Models.
-                return self._validate_ldap_user(user_id, password)
+                user = self._validate_ldap_user(user_id, password)
+
+                # Run login hook logic for user.
+                self.run_user_login_hooks(user)
+
+                return user
         except Exception as err:
             logger.auth_error('Error during auth: {0}'.format(err), exc_info=True)
             raise (err)
@@ -231,7 +245,33 @@ class AbstractLDAPBackend(ABC):
             logger.auth_info('{0}: User not found.'.format(user_id))
         return user
 
+    def run_user_login_hooks(self, user):
+        """
+        Runs user login hooks for included apps.
+        Allows apps to run additional, custom logic for user.
+        :param user: User model of newly authenticated user.
+        """
+        # Check if login was successful.
+        if user is None:
+            # User not provided. Login not successful.
+            return
+
+        # If we made it this far, login was successful. Run login hooks.
+        logger.auth_info('{0}: Login successful. Running user login hooks.'.format(user))
+
+        # Call all login user logic hooks for included apps.
+        for project, project_settings in settings.INSTALLED_CAE_PROJECTS.items():
+            for app, app_name in project_settings['related_apps'].items():
+                try:
+                    # Attempt to call app hook.
+                    app_hook = import_module('{0}.management.user_hooks'.format(app_name))
+                    app_hook.LoginHooks(user)
+                except ModuleNotFoundError:
+                    # User login hooks do not exist for app. Skip.
+                    pass
+
     #endregion User Auth
+
 
     #region User Permissions
 
@@ -323,6 +363,7 @@ class AbstractLDAPBackend(ABC):
         )
 
     #endregion User Permissions
+
 
     #region User LDAP Attribute Methods
 
