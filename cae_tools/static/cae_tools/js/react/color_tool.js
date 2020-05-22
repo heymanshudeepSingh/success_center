@@ -9,7 +9,7 @@ import ColorAdjustment from './components/color_adjustment';
 import ColorSelection from './components/color_selection';
 import WmuColorDisplay from './components/wmu_color_display';
 
-import { color_calc, color_parse } from './color_functions';
+import { color_calc, color_parse } from './components/color_functions';
 
 
 class ColorTool extends React.Component {

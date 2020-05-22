@@ -3,8 +3,7 @@
  */
 
 
-// import color_calc from '../color_functions';
-import { color_calc } from '../color_functions';
+import { color_calc } from './color_functions';
 
 
 class ColorDisplay extends React.Component {

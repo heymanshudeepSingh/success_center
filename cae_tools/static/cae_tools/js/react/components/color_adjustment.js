@@ -5,7 +5,7 @@
 
 import ColorDisplay from './color_display';
 
-import { color_calc } from '../color_functions';
+import { color_calc } from './color_functions';
 
 
 class ColorLine extends React.Component {

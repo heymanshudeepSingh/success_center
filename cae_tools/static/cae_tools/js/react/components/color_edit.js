@@ -3,7 +3,7 @@
  */
 
 
-import { color_calc, color_parse } from '../color_functions';
+import { color_calc, color_parse } from './color_functions';
 
 
 class ColorEdit extends React.Component {

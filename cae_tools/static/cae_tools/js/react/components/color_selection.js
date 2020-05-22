@@ -5,7 +5,7 @@
 
 import ColorEdit from './color_edit';
 
-import { color_calc } from '../color_functions';
+import { color_calc } from './color_functions';
 
 
 class ColorSelection extends React.Component {
