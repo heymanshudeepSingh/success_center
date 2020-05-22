@@ -145,6 +145,23 @@
 //=====================================//
 
 
+//==========================//
+//==== START Text Block ====//
+//==========================//
+
+@each $content_element in $content_element_list {
+#{$content_element} {
+    span.highlight {
+        padding-right: 5px;
+        padding-left: 5px
+    }
+}}
+
+//=========================//
+//==== End Text Block ====//
+//=========================//
+
+
 //================================================================================//
 //================================== Typography ==================================//
 //================================== Includes: ===================================//
@@ -267,25 +284,27 @@
          // Loop through all possible status types.
         @each $status, $status-dict in theme-status-dict($theme) {
 
-            p.#{$status}, .p.#{$status} {
+            p.#{$status}, .p.#{$status}, span.#{$status} {
                 color: theme-status($theme, $status, 'primary');
             }
-             p.highlight.primary, .p.highlight.primary {
+             p.highlight.primary, .p.highlight.primary, span.highlight.primary {
                 color: theme-text($theme,'text');
             }
-            p.highlight.secondary, .p.highlight.secondary {
+            p.highlight.secondary, .p.highlight.secondary, span.highlight.secondary {
                 color: theme-text($theme,'primary');
             }
-            p.highlight.info, .p.highlight.info {
+            p.highlight.info, .p.highlight.info, span.highlight.info {
                 color: theme-text($theme,'text');
             }
-            p.highlight.success, .p.highlight.success {
+            p.highlight.success, .p.highlight.success, span.highlight.success {
                 color: theme-text($theme,'text');
             }
-            p.highlight.warning, .p.highlight.warning, p.highlight.warn, .p.highlight.warn {
+            p.highlight.warning, .p.highlight.warning, span.highlight.warning,
+            p.highlight.warn, .p.highlight.warn, span.highlight.warn {
                 color: theme-text($theme,'text');
             }
-            p.highlight.error, .p.highlight.error, p.highlight.danger, .p.highlight.danger {
+            p.highlight.error, .p.highlight.error, span.highlight.error,
+            p.highlight.danger, .p.highlight.danger, span.highlight.danger {
                 color: theme-text($theme,'primary-hover');
             }
         }
@@ -448,7 +467,7 @@
          // Loop through all possible status types.
         @each $status, $status-dict in theme-status-dict($theme) {
 
-            p.highlight.#{$status}, .p.highlight.#{$status} {
+            p.highlight.#{$status}, .p.highlight.#{$status}, span.highlight.#{$status} {
                 background-color: theme-status($theme, $status, 'primary');
                 border: 1px solid theme-status($theme, $status, 'border');
             }
