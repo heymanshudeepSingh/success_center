@@ -374,7 +374,7 @@ function migrations_reset_help () {
  # Runs the script for restarting major Django processes in production environments.
  ##
 function restart_server() {
-    ./production/restart_server.sh "${@}"
+    sudo ./production/restart_server.sh "${@}"
 }
 ###
  # Aliases for "restart_server".
@@ -409,7 +409,7 @@ function server_restart_help () {
  # Runs the script for setting file permissions in production environments.
  ##
 function set_file_permissions () {
-    ./production/set_file_permissions.sh "${@}"
+    sudo ./production/set_file_permissions.sh "${@}"
 }
 ###
  # Aliases for "set_file_permissions".
@@ -488,4 +488,4 @@ function ssh_generate_help () {
 }
 
 
-main ${@}
+main "${@}"
