@@ -34,9 +34,12 @@ class Command(BaseCommand):
         # Logout all found sessions.
         self.stdout.write('Examining active sessions:')
         for active_session in sessions:
-            user_pk = active_session.get_decoded().get('_auth_user_id')
-            username = get_user_model().objects.get(id=user_pk)
-            self.stdout.write('    Logging out user "{0}".'.format(username))
+            try:
+                user_pk = active_session.get_decoded().get('_auth_user_id')
+                username = get_user_model().objects.get(id=user_pk)
+                self.stdout.write('    Logging out user "{0}".'.format(username))
+            except get_user_model().ObjectDoesNotExist:
+                self.stdout.write('    Logging out user "{0}".'.format(user_pk))
 
             request.session = self.init_session(active_session.session_key)
             logout(request)
