@@ -82,13 +82,6 @@ function main () {
     # Check that command is going to compile anything.
     if [[ $command != "" ]]
     then
-        # Set permissions on user's ~/.config folder.
-        if [[ -d /home/$USER/.config ]]
-        then
-            # Folder exists. Set permissions to be safe.
-            sudo chown -R $USER:$(id -gn $USER) /home/$USER/.config
-        fi
-
         echo -e "${color_blue}Installing npm depenencies.${color_reset}"
         cd ..
         npm install

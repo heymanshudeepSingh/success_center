@@ -20,13 +20,19 @@ function main () {
     # Make sure we are not root.
     check_not_user "root"
 
-
     # Remove node_modules directory to start from scratch.
     if [[ -d ../node_modules/ ]]
     then
         cd ..
         rm -r ./node_modules
         cd ./scripts/
+    fi
+
+    # Set permissions on user's ~/.config folder.
+    if [[ -d /home/$USER/.config ]]
+    then
+        # Folder exists. Set permissions to be safe.
+        sudo chown -R $USER:$(id -gn $USER) /home/$USER/.config
     fi
 
     # Update npm dependency versions.
