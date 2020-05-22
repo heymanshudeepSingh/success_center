@@ -91,6 +91,18 @@ ALLOWED_CAE_PROJECTS = {
         },
         'third_party_apps': [],
     },
+
+    'Drop_Off': {
+        'name': 'Drop Off',
+        'index': 'drop_off_core:index',
+        'url-prefix': 'drop_off',
+        'related_apps': {
+            'drop_off_core': {
+                'config': 'apps.DropOffCoreConfig',
+            },
+        },
+        'third_party_apps': [],
+    }
 }
 
 
