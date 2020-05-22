@@ -16,22 +16,47 @@ function main() {
     # Make sure we are not root.
     check_not_user "root"
 
+    env_mode=""
+    python_version=""
 
     # Display friendly prompt to user.
     echo ""
     echo "Note: This script will run first time project setup."
     echo -e "      ${color_cyan}To cancel, hit ctrl+c now. Otherwise hit enter to start.${color_reset}"
     read user_input
+    echo ""
 
+    # Check if development or production.
     user_confirmation "Run project in development mode?"
     if [[ "$return_value" = true ]]
     then
         touch ../DEBUG
+        env_mode="dev"
         echo "To run in production, delete the \"DEBUG\" file located at project root."
     else
+        env_mode="prod"
         echo "To run in development, create an empty file called \"DEBUG\" at project root."
     fi
     echo ""
+    echo ""
+
+    # Get Python version. Should be in format of "#.#".
+    while [[ ! $valid_python ]]
+    do
+        echo -e "Enter Python version for Project ${color_cyan}[ 3.6, 3.7, 3.8 ]${color_reset}:"
+        read user_input
+        if [[ $user_input = "3.6" ]] || [[ $user_input = "3.7" ]] || [[ $user_input = "3.8" ]]
+        then
+            echo ""
+            valid_python=true
+            python_version=$user_input
+            echo ""
+        else
+            echo "Invalid input. Please enter version, such as \"3.6\" or \"3.7\"."
+            echo ""
+            echo ""
+        fi
+    done
 
     cp ../settings/local_env/env_example.py ../settings/local_env/env.py
 
@@ -66,7 +91,7 @@ function main() {
             echo "This script will ask for your password in a second..."
             echo ""
             echo -e "${color_blue}Installing Ubuntu package dependencies...${color_reset}"
-            sudo ./general/installers/ubuntu_install.sh
+            sudo ./general/installers/ubuntu_install.sh "python_version" $python_version -f $env_mode
             echo ""
             loop=false
 
@@ -125,29 +150,11 @@ function main() {
 
     # Attempt to set up Python for user.
     user_confirmation "Install local python environment in project root?"
+    echo ""
+    echo ""
     if [[ "$return_value" == true ]]
     then
         cd ..
-
-        # Get Python version. Should be in format of "#.#".
-        valid_python=""
-        python_version=""
-
-        # Loop until user provides a valid version of Python.
-        while [[ ! $valid_python ]]
-        do
-            echo "Enter Python version for Project (Must be Python 3.6 or higher):"
-            read user_input
-            if [[ $user_input = "3.6" ]] || [[ $user_input = "3.7" ]] || [[ $user_input = "3.8" ]] || [[ $user_input == "3.9" ]]
-            then
-                echo ""
-                valid_python=true
-                python_version=$user_input
-            else
-                echo "Invalid input. Please enter version, such as \"3.6\" or \"3.7\"."
-                echo ""
-            fi
-        done
 
         # Create environment with desired python version.
         echo -e "${color_blue}Installing local environment...${color_reset}"
@@ -185,10 +192,13 @@ function main() {
         echo ""
 
         user_confirmation "Create initial seed for database?"
+        echo ""
+        echo ""
         if [[ $return_value == true ]]
         then
             echo "Enter model seed count (default is 100)."
             read user_input
+            echo ""
             echo ""
             echo -e "${color_blue}Seeding database...${color_reset}"
             python manage.py seed $user_input
@@ -196,6 +206,7 @@ function main() {
         else
             echo -e "${color_blue}Skipping database seed, but still loading initial fixtures...${color_reset}"
             python manage.py loadfixtures
+            echo ""
             echo ""
         fi
 
@@ -206,7 +217,7 @@ function main() {
         deactivate
 
         echo ""
-        echo "If all tests passed, then the project has installed successfully."
+        echo -e "${color_blue}If all tests passed, then the project has installed successfully.${color_reset}"
 
     # Unknown Python environment.
     else
@@ -215,16 +226,13 @@ function main() {
         echo "   * Load your desired python environment and install from requirements.txt."
         echo "   * Run the standard Django manage.py commands."
         echo "      (\"makemigrations\", \"migrate\", and optionally \"seed\", in that order.)"
-        echo "   * Install \"ruby-sass\" and then run the \"compile_css.sh\" file in the project scripts folder."
-        echo "   * Install selenium (integration testing) dependencies for your system."
         echo "   * Run \"python manage.py test\" to ensure that everything is working properly."
         echo ""
         echo "If all tests pass, then the project installed successfully."
     fi
 
 
-    echo ""
-    echo "Exiting script."
+    echo "${color_blue}Exiting script.${color_reset}"
     exit 0
 }
 

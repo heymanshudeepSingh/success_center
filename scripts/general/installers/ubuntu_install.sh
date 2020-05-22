@@ -4,6 +4,10 @@
  ##
 
 
+# Set "kwarg" values for script.
+key_value_args=("python_version")
+
+
 # Import utility script.
 source $(dirname $0)/../../utils.sh
 
@@ -16,46 +20,65 @@ function main () {
     # Make sure we are root.
     check_user "root"
 
-
-    # Display friendly prompt to user.
-    echo ""
-    echo "Note: This script will install system packages."
-    echo -e "      ${color_cyan}To cancel, hit ctrl+c now. Otherwise hit enter to start.${color_reset}"
-    read user_input
-
-
-    valid_python=""
-    python_version=""
     mysql=""
     ldap=""
     dev_setup=""
+    python_version=""
 
-    user_confirmation "Is this a local development setup? (Alternative is a production setup)"
-    dev_setup=$return_value
-    echo ""
+    # Check for environment flags.
+    if [[ ${args[@]} =~ "dev" ]]
+    then
+        # Development flag provided.
+        dev_setup=true
 
-    # Get Python version. Should be in format of "#.#".
-    while [[ ! $valid_python ]]
-    do
-        echo "Enter Python version for Project (Must be Python 3.6 or higher):"
-        read user_input
-        if [[ $user_input = "3.6" ]] || [[ $user_input = "3.7" ]] || [[ $user_input = "3.8" ]]
-        then
-            echo ""
-            valid_python=true
-            python_version=$user_input
-        else
-            echo "Invalid input. Please enter version, such as \"3.6\" or \"3.7\"."
-            echo ""
-        fi
-    done
+    elif [[ ${args[@]} =~ "prod" ]]
+    then
+        # Production flag provided.
+        dev_setup=false
+
+    else
+        # Environment flags not provided. Clarify from user.
+        user_confirmation "Is this a local development setup? (Alternative is a production setup)"
+        dev_setup=$return_value
+        echo ""
+        echo ""
+    fi
+
+    # Check for python version kwarg.
+    if [[ ${!kwargs[@]} =~ "python_version" ]]
+    then
+        # Kwarg provided.
+        python_version=${kwargs["python_version"]}
+    else
+        # Kwarg not provided.
+        # Get Python version. Should be in format of "#.#".
+        valid_python=""
+        while [[ ! $valid_python ]]
+        do
+            echo -e "Enter Python version for Project ${color_cyan}[ 3.6, 3.7, 3.8 ]${color_reset}:"
+            read user_input
+            if [[ $user_input = "3.6" ]] || [[ $user_input = "3.7" ]] || [[ $user_input = "3.8" ]]
+            then
+                echo ""
+                valid_python=true
+                python_version=$user_input
+                echo ""
+            else
+                echo "Invalid input. Please enter version, such as \"3.6\" or \"3.7\"."
+                echo ""
+                echo ""
+            fi
+        done
+    fi
 
     user_confirmation "Install MySQL dependency requirements?"
     mysql=$return_value
     echo ""
+    echo ""
 
     user_confirmation "Install Ldap dependency requirements?"
     ldap=$return_value
+    echo ""
     echo ""
 
     # Install apt-get packages.
@@ -87,7 +110,7 @@ function main () {
     apt-get install npm -y
     sudo ./general/installers/misc/npm_install.sh
 
-    if [[ "$mysql" = true ]]
+    if [[ "$mysql" == true ]]
     then
         echo ""
         echo -e "${color_blue}Installing MySQL dependencies...${color_reset}"
@@ -97,7 +120,7 @@ function main () {
         echo -e "${color_blue}Skipping MySQL dependencies...${color_reset}"
     fi
 
-    if [[ "$ldap" = true ]]
+    if [[ "$ldap" == true ]]
     then
         echo ""
         echo -e "${color_blue}Installing Ldap dependencies...${color_reset}"
@@ -107,7 +130,7 @@ function main () {
         echo -e "${color_blue}Skipping Ldap dependencies...${color_reset}"
     fi
 
-    if [[ "$dev_setup" = true ]]
+    if [[ "$dev_setup" == true ]]
     then
         echo ""
         echo -e "${color_blue}Installing Selenium Testing dependencies...${color_reset}"
@@ -151,4 +174,30 @@ function main () {
     exit 0
 }
 
-main
+
+# Warn user with prompt. Skip if "force" arg was provided.
+if [[ ${args[@]} =~ "force" ]]
+then
+    # Force command provided. Skipping prompt.
+    # First remove arg as it's no longer necessary.
+    args=${args[@]#force}
+    main "${args[0]}"
+
+elif [[ ${args[@]} =~ "-f" ]]
+then
+    # Force flag provided. Skipping prompt.
+    # First remove arg as it's no longer necessary.
+    args=${args[@]#-f}
+    main "${args[0]}"
+
+else
+    # Display friendly prompt to user.
+    echo ""
+    echo "Note: This script will install system packages."
+    echo -e "      ${color_cyan}To cancel, hit ctrl+c now. Otherwise hit enter to start.${color_reset}"
+    read user_input
+    echo ""
+
+    main "${args[0]}"
+fi
+
