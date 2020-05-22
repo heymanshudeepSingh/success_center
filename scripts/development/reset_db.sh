@@ -17,24 +17,6 @@ source $(dirname $0)/../utils.sh
 change_to_scripts_directory
 
 
-###
- # Display passed prompt and get user input.
- # Return true on "yes" or false otherwise.
- ##
-function user_confirmation () {
-
-    echo -e "$1 ${color_cyan}[ Yes | No ]${color_reset}"
-    read user_input
-
-    if [[ "$user_input" = "yes" ]] || [[ "$user_input" = "y" ]] || [[ "$user_input" = "YES" ]] || [[ "$user_input" = "Y" ]]
-    then
-        return_value=true
-    else
-        return_value=false
-    fi
-}
-
-
 function main () {
     # Remove migrations.
     ./development/reset_migrations.sh force
@@ -68,7 +50,6 @@ function main () {
     echo -e "${color_blue}Seeding data...${color_reset}"
 
     model_count="$1"
-    echo "model_count: $model_count"
     re='^[0-9]+$'
     if ! [[ $model_count =~ $re ]]
     then
