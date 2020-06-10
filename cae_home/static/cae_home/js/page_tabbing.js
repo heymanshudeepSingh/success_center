@@ -34,13 +34,18 @@ if (document.getElementById("pagetabs-template-variables")) {
  */
 function page_tab_generation_main() {
     // Get default pagetab content container.
-    var pagetab_content_containers = document.getElementsByClassName('page-tabs');
+    var pagetab_content_containers = document.getElementsByClassName("page-tabs");
 
     // Handle for each pagetab container found on page. This allows multiple to exist on a page, if desired.
     for (var index = 0; index < pagetab_content_containers.length; index++) {
         // Populate variables.
+        pagetabs_header_dict = {
+            "All": [],
+            "Other": [],
+        };
+        pagetabs_header_ordering = [];
         populate_page_tab_variables(pagetab_content_containers[index]);
-        generate_page_tabs(pagetab_content_containers[index]);
+        generate_page_tabs(pagetab_content_containers[index], index);
     }
 }
 
@@ -69,7 +74,7 @@ function populate_page_tab_variables(pagetab_content_container) {
         // Proceed if element has content.
         } else {
             // Check if element is H2 header. If so, create a new key in header_dict, using element's text value.
-            if (current_element.tagName == 'H2') {
+            if (current_element.tagName == "H2") {
                 current_header = current_element.firstChild.nodeValue;
 
                 // Check if item is in "tabbable topics" array. By default, all headers are allowed.
@@ -101,7 +106,7 @@ function populate_page_tab_variables(pagetab_content_container) {
 /**
  * Generates actual tab navigation elements on page.
  */
-function generate_page_tabs(pagetab_content_container) {
+function generate_page_tabs(pagetab_content_container, element_num) {
 
     // Check if we have at least two unique headers to create tabs for.
     // If so, generate pagetabs html. Otherwise, leave page as is.
@@ -135,14 +140,14 @@ function generate_page_tabs(pagetab_content_container) {
         // Default "All" tab. Will always be present in a page tabs page.
         // Create tab for "All".
         var all_tab = document.createElement("li");
-        all_tab.id = "pagetabs-all-tab";
+        all_tab.id = "pagetabs-" + element_num + "-all-tab";
         all_tab.className = "pagetabs-tab-element";
         all_tab.innerHTML = "All";
         page_tabs_ul.append(all_tab);
 
         // Create page content div for "All".
         var all_div = document.createElement("div");
-        all_div.id = "pagetabs-all-div";
+        all_div.id = "pagetabs-" + element_num + "-all-div";
         all_div.className = "pagetabs-content-element";
         var all_arr_length = pagetabs_header_dict["All"].length;
         for (index = 0; index < all_arr_length; index++) {
@@ -153,13 +158,13 @@ function generate_page_tabs(pagetab_content_container) {
         // In most cases, we will have an automatically generated "Other" tab, too.
         // Create tab for "Other".
         var other_tab = document.createElement("li");
-        other_tab.id = "pagetabs-other-tab";
+        other_tab.id = "pagetabs-" + element_num + "-other-tab";
         other_tab.className = "pagetabs-tab-element";
         other_tab.innerHTML = "Other";
 
         // Create page content for "Other".
         var other_div = document.createElement("div");
-        other_div.id = "pagetabs-other-div";
+        other_div.id = "pagetabs" + element_num + "-other-div";
         other_div.className = "pagetabs-content-element";
 
         // Loop through all values present in ordering array to dynamically add all other headers.
@@ -174,14 +179,14 @@ function generate_page_tabs(pagetab_content_container) {
 
                 // Create tab for current header.
                 var curr_tab = document.createElement("li");
-                curr_tab.id = "pagetabs-" + header_slug + "-tab";
+                curr_tab.id = "pagetabs-" + element_num + "-" + header_slug + "-tab";
                 curr_tab.className = "pagetabs-tab-element";
                 curr_tab.innerHTML = curr_header;
                 page_tabs_ul.append(curr_tab);
 
                 // Create page content div for current header.
                 var curr_div = document.createElement("div");
-                curr_div.id = "pagetabs-" + header_slug + "-div";
+                curr_div.id = "pagetabs-" + element_num + "-" + header_slug + "-div";
                 curr_div.className = "pagetabs-content-element";
                 var array_length = pagetabs_header_dict[curr_header].length;
                 for (var inner_index = 0; inner_index < array_length; inner_index++) {
@@ -220,7 +225,7 @@ function generate_page_tabs(pagetab_content_container) {
         // Add "All" value to start of array.
         // If we have tabs at all, then this is always present and first.
         pagetabs_header_ordering.unshift("All");
-        current_tab_parent = document.getElementsByClassName('pagetabs-tab-container')[0].childNodes[0];
+        current_tab_parent = document.getElementsByClassName("pagetabs-tab-container")[element_num].childNodes[0];
 
         // Add click event listeners for pagetabs.
         for (var index = 0; index < pagetabs_header_ordering.length; index++) {
@@ -231,6 +236,7 @@ function generate_page_tabs(pagetab_content_container) {
             current_tab.addEventListener("click", function() {
                 // Get index of clicked tab element.
                 // Do this by cycling back through parent container until we get to first child, and counting each.
+
                 var element_index = 0;
                 var current_tab = this;
                 while (current_tab.previousSibling != null) {
@@ -241,7 +247,7 @@ function generate_page_tabs(pagetab_content_container) {
                 // Hide all div tab-sections, except the one clicked.
                 for (var tab_index = 0; tab_index < pagetabs_header_ordering.length; tab_index++) {
                     // Get parent of content elements to hide/show.
-                    content_container = document.getElementsByClassName('pagetabs-content-container')[0];
+                    content_container = document.getElementsByClassName("pagetabs-content-container")[element_num];
 
                     // Check if same index as clicked. If so, show instead.
                     if (element_index == tab_index) {
@@ -255,12 +261,12 @@ function generate_page_tabs(pagetab_content_container) {
             });
 
             // Also hide all content, initially. Otherwise we'll have duplicates on page.
-            var tab_content = document.getElementsByClassName('pagetabs-content-container')[0].childNodes[index];
+            var tab_content = document.getElementsByClassName("pagetabs-content-container")[element_num].childNodes[index];
             tab_content.style.display = "none";
         }
 
         // Set "All" content to be visible. Everything else should be hidden by now.
-        document.getElementsByClassName('pagetabs-content-container')[0].childNodes[0].style.display = "block";
+        document.getElementsByClassName("pagetabs-content-container")[element_num].childNodes[0].style.display = "block";
     }
 }
 
