@@ -13,20 +13,8 @@ var pagetabs_header_dict = {
 };
 var allow_all_headers = true;
 var pagetabs_header_ordering = [];
+var page_tabbable_topics =[];
 var generate_page_tab_bool = true;
-
-// Get "tabbable topics" if provided.
-var page_tabbable_topics = []
-if (document.getElementById("pagetabs-template-variables")) {
-    // Topics were provided by template.
-    page_tabbable_topics = document.getElementById("pagetabs-template-variables").innerHTML;
-
-    // Topics acquired. Element no longer servers a purpose. Remove.
-    document.getElementById("pagetabs-template-variables").remove();
-} else {
-    // Topics were not provided by template.
-    page_tabbable_topics =["Test 1", "Test 2", "Test 3"];
-}
 
 
 /**
@@ -44,6 +32,19 @@ function page_tab_generation_main() {
             "Other": [],
         };
         pagetabs_header_ordering = [];
+        page_tabbable_topics = [];
+
+        // Get tabbable topics, if provided.
+        tabbable_topics = pagetab_content_containers[index].dataset.headers;
+        if (tabbable_topics != null && tabbable_topics != "") {
+            // Header topics provided. Parse and use that for tabbing.
+            allow_all_headers = false;
+            page_tabbable_topics = tabbable_topics.split(", ");
+        } else {
+            // Header topics not provided. Default to using all found H2 elements.
+            allow_all_headers = true;
+        }
+
         populate_page_tab_variables(pagetab_content_containers[index]);
         generate_page_tabs(pagetab_content_containers[index], index);
     }
@@ -255,9 +256,6 @@ function generate_page_tabs(pagetab_content_container, element_num) {
                         // On clicked element.
 
                         // Add selected class to tab.
-                        // console.log("Clicked:");
-                        // console.log(current_tab_parent.childNodes[tab_index]);
-                        // console.log(this);
                         $(tab_container.childNodes[tab_index]).addClass("selected");
 
                         // Set to content to display.
