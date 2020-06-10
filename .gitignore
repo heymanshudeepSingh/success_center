@@ -29,6 +29,9 @@ package-lock.json
 *.css.map
 *.sass-cache/
 
+# Do not track compiled JS files.
+dist/
+
 # Do not track files created from selenium tests.
 geckodriver.log
 
