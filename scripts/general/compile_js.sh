@@ -74,38 +74,38 @@ function main () {
         cd ..
         npm install
         cd ./scripts/
-    fi
 
-    # Execute depending on provided "watch" arg.
-    if [[ ${args[@]} =~ "watch" ]]
-    then
-        # Watch provided by user.
-        full_command=(npx concurrently "${compile_command[@]}" "${merge_command[@]}")
+        # Execute depending on provided "watch" arg.
+        if [[ ${args[@]} =~ "watch" ]]
+        then
+            # Watch provided by user.
+            full_command=(npx concurrently "${compile_command[@]}" "${merge_command[@]}")
 
-        echo ""
-        echo -e "${color_blue}Compiling React and Merging JavaScript:${color_reset}"
-        echo "${full_command[@]}"
-        echo ""
-        "${full_command[@]}"
-        echo ""
+            echo ""
+            echo -e "${color_blue}Compiling React and Merging JavaScript:${color_reset}"
+            echo "${full_command[@]}"
+            echo ""
+            "${full_command[@]}"
+            echo ""
 
-    else
-        # Watch not provided by user.
+        else
+            # Watch not provided by user.
 
-        compile_command=(npx concurrently "${compile_command[@]}")
-        echo ""
-        echo -e "${color_blue}Compiling React Code:${color_reset}"
-        echo "${compile_command[@]}"
-        "${compile_command[@]}"
-        echo ""
+            compile_command=(npx concurrently "${compile_command[@]}")
+            echo ""
+            echo -e "${color_blue}Compiling React Code:${color_reset}"
+            echo "${compile_command[@]}"
+            "${compile_command[@]}"
+            echo ""
 
-        merge_command=(npx concurrently "${merge_command[@]}")
-        echo ""
-        echo -e "${color_blue}Merging JavaScript Files:${color_reset}"
-        echo "${merge_command[@]}"
-        echo ""
-        "${merge_command[@]}"
-        echo ""
+            merge_command=(npx concurrently "${merge_command[@]}")
+            echo ""
+            echo -e "${color_blue}Merging JavaScript Files:${color_reset}"
+            echo "${merge_command[@]}"
+            echo ""
+            "${merge_command[@]}"
+            echo ""
+        fi
     fi
 
 }
