@@ -52,7 +52,7 @@ function main_help() {
     echo -e "${color_blue}General${color_reset}:"
     echo "    first_time_setup - Installs dependencies and sets up project for the first time on a machine."
     echo "    compile_css - Compiles all SASS files to CSS."
-    echo "    compile_react - Compiles all React files to JS."
+    echo "    compile_js - Compiles all React files to JS."
     echo "    update_npm - Attempts to update all npm dependencies."
     echo ""
     echo -e "${color_blue}Development${color_reset}:"
@@ -176,36 +176,36 @@ function sass_help () {
 
 
 ###
- # Runs the script for compiling react.
+ # Runs the script for compiling JavaScript.
  ##
-function compile_react () {
-    ./general/compile_react.sh "${@}"
+function compile_js () {
+    ./general/compile_js.sh "${@}"
 }
 ###
- # Aliases for "compile_react".
+ # Aliases for "compile_js".
  ##
+ function compile_react () {
+    compile_js "${@}"
+}
 function react () {
-    compile_react "${@}"
+    compile_js "${@}"
 }
 function js () {
-    compile_react "${@}"
-}
-function compile_js () {
-    compile_react "${@}"
+    compile_js "${@}"
 }
 function javascript () {
-    compile_react "${@}"
+    compile_js "${@}"
 }
 function compile_javascript () {
-    compile_react "${@}"
+    compile_js "${@}"
 }
 
 
 ###
  # Displays helper text for script.
  ##
-function compile_react_help () {
-    echo -e "${color_blue}Script${color_reset}: compile_react.sh"
+function compile_js_help () {
+    echo -e "${color_blue}Script${color_reset}: compile_js.sh"
     echo "    Compiles all project React files to JS."
     echo "    Includes both CAE Workspace and includes supbrojects in the \"apps\" directory."
     echo ""
@@ -218,29 +218,29 @@ function compile_react_help () {
     echo "    * watch - Watches for changes."
     echo ""
     echo -e "${color_blue}Aliases${color_reset}:"
+    echo "    * compile_react"
     echo "    * react"
     echo "    * js"
-    echo "    * compile_js"
     echo "    * javascript"
     echo "    * compile_javascript"
 }
 ###
- # Aliases for "compile_react_help".
+ # Aliases for "compile_js_help".
  ##
+ function compile_react_help () {
+    compile_js_help "${@}"
+}
 function react_help () {
-    compile_react_help "${@}"
+    compile_js_help "${@}"
 }
 function js_help () {
-    compile_react_help "${@}"
-}
-function compile_js_help () {
-    compile_react_help "${@}"
+    compile_js_help "${@}"
 }
 function javascript_help () {
-    compile_react_help "${@}"
+    compile_js_help "${@}"
 }
 function compile_javascript_help () {
-    compile_react_help "${@}"
+    compile_js_help "${@}"
 }
 
 
