@@ -33,6 +33,13 @@ def css_examples(request):
     })
 
 
+def css_page_tabbing(request):
+    """
+    Displays examples of custom HTML/CSS layout for "page tabbing" elements.
+    """
+    return TemplateResponse(request, 'cae_tools/css_examples/page_tabbing.html', {})
+
+
 def color_tool(request):
     """
     Color tool.

@@ -1,0 +1,76 @@
+{% extends 'cae_tools/main.html' %}
+
+
+{% block title_page_name %}Page Tabbing | CSS Examples | {% endblock title_page_name %}
+
+
+{% block content %}
+  <h1>CSS Examples - Page Tabbing</h1>
+  <p>
+    "Page tabbing" elements separate sections of a page into unique views using JavaScript. These sections can be shown
+    or hidden based on user click actions.
+  </p>
+  <br>
+  <p style="font-weight: bold;">How it Works:</p>
+  <p>
+    Clickable tabbings are created for all divs with the "page-tabs" styling. There will always be an "All" tab that
+    shows all content. This is what shows on page load. Clicking any other tab will hide all other content and show only
+    content for that tab. Tabs are determined by "direct child" H2 elements of this "page-tabs" div. Content is
+    associated with a tab if it is directly beneath the corresponding H2 element.
+  </p>
+  <br>
+  <p>
+    If headers are not specified, then all "direct child" H2 elements are turned into tabs. Otherwise, headers can be
+    specified in the "page-tabs" divs element, using a "data-headers" attribute. Any headers not included in
+    "data-headers" is lumped into an "Other" tab. Note that these headers must be separated by a space and comma.
+  </p>
+
+  <h2>Example of Default Handling</h2>
+  <p>An example of the most basic possible "Page Tabbing" element. No headers are specified.</p>
+
+  <div class="page-tabs">
+    <h2>Default Content Section 1</h2>
+    <p>This is a section 1 content item. It will be tabbed.</p>
+    <br>
+    {% lorem 1 p %}
+
+    <h2>Default Content Section 2</h2>
+    <p>This is a section 2 content item. It will be tabbed.</p>
+    <br>
+    {% lorem 1 p %}
+
+    <h2>Default Content Section 3</h2>
+    <p>This is a section 3 content item. It will be tabbed.</p>
+    <br>
+    {% lorem 1 p %}
+  </div>
+
+  <br>
+  <br>
+  <br>
+  <br>
+
+  <h2>Example of Specifying Tab Names</h2>
+  <p>An example of a "Page Tabbing" element where headers are specified.</p>
+  <div class="page-tabs" data-headers="Content Section 1, Content Section 2">
+    <h2>Content Section 1</h2>
+    <p>The h2 title of this section is included in the div "data-headers" attribute. It will be tabbed.<p>
+    <br>
+    {% lorem 1 p %}
+
+    <h2>Content Section 2</h2>
+    <p>The h2 title of this section is included in the div "data-headers" attribute. It will be tabbed.<p>
+    <br>
+    {% lorem 1 p %}
+
+    <h2>Content Section 3</h2>
+    <p>The h2 title of this section is not included in the div "data-headers" attribute. It will not be tabbed.<p>
+    <br>
+    {% lorem 1 p %}
+
+    <h2>Content Section 4</h2>
+    <p>The h2 title of this section is not included in the div "data-headers" attribute. It will not be tabbed.<p>
+    <br>
+    {% lorem 1 p %}
+  </div>
+{% endblock content %}
