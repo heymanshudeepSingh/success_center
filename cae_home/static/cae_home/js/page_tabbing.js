@@ -141,7 +141,7 @@ function generate_page_tabs(pagetab_content_container, element_num) {
         // Create tab for "All".
         var all_tab = document.createElement("li");
         all_tab.id = "pagetabs-" + element_num + "-all-tab";
-        all_tab.className = "pagetabs-tab-element";
+        all_tab.className = "pagetabs-tab-element selected";
         all_tab.innerHTML = "All";
         page_tabs_ul.append(all_tab);
 
@@ -247,15 +247,30 @@ function generate_page_tabs(pagetab_content_container, element_num) {
                 // Hide all div tab-sections, except the one clicked.
                 for (var tab_index = 0; tab_index < pagetabs_header_ordering.length; tab_index++) {
                     // Get parent of content elements to hide/show.
+                    tab_container = this.parentNode;
                     content_container = document.getElementsByClassName("pagetabs-content-container")[element_num];
 
                     // Check if same index as clicked. If so, show instead.
                     if (element_index == tab_index) {
-                        // On clicked element. Set to "block" to display.
-                        content_container.childNodes[tab_index].style.display = "block";
+                        // On clicked element.
+
+                        // Add selected class to tab.
+                        // console.log("Clicked:");
+                        // console.log(current_tab_parent.childNodes[tab_index]);
+                        // console.log(this);
+                        $(tab_container.childNodes[tab_index]).addClass("selected");
+
+                        // Set to content to display.
+                        $(content_container.childNodes[tab_index]).slideDown();
                     } else {
-                        // On a sibling element. Set to display none to hide.
-                        content_container.childNodes[tab_index].style.display = "none";
+                        // On a sibling element.
+
+                        // Remove selected class, if present.
+                        $(tab_container.childNodes[tab_index]).removeClass("selected");
+
+                        // Set content to hide.
+                        $(content_container.childNodes[tab_index]).slideUp();
+
                     }
                 }
             });
