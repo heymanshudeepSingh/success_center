@@ -70,7 +70,7 @@ function main () {
     if [[ $compile_command != "" || $merge_command != "" ]]
     then
         echo ""
-        echo -e "${color_blue}Installing npm depenencies.${color_reset}"
+        echo -e "${color_blue}Installing npm dependencies.${color_reset}"
         cd ..
         npm install
         cd ./scripts/
