@@ -6,37 +6,58 @@
 
 {% block content %}
   <h1>CSS Examples - Articles</h1>
+  <p>
+    Articles are good elements to split up larger sections of content, while having minimal visual separation of said
+    content. They are similar to "panels", except that they visually de-emphasize content.
+  </p>
+  <p>To create an article, one can either use the &#60;article&#62; element or a div with the class of "article".</p>
 
   <article id="article-examples">
     <h2>Article Examples</h2>
-    <p>
-      Articles are good elements to split up larger sections of content. By default, they are clear. To create an
-      article, one can either use the &#60;article&#62; element or a div with the class of "article".
-    </p>
-    <article class="color">
-      <p>
-        But adding the "color" class gives articles a border and background, like this. Or if using a div element, then
-        use the "article-color" class.
-      </p>
+    <article>
+      <h3>Default Article</h3>
+      <p>This is a article with minimal styles. By default, articles are clear and extremely minimal.</p>
     </article>
-    <section>
-      <p>
-        Usually, to subdivide content within an article, you would use a section element, like this one. Again, to
-        create an article, one can either use the &#60;section&#62; element or a div with the class of "section".
-      </p>
-    </section>
-    <section class="color">
-      <p>
-        Similarly to articles, sections can add the "color" class to get a visible border and background. If using a
-        div element, then use the "section-color" class.
-      </p>
-    </section>
-    <div class="article-color">
-      <p>This is an example of a colored section within a colored article.</p>
-      <div class="section-color">
-        {% lorem 1 p %}
-      </div>
+    <article class="color">
+      <h3>Article with "color" Class</h3>
+      <p>Adding the "color" class gives articles a border and background, like this one has.</p>
+      <p>Note that the "WMU" theme has a clear background for this, but borders should still be visible.</p>
+    </article>
+    <div class="article">
+      <h3>Div Article</h3>
+      <p>Similarly, div elements can be given article stylings as well. Just add the "article" class to the div.</p>
     </div>
+    <div class="article color">
+      <h3>Div Article with "color" Class</h3>
+
+      <p>And adding the "color" class to a div article also gives it a border and background.</p>
+      <p>Note that the "WMU" theme has a clear background for this, but borders should still be visible.</p>
+    </div>
+  </article>
+
+  <article id="section-examples">
+    <h2>Section Examples</h2>
+    <article>
+      <h3>Basic Use of Sections within Articles</h3>
+      <section>
+        <p>
+          Usually, to subdivide content within an article, you would use a section element, like this one. To
+          create an section, one can either use the &#60;section&#62; element or a div with the class of "section".
+        </p>
+      </section>
+      <section class="color">
+        <p>
+          Similarly to articles, sections can add the "color" class to get a visible border and background.
+        </p>
+      </section>
+    </article>
+    <article class="color">
+      <h3>Example of Nested Elements with "Color" Class</h3>
+      <p>This is an example of a colored section within a colored article.</p>
+      <section class="color">
+        {% lorem 1 p %}
+      </section>
+    </article>
   </article>
 
 {% endblock content %}

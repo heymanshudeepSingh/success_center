@@ -6,12 +6,14 @@
 
 {% block content %}
   <h1>CSS Examples - Buttons</h1>
+  <p>
+    Standard buttons. Can be either standard button (&#60;button&#62;), anchor (&#60;a&#62;), or div (&#60;div&#62;)
+    type.
+  </p>
 
   <article id="button-examples">
     <h2>Button Element Examples</h2>
-    <p>
-      Standard buttons. Can be either button (&#60;button&#62;) or anchor (&#60;a&#62;) type.
-    </p>
+
     <section class="center">
       <h3>Standard Button Elements</h3>
       <button>Default</button>
@@ -36,9 +38,25 @@
       <a href="" class="button danger">Danger</a>
     </section>
 
+    <section class="center">
+      <h3>Div Button Elements</h3>
+      <div class="button">Default</div>
+      <div class="button primary">Primary</div>
+      <div class="button secondary">Secondary</div>
+      <div class="button info">Info</div>
+      <div class="button success">Success</div>
+      <div class="button warning">Warning</div>
+      <div class="button error">Error</div>
+      <div class="button danger">Danger</div>
+    </section>
+  </article>
+
+  <article>
+    <h2>Button Element Groups</h2>
+    <p>Buttons can also be grouped together. To do this, surround buttons in a div with the "buttons" class.</p>
+
     <section>
-      <h3>Button Element Groups</h3>
-      <p>Buttons can also be grouped together.</p>
+      <h3>Standard Button Element Groups</h3>
       <div class="buttons">
         <button>Default</button>
         <button class="primary">Primary</button>
@@ -49,6 +67,9 @@
         <button class="error">Error</button>
         <button class="danger">Danger</button>
       </div>
+    </section>
+    <section>
+      <h3>Anchor Button Element Groups</h3>
       <div class="buttons">
         <a href="" class="button">Default</a>
         <a href="" class="button primary">Primary</a>
@@ -58,6 +79,19 @@
         <a href="" class="button warning">Warning</a>
         <a href="" class="button error">Error</a>
         <a href="" class="button danger">Danger</a>
+      </div>
+    </section>
+    <section>
+      <h3>Div Button Element Groups</h3>
+      <div class="buttons">
+        <div class="button">Default</div>
+        <div class="button primary">Primary</div>
+        <div class="button secondary">Secondary</div>
+        <div class="button info">Info</div>
+        <div class="button success">Success</div>
+        <div class="button warning">Warning</div>
+        <div class="button error">Error</div>
+        <div class="button danger">Danger</div>
       </div>
     </section>
   </article>

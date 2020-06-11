@@ -11,31 +11,13 @@
       <a href="#content">Back to Top</a>
     </li>
     <li>
-      <a href="#button-examples">Button Examples</a>
+      <a href="#css-example-links">CSS Example Links</a>
     </li>
     <li>
-      <a href="#alert-examples">Alert Examples</a>
+      <a href="#site-themes">Site Themes</a>
     </li>
     <li>
-      <a href="#status-message-examples">Status Message Examples</a>
-    </li>
-    <li>
-      <a href="#article-examples">Article Examples</a>
-    </li>
-    <li>
-      <a href="#table-examples">Table Examples</a>
-    </li>
-    <li>
-      <a href="#panel-examples">Panel Examples</a>
-    </li>
-    <li>
-      <a href="#tabbed-panel-examples">Tabbed Panel Examples</a>
-    </li>
-    <li>
-      <a href="#form-examples">Form Examples</a>
-    </li>
-    <li>
-      <a href="#specific-usage-examples">Specific Usage Examples</a>
+      <a href="#site-theme-classes">Site Theme Classes</a>
     </li>
   </ul>
 {% endblock content_bar_left %}
@@ -72,14 +54,12 @@
       These page contains various, reusable, custom css stylings. Use these for reference when formatting new pages. All
       custom elements make use of the provided "site themes" that come with the workspace project.
     </p>
-    <br>
     <p>
-      The original intention of these styles was to have a set of simple CSS styles to use so that all CAE Center
-      projects have a consistent look and feel. While existing CSS frameworks like bootstrap technically accomplish
-      this, we originally felt that bootstrap tends to make element html dirty and was generally overkill for our
+      The original intention of these was to have a set of simple CSS styles to use so that all CAE Center projects have
+      a consistent look and feel. While existing CSS frameworks like bootstrap technically accomplish this, we
+      originally felt that bootstrap tends to make html elements "dirty" and hard and was generally overkill for our
       anticipated needs. Thus, we wanted something that was simpler and less verbose to use.
     </p>
-    <br>
     <p>
       Of course, like the rest of this "Workspace" project, everything has grown above and beyond initial expectations.
       We didn't expect this CSS to approach the equivalent of a full, alternative to bootstrap, like it is now. Thus, we
@@ -87,8 +67,8 @@
     </p>
     <br>
     <p>
-      Generally speaking, the original CSS for these files can be found at
-      <span class="highlight info">cae_home/static/cae_home/css/sass/</span>.
+      Generally speaking, the original CSS for these elements can be found at
+      <span class="highlight info">cae_home/static/cae_home/css/sass/content/</span>.
     </p>
     <p>
       If there is associated JavaScript, then it can be found at
@@ -111,8 +91,21 @@
     </ul>
   </article>
 
-  <article id="theme-class-types">
-    <h2>Theme Class Types</h2>
+  <article id="site-themes">
+    <h2>Site Themes</h2>
+    <p>
+      The CSS for this site has various "themes" that the user can select. Selection is available from editing the user
+      profile (when logged in, hover over username in topright corner for nav menu. Then click "user settings"). These
+      themes essentially change the look and feel of the site, by adjusting the colors but not the actual layout.
+    </p>
+    <p>
+      The original intent was to have "light and dark" versions of the site, but then we needed a "wmu-mockup" look, and
+      the number of themes grew from there.
+    </p>
+  </article>
+
+  <article id="site-theme-classes">
+    <h2>Site Theme Classes</h2>
     <p>
       Most of the elements described in these pages can be customized. In such cases, the elements will have a "default"
       look, and then additional looks depending specified classes. These classes only change the color of the class, not

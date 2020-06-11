@@ -6,13 +6,20 @@
 
 {% block content %}
   <h1>CSS Examples - Status Messages</h1>
+  <p>
+    Status Messages are similar to alerts, but intended to show up at the top of the page, usually after something
+    like a form submission.
+  </p>
+  <p>
+    Generally speaking, "Django messages" should be used to automatically create these. If you need to to create
+    something like this in the middle of the page, more often than not, an alert element should be used instead.
+  </p>
+  <p>
+    These will have an "x" on the right hand side for the user to remove the message from the page.
+  </p>
 
   <article id="status-message-examples">
     <h2>Status Message Examples</h2>
-    <p>
-      Status Messages are similar to alerts, but intended to show up at the top of the page, usually after something
-      like a form submission. Generally speaking, "Django messages" should be used to create these.
-    </p>
     <ul id="status-message-container">
       <li class="message">
         <p>Default <a href="">Test Link</a> Default</p>

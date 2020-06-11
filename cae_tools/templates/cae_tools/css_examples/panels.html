@@ -7,15 +7,31 @@
 {% block content %}
   <h1>CSS Examples - Panels</h1>
 
+  <p>
+    Panels can be used to visually section off related content elements. They are similar to "articles", except that
+    they visually emphasize content.
+  </p>
+  <p>
+    Generally speaking, a panel is comprised of a div with the "panel" class. It can have up to three expected direct
+    child types:
+  </p>
+  <ul>
+    <li>"header" or "head"</li>
+    <li>"content" or "body"</li>
+    <li>"footer" or "foot"</li>
+  </ul>
+  <p>
+    At least one of the child types is expected to be present. Up to all three can be present. And ordering matters.
+    That is, if present, the header child is expected to be first, and the footer child is expected to be last.
+  </p>
+  <p>
+    Direct children of the "header" and "footer" sections will always try to space out evenly, while direct children
+    in the "content" section will format in normal paragraph format.
+  </p>
+
   <article id="panel-examples">
-    <h2>Panel Examples</h2>
-    <p>
-      Panels can be used to visually section off related content elements.
-    </p>
-    <p>
-      Note: The stylings (".header" or ".head"), (".content" or ".body"), and (".footer" or ".foot") all work for
-      targeting the appropriate panel children.
-    </p>
+    <h2>Basic Panel Examples</h2>
+
     <div class="panel">
       <div class="header">
         <p>Default Header Example</p>
@@ -106,13 +122,13 @@
     </div>
   </article>
 
-
   <article id="tabbed-panel-examples">
     <h2>Tabbed Panel Examples</h2>
-    <p>Panels with clickable tabs.</p>
+    <p>Panels with clickable tabs to show/hide content.</p>
     <p>
-      To create, simply use a standard panel. Within the panel's body/content section, create divs with the class "tab"
-      for each tab you want. The first header element within each tab will become the tab's nav text.
+      To create, start with a standard panel and add the class "tabs" to the outermost div. Then within the panel's
+      body/content section, create divs with the class "tab" for each tab you want. The first header element within each
+      tab will become the clickable nav text.
     </p>
 
     <div class="panel tabs">
@@ -387,23 +403,61 @@
     <h2>Specific Usage Examples</h2>
 
     <section>
+      <h3>Panel with Only a Header</h3>
       <div class="panel">
         <div class="header"><p>This panel only has a header section.</p></div>
       </div>
 
+      <h3>Panel with Only a Body</h3>
       <div class="panel">
         <div class="content"><p>This panel only has a content section.</p></div>
       </div>
 
+      <h3>Panel with Only a Footer</h3>
       <div class="panel">
         <div class="footer"><p>This panel only has a footer section.</p></div>
       </div>
     </section>
 
     <section>
+      <h3>Panels with No Content Section</h3>
       <div class="panel">
         <div class="header">
-          <p>Panel with different status buttons and no content section.</p>
+          <p>This is a "default" panel with a header section. There is no content section.</p>
+        </div>
+        <div class="footer">
+          <p>This is a "default" panel with a footer section. There is no content section.</p>
+        </div>
+      </div>
+
+      <div class="panel primary">
+        <div class="header">
+          <p>This is a "primary" panel with a header section. There is no content section.</p>
+        </div>
+        <div class="footer">
+          <p>This is a "primary" panel with a footer section. There is no content section.</p>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="header">
+          <p>This is a "default" panel with different status buttons and no content section.</p>
+        </div>
+        <div class="footer">
+          <div><button>Default Button</button><a class="button" href="">Default a-Button</a></div>
+          <div><button class="primary">Primary Button</button><a class="button primary" href="">Primary a-Button</a></div>
+          <div><button class="secondary">Secondary Button</button><a class="button secondary" href="">Secondary a-Button</a></div>
+          <div><button class="info">Info Button</button><a class="button info" href="">Info a-Button</a></div>
+          <div><button class="success">Success Button</button><a class="button success" href="">Success a-Button</a></div>
+          <div><button class="warning">Warning Button</button><a class="button warning" href="">Warning a-Button</a></div>
+          <div><button class="error">Error Button</button><a class="button error" href="">Error a-Button</a></div>
+          <div><button class="danger">Danger Button</button><a class="button danger" href="">Danger a-Button</a></div>
+        </div>
+      </div>
+
+      <div class="panel primary">
+        <div class="header">
+          <p>This is a "primary" panel with different status buttons and no content section.</p>
         </div>
         <div class="footer">
           <div><button>Default Button</button><a class="button" href="">Default a-Button</a></div>
@@ -419,6 +473,8 @@
     </section>
 
     <section>
+      <h2>Panels with Nested Subpanels</h2>
+      <p>Technically, panels can be nested within panels. Not sure how useful this is in practice though.</p>
       <div class="panel primary">
         <div class="header">
           <h3>This is panel with nested subpanels</h3>
