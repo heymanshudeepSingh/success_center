@@ -46,16 +46,11 @@
             margin-bottom: 10px;
         }
 
+        // The very first header element in an article element.
         @each $header_element in $header_element_list {
-            > #{$header_element} {
-                padding-top: 0;
-                margin-bottom: 10px;
-            }
-        }
-
-        > p {
-            margin: 5px;
-        }
+        > #{$header_element}:first-child {
+                margin-top: 0px;
+        }}
 
     }}
 
@@ -164,7 +159,7 @@
 
         }}
 
-        article.color, div.article-color, section.color, div.section-color {
+        article.color, div.article.color, div.article-color, section.color, div.section.color, div.section-color {
             background-color: theme-background($theme, 'content-alt');
             border: 1px solid theme-background($theme, 'border');
         }

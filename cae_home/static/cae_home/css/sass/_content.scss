@@ -81,6 +81,21 @@
         margin: 1px;
     }
 
+    // P elements that are visually a direct child of the content container.
+    > p, > article p {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    // Header elements that are visually a direct child of the content container.
+    @each $header_element in $header_element_list {
+    > #{$header_element}, >article #{$header_element} {
+        padding-top: 10px;
+        padding-bottom: 5px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }}
+
 }}
 
 //=====================================//
