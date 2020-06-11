@@ -1,10 +1,13 @@
 
-//==================//
-//==== Base CSS ====//
-//==================//
+//==========================//
+//==== Base Content CSS ====//
+//==========================//
 
-// This is essentially a "parent" file that gathers all other .scss files using
-// the precompiler called SASS.
+// This is essentially a "parent" file that gathers all other content .scss files
+// using the precompiler called SASS.
+//
+// We split our "base.css" into two files to (hopefully) somewhat reduce compile
+// time when updating our css stylings.
 
 
 //================================================================================//
@@ -36,10 +39,5 @@
 //================================================================================//
 //============================== Import Statements ===============================//
 //================================================================================//
-@import '_reset';                                                                 //
-@import '_body';                                                                  //
-@import '_header';                                                                //
-@import '_footer';                                                                //
-@import '_nav';                                                                   //
-//@import '_content';                                                             //
+@import '_content';                                                               //
 //================================================================================//
