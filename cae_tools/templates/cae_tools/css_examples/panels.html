@@ -1,0 +1,456 @@
+{% extends 'cae_tools/main.html' %}
+
+
+{% block title_page_name %}Panels | CSS Examples | {% endblock title_page_name %}
+
+
+{% block content %}
+  <h1>CSS Examples - Panels</h1>
+
+  <article id="panel-examples">
+    <h2>Panel Examples</h2>
+    <p>
+      Panels can be used to visually section off related content elements.
+    </p>
+    <p>
+      Note: The stylings (".header" or ".head"), (".content" or ".body"), and (".footer" or ".foot") all work for
+      targeting the appropriate panel children.
+    </p>
+    <div class="panel">
+      <div class="header">
+        <p>Default Header Example</p>
+        <a href="">Test Link</a>
+        <div><button>Button</button><a class="button" href="">a-Button</a></div>
+      </div>
+      <div class="content">
+        <p>Default Content with a <a href="">Test Link</a></p>
+      </div>
+      <div class="footer">Default Footer Example <a href="">Test Link</a></div>
+    </div>
+    <div class="panel primary">
+      <div class="header">
+        <p>Primary Header Example</p>
+        <a href="">Test Link</a>
+        <div><button>Button</button><a class="button" href="">a-Button</a></div>
+      </div>
+      <div class="content">
+        <p>Primary Content with a <a href="">Test Link</a></p>
+      </div>
+      <div class="footer">Primary Footer Example <a href="">Test Link</a></div>
+    </div>
+    <div class="panel secondary">
+      <div class="header">
+        <p>Secondary Header Example</p>
+        <a href="">Test Link</a>
+        <div><button>Button</button><a class="button" href="">a-Button</a></div>
+      </div>
+      <div class="content">
+        <p>Secondary Content with a <a href="">Test Link</a></p>
+      </div>
+      <div class="footer">Secondary Footer Example <a href="">Test Link</a></div>
+    </div>
+    <div class="panel info">
+      <div class="header">
+        <p>Info Header Example</p>
+        <a href="">Test Link</a>
+        <div><button class="info">Button</button><a class="button" href="">a-Button</a></div>
+      </div>
+      <div class="content">
+        <p>Info Content with a <a href="">Test Link</a></p>
+      </div>
+      <div class="footer">Info Footer Example <a href="">Test Link</a></div>
+    </div>
+    <div class="panel success">
+      <div class="header">
+        <p>Success Header Example</p>
+        <a href="">Test Link</a>
+        <div><button>Button</button><a class="button" href="">a-Button</a></div>
+      </div>
+      <div class="content">
+        <p>Success Content with a <a href="">Test Link</a></p>
+      </div>
+      <div class="footer">Success Footer Example <a href="">Test Link</a></div>
+    </div>
+    <div class="panel warning">
+      <div class="header">
+        <p>Warning Header Example</p>
+        <a href="">Test Link</a>
+        <div><button>Button</button><a class="button" href="">a-Button</a></div>
+      </div>
+      <div class="content">
+        <p>Warning Content with a <a href="">Test Link</a></p>
+      </div>
+      <div class="footer">Warning Footer Example <a href="">Test Link</a></div>
+    </div>
+    <div class="panel error">
+      <div class="header">
+        <p>Error Header Example</p>
+        <a href="">Test Link</a>
+        <div><button>Button</button><a class="button" href="">a-Button</a></div>
+      </div>
+      <div class="content">
+        <p>Error Content with a <a href="">Test Link</a></p>
+      </div>
+      <div class="footer">Error Footer Example <a href="">Test Link</a></div>
+    </div>
+    <div class="panel danger">
+      <div class="header">
+        <p>Danger Header Example</p>
+        <a href="">Test Link</a>
+        <div><button>Button</button><a class="button" href="">a-Button</a></div>
+      </div>
+      <div class="content">
+        <p>Danger Content with a <a href="">Test Link</a></p>
+      </div>
+      <div class="footer">Danger Footer Example <a href="">Test Link</a></div>
+    </div>
+  </article>
+
+
+  <article id="tabbed-panel-examples">
+    <h2>Tabbed Panel Examples</h2>
+    <p>Panels with clickable tabs.</p>
+    <p>
+      To create, simply use a standard panel. Within the panel's body/content section, create divs with the class "tab"
+      for each tab you want. The first header element within each tab will become the tab's nav text.
+    </p>
+
+    <div class="panel tabs">
+      <div class="header">
+        <p>Default Tabbed Panel</p>
+      </div>
+      <div class="body">
+        <div class="tab">
+          <h3>Tab 1</h3>
+          <p>Some content in Tab 1</p>
+          <a href="">A link in Tab 1</a>
+          <p>{% lorem random %}</p>
+        </div>
+        <div class="tab">
+          <h3>Tab 2</h3>
+          <p>Some content in Tab 2</p>
+          <a href="">A link in Tab 2</a>
+          <p>{% lorem random %}</p>
+        </div>
+        <div class="tab">
+          <h3>Tab 3</h3>
+          <p>Some content in Tab 3</p>
+          <a href="">A link in Tab 3</a>
+          <p>{% lorem random %}</p>
+        </div>
+        <div class="tab">
+          <h3>Tab 4</h3>
+          <p>Some content in Tab 4</p>
+          <a href="">A link in Tab 4</a>
+          <p>{% lorem random %}</p>
+        </div>
+        <div class="tab">
+          <h3>Tab 5</h3>
+          <p>Some content in Tab 5</p>
+          <a href="">A link in Tab 5</a>
+          <p>{% lorem random %}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel tabs primary">
+      <div class="header">
+        <p>Primary Tabbed Panel</p>
+      </div>
+      <div class="body">
+        <div class="tab">
+          <h3>Tab 1</h3>
+          <p>Some content in Tab 1</p>
+          <a href="">A link in Tab 1</a>
+          <p>{% lorem random %}</p>
+        </div>
+        <div class="tab">
+          <h3>Tab 2</h3>
+          <p>Some content in Tab 2</p>
+          <a href="">A link in Tab 2</a>
+          <p>{% lorem random %}</p>
+        </div>
+        <div class="tab">
+          <h3>Tab 3</h3>
+          <p>Some content in Tab 3</p>
+          <a href="">A link in Tab 3</a>
+          <p>{% lorem random %}</p>
+        </div>
+        <div class="tab">
+          <h3>Tab 4</h3>
+          <p>Some content in Tab 4</p>
+          <a href="">A link in Tab 4</a>
+          <p>{% lorem random %}</p>
+        </div>
+        <div class="tab">
+          <h3>Tab 5</h3>
+          <p>Some content in Tab 5</p>
+          <a href="">A link in Tab 5</a>
+          <p>{% lorem random %}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel tabs secondary">
+      <div class="header">
+        <p>Secondary Tabbed panel</p>
+      </div>
+      <div class="body">
+        <div class="tab">
+          <h3>Tab 1</h3>
+          <p>Some content in Tab 1</p>
+          <a href="">A link in Tab 1</a>
+          <p>{% lorem random %}</p>
+        </div>
+        <div class="tab">
+          <h3>Tab 2</h3>
+          <p>Some content in Tab 2</p>
+          <a href="">A link in Tab 2</a>
+          <p>{% lorem random %}</p>
+        </div>
+        <div class="tab">
+          <h3>Tab 3</h3>
+          <p>Some content in Tab 3</p>
+          <a href="">A link in Tab 3</a>
+          <p>{% lorem random %}</p>
+        </div>
+        <div class="tab">
+          <h3>Tab 4</h3>
+          <p>Some content in Tab 4</p>
+          <a href="">A link in Tab 4</a>
+          <p>{% lorem random %}</p>
+        </div>
+        <div class="tab">
+          <h3>Tab 5</h3>
+          <p>Some content in Tab 5</p>
+          <a href="">A link in Tab 5</a>
+          <p>{% lorem random %}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel tabs info">
+      <div class="header">
+        <p>Info Tabbed Panel</p>
+      </div>
+      <div class="body">
+        <div class="tab">
+          <h3>Tab 1</h3>
+          <p>Some content in Tab 1</p>
+          <a href="">A link in Tab 1</a>
+          <p>{% lorem random %}</p>
+        </div>
+        <div class="tab">
+          <h3>Tab 2</h3>
+          <p>Some content in Tab 2</p>
+          <a href="">A link in Tab 2</a>
+          <p>{% lorem random %}</p>
+        </div>
+        <div class="tab">
+          <h3>Tab 3</h3>
+          <p>Some content in Tab 3</p>
+          <a href="">A link in Tab 3</a>
+          <p>{% lorem random %}</p>
+        </div>
+        <div class="tab">
+          <h3>Tab 4</h3>
+          <p>Some content in Tab 4</p>
+          <a href="">A link in Tab 4</a>
+          <p>{% lorem random %}</p>
+        </div>
+        <div class="tab">
+          <h3>Tab 5</h3>
+          <p>Some content in Tab 5</p>
+          <a href="">A link in Tab 5</a>
+          <p>{% lorem random %}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel tabs success">
+      <div class="header">
+        <p>Success Tabbed Panel</p>
+      </div>
+      <div class="body">
+        <div class="tab">
+          <h3>Tab 1</h3>
+          <p>Some content in Tab 1</p>
+          <a href="">A link in Tab 1</a>
+          <p>{% lorem random %}</p>
+        </div>
+        <div class="tab">
+          <h3>Tab 2</h3>
+          <p>Some content in Tab 2</p>
+          <a href="">A link in Tab 2</a>
+          <p>{% lorem random %}</p>
+        </div>
+        <div class="tab">
+          <h3>Tab 3</h3>
+          <p>Some content in Tab 3</p>
+          <a href="">A link in Tab 3</a>
+          <p>{% lorem random %}</p>
+        </div>
+        <div class="tab">
+          <h3>Tab 4</h3>
+          <p>Some content in Tab 4</p>
+          <a href="">A link in Tab 4</a>
+          <p>{% lorem random %}</p>
+        </div>
+        <div class="tab">
+          <h3>Tab 5</h3>
+          <p>Some content in Tab 5</p>
+          <a href="">A link in Tab 5</a>
+          <p>{% lorem random %}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel tabs warning">
+      <div class="header">
+        <p>Warning Tabbed Panel</p>
+      </div>
+      <div class="body">
+        <div class="tab">
+          <h3>Tab 1</h3>
+          <p>Some content in Tab 1</p>
+          <a href="">A link in Tab 1</a>
+          <p>{% lorem random %}</p>
+        </div>
+        <div class="tab">
+          <h3>Tab 2</h3>
+          <p>Some content in Tab 2</p>
+          <a href="">A link in Tab 2</a>
+          <p>{% lorem random %}</p>
+        </div>
+        <div class="tab">
+          <h3>Tab 3</h3>
+          <p>Some content in Tab 3</p>
+          <a href="">A link in Tab 3</a>
+          <p>{% lorem random %}</p>
+        </div>
+        <div class="tab">
+          <h3>Tab 4</h3>
+          <p>Some content in Tab 4</p>
+          <a href="">A link in Tab 4</a>
+          <p>{% lorem random %}</p>
+        </div>
+        <div class="tab">
+          <h3>Tab 5</h3>
+          <p>Some content in Tab 5</p>
+          <a href="">A link in Tab 5</a>
+          <p>{% lorem random %}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel tabs error">
+      <div class="header">
+        <p>Error Tabbed Panel</p>
+      </div>
+      <div class="body">
+        <div class="tab">
+          <h3>Tab 1</h3>
+          <p>Some content in Tab 1</p>
+          <a href="">A link in Tab 1</a>
+          <p>{% lorem random %}</p>
+        </div>
+        <div class="tab">
+          <h3>Tab 2</h3>
+          <p>Some content in Tab 2</p>
+          <a href="">A link in Tab 2</a>
+          <p>{% lorem random %}</p>
+        </div>
+        <div class="tab">
+          <h3>Tab 3</h3>
+          <p>Some content in Tab 3</p>
+          <a href="">A link in Tab 3</a>
+          <p>{% lorem random %}</p>
+        </div>
+        <div class="tab">
+          <h3>Tab 4</h3>
+          <p>Some content in Tab 4</p>
+          <a href="">A link in Tab 4</a>
+          <p>{% lorem random %}</p>
+        </div>
+        <div class="tab">
+          <h3>Tab 5</h3>
+          <p>Some content in Tab 5</p>
+          <a href="">A link in Tab 5</a>
+          <p>{% lorem random %}</p>
+        </div>
+      </div>
+    </div>
+
+  </article>
+
+  <article id="specific-usage-examples">
+    <h2>Specific Usage Examples</h2>
+
+    <section>
+      <div class="panel">
+        <div class="header"><p>This panel only has a header section.</p></div>
+      </div>
+
+      <div class="panel">
+        <div class="content"><p>This panel only has a content section.</p></div>
+      </div>
+
+      <div class="panel">
+        <div class="footer"><p>This panel only has a footer section.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="panel">
+        <div class="header">
+          <p>Panel with different status buttons and no content section.</p>
+        </div>
+        <div class="footer">
+          <div><button>Default Button</button><a class="button" href="">Default a-Button</a></div>
+          <div><button class="primary">Primary Button</button><a class="button primary" href="">Primary a-Button</a></div>
+          <div><button class="secondary">Secondary Button</button><a class="button secondary" href="">Secondary a-Button</a></div>
+          <div><button class="info">Info Button</button><a class="button info" href="">Info a-Button</a></div>
+          <div><button class="success">Success Button</button><a class="button success" href="">Success a-Button</a></div>
+          <div><button class="warning">Warning Button</button><a class="button warning" href="">Warning a-Button</a></div>
+          <div><button class="error">Error Button</button><a class="button error" href="">Error a-Button</a></div>
+          <div><button class="danger">Danger Button</button><a class="button danger" href="">Danger a-Button</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="panel primary">
+        <div class="header">
+          <h3>This is panel with nested subpanels</h3>
+        </div>
+        <div class="body">
+          <div class="panel primary">
+            <div class="header"><h4>Subpanel 1 - Primary</h4></div>
+            <div class="content"><p>Subpanel 1 Content</p></div>
+          </div>
+          <div class="panel secondary">
+            <div class="header"><h4>Subpanel 2 - Secondary</h4></div>
+            <div class="content"><p>Subpanel 2 Content</p></div>
+          </div>
+          <div class="panel info">
+            <div class="header"><h4>Subpanel 3 - Info</h4></div>
+            <div class="content"><p>Subpanel 3 Content</p></div>
+          </div>
+          <div class="panel success">
+            <div class="header"><h4>Subpanel 4 - Success</h4></div>
+            <div class="content"><p>Subpanel 4 Content</p></div>
+          </div>
+          <div class="panel warning">
+            <div class="header"><h4>Subpanel 5 - Warning</h4></div>
+            <div class="content"><p>Subpanel 5 Content</p></div>
+          </div>
+          <div class="panel error">
+            <div class="header"><h4>Subpanel 6 - Danger/Error</h4></div>
+            <div class="content"><p>Subpanel 6 Content</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </article>
+
+{% endblock content %}

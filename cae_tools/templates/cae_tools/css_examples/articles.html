@@ -1,0 +1,42 @@
+{% extends 'cae_tools/main.html' %}
+
+
+{% block title_page_name %}Articles | CSS Examples | {% endblock title_page_name %}
+
+
+{% block content %}
+  <h1>CSS Examples - Articles</h1>
+
+  <article id="article-examples">
+    <h2>Article Examples</h2>
+    <p>
+      Articles are good elements to split up larger sections of content. By default, they are clear. To create an
+      article, one can either use the &#60;article&#62; element or a div with the class of "article".
+    </p>
+    <article class="color">
+      <p>
+        But adding the "color" class gives articles a border and background, like this. Or if using a div element, then
+        use the "article-color" class.
+      </p>
+    </article>
+    <section>
+      <p>
+        Usually, to subdivide content within an article, you would use a section element, like this one. Again, to
+        create an article, one can either use the &#60;section&#62; element or a div with the class of "section".
+      </p>
+    </section>
+    <section class="color">
+      <p>
+        Similarly to articles, sections can add the "color" class to get a visible border and background. If using a
+        div element, then use the "section-color" class.
+      </p>
+    </section>
+    <div class="article-color">
+      <p>This is an example of a colored section within a colored article.</p>
+      <div class="section-color">
+        {% lorem 1 p %}
+      </div>
+    </div>
+  </article>
+
+{% endblock content %}

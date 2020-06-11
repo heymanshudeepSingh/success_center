@@ -1,0 +1,65 @@
+{% extends 'cae_tools/main.html' %}
+
+
+{% block title_page_name %}Buttons | CSS Examples | {% endblock title_page_name %}
+
+
+{% block content %}
+  <h1>CSS Examples - Buttons</h1>
+
+  <article id="button-examples">
+    <h2>Button Element Examples</h2>
+    <p>
+      Standard buttons. Can be either button (&#60;button&#62;) or anchor (&#60;a&#62;) type.
+    </p>
+    <section class="center">
+      <h3>Standard Button Elements</h3>
+      <button>Default</button>
+      <button class="primary">Primary</button>
+      <button class="secondary">Secondary</button>
+      <button class="info">Info</button>
+      <button class="success">Success</button>
+      <button class="warning">Warning</button>
+      <button class="error">Error</button>
+      <button class="danger">Danger</button>
+    </section>
+
+    <section class="center">
+      <h3>Anchor Button Elements</h3>
+      <a href="" class="button">Default</a>
+      <a href="" class="button primary">Primary</a>
+      <a href="" class="button secondary">Secondary</a>
+      <a href="" class="button info">Info</a>
+      <a href="" class="button success">Success</a>
+      <a href="" class="button warning">Warning</a>
+      <a href="" class="button error">Error</a>
+      <a href="" class="button danger">Danger</a>
+    </section>
+
+    <section>
+      <h3>Button Element Groups</h3>
+      <p>Buttons can also be grouped together.</p>
+      <div class="buttons">
+        <button>Default</button>
+        <button class="primary">Primary</button>
+        <button class="secondary">Secondary</button>
+        <button class="info">Info</button>
+        <button class="success">Success</button>
+        <button class="warning">Warning</button>
+        <button class="error">Error</button>
+        <button class="danger">Danger</button>
+      </div>
+      <div class="buttons">
+        <a href="" class="button">Default</a>
+        <a href="" class="button primary">Primary</a>
+        <a href="" class="button secondary">Secondary</a>
+        <a href="" class="button info">Info</a>
+        <a href="" class="button success">Success</a>
+        <a href="" class="button warning">Warning</a>
+        <a href="" class="button error">Error</a>
+        <a href="" class="button danger">Danger</a>
+      </div>
+    </section>
+  </article>
+
+{% endblock content %}

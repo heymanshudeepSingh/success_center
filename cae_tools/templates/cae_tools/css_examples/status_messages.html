@@ -1,0 +1,52 @@
+{% extends 'cae_tools/main.html' %}
+
+
+{% block title_page_name %}Status Messages | CSS Examples | {% endblock title_page_name %}
+
+
+{% block content %}
+  <h1>CSS Examples - Status Messages</h1>
+
+  <article id="status-message-examples">
+    <h2>Status Message Examples</h2>
+    <p>
+      Status Messages are similar to alerts, but intended to show up at the top of the page, usually after something
+      like a form submission. Generally speaking, "Django messages" should be used to create these.
+    </p>
+    <ul id="status-message-container">
+      <li class="message">
+        <p>Default <a href="">Test Link</a> Default</p>
+        <p class="exit">x</p>
+      </li>
+      <li class="message primary">
+        <p>Primary <a href="">Test Link</a> Primary</p>
+        <p class="exit">x</p>
+      </li>
+      <li class="message secondary">
+        <p>Secondary <a href="">Test Link</a> Secondary</p>
+        <p class="exit">x</p>
+      </li>
+      <li class="message info">
+        <p>Info <a href="">Test Link</a> Info</p>
+        <p class="exit">x</p>
+      </li>
+      <li class="message success">
+        <p>Success <a href="">Test Link</a> Success</p>
+        <p class="exit">x</p>
+      </li>
+      <li class="message warning">
+        <p>Warning <a href="">Test Link</a> Warning</p>
+        <p class="exit">x</p>
+      </li>
+      <li class="message error">
+        <p>Error <a href="">Test Link</a> Error</p>
+        <p class="exit">x</p>
+      </li>
+      <li class="message danger">
+        <p>Danger <a href="">Test Link</a> Danger</p>
+        <p class="exit">x</p>
+      </li>
+    </ul>
+  </article>
+
+{% endblock content %}

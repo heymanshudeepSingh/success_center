@@ -1,0 +1,46 @@
+{% extends 'cae_tools/main.html' %}
+
+
+{% block title_page_name %}Forms | CSS Examples | {% endblock title_page_name %}
+
+
+{% block content %}
+  <h1>CSS Examples - Forms</h1>
+
+  <article id="form-examples">
+    <h2>Form Examples</h2>
+    <p>
+      Except for nonstandard forms, forms should always be rendered with
+      <span class="pre">&#123;&#37; include 'cae_home/include/form.html' &#37;&#125;</span>
+    </p>
+    <p>
+      Note: Forms in these examples do not actually submit data. To see an error, intentionally enter an invalid value
+      for a timestamp.
+    </p>
+    <section>
+      <h3>A Basic Form</h3>
+      {% include 'cae_home/include/form.html' %}
+    </section>
+    <section>
+      <div class="panel">
+        <div class="header">
+          <h2>A Form Within a Default Panel</h2>
+        </div>
+        <div class="content">
+          {% include 'cae_home/include/form.html' %}
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="panel primary">
+        <div class="header">
+          <h2>A Form Within a Primary Panel</h2>
+        </div>
+        <div class="content">
+          {% include 'cae_home/include/form.html' %}
+        </div>
+      </div>
+    </section>
+  </article>
+
+{% endblock content %}

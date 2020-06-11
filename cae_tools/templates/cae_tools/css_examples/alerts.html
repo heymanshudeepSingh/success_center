@@ -1,0 +1,26 @@
+{% extends 'cae_tools/main.html' %}
+
+
+{% block title_page_name %}Alerts | CSS Examples | {% endblock title_page_name %}
+
+
+{% block content %}
+  <h1>CSS Examples - Alerts</h1>
+
+  <article id="alert-examples">
+    <h2>Alert Examples</h2>
+    <p>
+      Alerts can be used anywhere on the page. They are generally intended to pop up as a notification to user, such as
+      to display a form error.
+    </p>
+    <div class="alert"><p>Default</p> <a href="">Test Link</a></div>
+    <div class="alert primary"><p>Primary</p> <a href="">Test Link</a></div>
+    <div class="alert secondary"><p>Secondary</p> <a href="">Test Link</a></div>
+    <div class="alert info"><p>Info</p> <a href="">Test Link</a></div>
+    <div class="alert success"><p>Success</p> <a href="">Test Link</a></div>
+    <div class="alert warning"><p>Warning</p> <a href="">Test Link</a></div>
+    <div class="alert error"><p>Error</p> <a href="">Test Link</a></div>
+    <div class="alert danger"><p>Danger</p> <a href="">Test Link</a></div>
+  </article>
+
+{% endblock content %}
