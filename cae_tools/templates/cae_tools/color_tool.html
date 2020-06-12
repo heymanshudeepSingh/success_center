@@ -16,5 +16,8 @@
 
 
 {% block extra_scripts_body %}
-  <script src="{% static 'cae_tools/js/color_tool.js' %}"></script>
+  {{ block.super }}
+  {% if site_debug %}
+    <script src="{% static 'cae_tools/js/color_tool.js' %}"></script>
+  {% endif %}
 {% endblock extra_scripts_body %}

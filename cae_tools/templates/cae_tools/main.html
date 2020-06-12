@@ -17,3 +17,10 @@
     {% block content %}{% endblock content %}
   </main>
 {% endblock %}
+
+
+{% block extra_scripts_body %}
+  {% if not site_debug %}
+    <script src="{% static 'cae_tools/js/dist/cae_tools.js' %}"></script>
+  {% endif %}
+{% endblock extra_scripts_body %}
