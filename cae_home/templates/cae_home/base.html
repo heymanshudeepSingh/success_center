@@ -45,6 +45,7 @@
         <link rel="icon" type="image/png" href="{% static 'wmu_home/images/wmu_icons/favicon.ico' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'third_party/css/select2_4.0.5.min.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'cae_home/css/base.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'cae_home/css/base_content.css' %}">
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
       {% endblock base_styles %}
       {% block extra_styles %}{% endblock extra_styles %}
@@ -123,14 +124,20 @@
       {% endblock footer %}
 
       {% block base_scripts_body %}
-        <script src="{% static 'cae_home/js/form.js' %}"></script>
-        <script src="{% static 'cae_home/js/mobile_nav.js' %}"></script>
-        <script src="{% static 'cae_home/js/page_tabbing.js' %}"></script>
-        <script src="{% static 'cae_home/js/status_messages.js' %}"></script>
-        <script src="{% static 'cae_home/js/side_content_bars.js' %}"></script>
-        <script src="{% static 'cae_home/js/overlay_modal.js' %}"></script>
-        <script src="{% static 'cae_home/js/tabbed_panel.js' %}"></script>
-        <script src="{% static 'cae_home/js/flat_picker_widgets.js' %}"></script>
+        {% if site_debug %}
+          <!-- For development, we serve individual JS files. -->
+          <script src="{% static 'cae_home/js/form.js' %}"></script>
+          <script src="{% static 'cae_home/js/mobile_nav.js' %}"></script>
+          <script src="{% static 'cae_home/js/page_tabbing.js' %}"></script>
+          <script src="{% static 'cae_home/js/status_messages.js' %}"></script>
+          <script src="{% static 'cae_home/js/side_content_bars.js' %}"></script>
+          <script src="{% static 'cae_home/js/overlay_modal.js' %}"></script>
+          <script src="{% static 'cae_home/js/tabbed_panel.js' %}"></script>
+          <script src="{% static 'cae_home/js/flat_picker_widgets.js' %}"></script>
+        {% else %}
+          <!-- For production, we serve a single file of our merged JS. -->
+          <script src="{% static 'cae_home/js/dist/cae_home.js' %}"></script>
+        {% endif %}
 
         <script>
           // Pass middleware template values in to JavaScript as variables.
