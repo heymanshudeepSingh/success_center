@@ -1,34 +1,44 @@
 #!/usr/bin/env bash
 ###
- # Utility script to provide helper functions/logic to other scripts.
- #
- #
- # Args/Kwargs Notes:
- #      Array (args):
- #          Access all args with "${args[@]}"
- #
- #      Dict (kwargs):
- #          Access all keys with "${!kwargs[@]}".
- #          Access all values with "${kwargs[@]}".
- #
- #      Check if contains with =~
- #          Ex: "${args[@]}" =~ "-h" to check if args contains "-h".
- #
- #
- # Color Notes:
- #      Use colors by adding the "-e" flag to echo, otherwise it will just print out the ascii values of the color.
- #
- #      Reset - Should be used at the end of every echo that uses a color.
- #      Red - For errors.
- #      Green - For success notifications.
- #      Blue - Headers to visually differentiate new sections of data to the user.
- #      Cyan - For prompts that ask the user to input a value.
+ # Utility/helper logic for other scripts. Impriting this file imports all logic, callable as functions.
+ # Version 1.0
  #
  #
  # return_value:
- #      Used as a variable to save return values of functions.
- #      Necessary or else we can only return integers. Also, any integer other than 0 will count as an "error flag" and
- #          cause the scripts to terminate if the "set -e" flag is set.
+ #  * Used to save the return values of functions.
+ #  * Normal return values only let us return "error codes", aka integers. Any integer other than 0 will count as an
+ #    "error flag" and cause the scripts to terminate if the "set -e" flag is set.
+ #
+ #
+ # Color Notes:
+ #  * Colors variables are used to change color of text displayed to console.
+ #  * Use colors by adding the "-e" flag to echo, otherwise it will just print out the ascii values of the color.
+ #  * Intended main use cases for colors are as follows:
+ #      * Reset - Should be used at the end of every echo that uses a color.
+ #      * Red - For errors.
+ #      * Green - For success notifications.
+ #      * Blue - Headers to visually differentiate new sections of data to the user.
+ #      * Cyan - For prompts that ask the user to input a value.
+ #
+ #
+ # Args/Kwargs Notes:
+ #  * Array (args):
+ #      * Access all args with "${args[@]}".
+ #      * All original passed values which are not interpreted as a kwarg will be considered an arg.
+ #
+ #  * Dict (kwargs):
+ #      * Access all keys with "${!kwargs[@]}".
+ #      * Access all values with "${kwargs[@]}".
+ #      * To interpret a value pairing as a kwarg:
+ #          * Define an array variable called "key_value_args" before importing this util script.
+ #          * In said array, define all possible args to read in as dictionary keys.
+ #              * Ex: key_value_args=("my_key_1", "my_key_2")
+ #          * On execution, if one of these keys is found, then the direct next arg will be interpreted as the
+ #            associated value.
+ #
+ #  * Check if contains with =~
+ #      * Ex: "${args[@]}" =~ "-h" to check if args array contains value "-h".
+ #
  ##
 
 
@@ -113,6 +123,7 @@ function user_confirmation () {
         return_value=""
     fi
 
+    # Check user value.
     if [[ "$return_value" = "yes" ]] || [[ "$return_value" = "ye" ]] || [[ "$return_value" = "y" ]]
     then
         return_value=true
@@ -149,13 +160,15 @@ function string_to_lower () {
     fi
 }
 
+
 #endregion General Helper Functions
 
 
 #region Directory Management Functions
 
 ###
- # Change to location of script's directory to the same directory script resides in.
+ # Changes the location of terminal instance to the same directory the calling script file resides in.
+ # Lasts until script ends or another cd command is used.
  # Can help make logic more consistent, if location of terminal matters.
  ##
 function normalize_directory () {
@@ -164,8 +177,10 @@ function normalize_directory () {
 
 
 ###
- # Change location of script's directory to the project's top level "scripts" folder.
+ # Change location of script's directory to the project's top level "scripts" folder, if it exists.
  # Can help make logic more consistent, if location of terminal matters.
+ # May be more reliable than "normalize_directory" function, in cases where the scripts directory is large and has
+ # multiple levels.
  ##
 function change_to_scripts_directory () {
     # First normalize directory, so it doesn't matter where we called from in terminal.
@@ -205,6 +220,7 @@ function get_absolute_path () {
 #endregion Directory Management Functions
 
 
+
 #region Arg Parsing/Management Functions
 
 ###
@@ -221,20 +237,23 @@ function get_absolute_path () {
  ##
 function parse_args () {
     key=""
+
+    # Loop through all the original passed args.
     for arg in $orig_args
     do
         # Check if we already have a key.
         if [[ $key != "" ]]
         then
+            # Value is a key.
 
-            # We have a key. Check that we don't have two in a row.
+            # Check that we don't have two keys in a row.
             if [[ ! ${#key_value_args[@]} -eq 0 && ${key_value_args[@]} =~ $arg ]]
             then
                 # Found a second key immediately after the first.
                 echo ""
                 echo -e "${color_red}Two keys were passed in a row. Expected key, value pairs. Terminating script.${color_reset}"
                 echo ""
-                exit 0
+                exit 1
             fi
 
             # Save key value pair.
@@ -243,7 +262,8 @@ function parse_args () {
             # Reset key.
             key=""
         else
-            # We do not have a key.
+            # Value is not a key.
+
             # Check if value is kwarg key or standard arg.
             # Key value pairs must be manually established by being defined in key_value_args.
             if [[ ! ${#key_value_args[@]} -eq 0 && ${key_value_args[@]} =~ $arg ]]
@@ -283,7 +303,6 @@ function display_args () {
         echo "No args passed to script."
     else
         # One or more values exist. Display all.
-
         echo "Args:"
         for arg in ${args[@]}
         do
@@ -298,7 +317,6 @@ function display_args () {
         echo "No kwargs passed to script."
     else
         # One or more values exist. Display all.
-
         orig_key=$key
         echo "Kwargs:"
         for key in ${!kwargs[@]}
