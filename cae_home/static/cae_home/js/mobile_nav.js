@@ -7,7 +7,7 @@
 $(document).ready(function() {
     // console.log("Loaded mobile_nav.js file.");
 
-    var mobile_window_cutoff = 869;
+    var mobile_window_cutoff = 857;
 
     var body = $('body');
     var mobile_icon = $('.mobile-nav-icon');
@@ -89,8 +89,14 @@ $(document).ready(function() {
      * Detect window screen size change and make appropriate adjustments.
      */
      $(window).on('resize', function() {
+        // Reset font sizing based on window.
         remove_font_sizing_classes();
         add_font_sizing_classes();
+
+        // Toggle nav menu based on width.
+        if ($(window).width() >= mobile_window_cutoff) {
+            hide_mobile_nav();
+        }
      });
 
 });
