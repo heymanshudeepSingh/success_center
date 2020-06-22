@@ -4,6 +4,7 @@ Definitions of "CAE Center" related Core Models.
 
 # System Imports.
 from django.db import models
+from django.db.models import ObjectDoesNotExist
 
 
 MAX_LENGTH = 255
@@ -50,3 +51,36 @@ class Asset(models.Model):
         # Save model.
         self.full_clean()
         super(Asset, self).save(*args, **kwargs)
+
+    @staticmethod
+    def create_dummy_model():
+        serial_number = "12345"
+        asset_tag = "A12345"
+        brand_name = "Popular Brand"
+        mac_address = "FFFFFFFFFF"
+        ip_address = "127.0.0.1"
+        device_name = "Device"
+        description = "It does something."
+
+        try:
+            asset = Asset.objects.get(
+                serial_number=serial_number,
+                asset_tag=asset_tag,
+                brand_name=brand_name,
+                mac_address=mac_address,
+                ip_address=ip_address,
+                device_name=device_name,
+                description=description
+            )
+            return asset
+        except ObjectDoesNotExist:
+            asset = Asset.objects.create(
+                serial_number=serial_number,
+                asset_tag=asset_tag,
+                brand_name=brand_name,
+                mac_address=mac_address,
+                ip_address=ip_address,
+                device_name=device_name,
+                description=description
+            )
+            return asset
