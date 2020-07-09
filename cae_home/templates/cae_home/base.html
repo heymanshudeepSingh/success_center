@@ -83,9 +83,13 @@
 
       <a class="accessibility-element" href="#content">Skip to Main Content</a>
 
-      {% block header %}
-        {% include 'cae_home/header.html' with app_nav=main_nav_template_path %}
-      {% endblock header %}
+      <header>
+        <div class="header-top">
+          {% include 'cae_home/nav/icon_nav.html' %}
+          {% include 'cae_home/nav/header_main.html' with app_nav=main_nav_template_path %}
+        </div>
+        <div class="header-bottom"></div>
+      </header>
 
       {% block placeholder_left %}
         <div id="main-placeholder-left">
