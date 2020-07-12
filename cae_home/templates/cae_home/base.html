@@ -91,35 +91,37 @@
         <div class="header-bottom"></div>
       </header>
 
-      {% block placeholder_left %}
-        <div id="main-placeholder-left">
-          <div id="content-bar-left" class="content-bar-left hidden">
-            <div class="bar-nav">
-              <i class="arrow-right fa fa-chevron-circle-right"></i>
-              <i class="arrow-left fa fa-chevron-circle-left"></i>
-            </div>
-            <div class="bar-content">
-              {% block content_bar_left %}{% endblock content_bar_left %}
-            </div>
-          </div>
-        </div>
-      {% endblock placeholder_left %}
-
-      {% block main %}{% endblock main %}
-
-      {% block placeholder_right %}
-        <div id="main-placeholder-right">
-          <div id="content-bar-right" class="content-bar-right hidden">
-            <div class="bar-nav">
-              <i class="arrow-right fa fa-chevron-circle-right"></i>
-              <i class="arrow-left fa fa-chevron-circle-left"></i>
-            </div>
-            <div class="bar-content">
-              {% block content_bar_right %}{% endblock content_bar_right %}
+      <div id="body">
+        {% block placeholder_left %}
+          <div id="main-placeholder-left">
+            <div id="content-bar-left" class="content-bar-left hidden">
+              <div class="bar-nav">
+                <i class="arrow-right fa fa-chevron-circle-right"></i>
+                <i class="arrow-left fa fa-chevron-circle-left"></i>
+              </div>
+              <div class="bar-content">
+                {% block content_bar_left %}{% endblock content_bar_left %}
+              </div>
             </div>
           </div>
-        </div>
-      {% endblock placeholder_right %}
+        {% endblock placeholder_left %}
+
+        {% block main %}{% endblock main %}
+
+        {% block placeholder_right %}
+          <div id="main-placeholder-right">
+            <div id="content-bar-right" class="content-bar-right hidden">
+              <div class="bar-nav">
+                <i class="arrow-right fa fa-chevron-circle-right"></i>
+                <i class="arrow-left fa fa-chevron-circle-left"></i>
+              </div>
+              <div class="bar-content">
+                {% block content_bar_right %}{% endblock content_bar_right %}
+              </div>
+            </div>
+          </div>
+        {% endblock placeholder_right %}
+      </div>
 
       {% block footer %}
         <footer>

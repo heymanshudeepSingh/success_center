@@ -46,61 +46,11 @@ html {
     }
 }
 
-body {
-    // Handle for different user font size options.
-
-    // Size Extra Small.
-    &.font-size-xs {
-        grid-template-rows: 34px auto auto 34px;
-    }
-
-    // Size Small.
-    &.font-size-sm {
-        grid-template-rows: 36px auto auto 36px;
-    }
-
-    // Size Default.
-    &.font-size-base {
-        grid-template-rows: 39px auto auto 39px;
-    }
-
-    // Size Medium.
-    &.font-size-md {
-        grid-template-rows: 41px auto auto 41px;
-    }
-
-    // Size Large.
-    &.font-size-lg {
-        grid-template-rows: 44px auto auto 44px;
-    }
-
-    // Size Extra Large.
-    &.font-size-xl {
-        grid-template-rows: 50px auto auto 50px;
-    }
-}
-
 body.grid {
     @media only screen {
-        display: grid;
+        @include display-flex;
+        @include flex-direction(column);
     }
-
-    grid-template-columns: 5% 45% 45% 5%;
-
-    grid-template-areas:
-        "header header header header"
-        "main-placeholder-left main main main-placeholder-right"
-        "main-placeholder-left main main main-placeholder-right"
-        "footer footer footer footer";
-
-    // Show on larger screens.
-    @media only screen and (min-width: $screen-tablet-mid) {
-        grid-template-columns: 15% 35% 35% 15%;
-    }
-}
-
-body.no-margins {
-    grid-template-columns: 0% 50% 50% 0%;
 }
 
 body.no-grid {
@@ -121,18 +71,23 @@ body {
     header {
         position: relative;
 
-        grid-area: header;
-
         // Printer layout.
         @media only print {
             display: none;
         }
     }
 
+    #body {
+        @include display-flex;
+        @include flex-direction(row);
+        @include justify-content(space-between);
+        @include flex(1);
+    }
+
     main {
         position: relative;
 
-        grid-area: main;
+        @include flex(1);
 
         // Printer layout.
         @media only print {
@@ -143,7 +98,7 @@ body {
     #main-placeholder-left {
         position: relative;
 
-        grid-area: main-placeholder-left;
+        width: 15%;
 
         // Printer layout.
         @media only print {
@@ -154,7 +109,7 @@ body {
     #main-placeholder-right {
         position: relative;
 
-        grid-area: main-placeholder-right;
+        width: 15%;
 
         // Printer layout.
         @media only print {
@@ -164,8 +119,6 @@ body {
 
     footer {
         position: relative;
-
-        grid-area: footer;
 
         // Printer layout.
         @media only print {
