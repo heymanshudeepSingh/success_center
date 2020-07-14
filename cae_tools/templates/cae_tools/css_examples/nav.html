@@ -1,0 +1,59 @@
+{% extends 'cae_tools/main.html' %}
+
+
+{% block title_page_name %}Nav | CSS Examples | {% endblock title_page_name %}
+
+
+{% block sub_nav %}
+  <ul>
+    <li><a href="">SubNav Element 1</a></li>
+    <li><a href="">SubNav Element 2</a></li>
+    <li><a href="">SubNav Element 3</a></li>
+  </ul>
+{% endblock sub_nav %}
+
+
+{% block content %}
+  <h1>CSS Examples - Nav</h1>
+  <p>There are 3 distinct nav element types provided by this site:</p>
+  <ul>
+    <li><a href="#main-nav-explanation">Main Nav</a></li>
+    <li><a href="#sub-nav-explanation">Sub Nav</a></li>
+    <li><a href="#breadcrumb-nav-explanation">Breadcrumb Nav</a></li>
+  </ul>
+
+  <article id="main-nav-explanation">
+    <h2>Main Nav</h2>
+    <p>The "main nav" is essentially the site header, aka the bar at the very top of the page.</p>
+    <p>On mobile views, this will condense down and have clickable elements, rather than hover elements.</p>
+    <p>
+      Generally speaking, this is dictated by the corresponding django project/subproject, and will not change much
+      (or at all) on a page-by-page basis.
+    </p>
+  </article>
+  <article id="sub-nav-explanation">
+    <h2>Sub Nav</h2>
+    <p>The "sub nav" appears as a second bar, directly beneath "main nav" on pages that define it.</p>
+    <p>
+      This element should be used for navigation to distinct subpages within a larger "main nav" element. For example,
+      our CAE Web project, has "employee" main nav page. Within this, there are related sub pages such as "employee
+      shifts" and "employee schedules". Both of these sub pages are separate entities from each other, whil still
+      belonging within the larger "employee" main nav space. Thus using a sub nav element for this is appropriate.
+    </p>
+    <p>
+      To define sub nav on a page, use the <span class="highlight info">sub_nav</span> block within the corresponding
+      page template.
+    </p>
+  </article>
+  <article id="breadcrumb-nav-explanation">
+    <h2>Breadcrumb Nav</h2>
+    <p>
+      The "breadcrumb nav" displays beneath other nav elements. This element is mostly used to show ordering between
+      related pages. It allows the user to quickly and easily go back to previous pages, if desired.
+    </p>
+    <p>
+      To define breadcrumb nav on a page, use the <span class="highlight info">breadcrum_nav</span> block within the
+      corresponding page template.
+    </p>
+  </article>
+{% endblock content %}

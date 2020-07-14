@@ -226,6 +226,51 @@ header nav {
 //====================================================================//
 
 
+//=============================//
+//==== START Sub Nav Block ====//
+//=============================//
+
+header .sub-nav {
+    @include display-flex;
+    @include flex-direction(row);
+    @include justify-content(center);
+    @include align-items(center);
+
+    > ul {
+        @include display-flex;
+        @include flex-direction(row);
+        @include justify-content(space-evenly);
+        @include align-items(center);
+        @include flex-wrap(wrap);
+
+        width: 100%;
+    }
+
+    > ul:before {
+        position: absolute;
+        left: -1px;
+        bottom: -1px;
+    }
+
+    > ul:after {
+        position: absolute;
+        right: -1px;
+        bottom: -1px;
+    }
+
+    li, a {
+        padding-top: 5px;
+        padding-right: 10px;
+        padding-bottom: 5px;
+        padding-left: 10px;
+    }
+}
+
+//=============================//
+//===== END Sub Nav Block =====//
+//=============================//
+
+
 //=====================================//
 //==== START Mobile Nav Icon Block ====//
 //=====================================//
@@ -452,6 +497,34 @@ header nav {
 //===============================================//
 
 
+//============================================//
+//==== START "Sub Nav" Theme Colors Block ====//
+//============================================//
+
+header .sub-nav {
+
+    @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & {
+
+        li, a {
+            color: theme-text($theme, 'primary');
+
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: theme-text($theme, 'primary-hover');
+        }
+
+    }}
+
+}
+
+//============================================//
+//===== END "Sub Nav" Theme Colors Block =====//
+//============================================//
+
+
 //=========================================//
 //==== START Mobile Nav Dropdown Block ====//
 //=========================================//
@@ -568,6 +641,48 @@ header .header-top nav {
 //===============================================//
 //===== END "Header Nav" Theme Colors Block =====//
 //===============================================//
+
+
+//============================================//
+//==== START "Sub Nav" Theme Colors Block ====//
+//============================================//
+
+header .sub-nav {
+
+    @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & {
+
+        ul {
+            background-color: theme-background($theme, 'primary');
+        }
+
+        ul:before {
+            content:'';
+            border-bottom: 70px solid theme-background($theme, 'content');
+            border-right: 70px solid transparent;
+        }
+
+        ul:after {
+            content:'';
+            border-bottom: 70px solid theme-background($theme, 'content');
+            border-left: 70px solid transparent;
+        }
+
+        li {
+            list-style-type: none;
+        }
+
+        a:hover {
+            background-color: theme-background($theme, 'highlight');
+        }
+
+    }}
+
+}
+
+//============================================//
+//===== END "Sub Nav" Theme Colors Block =====//
+//============================================//
 
 
 //=====================================//
@@ -691,6 +806,22 @@ header .header-bottom nav {
 // interpolation-mode, direction, marks, page, set-link-source, unicode-bidi,     //
 // speak                                                                          //
 //================================================================================//
+
+//===============================//
+//==== START "Sub Nav" Block ====//
+//===============================//
+
+header .sub-nav {
+
+    li, a {
+        @include transition(color 0.5s, background-color 0.5s);
+    }
+}
+
+//===============================//
+//===== END "Sub Nav" Block =====//
+//===============================//
+
 
 //=====================================//
 //==== START Mobile Nav Icon Block ====//

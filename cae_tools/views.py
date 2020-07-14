@@ -66,6 +66,14 @@ def css_forms(request):
     })
 
 
+def css_nav(request):
+    """
+    Displays examples of custom HTML/CSS layout for "nav" elements.
+    """
+    # Render template to user.
+    return TemplateResponse(request, 'cae_tools/css_examples/nav.html', {})
+
+
 def css_page_tabbing(request):
     """
     Displays examples of custom HTML/CSS layout for "page tabbing" elements.

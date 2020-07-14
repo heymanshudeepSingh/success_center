@@ -89,6 +89,9 @@
           {% include 'cae_home/nav/header_main.html' with app_nav=main_nav_template_path %}
         </div>
         <div class="header-bottom"></div>
+        <div class="sub-nav" style="display: none;">
+          {% block sub_nav %}{% endblock sub_nav %}
+        </div>
       </header>
 
       <div id="body">
@@ -137,6 +140,7 @@
           <script src="{% static 'cae_home/js/page_tabbing.js' %}"></script>
           <script src="{% static 'cae_home/js/status_messages.js' %}"></script>
           <script src="{% static 'cae_home/js/side_content_bars.js' %}"></script>
+          <script src="{% static 'cae_home/js/sub_nav.js' %}"></script>
           <script src="{% static 'cae_home/js/overlay_modal.js' %}"></script>
           <script src="{% static 'cae_home/js/tabbed_panel.js' %}"></script>
           <script src="{% static 'cae_home/js/flat_picker_widgets.js' %}"></script>
