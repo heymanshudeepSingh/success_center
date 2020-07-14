@@ -656,24 +656,26 @@ header .sub-nav {
             background-color: theme-background($theme, 'primary');
         }
 
-        ul:before {
-            content:'';
-            border-bottom: 70px solid theme-background($theme, 'content');
-            border-right: 70px solid transparent;
-        }
-
-        ul:after {
-            content:'';
-            border-bottom: 70px solid theme-background($theme, 'content');
-            border-left: 70px solid transparent;
-        }
-
         li {
             list-style-type: none;
         }
 
         a:hover {
             background-color: theme-background($theme, 'highlight');
+        }
+
+        @media only screen and (min-width: $screen-tablet-mid) {
+            ul:before {
+                content:'';
+                border-bottom: 70px solid theme-background($theme, 'content');
+                border-right: 70px solid transparent;
+            }
+
+            ul:after {
+                content:'';
+                border-bottom: 70px solid theme-background($theme, 'content');
+                border-left: 70px solid transparent;
+            }
         }
 
     }}

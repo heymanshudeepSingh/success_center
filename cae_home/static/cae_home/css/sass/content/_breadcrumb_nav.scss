@@ -1,0 +1,209 @@
+
+//============================//
+//==== Breadcrumb Nav CSS ====//
+//============================//
+
+// Import statements
+@import '../variables/_core';
+
+
+//================================================================================//
+//================================= Positioning ==================================//
+//================================== Includes: ===================================//
+//================================================================================//
+// position, top, right, bottom, left, z-index, display, float                    //
+//                                                                                //
+// grid-template-columns, grid-template-rows, grid-template-areas, grid-template, //
+// grid-gap, place-items, grid, grid-column, grid-row, grid-area, place-self,     //
+//                                                                                //
+// flex-direction, flex-wrap, justify-content, align-items, align-content, order, //
+// flex-grow, flex-shrink, flex-basis, flex, align-self,                          //
+//                                                                                //
+// width, height, max-width, max-height, min-width, min-height,                   //
+// padding, padding-top, padding-right, padding-bottom, padding-left,             //
+// margin, margin-top, margin-right, margin-bottom, margin-left,                  //
+//                                                                                //
+// margin-collapse, margin-top-collapse, margin-right-collapse,                   //
+// margin-bottom-collapse, margin-left-collapse,                                  //
+//                                                                                //
+// overflow, overflow-x, overflow-y, clip, clear                                  //
+//================================================================================//
+
+//===========================//
+//==== START ----- Block ====//
+//===========================//
+
+main #breadcrumb-nav {
+    display: none;
+    @include flex-direction(row);
+    @include justify-content(center);
+    @include align-items(center);
+
+    ul {
+        @include display-flex;
+        @include flex-direction(row);
+        @include justify-content(center);
+        @include align-items(center);
+
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+
+    li, a {
+        padding-top: 5px;
+        padding-right: 10px;
+        padding-bottom: 5px;
+        padding-left: 10px;
+
+        text-decoration: none;
+        list-style-type: none;
+    }
+}
+
+//===========================//
+//===== END ----- Block =====//
+//===========================//
+
+
+//================================================================================//
+//================================== Typography ==================================//
+//================================== Includes: ===================================//
+//================================================================================//
+// font, font-family, font-size, font-smoothing, osx-font-smoothing, font-style,  //
+// font-weight,                                                                   //
+//                                                                                //
+// hyphens, src, line-height, letter-spacing, word-spacing, color, text-align,    //
+// text-decoration, text-indent, text-overflow, text-rendering, text-size-adjust, //
+// text-shadow, text-transform,                                                   //
+//                                                                                //
+// word-break, word-wrap, white-space                                             //
+//================================================================================//
+
+//==================================//
+//==== START Theme Colors Block ====//
+//==================================//
+
+main #breadcrumb-nav {
+
+    @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & {
+
+        li, a {
+            color: theme-text($theme, 'primary');
+        }
+
+        a:hover {
+            color: theme-text($theme, 'primary-hover');
+        }
+
+    }}
+
+}
+
+//==================================//
+//===== END Theme Colors Block =====//
+//==================================//
+
+
+//================================================================================//
+//==================================== Visual ====================================//
+//================================== Includes: ===================================//
+//================================================================================//
+// vertical-align,                                                                //
+//                                                                                //
+// list-style, list-style-type, list-style-position, list-style-image,            //
+//                                                                                //
+// pointer-events, cursor,                                                        //
+//                                                                                //
+// background, background-attatchment, background-color, background-image,        //
+// background-position, background-repeat, background-size,                       //
+//                                                                                //
+// border, border-collapse, border-top, border-right, border-bottom, border-left, //
+// border-color, border-image, border-top-color, border-right-color,              //
+// border-bottom-color, border-left-color, border-spacing, border-style,          //
+// border-top-style, border-right-style, border-bottom-style, border-left-style,  //
+// border-width, border-top-width, border-right-width, border-bottom-width,       //
+// border-left-width,                                                             //
+//                                                                                //
+// border-radius, border-top-right-radius, border-bottom-right-radius,            //
+// border-bottom-left-radius, border-top-left-radius, border-radius-topright,     //
+// border-radius-bottomright, border-radius-bottomleft, border-radius-topleft,    //
+//                                                                                //
+// content, quotes, outline, outline-offset, opacity, filter, visibility, size,   //
+// zoom                                                                           //
+//================================================================================//
+
+//===========================//
+//==== START ----- Block ====//
+//===========================//
+
+main #breadcrumb-nav {
+
+    ul {
+        border-bottom-right-radius: 5px;
+        border-bottom-left-radius: 5px;
+    }
+
+}
+
+//===========================//
+//===== END ----- Block =====//
+//===========================//
+
+
+//==================================//
+//==== START Theme Colors Block ====//
+//==================================//
+
+main #breadcrumb-nav {
+
+    @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & {
+
+        ul {
+            background-color: theme-background($theme, 'primary');
+
+            border: 1px solid theme-background($theme, 'border');
+        }
+
+        a:hover {
+            background-color: theme-background($theme, 'highlight');
+        }
+
+    }}
+
+}
+
+//==================================//
+//===== END Theme Colors Block =====//
+//==================================//
+
+
+//================================================================================//
+//==================================== Other =====================================//
+//================================== Includes: ===================================//
+//================================================================================//
+// transform, box-align, box-flex, box-orient, box-pack, box-shadow, box-sizing,  //
+// table-layout,                                                                  //
+//                                                                                //
+// animation, animation-delay, animation-duration, animation-iteration-count,     //
+// animation-name, animation-play-state, animation-timing-function,               //
+// animation-fill-mode,                                                           //
+//                                                                                //
+// transition, transition-delay, transition-duration, transition-property,        //
+// transition-timing-function,                                                    //
+//                                                                                //
+// background-clip, backface-visibility, resize, appearance, user-select,         //
+// interpolation-mode, direction, marks, page, set-link-source, unicode-bidi,     //
+// speak                                                                          //
+//================================================================================//
+
+//===========================//
+//==== START ----- Block ====//
+//===========================//
+
+
+
+//===========================//
+//===== END ----- Block =====//
+//===========================//

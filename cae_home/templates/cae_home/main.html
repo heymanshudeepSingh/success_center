@@ -8,6 +8,11 @@
   <main id="content" class="main-content {% block app_main_element_class %}{% endblock app_main_element_class %}" tabindex="-1">
     {% include 'cae_home/include/status_messages.html' %}
     {% include 'cae_home/include/overlay_modal.html' %}
+    <nav id="breadcrumb-nav">
+      <ul>
+        {% block breadcrumb_nav %}{% endblock breadcrumb_nav %}
+      </ul>
+    </nav>
     {% block content %}{% endblock content %}
   </main>
 {% endblock %}

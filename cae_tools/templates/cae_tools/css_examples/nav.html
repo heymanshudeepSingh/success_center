@@ -13,6 +13,13 @@
 {% endblock sub_nav %}
 
 
+{% block breadcrumb_nav %}
+  <li><a href="">Breadcrumb Nav Item 1</a></li>
+  <li><a href="">Breadcrumb Nav Item 2</a></li>
+  <li><a href="">Breadcrumb Nav Item 3</a></li>
+{% endblock breadcrumb_nav %}
+
+
 {% block content %}
   <h1>CSS Examples - Nav</h1>
   <p>There are 3 distinct nav element types provided by this site:</p>
@@ -37,7 +44,7 @@
     <p>
       This element should be used for navigation to distinct subpages within a larger "main nav" element. For example,
       our CAE Web project, has "employee" main nav page. Within this, there are related sub pages such as "employee
-      shifts" and "employee schedules". Both of these sub pages are separate entities from each other, whil still
+      shifts" and "employee schedules". Both of these sub pages are separate entities from each other, while still
       belonging within the larger "employee" main nav space. Thus using a sub nav element for this is appropriate.
     </p>
     <p>
