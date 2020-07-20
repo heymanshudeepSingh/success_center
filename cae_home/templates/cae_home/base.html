@@ -83,6 +83,10 @@
 
       <a class="accessibility-element" href="#content">Skip to Main Content</a>
 
+      <div id="dev-bar"{% if site_debug %}class="debug"{% endif %}>
+        Site in Development Mode
+      </div>
+
       <header>
         <div class="header-top">
           {% include 'cae_home/nav/icon_nav.html' %}
