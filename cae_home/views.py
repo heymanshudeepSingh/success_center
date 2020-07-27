@@ -43,6 +43,25 @@ step_employee_groups = [
 ]
 
 
+#region Special Views
+
+def handler400(request, exception=None):
+    return TemplateResponse(request, 'cae_home/errors/400.html', status=400)
+
+
+def handler403(request, exception=None):
+    return TemplateResponse(request, 'cae_home/errors/403.html', status=403)
+
+
+def handler404(request, exception=None):
+    return TemplateResponse(request, 'cae_home/errors/404.html', status=404)
+
+
+def handler500(request, exception=None):
+    return TemplateResponse(request, 'cae_home/errors/500.html', status=500)
+
+#endregion Special Views
+
 def login(request, *args, **kwargs):
     """
     Modified login view for "remember me" checkbox.

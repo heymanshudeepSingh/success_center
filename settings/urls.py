@@ -19,6 +19,13 @@ router = routers.DefaultRouter()
 router.register(r'departments', views.DepartmentViewSet)
 
 
+# Special view handling.
+handler400 = 'cae_home.views.handler400'
+handler403 = 'cae_home.views.handler403'
+handler404 = 'cae_home.views.handler404'
+handler500 = 'cae_home.views.handler500'
+
+
 # General url handling.
 urlpatterns = [
     # Admin views.

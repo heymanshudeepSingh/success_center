@@ -19,15 +19,22 @@
         {% endif %}
       </div>
       <ul>
-        {% for project in imported_projects %}
-          {% if project.index and project.index != '' %}
-            <li>
-              <a href="{% url project.index %}">{{ project.name }}</a>
-            </li>
-          {% else %}
-            <li><a href="{% url 'cae_home:index' %}">{{ project.name }}</a></li>
-          {% endif %}
-        {% endfor %}
+        {% if site_debug %}
+          {% for project in imported_projects %}
+            {% if project.index and project.index != '' %}
+              <li>
+                <a href="{% url project.index %}">{{ project.name }}</a>
+              </li>
+            {% else %}
+              <li><a href="{% url 'cae_home:index' %}">{{ project.name }}</a></li>
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          <li><a href="https://cae.ceas.wmich.edu/caeweb">CAEWeb</a></li>
+          <li><a href="https://wiki.ceas.wmich.edu/">Wiki</a></li>
+          <li><a href="https://ceas.wmich.edu/redmine">Redmine</a></li>
+          <li><a href="https://git.ceas.wmich.edu/">Git</a></li>
+        {% endif %}
       </ul>
     </li>
   </ul>
