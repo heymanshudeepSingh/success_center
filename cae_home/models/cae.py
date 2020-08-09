@@ -185,7 +185,7 @@ class SoftwareDetail(models.Model):
         """
         software = Software.create_dummy_model()
         version = 5
-        expiration = timezone.datetime.strptime('2020-01-01', '%d-%m-%Y')
+        expiration = timezone.datetime.strptime('2020-01-01', '%Y-%m-%d')
         try:
             return SoftwareDetail.objects.get(
                 software=software,
