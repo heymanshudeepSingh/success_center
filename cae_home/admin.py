@@ -787,6 +787,51 @@ class AssetAdmin(admin.ModelAdmin):
         }),
     )
 
+
+class SoftwareAdmin(admin.ModelAdmin):
+    # Fields to display in admin list view.
+    list_display = ('name',)
+
+    # Fields to search in admin list view.
+    search_fields = ['name',]
+
+    # Read only fields for admin detail view.
+    readonly_fields = ('date_created', 'date_modified')
+
+    # Organize fieldsets for admin detail view.
+    fieldsets = (
+        (None, {
+            'fields': ('name',)
+        }),
+        ('Advanced', {
+            'classes': ('collapse',),
+            'fields': ('date_created', 'date_modified',),
+        }),
+    )
+
+
+class SoftwareDetailAdmin(admin.ModelAdmin):
+    # Fields to display in admin list view.
+    list_display = ('software', 'version', 'expiration',)
+
+    # Fields to search in admin list view.
+    search_fields = ['version', 'expiration', 'software']
+
+    # Read only fields for admin detail view.
+    readonly_fields = ('date_created', 'date_modified')
+
+    # Organize fieldsets for admin detail view.
+    fieldsets = (
+        (None, {
+            'fields': ('version', 'expiration')
+        }),
+        ('Advanced', {
+            'classes': ('collapse',),
+            'fields': ('date_created', 'date_modified',),
+        }),
+    )
+
+
 #endregion CAE Model Admin
 
 
@@ -807,3 +852,5 @@ admin.site.register(models.WmuUser, WmuUserAdmin)
 
 # CAE Model Registration.
 #admin.site.register(models.Asset, AssetAdmin)
+admin.site.register(models.Software, SoftwareAdmin)
+admin.site.register(models.SoftwareDetail, SoftwareDetailAdmin)
