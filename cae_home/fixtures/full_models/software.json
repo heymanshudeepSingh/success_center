@@ -1,0 +1,1172 @@
+[
+    {
+        "model": "cico_core.Software",
+        "pk": "1",
+        "fields": {
+            "name": "CentOS",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "2",
+        "fields": {
+            "name": "VPN",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "3",
+        "fields": {
+            "name": "Solidworks",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "4",
+        "fields": {
+            "name": "Solid Cast",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "5",
+        "fields": {
+            "name": "Lindo & Lingo",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "6",
+        "fields": {
+            "name": "LabView",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "7",
+        "fields": {
+            "name": "NTP",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "8",
+        "fields": {
+            "name": "Visum",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "9",
+        "fields": {
+            "name": "UnrealEngine",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "10",
+        "fields": {
+            "name": "syslogagent",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "11",
+        "fields": {
+            "name": "Maple",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "12",
+        "fields": {
+            "name": "Altair",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "13",
+        "fields": {
+            "name": "Cimatron",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "14",
+        "fields": {
+            "name": "VISSIM",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "15",
+        "fields": {
+            "name": "LabStats",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "16",
+        "fields": {
+            "name": "VIP-PLANOPT",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "17",
+        "fields": {
+            "name": "Flexera",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "18",
+        "fields": {
+            "name": "Virtual CloneDrive",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "19",
+        "fields": {
+            "name": "Evcctl",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "20",
+        "fields": {
+            "name": "Bentley Leap Bridge",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "21",
+        "fields": {
+            "name": "Microsoft Visio Pro",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "22",
+        "fields": {
+            "name": "STK",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "23",
+        "fields": {
+            "name": "Lingo13",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "24",
+        "fields": {
+            "name": "LTspice",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "25",
+        "fields": {
+            "name": "Microsoft Project Pro",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "26",
+        "fields": {
+            "name": "Vistro",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "27",
+        "fields": {
+            "name": "NetBeans",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "28",
+        "fields": {
+            "name": "NX",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "29",
+        "fields": {
+            "name": "Microsoft Office",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "30",
+        "fields": {
+            "name": "HEC-RAS",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "31",
+        "fields": {
+            "name": "JetBrains",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "32",
+        "fields": {
+            "name": "Bentley GEOPAK Civil Engineering Suite",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "33",
+        "fields": {
+            "name": "Ext2Fsd",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "34",
+        "fields": {
+            "name": "Adams",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "35",
+        "fields": {
+            "name": "TransCAD",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "36",
+        "fields": {
+            "name": "Bentley Microstation",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "37",
+        "fields": {
+            "name": "SPSS",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "38",
+        "fields": {
+            "name": "PuTTY",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "39",
+        "fields": {
+            "name": "HAP",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "40",
+        "fields": {
+            "name": "Mach3",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "41",
+        "fields": {
+            "name": "StructurePoint",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "42",
+        "fields": {
+            "name": "Creo",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "43",
+        "fields": {
+            "name": "D4Cost",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "44",
+        "fields": {
+            "name": "Modelogix",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "45",
+        "fields": {
+            "name": "Abaqus",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "46",
+        "fields": {
+            "name": "Romax",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "47",
+        "fields": {
+            "name": "AVG",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "48",
+        "fields": {
+            "name": "Algor",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "49",
+        "fields": {
+            "name": "Notepad++",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "50",
+        "fields": {
+            "name": "7-Zip",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "51",
+        "fields": {
+            "name": "Microsoft Product Activation",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "52",
+        "fields": {
+            "name": "Final Cut Pro",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "53",
+        "fields": {
+            "name": "VLC Player",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "54",
+        "fields": {
+            "name": "QuarkXPress",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "55",
+        "fields": {
+            "name": "IBM Rational RequisitePro",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "56",
+        "fields": {
+            "name": "NSClient",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "57",
+        "fields": {
+            "name": "ColorCheckerPassport",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "58",
+        "fields": {
+            "name": "SAP",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "59",
+        "fields": {
+            "name": "Microsoft Office Mac",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "60",
+        "fields": {
+            "name": "Flamingo",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "61",
+        "fields": {
+            "name": "csibridge",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "62",
+        "fields": {
+            "name": "Merl",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "63",
+        "fields": {
+            "name": "ICE",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "64",
+        "fields": {
+            "name": "PartSolutions",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "65",
+        "fields": {
+            "name": "MasterCAM",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "66",
+        "fields": {
+            "name": "Microsoft SQL Server",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "67",
+        "fields": {
+            "name": "MiniTool",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "68",
+        "fields": {
+            "name": "Python 2.7",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "69",
+        "fields": {
+            "name": "AdobeCC",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "70",
+        "fields": {
+            "name": "IBM Rational Architect",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "71",
+        "fields": {
+            "name": "Office",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "72",
+        "fields": {
+            "name": "Ninite",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "73",
+        "fields": {
+            "name": "Mathcad",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "74",
+        "fields": {
+            "name": "TrueCrypt-7.1a",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "75",
+        "fields": {
+            "name": "Deepfreeze",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "76",
+        "fields": {
+            "name": "CutePDF",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "77",
+        "fields": {
+            "name": "ComSol",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "78",
+        "fields": {
+            "name": "Unity",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "79",
+        "fields": {
+            "name": "Autodesk",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "80",
+        "fields": {
+            "name": "Aspen",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "81",
+        "fields": {
+            "name": "Rapid Miner",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "82",
+        "fields": {
+            "name": "DEstimator",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "83",
+        "fields": {
+            "name": "GIMP",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "84",
+        "fields": {
+            "name": "Coventorware",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "85",
+        "fields": {
+            "name": "ArcGIS",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "86",
+        "fields": {
+            "name": "Tex",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "87",
+        "fields": {
+            "name": "Impact",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "88",
+        "fields": {
+            "name": "Java",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "89",
+        "fields": {
+            "name": "SolidCam",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "90",
+        "fields": {
+            "name": "Orcad",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "91",
+        "fields": {
+            "name": "Bentley STAAD.Pro",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "92",
+        "fields": {
+            "name": "LS-Dyna",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "93",
+        "fields": {
+            "name": "MedModel",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "94",
+        "fields": {
+            "name": "HTMLKit",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "95",
+        "fields": {
+            "name": "Eclipse",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "96",
+        "fields": {
+            "name": "CESEduPack",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "97",
+        "fields": {
+            "name": "Novell Client",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "98",
+        "fields": {
+            "name": "Minitab",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "99",
+        "fields": {
+            "name": "CrystalBall",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "100",
+        "fields": {
+            "name": "WAMP",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "101",
+        "fields": {
+            "name": "ImgBurn",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "102",
+        "fields": {
+            "name": "McTrans",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "103",
+        "fields": {
+            "name": "Moldflow",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "104",
+        "fields": {
+            "name": "AdobeAcrobat",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "105",
+        "fields": {
+            "name": "Risa 3D",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "106",
+        "fields": {
+            "name": "Quicktime",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "107",
+        "fields": {
+            "name": "SketchUp",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "108",
+        "fields": {
+            "name": "Calculix",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "109",
+        "fields": {
+            "name": "GEOMAGIC",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "110",
+        "fields": {
+            "name": "SimTraffic",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "111",
+        "fields": {
+            "name": "GarageBand",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "112",
+        "fields": {
+            "name": "Doxygen",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "113",
+        "fields": {
+            "name": "Promodel",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "114",
+        "fields": {
+            "name": "Catia",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "115",
+        "fields": {
+            "name": "GTPower",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "116",
+        "fields": {
+            "name": "Matlab",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "117",
+        "fields": {
+            "name": "Symantec Endpoint",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "118",
+        "fields": {
+            "name": "LanSchool",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "119",
+        "fields": {
+            "name": "Ansys",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "120",
+        "fields": {
+            "name": "Microsoft Visual Studio",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "121",
+        "fields": {
+            "name": "PSpice",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "122",
+        "fields": {
+            "name": "Chemkin",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "123",
+        "fields": {
+            "name": "TortoiseSVN",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "124",
+        "fields": {
+            "name": "iMovie",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "125",
+        "fields": {
+            "name": "SAS",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "126",
+        "fields": {
+            "name": "xrite",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "127",
+        "fields": {
+            "name": "EASE",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "128",
+        "fields": {
+            "name": "DProfiler",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "129",
+        "fields": {
+            "name": "Rockwell Auto",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cico_core.Software",
+        "pk": "130",
+        "fields": {
+            "name": "ImageNow",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    }
+]

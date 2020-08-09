@@ -20,6 +20,8 @@ def generate_model_seeds(style, model_count):
     """
     stdout.write(style.HTTP_NOT_MODIFIED('SEEDING CAE Model Group.\n'))
     create_assets(style, model_count)
+    create_software(style, model_count)
+    create_software_detail(style, model_count)
 
 
 def create_assets(style, model_count):
@@ -91,3 +93,46 @@ def create_assets(style, model_count):
         ))
 
     stdout.write('Populated ' + style.SQL_FIELD('Asset') + ' models.\n')
+
+
+def create_software(style, model_count):
+    """
+    Create Software models.
+    """
+    # Generate random data.
+    faker_factory = Faker()
+
+    # Count number of models already created.
+    pre_initialized_count = len(models.Software.objects.all())
+
+    # Generate models equal to model count.
+    for i in range(model_count - pre_initialized_count):
+        models.Software.objects.create(name=faker_factory.job())
+    print('Populated software models.')
+
+
+def create_software_detail(style, model_count):
+    """
+    Create Software Detail models
+    """
+    # Generate random data.
+    faker_factory = Faker()
+
+    softwares = models.Software.objects.all()
+
+    # Count number of models already created.
+    pre_initialized_count = len(models.SoftwareDetail.objects.all())
+
+    # Generate models equal to model count.
+    for i in range(model_count - pre_initialized_count):
+        # Get room.
+        index = randint(0, len(softwares) - 1)
+        software = softwares[index]
+
+        models.SoftwareDetail.objects.create(
+            software=software,
+            version=faker_factory.random_int(min=1, max=500),
+            expiration=faker_factory.date_between(start_date="-1y", end_date="+2y")
+        )
+
+    print('Populated software detail models.')

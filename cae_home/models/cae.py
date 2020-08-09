@@ -84,3 +84,75 @@ class Asset(models.Model):
                 description=description
             )
             return asset
+
+
+class Software(models.Model):
+    """
+    Software on a given computer.
+    """
+    # Model fields.
+    name = models.CharField(max_length=MAX_LENGTH)
+
+    # Self-setting/Non-user-editable fields.
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Software"
+        verbose_name_plural = "Software"
+        ordering = ('name',)
+
+    def natural_key(self):
+        return self.name
+
+    def __str__(self):
+        return '{0}'.format(self.name)
+
+    def save(self, *args, **kwargs):
+        """
+        Modify model save behavior.
+        """
+        # Save model.
+        self.full_clean()
+        super(Software, self).save(*args, **kwargs)
+
+
+class SoftwareDetail(models.Model):
+    """
+    Provides more detail about a piece of software.
+    Includes things like version, expiration, etc.
+    """
+    # Relationship keys.
+    software = models.ForeignKey('Software', on_delete=models.CASCADE)
+
+    # Model fields
+    version = models.CharField(max_length=MAX_LENGTH)
+    expiration = models.DateField()
+
+    # Self-setting/Non-user-editable fields.
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Software Detail"
+        verbose_name_plural = "Software Details"
+        ordering = ('version', 'expiration')
+
+    # def natural_key(self):
+    #     values = []
+    #     values.append(self.software.name)
+    #     values.append(self.version)
+    #     values.append(self.expiration)
+    #
+    #     return values
+
+    def __str__(self):
+        return '{0} - {1}'.format(self.software.name, self.version)
+
+    def save(self, *args, **kwargs):
+        """
+        Modify model save behavior.
+        """
+        # Save model.
+        self.full_clean()
+        super(SoftwareDetail, self).save(*args, **kwargs)
