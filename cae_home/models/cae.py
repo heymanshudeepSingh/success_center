@@ -5,6 +5,10 @@ Definitions of "CAE Center" related Core Models.
 # System Imports.
 from django.db import models
 from django.db.models import ObjectDoesNotExist
+from django.utils import timezone
+from django.utils.text import slugify
+
+# User Imports.
 
 
 MAX_LENGTH = 255
@@ -94,6 +98,11 @@ class Software(models.Model):
     name = models.CharField(max_length=MAX_LENGTH)
 
     # Self-setting/Non-user-editable fields.
+    slug = models.SlugField(
+        max_length=MAX_LENGTH,
+        unique=True,
+        help_text='Used for urls referencing this Software.',
+    )
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
 
@@ -115,6 +124,25 @@ class Software(models.Model):
         # Save model.
         self.full_clean()
         super(Software, self).save(*args, **kwargs)
+
+    @staticmethod
+    def create_dummy_model():
+        """
+        Attempts to get or create a dummy model.
+        Used for testing.
+        """
+        name = 'Dummy Software'
+        slug = slugify(name)
+        try:
+            return Software.objects.get(
+                name=name,
+                slug=slug,
+            )
+        except ObjectDoesNotExist:
+            return Software.objects.create(
+                name=name,
+                slug=slug,
+            )
 
 
 class SoftwareDetail(models.Model):
@@ -138,14 +166,6 @@ class SoftwareDetail(models.Model):
         verbose_name_plural = "Software Details"
         ordering = ('version', 'expiration')
 
-    # def natural_key(self):
-    #     values = []
-    #     values.append(self.software.name)
-    #     values.append(self.version)
-    #     values.append(self.expiration)
-    #
-    #     return values
-
     def __str__(self):
         return '{0} - {1}'.format(self.software.name, self.version)
 
@@ -156,3 +176,25 @@ class SoftwareDetail(models.Model):
         # Save model.
         self.full_clean()
         super(SoftwareDetail, self).save(*args, **kwargs)
+
+    @staticmethod
+    def create_dummy_model():
+        """
+        Attempts to get or create a dummy model.
+        Used for testing.
+        """
+        software = Software.create_dummy_model()
+        version = 5
+        expiration = timezone.datetime.strptime('2020-01-01', '%d-%m-%Y')
+        try:
+            return SoftwareDetail.objects.get(
+                software=software,
+                version=version,
+                expiration=expiration,
+            )
+        except ObjectDoesNotExist:
+            return SoftwareDetail.objects.create(
+                software=software,
+                version=version,
+                expiration=expiration,
+            )
