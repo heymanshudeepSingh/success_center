@@ -270,6 +270,8 @@ ADMIN_REORDER = (
         'label': 'Core CAE Models',
         'models': (
             'cae_home.Asset',
+            'cae_home.Software',
+            'cae_home.SoftwareDetail',
         ),
     },
 )
