@@ -17,3 +17,19 @@ def create_assets(style, display_output=False):
     """
     # Nothing here yet.
     pass
+
+
+def create_software(style, display_output=False):
+    """
+    Imports fixtures for Software models.
+    """
+    # Nothing here yet.
+    pass
+
+
+def create_software_detail(style, display_output=False):
+    """
+    Imports fixtures for Software Detail models.
+    """
+    # Nothing here yet.
+    pass

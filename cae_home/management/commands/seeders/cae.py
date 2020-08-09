@@ -5,6 +5,7 @@ Seeder for "CAE Center" related Core Models.
 # System Imports
 from django.core.exceptions import ValidationError
 from django.db import IntegrityError
+from django.utils.text import slugify
 from faker import Faker
 from random import randint
 from sys import stdout
@@ -28,8 +29,6 @@ def create_assets(style, model_count):
     """
     Create Asset models.
     """
-    print(f"Model count: {model_count}")
-
     # Load preset fixtures.
     cae_fixtures.create_assets(style)
 
@@ -38,7 +37,6 @@ def create_assets(style, model_count):
 
     # Count number of models already created.
     pre_initialized_count = len(models.Asset.objects.all())
-    print(f"Pre-initialized count: {pre_initialized_count}")
 
     # Get all related models.
     rooms = models.Room.objects.all()
@@ -99,6 +97,9 @@ def create_software(style, model_count):
     """
     Create Software models.
     """
+    # Load preset fixtures.
+    cae_fixtures.create_software(style)
+
     # Generate random data.
     faker_factory = Faker()
 
@@ -106,15 +107,51 @@ def create_software(style, model_count):
     pre_initialized_count = len(models.Software.objects.all())
 
     # Generate models equal to model count.
+    total_fail_count = 0
     for i in range(model_count - pre_initialized_count):
-        models.Software.objects.create(name=faker_factory.job())
-    print('Populated software models.')
+        fail_count = 0
+        try_create_model = True
+
+        # Loop attempt until 3 fails or model is created.
+        # Model creation may fail due to randomness of name value and overlapping slugs being invalid.
+        while try_create_model:
+
+            name = faker_factory.job()
+            slug = slugify(name)
+
+            # Attempt to create model seed.
+            try:
+                models.Software.objects.create(
+                    name=name,
+                    slug=slug
+                )
+                try_create_model = False
+            except (ValidationError, IntegrityError):
+                # Seed generation failed. Nothing can be done about this without removing the random generation
+                # aspect. If we want that, we should use fixtures instead.
+                fail_count += 1
+
+                # If failed 3 times, give up model creation and move on to next model, to prevent infinite loops.
+                if fail_count > 2:
+                    try_create_model = False
+                    total_fail_count += 1
+
+    # Output if model instances failed to generate.
+    if total_fail_count > 0:
+        stdout.write(style.WARNING(
+            'Failed to generate {0}/{1} Software seed instances.\n'.format(total_fail_count, model_count)
+        ))
+
+    stdout.write('Populated ' + style.SQL_FIELD('Software') + ' models.\n')
 
 
 def create_software_detail(style, model_count):
     """
     Create Software Detail models
     """
+    # Load preset fixtures.
+    cae_fixtures.create_software_detail(style)
+
     # Generate random data.
     faker_factory = Faker()
 
@@ -125,7 +162,7 @@ def create_software_detail(style, model_count):
 
     # Generate models equal to model count.
     for i in range(model_count - pre_initialized_count):
-        # Get room.
+        # Get software.
         index = randint(0, len(softwares) - 1)
         software = softwares[index]
 
@@ -135,4 +172,4 @@ def create_software_detail(style, model_count):
             expiration=faker_factory.date_between(start_date="-1y", end_date="+2y")
         )
 
-    print('Populated software detail models.')
+    stdout.write('Populated ' + style.SQL_FIELD('Software Detail') + ' models.\n')
