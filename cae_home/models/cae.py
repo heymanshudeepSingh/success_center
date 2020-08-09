@@ -164,7 +164,7 @@ class SoftwareDetail(models.Model):
     class Meta:
         verbose_name = "Software Detail"
         verbose_name_plural = "Software Details"
-        ordering = ('version', 'expiration')
+        ordering = ('software__name', 'expiration', 'version')
 
     def __str__(self):
         return '{0} - {1}'.format(self.software.name, self.version)
