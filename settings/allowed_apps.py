@@ -10,7 +10,6 @@ APP_DIR = os.path.join(BASE_DIR, 'apps')
 
 debug_print('')
 
-
 # Django base apps, any 3rd party add-on apps, and CAE_Home app.
 # All other CAE Apps should be defined under the "Allowed_CAE_Apps" setting.
 INSTALLED_APPS = [
