@@ -102,7 +102,17 @@ ALLOWED_CAE_PROJECTS = {
             },
         },
         'third_party_apps': [],
-    }
+    },
+
+    'Success_Center': {
+        'name': 'Success Center',
+        'index': 'success_center_core:index',
+        'url-prefix': 'success_ctr',
+        'related_apps': {
+            'success_center_core': {},
+        },
+        'third_party_apps': [],
+    },
 }
 
 
