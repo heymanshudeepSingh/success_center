@@ -4,6 +4,16 @@
 {% block title_page_name %}Forms | CSS Examples | {% endblock title_page_name %}
 
 
+{% block sub_nav %}
+  <ul>
+    <li><a href="{% url 'cae_tools:css_forms_base' %}">Form Home</a></li>
+    <li><a href="{% url 'cae_tools:css_forms_default_fields' %}">Default Form Fields</a></li>
+    <li><a href="{% url 'cae_tools:css_forms_custom_fields' %}">Custom Form Fields</a></li>
+    <li><a href="{% url 'cae_tools:css_forms_misc' %}">Form Misc</a></li>
+  </ul>
+{% endblock %}
+
+
 {% block content %}
   <h1>CSS Examples - Forms</h1>
 

@@ -1,0 +1,101 @@
+{% extends 'cae_tools/main.html' %}
+
+
+{% block title_page_name %}Custom Fields | Forms | CSS Examples | {% endblock title_page_name %}
+
+
+{% block sub_nav %}
+  <ul>
+    <li><a href="{% url 'cae_tools:css_forms_base' %}">Form Home</a></li>
+    <li><a href="{% url 'cae_tools:css_forms_default_fields' %}">Default Form Fields</a></li>
+    <li><a href="{% url 'cae_tools:css_forms_custom_fields' %}">Custom Form Fields</a></li>
+    <li><a href="{% url 'cae_tools:css_forms_misc' %}">Form Misc</a></li>
+  </ul>
+{% endblock %}
+
+
+{% block content %}
+  <h1>CSS Examples - Custom Form Fields</h1>
+  <p>
+    Except for nonstandard forms, forms should always be rendered with
+    <span class="pre">&#123;&#37; include 'cae_home/include/form.html' &#37;&#125;</span>
+  </p>
+  <p>
+    When possible, most form logic/work should be in the associated forms.py class.
+  </p>
+
+  <article id="custom-datetime-form-fields">
+    <h3>Custom DateTime-Related Form Fields</h3>
+    <p>
+      These are our attempt at making Date/Time related fields much more user friendly. They're not perfect, but they
+      make things a lot more intuitive to use than the default Django implementation.
+    </p>
+
+    <div class="panel">
+      <div class="head">
+        <p>DatePickerWidget and DatePickerWidget Example</p>
+      </div>
+      <div class="body">
+        {% include 'cae_home/include/form.html' with form=datetime_form %}
+      </div>
+    </div>
+  </article>
+
+  <article id="custom-select-button-form-fields">
+    <h3>Custom "Select Button"-Related Form Fields</h3>
+    <p>
+      The "Select Button" widget is selected by using the <span class="pre">SelectButtonsWidget</span> from the
+      cae_home forms.py file.
+    </p>
+    <p>
+      The "Select Button" form widgets allow a choice field that looks and acts like clickable buttons. Currently,
+      implementation only allows one choice to be selected at a time with this widget. Thus it should not be used with
+      a "MultipleChoiceField" for now.
+    </p>
+    <p>
+      Note that these buttons can also be toggled to display on the side, next to all other fields in the form. This
+      is done by simply using the <span class="pre">SelectButtonsSideWidget</span> widget. Other than displaying on
+      the side of the form, this should behave identically to the standard Select Buttons widget.
+    </p>
+
+    <div class="panel">
+      <div class="head">
+        <p>SelectButtonsWidget Example</p>
+      </div>
+      <div class="body">
+        {% include 'cae_home/include/form.html' with form=select_buttons_form %}
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="head">
+        <p>SelectButtonsSideWidget example</p>
+      </div>
+      <div class="body">
+        {% include 'cae_home/include/form.html' with form=select_buttons_side_form %}
+      </div>
+    </div>
+  </article>
+
+  <article id="custom-select2-form-fields">
+    <h3>Custom Select2-Related Form Fields</h3>
+    <p>
+      The "Select2" widget is our Django implementation of <a href="https://select2.org/">https://select2.org/</a>.
+    </p>
+    <p>
+      In short, it's an attempt to have more dynamic and universal select choices across all websites, languages, and
+      browsers. Our implementation here is only a basic one, with a lot of potential functionality that can be
+      imported/added. See select2 official docs for full details of what it's meant to do.
+    </p>
+
+    <div class="panel">
+      <div class="head">
+        <p>Select2Widget and Select2MultipleWidget Example</p>
+      </div>
+      <div class="body">
+        {% include 'cae_home/include/form.html' with form=select2_form %}
+      </div>
+    </div>
+  </article>
+
+{% endblock content %}

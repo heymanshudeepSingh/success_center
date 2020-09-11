@@ -1,0 +1,201 @@
+{% extends 'cae_tools/main.html' %}
+
+
+{% block title_page_name %}Default Fields | Forms | CSS Examples | {% endblock title_page_name %}
+
+
+{% block sub_nav %}
+  <ul>
+    <li><a href="{% url 'cae_tools:css_forms_base' %}">Form Home</a></li>
+    <li><a href="{% url 'cae_tools:css_forms_default_fields' %}">Default Form Fields</a></li>
+    <li><a href="{% url 'cae_tools:css_forms_custom_fields' %}">Custom Form Fields</a></li>
+    <li><a href="{% url 'cae_tools:css_forms_misc' %}">Form Misc</a></li>
+  </ul>
+{% endblock %}
+
+
+{% block content %}
+  <h1>CSS Examples - Default Form Fields</h1>
+
+  <p>
+    Except for nonstandard forms, forms should always be rendered with
+    <span class="pre">&#123;&#37; include 'cae_home/include/form.html' &#37;&#125;</span>
+  </p>
+  <p>
+    Note: Forms in these examples do not actually submit data. To see an error, intentionally enter an invalid value
+    for a timestamp.
+  </p>
+
+  <article id="default-text-form-fields">
+    <h2>Default Text Form Fields</h2>
+    <p>The CharField and TextField are some of the most common fields you'll see on any site.</p>
+    <p>
+      Note that for Django, the text area appears to be a standard <span class="pre">CharField</span>, except it has a
+      high "max_length" value, and a "Textarea" widget instead of the standard widget.
+    </p>
+
+    <div class="panel">
+      <div class="head">
+        <p>Text Form Field Example</p>
+      </div>
+      <div class="body">
+        {% include 'cae_home/include/form.html' with form=text_form %}
+      </div>
+    </div>
+  </article>
+
+  <article id="default-uncommon-text-form-fields">
+    <h2>Less Common Default Text Form Fields</h2>
+    <p>For the most part, these behave similarly to a CharField.</p>
+    <p>
+      RegexField will check that the input must match a provided regex value. In this case, the field will only accept
+      standard numbers and characters.
+    </p>
+    <p>
+      EmailField is essentially a RegexField that checks if the text is in valid email format.
+    </p>
+    <p>
+      Similarly, a SlugField is essentially a RegexField that specifically checks for url-safe text (only letters,
+      numbers, underscores, and hyphens). And URLField will check that the string is in valid full URL format.
+    </p>
+    <div class="panel">
+      <div class="head">
+        <p>Less Common Text Form Field Example</p>
+      </div>
+      <div class="body">
+        {% include 'cae_home/include/form.html' with form=text_form_uncommon %}
+      </div>
+    </div>
+  </article>
+
+  <article id="default-number-form-fields">
+    <h2>Default Number Form Fields</h2>
+    <p>Number forms are also fairly common.</p>
+    <p>
+      However, note the default widget values for DecimalFields and FloatFields seem to behave identically to
+      IntegerFields. Users can manually enter the values they want, but it's not very intuitive from a design
+      standpoint.
+    </p>
+    <p>
+      We can fix this problem fairly easily by adjusting a few values when we create our form fields, as was done in the
+      "Adjusted" example. In this case, we set the DecimalField to increment by values of 0.01. Meanwhile,
+      the FloatField has a min of -1, a max of 1, and increments by values of 0.1.
+    </p>
+
+    <div class="panel">
+      <div class="head">
+        <p>Number Form Field Example</p>
+      </div>
+      <div class="body">
+        {% include 'cae_home/include/form.html' with form=number_form %}
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="head">
+        <p>Adjusted Number Form Field Example</p>
+      </div>
+      <div class="body">
+        {% include 'cae_home/include/form.html' with form=number_form_adjusted %}
+      </div>
+    </div>
+  </article>
+
+  <article id="default-date-form-fields">
+    <h2>Default Date/Time Form Fields</h2>
+    <p>There are three main form fields for Date/Time inputs:</p>
+    <ul>
+      <li><p>DateField - Handles the date, such as year/month/day.</p></li>
+      <li><p>TimeField - Handles the time, such as hour/second/millisecond.</p></li>
+      <li><p>DateTimeField - Handles both of the above fields as a single entity.</p></li>
+    </ul>
+    <p>
+      Unfortunately, Django really lets us down with default handling of these inputs. As you can see from the first
+      example, Django displays these to the user as standard CharField inputs. ...that's not very useful or intuitive
+      at all. As you can see in the second example, we can make it very slightly better for the DateField input, and
+      then split up the DateTimeField. But even this is lacking, and there's no real built-in solution for anything
+      involving the TimeField input.
+    </p>
+    <p>
+      See <a href="{% url 'cae_tools:css_forms_custom_fields' %}#custom-datetime-form-fields">Custom Form Fields</a>
+      for the Workspace's solution to these pitfalls.
+    </p>
+    <p>
+      Note that some solutions on the internet will suggest "just use the Django Admin date/time picker widgets!" Uhhh,
+      yeah, implementing that in standard views is a lot more work than it sounds like. And may be prone to randomly
+      breaking in future implementations of Django. Thus, it's better to create your own implementation, like we have.
+    </p>
+
+    <div class="panel">
+      <div class="head">
+        <p>Date Form Field Example</p>
+      </div>
+      <div class="body">
+        {% include 'cae_home/include/form.html' with form=date_form %}
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="head">
+        <p>Adjusted Date Form Field Example</p>
+      </div>
+      <div class="body">
+        {% include 'cae_home/include/form.html' with form=date_form_adjusted %}
+      </div>
+    </div>
+  </article>
+
+  <article id="default-choice-form-fields">
+    <h2>Default Choice Form Fields</h2>
+    <p>
+      Choice fields effectively let you choose a value from a list. Multiple choice fields act the same, except they the
+      user choose one or more values from the list.
+    </p>
+    <p>
+      Similarly to Date/Time fields, Django somewhat lets us down with the default implementation of
+      MultipleChoiceFields. But at least it's somewhat usable not very user friendly. Essentially, hold control as you
+      click to select/deselect values.
+    </p>
+    <p>
+      Once again, see <a href="{% url 'cae_tools:css_forms_custom_fields' %}">Custom Form Fields</a> for the Workspace's
+      solution to these pitfalls.
+    </p>
+
+    <div class="panel">
+      <div class="head">
+        <p>Choice Form Field Example</p>
+      </div>
+      <div class="body">
+        {% include 'cae_home/include/form.html' with form=choice_form %}
+      </div>
+    </div>
+
+    <p><small>
+      We really don't know what the point of a "Typed" choice field is, and google didn't seem to give many useful
+      results.
+    </small></p>
+
+  </article>
+
+  <article id="default-misc-form-fields">
+    <h2>Default Misc Form Fields</h2>
+    <p>
+      Various fields that don't really fit in with the above fieldsets. For the most part, they're fairly
+      self-explanatory, except for things like DurationField, which we aren't sure what it's even for.
+    </p>
+    <p>
+      The only field not included here is FilePathField, which appears to take in a directory path as an argument, and
+      then the user is able to use this field to select any files within said directory for download.
+    </p>
+
+    <div class="panel">
+      <div class="head">
+        <p>Misc Form Field Example</p>
+      </div>
+      <div class="body">
+        {% include 'cae_home/include/form.html' with form=misc_form %}
+      </div>
+    </div>
+  </article>
+
+{% endblock content %}
