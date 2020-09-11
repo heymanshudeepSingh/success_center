@@ -142,6 +142,12 @@
             padding: 10px;
             margin: 5px;
         }
+
+        & {
+            @include display-flex;
+            @include justify-content(start);
+            @include align-items(center);
+        }
     }
 }
 
