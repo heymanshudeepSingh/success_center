@@ -51,6 +51,7 @@
             @include display-flex;
             @include flex-direction(row);
             @include justify-content(center);
+            @include align-items(center);
 
             width: 100%;
 
@@ -89,6 +90,13 @@
         margin-right: auto;
         margin-left: auto;
     }
+}
+
+.main-content form.as-row {
+    @include display-flex();
+    @include flex-direction(row);
+    @include justify-content(center);
+    @include align-items(center);
 }
 
 
