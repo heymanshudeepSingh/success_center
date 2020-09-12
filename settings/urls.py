@@ -8,6 +8,7 @@ Note: Urls will automatically be prefixed with "<url-prefix>/" as defined in all
 from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.urls import path
 from rest_framework import routers
 
 # User Class Imports.
@@ -29,14 +30,14 @@ handler500 = 'cae_home.views.handler500'
 # General url handling.
 urlpatterns = [
     # Admin views.
-    url(r'^admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
 
     # DjangoRest urls.
-    url(r'^api/', include(router.urls)),
+    path('api/', include(router.urls)),
     # url(r'api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
     # CAE_Home app views.
-    url(r'^', include('cae_home.urls')),
+    path('', include('cae_home.urls')),
 ]
 
 
@@ -44,7 +45,7 @@ urlpatterns = [
 if settings.DEV_URLS:
     urlpatterns += [
         # CAE Tools app views.
-        url(r'^cae_tools/', include('cae_tools.urls')),
+        path('cae_tools/', include('cae_tools.urls')),
     ]
 
 
