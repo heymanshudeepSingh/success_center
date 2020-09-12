@@ -44,7 +44,7 @@ def create_groups(style=None, display_output=False):
 
     general_permissions = get_general_wmu_permissions()
 
-    set_cae_group_permissions(group_dict)
+    set_cae_group_permissions(group_dict, general_permissions)
     set_wmu_group_permissions(group_dict, general_permissions)
     set_step_group_permissions(group_dict, general_permissions)
 
@@ -116,7 +116,7 @@ def create_permission_groups(as_dict=False):
 
 #region Set Permission Functions
 
-def set_cae_group_permissions(group_dict):
+def set_cae_group_permissions(group_dict, general_permissions):
     """
     Sets all permissions related to CAE Center groups.
     Technically not a fixture, but still pretty integral to site running, and has no random data.
@@ -148,6 +148,7 @@ def set_cae_group_permissions(group_dict):
     for permission in cae_center_permissions:
         if 'Can add' in permission.name or 'Can change user' in permission.name:
             filtered_permissions.append(permission)
+    filtered_permissions += general_permissions
     group_dict['cae_attendant'].permissions.set(filtered_permissions)
 
 
