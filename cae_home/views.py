@@ -34,11 +34,12 @@ cae_employee_groups = [
     'CAE Attendant',
     'CAE Admin',
     'CAE Programmer',
-    'CAE Director Inactive',
-    'CAE Building Coordinator Inactive',
-    'CAE Attendant Inactive',
-    'CAE Admin Inactive',
-    'CAE Programmer Inactive',
+]
+
+# STEP specific User Group names.
+step_employee_groups = [
+    'STEP Admin',
+    'STEP Employee',
 ]
 
 
@@ -81,12 +82,22 @@ def login_redirect(request):
                 return redirect('cae_home:index')
 
         # Check if CAE Center employee.
-        for cae_group in cae_employee_groups:
-            if cae_group in user_groups:
-                return redirect('cae_web_core:index')
+        if  'cae_web' in settings.INSTALLED_CAE_PROJECTS:
+            for cae_group in cae_employee_groups:
+                if cae_group in user_groups:
+                    return redirect('cae_web_core:index')
+
+        # Check if STEP (Success Center) employee.
+        if 'success_center' in settings.INSTALLED_CAE_PROJECTS:
+            for step_group in step_employee_groups:
+                if step_group in user_groups:
+                    return redirect('success_center:index')
 
         # Unknown user group.
-        exception = 'Server did not recognize login user\'s group. Please contact the CAE Center.'
+        exception = 'Server did not recognize login user\'s ({0}) group. Please contact the CAE Center.'.format(
+            request.user,
+        )
+        logger.error(exception)
         return TemplateResponse(request, 'cae_home/errors/404.html', {
             'error_message': exception,
         },
@@ -115,10 +126,17 @@ def logout(request):
                 url_set = True
 
         # Check if CAE Center employee.
-        if not url_set:
+        if not url_set and 'cae_web' in settings.INSTALLED_CAE_PROJECTS:
             for cae_group in cae_employee_groups:
                 if cae_group in user_groups:
                     logout_redirect_url = redirect('cae_web_core:index')
+                    url_set = True
+
+        # Check if STEP (Success Center) employee.
+        if not url_set and 'success_center' in settings.INSTALLED_CAE_PROJECTS:
+            for step_group in step_employee_groups:
+                if step_group in user_groups:
+                    logout_redirect_url = redirect('success_center_core:index')
                     url_set = True
 
         logger.auth_info('{0}: Logging user out.'.format(request.user))
@@ -132,6 +150,7 @@ def info_schedules(request):
     Temporary page to publicly display schedules of users.
     """
     return TemplateResponse(request, 'cae_home/info_schedules.html', {})
+
 
 def info_servers(request):
     """
