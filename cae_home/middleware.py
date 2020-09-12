@@ -8,8 +8,6 @@ from django.conf import settings
 from django.contrib.sites.shortcuts import get_current_site
 from django.db.models import ObjectDoesNotExist
 from django.utils import timezone
-
-
 from django.core.handlers.exception import response_for_exception
 
 # User Class Imports.
@@ -173,5 +171,7 @@ class HandleExceptionsMiddleware(object):
         logger.error('{0}'.format(exception), exc_info=True)
 
         # Call standard Django response handling for given exception.
-        return response_for_exception(request, exception)
+        response_for_exception(request, exception)
 
+        # Note that this function SHOULD NOT return any value.
+        # Otherwise, all exception pages that raise will look like a 500.
