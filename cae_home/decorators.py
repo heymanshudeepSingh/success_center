@@ -1,5 +1,8 @@
 """
 View permission decorators for CAE Home app.
+
+To use on class based views, call with Django's "method_decorator".
+To pass args, see https://stackoverflow.com/a/27864969
 """
 
 # System Imports.
@@ -34,16 +37,12 @@ def group_required(*required_groups):
     """
     Limits view access based on user group.
     To access view, user must be part of one or more groups provided.
-    Logic from "https://codereview.stackexchange.com/questions/57073/django-custom-decorator-for-user-group-check"
-
-    Not currently used and not sure if we'll need it, but logic is here just in case.
+    Logic from https://codereview.stackexchange.com/questions/57073/django-custom-decorator-for-user-group-check
     """
     def check_group(view_func):
         @wraps(view_func)
         def wrapper(request, *args, **kwargs):
             user = request.user
-            print('User: {0}'.format(user))
-            print('Args: {0}'.format(required_groups))
 
             # Check that user is authenticated.
             if not user.is_authenticated:
