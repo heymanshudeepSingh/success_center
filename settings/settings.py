@@ -5,7 +5,7 @@ These are settings that are essentially expected by Django or Third Party Librar
 (See "settings/allowed_apps.py" file for INSTALLED_APPS variable and related logic.)
 """
 
-# User Class Imports.
+# User Imports.
 from settings.reusable_settings import *
 
 
@@ -84,6 +84,9 @@ CHANNEL_LAYERS = {
         }
     }
 }
+
+
+STATICFILES_STORAGE = 'settings.static_storage.ForgivingManifestStaticFilesStorage'
 
 
 # User Model.
