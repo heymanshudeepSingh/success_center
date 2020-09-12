@@ -79,7 +79,7 @@ def create_permission_groups(as_dict=False):
 
     # Check if return value should be list or dict format.
     if as_dict:
-        # Create and add to dict.
+        # Populate dictionaries in case calling logic wants easy access to users.
         group_dict = {
             'cae_director': director_group,
             'building_coordinator': building_coordinator_group,
@@ -96,7 +96,7 @@ def create_permission_groups(as_dict=False):
         }
         return group_dict
     else:
-        # Create and add to array. Used in testing.
+        # Populate arrays in case calling logic wants easy access to users.
         group_array = [                     # Index Num:
             director_group,                 # 0
             building_coordinator_group,     # 1

@@ -86,28 +86,43 @@ def create_users(style):
     stdout.write('Populated ' + style.SQL_FIELD('User') + ' models.\n')
 
 
-def create_permission_group_users(password=default_password, with_names=True):
+def create_permission_group_users(password=default_password, with_names=True, as_dict=False):
     """
     Create specific users for each main group permission.
     :param password: Password to seed users with.
     :param with_names: Boolean indicating if names should be used. Should probably be set to False for UnitTesting.
-    :return: Array of users.
+    :param as_dict: Bool indicating if return value should be list or dict.
+    :return: Array or dict of users.
     """
-    # Create normal users for every main permission group.
+    # Create normal users for every CAE Center permission group.
     cae_director = models.User.get_or_create_user('cae_director', '', password)
-    cae_director_inactive = models.User.get_or_create_user('cae_director_inactive', '', password)
+    cae_director_inactive = models.User.get_or_create_user('cae_director_inactive', '', password, inactive=True)
     cae_building_coordinator = models.User.get_or_create_user('cae_building_coordinator', '', password)
-    cae_building_coordinator_inactive = models.User.get_or_create_user('cae_building_coordinator_inactive', '', password)
+    cae_building_coordinator_inactive = models.User.get_or_create_user('cae_building_coordinator_inactive', '', password, inactive=True)
     cae_admin_ga = models.User.get_or_create_user('cae_admin_ga', '', password)
-    cae_admin_ga_inactive = models.User.get_or_create_user('cae_admin_ga_inactive', '', password)
+    cae_admin_ga_inactive = models.User.get_or_create_user('cae_admin_ga_inactive', '', password, inactive=True)
     cae_programmer_ga = models.User.get_or_create_user('cae_programmer_ga', '', password)
-    cae_programmer_ga_inactive = models.User.get_or_create_user('cae_programmer_ga_inactive', '', password)
+    cae_programmer_ga_inactive = models.User.get_or_create_user('cae_programmer_ga_inactive', '', password, inactive=True)
     cae_admin = models.User.get_or_create_user('cae_admin', '', password)
-    cae_admin_inactive = models.User.get_or_create_user('cae_admin_inactive', '', password)
+    cae_admin_inactive = models.User.get_or_create_user('cae_admin_inactive', '', password, inactive=True)
     cae_programmer = models.User.get_or_create_user('cae_programmer', '', password)
-    cae_programmer_inactive = models.User.get_or_create_user('cae_programmer_inactive', '', password)
+    cae_programmer_inactive = models.User.get_or_create_user('cae_programmer_inactive', '', password, inactive=True)
     cae_attendant = models.User.get_or_create_user('cae_attendant', '', password)
-    cae_attendant_inactive = models.User.get_or_create_user('cae_attendant_inactive', '', password)
+    cae_attendant_inactive = models.User.get_or_create_user('cae_attendant_inactive', '', password, inactive=True)
+
+    # Create normal users for every general WMU permission group.
+    wmu_faculty = models.User.get_or_create_user('wmu_faculty', '', password)
+    wmu_faculty_inactive = models.User.get_or_create_user('wmu_faculty_inactive', '', password, inactive=True)
+    wmu_teacher = models.User.get_or_create_user('wmu_teacher', '', password)
+    wmu_teacher_inactive = models.User.get_or_create_user('wmu_teacher_inactive', '', password, inactive=True)
+    wmu_student = models.User.get_or_create_user('wmu_student', '', password)
+    wmu_student_inactive = models.User.get_or_create_user('wmu_student_inactive', '', password, inactive=True)
+
+    # Create normal users for every STEP (Success Center) permission group.
+    step_admin = models.User.get_or_create_user('step_admin', '', password)
+    step_admin_inactive = models.User.get_or_create_user('step_admin_inactive', '', password, inactive=True)
+    step_employee = models.User.get_or_create_user('step_employee', '', password)
+    step_employee_inactive = models.User.get_or_create_user('step_employee_inactive', '', password, inactive=True)
 
     # Set their names.
     if with_names:
@@ -127,25 +142,7 @@ def create_permission_group_users(password=default_password, with_names=True):
         cae_programmer_ga.last_name = "One"
         cae_programmer_ga.save()
 
-    # Set inactive values.
-    cae_director_inactive.is_active = False
-    cae_director_inactive.save()
-    cae_building_coordinator_inactive.is_active = False
-    cae_building_coordinator_inactive.save()
-    cae_admin_ga_inactive.is_active = False
-    cae_admin_ga_inactive.save()
-    cae_admin_inactive.is_active = False
-    cae_admin_inactive.save()
-    cae_programmer_ga_inactive.is_active = False
-    cae_programmer_ga_inactive.save()
-    cae_programmer_inactive.is_active = False
-    cae_programmer_inactive.save()
-    cae_attendant_inactive.is_active = False
-    cae_attendant_inactive.save()
-
-
-
-    # Add permission groups to users.
+    # Add permission groups to CAE Center users.
     cae_director.groups.add(Group.objects.get(name='CAE Director'))
     cae_director_inactive.groups.add(Group.objects.get(name='CAE Director'))
     cae_building_coordinator.groups.add(Group.objects.get(name='CAE Building Coordinator'))
@@ -161,16 +158,82 @@ def create_permission_group_users(password=default_password, with_names=True):
     cae_attendant.groups.add(Group.objects.get(name='CAE Attendant'))
     cae_attendant_inactive.groups.add(Group.objects.get(name='CAE Attendant'))
 
-    # Create and add to array. Used in testing.
-    user_array = []                               # Index Num:
-    user_array.append(cae_director)               # 0
-    user_array.append(cae_building_coordinator)   # 1
-    user_array.append(cae_admin_ga)               # 2
-    user_array.append(cae_programmer_ga)          # 3
-    user_array.append(cae_admin)                  # 4
-    user_array.append(cae_programmer)             # 5
-    user_array.append(cae_attendant)              # 6
-    return user_array
+    # Add permission groups to general WMU users.
+    wmu_faculty.groups.add(Group.objects.get(name='WMU Faculty'))
+    wmu_faculty_inactive.groups.add(Group.objects.get(name='WMU Faculty'))
+    wmu_teacher.groups.add(Group.objects.get(name='WMU Teacher'))
+    wmu_teacher_inactive.groups.add(Group.objects.get(name='WMU Teacher'))
+    wmu_student.groups.add(Group.objects.get(name='WMU Student'))
+    wmu_student_inactive.groups.add(Group.objects.get(name='WMU Student'))
+
+    # Add permission groups to STEP (Success Center) users.
+    step_admin.groups.add(Group.objects.get(name='STEP Admin'))
+    step_admin_inactive.groups.add(Group.objects.get(name='STEP Admin'))
+    step_employee.groups.add(Group.objects.get(name='STEP Employee'))
+    step_employee_inactive.groups.add(Group.objects.get(name='STEP Employee'))
+
+    if as_dict:
+        # Populate dictionaries in case calling logic wants easy access to users.
+        active_user_dict = {
+            'cae_director': cae_director,
+            'cae_building_coordinator': cae_building_coordinator,
+            'cae_admin_ga': cae_admin_ga,
+            'cae_programmer_ga': cae_programmer_ga,
+            'cae_admin': cae_admin,
+            'cae_programmer': cae_programmer,
+            'cae_attendant': cae_attendant,
+            'wmu_faculty': wmu_faculty,
+            'wmu_teacher': wmu_teacher,
+            'wmu_student': wmu_student,
+            'step_admin': step_admin,
+            'step_employee': step_employee,
+        }
+        inactive_user_dict = {
+            'cae_director': cae_director_inactive,
+            'cae_building_coordinator': cae_building_coordinator_inactive,
+            'cae_admin_ga': cae_admin_ga_inactive,
+            'cae_programmer_ga': cae_programmer_ga_inactive,
+            'cae_admin': cae_admin_inactive,
+            'cae_programmer': cae_programmer_inactive,
+            'cae_attendant': cae_attendant_inactive,
+            'wmu_faculty': wmu_faculty_inactive,
+            'wmu_teacher': wmu_teacher_inactive,
+            'wmu_student': wmu_student_inactive,
+            'step_admin': step_admin_inactive,
+            'step_employee': step_employee_inactive,
+        }
+        return (active_user_dict, inactive_user_dict)
+    else:
+        # Populate arrays in case calling logic wants easy access to users.
+        active_user_array = [               # Index Num:
+            cae_director,                   # 0
+            cae_building_coordinator,       # 1
+            cae_admin_ga,                   # 2
+            cae_programmer_ga,              # 3
+            cae_admin,                      # 4
+            cae_programmer,                 # 5
+            cae_attendant,                  # 6
+            wmu_faculty,                    # 7
+            wmu_teacher,                    # 8
+            wmu_student,                    # 9
+            step_admin,                     # 10
+            step_employee,                  # 11
+        ]
+        inactive_user_array = [                     # Index Num:
+            cae_director_inactive,                  # 0
+            cae_building_coordinator_inactive,      # 1
+            cae_admin_ga_inactive,                  # 2
+            cae_programmer_ga_inactive,             # 3
+            cae_admin_inactive,                     # 4
+            cae_programmer_inactive,                # 5
+            cae_attendant_inactive,                 # 6
+            wmu_faculty_inactive,                   # 7
+            wmu_teacher_inactive,                   # 8
+            wmu_student_inactive,                   # 9
+            step_admin_inactive,                    # 10
+            step_employee_inactive,                 # 11
+        ]
+        return (active_user_array, inactive_user_array)
 
 
 def create_wmu_users(style, model_count):
