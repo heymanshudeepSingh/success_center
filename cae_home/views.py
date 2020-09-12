@@ -91,7 +91,7 @@ def login_redirect(request):
         if 'success_center' in settings.INSTALLED_CAE_PROJECTS:
             for step_group in step_employee_groups:
                 if step_group in user_groups:
-                    return redirect('success_center:index')
+                    return redirect('success_center_core:index')
 
         # Unknown user group.
         exception = 'Server did not recognize login user\'s ({0}) group. Please contact the CAE Center.'.format(
