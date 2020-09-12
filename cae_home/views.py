@@ -7,6 +7,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied, SuspiciousOperation
 from django.db.models import ObjectDoesNotExist
 from django.http import Http404
 from django.http.response import HttpResponseRedirect
@@ -61,6 +62,9 @@ def handler500(request, exception=None):
     return TemplateResponse(request, 'cae_home/errors/500.html', status=500)
 
 #endregion Special Views
+
+
+#region Login Views
 
 def login(request, *args, **kwargs):
     """
@@ -162,6 +166,8 @@ def logout(request):
 
         # Call Django's standard logout function.
         return auth_views.LogoutView.as_view(next_page=logout_redirect_url.url)(request)
+
+#endregion Login Views
 
 
 def info_schedules(request):
@@ -372,6 +378,22 @@ def external_dev_index(request):
         return TemplateResponse(request, 'wmu_home/index.html', {})
     else:
         raise Http404()
+
+
+#region Test Error Views
+
+def test_400_error(request):
+    raise SuspiciousOperation('Test 400 Error.')
+
+
+def test_403_error(request):
+    raise PermissionDenied('Test 403 Error.')
+
+
+def test_500_error(request):
+    raise Exception('Test 500 Error.')
+
+#endregion Test Error Views
 
 
 def test_single_email(request):

@@ -26,9 +26,15 @@ urlpatterns = [
 
     # User pages.
     url(r'^user/edit/(?P<slug>[\w-]+)/$', views.user_edit, name='user_edit'),
+    url(r'^user/helpful_resources/$', views.helpful_resources, name='helpful_resources'),
+
+    # Error page test views.
+    url(r'^error/400/$', views.test_400_error, name='error_400'),
+    url(r'^error/403/$', views.test_403_error, name='error_403'),
+    # url(r'^error/404/$', views.test_404_error, name='error_404'),
+    url(r'^error/500/$', views.test_500_error, name='error_500'),
 
     # CAE Home/Index page.
-    url(r'^user/helpful_resources/$', views.helpful_resources, name='helpful_resources'),
     url(r'^$', views.index, name='index'),
 ]
 
@@ -36,12 +42,6 @@ urlpatterns = [
 # Debug only urls.
 if settings.DEV_URLS:
     urlpatterns += [
-        # Error page test views.
-        url(r'^error/400/$', TemplateView.as_view(template_name='cae_home/errors/400.html'), name='error_400'),
-        url(r'^error/403/$', TemplateView.as_view(template_name='cae_home/errors/403.html'), name='error_403'),
-        url(r'^error/404/$', TemplateView.as_view(template_name='cae_home/errors/404.html'), name='error_404'),
-        url(r'^error/500/$', TemplateView.as_view(template_name='cae_home/errors/500.html'), name='error_500'),
-
         # Internal site ("CAE Home") test page(s).
         # Used for layout format and general testing of "internal facing" views.
         url(r'^cae/$', views.internal_dev_index, name='internal_dev_index'),
