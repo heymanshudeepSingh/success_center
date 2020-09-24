@@ -99,16 +99,17 @@ function main () {
     apt-get install python3 python3-dev python3-venv -y > /dev/null
     apt-get install "python$python_version" "python$python_version-dev" "python$python_version-venv" -y > /dev/null
 
-    # Install Sass packages.
-    echo -e "${color_blue}Installing sass dependencies...${color_reset}"
-    apt-get install ruby-sass -y > /dev/null
-
     # Install Node/Npm packages.
     echo -e "${color_blue}Installing npm dependencies...${color_reset}"
     curl -sL https://deb.nodesource.com/setup_14.x > /dev/null 2>&1 | sudo -E bash -
     apt-get install nodejs -y > /dev/null 2>&1
     apt-get install npm -y > /dev/null 2>&1
     sudo ./general/installers/misc/npm_install.sh > /dev/null 2>&1
+
+    # Install Sass packages.
+    echo -e "${color_blue}Installing sass dependencies...${color_reset}"
+    apt-get purge --auto-remove ruby-sass -y > /dev/null 2>&1
+    npm install -g sass > /dev/null
 
     # Optionally install Mysql packages.
     if [[ "$mysql" == true ]]
@@ -131,7 +132,6 @@ function main () {
     # Other packages, based on dev or prod environment.
     if [[ "$dev_setup" == true ]]
     then
-        echo ""
         echo -e "${color_blue}Installing Selenium Testing dependencies...${color_reset}"
         # Google Chrome "chromium" driver for running selenium with chrome.
         if [[ ! -f "/usr/local/bin/chromedriver" ]]
@@ -150,10 +150,8 @@ function main () {
             rm geckodriver-v0.24.0-linux64.tar.gz > /dev/null
         fi
     else
-        echo ""
         echo -e "${color_blue}Skipping Selenium Testing dependencies...${color_reset}"
 
-        echo ""
         echo -e "${color_blue}Installing Nginx dependencies...${color_reset}"
         apt-get install nginx -y > /dev/null
         systemctl disable nginx
