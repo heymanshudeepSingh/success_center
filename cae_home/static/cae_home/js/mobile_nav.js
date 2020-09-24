@@ -36,7 +36,7 @@ $(document).ready(function() {
         // console.log("Mobile icon clicked.");
 
         if ($(".header-bottom").css("display") == "none") {
-            // console.log("Showing movile nav.");
+            // console.log("Showing mobile nav.");
 
             $(".header-bottom").append("<nav></nav>");
             $(".header-bottom nav").append(main_nav);
@@ -61,6 +61,7 @@ $(document).ready(function() {
      * Add appropriate font sizing based on mobile display or not.
      */
     function add_font_sizing_classes() {
+        var font_size_class = null;
 
         if ($(window).width() > mobile_window_cutoff) {
             // Currently in desktop mode.
