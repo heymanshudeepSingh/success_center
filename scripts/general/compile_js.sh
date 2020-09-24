@@ -24,9 +24,18 @@ function main () {
     check_not_user "root"
 
 
-    echo "Possible params:"
-    echo "   * watch - Watches for changes."
-    echo ""
+    if [[ ${args[@]} =~ "hide" ]]
+    then
+        # Hide arg passed. Skip displaying params.
+        true
+    else
+        # Display params.
+        echo -e "${color_blue}Possible params:${color_reset}"
+        echo "   * watch - Watches for changes."
+        echo "   * hide - Hides stdout of script."
+        echo ""
+        echo ""
+    fi
 
     compile_command=""
     merge_command=""
@@ -72,7 +81,13 @@ function main () {
         echo ""
         echo -e "${color_blue}Installing npm dependencies.${color_reset}"
         cd ..
-        npm install
+        if [[ ${args[@]} =~ "hide" ]]
+        then
+            # Hide arg passed.
+            npm install > /dev/null
+        else
+            npm install
+        fi
         cd ./scripts/
 
         # Execute depending on provided "watch" arg.
@@ -90,21 +105,40 @@ function main () {
 
         else
             # Watch not provided by user.
-
             compile_command=(npx concurrently "${compile_command[@]}")
-            echo ""
-            echo -e "${color_blue}Compiling React Code:${color_reset}"
-            echo "${compile_command[@]}"
-            "${compile_command[@]}"
-            echo ""
+
+            # Handle based on if "hide" arg was passed or not.
+            if [[ ${args[@]} =~ "hide" ]]
+            then
+                # Hide arg passed.
+                echo -e "${color_blue}Compiling React Code.${color_reset}"
+                "${compile_command[@]}"  > /dev/null
+            else
+                # Display full stdout.
+                echo ""
+                echo -e "${color_blue}Compiling React Code:${color_reset}"
+                echo "${compile_command[@]}"
+                "${compile_command[@]}"
+                echo ""
+            fi
 
             merge_command=(npx concurrently "${merge_command[@]}")
-            echo ""
-            echo -e "${color_blue}Merging JavaScript Files:${color_reset}"
-            echo "${merge_command[@]}"
-            echo ""
-            "${merge_command[@]}"
-            echo ""
+
+            # Handle based on if "hide" command was passed or not.
+            if [[ ${args[@]} =~ "hide" ]]
+            then
+                # Hide arg passed.
+                echo -e "${color_blue}Merging JavaScript Files.${color_reset}"
+                "${merge_command[@]}" > /dev/null
+            else
+                # Display full stdout.
+                echo ""
+                echo -e "${color_blue}Merging JavaScript Files:${color_reset}"
+                echo "${merge_command[@]}"
+                echo ""
+                "${merge_command[@]}"
+                echo ""
+            fi
         fi
     fi
 
@@ -134,7 +168,13 @@ function compile_react() {
             then
                 dir_basename=${dir%/*}
                 dir_basename=${dir_basename##*/}
-                echo -e "${color_blue}${dir_basename}: Found React files to compile.${color_reset}"
+                if [[ ${args[@]} =~ "hide" ]]
+                then
+                    # Hide arg passed. Skip displaying output.
+                    true
+                else
+                    echo -e "${color_blue}${dir_basename}: Found React files to compile.${color_reset}"
+                fi
 
                 # Get base file name.
                 filename=$(basename "${file%.*}")
@@ -174,7 +214,13 @@ function merge_js() {
         file_set=""
         dir_basename=${dir%/*}
         dir_basename=${dir_basename##*/}
-        echo -e "${color_blue}${dir_basename}: Found JS files to merge.${color_reset}"
+        if [[ ${args[@]} =~ "hide" ]]
+        then
+            # Hide arg passed. Skip displaying output.
+            true
+        else
+            echo -e "${color_blue}${dir_basename}: Found JS files to merge.${color_reset}"
+        fi
 
         # Add all files in react directory.
         # Annoyingly, we have to check these separately to prevent occassional nonsensical compile errors.

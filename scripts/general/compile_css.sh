@@ -21,11 +21,20 @@ function main () {
     check_not_user "root"
 
 
-    echo "Possible params:"
-    echo "   * watch - Watches for changes."
-    echo "   * dev - Compile in human-legible format."
-    echo "   * trace - Adds backtracing to troubleshoot errors."
-    echo ""
+    if [[ ${args[@]} =~ "hide" ]]
+    then
+        # Hide arg passed. Skip displaying params.
+        true
+    else
+        # Display params.
+        echo -e "${color_blue}Possible params:${color_reset}"
+        echo "   * watch - Watches for changes."
+        echo "   * dev - Compile in human-legible format."
+        echo "   * trace - Adds backtracing to troubleshoot errors."
+        echo "   * hide - Hides stdout of script."
+        echo ""
+        echo ""
+    fi
 
     # Variables.
     watch="--update"
@@ -46,6 +55,7 @@ function main () {
     then
         trace=" --trace"
     fi
+
 
     # Determine directories to compile.
     for dir in ../*/*/*/* ../*/*/*/*/*/*
@@ -118,12 +128,19 @@ function main () {
     # Combine variables to create command.
     command="sass $watch ${css_directories[*]} $compress $trace"
 
-    echo ""
-    echo "Running command:"
-    echo $command
-    echo ""
-    $command
-    echo ""
+    # Handle based on if "hide" arg was passed or not.
+    if [[ ${args[@]} =~ "hide" ]]
+    then
+        # Hide arg passed.
+        echo -e "${color_blue}Compiling CSS files...${color_reset}"
+        $command > /dev/null
+    else
+        # Display full stdout.
+        echo -e "${color_blue}Running command:${color_reset}"
+        echo $command
+        $command
+        echo ""
+    fi
 }
 
 

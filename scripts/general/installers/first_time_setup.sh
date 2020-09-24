@@ -137,14 +137,12 @@ function main() {
 
 
     # Compile CSS.
-    echo -e "${color_blue}Compiling CSS files...${color_reset}"
-    ./general/compile_css.sh
-    echo ""
+    ./general/compile_css.sh hide
 
 
     # Compile JS.
     echo -e "${color_blue}Compiling JS files...${color_reset}"
-    ./general/compile_react.sh
+    ./general/compile_js.sh hide
     echo ""
 
 
