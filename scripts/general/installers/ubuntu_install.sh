@@ -83,53 +83,52 @@ function main () {
 
     # Install apt-get packages.
     echo -e "${color_blue}Updating apt package list...${color_reset}"
-    apt-get update
-    apt-get install curl -y
+    apt-get update > /dev/null
+    apt-get install curl -y > /dev/null
 
-    echo ""
+    # Install Apache packages.
     echo -e "${color_blue}Installing apache dependencies...${color_reset}"
-    apt-get install apache2 apache2-dev libapache2-mod-wsgi-py3 -y
+    apt-get install apache2 apache2-dev libapache2-mod-wsgi-py3 -y > /dev/null
 
-    echo ""
+    # Install Redis packages.
     echo -e "${color_blue}Installing redis dependencies...${color_reset}"
-    apt-get install redis-server -y
+    apt-get install redis-server -y > /dev/null
 
-    echo ""
+    # Install Python packages.
     echo -e "${color_blue}Installing Python$python_version dependencies...${color_reset}"
-    apt-get install python3 python3-dev python3-venv -y
-    apt-get install "python$python_version" "python$python_version-dev" "python$python_version-venv" -y
+    apt-get install python3 python3-dev python3-venv -y > /dev/null
+    apt-get install "python$python_version" "python$python_version-dev" "python$python_version-venv" -y > /dev/null
 
-    echo ""
+    # Install Sass packages.
     echo -e "${color_blue}Installing sass dependencies...${color_reset}"
-    apt-get install ruby-sass -y
+    apt-get install ruby-sass -y > /dev/null
 
-    echo ""
+    # Install Node/Npm packages.
     echo -e "${color_blue}Installing npm dependencies...${color_reset}"
-    curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-    apt-get install nodejs -y
-    apt-get install npm -y
-    sudo ./general/installers/misc/npm_install.sh
+    curl -sL https://deb.nodesource.com/setup_14.x > /dev/null 2>&1 | sudo -E bash -
+    apt-get install nodejs -y > /dev/null 2>&1
+    apt-get install npm -y > /dev/null 2>&1
+    sudo ./general/installers/misc/npm_install.sh > /dev/null 2>&1
 
+    # Optionally install Mysql packages.
     if [[ "$mysql" == true ]]
     then
-        echo ""
         echo -e "${color_blue}Installing MySQL dependencies...${color_reset}"
-        apt-get install mysql-server libmysqlclient-dev -y
+        apt-get install mysql-server libmysqlclient-dev -y > /dev/null
     else
-        echo ""
         echo -e "${color_blue}Skipping MySQL dependencies...${color_reset}"
     fi
 
+    # Optionally install Ldap packages.
     if [[ "$ldap" == true ]]
     then
-        echo ""
         echo -e "${color_blue}Installing Ldap dependencies...${color_reset}"
-        apt-get install libldap2-dev libsasl2-dev -y
+        apt-get install libldap2-dev libsasl2-dev -y > /dev/null
     else
-        echo ""
         echo -e "${color_blue}Skipping Ldap dependencies...${color_reset}"
     fi
 
+    # Other packages, based on dev or prod environment.
     if [[ "$dev_setup" == true ]]
     then
         echo ""
@@ -138,17 +137,17 @@ function main () {
         if [[ ! -f "/usr/local/bin/chromedriver" ]]
         then
             wget https://chromedriver.storage.googleapis.com/2.46/chromedriver_linux64.zip
-            unzip chromedriver_linux64.zip -d /usr/local/bin/
-            chmod +x /usr/local/bin/chromedriver
-            rm chromedriver_linux64.zip
+            unzip chromedriver_linux64.zip -d /usr/local/bin/ > /dev/null
+            chmod +x /usr/local/bin/chromedriver > /dev/null
+            rm chromedriver_linux64.zip > /dev/null
         fi
         # Firefox "gecko" driver for running selenium with firefox.
         if [[ ! -f "/usr/local/bin/geckodriver" ]]
         then
             wget https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-linux64.tar.gz
-            sh -c 'tar -x geckodriver -zf geckodriver-v0.24.0-linux64.tar.gz -O > /usr/local/bin/geckodriver'
-            chmod +x /usr/local/bin/geckodriver
-            rm geckodriver-v0.24.0-linux64.tar.gz
+            sh -c 'tar -x geckodriver -zf geckodriver-v0.24.0-linux64.tar.gz -O > /usr/local/bin/geckodriver' > /dev/null
+            chmod +x /usr/local/bin/geckodriver > /dev/null
+            rm geckodriver-v0.24.0-linux64.tar.gz > /dev/null
         fi
     else
         echo ""
@@ -156,7 +155,7 @@ function main () {
 
         echo ""
         echo -e "${color_blue}Installing Nginx dependencies...${color_reset}"
-        apt-get install nginx -y
+        apt-get install nginx -y > /dev/null
         systemctl disable nginx
         systemctl stop nginx
         echo -e "${color_blue}Nginx server installed.${color_reset}"

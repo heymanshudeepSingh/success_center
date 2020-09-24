@@ -232,7 +232,7 @@ function main() {
     fi
 
 
-    echo "${color_blue}Exiting script.${color_reset}"
+    echo -e "${color_blue}Exiting script.${color_reset}"
     exit 0
 }
 
