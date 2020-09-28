@@ -24,7 +24,7 @@ class CAEHomeViewTests(IntegrationTestCase):
 
         # Load all relevant fixtures.
         with open(devnull, 'a') as null:
-            call_command('loaddata', 'full_models/site_themes', stdout=null)
+            call_command('loaddata', 'production_models/site_themes', stdout=null)
 
     def setUp(self):
         """

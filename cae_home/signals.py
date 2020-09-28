@@ -73,7 +73,7 @@ def userintermediary_model_post_save(sender, instance, created, **kwargs):
         except ObjectDoesNotExist:
             # Failed to get theme. Likely a unit test. Run site_theme fixtures and attempt again.
             with open(devnull, 'a') as null:
-                call_command('loaddata', 'full_models/site_themes', stdout=null)
+                call_command('loaddata', 'production_models/site_themes', stdout=null)
             site_theme = models.SiteTheme.objects.get(slug='wmu')
 
         # Create new profile object for new user.
