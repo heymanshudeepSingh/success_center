@@ -86,7 +86,8 @@ CHANNEL_LAYERS = {
 }
 
 
-STATICFILES_STORAGE = 'settings.static_storage.ForgivingManifestStaticFilesStorage'
+# Uncomment in production.
+# STATICFILES_STORAGE = 'settings.static_storage.ForgivingManifestStaticFilesStorage'
 
 
 # User Model.
