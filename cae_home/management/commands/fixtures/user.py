@@ -25,7 +25,7 @@ def create_site_themes(style, display_output=False):
     Imports fixtures for profile theme models.
     """
     # Load preset fixtures.
-    call_command('loaddata', 'full_models/site_themes')
+    call_command('loaddata', 'production_models/site_themes')
 
     if display_output and style is not None:
         stdout.write('Imported fixtures for ' + style.SQL_FIELD('Site Theme') + ' models.\n')
@@ -283,7 +283,7 @@ def create_wmu_users(style, display_output=False):
     Imports fixtures for WMU User models.
     """
     # Load preset fixtures.
-    call_command('loaddata', 'full_models/wmu_users')
+    call_command('loaddata', 'production_models/wmu_users')
 
     if display_output and style is not None:
         stdout.write('Imported fixtures for ' + style.SQL_FIELD('Wmu User') + ' models.\n')
