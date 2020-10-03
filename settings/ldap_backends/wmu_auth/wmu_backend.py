@@ -51,7 +51,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
 
     #region User Create/Update Functions
 
-    def create_or_update_user_model(self, uid, password):
+    def create_or_update_user_model(self, uid, password=None):
         """
         Attempts to get and update User model with given username.
         In the event that no such model exists, instead create it from scratch using ldap info.
@@ -101,7 +101,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
             raise ValidationError(error_message)
 
         # Set password based on AUTH_BACKEND_USE_DJANGO_USER_PASSWORDS setting.
-        if settings.AUTH_BACKEND_USE_DJANGO_USER_PASSWORDS:
+        if settings.AUTH_BACKEND_USE_DJANGO_USER_PASSWORDS and password is not None:
             login_user.set_password(password)
             login_user.save()
 

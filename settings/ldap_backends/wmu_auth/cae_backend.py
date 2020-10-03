@@ -46,7 +46,7 @@ class CaeAuthBackend(AbstractLDAPBackend):
         self.ldap_lib.set_search_base(settings.CAE_LDAP['user_search_base'])
         self.ldap_lib.set_uid_attribute(settings.CAE_LDAP['default_uid'])
 
-    def create_or_update_user_model(self, uid, password):
+    def create_or_update_user_model(self, uid, password=None):
         """
         Attempts to get and update User model with given username.
         In the event that no such model exists, instead create it from scratch using ldap info.
@@ -61,7 +61,7 @@ class CaeAuthBackend(AbstractLDAPBackend):
             user = models.User.objects.get(username=uid)
 
             # If we got this far, then model exists. Update.
-            return self._update_user_model(uid)
+            return self._update_user_model(uid, password)
         except models.User.DoesNotExist:
             # User model doesn't exist. Create new model.
             return self._create_user_model(uid, password)
@@ -77,46 +77,55 @@ class CaeAuthBackend(AbstractLDAPBackend):
         :param password: Confirmed valid ldap pass.
         :return: Instance of User model.
         """
-        logger.auth_info('{0}: Attempting to create new user model...'.format(uid))
-
-        # Create new user.
-        login_user, created = models.User.objects.get_or_create(username=uid)
-
-        # Double check that user was created. If not, then duplicate user Id's exists.
-        if not created:
-            # Duplicate Id's exist.
-            # Most likely, there's a logic error in code and "_update_user_model" should have been called.
-            login_user = None
-            error_message = '{0}: Attempted to create user but user with id already exists.'.format(uid)
-            logger.auth_error(error_message)
-            raise ValidationError(error_message)
-
-        # Connect to server and pull user's full info.
+        # Connect to LDAP server and pull user's full info.
         ldap_user_info = self.get_ldap_user_info(uid, attributes=['uid', 'givenName', 'sn', ])
 
-        # Set password based on AUTH_BACKEND_USE_DJANGO_USER_PASSWORDS setting.
-        if settings.AUTH_BACKEND_USE_DJANGO_USER_PASSWORDS:
-            login_user.set_password(password)
+        # Check if we got LDAP response. If not, user does not exist in CAE LDAP.
+        if ldap_user_info is not None:
+
+            logger.auth_info('{0}: Attempting to create new user model...'.format(uid))
+
+            # Create new user.
+            login_user, created = models.User.objects.get_or_create(username=uid)
+
+            # Double check that user was created. If not, then duplicate user Id's exists.
+            if not created:
+                # Duplicate Id's exist.
+                # Most likely, there's a logic error in code and "_update_user_model" should have been called.
+                login_user = None
+                error_message = '{0}: Attempted to create user but user with id already exists.'.format(uid)
+                logger.auth_error(error_message)
+                raise ValidationError(error_message)
+
+            # Set password based on AUTH_BACKEND_USE_DJANGO_USER_PASSWORDS setting.
+            if settings.AUTH_BACKEND_USE_DJANGO_USER_PASSWORDS and password is not None:
+                login_user.set_password(password)
+                login_user.save()
+
+            # Set general user values.
+            login_user.email = '{0}@wmich.edu'.format(uid)
+            login_user.first_name = ldap_user_info['givenName'][0].strip()
+            login_user.last_name = ldap_user_info['sn'][0].strip()
+
+            # Save model.
             login_user.save()
 
-        # Set general user values.
-        login_user.email = '{0}@wmich.edu'.format(uid)
-        login_user.first_name = ldap_user_info['givenName'][0].strip()
-        login_user.last_name = ldap_user_info['sn'][0].strip()
+            logger.auth_info('{0}: Created user new user model. Now setting groups...'.format(uid))
 
-        # Save model.
-        login_user.save()
+            # Model created. Now run update logic to ensure all fields are properly set.
+            login_user = self._update_user_model(uid, password)
 
-        logger.auth_info('{0}: Created user new user model. Now setting groups...'.format(uid))
+            logger.auth_info('{0}: Imported Main Campus user info. User creation complete.'.format(uid))
 
-        # Model created. Now run update logic to ensure all fields are properly set.
-        login_user = self._update_user_model(uid)
+            return login_user
 
-        logger.auth_info('{0}: Imported Main Campus user info. User creation complete.'.format(uid))
+        else:
+            # User does not exist in CAE LDAP. Try WMU LDAP instead.
+            from settings.ldap_backends.wmu_auth import wmu_backend
+            wmu_ldap = wmu_backend.WmuAuthBackend()
+            return wmu_ldap.create_or_update_user_model(uid, password)
 
-        return login_user
-
-    def _update_user_model(self, uid):
+    def _update_user_model(self, uid, password):
         """
         Updates User model, using pulled Ldap information.
         Logic here should be fine to potentially run on every user login instance (including first).
@@ -159,8 +168,9 @@ class CaeAuthBackend(AbstractLDAPBackend):
         logger.auth_info('{0}: CAE Center User groups set for user.'.format(uid))
         logger.auth_info('{0}: Attempting to get Main Campus user info...'.format(uid))
 
-        # Check for associated Wmu User model.
+        # Check for associated Wmu model info.
         wmu_ldap = WmuAuthBackend()
+        wmu_ldap.create_or_update_user_model(uid, password)
         wmu_ldap.create_or_update_wmu_user_model(uid)
 
         logger.auth_info('{0}: User model has been updated.'.format(uid))
