@@ -37,9 +37,9 @@ from .django_rest_views import DepartmentViewSet
 from .form_views import user_edit
 
 # Login views.
-from .login_views import login
-from .login_views import login_redirect
-from .login_views import logout
+from .auth_views import login
+from .auth_views import login_redirect
+from .auth_views import logout
 
 # Misc views.
 from .misc_views import handler400
@@ -50,3 +50,5 @@ from .misc_views import info_schedules
 from .misc_views import info_servers
 from .misc_views import info_software
 from .misc_views import helpful_resources
+from .misc_views import get_or_create_login_user_model
+from .misc_views import get_or_create_wmu_user_model

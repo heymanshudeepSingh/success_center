@@ -1,5 +1,5 @@
 """
-Login views for CAE Home app.
+Authentication-related views for CAE Home app.
 """
 
 # System Imports.
