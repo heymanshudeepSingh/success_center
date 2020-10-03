@@ -122,7 +122,13 @@ class AuthenticationForm(auth_form):
     remember_me = forms.BooleanField(required=False, label='Keep Me Logged In:')
 
 
+class UserLookupForm(forms.Form):
+    user_id = forms.CharField()
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['user_id'].label = 'Student Winno or Bronconet:'
 
 
 class UserModelForm(forms.ModelForm):

@@ -50,5 +50,5 @@ from .misc_views import info_schedules
 from .misc_views import info_servers
 from .misc_views import info_software
 from .misc_views import helpful_resources
-from .misc_views import get_or_create_login_user_model
-from .misc_views import get_or_create_wmu_user_model
+from .misc_views import GetLoginUser
+from .misc_views import GetWmuUser

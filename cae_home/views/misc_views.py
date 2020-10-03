@@ -3,10 +3,20 @@ Misc views for CAE Home app.
 """
 
 # System Imports.
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import redirect
 from django.template.response import TemplateResponse
+from django.views.generic.edit import FormView
+from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
 
 # User Imports.
+from . import cae_employee_groups
+from cae_home import forms, models
+from cae_home.decorators import group_required
+from cae_home.utils import get_or_create_login_user_model, get_or_create_wmu_user_model
 from settings import logging as init_logging
 
 
@@ -15,7 +25,7 @@ logger = init_logging.get_logger(__name__)
 
 
 
-#region Special Views
+#region Error-Handling Views
 
 def handler400(request, exception=None):
     return TemplateResponse(request, 'cae_home/errors/400.html', status=400)
@@ -32,8 +42,10 @@ def handler404(request, exception=None):
 def handler500(request, exception=None):
     return TemplateResponse(request, 'cae_home/errors/500.html', status=500)
 
-#endregion Special Views
+#endregion Error-Handling Views
 
+
+#region Public Info Views
 
 def info_schedules(request):
     """
@@ -66,6 +78,8 @@ def info_software(request):
         'contact_singh': 'Simar Singh<br>hfv6838@wmich.edu'
     })
 
+#endregion Public Info Views
+
 
 @login_required
 def helpful_resources(request):
@@ -73,3 +87,145 @@ def helpful_resources(request):
     "Useful links" page for CAE Center employees.
     """
     return TemplateResponse(request, 'cae_home/helpful_resources.html', {})
+
+
+# @method_decorator(group_required(cae_employee_groups), name='dispatch')
+class GetLoginUser(LoginRequiredMixin, FormView):
+    """
+    An example of using a FormView class to check for a (Login) User model.
+    If value does not exist in the Django database, then it makes a query to LDAP to search for an associated user.
+    Catches errors if LDAP is not properly configured on local machine.
+    """
+    template_name = 'cae_home/get_login_user.html'
+    form_class = forms.UserLookupForm
+    success_url = reverse_lazy('cae_home:get_login_user')
+
+    def get_context_data(self, **kwargs):
+        """
+        Add additional context (variables) for template to display.
+        """
+        context = super().get_context_data(**kwargs)
+
+        # Check if we have a BroncoNet or Winno in our session values.
+        user_id = self.request.session.pop('cae_home__user_id', None)
+
+        # Attempt to get model.
+        user_model = get_or_create_login_user_model(self.request, user_id)
+
+        # Check if TemplateResponse object was returned.
+        if isinstance(user_model, TemplateResponse):
+            # TemplateResponse returned. Note that in a MethodView (instead of a ClassView),
+            # this TemplateResponse object can just be returned directly as is, at this point.
+            # Instead, we do extra logic here because ClassViews can be picky with where you return a TemplateResponse.
+            message = 'LDAP is required to properly view this page. ' \
+                      'The web server does not appear to have LDAP connections setup.'
+            messages.error(self.request, message)
+            logger.error(message)
+            user_model = None
+
+        context.update({
+            'user_model': user_model,
+        })
+        return context
+
+    def form_valid(self, form):
+        """
+        Logic to run on valid form data return.
+        """
+        user_id = form.cleaned_data['user_id']
+
+        # Attempt to get model.
+        user_model = get_or_create_login_user_model(self.request, user_id)
+
+        # Check if TemplateResponse object was returned.
+        if isinstance(user_model, TemplateResponse):
+            # TemplateResponse returned. Note that in a MethodView (instead of a ClassView),
+            # this TemplateResponse object can just be returned directly as is, at this point.
+            # Instead, we do extra logic here because ClassViews can be picky with where you return a TemplateResponse.
+            message = 'LDAP is required to properly view this page. ' \
+                      'The web server does not appear to have LDAP connections setup.'
+            messages.error(self.request, message)
+            logger.error(message)
+            user_model = None
+
+        # Check if result was found.
+        if user_model is not None:
+            self.request.session['cae_home__user_id'] = user_model.username
+        else:
+            messages.warning(self.request, 'Provided value did not match a known BroncoNet or Winno.')
+
+            # Display our template to user once more. Pass our form data so fields stay filled out.
+            return self.render_to_response(self.get_context_data(form=form))
+
+        return redirect(reverse_lazy('cae_home:get_login_user'))
+
+
+# @method_decorator(group_required(cae_employee_groups), name='dispatch')
+class GetWmuUser(LoginRequiredMixin, FormView):
+    """
+    An example of using a FormView class to check for a (Login) User model.
+    If value does not exist in the Django database, then it makes a query to LDAP to search for an associated user.
+    Catches errors if LDAP is not properly configured on local machine.
+    """
+    template_name = 'cae_home/get_wmu_user.html'
+    form_class = forms.UserLookupForm
+    success_url = reverse_lazy('cae_home:get_wmu_user')
+
+    def get_context_data(self, **kwargs):
+        """
+        Add additional context (variables) for template to display.
+        """
+        context = super().get_context_data(**kwargs)
+
+        # Check if we have a BroncoNet or Winno in our session values.
+        user_id = self.request.session.pop('cae_home__user_id', None)
+
+        # If id was present, get associated model.
+        user_model = get_or_create_wmu_user_model(self.request, user_id)
+
+        # Check if TemplateResponse object was returned.
+        if isinstance(user_model, TemplateResponse):
+            # TemplateResponse returned. Note that in a MethodView (instead of a ClassView),
+            # this TemplateResponse object can just be returned directly as is, at this point.
+            # Instead, we do extra logic here because ClassViews can be picky with where you return a TemplateResponse.
+            message = 'LDAP is required to properly view this page. ' \
+                      'The web server does not appear to have LDAP connections setup.'
+            messages.error(self.request, message)
+            logger.error(message)
+            user_model = None
+
+        context.update({
+            'user_model': user_model,
+        })
+        return context
+
+    def form_valid(self, form):
+        """
+        Logic to run on valid form data return.
+        """
+        user_id = form.cleaned_data['user_id']
+
+        # Attempt to get model.
+        user_model = get_or_create_wmu_user_model(self.request, user_id)
+
+        # Check if TemplateResponse object was returned.
+        if isinstance(user_model, TemplateResponse):
+            # TemplateResponse returned. Note that in a MethodView (instead of a ClassView),
+            # this TemplateResponse object can just be returned directly as is, at this point.
+            # Instead, we do extra logic here because ClassViews can be picky with where you return a TemplateResponse.
+            message = 'LDAP is required to properly view this page. ' \
+                      'The web server does not appear to have LDAP connections setup.'
+            messages.error(self.request, message)
+            logger.error(message)
+            user_model = None
+
+        # Check if result was found.
+        if user_model is not None:
+            self.request.session['cae_home__user_id'] = user_model.bronco_net
+        else:
+            messages.warning(self.request, 'Provided value did not match a known BroncoNet or Winno.')
+
+            # Display our template to user once more. Pass our form data so fields stay filled out.
+            return self.render_to_response(self.get_context_data(form=form))
+
+        return redirect(reverse_lazy('cae_home:get_wmu_user'))

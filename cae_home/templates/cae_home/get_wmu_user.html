@@ -1,0 +1,23 @@
+{% extends 'cae_home/main.html' %}
+
+
+{% block title_page_name %}Wmu User Check | {% endblock title_page_name %}
+
+
+{% block content %}
+  <h1>Wmu User Check</h1>
+
+  <div class="panel">
+    <div class="body">
+      {% include 'cae_home/include/form.html' %}
+    </div>
+    {% if user_model %}
+      <hr>
+      <div class="body center">
+        <p>Found data for WmuUser model:</p>
+        <p>{{ user_model.bronco_net }} - {{ user_model.first_name }} {{user_model.last_name }}</p>
+      </div>
+    {% endif %}
+  </div>
+
+{% endblock content %}

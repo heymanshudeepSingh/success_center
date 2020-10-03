@@ -33,6 +33,10 @@ urlpatterns = [
     # path('error/404/', views.test_404_error, name='error_404'),
     path('error/500/', views.test_500_error, name='error_500'),
 
+    # Other views.
+    path('user/get_user/login/', views.GetLoginUser.as_view(), name='get_login_user'),
+    path('user/get_user/wmu/', views.GetWmuUser.as_view(), name='get_wmu_user'),
+
     # CAE Home/Index page.
     path('', views.index, name='index'),
 ]
