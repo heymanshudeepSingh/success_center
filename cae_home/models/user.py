@@ -77,9 +77,8 @@ def compare_user_and_wmuuser_models(uid):
             model_updated = True
 
         # Check that email values are the same.
-        if user_model.email != wmu_user_model.shorthand_email():
-            # WmuUser shorthand should always be correct (<bronconet>@wmich.edu). Use that unconditionally.
-            user_model.email = wmu_user_model.shorthand_email()
+        if user_model.email != wmu_user_model.official_email:
+            user_model.email = wmu_user_model.official_email
             model_updated = True
 
         # Check is_active values.

@@ -105,12 +105,6 @@ class WmuAuthBackend(AbstractLDAPBackend):
             login_user.set_password(password)
             login_user.save()
 
-        # Set general (login) user values.
-        login_user.email = '{0}@wmich.edu'.format(uid)
-
-        # Save model.
-        login_user.save()
-
         logger.auth_info('{0}: Set up "User" model. Now creating "WmuUser" model...'.format(uid))
 
         # Model created. Now run update logic to ensure all fields are properly set.
@@ -219,6 +213,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
         # Get middle name info.
         middle_name = self._parse_user_ldap_field(user_ldap_info, 'wmuMiddleName')
 
+        # Get last name info.
         if login_user is not None and login_user.last_name != '':
             # Associated login user exists and has name info. Use that.
             last_name = login_user.last_name
@@ -229,14 +224,9 @@ class WmuAuthBackend(AbstractLDAPBackend):
                 last_name = self.get_backup_ldap_name(uid, last_name=True, user_ldap_info=user_ldap_info)
 
         # Get email info.
-        if login_user is not None and login_user.email != '':
-            # Associated login user exists and has email info. Use that.
-            official_email = login_user.email
-        else:
-            # Associated login user does not exist or does not have email info. Check LDAP.
-            official_email = self._parse_user_ldap_field(user_ldap_info, 'mail')
-            if official_email is None or official_email == '':
-                official_email = '{0}@wmich.edu'.format(uid)
+        official_email = self._parse_user_ldap_field(user_ldap_info, 'mail')
+        if official_email is None or official_email == '':
+            official_email = '{0}@wmich.edu'.format(uid)
 
         # Create WmuUser model.
         models.WmuUser.objects.create(
@@ -247,41 +237,6 @@ class WmuAuthBackend(AbstractLDAPBackend):
             last_name=last_name,
             official_email=official_email,
         )
-
-        # Check all field values in User model. Set if they were not set.
-        if login_user is not None:
-            set_value = False
-
-            # Check first name.
-            if login_user.first_name != first_name:
-                login_user.first_name = first_name
-                set_value = True
-
-            # Check last name.
-            if login_user.last_name != last_name:
-                login_user.last_name = last_name
-                set_value = True
-
-            # Check email.
-            if login_user.email != official_email:
-                login_user.email = official_email
-                set_value = True
-
-            # If any User value was set, save changes.
-            if set_value:
-                login_user.save()
-
-        # Attempt to update user profile.
-        user_profile = models.Profile.get_profile(uid)
-        if user_profile is None:
-            logger.auth_error('{0}: Could not find profile for user.'.format(uid))
-            raise ValueError('Could not find profile for user {0}.'.format(uid))
-
-        # Get phone number info.
-        phone_number = self._parse_user_ldap_field(user_ldap_info, 'homePhone')
-        if phone_number is not None and phone_number != '':
-            user_profile.phone_number = PhoneNumber.from_string(phone_number)
-        user_profile.save()
 
         # Model created. Now run update logic to ensure all fields are properly set.
         return self._update_wmu_user_model(uid, user_ldap_info)
@@ -298,15 +253,186 @@ class WmuAuthBackend(AbstractLDAPBackend):
         :return: Instance of Wmu User model.
         """
         # WmuUser model exists. Attempt to update information.
-        adv_ldap = AdvisingAuthBackend()
+        self._update_user_name_fields(uid, user_ldap_info)
+        self._update_user_email_fields(uid, user_ldap_info)
+        self._update_user_phone_fields(uid, user_ldap_info)
 
         # Update major.
+        adv_ldap = AdvisingAuthBackend()
         adv_ldap.add_or_update_major(uid)
 
         logger.auth_info('{0}: WmuUser model has been updated.'.format(uid))
 
         # Return fresh instance of model, in case instance was updated by Advising Auth logic.
         return models.WmuUser.objects.get(bronco_net=uid)
+
+    def _update_user_name_fields(self, uid, user_ldap_info):
+        """
+        Updates associated name fields for user with given uid.
+        :param uid: Uid of user.
+        :param user_ldap_info: User's LDAP info.
+        :return: Tuple of found (FirstName, MiddleName, LastName) values.
+        """
+        # Grab existing Django model data.
+        wmu_user_model = models.WmuUser.objects.get(bronco_net=uid)
+        model_updated = False
+
+        # Get first name info.
+        first_name = self._parse_user_ldap_field(user_ldap_info, 'wmuFirstName')
+        if first_name is None or first_name == '':
+            first_name = self.get_backup_ldap_name(uid, first_name=True, user_ldap_info=user_ldap_info)
+        if first_name is None:
+            first_name = ''
+
+        # Update first name info.
+        if first_name != '' and wmu_user_model.first_name != first_name:
+            wmu_user_model.first_name = first_name
+            model_updated = True
+
+        # Get middle name info.
+        middle_name = self._parse_user_ldap_field(user_ldap_info, 'wmuMiddleName')
+        if middle_name is None:
+            middle_name = ''
+
+        # Update middle name info.
+        if middle_name != '' and wmu_user_model.middle_name != middle_name:
+            wmu_user_model.middle_name = middle_name
+            model_updated = True
+
+        # Get last name info.
+        last_name = self._parse_user_ldap_field(user_ldap_info, 'wmuLastName')
+        if last_name is None or last_name == '':
+            last_name = self.get_backup_ldap_name(uid, last_name=True, user_ldap_info=user_ldap_info)
+        if last_name is None:
+            last_name = ''
+
+        # Update last name info.
+        if last_name != '' and wmu_user_model.last_name != last_name:
+            wmu_user_model.last_name = last_name
+            model_updated = True
+
+        # Also attempt to update associated (Login) User model, if exists.
+        try:
+            login_user_model = models.User.objects.get(username=uid)
+
+            # Check first name.
+            if first_name == '':
+                # Blank first name was found earlier. See if we can correct this.
+                if login_user_model.first_name != None and login_user_model.first_name != '':
+                    first_name = login_user_model.first_name
+                    wmu_user_model.first_name = first_name
+                    model_updated = True
+
+            else:
+                # Update first name info.
+                if login_user_model.first_name != first_name:
+                    login_user_model.first_name = first_name
+                    model_updated = True
+
+            # Check last name.
+            if last_name == '':
+                # Blank last name was found earlier. See if we can correct this.
+                if login_user_model.last_name != None and login_user_model.last_name != '':
+                    last_name = login_user_model.last_name
+                    wmu_user_model.last_name = last_name
+                    model_updated = True
+
+            else:
+                # update last name info.
+                if login_user_model.last_name != last_name:
+                    login_user_model.last_name = last_name
+                    model_updated = True
+
+            # Save model if updates occurred.
+            if model_updated:
+                wmu_user_model.save()
+                login_user_model.save()
+
+        except models.User.DoesNotExist:
+            # No associated (Login) User model. This is fine.
+
+            # Save model if updates occurred.
+            if model_updated:
+                wmu_user_model.save()
+
+        # Finally update UserIntermediary model.
+        user_intermediary_model = models.UserIntermediary.objects.get(bronco_net=uid)
+        model_updated = False
+
+        # Update first name info.
+        if first_name != '' and user_intermediary_model.first_name != first_name:
+            user_intermediary_model.first_name = first_name
+            model_updated = True
+
+        # Update last name info.
+        if last_name != '' and user_intermediary_model.last_name != last_name:
+            user_intermediary_model.last_name = last_name
+            model_updated = True
+
+        # Save model if updates occurred.
+        if model_updated:
+            user_intermediary_model.save()
+
+        return (first_name, middle_name, last_name)
+
+    def _update_user_email_fields(self, uid, user_ldap_info):
+        """
+        Updates associated email fields for user with given uid.
+        :param uid: Uid of user.
+        :param user_ldap_info: User's LDAP info.
+        :return: Tuple of found (OfficialEmail, ShorthandEmail) values.
+        """
+        # Get email info.
+        shorthand_email = '{0}@wmich.edu'.format(uid)
+        official_email = self._parse_user_ldap_field(user_ldap_info, 'mail')
+        if official_email is None or official_email == '':
+            official_email = shorthand_email
+
+        # Grab existing Django model data.
+        wmu_user_model = models.WmuUser.objects.get(bronco_net=uid)
+        if wmu_user_model.official_email != official_email:
+            wmu_user_model.official_email = official_email
+            wmu_user_model.save()
+
+        # Also attempt to update associated (Login) User model, if exists.
+        try:
+            login_user_model = models.User.objects.get(username=uid)
+
+            # Update email info.
+            if login_user_model.email != official_email:
+                login_user_model.email = official_email
+                login_user_model.save()
+
+        except models.User.DoesNotExist:
+            # No associated (Login) User model. This is fine.
+            pass
+
+        return (official_email, shorthand_email)
+
+    def _update_user_phone_fields(self, uid, user_ldap_info):
+        """
+        Updates associated phone number fields for user with given uid.
+        :param uid: Uid of user.
+        :param user_ldap_info: User's LDAP info.
+        :return: Found PhoneNumber value.
+        """
+        # Get associated user profile.
+        user_profile = models.Profile.get_profile(uid)
+        if user_profile is None:
+            logger.auth_error('{0}: Could not find profile for user.'.format(uid))
+            raise ValueError('Could not find profile for user {0}.'.format(uid))
+
+        # Get phone number info.
+        phone_number = self._parse_user_ldap_field(user_ldap_info, 'homePhone')
+        if phone_number is None:
+            phone_number = ''
+
+        # Update phone number info.
+        if phone_number != '':
+            user_profile.phone_number = PhoneNumber.from_string(phone_number)
+            user_profile.save()
+
+        return phone_number
 
     #endregion User Create/Update Functions
 
