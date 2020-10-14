@@ -380,6 +380,14 @@ class WmuUser(models.Model):
     def __str__(self):
         return '{0}: {1} {2}'.format(self.bronco_net, self.first_name, self.last_name)
 
+    def clean(self, *args, **kwargs):
+        """
+        Custom cleaning implementation. Includes validation, setting fields, etc.
+        """
+        # Make sure there is always some value for official email.
+        if self.official_email is None or self.official_email == '':
+            self.official_email = self.shorthand_email()
+
     def save(self, *args, **kwargs):
         """
         Modify model save behavior.
