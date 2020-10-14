@@ -40,6 +40,7 @@ def user_edit(request, slug):
     user = user_intermediary.user
     user_profile = user_intermediary.profile
     address = user_profile.address
+    user_groups = request.user.groups.values_list('name', flat=True)
 
     form_list = []
     form = forms.UserModelForm(instance=user)
@@ -54,7 +55,10 @@ def user_edit(request, slug):
     form.display_name = 'Address'
     # form_list.append(form)
 
-    form = forms.ProfileModelForm_OnlySiteOptions(instance=user_profile)
+    if 'CAE Admin GA' in user_groups or 'CAE Programmer GA' in user_groups:
+        form = forms.ProfileModelForm_OnlySiteOptionsGA(instance=user_profile)
+    else:
+        form = forms.ProfileModelForm_OnlySiteOptions(instance=user_profile)
     form.display_name = 'Site Settings'
     form_list.append(form)
 
@@ -81,7 +85,10 @@ def user_edit(request, slug):
         form.display_name = 'Address'
         # form_list.append(form)
 
-        form = forms.ProfileModelForm_OnlySiteOptions(instance=user_profile, data=request.POST)
+        if 'CAE Admin GA' in user_groups or 'CAE Programmer GA' in user_groups:
+            form = forms.ProfileModelForm_OnlySiteOptionsGA(instance=user_profile, data=request.POST)
+        else:
+            form = forms.ProfileModelForm_OnlySiteOptions(instance=user_profile, data=request.POST)
         form.name = 'SiteSettingsForm'
         form.display_name = 'Site Settings'
         form_list.append(form)

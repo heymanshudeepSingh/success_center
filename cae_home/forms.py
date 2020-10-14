@@ -195,6 +195,27 @@ class ProfileModelForm_OnlySiteOptions(forms.ModelForm):
         }
 
 
+class ProfileModelForm_OnlySiteOptionsGA(forms.ModelForm):
+    """
+    GA User Profile model form for standard views.
+    Only displays site option fields.
+    """
+    class Meta:
+        model = models.Profile
+        fields = (
+            'site_theme',
+            'user_timezone',
+            'desktop_font_size',
+            'mobile_font_size',
+            'fg_color',
+            'bg_color',
+            'employee_shift_display_default',
+        )
+        widgets = {
+            'user_timezone': Select2Widget,
+        }
+
+
 class AddressModelForm(forms.ModelForm):
     """
     Address model form for standard views.

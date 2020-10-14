@@ -472,11 +472,14 @@ class Profile(models.Model):
     fg_color = models.CharField(
         blank=True,
         help_text="Foreground css color for schedule. E.g. 'red' or '#FF0000'",
-        max_length=30)
+        max_length=30,
+    )
     bg_color = models.CharField(
         blank=True,
         help_text="Foreground css color for schedule. E.g. 'red' or '#FF0000'",
-        max_length=30)
+        max_length=30,
+    )
+    employee_shift_display_default = models.BooleanField(default=True)
 
     # Self-setting/Non-user-editable fields.
     date_created = models.DateTimeField(auto_now_add=True)
