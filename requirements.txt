@@ -21,6 +21,12 @@ django-filter==2.2.0
 Faker==4.0.3
 # Read .xls and .xlsx Excel files (Deprecated, but required for .xls)
 xlrd==1.2.0
+# Pdf creation.
+fpdf2
+# Printer connection.
+pycups==1.9.74
+# Redmine communication.
+python-redmine
 
 
 # -- Packages for Testing --
