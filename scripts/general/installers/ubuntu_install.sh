@@ -111,6 +111,11 @@ function main () {
     apt-get purge --auto-remove ruby-sass -y > /dev/null 2>&1
     npm install -g sass > /dev/null
 
+    # Install Printer packages.
+    echo -e "${color_blue}Installing printer connection dependencies...${color_reset}"
+    apt-get install libcups2-dev -y > /dev/null 2>&1
+    apt-get install smbclient -y > /dev/null 2>&1
+
     # Optionally install Mysql packages.
     if [[ "$mysql" == true ]]
     then
