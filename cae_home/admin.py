@@ -249,6 +249,7 @@ class MajorToDepartmentListFilter(admin.SimpleListFilter):
         if department_filter != '':
             return queryset.filter(department__slug=department_filter)
 
+
 class SemesterDateToYearListFilter(admin.SimpleListFilter):
     """
     Filter for Semester Date model Admin to show models associated with a given year.
@@ -279,6 +280,76 @@ class SemesterDateToYearListFilter(admin.SimpleListFilter):
         year_filter = request.GET.get('year', '')
         if year_filter != '':
             return queryset.filter(start_date__year=year_filter)
+
+
+class SoftwareDetailToSoftwareListFilter(admin.SimpleListFilter):
+    """
+    Filter for SoftwareDetail model Admin to show models associated with Software.
+    """
+    # Label to display for filter.
+    title = 'Software'
+
+    # This is the name used in the url for this filter.
+    # Can be set to anything you want, as long as it's unique to other filters in this model.
+    parameter_name = 'software'
+
+    def lookups(self, request, model_admin):
+        """
+        This defines the filter options.
+        """
+        software = models.Software.objects.all()
+        software_list = []
+        for item in software:
+            software_list.append((item.slug, item.name))
+        return software_list
+
+    def queryset(self, request, queryset):
+        """
+        This processes the filter option (defined above, in "lookups") when selected by a user.
+        """
+        software_filter = request.GET.get('software', '')
+        if software_filter != '':
+            return queryset.filter(software__slug=software_filter)
+
+
+class SoftwareExpiryToYearListFilter(admin.SimpleListFilter):
+    """
+    Filter for SoftwareDetail model Admin to show models associated with a given expiration year.
+    """
+    # Label to display for filter.
+    title = 'Year'
+
+    # This is the name used in the url for this filter.
+    # Can be set to anything you want, as long as it's unique to other filters in this model.
+    parameter_name = 'year'
+
+    def lookups(self, request, model_admin):
+        """
+        This defines the filter options.
+        """
+        software_details = models.SoftwareDetail.objects.all()
+        year_list = []
+        for software_detail in software_details:
+            expiration = software_detail.expiration
+            if expiration is not None:
+                year = expiration.year
+                if (year, year) not in year_list:
+                    year_list.append((year, year))
+            else:
+                if ('None', 'None') not in year_list:
+                    year_list = [('None', 'None')] + year_list
+        return year_list
+
+    def queryset(self, request, queryset):
+        """
+        This processes the filter option (defined above, in "lookups") when selected by a user.
+        """
+        year_filter = request.GET.get('year', '')
+        if year_filter != '':
+            if year_filter == 'None':
+                return queryset.filter(expiration__year__isnull=True)
+            else:
+                return queryset.filter(expiration__year=year_filter)
 
 #endregion Custom Filters
 
@@ -791,12 +862,14 @@ class AssetAdmin(admin.ModelAdmin):
 class SoftwareAdmin(admin.ModelAdmin):
     # Fields to display in admin list view.
     list_display = ('name',)
+    if settings.DEBUG:
+        list_display = ('id',) + list_display
 
     # Fields to search in admin list view.
     search_fields = ['name',]
 
     # Read only fields for admin detail view.
-    readonly_fields = ('date_created', 'date_modified')
+    readonly_fields = ('id', 'date_created', 'date_modified')
 
     # Organize fieldsets for admin detail view.
     fieldsets = (
@@ -805,31 +878,42 @@ class SoftwareAdmin(admin.ModelAdmin):
         }),
         ('Advanced', {
             'classes': ('collapse',),
-            'fields': ('date_created', 'date_modified',),
+            'fields': ('id', 'slug', 'date_created', 'date_modified',),
         }),
     )
+
+    # New object's slugs will be automatically set by code.
+    prepopulated_fields = {'slug': ('name',)}
 
 
 class SoftwareDetailAdmin(admin.ModelAdmin):
     # Fields to display in admin list view.
-    list_display = ('software', 'version', 'expiration',)
+    list_display = ('software', 'version', 'expiration', 'software_type')
+    if settings.DEBUG:
+        list_display = ('id',) + list_display
+
+    # Fields to filter by in admin list view.
+    list_filter = (SoftwareDetailToSoftwareListFilter, SoftwareExpiryToYearListFilter)
 
     # Fields to search in admin list view.
     search_fields = ['version', 'expiration', 'software']
 
     # Read only fields for admin detail view.
-    readonly_fields = ('date_created', 'date_modified')
+    readonly_fields = ('id', 'date_created', 'date_modified')
 
     # Organize fieldsets for admin detail view.
     fieldsets = (
         (None, {
-            'fields': ('version', 'expiration')
+            'fields': ('software', 'software_type', 'version', 'expiration', 'is_active')
         }),
         ('Advanced', {
             'classes': ('collapse',),
-            'fields': ('date_created', 'date_modified',),
+            'fields': ('id', 'slug', 'date_created', 'date_modified',),
         }),
     )
+
+    # New object's slugs will be automatically set by code.
+    prepopulated_fields = {'slug': ('software', 'version')}
 
 
 #endregion CAE Model Admin

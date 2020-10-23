@@ -150,14 +150,28 @@ class SoftwareDetail(models.Model):
     Provides more detail about a piece of software.
     Includes things like version, expiration, etc.
     """
+    # Preset field choices.
+    SOFTWARE_TYPE_CHOICES = (
+        (1, 'Public'),
+        (2, 'University'),
+        (3, 'Research'),
+    )
+
     # Relationship keys.
     software = models.ForeignKey('Software', on_delete=models.CASCADE)
 
     # Model fields
+    software_type = models.PositiveSmallIntegerField(choices=SOFTWARE_TYPE_CHOICES, default=2)
     version = models.CharField(max_length=MAX_LENGTH)
-    expiration = models.DateField()
+    expiration = models.DateField(blank=True, null=True)
+    is_active = models.BooleanField(default=False)
 
     # Self-setting/Non-user-editable fields.
+    slug = models.SlugField(
+        max_length=MAX_LENGTH,
+        unique=True,
+        help_text='Used for urls referencing this Software.',
+    )
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
 
@@ -176,6 +190,16 @@ class SoftwareDetail(models.Model):
         # Save model.
         self.full_clean()
         super(SoftwareDetail, self).save(*args, **kwargs)
+
+    def get_software_type(self, value=None):
+        """
+        Returns software type as string.
+        :param value: Integer of value to get. If None, then uses current model value.
+        :return: Software Type.
+        """
+        if value is None:
+            value = self.software_type
+        return self.SOFTWARE_TYPE_CHOICES[value][1]
 
     @staticmethod
     def create_dummy_model():
