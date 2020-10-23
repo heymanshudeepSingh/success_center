@@ -1,970 +1,1146 @@
 [
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 1,
         "fields": {
             "software": "1",
+            "software_type": "",
             "version": "5.3",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 2,
         "fields": {
             "software": "3",
+            "software_type": "",
             "version": "2018SP3",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 3,
         "fields": {
             "software": "4",
+            "software_type": "",
             "version": "8.2.5",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 4,
         "fields": {
             "software": "6",
+            "software_type": "",
             "version": "Spring 2018",
             "expiration": "2020-10-09",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 5,
         "fields": {
             "software": "10",
+            "software_type": "",
             "version": "2.3",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 6,
         "fields": {
             "software": "11",
+            "software_type": "",
             "version": "2019.1",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 7,
         "fields": {
             "software": "12",
+            "software_type": "",
             "version": "19.0",
             "expiration": "2020-09-30",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 8,
         "fields": {
             "software": "13",
+            "software_type": "",
             "version": "12",
             "expiration": "2019-12-16",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 9,
         "fields": {
             "software": "14",
+            "software_type": "",
             "version": "6.00-19",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 10,
         "fields": {
             "software": "16",
+            "software_type": "",
             "version": "10",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 11,
         "fields": {
             "software": "18",
+            "software_type": "",
             "version": "5.5.0",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 12,
         "fields": {
             "software": "20",
+            "software_type": "",
             "version": "09000302",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 13,
         "fields": {
             "software": "24",
+            "software_type": "",
             "version": "XVII",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 14,
         "fields": {
             "software": "26",
+            "software_type": "",
             "version": "2.00-12",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 15,
         "fields": {
             "software": "27",
+            "software_type": "",
             "version": "8.0.1",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 16,
         "fields": {
             "software": "28",
+            "software_type": "",
             "version": "12",
             "expiration": "2020-09-30",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 17,
         "fields": {
             "software": "29",
+            "software_type": "",
             "version": "2019",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 18,
         "fields": {
             "software": "30",
+            "software_type": "",
             "version": "5.0.7",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 19,
         "fields": {
             "software": "31",
+            "software_type": "",
             "version": "1.3.2421",
             "expiration": "2020-05-12",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 20,
         "fields": {
             "software": "32",
+            "software_type": "",
             "version": "081107427",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 21,
         "fields": {
             "software": "33",
+            "software_type": "",
             "version": "0.48",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 22,
         "fields": {
             "software": "34",
+            "software_type": "",
             "version": "2012",
             "expiration": "2020-03-17",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 23,
         "fields": {
             "software": "36",
+            "software_type": "",
             "version": "081107443",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 24,
         "fields": {
             "software": "37",
+            "software_type": "",
             "version": "25",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 25,
         "fields": {
             "software": "38",
+            "software_type": "",
             "version": "0.6",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 26,
         "fields": {
             "software": "39",
+            "software_type": "",
             "version": "5.10",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 27,
         "fields": {
             "software": "40",
+            "software_type": "",
             "version": "3.043.066",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 28,
         "fields": {
             "software": "42",
+            "software_type": "",
             "version": "5.0",
             "expiration": "2021-04-19",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 29,
         "fields": {
             "software": "45",
+            "software_type": "",
             "version": "2018",
             "expiration": "2020-09-19",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 30,
         "fields": {
             "software": "47",
+            "software_type": "",
             "version": "Business Edition 2016",
             "expiration": "2021-10-29",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 31,
         "fields": {
             "software": "48",
+            "software_type": "",
             "version": "2011",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 32,
         "fields": {
             "software": "49",
+            "software_type": "",
             "version": "Newest",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 33,
         "fields": {
             "software": "50",
+            "software_type": "",
             "version": "Newest",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 34,
         "fields": {
             "software": "53",
+            "software_type": "",
             "version": "Newest",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 35,
         "fields": {
             "software": "55",
+            "software_type": "",
             "version": "7.1",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 36,
         "fields": {
             "software": "56",
+            "software_type": "",
             "version": "??",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 37,
         "fields": {
             "software": "58",
+            "software_type": "",
             "version": "21",
             "expiration": "2020-05-23",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 38,
         "fields": {
             "software": "59",
+            "software_type": "",
             "version": "N/A",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 39,
         "fields": {
             "software": "61",
+            "software_type": "",
             "version": "2016",
             "expiration": "2020-04-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 40,
         "fields": {
             "software": "62",
+            "software_type": "",
             "version": "??",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 41,
         "fields": {
             "software": "63",
+            "software_type": "",
             "version": "ICE2000",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 42,
         "fields": {
             "software": "65",
+            "software_type": "",
             "version": "2020",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 43,
         "fields": {
             "software": "66",
+            "software_type": "",
             "version": "N/A",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 44,
         "fields": {
             "software": "68",
+            "software_type": "",
             "version": "2.7",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 45,
         "fields": {
             "software": "70",
+            "software_type": "",
             "version": "9.1.2",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 46,
         "fields": {
             "software": "71",
+            "software_type": "",
             "version": "2019",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 47,
         "fields": {
             "software": "73",
+            "software_type": "",
             "version": "15",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 48,
         "fields": {
             "software": "75",
+            "software_type": "",
             "version": "Enterprise",
             "expiration": "2020-03-28",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 49,
         "fields": {
             "software": "76",
+            "software_type": "",
             "version": "Newest",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 50,
         "fields": {
             "software": "79",
+            "software_type": "",
             "version": "2020",
             "expiration": "2020-05-31",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 51,
         "fields": {
             "software": "80",
+            "software_type": "",
             "version": "10",
             "expiration": "2020-06-18",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 52,
         "fields": {
             "software": "81",
+            "software_type": "",
             "version": "9.2.1",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 53,
         "fields": {
             "software": "82",
+            "software_type": "",
             "version": "2016.1.0",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 54,
         "fields": {
             "software": "83",
+            "software_type": "",
             "version": "Newest",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 55,
         "fields": {
             "software": "84",
+            "software_type": "",
             "version": "2014",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 56,
         "fields": {
             "software": "85",
+            "software_type": "",
             "version": "10.0",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 57,
         "fields": {
             "software": "86",
+            "software_type": "",
             "version": "LyX: 2.3.2; Miktex: 2.9.7031; TexStudio: 2.12.14",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 58,
         "fields": {
             "software": "88",
+            "software_type": "",
             "version": "JDK: 7.4, JRE: 6u81",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 59,
         "fields": {
             "software": "89",
+            "software_type": "",
             "version": "2017 SP2",
             "expiration": "2019-12-31",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 60,
         "fields": {
             "software": "90",
+            "software_type": "",
             "version": "16",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 61,
         "fields": {
             "software": "91",
+            "software_type": "",
             "version": "20070635",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 62,
         "fields": {
             "software": "92",
+            "software_type": "",
             "version": "R11",
             "expiration": "2020-12-31",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 63,
         "fields": {
             "software": "93",
+            "software_type": "",
             "version": "??",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 64,
         "fields": {
             "software": "94",
+            "software_type": "",
             "version": "Build 292",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 65,
         "fields": {
             "software": "95",
+            "software_type": "",
             "version": " Eclipse IDE 2019‑03",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 66,
         "fields": {
             "software": "97",
+            "software_type": "",
             "version": "2.1",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 67,
         "fields": {
             "software": "98",
+            "software_type": "",
             "version": "19",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 68,
         "fields": {
             "software": "99",
+            "software_type": "",
             "version": "11.1.2.4.625",
             "expiration": "2020-02-12",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 69,
         "fields": {
             "software": "100",
+            "software_type": "",
             "version": "2.5",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 70,
         "fields": {
             "software": "101",
+            "software_type": "",
             "version": "Newest",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 71,
         "fields": {
             "software": "103",
+            "software_type": "",
             "version": "2019",
             "expiration": "2020-06-27",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 72,
         "fields": {
             "software": "104",
+            "software_type": "",
             "version": "11.0.01",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 73,
         "fields": {
             "software": "105",
+            "software_type": "",
             "version": "8.0.3 DEMO",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 74,
         "fields": {
             "software": "106",
+            "software_type": "",
             "version": "7.7.9",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 75,
         "fields": {
             "software": "107",
+            "software_type": "",
             "version": "Make 2016",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 76,
         "fields": {
             "software": "108",
+            "software_type": "",
             "version": "2.0",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 77,
         "fields": {
             "software": "112",
+            "software_type": "",
             "version": "1.8.15",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 78,
         "fields": {
             "software": "113",
+            "software_type": "",
             "version": "2018",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 79,
         "fields": {
             "software": "114",
+            "software_type": "",
             "version": "V5-6R2017",
             "expiration": "2020-10-15",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 80,
         "fields": {
             "software": "116",
+            "software_type": "",
             "version": "Classroom: R2018a; Research: R2018a",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 81,
         "fields": {
             "software": "117",
+            "software_type": "",
             "version": "14",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 82,
         "fields": {
             "software": "119",
+            "software_type": "",
             "version": "19.1",
             "expiration": "2020-07-25",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 83,
         "fields": {
             "software": "120",
+            "software_type": "",
             "version": "2013 Ultimate",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 84,
         "fields": {
             "software": "121",
+            "software_type": "",
             "version": "16.6",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 85,
         "fields": {
             "software": "122",
+            "software_type": "",
             "version": "2012",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 86,
         "fields": {
             "software": "123",
+            "software_type": "",
             "version": "1.8.7",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 87,
         "fields": {
             "software": "128",
+            "software_type": "",
             "version": "2016.1.0",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     },
     {
-        "model": "cico_core.SoftwareDetail",
+        "model": "cae_home.SoftwareDetail",
         "pk": 88,
         "fields": {
             "software": "129",
+            "software_type": "",
             "version": "RS5000",
             "expiration": "1970-01-01",
-            "date_created": "2018-01-01T08:00:00.000Z",
-            "date_modified": "2018-01-01T08:00:00.000Z"
+            "slug": "",
+            "date_created": "2020-01-01T08:00:00.000Z",
+            "date_modified": "2020-01-01T08:00:00.000Z"
         }
     }
 ]
