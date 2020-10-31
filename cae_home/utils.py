@@ -68,6 +68,7 @@ def get_or_create_login_user_model(request, user_id):
         from django.conf import settings
         if settings.CAE_LDAP['host'] == '' or settings.WMU_LDAP['host'] == '' or settings.ADV_LDAP['login_dn'] == '':
             # Missing local LDAP credentials.
+            logger.warning('LDAP credentials not set. Failed to get (User model) LDAP information.')
             return TemplateResponse(request, 'error_views/ldap_required.html', {})
         else:
             # Local LDAP credentials found. Attempt connection.
@@ -80,6 +81,7 @@ def get_or_create_login_user_model(request, user_id):
                 user_model = cae_ldap.create_or_update_user_model(user_id)
             except (ImportError, ModuleNotFoundError):
                 # LDAP is not installed on machine. Redirect to template stating such.
+                logger.warning('Error importing LDAP module. Is the CAE "simple_ldap_lib" library installed?')
                 return TemplateResponse(request, 'error_views/ldap_required.html', {})
 
             except ValidationError:
@@ -121,6 +123,7 @@ def get_or_create_wmu_user_model(request, user_id):
         from django.conf import settings
         if settings.CAE_LDAP['host'] == '' or settings.WMU_LDAP['host'] == '' or settings.ADV_LDAP['login_dn'] == '':
             # Missing local LDAP credentials.
+            logger.warning('LDAP credentials not set. Failed to get (WmuUser model) LDAP information.')
             return TemplateResponse(request, 'error_views/ldap_required.html', {})
         else:
             # Local LDAP credentials found. Attempt connection.
@@ -138,6 +141,7 @@ def get_or_create_wmu_user_model(request, user_id):
                 user_model = wmu_ldap.create_or_update_wmu_user_model(user_id)
             except (ImportError, ModuleNotFoundError):
                 # LDAP is not installed on machine. Redirect to template stating such.
+                logger.warning('Error importing LDAP module. Is the CAE "simple_ldap_lib" library installed?')
                 return TemplateResponse(request, 'error_views/ldap_required.html', {})
 
             except ValidationError:
