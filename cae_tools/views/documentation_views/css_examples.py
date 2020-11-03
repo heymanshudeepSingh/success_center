@@ -1,24 +1,13 @@
 """
-Views for CAE Tools app.
+CSS Example views for CAE Tools app.
 """
 
 # System Imports.
-from django.shortcuts import redirect
 from django.template.response import TemplateResponse
 
 # User Imports.
-from . import forms
+from cae_tools import forms
 
-
-def index(request):
-    """
-    CAE Tools index.
-    Currently only redirects to color tool
-    """
-    return redirect('cae_tools:color_tool')
-
-
-#region CSS Example Views
 
 def css_examples(request):
     """
@@ -50,6 +39,8 @@ def css_buttons(request):
     """
     return TemplateResponse(request, 'cae_tools/css_examples/buttons.html', {})
 
+
+#region Form Example Views
 
 def css_forms(request):
     """
@@ -122,6 +113,8 @@ def css_forms_misc(request):
 
     })
 
+#endregion Form Example Views
+
 
 def css_nav(request):
     """
@@ -169,12 +162,3 @@ def css_text_highlighting(request):
     """
     # Render template to user.
     return TemplateResponse(request, 'cae_tools/css_examples/text_highlighting.html', {})
-
-#endregion CSS Example Views
-
-
-def color_tool(request):
-    """
-    Color tool.
-    """
-    return TemplateResponse(request, 'cae_tools/color_tool.html', {})
