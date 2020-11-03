@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 ###
  # Script to install required system (pacman) dependencies for project on a Arch Linux system.
+ # Note that script assumes arch linux will be a development environment.
  ##
 
 
@@ -42,14 +43,18 @@ function main() {
     systemctl start redis
 
     echo ""
-    echo -e "${color_blue}Installing sass dependencies...${color_reset}"
-    pacman -S ruby-sass --noconfirm
-    pacman -S ruby-rb-fsevent --noconfirm
+    echo -e "${color_blue}Installing npm dependencies...${color_reset}"
+    pacman -S nodejs npm --noconfirm
+    sudo ./general/installers/misc/npm_install.sh
 
     echo ""
-    echo -e "${color_blue}Installing npm dependencies...${color_reset}"
-    pacman -S nodejs npm
-    sudo ./misc/npm_install.sh
+    echo -e "${color_blue}Installing sass dependencies...${color_reset}"
+    npm install -g sass
+
+    echo ""
+    echo -e "${color_blue}Installing sass dependencies...${color_reset}"
+    pacman -S libcups --noconfirm
+    pacman -S smbclient --noconfirm
 
     if [[ "$mysql" = true ]]
     then
