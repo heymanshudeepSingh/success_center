@@ -30,48 +30,41 @@ function main() {
 
     # Install packman packages.
     echo -e "${color_blue}Updating pacman package list...${color_reset}"
-    pacman -Syy
+    pacman -Syy > /dev/null
 
-    echo ""
     echo -e "${color_blue}Installing gitk dependencies...${color_reset}"
-    pacman -S tk --noconfirm
+    pacman -S tk --needed --noconfirm> /dev/null
 
-    echo ""
     echo -e "${color_blue}Installing redis dependencies...${color_reset}"
-    pacman -S redis --noconfirm
-    systemctl enable redis
-    systemctl start redis
+    pacman -S redis --needed --noconfirm > /dev/null
+    systemctl enable redis > /dev/null
+    systemctl start redis > /dev/null
 
-    echo ""
     echo -e "${color_blue}Installing npm dependencies...${color_reset}"
-    pacman -S nodejs npm --noconfirm
-    sudo ./general/installers/misc/npm_install.sh
+    pacman -S nodejs npm --needed --noconfirm > /dev/null 2>&1
+    sudo ./general/installers/misc/npm_install.sh > /dev/null 2>&1
 
-    echo ""
     echo -e "${color_blue}Installing sass dependencies...${color_reset}"
-    npm install -g sass
+    npm install -g sass > /dev/null
 
-    echo ""
     echo -e "${color_blue}Installing sass dependencies...${color_reset}"
-    pacman -S libcups --noconfirm
-    pacman -S smbclient --noconfirm
+    pacman -S libcups --needed --noconfirm > /dev/null
+    pacman -S smbclient --needed --noconfirm > /dev/null
 
     if [[ "$mysql" = true ]]
     then
-        echo ""
         echo -e "${color_blue}Installing MySQL dependencies...${color_reset}"
 
         # Call MariaDB Arch install script.
-        sudo ./general/installers/misc/arch_maria_db_install.sh
+        sudo ./general/installers/misc/arch_maria_db_install.sh > /dev/null
     fi
 
-    echo ""
     echo -e "${color_blue}Installing Selenium Testing dependencies...${color_reset}"
-    pacman -S python-selenium --noconfirm
+    pacman -S python-selenium --needed --noconfirm > /dev/null
     # Google Chrome "chromium" driver for running selenium with chrome.
-    pacman -S chromium --noconfirm
+    pacman -S chromium --needed --noconfirm > /dev/null
     # Firefox "gecko" driver for running selenium with firefox.
-    pacman -S geckodriver --noconfirm
+    pacman -S geckodriver --needed --noconfirm > /dev/null
 
     # Success. Exit script.
     echo ""
