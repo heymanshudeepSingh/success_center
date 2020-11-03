@@ -1,8 +1,7 @@
 """
-Models for CAE Home app.
+Views for CAE Home app.
 
-Models here should be "core" models which have overlap in various subprojects.
-If a model only applies to a single project, then it should be defined within that project.
+Split up into separate files for organization. Imported here.
 """
 
 # CAE Center specific User Group names.

@@ -45,6 +45,7 @@ urlpatterns = [
 if settings.DEV_URLS:
     urlpatterns += [
         # CAE Tools app views.
+        path('dev/', include('cae_tools.urls')),
         path('cae_tools/', include('cae_tools.urls')),
     ]
 

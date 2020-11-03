@@ -25,6 +25,21 @@ urlpatterns = [
     path('documentation/css_examples/text_highlighting', views.css_text_highlighting, name='css_text_highlighting'),
     path('documentation/css_examples/', views.css_examples, name='css_examples'),
 
+    # Custom Workspace Logic Documentation.
+    path('documentation/css/', views.docs_css, name='documentation_css'),
+    path('documentation/general_setup/', views.docs_general_setup, name='documentation_general_setup'),
+    path('documentation/javascript/', views.docs_javascript, name='documentation_javascript'),
+    path('documentation/ldap/', views.docs_ldap, name='documentation_ldap'),
+    path('documentation/middleware/', views.docs_middlware, name='documentation_middleware'),
+    path('documentation/models/', views.docs_middlware, name='documentation_models'),
+    path('documentation/seeds_and_fixtures/', views.docs_seeds_and_fixtures, name='documentation_seeds_and_fixtures'),
+    path('documentation/settings/', views.docs_settings, name='documentation_settings'),
+    path('documentation/subprojects/', views.docs_subprojects, name='documentation_subprojects'),
+    path('documentation/templates/', views.docs_templates, name='documentation_templates'),
+    path('documentation/tests/', views.docs_tests, name='documentation_tests'),
+    path('documentation/views/', views.docs_views, name='documentation_views'),
+    path('documentation/', views.documentation, name='documentation'),
+
     # Color Tool urls.
     path('color/', views.color_tool, name='color_tool'),
 

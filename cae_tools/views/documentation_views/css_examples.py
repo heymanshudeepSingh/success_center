@@ -14,7 +14,7 @@ def css_examples(request):
     Main page for examples of custom HTML/CSS layout and stylings provided by CAE Workspace.
     """
     # Render template to user.
-    return TemplateResponse(request, 'cae_tools/css_example.html', {})
+    return TemplateResponse(request, 'cae_tools/css_examples.html', {})
 
 
 def css_alerts(request):

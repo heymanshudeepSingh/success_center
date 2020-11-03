@@ -1,0 +1,37 @@
+{% extends 'cae_tools/main.html' %}
+{% load static %}
+
+
+{% block title_page_name %}Documentation | {% endblock title_page_name %}
+
+{% block breadcrumb_nav %}
+  <li><a href="{% url 'cae_tools:index' %}">Dev Tools & Docs</a></li>
+{% endblock breadcrumb_nav %}
+
+
+{% block content %}
+  <h1>Custom Project Logic Documentation</h1>
+  <p>
+    Here, we describe all the various ways in which the <span class="highlight primary">CAE Workspace</span> project is
+    unique compared to a standard <span class="highlight primary">Django</span> project. This includes all the provided
+    additional and custom functionality, as well as notes of related quirks.
+  </p>
+  <p>
+    We opted to put project documentation here, rather than our internal wiki, to ensure that everyone who has access
+    to CAE Workspace is able to access this documentation.
+  </p>
+  <ul>
+    <li><a href="{% url 'cae_tools:documentation_css' %}">Custom "CSS" Logic</a></li>
+    <li><a href="{% url 'cae_tools:documentation_general_setup' %}">Custom "General Setup" Logic</a></li>
+    <li><a href="{% url 'cae_tools:documentation_javascript' %}">Custom "JavaScript" Logic</a></li>
+    <li><a href="{% url 'cae_tools:documentation_ldap' %}">Custom "LDAP" Logic</a></li>
+    <li><a href="{% url 'cae_tools:documentation_middleware' %}">Custom "Middleware" Logic</a></li>
+    <li><a href="{% url 'cae_tools:documentation_models' %}">Custom "Model" Logic</a></li>
+    <li><a href="{% url 'cae_tools:documentation_seeds_and_fixtures' %}">Custom "Seeds and Fixture" Logic</a></li>
+    <li><a href="{% url 'cae_tools:documentation_settings' %}">Custom "Settings" Logic</a></li>
+    <li><a href="{% url 'cae_tools:documentation_subprojects' %}">Custom "Sub Project" Logic</a></li>
+    <li><a href="{% url 'cae_tools:documentation_templates' %}">Custom "Template" Logic</a></li>
+    <li><a href="{% url 'cae_tools:documentation_tests' %}">Custom "Test" Logic</a></li>
+    <li><a href="{% url 'cae_tools:documentation_views' %}">Custom "View" Logic</a></li>
+  </ul>
+{% endblock content %}

@@ -3,7 +3,7 @@ Misc views for CAE Tools app.
 """
 
 # System Imports.
-from django.shortcuts import redirect
+from django.template.response import TemplateResponse
 
 # User Imports.
 
@@ -11,6 +11,12 @@ from django.shortcuts import redirect
 def index(request):
     """
     CAE Tools index.
-    Currently only redirects to color tool
     """
-    return redirect('cae_tools:color_tool')
+    return TemplateResponse(request, 'cae_tools/index.html', {})
+
+
+def documentation(request):
+    """
+    Index for documentation of custom Workspace project logic.
+    """
+    return TemplateResponse(request, 'cae_tools/documentation.html', {})

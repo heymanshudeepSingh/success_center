@@ -12,3 +12,4 @@ from .tools import color_tool
 
 # Misc Views.
 from .misc import index
+from .misc import documentation

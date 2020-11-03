@@ -1,0 +1,11 @@
+{% extends 'cae_tools/main.html' %}
+{% load static %}
+
+
+{% block title_page_name %}Documentation | {% endblock title_page_name %}
+
+
+{% block breadcrumb_nav %}
+  <li><a href="{% url 'cae_tools:index' %}">Dev Tools & Docs</a></li>
+  <li><a href="{% url 'cae_tools:documentation' %}">Documentation</a></li>
+{% endblock breadcrumb_nav %}
