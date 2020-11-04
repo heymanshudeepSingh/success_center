@@ -4,6 +4,7 @@
 
 {% block title_page_name %}Documentation | {% endblock title_page_name %}
 
+
 {% block breadcrumb_nav %}
   <li><a href="{% url 'cae_tools:index' %}">Dev Tools & Docs</a></li>
 {% endblock breadcrumb_nav %}
@@ -20,18 +21,28 @@
     We opted to put project documentation here, rather than our internal wiki, to ensure that everyone who has access
     to CAE Workspace is able to access this documentation.
   </p>
+
+  <br>
+  <p>
+    Documentation links for custom CAE Workspace logic is as follows:
+  </p>
   <ul>
-    <li><a href="{% url 'cae_tools:documentation_css' %}">Custom "CSS" Logic</a></li>
-    <li><a href="{% url 'cae_tools:documentation_general_setup' %}">Custom "General Setup" Logic</a></li>
-    <li><a href="{% url 'cae_tools:documentation_javascript' %}">Custom "JavaScript" Logic</a></li>
-    <li><a href="{% url 'cae_tools:documentation_ldap' %}">Custom "LDAP" Logic</a></li>
-    <li><a href="{% url 'cae_tools:documentation_middleware' %}">Custom "Middleware" Logic</a></li>
-    <li><a href="{% url 'cae_tools:documentation_models' %}">Custom "Model" Logic</a></li>
-    <li><a href="{% url 'cae_tools:documentation_seeds_and_fixtures' %}">Custom "Seeds and Fixture" Logic</a></li>
-    <li><a href="{% url 'cae_tools:documentation_settings' %}">Custom "Settings" Logic</a></li>
-    <li><a href="{% url 'cae_tools:documentation_subprojects' %}">Custom "Sub Project" Logic</a></li>
-    <li><a href="{% url 'cae_tools:documentation_templates' %}">Custom "Template" Logic</a></li>
-    <li><a href="{% url 'cae_tools:documentation_tests' %}">Custom "Test" Logic</a></li>
-    <li><a href="{% url 'cae_tools:documentation_views' %}">Custom "View" Logic</a></li>
+    <li><a href="{% url 'cae_tools:documentation_css' %}">CSS</a></li>
+    <li><a href="{% url 'cae_tools:documentation_general_setup' %}">General Setup</a></li>
+    <li><a href="{% url 'cae_tools:documentation_javascript' %}">JavaScript</a></li>
+    <li><p>LDAP</p></li>
+    <ul>
+      <li><a href="{% url 'cae_tools:documentation_ldap_setup' %}">Setup</a></li>
+      <li><a href="{% url 'cae_tools:documentation_ldap_auth_backends' %}">Auth Backends</a></li>
+      <li><a href="{% url 'cae_tools:documentation_ldap_utility_connectors' %}">Utility Connectors</a></li>
+    </ul>
+    <li><a href="{% url 'cae_tools:documentation_middleware' %}">Middleware</a></li>
+    <li><a href="{% url 'cae_tools:documentation_models' %}">Model</a></li>
+    <li><a href="{% url 'cae_tools:documentation_seeds_and_fixtures' %}">Seeds and Fixture</a></li>
+    <li><a href="{% url 'cae_tools:documentation_settings' %}">Settings</a></li>
+    <li><a href="{% url 'cae_tools:documentation_subprojects' %}">Sub Project</a></li>
+    <li><a href="{% url 'cae_tools:documentation_templates' %}">Template</a></li>
+    <li><a href="{% url 'cae_tools:documentation_tests' %}">Test</a></li>
+    <li><a href="{% url 'cae_tools:documentation_views' %}">View</a></li>
   </ul>
 {% endblock content %}

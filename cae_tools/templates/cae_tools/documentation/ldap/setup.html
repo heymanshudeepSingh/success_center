@@ -1,0 +1,77 @@
+{% extends 'cae_tools/documentation/ldap/main.html' %}
+{% load static %}
+
+
+{% block title_page_name %}Setup |  {{ block.super }}{% endblock title_page_name %}
+
+
+{% block content %}
+  {{ block.super }}
+
+  <h2>Setting Up LDAP</h2>
+  <p>
+    The project is not set up to provide LDAP functionality out of the box. However, with a few small changes,
+    it can be enabled.
+  </p>
+
+  <article class="color">
+    <h3>Installing Required Local LDAP Packages</h3>
+    <p>
+      To make any LDAP connections on your machine, you'll first need to install the required LDAP system and Python
+      packages.
+    </p>
+    <h4>Installing LDAP System Packages</h4>
+    <p>
+      If you ran the <a href="{% url 'cae_tools:documentation_general_setup' %}">Setup Installation Script</a>, then
+      you should have been prompted to install LDAP dependencies. If not, then run the appropriate of the following
+      commands:
+    </p>
+    <p>For Arch Linux:</p>
+    <p class="highlight info">sudo pacman -Syy libldap libsasl</p>
+    <p>For Ubuntu:</p>
+    <p class="highlight info">sudo apt-get install libldap2-dev libsasl2-dev</p>
+
+    <h4>Installing LDAP Python Packages</h4>
+    <p>
+      Once the required system packages are installed, you can install the associated Python packages.
+    </p>
+    <p>
+      For this, edit the <span class="highlight primary">&lt;project_root&gt;/requirements.txt</span> file, and comment
+      out the appropriate lines under the <span class="highlight primary">Optional Imports</span> section. Save the
+      file.
+    </p>
+    <p>
+      With a terminal at project root, load your desired Python environment and run:
+    </p>
+    <p class="highlight info">pip install -r requirements.txt</p>
+  </article>
+
+  <br>
+
+  <article class="color">
+    <h3>The "Simple LDAP Lib" Submodule</h3>
+    <p>
+      First, pull the provided Git Submodule project called <span class="highlight primary">Simple Ldap Lib</span> from
+      the CAE Center GitLab. This project acts as a Python interface to simplify connections to LDAP.
+    </p>
+    <p>
+      Documentation for submodules (including various git commands for submodules) is provided at
+      <span class="highlight primary">&lt;project_root&gt;/documents/git_submodules.md</span>.
+    </p>
+  </article>
+
+  <br>
+
+  <article class="color">
+    <h3>LDAP Credentials</h3>
+    <p>
+      You'll need to provide proper credentials to establish connections. These can be found at the
+      <a href="https://wiki.ceas.wmich.edu/">CAE Center internal wiki</a>, under the programmers section. Note that only
+      CAE Center employees can access this wiki.
+    </p>
+    <p>
+      These credentials can be put into the CAE Workspace
+      <a href="{% url 'cae_tools:documentation_settings' %}">local environment settings file</a>.
+    </p>
+  </article>
+{% endblock content %}

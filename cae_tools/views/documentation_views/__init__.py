@@ -31,6 +31,9 @@ from .javascript import docs_javascript
 
 # Custom "LDAP" Logic Documentation.
 from .ldap import docs_ldap
+from .ldap import docs_ldap_setup
+from .ldap import docs_ldap_auth_backends
+from .ldap import docs_ldap_utility_connectors
 
 # Custom "Middleware" Logic Documentation.
 from .middleware import docs_middlware

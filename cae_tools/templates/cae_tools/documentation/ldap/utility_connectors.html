@@ -1,0 +1,82 @@
+{% extends 'cae_tools/documentation/ldap/main.html' %}
+{% load static %}
+
+
+{% block title_page_name %}Custom Utility Connectors |  {{ block.super }}{% endblock title_page_name %}
+
+
+{% block content %}
+  {{ block.super }}
+
+  <h2>Custom LDAP Utility Connectors</h2>
+  <p>
+    Two LDAP utility connector functions are provided at
+    <span class="highlight primary">&lt;project_root&gt;/cae_home/utils.py</span>.
+  </p>
+  <p>
+    They are to be used when trying to get a user model via either BroncoNet or Winno. The intent is to make it easier
+    to manage model data that may require LDAP connections.
+  </p>
+
+  <br>
+
+  <article class="color">
+    <h3>Function Input/Output</h3>
+    <p>
+      Both these functions take in a single argument, of either "BroncoNet" or "Winno". They both then handle all the
+      corresponding LDAP logic (including LDAP not being setup on the local machine) and return values based on one of the
+      four following situations:
+    </p>
+    <ul>
+      <li>
+        <p>
+          If a user model for the corresponding BroncoNet/Winno already exists in the Django database, then the functions
+          will return the found Django model. No LDAP functionality is called.
+        </p>
+        <br>
+      </li>
+      <li>
+        <p>
+          If LDAP connections are setup locally, and valid student data returns for the BroncoNet/Winno, then an
+          equivalent Django model should populate from the data. The functions then return this model.
+        </p>
+        <br>
+      </li>
+      <li>
+        <p>
+          If LDAP connections are setup locally, but no valid student data returns for the BroncoNet/Winno value, then the
+          functions return None.
+        </p>
+        <br>
+      </li>
+      <li>
+        <p>
+          If the user's machine does not have LDAP connections setup (or not properly setup), then it should gracefully
+          return a TemplateResponse object.
+        </p>
+        <p>
+          If called from a view, then the view can either display this TemplateResponse object right then, or you can use
+          an if statemnt to check for a TemplateResponse object and handle how you like.
+        </p>
+        <p>
+          There are examples of this handling in cae_home/views/misc_views.py.
+        </p>
+        <br>
+      </li>
+    </ul>
+  </article>
+
+  <br>
+
+  <p>
+    It's worth noting that "missing LDAP packages", "missing SimpleLdapLib submodule", and "bad LDAP credentials" will
+    all result in the fourth scenario. It hasn't been tested yet, but "no internet connection" likely would as well.
+  </p>
+
+  <br>
+
+  <p>
+    Between all of these, it should be able to handle for both development and production, including users that have
+    LDAP connections setup for their machine and users that don't want to touch LDAP at all.
+  </p>
+{% endblock content %}
