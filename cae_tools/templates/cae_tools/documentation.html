@@ -39,7 +39,13 @@
     <li><a href="{% url 'cae_tools:documentation_middleware' %}">Middleware</a></li>
     <li><a href="{% url 'cae_tools:documentation_models' %}">Model</a></li>
     <li><a href="{% url 'cae_tools:documentation_seeds_and_fixtures' %}">Seeds and Fixture</a></li>
-    <li><a href="{% url 'cae_tools:documentation_settings' %}">Settings</a></li>
+    <li><p>Settings</p></li>
+    <ul>
+      <li><a href="{% url 'cae_tools:documentation_settings_organization' %}">Settings Organization</a></li>
+      <li><a href="{% url 'cae_tools:documentation_settings_local_environment' %}">Local Environment Settings</a></li>
+      <li><a href="{% url 'cae_tools:documentation_settings_dev_password' %}">Dev Password Logic</a></li>
+      <li><a href="{% url 'cae_tools:documentation_settings_logging' %}">Logging</a></li>
+    </ul>
     <li><a href="{% url 'cae_tools:documentation_subprojects' %}">Sub Project</a></li>
     <li><a href="{% url 'cae_tools:documentation_templates' %}">Template</a></li>
     <li><a href="{% url 'cae_tools:documentation_tests' %}">Test</a></li>

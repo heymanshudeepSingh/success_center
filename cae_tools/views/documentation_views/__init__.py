@@ -46,6 +46,10 @@ from .seeds_and_fixtures import docs_seeds_and_fixtures
 
 # Custom "Settings" Logic Documentation.
 from .settings import docs_settings
+from .settings import docs_settings_organization
+from .settings import docs_settings_local_environment
+from .settings import docs_settings_dev_password
+from .settings import docs_settings_logging
 
 # Custom "Sub Project" Logic Documentation.
 from .subprojects import docs_subprojects

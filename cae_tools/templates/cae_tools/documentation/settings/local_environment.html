@@ -1,0 +1,101 @@
+{% extends 'cae_tools/documentation/settings/main.html' %}
+{% load static %}
+
+
+{% block title_page_name %}Local Environment Settings |  {{ block.super }}{% endblock title_page_name %}
+
+
+{% block content %}
+  {{ block.super }}
+
+  <h2>Local Environment Settings</h2>
+  <p>
+    Local project environment settings are located at
+    <span class="highlight primary">&lt;project_root&gt;/settings/local_env/env.py</span>.
+  </p>
+  <p>
+    This env.py file is gitignored from project commits, so an <span class="highlight primary">env_example.py</span>
+    file exists with general default settings that are acceptable for a basic development environment.
+  </p>
+  <p>Notable settings are as listed:</p>
+  <ul>
+    <li>
+      <p>
+        <b>ALLOWED_HOSTS</b> - The domain expected to serve the site.
+      </p>
+      <ul>
+        <li><p>Can be left empty in development. Needs to be populated in production.</p></li>
+      </ul>
+    </li>
+    <li><p><b>STATIC/MEDIA_URL</b> - The values at the start of all browser urls for static or media files.</p></li>
+    <li><p><b>STATIC/MEDIA_Root</b> - The physical file path for the OS to find static/media files locally.</p></li>
+    <li>
+      <p>
+        <b>AUTHENTICATION_BACKENDS</b> - What Django uses for Authentication, when logging in users. If multiple are
+        enabled, then it attempts in order of first to last, and stops when one of them validates the provided user
+        credentials. If all auth backends fail, then the provided user credentials are deemed invalid.
+      </p>
+      <ul>
+        <li><p>
+          The default Django "ModelBackend" is only listed for development and for unittests.
+        </p></li>
+        <li><p>
+          For details on the two custom backends, see
+          <a href="{% url 'cae_tools:documentation_ldap_auth_backends' %}">LDAP Auth Backends</a> documentation.
+        </p></li>
+      </ul>
+    </li>
+    <li><p>
+      <b>AUTH_BACKEND_USE_DJANGO_USER_PASSWORDS</b> - Bool to allow/disable local storing of passwords. Production
+      should set this to false, to avoid concerns of saving stale passwords (there's no good way to sync this with main
+      campus, that we're aware of right now).
+    </p></li>
+    <li><p>
+      <b>LDAP Credentials</b> - Three different sets of LDAP credentials. See
+      <a href="{% url 'cae_tools:documentation_ldap_setup' %}">Setup</a> for details.
+    </p></li>
+    <li>
+      <p><b>DATABASES</b> - Definition of database connection settings.</p>
+      <ul>
+        <li><p>
+          Default is SqLite. SqLite is great for quick and easy development setups, but strongly discouraged for use in
+          production.
+        </p></li>
+      </ul>
+    </li>
+    <li><p>
+      <b>Email Credentials</b> - For allowing the project to send emails. Default just prints email text to console,
+      rather than creating a real email.
+    </p></li>
+    <li><p>
+      <b>USER_SEED_PASSWORD</b> - The default password when creating seeds for the project. See
+      <a href="{% url 'cae_tools:documentation_settings_dev_password' %}">Dev Password Logic</a> for details.
+    </p></li>
+    <li>
+      <p>
+        <b>LOGGING_DIRECTORY</b> - The directory logs are generated to.
+      </p>
+      <ul>
+        <li><p>
+          The default values will save logs to
+          <span class="highlight primary">&lt;project_root&gt;/settings/local_env/logs/</span>. For production, it's
+          highly recommended to change this to some system folder, possibly to something like
+          <span class="highlight primary">/var/django_logs/</span> or
+          <span class="highlight primary">/opt/django_logs</span>.
+        </p></li>
+      </ul>
+    </li>
+    <li><p>
+      <b>Security Settings</b> - Various security settings for production. See
+      <a href="https://docs.djangoproject.com/en/dev/ref/settings/">the Django Docs</a> for the most up to date settings
+      and recommended values.
+    </p></li>
+    <li><p>
+      <b>BACKEND_LDAP_TEST_ID Variables</b> - BroncoNet values to run LDAP unittests. Only required if LDAP is
+      installed.
+    </p></li>
+    <li><p>
+      <b>SELENIUM_TESTS Variables</b> - Variables to customize selenium test execution.
+    </p></li>
+  </ul>
+{% endblock content %}

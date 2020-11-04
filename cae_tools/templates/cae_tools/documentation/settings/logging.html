@@ -1,0 +1,21 @@
+{% extends 'cae_tools/documentation/settings/main.html' %}
+{% load static %}
+
+
+{% block title_page_name %}Logging |  {{ block.super }}{% endblock title_page_name %}
+
+
+{% block content %}
+  {{ block.super }}
+
+  <h2>Project Logging</h2>
+  <p>The workspace project has custom logging logic, which saves all console output to file.</p>
+  <p>
+    The default location for logs is <span class="highlight primary">/settings/local_env/logs/</span> and can be changed
+    in the <a href="{% url 'cae_tools:documentation_settings_local_environment' %}">Local Environment Settings</a>.
+  </p>
+  <p>
+    This log file is effectively the same as logging in most CAE Center Python projects, but with a few extra filters
+    and handlers for web serving.
+  </p>
+{% endblock content %}

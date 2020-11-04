@@ -1,0 +1,22 @@
+{% extends 'cae_tools/documentation/main.html' %}
+{% load static %}
+
+
+{% block title_page_name %}Custom "Settings" Logic |  {{ block.super }}{% endblock title_page_name %}
+
+
+{% block sub_nav %}
+  <li><a href="{% url 'cae_tools:documentation_settings_organization' %}">Settings Organization</a></li>
+  <li><a href="{% url 'cae_tools:documentation_settings_local_environment' %}">Local Environment Settings</a></li>
+  <li><a href="{% url 'cae_tools:documentation_settings_dev_password' %}">Dev Password Logic</a></li>
+  <li><a href="{% url 'cae_tools:documentation_settings_logging' %}">Logging</a></li>
+{% endblock sub_nav %}
+
+
+{% block content %}
+  <h1>Documentation - Custom Workspace "Settings" Logic</h1>
+  <p>
+    Due to the size of this project, it was inevitable that CAE Workspace would need a handful of additional settings
+    values. All of these can be located in the <span class="highlight primary">&lt;project_root&gt;/settings/</span> folder.
+  </p>
+{% endblock content %}

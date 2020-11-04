@@ -1,0 +1,140 @@
+{% extends 'cae_tools/documentation/settings/main.html' %}
+{% load static %}
+
+
+{% block title_page_name %}Organization |  {{ block.super }}{% endblock title_page_name %}
+
+
+{% block content %}
+  {{ block.super }}
+
+  <h2>Project Settings Organization</h2>
+  <p>
+    The project settings folder contains all the normal Django files, such as the core
+    <span class="highlight primary">settings.py</span> and <span class="highlight primary">urls.py</span> files that
+    come standard in any project.
+  </p>
+  <p>
+    However, the workspace also includes:
+  </p>
+  <ul>
+    <li><a href="{% url 'cae_tools:documentation_settings_local_environment' %}">Local Environment Settings</a></li>
+    <li><a href="{% url 'cae_tools:documentation_settings_organization' %}#extra-settings">Extra Settings</a></li>
+    <li><a href="{% url 'cae_tools:documentation_settings_organization' %}#allowed-apps">Allowed Apps</a></li>
+    <li><a href="{% url 'cae_tools:documentation_settings_organization' %}#git-submodules">Git Submodules</a></li>
+    <li><a href="{% url 'cae_tools:documentation_settings_logging' %}">Logging</a></li>
+  </ul>
+
+  <article id="allowed-apps" class="color">
+    <h2>Allowed Apps</h2>
+
+    <p>
+      The "allowed apps" file is located at
+      <span class="highlight primary">&lt;project_root&gt;/settings/allowed_apps.py</span>. This file acts as a
+      "whitelist" for <a href="{% url 'cae_tools:documentation_subprojects' %}">sub-projects</a> put into the
+      <span class="highlight primary">&lt;project_root&gt;/apps/</span> folder.
+    </p>
+    <br>
+    <p>
+      The top of the file has the <span class="highlight primary">INSTALLED_APPS</span> variable, which acts the same
+      as the equivalent in a standard Django installation.
+    </p>
+    <br>
+    <p>
+      Directly beneath is the <span class="highlight primary">ALLOWED_CAE_PROJECTS</span> variable, which acts as a
+      dictionary of whitelisted <a href="{% url 'cae_tools:documentation_subprojects' %}">sub-projects</a>. For each,
+      there is:
+    </p>
+    <ul>
+      <li><p><b>name</b> - The name of the subproject, displayed to the end user in some views.</p></li>
+      <li><p><b>index</b> - The url of the subproject's home page.</p></li>
+      <li><p>
+        <b>url-prefix</b> - The value to put at the start of the browser url, for all pages served in the subproject.
+      </p></li>
+      <li><p><b>related_apps</b> - An inner-dictionary of Django apps, defined by the subproject.</p></li>
+      <ul>
+        <li><p>
+          At minimum, each project should have an
+          <a href="{% url 'cae_tools:documentation_subprojects' %}">&lt;subproject_name&gt;_core</a> app.
+        </p></li>
+      </ul>
+      <li><p>
+        <b>third_party_apps</b> - An optional list of third-party Django apps, associated with the subproject.
+      </p></li>
+      <ul>
+        <li><p>Note: While defined, none of our projects appear to use this. Is this actually implemented?</p></li>
+      </ul>
+    </ul>
+  </article>
+
+  <br>
+
+  <article id="extra-settings" class="color">
+    <h2>Extra Settings</h2>
+
+    <p>
+      The original Django <span class="highlight primary">&lt;project_root&gt;/settings/settings.py</span> file is
+      divided into multiple files, for organization. They are as follows:
+    </p>
+    <ul>
+      <li><p>
+        <b>/settings/settings.py</b> - This holds a lot of the "standard" Django settings,
+        particularly ones that are expected to be fairly static, such as middleware, password validators, default
+        timezones, etc.
+      </p></li>
+      <li><p>
+        <b>/settings/allowed_apps.py</b> - See the
+        <a href="{% url 'cae_tools:documentation_settings_organization' %}#allowed-apps">allowed apps</a> documentation.
+      </p></li>
+      <li>
+        <p>
+          <b>/settings/extra_settings.py</b> - Similar to settings.py, this holds settings that are
+          expected to be mostly static and thus generally not change much, if at all.
+        </p>
+        <p>
+          The difference between the two files is that extra_settings.py contains values that generally aren't found in
+          a default Django settings installation. In other words, extra_settings.py generally contains static settings
+          that are unique to Workspace.
+        </p>
+      </li>
+      <li><p>
+        <b>/settings/reusable_settings.py</b> - This file contains settings (or settings-helpers)
+        that are okay to be imported repeatedly, once per settings file. This was required to prevent unintentional
+        dependency loops among settings files.
+      </p></li>
+      <li><p>
+        <b>/settings/local_env/env.py</b> - See the
+        <a href="{% url 'cae_tools:documentation_settings_local_environment' %}">Local Environment Settings</a>
+        documentation.
+      </p></li>
+    </ul>
+    <br>
+    <p>
+      For reference, Workspace still enters the settings at the normal
+      <span class="highlight primary">settings.py</span> file. From there, it almost immediately imports
+      <span class="highlight primary">allowed_apps.py</span>, and then passes logic off to
+      <span class="highlight primary">extra_settings.py</span>. The extra_settings.py file loads in the
+      <span class="highlight primary">env.py</span>, and after both finish logic, project settings are fully loaded.
+    </p>
+  </article>
+
+  <br>
+
+  <article id="git-submodules" class="color">
+    <h2>Git Submodules</h2>
+
+    <p>
+      When imported, Git Submodules are set to download to the project settings folder.
+    </p>
+    <p>
+      Currently, this project only uses one git submodule. It's a custom project on the CAE Center GitLab, called
+      <a href="https://git.ceas.wmich.edu/Python/simple_ldap_lib">SimpleLdapLib</a> (See
+      <a href="{% url 'cae_tools:documentation_ldap_setup' %}">LDAP setup</a> for more on using this project within
+      workspace).
+    </p>
+    <p>
+      In the future, more git submodules may be included. See
+      <span class="highlight primary">&lt;project_root&gt;/documents/git_submodules.md</span> for more on git submodules.
+    </p>
+  </article>
+{% endblock content %}
