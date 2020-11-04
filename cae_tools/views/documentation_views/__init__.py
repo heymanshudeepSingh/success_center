@@ -28,6 +28,8 @@ from .general_setup import docs_general_setup
 
 # Custom "JavaScript" Logic Documentation.
 from .javascript import docs_javascript
+from .javascript import docs_javascript_passing_variables
+from .javascript import docs_javascript_libraries
 
 # Custom "LDAP" Logic Documentation.
 from .ldap import docs_ldap

@@ -1,0 +1,91 @@
+{% extends 'cae_tools/documentation/javascript/main.html' %}
+{% load static %}
+
+
+{% block title_page_name %}Passing Variables |  {{ block.super }}{% endblock title_page_name %}
+
+
+{% block content %}
+  {{ block.super }}
+
+  <h2>Passing Variables</h2>
+
+  <article id="reasoning" class="color">
+    <h3>Reasoning for Needing to "Pass" Variables</h3>
+    <p>
+      Variables need to be "passed" from Python code to JavaScript, due to the nature of the two languages.
+    </p>
+    <p>
+      Django (and thus Python) code is server-side, as in it runs entirely on the production server. The server gets the
+      user's request, responds accordingly (generally by making a template), then passes this response back to the user's
+      local browser.
+    </p>
+    <p>
+      On the other hand, JavaScript code is client-side, as in it runs entirely on the user's local machine and browser.
+      Once the browser receives a response, it renders this response to the user. JavaScript can then begin running
+      within the browser, and respond accordingly to user interaction.
+    </p>
+    <p>
+      These two processes are entirely separate. Thus, JavaScript code can only get variables explicitly passed to it,
+      either from within the response template, from a websocket connection, or from a JSON request.
+    </p>
+    <p>
+      Note that, outside of websockets or JSON requests, JavaScript is unable to really pass data back to the server at
+      all. This is why, to pass data, most sites will have the browser bypass JavaScript and instead make an entirely
+      new page request.
+    </p>
+  </article>
+
+  <article id="syntax" class="color">
+    <h3>Syntax</h3>
+    <p>
+      After much experimentation and various implementations, we now have a recommended way to pass variables from Python
+      logic (variables in Django middleware/views/templates) to JavaScript code.
+    </p>
+    <p>
+      Note that there's no "correct" way to pass variables, but this is the manner we've settled on for this project.
+      If nothing else, having an "established" method means it's at least consistent between projects maintained at the
+      CAE Center, and thus easier to maintain.
+    </p>
+
+    <h4>Passing Middleware Variables</h4>
+    <p>
+      For passing <a href="{% url 'cae_tools:documentation_middleware' %}">Middleware</a> variables, to JavaScript, we
+      have opted to do it in one single location, at the bottom of
+      <span class="highlight primary">&lt;project_root&gt;/cae_home/templates/cae_home/base.html</span>.
+    </p>
+    <p>
+      Here, we have a script tag where we define a <span class="highlight info">window.django_middleware</span>
+      JavaScript dictionary object, and pass in the corresponding middleware variables as key-value pairs.
+    </p>
+    <p>
+      Saving it to the <span class="highlight info">window.django_middleware</span> gives it a sort of namespace,
+      so it's easily identifiable in JavaScript code, and can't be accidentally overridden.
+    </p>
+
+    <br>
+
+    <p>
+      It can then be accessed from any JavaScript file that extends CAE Home templates, via the following syntax:
+    </p>
+    <p class="highlight info">window.django_middleware.&lt;variable_key&gt;</p>
+
+    <h4>Passing View/Template Variables</h4>
+    <p>
+      Passing view/template variables to JavaScript is handled extremely similar to middleware ones. The difference
+      is that we save these variables to a <span class="highlight info">window.django_template</span> dictionary, to
+      keep it obvious which variables were passed from which location.
+    </p>
+    <p>
+      Furthermore, this <span class="highlight info">window.django_template</span> dictionary is only defined in the
+      corresponding template, that way the variable doesn't clutter up all pages served in all projects.
+    </p>
+
+    <br>
+
+    <p>
+      This dictionary is then only accessible in JavaScript loaded from the given template, via syntax like:
+    </p>
+    <p class="highlight info">window.django_template.&lt;variable_key&gt;</p>
+  </article>
+{% endblock content %}

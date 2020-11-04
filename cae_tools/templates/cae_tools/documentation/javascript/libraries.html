@@ -1,0 +1,76 @@
+{% extends 'cae_tools/documentation/javascript/main.html' %}
+{% load static %}
+
+
+{% block title_page_name %}Provided Libraries |  {{ block.super }}{% endblock title_page_name %}
+
+
+{% block content %}
+  {{ block.super }}
+
+  <h2>Provided JavaScript Libraries & Logic</h2>
+  <p>
+    Workspace provides some JavaScript libraries by default. These are automatically loaded and available to all
+    templates that extend logic from CAE Home.
+  </p>
+  <br>
+  <article id="third-party-libraries" class="color">
+    <h3>Third Party Libraries</h3>
+    <ul>
+      <li>
+        <p>
+          <b>JQuery</b> - <a href="https://jquery.com/">JQuery</a> is a library that adds a significant amount of
+          general logic and helper functions to the base JavaScript language.
+        </p>
+        <p>
+          In a lot of cases, JQuery accomplishes what JavaScript could already do, but in far fewer lines and much
+          easier to maintain code. Plus, according to the documentation, it has minimal footprint, and is cross-browser
+          compliant.
+        </p>
+      </li>
+      <li>
+        <p>
+          <b>React</b> - <a href="https://reactjs.org/">React</a> is a library that overhauls JavaScript to be much more
+          dynamic and organized for large-scale pages.
+        </p>
+        <p>
+          Note that React is a pretty significant overhaul of JavaScript, on its own. To the point that it can act as a
+          full, stand-alone web server. Workspace only uses it for front-end management, but there's still a bit of a
+          learning curve to getting it working.
+        </p>
+      </li>
+      <li>
+        <p>
+          <b>Flatpickr</b> - <a href="https://flatpickr.js.org/">Flatpickr</a> is a third-party, JavaScript-based
+          datetime form widget. It's used for some of Workspace's
+          <a href="{% url 'cae_tools:css_forms_custom_fields' %}">Custom Datetime Form Widgets</a>.
+        </p>
+      </li>
+      <li>
+        <p>
+          <b>Select2</b> - <a href="https://select2.org/">Select2</a> is a third-party, JQuery-based selectbox form
+          widget. It's used for some of Workspace's
+          <a href="{% url 'cae_tools:css_forms_custom_fields' %}">Custom Select Form Widgets</a>.
+        </p>
+      </li>
+    </ul>
+    <br>
+    <p>
+      For more info on differences between JavaScript, JQuery, and React (as well as when to use which), see
+      documentation at <span>&lt;project_root&gt;/documents/javascript_and_react.md</span>.
+    </p>
+  </article>
+
+  <article id="custom-javascript-logic" class="color">
+    <h3>Custom JavaScript Logic</h3>
+    <p>
+      CAE Workspace also provides a handful of custom JavaScript logic. This includes things like mobile handling,
+      custom form widgets, custom interactive CSS elements, and more.
+    </p>
+    <p>
+      Most of these are showcased in the <a href="{% url 'cae_tools:css_examples' %}">CSS Example</a> pages.
+      The associated code is located at
+      <span class="highlight primary">&lt;project_root&gt;/cae_home/static/cae_home/js/</span>.
+    </p>
+  </article>
+{% endblock content %}

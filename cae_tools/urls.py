@@ -28,7 +28,10 @@ urlpatterns = [
     # Custom Workspace Logic Documentation.
     path('documentation/css/', views.docs_css, name='documentation_css'),
     path('documentation/general_setup/', views.docs_general_setup, name='documentation_general_setup'),
-    path('documentation/javascript/', views.docs_javascript, name='documentation_javascript'),
+
+    # path('documentation/javascript/', views.docs_javascript, name='documentation_javascript'),
+    path('documentation/javascript/passing_variables/', views.docs_javascript_passing_variables, name='documentation_javascript_passing_variables'),
+    path('documentation/javascript/libraries/', views.docs_javascript_libraries, name='documentation_javascript_libraries'),
 
     # path('documentation/ldap/', views.docs_ldap, name='documentation_ldap'),
     path('documentation/ldap/setup/', views.docs_ldap_setup, name='documentation_ldap_setup'),

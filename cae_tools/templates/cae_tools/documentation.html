@@ -27,19 +27,49 @@
     Documentation links for custom CAE Workspace logic is as follows:
   </p>
   <ul>
-    <li><p>Project Settings</p></li>
-    <ul>
-      <li><a href="{% url 'cae_tools:documentation_settings_organization' %}">Settings Organization</a></li>
-      <li><a href="{% url 'cae_tools:documentation_settings_local_environment' %}">Local Environment Settings</a></li>
-      <li><a href="{% url 'cae_tools:documentation_settings_dev_password' %}">Dev Password Logic</a></li>
-      <li><a href="{% url 'cae_tools:documentation_settings_logging' %}">Logging</a></li>
-    </ul>
-    <li><p>LDAP</p></li>
-    <ul>
-      <li><a href="{% url 'cae_tools:documentation_ldap_setup' %}">Setup</a></li>
-      <li><a href="{% url 'cae_tools:documentation_ldap_auth_backends' %}">Auth Backends</a></li>
-      <li><a href="{% url 'cae_tools:documentation_ldap_utility_connectors' %}">Utility Connectors</a></li>
-    </ul>
+    <li>
+      <p>Setup and Project Core</p>
+      <ul>
+        <li>
+          <p>Project Settings</p>
+          <ul>
+            <li><a href="{% url 'cae_tools:documentation_settings_organization' %}">Settings Organization</a></li>
+            <li><a href="{% url 'cae_tools:documentation_settings_local_environment' %}">Local Environment Settings</a></li>
+            <li><a href="{% url 'cae_tools:documentation_settings_dev_password' %}">Dev Password Logic</a></li>
+            <li><a href="{% url 'cae_tools:documentation_settings_logging' %}">Logging</a></li>
+          </ul>
+        </li>
+        <li>
+          <p>LDAP</p>
+          <ul>
+            <li><a href="{% url 'cae_tools:documentation_ldap_setup' %}">Setup</a></li>
+            <li><a href="{% url 'cae_tools:documentation_ldap_auth_backends' %}">Auth Backends</a></li>
+            <li><a href="{% url 'cae_tools:documentation_ldap_utility_connectors' %}">Utility Connectors</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+
+    <li>
+      <p>Front End</p>
+      <ul>
+        <li>
+          <p>JavaScript</p>
+          <ul>
+            <li><a href="{% url 'cae_tools:documentation_javascript_passing_variables' %}">Passing JavaScript Variables</a></li>
+            <li><a href="{% url 'cae_tools:documentation_javascript_libraries' %}">Provided Libraries & Logic</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+
+    <li>
+      <p>Back End</p>
+      <ul>
+        <li><p>None yet.</p></li>
+      </ul>
+    </li>
+
   </ul>
   <br>
   <br>
@@ -47,13 +77,12 @@
   <ul>
     <li><a href="{% url 'cae_tools:documentation_css' %}">CSS</a></li>
     <li><a href="{% url 'cae_tools:documentation_general_setup' %}">General Setup</a></li>
-    <li><a href="{% url 'cae_tools:documentation_javascript' %}">JavaScript</a></li>
     <li><a href="{% url 'cae_tools:documentation_middleware' %}">Middleware</a></li>
-    <li><a href="{% url 'cae_tools:documentation_models' %}">Model</a></li>
+    <li><a href="{% url 'cae_tools:documentation_models' %}">Models</a></li>
     <li><a href="{% url 'cae_tools:documentation_seeds_and_fixtures' %}">Seeds and Fixture</a></li>
     <li><a href="{% url 'cae_tools:documentation_subprojects' %}">Sub Projects</a></li>
-    <li><a href="{% url 'cae_tools:documentation_templates' %}">Template</a></li>
-    <li><a href="{% url 'cae_tools:documentation_tests' %}">Test</a></li>
-    <li><a href="{% url 'cae_tools:documentation_views' %}">View</a></li>
+    <li><a href="{% url 'cae_tools:documentation_templates' %}">Templates</a></li>
+    <li><a href="{% url 'cae_tools:documentation_tests' %}">Testing</a></li>
+    <li><a href="{% url 'cae_tools:documentation_views' %}">Views</a></li>
   </ul>
 {% endblock content %}
