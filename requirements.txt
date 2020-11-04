@@ -34,7 +34,7 @@ python-redmine
 selenium==3.141.0
 
 
-# -- Production Imports --
+# -- Optional Imports --
 # For connecting to mysql. Not necessary if using sqlite during development.
 #mysqlclient==1.4.6
 # For ldap connection. Only necessary when CaeAuthBackend is turned on.
