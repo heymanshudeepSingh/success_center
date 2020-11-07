@@ -5,6 +5,12 @@
 {% block title_page_name %}Custom "JavaScript" Logic |  {{ block.super }}{% endblock title_page_name %}
 
 
+{% block sub_nav %}
+  <li><a href="{% url 'cae_tools:documentation_javascript_passing_variables' %}">Passing JavaScript Variables</a></li>
+  <li><a href="{% url 'cae_tools:documentation_javascript_libraries' %}">Provided Libraries & Logic</a></li>
+{% endblock sub_nav %}
+
+
 {% block content %}
   <h1>Documentation - Custom Workspace "JavaScript" Logic</h1>
 {% endblock content %}
