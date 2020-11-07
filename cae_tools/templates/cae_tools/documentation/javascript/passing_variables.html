@@ -48,44 +48,85 @@
       CAE Center, and thus easier to maintain.
     </p>
 
-    <h4>Passing Middleware Variables</h4>
-    <p>
-      For passing <a href="{% url 'cae_tools:documentation_middleware' %}">Middleware</a> variables, to JavaScript, we
-      have opted to do it in one single location, at the bottom of
-      <span class="highlight primary">&lt;project_root&gt;/cae_home/templates/cae_home/base.html</span>.
-    </p>
-    <p>
-      Here, we have a script tag where we define a <span class="highlight info">window.django_middleware</span>
-      JavaScript dictionary object, and pass in the corresponding middleware variables as key-value pairs.
-    </p>
-    <p>
-      Saving it to the <span class="highlight info">window.django_middleware</span> gives it a sort of namespace,
-      so it's easily identifiable in JavaScript code, and can't be accidentally overridden.
-    </p>
+    <section class="color">
+      <h4>Passing Middleware Variables</h4>
+      <p>
+        For passing <a href="{% url 'cae_tools:documentation_middleware' %}">Middleware</a> variables, to JavaScript, we
+        have opted to do it in one single location, at the bottom of
+        <span class="highlight primary">&lt;project_root&gt;/cae_home/templates/cae_home/base.html</span>.
+      </p>
+      <p>
+        Here, we have a script tag where we define a <span class="highlight info">window.django_middleware</span>
+        JavaScript dictionary object, and pass in the corresponding middleware variables as key-value pairs.
+      </p>
+      <p>
+        Saving it to the <span class="highlight info">window.django_middleware</span> gives it a sort of namespace,
+        so it's easily identifiable in JavaScript code, and can't be accidentally overridden.
+      </p>
+
+      <br>
+
+      <p>
+        It can then be accessed from any JavaScript file that extends CAE Home templates, via the following syntax:
+      </p>
+      <p class="highlight info">window.django_middleware.&lt;variable_key&gt;</p>
+
+      <br>
+      <div class="panel info">
+        <div class="header">
+          <p>Example:</p>
+        </div>
+        <div class="footer">
+          <pre>
+            &lt;script&gt;
+            // Pass required template values in to JavaScript as variables.
+            window.django_middleware = &#123;
+              my_passed_var_1: "some_value",
+              my_passed_var_2: "some_value_2",
+            &#125;
+            &lt;/script&gt;
+          </pre>
+        </div>
+      </div>
+    </section>
 
     <br>
 
-    <p>
-      It can then be accessed from any JavaScript file that extends CAE Home templates, via the following syntax:
-    </p>
-    <p class="highlight info">window.django_middleware.&lt;variable_key&gt;</p>
+    <section class="color">
+      <h4>Passing View/Template Variables</h4>
+      <p>
+        Passing view/template variables to JavaScript is handled extremely similar to middleware ones. The difference
+        is that we save these variables to a <span class="highlight info">window.django_template</span> dictionary, to
+        keep it obvious which variables were passed from which location.
+      </p>
+      <p>
+        Furthermore, this <span class="highlight info">window.django_template</span> dictionary is only defined in the
+        corresponding template, that way the variable doesn't clutter up all pages served in all projects.
+      </p>
 
-    <h4>Passing View/Template Variables</h4>
-    <p>
-      Passing view/template variables to JavaScript is handled extremely similar to middleware ones. The difference
-      is that we save these variables to a <span class="highlight info">window.django_template</span> dictionary, to
-      keep it obvious which variables were passed from which location.
-    </p>
-    <p>
-      Furthermore, this <span class="highlight info">window.django_template</span> dictionary is only defined in the
-      corresponding template, that way the variable doesn't clutter up all pages served in all projects.
-    </p>
+      <br>
 
-    <br>
-
-    <p>
-      This dictionary is then only accessible in JavaScript loaded from the given template, via syntax like:
-    </p>
-    <p class="highlight info">window.django_template.&lt;variable_key&gt;</p>
+      <p>
+        This dictionary is then only accessible in JavaScript loaded from the given template, via syntax like:
+      </p>
+      <p class="highlight info">window.django_template.&lt;variable_key&gt;</p>
+      <br>
+      <div class="panel info">
+        <div class="header">
+          <p>Example:</p>
+        </div>
+        <div class="footer">
+          <pre>
+            &lt;script&gt;
+            // Pass required template values in to JavaScript as variables.
+            window.django_template = &#123;
+              my_passed_var_1: "some_value",
+              my_passed_var_2: "some_value_2",
+            &#125;
+            &lt;/script&gt;
+          </pre>
+        </div>
+      </div>
+    </section>
   </article>
 {% endblock content %}
