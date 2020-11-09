@@ -1,1146 +1,1458 @@
 [
     {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 1,
-        "fields": {
-            "software": "1",
-            "software_type": "",
-            "version": "5.3",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 2,
-        "fields": {
-            "software": "3",
-            "software_type": "",
-            "version": "2018SP3",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 3,
-        "fields": {
-            "software": "4",
-            "software_type": "",
-            "version": "8.2.5",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 4,
-        "fields": {
-            "software": "6",
-            "software_type": "",
-            "version": "Spring 2018",
-            "expiration": "2020-10-09",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 5,
-        "fields": {
-            "software": "10",
-            "software_type": "",
-            "version": "2.3",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 6,
-        "fields": {
-            "software": "11",
-            "software_type": "",
-            "version": "2019.1",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 7,
-        "fields": {
-            "software": "12",
-            "software_type": "",
-            "version": "19.0",
-            "expiration": "2020-09-30",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 8,
-        "fields": {
-            "software": "13",
-            "software_type": "",
-            "version": "12",
-            "expiration": "2019-12-16",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 9,
-        "fields": {
-            "software": "14",
-            "software_type": "",
-            "version": "6.00-19",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 10,
-        "fields": {
-            "software": "16",
-            "software_type": "",
-            "version": "10",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 11,
-        "fields": {
-            "software": "18",
-            "software_type": "",
-            "version": "5.5.0",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 12,
-        "fields": {
-            "software": "20",
-            "software_type": "",
-            "version": "09000302",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 13,
-        "fields": {
-            "software": "24",
-            "software_type": "",
-            "version": "XVII",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 14,
-        "fields": {
-            "software": "26",
-            "software_type": "",
-            "version": "2.00-12",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 15,
-        "fields": {
-            "software": "27",
-            "software_type": "",
-            "version": "8.0.1",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 16,
-        "fields": {
-            "software": "28",
-            "software_type": "",
-            "version": "12",
-            "expiration": "2020-09-30",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 17,
-        "fields": {
-            "software": "29",
-            "software_type": "",
-            "version": "2019",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 18,
-        "fields": {
-            "software": "30",
-            "software_type": "",
-            "version": "5.0.7",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 19,
-        "fields": {
-            "software": "31",
-            "software_type": "",
-            "version": "1.3.2421",
-            "expiration": "2020-05-12",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 20,
-        "fields": {
-            "software": "32",
-            "software_type": "",
-            "version": "081107427",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 21,
-        "fields": {
-            "software": "33",
-            "software_type": "",
-            "version": "0.48",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 22,
-        "fields": {
-            "software": "34",
-            "software_type": "",
-            "version": "2012",
-            "expiration": "2020-03-17",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 23,
-        "fields": {
-            "software": "36",
-            "software_type": "",
-            "version": "081107443",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 24,
-        "fields": {
-            "software": "37",
-            "software_type": "",
-            "version": "25",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 25,
-        "fields": {
-            "software": "38",
-            "software_type": "",
-            "version": "0.6",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 26,
-        "fields": {
-            "software": "39",
-            "software_type": "",
-            "version": "5.10",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 27,
-        "fields": {
-            "software": "40",
-            "software_type": "",
-            "version": "3.043.066",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 28,
-        "fields": {
-            "software": "42",
-            "software_type": "",
-            "version": "5.0",
-            "expiration": "2021-04-19",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 29,
-        "fields": {
-            "software": "45",
-            "software_type": "",
-            "version": "2018",
-            "expiration": "2020-09-19",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 30,
-        "fields": {
-            "software": "47",
-            "software_type": "",
-            "version": "Business Edition 2016",
-            "expiration": "2021-10-29",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 31,
-        "fields": {
-            "software": "48",
-            "software_type": "",
-            "version": "2011",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 32,
-        "fields": {
-            "software": "49",
-            "software_type": "",
-            "version": "Newest",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 33,
-        "fields": {
-            "software": "50",
-            "software_type": "",
-            "version": "Newest",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 34,
-        "fields": {
-            "software": "53",
-            "software_type": "",
-            "version": "Newest",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 35,
-        "fields": {
-            "software": "55",
-            "software_type": "",
-            "version": "7.1",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 36,
-        "fields": {
-            "software": "56",
-            "software_type": "",
-            "version": "??",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 37,
-        "fields": {
-            "software": "58",
-            "software_type": "",
-            "version": "21",
-            "expiration": "2020-05-23",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 38,
-        "fields": {
-            "software": "59",
-            "software_type": "",
-            "version": "N/A",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 39,
-        "fields": {
-            "software": "61",
-            "software_type": "",
-            "version": "2016",
-            "expiration": "2020-04-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 40,
-        "fields": {
-            "software": "62",
-            "software_type": "",
-            "version": "??",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 41,
-        "fields": {
-            "software": "63",
-            "software_type": "",
-            "version": "ICE2000",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 42,
-        "fields": {
-            "software": "65",
-            "software_type": "",
-            "version": "2020",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 43,
-        "fields": {
-            "software": "66",
-            "software_type": "",
-            "version": "N/A",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 44,
-        "fields": {
-            "software": "68",
-            "software_type": "",
-            "version": "2.7",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 45,
-        "fields": {
-            "software": "70",
-            "software_type": "",
-            "version": "9.1.2",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 46,
-        "fields": {
-            "software": "71",
-            "software_type": "",
-            "version": "2019",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 47,
-        "fields": {
-            "software": "73",
-            "software_type": "",
-            "version": "15",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 48,
-        "fields": {
-            "software": "75",
-            "software_type": "",
-            "version": "Enterprise",
-            "expiration": "2020-03-28",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 49,
-        "fields": {
-            "software": "76",
-            "software_type": "",
-            "version": "Newest",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 50,
-        "fields": {
-            "software": "79",
-            "software_type": "",
-            "version": "2020",
-            "expiration": "2020-05-31",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 51,
-        "fields": {
-            "software": "80",
-            "software_type": "",
-            "version": "10",
-            "expiration": "2020-06-18",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 52,
-        "fields": {
-            "software": "81",
-            "software_type": "",
-            "version": "9.2.1",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 53,
-        "fields": {
-            "software": "82",
-            "software_type": "",
-            "version": "2016.1.0",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 54,
-        "fields": {
-            "software": "83",
-            "software_type": "",
-            "version": "Newest",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 55,
-        "fields": {
-            "software": "84",
-            "software_type": "",
-            "version": "2014",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 56,
-        "fields": {
-            "software": "85",
-            "software_type": "",
-            "version": "10.0",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 57,
-        "fields": {
-            "software": "86",
-            "software_type": "",
-            "version": "LyX: 2.3.2; Miktex: 2.9.7031; TexStudio: 2.12.14",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 58,
-        "fields": {
-            "software": "88",
-            "software_type": "",
-            "version": "JDK: 7.4, JRE: 6u81",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 59,
-        "fields": {
-            "software": "89",
-            "software_type": "",
-            "version": "2017 SP2",
-            "expiration": "2019-12-31",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 60,
-        "fields": {
-            "software": "90",
-            "software_type": "",
-            "version": "16",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 61,
-        "fields": {
-            "software": "91",
-            "software_type": "",
-            "version": "20070635",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 62,
-        "fields": {
-            "software": "92",
-            "software_type": "",
-            "version": "R11",
-            "expiration": "2020-12-31",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 63,
-        "fields": {
-            "software": "93",
-            "software_type": "",
-            "version": "??",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 64,
-        "fields": {
-            "software": "94",
-            "software_type": "",
-            "version": "Build 292",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 65,
-        "fields": {
-            "software": "95",
-            "software_type": "",
-            "version": " Eclipse IDE 2019‑03",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 66,
-        "fields": {
-            "software": "97",
-            "software_type": "",
-            "version": "2.1",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 67,
-        "fields": {
-            "software": "98",
-            "software_type": "",
-            "version": "19",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 68,
-        "fields": {
-            "software": "99",
-            "software_type": "",
-            "version": "11.1.2.4.625",
-            "expiration": "2020-02-12",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 69,
-        "fields": {
-            "software": "100",
-            "software_type": "",
-            "version": "2.5",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 70,
-        "fields": {
-            "software": "101",
-            "software_type": "",
-            "version": "Newest",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 71,
-        "fields": {
-            "software": "103",
-            "software_type": "",
-            "version": "2019",
-            "expiration": "2020-06-27",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 72,
-        "fields": {
-            "software": "104",
-            "software_type": "",
-            "version": "11.0.01",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 73,
-        "fields": {
-            "software": "105",
-            "software_type": "",
-            "version": "8.0.3 DEMO",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 74,
-        "fields": {
-            "software": "106",
-            "software_type": "",
-            "version": "7.7.9",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 75,
-        "fields": {
-            "software": "107",
-            "software_type": "",
-            "version": "Make 2016",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 76,
-        "fields": {
-            "software": "108",
-            "software_type": "",
-            "version": "2.0",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 77,
-        "fields": {
-            "software": "112",
-            "software_type": "",
-            "version": "1.8.15",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 78,
-        "fields": {
-            "software": "113",
-            "software_type": "",
-            "version": "2018",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 79,
-        "fields": {
-            "software": "114",
-            "software_type": "",
-            "version": "V5-6R2017",
-            "expiration": "2020-10-15",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 80,
-        "fields": {
-            "software": "116",
-            "software_type": "",
-            "version": "Classroom: R2018a; Research: R2018a",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 81,
-        "fields": {
-            "software": "117",
-            "software_type": "",
-            "version": "14",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 82,
-        "fields": {
-            "software": "119",
-            "software_type": "",
-            "version": "19.1",
-            "expiration": "2020-07-25",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 83,
-        "fields": {
-            "software": "120",
-            "software_type": "",
-            "version": "2013 Ultimate",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 84,
-        "fields": {
-            "software": "121",
-            "software_type": "",
-            "version": "16.6",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 85,
-        "fields": {
-            "software": "122",
-            "software_type": "",
-            "version": "2012",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 86,
-        "fields": {
-            "software": "123",
-            "software_type": "",
-            "version": "1.8.7",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 87,
-        "fields": {
-            "software": "128",
-            "software_type": "",
-            "version": "2016.1.0",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
-    },
-    {
-        "model": "cae_home.SoftwareDetail",
-        "pk": 88,
-        "fields": {
-            "software": "129",
-            "software_type": "",
-            "version": "RS5000",
-            "expiration": "1970-01-01",
-            "slug": "",
-            "date_created": "2020-01-01T08:00:00.000Z",
-            "date_modified": "2020-01-01T08:00:00.000Z"
-        }
+            "model": "cae_home.SoftwareDetail",
+            "pk": "1",
+            "fields": {
+                    "software": "1",
+                    "software_type": 1,
+                    "version": "7z920",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "7-zip-7z920",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "2",
+            "fields": {
+                    "software": "2",
+                    "software_type": 1,
+                    "version": "2018",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "abaqus-2018",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "3",
+            "fields": {
+                    "software": "3",
+                    "software_type": 1,
+                    "version": "2019",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "adams-2019",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "4",
+            "fields": {
+                    "software": "4",
+                    "software_type": 1,
+                    "version": "11.0.01",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "adobe acrobat-11.0.01",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "5",
+            "fields": {
+                    "software": "5",
+                    "software_type": 1,
+                    "version": "CC",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "adobe cc-cc",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "6",
+            "fields": {
+                    "software": "6",
+                    "software_type": 1,
+                    "version": "5.1.0.0",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "alertus-5.1.0.0",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "7",
+            "fields": {
+                    "software": "7",
+                    "software_type": 1,
+                    "version": "19",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "altair-19.0",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "8",
+            "fields": {
+                    "software": "8",
+                    "software_type": 1,
+                    "version": "2019 R2",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "ansys-2019 r2",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "9",
+            "fields": {
+                    "software": "9",
+                    "software_type": 1,
+                    "version": "10",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "arcgis-10.0",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "10",
+            "fields": {
+                    "software": "10",
+                    "software_type": 1,
+                    "version": "V11-ENG",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "aspen-v11-eng",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "11",
+            "fields": {
+                    "software": "11",
+                    "software_type": 1,
+                    "version": "2021-Win",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "autodesk-2021-win",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "12",
+            "fields": {
+                    "software": "12",
+                    "software_type": 1,
+                    "version": "081107427en",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "bentley geopak civil engineering suite-081107427en",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "13",
+            "fields": {
+                    "software": "13",
+                    "software_type": 1,
+                    "version": "lbs09000302en",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "bentley leap bridge-lbs09000302en",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "14",
+            "fields": {
+                    "software": "14",
+                    "software_type": 1,
+                    "version": "81107443",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "bentley microstation-081107443",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "15",
+            "fields": {
+                    "software": "15",
+                    "software_type": 1,
+                    "version": "20070635en",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "bentley staad.pro-20070635en",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "16",
+            "fields": {
+                    "software": "16",
+                    "software_type": 1,
+                    "version": "2",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "calculix-2.0",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "17",
+            "fields": {
+                    "software": "17",
+                    "software_type": 1,
+                    "version": "V5-6R2019-SP3",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "catia-v5-6r2019-sp3",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "18",
+            "fields": {
+                    "software": "18",
+                    "software_type": 1,
+                    "version": "2019",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "cesedupack-2019",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "19",
+            "fields": {
+                    "software": "19",
+                    "software_type": 1,
+                    "version": "2019",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "chrome-2019",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "20",
+            "fields": {
+                    "software": "20",
+                    "software_type": 1,
+                    "version": "14",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "cimatron-14.0",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "21",
+            "fields": {
+                    "software": "21",
+                    "software_type": 1,
+                    "version": "2.01",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "cnc workshop-2.01",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "22",
+            "fields": {
+                    "software": "22",
+                    "software_type": 1,
+                    "version": "54",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "comsol-54",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "23",
+            "fields": {
+                    "software": "23",
+                    "software_type": 1,
+                    "version": "6",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "creo-6.0",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "24",
+            "fields": {
+                    "software": "24",
+                    "software_type": 1,
+                    "version": "V861540-01",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "crystalball-v861540-01",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "25",
+            "fields": {
+                    "software": "25",
+                    "software_type": 1,
+                    "version": "2016v1820",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "csibridge-2016v1820",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "26",
+            "fields": {
+                    "software": "26",
+                    "software_type": 1,
+                    "version": "2010",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "cutepdf-2010",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "27",
+            "fields": {
+                    "software": "27",
+                    "software_type": 1,
+                    "version": "1.8.18",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "doxygen-1.8.18",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "28",
+            "fields": {
+                    "software": "28",
+                    "software_type": 1,
+                    "version": "2020",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "eclipse-2020",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "29",
+            "fields": {
+                    "software": "29",
+                    "software_type": 1,
+                    "version": "Latest",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "final cut pro-latest",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "30",
+            "fields": {
+                    "software": "30",
+                    "software_type": 1,
+                    "version": "53.0.2",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "firefox-53.0.2",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "31",
+            "fields": {
+                    "software": "31",
+                    "software_type": 1,
+                    "version": "2016.2.1",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "geomagic-2016.2.1",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "32",
+            "fields": {
+                    "software": "32",
+                    "software_type": 1,
+                    "version": "2.8.22",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "gimp-2.8.22",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "33",
+            "fields": {
+                    "software": "33",
+                    "software_type": 1,
+                    "version": "2016",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "gtpower-2016",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "34",
+            "fields": {
+                    "software": "34",
+                    "software_type": 1,
+                    "version": "5.1",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "hap-5.10",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "35",
+            "fields": {
+                    "software": "35",
+                    "software_type": 1,
+                    "version": "5.0.7",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "hec-ras-5.0.7",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "36",
+            "fields": {
+                    "software": "36",
+                    "software_type": 1,
+                    "version": "Current",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "hp sender and receiver-current",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "37",
+            "fields": {
+                    "software": "37",
+                    "software_type": 1,
+                    "version": "Build 292",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "htmlkit-build 292",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "38",
+            "fields": {
+                    "software": "38",
+                    "software_type": 1,
+                    "version": "9.1.2",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "ibm rational architect-9.1.2",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "39",
+            "fields": {
+                    "software": "39",
+                    "software_type": 1,
+                    "version": "7.1",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "ibm rational requisitepro-7.1",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "40",
+            "fields": {
+                    "software": "40",
+                    "software_type": 1,
+                    "version": "ICE2000",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "ice-ice2000",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "41",
+            "fields": {
+                    "software": "41",
+                    "software_type": 1,
+                    "version": "2.5.6.0",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "imgburn-2.5.6.0",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "42",
+            "fields": {
+                    "software": "42",
+                    "software_type": 1,
+                    "version": "Current",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "imovie-current",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "43",
+            "fields": {
+                    "software": "43",
+                    "software_type": 1,
+                    "version": "2019",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "impact-2019",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "44",
+            "fields": {
+                    "software": "44",
+                    "software_type": 1,
+                    "version": "8u211",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "java-8u211",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "45",
+            "fields": {
+                    "software": "45",
+                    "software_type": 1,
+                    "version": "1.14.5179",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "jetbrains-1.14.5179",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "46",
+            "fields": {
+                    "software": "46",
+                    "software_type": 1,
+                    "version": "7.19.522.1",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "labstats-7.19.522.1",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "47",
+            "fields": {
+                    "software": "47",
+                    "software_type": 1,
+                    "version": "2020",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "labview-2020",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "48",
+            "fields": {
+                    "software": "48",
+                    "software_type": 1,
+                    "version": "R11.0.0",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "ls-dyna-r11.0.0",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "49",
+            "fields": {
+                    "software": "49",
+                    "software_type": 1,
+                    "version": "XVII",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "ltspice-xvii",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "50",
+            "fields": {
+                    "software": "50",
+                    "software_type": 1,
+                    "version": "3.043.066",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "mach3-3.043.066",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "51",
+            "fields": {
+                    "software": "51",
+                    "software_type": 1,
+                    "version": "2019",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "maple-2019",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "52",
+            "fields": {
+                    "software": "52",
+                    "software_type": 1,
+                    "version": "2020",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "mastercam-2020",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "53",
+            "fields": {
+                    "software": "53",
+                    "software_type": 1,
+                    "version": "15",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "mathcad-15.0",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "54",
+            "fields": {
+                    "software": "54",
+                    "software_type": 1,
+                    "version": "R2020b",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "matlab-r2020b",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "55",
+            "fields": {
+                    "software": "55",
+                    "software_type": 1,
+                    "version": "Current",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "mctrans-current",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "56",
+            "fields": {
+                    "software": "56",
+                    "software_type": 1,
+                    "version": "2019",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "microsoft office-2019",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "57",
+            "fields": {
+                    "software": "57",
+                    "software_type": 1,
+                    "version": "2019",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "microsoft office mac-2019",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "58",
+            "fields": {
+                    "software": "58",
+                    "software_type": 1,
+                    "version": "2016",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "microsoft sql server-2016",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "59",
+            "fields": {
+                    "software": "59",
+                    "software_type": 1,
+                    "version": "2013",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "microsoft visual studio-2013",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "60",
+            "fields": {
+                    "software": "60",
+                    "software_type": 1,
+                    "version": "19",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "minitab-19",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "61",
+            "fields": {
+                    "software": "61",
+                    "software_type": 1,
+                    "version": "pdr81",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "minitool-pdr81",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "62",
+            "fields": {
+                    "software": "62",
+                    "software_type": 1,
+                    "version": "2019",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "moldflow-2019",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "63",
+            "fields": {
+                    "software": "63",
+                    "software_type": 1,
+                    "version": "11",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "netbeans-11.0",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "64",
+            "fields": {
+                    "software": "64",
+                    "software_type": 1,
+                    "version": "Current",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "ninite-current",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "65",
+            "fields": {
+                    "software": "65",
+                    "software_type": 1,
+                    "version": "Current",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "notepad++-current",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "66",
+            "fields": {
+                    "software": "66",
+                    "software_type": 1,
+                    "version": "1899",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "nx-1899",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "67",
+            "fields": {
+                    "software": "67",
+                    "software_type": 1,
+                    "version": "16",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "orcad-16",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "68",
+            "fields": {
+                    "software": "68",
+                    "software_type": 1,
+                    "version": "18.3.7",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "papercut-18.3.7",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "69",
+            "fields": {
+                    "software": "69",
+                    "software_type": 1,
+                    "version": "11SP7",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "partsolutions-11sp7",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "70",
+            "fields": {
+                    "software": "70",
+                    "software_type": 1,
+                    "version": "10.3.1.3536",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "promodel-10.3.1.3536",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "71",
+            "fields": {
+                    "software": "71",
+                    "software_type": 1,
+                    "version": "16.6",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "pspice-16.6",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "72",
+            "fields": {
+                    "software": "72",
+                    "software_type": 1,
+                    "version": "0.67",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "putty-0.67",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "73",
+            "fields": {
+                    "software": "73",
+                    "software_type": 1,
+                    "version": "2.7",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "python 2.7-2.7",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "74",
+            "fields": {
+                    "software": "74",
+                    "software_type": 1,
+                    "version": "3.7",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "python 3-3.7",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "75",
+            "fields": {
+                    "software": "75",
+                    "software_type": 1,
+                    "version": "2017-29145",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "quarkxpress-2017-29145",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "76",
+            "fields": {
+                    "software": "76",
+                    "software_type": 1,
+                    "version": "7.7.9",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "quicktime-7.7.9",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "77",
+            "fields": {
+                    "software": "77",
+                    "software_type": 1,
+                    "version": "4.0.2",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "r-4.0.2",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "78",
+            "fields": {
+                    "software": "78",
+                    "software_type": 1,
+                    "version": "9.7.2",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "rapid miner-9.7.2",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "79",
+            "fields": {
+                    "software": "79",
+                    "software_type": 1,
+                    "version": "1602",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "risa 3d-1602",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "80",
+            "fields": {
+                    "software": "80",
+                    "software_type": 1,
+                    "version": "5000",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "rockwell automation-5000",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "81",
+            "fields": {
+                    "software": "81",
+                    "software_type": 1,
+                    "version": "R18",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "romax-r18",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "82",
+            "fields": {
+                    "software": "82",
+                    "software_type": 1,
+                    "version": "21",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "sap-21",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "83",
+            "fields": {
+                    "software": "83",
+                    "software_type": 1,
+                    "version": "9.4",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "sas-9.4",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "84",
+            "fields": {
+                    "software": "84",
+                    "software_type": 1,
+                    "version": "10",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "simtraffic-10",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "85",
+            "fields": {
+                    "software": "85",
+                    "software_type": 1,
+                    "version": "3.5.6",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "sketchup-3.5.6",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "86",
+            "fields": {
+                    "software": "86",
+                    "software_type": 1,
+                    "version": "8.5.0",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "solid cast-8.5.0",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "87",
+            "fields": {
+                    "software": "87",
+                    "software_type": 1,
+                    "version": "2019 SP2",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "solidcam-2019 sp2",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "88",
+            "fields": {
+                    "software": "88",
+                    "software_type": 1,
+                    "version": "2020 SP4",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "solidworks-2020 sp4",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "89",
+            "fields": {
+                    "software": "89",
+                    "software_type": 1,
+                    "version": "25",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "spss-25",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "90",
+            "fields": {
+                    "software": "90",
+                    "software_type": 1,
+                    "version": "Current",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "stk-current",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "91",
+            "fields": {
+                    "software": "91",
+                    "software_type": 1,
+                    "version": "3.5",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "structurepoint-3.5",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "92",
+            "fields": {
+                    "software": "92",
+                    "software_type": 1,
+                    "version": "Current",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "teamviewer-current",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "93",
+            "fields": {
+                    "software": "93",
+                    "software_type": 1,
+                    "version": "2.12.22",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "tex-2.12.22",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "94",
+            "fields": {
+                    "software": "94",
+                    "software_type": 1,
+                    "version": "1.14.0",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "tortoisesvn-1.14.0",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "95",
+            "fields": {
+                    "software": "95",
+                    "software_type": 1,
+                    "version": "7",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "transcad-7.0",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "96",
+            "fields": {
+                    "software": "96",
+                    "software_type": 1,
+                    "version": "11.00-07",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "vissim-11.00-07",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "97",
+            "fields": {
+                    "software": "97",
+                    "software_type": 1,
+                    "version": "2.2.5.1",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "vlc player-2.2.5.1",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "98",
+            "fields": {
+                    "software": "98",
+                    "software_type": 1,
+                    "version": "6.7.0",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "vmware-6.7.0",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "99",
+            "fields": {
+                    "software": "99",
+                    "software_type": 1,
+                    "version": "15.0.0",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "vmwareworkstation-15.0.0",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "100",
+            "fields": {
+                    "software": "100",
+                    "software_type": 1,
+                    "version": "6",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "vpn-6.0",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "101",
+            "fields": {
+                    "software": "101",
+                    "software_type": 1,
+                    "version": "6",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "vpnpulsesecure-6.0",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "102",
+            "fields": {
+                    "software": "102",
+                    "software_type": 1,
+                    "version": "3.2.0",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "wamp-3.2.0",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "103",
+            "fields": {
+                    "software": "103",
+                    "software_type": 1,
+                    "version": "Current",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "windows defender atp-current",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
+    },
+    {
+            "model": "cae_home.SoftwareDetail",
+            "pk": "104",
+            "fields": {
+                    "software": "104",
+                    "software_type": 1,
+                    "version": "9",
+                    "expiration": null,
+                    "is_active" : true,
+                    "slug": "working model 2d-9",
+                    "date_created": "2020-01-01T08:00:00.000Z",
+                    "date_modified": "2020-01-01T08:00:00.000Z"
+            }
     }
 ]
