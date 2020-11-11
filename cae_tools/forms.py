@@ -195,3 +195,15 @@ class CustomFieldExampleForm_Select2(forms.Form):
         choices=CHOICES,
         widget=cae_home_forms.Select2MultipleWidget,
     )
+
+
+class CustomFieldExampleForm_Signature(forms.Form):
+    """
+    An example form, used in the css examples page.
+    Should not actually submit any data.
+
+    Has signature-related custom-made form fields, provided by this workspace project.
+    """
+    reference_char_field = forms.CharField()
+    reference_text_field = forms.CharField(widget=forms.Textarea)
+    signature = forms.CharField(widget=cae_home_forms.SignatureWidget)

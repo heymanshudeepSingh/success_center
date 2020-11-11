@@ -83,6 +83,7 @@ def css_forms_default_fields(request):
         'misc_form': misc_form,
     })
 
+
 def css_forms_custom_fields(request):
     """
     Displays examples of custom HTML/CSS layout for various custom "form field" elements.
@@ -92,6 +93,7 @@ def css_forms_custom_fields(request):
     select_buttons_form = forms.CustomFieldExampleForm_SelectButtons()
     select_buttons_side_form = forms.CustomFieldExampleForm_SelectButtonsSide()
     select2_form = forms.CustomFieldExampleForm_Select2()
+    signature_form = forms.CustomFieldExampleForm_Signature()
 
     # Render template to user.
     return TemplateResponse(request, 'cae_tools/css_examples/forms/custom_fields.html', {
@@ -99,6 +101,7 @@ def css_forms_custom_fields(request):
         'select_buttons_form': select_buttons_form,
         'select_buttons_side_form': select_buttons_side_form,
         'select2_form': select2_form,
+        'signature_form': signature_form,
     })
 
 
