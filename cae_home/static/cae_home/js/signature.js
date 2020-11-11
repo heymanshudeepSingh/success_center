@@ -40,7 +40,7 @@ function createSignatureFormWidget(signature_element) {
     var signature_data = $(signature_element).attr('value');
 
     // Verify field error exists.
-    if (!($(widget_field_error).is('div') && $(widget_field_error).attr('class', 'alert error'))) {
+    if ( ! ( ($(widget_field_error).is('div')) && ($(widget_field_error).attr('class') == 'alert error') ) ) {
         widget_field_error = null;
     }
 
