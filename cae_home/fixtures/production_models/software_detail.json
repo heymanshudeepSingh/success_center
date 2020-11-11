@@ -50,7 +50,7 @@
                     "version": "11.0.01",
                     "expiration": null,
                     "is_active" : true,
-                    "slug": "adobe acrobat-11.0.01",
+                    "slug": "adobe-acrobat-11.0.01",
                     "date_created": "2020-01-01T08:00:00.000Z",
                     "date_modified": "2020-01-01T08:00:00.000Z"
             }
@@ -64,7 +64,7 @@
                     "version": "CC",
                     "expiration": null,
                     "is_active" : true,
-                    "slug": "adobe cc-cc",
+                    "slug": "adobe-cc-cc",
                     "date_created": "2020-01-01T08:00:00.000Z",
                     "date_modified": "2020-01-01T08:00:00.000Z"
             }
@@ -106,7 +106,7 @@
                     "version": "2019 R2",
                     "expiration": null,
                     "is_active" : true,
-                    "slug": "ansys-2019 r2",
+                    "slug": "ansys-2019-r2",
                     "date_created": "2020-01-01T08:00:00.000Z",
                     "date_modified": "2020-01-01T08:00:00.000Z"
             }
@@ -162,7 +162,7 @@
                     "version": "081107427en",
                     "expiration": null,
                     "is_active" : true,
-                    "slug": "bentley geopak civil engineering suite-081107427en",
+                    "slug": "bentley-geopak-civil-engineering-suite-081107427en",
                     "date_created": "2020-01-01T08:00:00.000Z",
                     "date_modified": "2020-01-01T08:00:00.000Z"
             }
@@ -176,7 +176,7 @@
                     "version": "lbs09000302en",
                     "expiration": null,
                     "is_active" : true,
-                    "slug": "bentley leap bridge-lbs09000302en",
+                    "slug": "bentley-leap-bridge-lbs09000302en",
                     "date_created": "2020-01-01T08:00:00.000Z",
                     "date_modified": "2020-01-01T08:00:00.000Z"
             }
@@ -190,7 +190,7 @@
                     "version": "81107443",
                     "expiration": null,
                     "is_active" : true,
-                    "slug": "bentley microstation-081107443",
+                    "slug": "bentley-microstation-081107443",
                     "date_created": "2020-01-01T08:00:00.000Z",
                     "date_modified": "2020-01-01T08:00:00.000Z"
             }
@@ -204,7 +204,7 @@
                     "version": "20070635en",
                     "expiration": null,
                     "is_active" : true,
-                    "slug": "bentley staad.pro-20070635en",
+                    "slug": "bentley-staadpro-20070635en",
                     "date_created": "2020-01-01T08:00:00.000Z",
                     "date_modified": "2020-01-01T08:00:00.000Z"
             }
@@ -288,7 +288,7 @@
                     "version": "2.01",
                     "expiration": null,
                     "is_active" : true,
-                    "slug": "cnc workshop-2.01",
+                    "slug": "cnc-workshop-2.01",
                     "date_created": "2020-01-01T08:00:00.000Z",
                     "date_modified": "2020-01-01T08:00:00.000Z"
             }
@@ -400,7 +400,7 @@
                     "version": "Latest",
                     "expiration": null,
                     "is_active" : true,
-                    "slug": "final cut pro-latest",
+                    "slug": "final-cut-pro-latest",
                     "date_created": "2020-01-01T08:00:00.000Z",
                     "date_modified": "2020-01-01T08:00:00.000Z"
             }
@@ -498,7 +498,7 @@
                     "version": "Current",
                     "expiration": null,
                     "is_active" : true,
-                    "slug": "hp sender and receiver-current",
+                    "slug": "hp-sender-and-receiver-current",
                     "date_created": "2020-01-01T08:00:00.000Z",
                     "date_modified": "2020-01-01T08:00:00.000Z"
             }
@@ -509,10 +509,10 @@
             "fields": {
                     "software": "37",
                     "software_type": 1,
-                    "version": "Build 292",
+                    "version": "Build 292",
                     "expiration": null,
                     "is_active" : true,
-                    "slug": "htmlkit-build 292",
+                    "slug": "htmlkit-build-292",
                     "date_created": "2020-01-01T08:00:00.000Z",
                     "date_modified": "2020-01-01T08:00:00.000Z"
             }
@@ -526,7 +526,7 @@
                     "version": "9.1.2",
                     "expiration": null,
                     "is_active" : true,
-                    "slug": "ibm rational architect-9.1.2",
+                    "slug": "ibm-rational-architect-9.1.2",
                     "date_created": "2020-01-01T08:00:00.000Z",
                     "date_modified": "2020-01-01T08:00:00.000Z"
             }
@@ -540,7 +540,7 @@
                     "version": "7.1",
                     "expiration": null,
                     "is_active" : true,
-                    "slug": "ibm rational requisitepro-7.1",
+                    "slug": "ibm-rational-requisitepro-7.1",
                     "date_created": "2020-01-01T08:00:00.000Z",
                     "date_modified": "2020-01-01T08:00:00.000Z"
             }
@@ -778,7 +778,7 @@
                     "version": "2019",
                     "expiration": null,
                     "is_active" : true,
-                    "slug": "microsoft office-2019",
+                    "slug": "microsoft-office-2019",
                     "date_created": "2020-01-01T08:00:00.000Z",
                     "date_modified": "2020-01-01T08:00:00.000Z"
             }
@@ -792,7 +792,7 @@
                     "version": "2019",
                     "expiration": null,
                     "is_active" : true,
-                    "slug": "microsoft office mac-2019",
+                    "slug": "microsoft-office-mac-2019",
                     "date_created": "2020-01-01T08:00:00.000Z",
                     "date_modified": "2020-01-01T08:00:00.000Z"
             }
@@ -806,7 +806,7 @@
                     "version": "2016",
                     "expiration": null,
                     "is_active" : true,
-                    "slug": "microsoft sql server-2016",
+                    "slug": "microsoft-sql-server-2016",
                     "date_created": "2020-01-01T08:00:00.000Z",
                     "date_modified": "2020-01-01T08:00:00.000Z"
             }
@@ -820,7 +820,7 @@
                     "version": "2013",
                     "expiration": null,
                     "is_active" : true,
-                    "slug": "microsoft visual studio-2013",
+                    "slug": "microsoft-visual-studio-2013",
                     "date_created": "2020-01-01T08:00:00.000Z",
                     "date_modified": "2020-01-01T08:00:00.000Z"
             }
@@ -904,7 +904,7 @@
                     "version": "Current",
                     "expiration": null,
                     "is_active" : true,
-                    "slug": "notepad++-current",
+                    "slug": "notepadplusplus-current",
                     "date_created": "2020-01-01T08:00:00.000Z",
                     "date_modified": "2020-01-01T08:00:00.000Z"
             }
@@ -1016,7 +1016,7 @@
                     "version": "2.7",
                     "expiration": null,
                     "is_active" : true,
-                    "slug": "python 2.7-2.7",
+                    "slug": "python-2.7-2.7",
                     "date_created": "2020-01-01T08:00:00.000Z",
                     "date_modified": "2020-01-01T08:00:00.000Z"
             }
@@ -1030,7 +1030,7 @@
                     "version": "3.7",
                     "expiration": null,
                     "is_active" : true,
-                    "slug": "python 3-3.7",
+                    "slug": "python-3-3.7",
                     "date_created": "2020-01-01T08:00:00.000Z",
                     "date_modified": "2020-01-01T08:00:00.000Z"
             }
@@ -1086,7 +1086,7 @@
                     "version": "9.7.2",
                     "expiration": null,
                     "is_active" : true,
-                    "slug": "rapid miner-9.7.2",
+                    "slug": "rapid-miner-9.7.2",
                     "date_created": "2020-01-01T08:00:00.000Z",
                     "date_modified": "2020-01-01T08:00:00.000Z"
             }
@@ -1100,7 +1100,7 @@
                     "version": "1602",
                     "expiration": null,
                     "is_active" : true,
-                    "slug": "risa 3d-1602",
+                    "slug": "risa-3d-1602",
                     "date_created": "2020-01-01T08:00:00.000Z",
                     "date_modified": "2020-01-01T08:00:00.000Z"
             }
@@ -1114,7 +1114,7 @@
                     "version": "5000",
                     "expiration": null,
                     "is_active" : true,
-                    "slug": "rockwell automation-5000",
+                    "slug": "rockwell-automation-5000",
                     "date_created": "2020-01-01T08:00:00.000Z",
                     "date_modified": "2020-01-01T08:00:00.000Z"
             }
@@ -1198,7 +1198,7 @@
                     "version": "8.5.0",
                     "expiration": null,
                     "is_active" : true,
-                    "slug": "solid cast-8.5.0",
+                    "slug": "solid-cast-8.5.0",
                     "date_created": "2020-01-01T08:00:00.000Z",
                     "date_modified": "2020-01-01T08:00:00.000Z"
             }
@@ -1212,7 +1212,7 @@
                     "version": "2019 SP2",
                     "expiration": null,
                     "is_active" : true,
-                    "slug": "solidcam-2019 sp2",
+                    "slug": "solidcam-2019-sp2",
                     "date_created": "2020-01-01T08:00:00.000Z",
                     "date_modified": "2020-01-01T08:00:00.000Z"
             }
@@ -1226,7 +1226,7 @@
                     "version": "2020 SP4",
                     "expiration": null,
                     "is_active" : true,
-                    "slug": "solidworks-2020 sp4",
+                    "slug": "solidworks-2020-sp4",
                     "date_created": "2020-01-01T08:00:00.000Z",
                     "date_modified": "2020-01-01T08:00:00.000Z"
             }
@@ -1352,7 +1352,7 @@
                     "version": "2.2.5.1",
                     "expiration": null,
                     "is_active" : true,
-                    "slug": "vlc player-2.2.5.1",
+                    "slug": "vlc-player-2.2.5.1",
                     "date_created": "2020-01-01T08:00:00.000Z",
                     "date_modified": "2020-01-01T08:00:00.000Z"
             }
@@ -1436,7 +1436,7 @@
                     "version": "Current",
                     "expiration": null,
                     "is_active" : true,
-                    "slug": "windows defender atp-current",
+                    "slug": "windows-defender-atp-current",
                     "date_created": "2020-01-01T08:00:00.000Z",
                     "date_modified": "2020-01-01T08:00:00.000Z"
             }
@@ -1450,7 +1450,7 @@
                     "version": "9",
                     "expiration": null,
                     "is_active" : true,
-                    "slug": "working model 2d-9",
+                    "slug": "working-model-2d-9",
                     "date_created": "2020-01-01T08:00:00.000Z",
                     "date_modified": "2020-01-01T08:00:00.000Z"
             }

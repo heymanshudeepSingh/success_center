@@ -34,7 +34,7 @@
                 "pk": "4",
                 "fields": {
                         "name": "Adobe Acrobat",
-                        "slug": "adobe acrobat",
+                        "slug": "adobe-acrobat",
                         "date_created": "2020-01-01T08:00:00.000Z",
                         "date_modified": "2020-01-01T08:00:00.000Z"
                 }
@@ -44,7 +44,7 @@
                 "pk": "5",
                 "fields": {
                         "name": "Adobe CC",
-                        "slug": "adobe cc",
+                        "slug": "adobe-cc",
                         "date_created": "2020-01-01T08:00:00.000Z",
                         "date_modified": "2020-01-01T08:00:00.000Z"
                 }
@@ -114,7 +114,7 @@
                 "pk": "12",
                 "fields": {
                         "name": "Bentley GEOPAK Civil Engineering Suite",
-                        "slug": "bentley geopak civil engineering suite",
+                        "slug": "bentley-geopak-civil-engineering-suite",
                         "date_created": "2020-01-01T08:00:00.000Z",
                         "date_modified": "2020-01-01T08:00:00.000Z"
                 }
@@ -124,7 +124,7 @@
                 "pk": "13",
                 "fields": {
                         "name": "Bentley Leap Bridge",
-                        "slug": "bentley leap bridge",
+                        "slug": "bentley-leap-bridge",
                         "date_created": "2020-01-01T08:00:00.000Z",
                         "date_modified": "2020-01-01T08:00:00.000Z"
                 }
@@ -134,7 +134,7 @@
                 "pk": "14",
                 "fields": {
                         "name": "Bentley Microstation",
-                        "slug": "bentley microstation",
+                        "slug": "bentley-microstation",
                         "date_created": "2020-01-01T08:00:00.000Z",
                         "date_modified": "2020-01-01T08:00:00.000Z"
                 }
@@ -144,7 +144,7 @@
                 "pk": "15",
                 "fields": {
                         "name": "Bentley STAAD.Pro",
-                        "slug": "bentley staad.pro",
+                        "slug": "bentley-staadpro",
                         "date_created": "2020-01-01T08:00:00.000Z",
                         "date_modified": "2020-01-01T08:00:00.000Z"
                 }
@@ -204,7 +204,7 @@
                 "pk": "21",
                 "fields": {
                         "name": "CNC Workshop",
-                        "slug": "cnc workshop",
+                        "slug": "cnc-workshop",
                         "date_created": "2020-01-01T08:00:00.000Z",
                         "date_modified": "2020-01-01T08:00:00.000Z"
                 }
@@ -284,7 +284,7 @@
                 "pk": "29",
                 "fields": {
                         "name": "Final Cut Pro",
-                        "slug": "final cut pro",
+                        "slug": "final-cut-pro",
                         "date_created": "2020-01-01T08:00:00.000Z",
                         "date_modified": "2020-01-01T08:00:00.000Z"
                 }
@@ -354,7 +354,7 @@
                 "pk": "36",
                 "fields": {
                         "name": "HP Sender and Receiver",
-                        "slug": "hp sender and receiver",
+                        "slug": "hp-sender-and-receiver",
                         "date_created": "2020-01-01T08:00:00.000Z",
                         "date_modified": "2020-01-01T08:00:00.000Z"
                 }
@@ -384,7 +384,7 @@
                 "pk": "39",
                 "fields": {
                         "name": "IBM Rational RequisitePro",
-                        "slug": "ibm rational requisitepro",
+                        "slug": "ibm-rational-requisitepro",
                         "date_created": "2020-01-01T08:00:00.000Z",
                         "date_modified": "2020-01-01T08:00:00.000Z"
                 }
@@ -554,7 +554,7 @@
                 "pk": "56",
                 "fields": {
                         "name": "Microsoft Office",
-                        "slug": "microsoft office",
+                        "slug": "microsoft-office",
                         "date_created": "2020-01-01T08:00:00.000Z",
                         "date_modified": "2020-01-01T08:00:00.000Z"
                 }
@@ -564,7 +564,7 @@
                 "pk": "57",
                 "fields": {
                         "name": "Microsoft Office Mac",
-                        "slug": "microsoft office mac",
+                        "slug": "microsoft-office-mac",
                         "date_created": "2020-01-01T08:00:00.000Z",
                         "date_modified": "2020-01-01T08:00:00.000Z"
                 }
@@ -574,7 +574,7 @@
                 "pk": "58",
                 "fields": {
                         "name": "Microsoft SQL Server",
-                        "slug": "microsoft sql server",
+                        "slug": "microsoft-sql-server",
                         "date_created": "2020-01-01T08:00:00.000Z",
                         "date_modified": "2020-01-01T08:00:00.000Z"
                 }
@@ -584,7 +584,7 @@
                 "pk": "59",
                 "fields": {
                         "name": "Microsoft Visual Studio",
-                        "slug": "microsoft visual studio",
+                        "slug": "microsoft-visual-studio",
                         "date_created": "2020-01-01T08:00:00.000Z",
                         "date_modified": "2020-01-01T08:00:00.000Z"
                 }
@@ -644,7 +644,7 @@
                 "pk": "65",
                 "fields": {
                         "name": "Notepad++",
-                        "slug": "notepad++",
+                        "slug": "notepadplusplus",
                         "date_created": "2020-01-01T08:00:00.000Z",
                         "date_modified": "2020-01-01T08:00:00.000Z"
                 }
@@ -724,7 +724,7 @@
                 "pk": "73",
                 "fields": {
                         "name": "Python 2.7",
-                        "slug": "python 2.7",
+                        "slug": "python-27",
                         "date_created": "2020-01-01T08:00:00.000Z",
                         "date_modified": "2020-01-01T08:00:00.000Z"
                 }
@@ -734,7 +734,7 @@
                 "pk": "74",
                 "fields": {
                         "name": "Python 3",
-                        "slug": "python 3",
+                        "slug": "python-3",
                         "date_created": "2020-01-01T08:00:00.000Z",
                         "date_modified": "2020-01-01T08:00:00.000Z"
                 }
@@ -774,7 +774,7 @@
                 "pk": "78",
                 "fields": {
                         "name": "Rapid Miner",
-                        "slug": "rapid miner",
+                        "slug": "rapid-miner",
                         "date_created": "2020-01-01T08:00:00.000Z",
                         "date_modified": "2020-01-01T08:00:00.000Z"
                 }
@@ -784,7 +784,7 @@
                 "pk": "79",
                 "fields": {
                         "name": "Risa 3D",
-                        "slug": "risa 3d",
+                        "slug": "risa-3d",
                         "date_created": "2020-01-01T08:00:00.000Z",
                         "date_modified": "2020-01-01T08:00:00.000Z"
                 }
@@ -794,7 +794,7 @@
                 "pk": "80",
                 "fields": {
                         "name": "Rockwell Automation",
-                        "slug": "rockwell automation",
+                        "slug": "rockwell-automation",
                         "date_created": "2020-01-01T08:00:00.000Z",
                         "date_modified": "2020-01-01T08:00:00.000Z"
                 }
@@ -854,7 +854,7 @@
                 "pk": "86",
                 "fields": {
                         "name": "Solid Cast",
-                        "slug": "solid cast",
+                        "slug": "solid-cast",
                         "date_created": "2020-01-01T08:00:00.000Z",
                         "date_modified": "2020-01-01T08:00:00.000Z"
                 }
@@ -964,7 +964,7 @@
                 "pk": "97",
                 "fields": {
                         "name": "VLC Player",
-                        "slug": "vlc player",
+                        "slug": "vlc-player",
                         "date_created": "2020-01-01T08:00:00.000Z",
                         "date_modified": "2020-01-01T08:00:00.000Z"
                 }
@@ -1024,7 +1024,7 @@
                 "pk": "103",
                 "fields": {
                         "name": "Windows Defender ATP",
-                        "slug": "windows defender atp",
+                        "slug": "windows-defender-atp",
                         "date_created": "2020-01-01T08:00:00.000Z",
                         "date_modified": "2020-01-01T08:00:00.000Z"
                 }
@@ -1034,7 +1034,7 @@
                 "pk": "104",
                 "fields": {
                         "name": "Working Model 2D",
-                        "slug": "working model 2d",
+                        "slug": "working-model-2d",
                         "date_created": "2020-01-01T08:00:00.000Z",
                         "date_modified": "2020-01-01T08:00:00.000Z"
                 }
