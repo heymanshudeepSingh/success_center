@@ -109,6 +109,23 @@ class Select2MultipleWidget(forms.SelectMultiple):
         attrs.setdefault('multiple', 'multiple')
         return attrs
 
+
+class SignatureWidget(forms.TextInput):
+    """
+    Widget for signature input.
+
+    Note:
+        * This element should be a "TextField" when used in a model.
+        * This element should be a "CharField" when used in a form.
+    """
+    def build_attrs(self, base_attrs, extra_attrs=None):
+        """
+        Set html attribute values.
+        """
+        attrs = super().build_attrs(base_attrs, extra_attrs=extra_attrs)
+        attrs.setdefault('class', 'form-widget-signature-field')
+        return attrs
+
 #endregion Custom Widgets
 
 

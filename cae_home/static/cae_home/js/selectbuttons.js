@@ -7,7 +7,7 @@
  *  Create function with JQuery-esque syntax.
  *  IE: Call with either:
  *      $(element).selectButtons()
-  *      $(element).selectButtonsSide()
+ *      $(element).selectButtonsSide()
  */
 (function( $ ) {
 
@@ -136,7 +136,7 @@ function toggleSelectbutton(selected_button) {
  * Detects and initializs html emements with the selectbuttons class.
  */
 $(document).ready(function() {
-
+    // Generate form widgets on page load.
     $('.form-widget-select-buttons').selectButtons();
     $('.form-widget-select-buttons-side').selectButtonsSide();
 });

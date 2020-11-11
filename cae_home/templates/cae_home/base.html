@@ -67,6 +67,7 @@
         <script src="https://cdn.jsdelivr.net/npm/flatpickr" defer></script>
         <script src="{% static 'cae_home/js/select2.js' %}"></script>
         <script src="{% static 'cae_home/js/selectbuttons.js' %}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/signature_pad/1.5.3/signature_pad.min.js"></script>
 
         <script>
           var user_site_option_desktop_font_size = '{{ desktop_font_size }}';
@@ -151,6 +152,7 @@
           <script src="{% static 'cae_home/js/overlay_modal.js' %}"></script>
           <script src="{% static 'cae_home/js/tabbed_panel.js' %}"></script>
           <script src="{% static 'cae_home/js/flat_picker_widgets.js' %}"></script>
+          <script src="{% static 'cae_home/js/signature.js' %}"></script>
         {% else %}
           <!-- For production, we serve a single file of our merged JS. -->
           <script src="{% static 'cae_home/js/dist/cae_home.js' %}"></script>

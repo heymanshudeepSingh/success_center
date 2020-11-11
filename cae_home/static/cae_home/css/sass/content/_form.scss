@@ -157,6 +157,14 @@
             @include align-items(center);
         }
     }
+
+    .signature-widget {
+        width: 100%;
+    }
+
+    .signature-pad {
+        margin-top: 5px;
+    }
 }
 
 //===================================//
@@ -214,6 +222,17 @@
             text-align: center;
         }
     }
+
+    .signature-pad {
+
+        @each $theme, $theme-dict in $theme-colors {
+        .theme-#{$theme} & {
+
+            penColor: theme-text($theme, 'text');
+
+        }}
+
+    }
 }
 
 //===================================//
@@ -239,6 +258,18 @@
             .select-item.selected {
                 color: theme-status($theme, 'primary', 'text');
             }
+
+        }}
+
+    }
+
+    .signature-pad {
+
+        @each $theme, $theme-dict in $theme-colors {
+        .theme-#{$theme} & {
+
+            background-color: theme-background($theme, 'background');
+            border: 1px solid theme-background($theme, 'border');
 
         }}
 
