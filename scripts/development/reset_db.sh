@@ -46,20 +46,28 @@ function main () {
     echo ""
     echo ""
 
-    # Create seeded data. Attempts to used passed model_count arg.
-    echo -e "${color_blue}Seeding data...${color_reset}"
-
-    model_count="$1"
-    re='^[0-9]+$'
-    if ! [[ $model_count =~ $re ]]
+    # Check for debug file.
+    if [[ -f "../DEBUG" ]]
     then
-        python ../manage.py seed $model_count --traceback
-    else
-        python ../manage.py seed --traceback
-    fi
-    echo ""
+        # Development environment. Create seeded data. Attempts to used passed model_count arg.
+        echo -e "${color_blue}Seeding data...${color_reset}"
 
-    echo -e "${color_green}Database reset and reseeded. Terminating script.${color_reset}"
+        model_count="$1"
+        re='^[0-9]+$'
+        if ! [[ $model_count =~ $re ]]
+        then
+            python ../manage.py seed $model_count --traceback
+        else
+            python ../manage.py seed --traceback
+        fi
+        echo ""
+        echo -e "${color_green}Database reset and reseeded. Terminating script.${color_reset}"
+    else
+        # Production environment. Skip seeds.
+        echo -e "${color_green}Database reset. Terminating script.${color_reset}"
+    fi
+
+
 }
 
 
