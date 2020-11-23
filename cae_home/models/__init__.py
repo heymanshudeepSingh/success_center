@@ -22,6 +22,6 @@ from .user import SiteTheme
 from .user import WmuUserMajorRelationship
 
 # Models related to the CAE Center.
-from .cae import Asset
+# from .cae import Asset
 from .cae import Software
 from .cae import SoftwareDetail

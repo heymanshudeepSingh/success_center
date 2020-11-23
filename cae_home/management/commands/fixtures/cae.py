@@ -12,7 +12,7 @@ def import_model_fixtures(style):
     Calls individual fixture methods.
     """
     stdout.write(style.HTTP_NOT_MODIFIED('IMPORTING FIXTURES for User Model Group.\n'))
-    create_assets(style)
+    # create_assets(style)
     create_software(style)
     create_software_detail(style)
 
