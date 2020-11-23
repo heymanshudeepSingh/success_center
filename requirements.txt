@@ -63,6 +63,8 @@ selenium==3.141.0
  ##
 # CICO requirement? Look into.
 django-webpack-loader
+# Dropoff requirement. Should be replaced by settings env.py file.
+python-decouple
 
 
 ###
