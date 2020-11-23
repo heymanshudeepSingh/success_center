@@ -1,7 +1,17 @@
-# Run via "pip install -r requirements.txt" while in the base project directory.
+###
+ # Specifies Python packages (and package versions) to install in order to run project.
+ #
+ # Execute via "pip install -r requirements.txt" while in the base project directory.
+ ##
 
 
-# -- Python Libraries --
+# Optional package. Hopefully a fix for "error" that occurs on newer python installations during install script.
+wheel
+
+
+###
+ # Core Python Packages
+ ##
 # Core Django framework.
 Django==3.0.5
 # Support for websocket connections.
@@ -22,19 +32,23 @@ Faker==4.0.3
 # Read .xls and .xlsx Excel files (Deprecated, but required for .xls)
 xlrd==1.2.0
 # Pdf creation.
-fpdf2
+fpdf2==2.0.6
 # Printer connection.
 pycups==1.9.74
 # Redmine communication.
-python-redmine
+python-redmine==2.3.0
 
 
-# -- Packages for Testing --
+###
+ # Packages for Testing
+ ##
 # Testing with an actual browser, to test JavaScript.
 selenium==3.141.0
 
 
-# -- Optional Imports --
+###
+ # Optional Imports
+ ##
 # For connecting to mysql. Not necessary if using sqlite during development.
 #mysqlclient==1.4.6
 # For ldap connection. Only necessary when CaeAuthBackend is turned on.
@@ -43,11 +57,18 @@ selenium==3.141.0
 #uWSGI==2.0.18
 
 
-# -- Temporary Imports --
+###
+ # Temporary Imports
+ # Remove at a later date.
+ ##
+# CICO requirement? Look into.
 django-webpack-loader
 
 
-# -- Pip Freeze: $ pip freeze -r requirements.txt --
+###
+ # Pip Freeze:
+ #      pip freeze -r requirements.txt
+ ##
 aioredis==1.3.1
 asgiref==3.2.7
 async-timeout==3.0.1
