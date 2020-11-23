@@ -4,6 +4,7 @@ Tests for CAE Home CAE app Models.
 
 # System Imports.
 from django.utils import timezone
+from django.utils.text import slugify
 
 # User Imports.
 from .. import models
@@ -15,9 +16,10 @@ class SoftwareModelTests(IntegrationTestCase):
     Tests to ensure valid Software model creation/logic.
     """
     def setUp(self):
+        self.software_name = 'Test Software'
         self.test_software = models.Software.objects.create(
-            name='Test Software',
-            slug='test-software',
+            name=self.software_name,
+            slug=slugify(self.software_name),
         )
 
     def test_model_creation(self):
@@ -42,16 +44,19 @@ class SoftwareDetailModelTests(IntegrationTestCase):
         cls.expiration=timezone.datetime.strptime('2020-01-01', '%Y-%m-%d').date()
 
     def setUp(self):
+        self.software_version = 5
         self.test_software_detail = models.SoftwareDetail.objects.create(
             software=self.software,
-            version=5,
+            version=self.software_version,
             expiration=self.expiration,
+            slug='{0}-{1}'.format(slugify(self.software.name), self.software_version)
         )
 
     def test_model_creation(self):
         self.assertEqual(self.test_software_detail.software, self.software)
-        self.assertEqual(self.test_software_detail.version, '5')
+        self.assertEqual(self.test_software_detail.version, str(self.software_version))
         self.assertEqual(self.test_software_detail.expiration, self.expiration)
+        self.assertEqual(self.test_software_detail.slug, 'dummy-software-5')
 
     def test_string_representation(self):
         self.assertEqual(str(self.test_software_detail), 'Dummy Software - 5')
