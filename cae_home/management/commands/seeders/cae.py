@@ -20,7 +20,7 @@ def generate_model_seeds(style, model_count):
     Calls individual seeder methods.
     """
     stdout.write(style.HTTP_NOT_MODIFIED('SEEDING CAE Model Group.\n'))
-    # create_assets(style, model_count)
+    create_assets(style, model_count)
     create_software(style, model_count)
     create_software_detail(style, model_count)
 
