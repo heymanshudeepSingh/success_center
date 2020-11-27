@@ -171,3 +171,10 @@ REST_FRAMEWORK = {
 }
 
 #endregion Third Party Library Settings
+
+
+REDMINE_URL=''
+REDMINE_USER=''
+REDMINE_PASSWORD=''
+
+CUPS_SERVER=''
