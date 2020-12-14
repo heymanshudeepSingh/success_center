@@ -414,6 +414,12 @@
 
     }}
 
+    // Temporary, quick implementaion. Will likely look bad on all dark themes.
+    p.highlight.code, .p.highlight.code, span.highlight.code {
+        background-color: #f5fcff;
+        border: 1px solid #999999;
+    }
+
 }}
 
 //====================================================//
@@ -492,6 +498,12 @@
         }
 
     }}
+
+    // Temporary, quick implementaion. Will likely look bad on all dark themes.
+    p.highlight.code, .p.highlight.code, span.highlight.code {
+        background-color: #f5fcff;
+        border: 1px solid #999999;
+    }
 
 }}
 
