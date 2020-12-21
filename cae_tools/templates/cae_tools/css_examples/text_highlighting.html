@@ -59,4 +59,64 @@
     <p>This line has a highlight span with <span class="highlight code">Code Text</span> in it.</p>
   </article>
 
+  <article>
+    <h2>Code Sections</h2>
+    <p>
+      Workspace also has highlighting for code elements, intended to be used pretty much exclusively within workspace
+      docs. For ease of use, the following four various syntax formats are allowed, and JavaScript will update each
+      one to ultimately display identically.
+    </p>
+
+    <h3>Full</h3>
+    <div class="code-block">
+      <pre><code>
+        &lt;script&gt;
+          // Pass required template values in to JavaScript as variables.
+          window.django_middleware = &#123;
+            my_passed_var_1: "some_value",
+            my_passed_var_2: "some_value_2",
+          &#125;
+        &lt;/script&gt;
+      </code></pre>
+    </div>
+
+    <h3>No "Code"</h3>
+    <div class="code-block">
+      <pre>
+        &lt;script&gt;
+          // Pass required template values in to JavaScript as variables.
+          window.django_middleware = &#123;
+            my_passed_var_1: "some_value",
+            my_passed_var_2: "some_value_2",
+          &#125;
+        &lt;/script&gt;
+      </pre>
+    </div>
+
+    <h3>No "pre"</h3>
+    <div class="code-block">
+      <code>
+        &lt;script&gt;
+          // Pass required template values in to JavaScript as variables.
+          window.django_middleware = &#123;
+            my_passed_var_1: "some_value",
+            my_passed_var_2: "some_value_2",
+          &#125;
+        &lt;/script&gt;
+      </code>
+    </div>
+
+    <h3>None</h3>
+    <div class="code-block">
+      &lt;script&gt;
+        // Pass required template values in to JavaScript as variables.
+        window.django_middleware = &#123;
+          my_passed_var_1: "some_value",
+          my_passed_var_2: "some_value_2",
+        &#125;
+      &lt;/script&gt;
+    </div>
+
+  </article>
+
 {% endblock content %}

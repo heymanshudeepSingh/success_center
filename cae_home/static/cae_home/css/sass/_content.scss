@@ -172,6 +172,11 @@
         padding-right: 5px;
         padding-left: 5px
     }
+
+    .code-block > .highlight {
+        padding-right: 10px;
+        padding-left: 10px;
+    }
 }}
 
 //=========================//
@@ -308,25 +313,30 @@
                 color: theme-text($theme,'text');
             }
             p.highlight.secondary, .p.highlight.secondary, span.highlight.secondary {
-                color: theme-text($theme,'primary');
+                color: theme-text($theme, 'primary');
             }
             p.highlight.info, .p.highlight.info, span.highlight.info {
-                color: theme-text($theme,'text');
+                color: theme-text($theme, 'text');
             }
             p.highlight.success, .p.highlight.success, span.highlight.success {
-                color: theme-text($theme,'text');
+                color: theme-text($theme, 'text');
             }
             p.highlight.warning, .p.highlight.warning, span.highlight.warning,
             p.highlight.warn, .p.highlight.warn, span.highlight.warn {
-                color: theme-text($theme,'text');
+                color: theme-text($theme, 'text');
             }
             p.highlight.error, .p.highlight.error, span.highlight.error,
             p.highlight.danger, .p.highlight.danger, span.highlight.danger {
-                color: theme-text($theme,'primary-hover');
+                color: theme-text($theme, 'primary-hover');
             }
         }
 
     }}
+
+    // Temporary, quick implementaion. Will likely look bad on all dark themes.
+    p.highlight.code, .p.highlight.code, span.highlight.code, pre.highlight.code {
+        color: #000;
+    }
 
 }}
 
@@ -415,7 +425,7 @@
     }}
 
     // Temporary, quick implementaion. Will likely look bad on all dark themes.
-    p.highlight.code, .p.highlight.code, span.highlight.code {
+    p.highlight.code, .p.highlight.code, span.highlight.code, pre.highlight.code {
         background-color: #f5fcff;
         border: 1px solid #999999;
     }
@@ -500,9 +510,13 @@
     }}
 
     // Temporary, quick implementaion. Will likely look bad on all dark themes.
-    p.highlight.code, .p.highlight.code, span.highlight.code {
+    p.highlight.code, .p.highlight.code, span.highlight.code pre.highlight.code {
         background-color: #f5fcff;
         border: 1px solid #999999;
+    }
+
+    pre.highlight.code {
+        display: inline-block;
     }
 
 }}
