@@ -2,8 +2,6 @@
  *  General logic for the code block css/html element.
  */
 
-console.log('loaded code_block.js');
-
 
 /**
  *  Create function with JQuery-esque syntax.
@@ -16,7 +14,6 @@ console.log('loaded code_block.js');
     $.fn.code_block = function() {
 
         this.each(function() {
-            console.log(this);
             formatCodeBlockElement(this);
         });
 
@@ -34,69 +31,43 @@ console.log('loaded code_block.js');
  */
 function formatCodeBlockElement(code_container) {
 
-    console.log(' ');
-    console.log(' ');
-    console.log(' ');
-    console.log(' ');
-    console.log(' ');
-    console.log('Code Container:');
-    console.log(code_container);
-    let pre_element = null;
-    let code_element = null;
-    let direct_child = null;
+    let pre_element, code_element, inner_element_html;
 
     // Search for existing elements in code block.
     if ( $(code_container).is('pre') ) {
         // Container is "pre" element.
-        console.log('Container itself is pre element.');
         pre_element = code_container;
 
     } else if ( $(code_container).is('code') ) {
         // Container is "code" element.
         code_element = code_container;
-        console.log('Container itself is code element.');
 
     } else {
-        console.log('Container itself is not pre or code element.');
-
         // Container is not "pre" or "code" elements. Check direct child.
         if ( $(code_container).has('pre')['length'] > 0 ) {
             // Direct "pre" element found.
-            console.log('found "pre"');
             pre_element = $(code_container).children('pre')[0];
 
             // Check for inner code element.
             if ( $(pre_element).has('code')['length'] > 0 ) {
-                console.log('found "code"');
                 code_element = $(pre_element).children('code')[0];
             }
 
         } else if ( $(code_container).has('code')['length'] > 0 ) {
             // Direct "code" element found.
-            console.log('found "code"');
             code_element = $(code_container).children('code')[0];
 
         } else {
-            // Neither "pre" or "code" direct elements found.
-            console.log('Failed to find "<pre>" or "code" elements in code block.');
+            // Neither "pre" or "code" direct elements found. Do nothing for now.
+            // console.log('Failed to find "<pre>" or "code" elements in code block.');
         }
 
     }
 
 
-    console.log('pre:');
-    console.log(pre_element);
-    console.log('code:');
-    console.log(code_element);
-
-    console.log(' ');
-
-    let inner_element_html;
-
     // Handle based on found existing elements.
     if (pre_element == null && code_element == null) {
         // Neither "pre" or "code" elements were present. Create both.
-        console.log('Neither pre or code elements exist.');
 
         inner_element_html = $(code_container).html();
         $(code_container).empty();
@@ -113,7 +84,6 @@ function formatCodeBlockElement(code_container) {
 
     } else if (pre_element != null && code_element == null) {
         // Only "pre" element was found. Create "code" element.
-        console.log('Only pre elment exists.');
 
         inner_element_html = $(pre_element).html();
         $(pre_element).empty();
@@ -129,7 +99,6 @@ function formatCodeBlockElement(code_container) {
 
     } else if (pre_element == null && code_element != null) {
         // Only "code" element was found. Create "pre" element.
-        console.log('Only code element exists.');
 
         inner_element_html = $(code_element).html();
         $(code_container).empty();
@@ -150,7 +119,6 @@ function formatCodeBlockElement(code_container) {
 
     } else {
         // Both "pre" and "code" elements exist. Nothing to create.
-        console.log('Both pre and code elements exist.');
 
         // Standardize code element spacing, using "pre" element.
         resetCodeTabbing(pre_element);
@@ -166,55 +134,6 @@ function formatCodeBlockElement(code_container) {
     if (! $(pre_element).hasClass('code') ) {
         $(pre_element).addClass('code');
     }
-
-
-
-    // // Check for required "code" inner element.
-    // var inner_element = $(pre_element).children('code');
-    // console.log(inner_element);
-
-    // // We only care if inner element is not "code" element.
-    // if ( $(inner_element).length == 0 ) {
-    //     console.log('Element length is 0');
-    //     // Inner "code" element not found. Create.
-    //     var inner_element_html = $(pre_element).html();
-    //     inner_element = $('<code></code>').append('\n' + inner_element_html);
-
-
-    //     console.log('');
-    //     console.log('');
-
-    //     console.log('inner_element_html:');
-    //     console.log(inner_element_html);
-
-    //     console.log('inner_element:');
-    //     console.log(inner_element);
-
-    //     console.log('');
-    //     console.log('');
-
-
-    //     $(pre_element).empty();
-    //     $(pre_element).append(inner_element);
-    // }
-
-
-    // // Check for expected classes.
-    // if (! $(pre_element).hasClass('highlight') ) {
-    //     $(pre_element).addClass('highlight');
-    // }
-    // if (! $(pre_element).hasClass('code') ) {
-    //     $(pre_element).addClass('code');
-    // }
-
-    // var html = $(pre_element).html();
-    // var pattern = html.match(/\s*\n[\t\s]*/);
-    // console.log('pattern:');
-    // console.log(pattern);
-    // console.log('HTML:');
-    // console.log(html);
-    // $(pre_element).html(html.replace(new RegExp(pattern, "g"),'\n'));
-
 }
 
 
@@ -252,6 +171,5 @@ function htmlDecode(html_input) {
 
 
 $(document).ready(function() {
-
     $('.code-block').code_block();
 });
