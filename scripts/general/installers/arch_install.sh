@@ -47,7 +47,7 @@ function main() {
     echo -e "${color_blue}Installing sass dependencies...${color_reset}"
     npm install -g sass > /dev/null
 
-    echo -e "${color_blue}Installing sass dependencies...${color_reset}"
+    echo -e "${color_blue}Installing printer connection dependencies...${color_reset}"
     pacman -S libcups --needed --noconfirm > /dev/null
     pacman -S smbclient --needed --noconfirm > /dev/null
 
