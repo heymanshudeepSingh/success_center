@@ -18,6 +18,7 @@ from sys import stdout
 
 # User Class Imports.
 from cae_home import models
+from cae_home.models.user import check_all_group_memberships
 from cae_home.management.commands.fixtures import user as user_fixtures
 
 default_password = settings.USER_SEED_PASSWORD
@@ -169,6 +170,9 @@ def create_permission_group_users(password=default_password, with_names=True, as
     step_admin_inactive.groups.add(Group.objects.get(name='STEP Admin'))
     step_employee.groups.add(Group.objects.get(name='STEP Employee'))
     step_employee_inactive.groups.add(Group.objects.get(name='STEP Employee'))
+
+    # Set all GroupMembership models for users.
+    check_all_group_memberships()
 
     if as_dict:
         # Populate dictionaries in case calling logic wants easy access to users.

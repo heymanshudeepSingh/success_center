@@ -8,7 +8,7 @@ from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.core.management import call_command
 from django.conf import settings
-from django.db import models
+from django.db import models, transaction
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils.text import slugify
@@ -17,7 +17,7 @@ from os import devnull
 
 # User Class Imports.
 from . import models
-from .models.user import compare_user_and_wmuuser_models
+from .models.user import compare_user_and_wmuuser_models, check_user_group_membership
 
 
 @receiver(post_save, sender=models.User)
@@ -50,8 +50,16 @@ def user_model_post_save(sender, instance, created, **kwargs):
     post_save.disconnect(userintermediary_model_post_save, sender=models.UserIntermediary)
     post_save.disconnect(wmuuser_model_post_save, sender=models.WmuUser)
 
-    # Run comparison method.
+    # Run comparison method to sync AuthUser and WmuUser models.
     compare_user_and_wmuuser_models(instance.username)
+
+    # Run logic to update group membership dates.
+    # Note that we have to wait for the full transaction to complete, as per:
+    # https://stackoverflow.com/questions/1925383/issue-with-manytomany-relationships-not-updating-immediately-after-save
+    # https://stackoverflow.com/questions/950214/run-code-after-transaction-commit-in-django
+    transaction.on_commit(
+        lambda: check_user_group_membership(instance.username)
+    )
 
     # Reconnect related post_save signals.
     post_save.connect(user_model_post_save, sender=models.User)

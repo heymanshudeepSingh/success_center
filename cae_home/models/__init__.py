@@ -14,6 +14,7 @@ from .wmu import SemesterDate
 
 # Models related to user-login accounts.
 from .user import User
+from .user import GroupMembership
 from .user import UserIntermediary
 from .user import WmuUser
 from .user import Profile

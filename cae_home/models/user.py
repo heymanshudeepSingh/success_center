@@ -4,7 +4,7 @@ Definitions of "User" related Core Models.
 
 # System Imports.
 import pytz
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, Group
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.conf import settings
 from django.db import models
@@ -163,6 +163,60 @@ def compare_user_and_wmuuser_models(uid):
         # BroncoNet somehow does not have an associated (login) User model or WmuUser model.
         raise ValidationError('Could not find associated user models for BroncoNet {0}.'.format(id))
 
+
+def check_user_group_membership(uid):
+    """
+    Checks/updates membership of groups for user.
+    Intended to run on model save.
+    """
+    user = User.objects.get(username=uid)
+    user_auth_groups = user.groups.all()
+
+    # Get list of all current values in user GroupMemberships.
+    group_membership_list = GroupMembership.objects.filter(user=user, date_left=None)
+
+    # Loop through current GroupMemberships and update models.
+    found_groups = []
+    for group_membership in group_membership_list:
+        # Save group as having known membership in GroupMemberships.
+        found_groups.append(group_membership.group)
+
+        # Find groups user is no longer member of.
+        if group_membership.group not in user_auth_groups:
+            # User is no longer member. Update GroupMembership.
+            group_membership.date_left = timezone.datetime.today()
+            group_membership.save()
+
+    # Loop through current group membership and update group dates accordingly.
+    for auth_group in user_auth_groups:
+
+        # Find groups user has joined membership of.
+        if auth_group not in found_groups:
+            GroupMembership.objects.create(user=user, group=auth_group, date_joined=timezone.datetime.today())
+
+
+def check_all_group_memberships():
+    """
+    Checks/updates membership of groups for all existing users.
+    """
+    # First update for active users.
+    active_users = User.objects.filter(is_active=True)
+
+    # Loop through all active users.
+    for user in active_users:
+        check_user_group_membership(user.username)
+
+    # Now update for inactive users.
+    inactive_users = User.objects.filter(is_active=False)
+
+    # Attempt to find any open GroupMembership that reference inactive users.
+    group_membership_list = GroupMembership.objects.filter(user__in=inactive_users, date_left=None)
+
+    # End all existing GroupMemberships for inactive users.
+    for inactive_group_membership in group_membership_list:
+        inactive_group_membership.date_left = timezone.datetime.today()
+        inactive_group_membership.save()
+
 #endregion Model Functions
 
 
@@ -272,6 +326,43 @@ class User(AbstractUser):
         Used for testing.
         """
         return User.get_or_create_user('dummy_user', 'dummy@gmail.com', settings.USER_SEED_PASSWORD)
+
+
+class GroupMembership(models.Model):
+    """
+    Retains the dates in which a user was part of a given group.
+    """
+    # Relationship Keys.
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='group_membership')
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+
+    # Model fields.
+    date_joined = models.DateField(default=timezone.datetime.today)
+    date_left = models.DateField(blank=True, null=True)
+
+    # Self-setting/Non-user-editable fields.
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'Group Membership'
+        verbose_name_plural = 'Group Memberships'
+
+    def __str__(self):
+        return '{0} - {1}: {2} - {3}'.format(self.user, self.group, self.date_joined, self.date_left)
+
+    def clean(self, *args, **kwargs):
+        """
+        Custom cleaning implementation. Includes validation, setting fields, etc.
+        """
+
+    def save(self, *args, **kwargs):
+        """
+        Modify model save behavior.
+        """
+        # Save model.
+        self.full_clean()
+        super().save(*args, **kwargs)
 
 
 class UserIntermediary(models.Model):
