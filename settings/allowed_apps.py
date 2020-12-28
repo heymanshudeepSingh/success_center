@@ -256,6 +256,7 @@ ADMIN_REORDER = (
         'models': (
             'auth.Group',
             'cae_home.User',
+            'cae_home.GroupMembership',
             'cae_home.UserIntermediary',
             'cae_home.WmuUser',
             'cae_home.Profile',

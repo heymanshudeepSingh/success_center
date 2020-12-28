@@ -402,6 +402,30 @@ class UserAdmin(BaseUserAdmin):
     get_user_groups.short_description = 'User Groups'
 
 
+class GroupMembershipAdmin(admin.ModelAdmin):
+    # Fields to display in admin list view.
+    list_display = ('user', 'group', 'date_joined', 'date_left')
+    if settings.DEBUG:
+        list_display = ('id',) + list_display
+
+    # Fields to filter by in admin list view.
+    list_filter = ('user', 'group')
+
+    # Read only fields for admin detail view.
+    readonly_fields = ('id', 'date_created', 'date_modified')
+
+    # Fieldset organization for admin detail view.
+    fieldsets = (
+        (None, {
+            'fields': ('user', 'group', 'date_joined', 'date_left'),
+        }),
+        ('Advanced', {
+            'classes': ('collapse',),
+            'fields': ('id', 'date_created', 'date_modified'),
+        }),
+    )
+
+
 class UserIntermediaryAdmin(admin.ModelAdmin):
     # Fields to display in admin list view.
     list_display = ('bronco_net', 'get_winno', 'first_name', 'last_name')
@@ -921,6 +945,7 @@ class SoftwareDetailAdmin(admin.ModelAdmin):
 
 # User Model Registration.
 admin.site.register(models.User, UserAdmin)
+admin.site.register(models.GroupMembership, GroupMembershipAdmin)
 admin.site.register(models.UserIntermediary, UserIntermediaryAdmin)
 admin.site.register(models.Profile, ProfileAdmin)
 admin.site.register(models.Address, AddressAdmin)
@@ -935,6 +960,6 @@ admin.site.register(models.SemesterDate, SemesterDateAdmin)
 admin.site.register(models.WmuUser, WmuUserAdmin)
 
 # CAE Model Registration.
-#admin.site.register(models.Asset, AssetAdmin)
+admin.site.register(models.Asset, AssetAdmin)
 admin.site.register(models.Software, SoftwareAdmin)
 admin.site.register(models.SoftwareDetail, SoftwareDetailAdmin)
