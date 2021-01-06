@@ -43,16 +43,16 @@ function main() {
     # Get Python version. Should be in format of "#.#".
     while [[ ! $valid_python ]]
     do
-        echo -e "Enter Python version for Project ${color_cyan}[ 3.6, 3.7, 3.8 ]${color_reset}:"
+        echo -e "Enter Python version for Project ${color_cyan}[ 3.6, 3.7, 3.8, 3.9 ]${color_reset}:"
         read user_input
-        if [[ $user_input = "3.6" ]] || [[ $user_input = "3.7" ]] || [[ $user_input = "3.8" ]]
+        if [[ $user_input = "3.6" || $user_input = "3.7" || $user_input = "3.8" || $user_input = "3.9" ]]
         then
             echo ""
             valid_python=true
             python_version=$user_input
             echo ""
         else
-            echo "Invalid input. Please enter version, such as \"3.6\" or \"3.7\"."
+            echo "Invalid input. Please enter version, such as \"3.8\" or \"3.9\"."
             echo ""
             echo ""
         fi
@@ -76,7 +76,7 @@ function main() {
         # Arch linux (such as Manjaro).
         if [[ "$user_input" == "1" ]]
         then
-            echo -e "NOTE: This script has been tested on ${color_blue}Manjaro XFCE 18.0.4${color_reset}."
+            echo -e "NOTE: This script has been tested on ${color_blue}Manjaro (2020 updates)${color_reset}."
             echo "The script will ask for your password in a second..."
             echo ""
             echo -e "${color_blue}Installing ArchLinux package dependencies...${color_reset}"
@@ -101,10 +101,10 @@ function main() {
             echo -e "NOTE: This script has been tested on ${color_blue}Windows 10, with updates for 2019${color_reset}."
             echo -e "If you haven't already done so, please install Python Version 3.6 or higher from ${color_cyan}https://www.python.org/downloads/${color_reset}."
             echo ""
-            echo "Please also follow the link below to download ruby."
-            echo -e "   ${color_cyan}https://rubyinstaller.org/downloads/${color_reset}"
-            echo -e "Run the ruby exe installer. Once ruby is already installed, hit ${color_blue}ENTER${color_reset} to continue."
-            echo "(You may first need to restart your terminal for it to dectect that ruby is installed.)"
+            echo "Please also follow the link below to download npm."
+            echo -e "   ${color_cyan}https://www.npmjs.com/get-npm${color_reset}"
+            echo -e "Run the npm exe installer. Once npm is already installed, hit ${color_blue}ENTER${color_reset} to continue."
+            echo "(You may first need to restart your terminal for it to detect that npm is installed.)"
             echo ""
             read user_input
             gem install sass
@@ -121,7 +121,7 @@ function main() {
             echo "      (This may require additional OS packages, depending on your system.)"
             echo "   * Run the standard Django manage.py commands."
             echo "      (\"makemigrations\", \"migrate\", and optionally \"seed\", in that order.)"
-            echo "   * Install \"ruby-sass\" and then run the \"compile_css.sh\" file in the project scripts folder."
+            echo "   * Install \"npm sass\" and then run the \"compile_css.sh\" file in the project scripts folder."
             echo "   * Install selenium (integration testing) dependencies for your system."
             echo "   * Run \"python manage.py test\" to ensure that everything is working properly."
             echo ""
