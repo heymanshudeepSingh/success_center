@@ -81,15 +81,21 @@ else:
                 .format(ConsoleColors.bold_blue, ConsoleColors.reset))
 
 
-# Set custom "development mode url" variable, based on DEBUG.
+# Set custom debug variable aliases, based on DEBUG.
 # Necessary for unit testing, or else tests referring to development urls will automatically fail.
 # DEBUG may potentially have other unexpected logic set by Django, in the future.
 # Thus setting a custom equivalent here saves potential future headache.
 # This value is effectively a custom variable that's equivalent to DEBUG, but minus the extra logic Django provides.
 if DEBUG:
     DEV_URLS = True
+    DEV_MODE = True
+    DEBUG_MODE = True
+    PROD_MODE = False
 else:
     DEV_URLS = False
+    DEV_MODE = False
+    DEBUG_MODE = False
+    PROD_MODE = True
 
 #endregion Environment Values
 
@@ -97,6 +103,6 @@ else:
 #region Third Party Library Settings
 
 # django-phonenumber-field settings
-PHONENUMBER_DEFAULT_REGION = "US" # Don't require users to prefix with +1
+PHONENUMBER_DEFAULT_REGION = 'US'   # Don't require users to prefix with +1
 
 #endregion Third Party Library Settings
