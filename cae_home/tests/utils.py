@@ -181,71 +181,65 @@ class IntegrationTestCase(TestCase):
         for attr, x, y in zip(fields, urlparse(url), urlparse(expected)):
             if attr == 'path':
                 if x != y:
-                    self.fail(
-                        "{0!r} != {1!r} Path's don't match".format(url, expected))
+                    self.fail('{0!r} != {1!r} Path\'s don\'t match'.format(url, expected))
             if parse_qs and attr == 'query':
                 x, y = QueryDict(x), QueryDict(y)
             if x and y and x != y:
-                self.fail("%r != %r (%s doesn't match)" %
-                          (url, expected, attr))
+                self.fail('%r != %r (%s doesn\'t match)' % (url, expected, attr))
 
     def assertPage(self, url, get=True, data=None, expected_url=None, status=200, is_admin_form=False, secure=False):
+        """
+
+        """
         data = data or {}
         self.client.force_login(self.user)
         if get:
-            response = self.client.get(
-                url, data=data, follow=True, secure=secure)
+            response = self.client.get(url, data=data, follow=True, secure=secure)
         else:
-            response = self.client.post(
-                url, data=data, follow=True, secure=secure)
+            response = self.client.post(url, data=data, follow=True, secure=secure)
 
         if self._debug_print:
-            print('-'*80)
+            print('-' * 80)
             print(response.content)
-            print('-'*80)
+            print('-' * 80)
             print(response.content.decode('utf-8'))
-            print('-'*80)
+            print('-' * 80)
 
             context = response.context or {}
 
-            # Print form errors if available
+            # Print form errors if available.
             if is_admin_form:
                 for error in context.get('errors', []):
                     print(error)
             if 'form' in context:
-                print("Form Invalid {0!r}:".format(
+                print('Form Invalid {0!r}:'.format(
                     not context['form'].is_valid()))
                 for error in context['form'].non_field_errors():
-                    print("\t{0}".format(error))
+                    print('\t{0}'.format(error))
                 for error in context['form'].errors:
-                    print("\t{0}".format(error))
+                    print('\t{0}'.format(error))
                 print('-'*80)
 
             if 'formset' in context:
                 for form in context['formset']:
-                    print("Form(set) Errors:")
+                    print('Form(set) Errors:')
                     for error in form.non_field_errors():
-                        print("\t{0}".format(error))
+                        print('\t{0}'.format(error))
                     for error in form.errors:
-                        print("\t{0}".format(error))
+                        print('\t{0}'.format(error))
                     print('-'*80)
 
             if 'messages' in context:
-                print("Messages")
+                print('Messages')
                 for message in context['messages']:
-                    print("\t{0}".format(message))
+                    print('\t{0}'.format(message))
 
         self.assertEqual(status, response.status_code)
 
         if expected_url is not None:
-            # Check if redirect is at correct url
-            self.assertTrue(
-                response.redirect_chain,
-                "Page did not redirect!")
-            self.assertURLEqual(
-                response.redirect_chain[-1][0],
-                expected_url,
-                parse_qs=True)
+            # Check if redirect is at correct url.
+            self.assertTrue(response.redirect_chain, 'Page did not redirect!')
+            self.assertURLEqual(response.redirect_chain[-1][0], expected_url, parse_qs=True)
 
         return response
 
@@ -334,7 +328,7 @@ class LiveServerTestCase(ChannelsLiveServerTestCase):
                 sys.stderr.write(' | ERROR: See {0} on how to setup Selenium with Firefox.\n'.format(
                     'https://github.com/mozilla/geckodriver'
                 ))
-                sys.stderr.write(" |\n {0} \n\n".format('-' * 80))
+                sys.stderr.write(' |\n {0} \n\n'.format('-' * 80))
                 super().tearDownClass()
             else:
                 super().tearDownClass()
@@ -369,7 +363,7 @@ class LiveServerTestCase(ChannelsLiveServerTestCase):
                 sys.stderr.write(' | ERROR: See {0} on how to setup Selenium with Firefox.\n'.format(
                     'https://github.com/mozilla/geckodriver'
                 ))
-                sys.stderr.write(" |\n {0} \n\n".format('-' * 80))
+                sys.stderr.write(' |\n {0} \n\n'.format('-' * 80))
             else:
                 raise ValueError('Unknown browser defined in selenium settings.')
             raise
@@ -575,7 +569,7 @@ class LiveServerTestCase(ChannelsLiveServerTestCase):
                     EC.visibility_of_element_located((by, query)),
                 )
         except TimeoutException:
-            self.fail(msg or "Element not found within time limit.")
+            self.fail(msg or 'Element not found within time limit.')
 
     #endregion Wait Helper Functions
 
