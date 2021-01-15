@@ -58,7 +58,7 @@ function main() {
         fi
     done
 
-    cp ../settings/local_env/env_example.py ../settings/local_env/env.py
+    cp ../settings/local_env/env_example.py ../env.py
 
     loop=true
     windows=false
