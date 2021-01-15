@@ -17,8 +17,7 @@ env/
 node_modules/
 settings/local_env/
 temp/
-CICO.pyproj
-CICO.sln
+env.py
 package-lock.json
 
 # Do not track python cache files.

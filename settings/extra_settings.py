@@ -18,9 +18,9 @@ from settings.reusable_settings import *
 
 # Check for local environment setup.
 try:
-    from settings.local_env.env import *
+    from env import *
 except Exception:
-    debug_print('Missing or Invalid local env file. Copy the env_example.py file to env.py in settings/local_env/')
+    debug_print('Missing or Invalid local env file. Please Copy the env_example.py file from settings/local_env/')
     debug_print(sys.exc_info())
     sys.exit(1)
 
