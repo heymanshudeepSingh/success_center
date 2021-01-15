@@ -30,6 +30,7 @@ def get_dynamic_app_path(app_file_name):
     # Return properly formatted string.
     return 'apps.{0}.{1}'.format(project_folder_name, app_folder_name)
 
+
 def debug_print(*args, **kwargs):
     """
     Method to print debug statements if using essential manage.py commands.
