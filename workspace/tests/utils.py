@@ -7,7 +7,7 @@ import os
 
 # User Class Imports.
 from django.conf import settings
-from settings.reusable_settings import BASE_DIR
+from workspace.settings.reusable_settings import BASE_DIR
 
 
 def run_ldap_tests():

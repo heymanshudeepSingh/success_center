@@ -13,9 +13,9 @@ from phonenumber_field.phonenumber import PhoneNumber
 
 # User Class Imports.
 from cae_home import models
-from settings import logging as init_logging
-from settings.ldap_backends.base_auth import AbstractLDAPBackend
-from settings.ldap_backends.wmu_auth.adv_backend import AdvisingAuthBackend
+from workspace import logging as init_logging
+from workspace.ldap_backends.base_auth import AbstractLDAPBackend
+from workspace.ldap_backends.wmu_auth.adv_backend import AdvisingAuthBackend
 
 
 # Import logger.

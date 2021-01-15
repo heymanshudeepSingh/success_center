@@ -13,7 +13,7 @@ from django.urls import reverse
 
 # User Imports.
 from cae_home import forms, models
-from settings import logging as init_logging
+from workspace import logging as init_logging
 
 
 # Import logger.

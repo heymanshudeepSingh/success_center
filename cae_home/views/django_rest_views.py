@@ -8,7 +8,7 @@ from rest_framework import viewsets, permissions
 # User Imports.
 from cae_home import forms, models
 from cae_home.rest import filters, serializers
-from settings import logging as init_logging
+from workspace import logging as init_logging
 
 
 # Import logger.

@@ -12,7 +12,7 @@ from django.urls import path
 from rest_framework import routers
 
 # User Class Imports.
-from settings import reusable_settings
+from .settings import reusable_settings
 from cae_home import views
 
 

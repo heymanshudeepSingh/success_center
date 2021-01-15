@@ -13,13 +13,13 @@ import logging.config
 from logging.handlers import RotatingFileHandler, TimedRotatingFileHandler
 
 # User Class Imports.
-from settings.reusable_settings import *
+from workspace.settings.reusable_settings import *
 
 
 # Variables to help run logging.
 LOG_VERSION = 2.2
 first_logging_call = True
-log_handler_class = 'settings.logging.RotatingFileHandler'
+log_handler_class = 'workspace.logging.RotatingFileHandler'
 log_handler_file_max_bytes = 1024 * 1024  # Roughly 1 MB.
 log_handler_file_backup_count = 20
 

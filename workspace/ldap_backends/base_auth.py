@@ -16,8 +16,8 @@ from importlib import import_module
 
 # User Class Imports.
 from cae_home import models
-from settings import simple_ldap_lib
-from settings import logging as init_logging
+from workspace import simple_ldap_lib
+from workspace import logging as init_logging
 
 
 # Import logger.

@@ -12,15 +12,15 @@ import string
 from django.utils.crypto import get_random_string
 
 # User Class Imports.
-from settings import logging as init_logging
-from settings.reusable_settings import *
+from workspace import logging as init_logging
+from workspace.settings.reusable_settings import *
 
 
 # Check for local environment setup.
 try:
     from env import *
 except Exception:
-    debug_print('Missing or Invalid local env file. Please Copy the env_example.py file from settings/local_env/')
+    debug_print('Missing or Invalid local env file. Please Copy the env_example.py file from workspace/local_env/')
     debug_print(sys.exc_info())
     sys.exit(1)
 
@@ -28,7 +28,7 @@ except Exception:
 #region Secret Key Settings
 
 # Check for secret key.
-path_to_key = os.path.join(BASE_DIR, './settings/local_env/secret_key.txt')
+path_to_key = os.path.join(BASE_DIR, './workspace/local_env/secret_key.txt')
 
 try:
     # Attempt to read key.

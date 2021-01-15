@@ -3,7 +3,7 @@ Manages and auto-installs apps for project.
 """
 
 # User Class Imports.
-from settings.reusable_settings import *
+from workspace.settings.reusable_settings import *
 
 
 APP_DIR = os.path.join(BASE_DIR, 'apps')

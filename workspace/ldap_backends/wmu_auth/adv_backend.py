@@ -10,8 +10,8 @@ from django.utils.text import slugify
 
 # User Class Imports.
 from cae_home import models
-from settings import logging as init_logging
-from settings.ldap_backends.base_auth import AbstractLDAPBackend
+from workspace import logging as init_logging
+from workspace.ldap_backends.base_auth import AbstractLDAPBackend
 
 
 # Import logger.

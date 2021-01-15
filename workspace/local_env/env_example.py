@@ -12,7 +12,7 @@ To use in project, please copy file and save at "settings/local_env/env.py".
 """
 
 # User Class Imports.
-from settings.reusable_settings import *
+from workspace.settings.reusable_settings import *
 
 
 #region Site Serve Settings
@@ -129,7 +129,7 @@ ADMINS = []
 USER_SEED_PASSWORD = 'temppass2'
 
 # Log folder location
-LOGGING_DIRECTORY = os.path.join(BASE_DIR, 'settings/local_env/logs/')
+LOGGING_DIRECTORY = os.path.join(BASE_DIR, 'workspace/local_env/logs/')
 
 # # HTTPS/Security Settings. Used in production.
 # SECURE_SSL_HOST = ""

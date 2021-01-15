@@ -12,7 +12,7 @@ from django.core.handlers.exception import response_for_exception
 
 # User Class Imports.
 from cae_home import models
-from settings import logging as init_logging
+from workspace import logging as init_logging
 
 
 # Import logger.

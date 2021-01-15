@@ -16,8 +16,8 @@ from django.core.management.base import BaseCommand
 
 # User Class Imports.
 from cae_home.models import User
-from settings.ldap_backends.wmu_auth import cae_backend, wmu_backend
-from settings import extra_settings
+from workspace.ldap_backends.wmu_auth import cae_backend, wmu_backend
+from workspace.settings import extra_settings
 
 
 logger = extra_settings.logging.getLogger(__name__)

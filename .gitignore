@@ -15,7 +15,7 @@ apps/
 .vs/
 env/
 node_modules/
-settings/local_env/
+workspace/local_env/
 temp/
 env.py
 package-lock.json

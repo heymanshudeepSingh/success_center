@@ -11,9 +11,9 @@ from django.core.exceptions import ValidationError
 
 # User Class Imports.
 from cae_home import models
-from settings import logging as init_logging
-from settings.ldap_backends.base_auth import AbstractLDAPBackend
-from settings.ldap_backends.wmu_auth.wmu_backend import WmuAuthBackend
+from workspace import logging as init_logging
+from workspace.ldap_backends.base_auth import AbstractLDAPBackend
+from workspace.ldap_backends.wmu_auth.wmu_backend import WmuAuthBackend
 
 
 # Import logger.
@@ -121,7 +121,7 @@ class CaeAuthBackend(AbstractLDAPBackend):
 
         else:
             # User does not exist in CAE LDAP. Try WMU LDAP instead.
-            from settings.ldap_backends.wmu_auth import wmu_backend
+            from workspace.ldap_backends.wmu_auth import wmu_backend
             wmu_ldap = wmu_backend.WmuAuthBackend()
             return wmu_ldap.create_or_update_user_model(uid, password)
 

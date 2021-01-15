@@ -11,7 +11,7 @@ from django.template.response import TemplateResponse
 # User Imports.
 from . import cae_employee_groups, step_employee_groups
 from cae_home import forms
-from settings import logging as init_logging
+from workspace import logging as init_logging
 
 
 # Import logger.

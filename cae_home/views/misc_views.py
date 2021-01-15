@@ -17,7 +17,7 @@ from . import cae_employee_groups
 from cae_home import forms, models
 from cae_home.decorators import group_required
 from cae_home.utils import get_or_create_login_user_model, get_or_create_wmu_user_model
-from settings import logging as init_logging
+from workspace import logging as init_logging
 
 
 # Import logger.

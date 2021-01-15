@@ -6,7 +6,7 @@ These are settings that are essentially expected by Django or Third Party Librar
 """
 
 # User Imports.
-from settings.reusable_settings import *
+from workspace.settings.reusable_settings import *
 
 
 debug_print("===== Base Settings =====")
@@ -14,7 +14,7 @@ debug_print("===== Base Settings =====")
 
 # Application definition
 
-from settings.allowed_apps import (
+from workspace.settings.allowed_apps import (
     INSTALLED_APPS, INSTALLED_CAE_PROJECTS, INSTALLED_APP_DETAILS, ADMIN_REORDER, INSTALLED_APP_URL_DICT
 )
 
@@ -37,7 +37,7 @@ MIDDLEWARE = [
     'cae_home.middleware.HandleExceptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'settings.urls'
+ROOT_URLCONF = 'workspace.urls'
 
 TEMPLATES = [
     {
@@ -70,8 +70,8 @@ WEBPACK_LOADER = {
     }
 }
 
-ASGI_APPLICATION = 'settings.routing.application'
-WSGI_APPLICATION = 'settings.wsgi.application'
+ASGI_APPLICATION = 'workspace.routing.application'
+WSGI_APPLICATION = 'workspace.wsgi.application'
 
 CHANNEL_LAYERS = {
     'default': {
@@ -87,7 +87,7 @@ CHANNEL_LAYERS = {
 
 
 # Uncomment in production.
-# STATICFILES_STORAGE = 'settings.static_storage.ForgivingManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'workspace.settings.static_storage.ForgivingManifestStaticFilesStorage'
 
 
 # User Model.
@@ -129,7 +129,7 @@ USE_TZ = True
 
 # Import "extra" settings.
 # Includes things like logging and local settings.
-from settings.extra_settings import *
+from workspace.settings.extra_settings import *
 
 
 # Force additional blank line for debug printing.

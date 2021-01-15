@@ -10,7 +10,7 @@ from django.shortcuts import redirect
 from django.template.response import TemplateResponse
 
 # User Imports.
-from settings import logging as init_logging
+from workspace import logging as init_logging
 from cae_tools.utils import test_mass_email as utils_test_mass_email
 from cae_tools.utils import test_single_email as utils_test_single_email
 

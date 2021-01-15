@@ -8,7 +8,7 @@ from django.template.response import TemplateResponse
 
 # User Imports.
 from cae_home.models import User, WmuUser
-from settings import logging as init_logging
+from workspace import logging as init_logging
 
 
 # Import logger.
@@ -73,7 +73,7 @@ def get_or_create_login_user_model(request, user_id):
         else:
             # Local LDAP credentials found. Attempt connection.
             try:
-                from settings.ldap_backends.wmu_auth import cae_backend, wmu_backend
+                from workspace.ldap_backends.wmu_auth import cae_backend, wmu_backend
                 cae_ldap = cae_backend.CaeAuthBackend()
                 wmu_ldap = wmu_backend.WmuAuthBackend()
 
@@ -128,7 +128,7 @@ def get_or_create_wmu_user_model(request, user_id):
         else:
             # Local LDAP credentials found. Attempt connection.
             try:
-                from settings.ldap_backends.wmu_auth import wmu_backend
+                from workspace.ldap_backends.wmu_auth import wmu_backend
                 wmu_ldap = wmu_backend.WmuAuthBackend()
 
                 if user_id.isdigit():
