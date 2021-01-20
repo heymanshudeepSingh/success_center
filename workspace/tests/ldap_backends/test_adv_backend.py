@@ -193,17 +193,19 @@ class AdvisingAuthBackendTests(IntegrationTestCase):
 
     @unittest.skipUnless(run_ldap_tests(), 'Missing criteria for LDAP. Skipping Ldap tests.')
     def test__get_degree_level_from_program_code(self):
+        # Note, these are all known program codes, acquired from campus LDAP, as of 2019.
+
         # Test with preferred code format.
-        self.assertEqual(self.adv_backend._get_degree_level_from_program_code('A-BSE-IENJ'), 2)
-        self.assertEqual(self.adv_backend._get_degree_level_from_program_code('A-MSE-IENM'), 3)
-        self.assertEqual(self.adv_backend._get_degree_level_from_program_code('A-PHD-IEND'), 4)
+        self.assertEqual(self.adv_backend._get_degree_level_from_program_code('test_uid', 'A-BSE-IENJ'), 2)
+        self.assertEqual(self.adv_backend._get_degree_level_from_program_code('test_uid', 'A-MSE-IENM'), 3)
+        self.assertEqual(self.adv_backend._get_degree_level_from_program_code('test_uid', 'A-PHD-IEND'), 4)
 
         # Test with 2 length format.
-        self.assertEqual(self.adv_backend._get_degree_level_from_program_code('ABSEIND-IENJ'), 2)
-        self.assertEqual(self.adv_backend._get_degree_level_from_program_code('AMSEIND-IENM'), 3)
+        self.assertEqual(self.adv_backend._get_degree_level_from_program_code('test_uid', 'ABSEIND-IENJ'), 2)
+        self.assertEqual(self.adv_backend._get_degree_level_from_program_code('test_uid', 'AMSEIND-IENM'), 3)
 
         # Test with 1 length format.
-        self.assertEqual(self.adv_backend._get_degree_level_from_program_code('IENP'), 1)
-        self.assertEqual(self.adv_backend._get_degree_level_from_program_code('IENJ'), 2)
-        self.assertEqual(self.adv_backend._get_degree_level_from_program_code('IENM'), 3)
-        self.assertEqual(self.adv_backend._get_degree_level_from_program_code('IEND'), 4)
+        self.assertEqual(self.adv_backend._get_degree_level_from_program_code('test_uid', 'IENP'), 1)
+        self.assertEqual(self.adv_backend._get_degree_level_from_program_code('test_uid', 'IENJ'), 2)
+        self.assertEqual(self.adv_backend._get_degree_level_from_program_code('test_uid', 'IENM'), 3)
+        self.assertEqual(self.adv_backend._get_degree_level_from_program_code('test_uid', 'IEND'), 4)

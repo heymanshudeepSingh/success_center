@@ -88,7 +88,7 @@ class WmuAuthBackendTests(IntegrationTestCase):
         self.assertTrue(isinstance(wmu_user, models.WmuUser))
         self.assertEqual(wmu_user.bronco_net, bronco_net)
         self.assertGreater(len(wmu_user.winno), 7)
-        self.assertEqual(wmu_user.active, True)
+        self.assertEqual(wmu_user.is_active, True)
         self.assertGreater(len(wmu_user.major.all()), 0)
 
         # Now update.
@@ -131,14 +131,20 @@ class WmuAuthBackendTests(IntegrationTestCase):
             ldap_info = {
                 'wmuEnrolled': ['True'],
             }
-            self.assertEqual(self.wmu_backend._verify_user_ldap_status(ldap_info), (True, True))
+            self.assertEqual(
+                self.wmu_backend._verify_user_ldap_status(self.test_ceas_prog_account, ldap_info),
+                (True, True),
+            )
 
         with self.subTest('With wmuEnrolled field False, iNetUserStatus False.'):
             ldap_info = {
                 'wmuEnrolled': ['False'],
                 'inetUserStatus': [''],
             }
-            self.assertEqual(self.wmu_backend._verify_user_ldap_status(ldap_info), (False, False))
+            self.assertEqual(
+                self.wmu_backend._verify_user_ldap_status(self.test_ceas_prog_account, ldap_info),
+                (False, False),
+            )
 
         with self.subTest('With wmuEnrolled field False, iNetUserStatus True, and currently employed.'):
             # Aka wmuEmployeeExpiration equal to or after current date.
@@ -150,7 +156,10 @@ class WmuAuthBackendTests(IntegrationTestCase):
                 'inetUserStatus': ['active'],
                 'wmuEmployeeExpiration': [employee_expiration.strftime(self.time_format)],
             }
-            self.assertEqual(self.wmu_backend._verify_user_ldap_status(ldap_info), (True, True))
+            self.assertEqual(
+                self.wmu_backend._verify_user_ldap_status(self.test_ceas_prog_account, ldap_info),
+                (True, True),
+            )
 
         with self.subTest('With wmuEnrolled field False, iNetUserStatus True, and within Student Retention period.'):
             # (Aka, wmuStudentExpiration before current date, but within 1 year.)
@@ -162,7 +171,10 @@ class WmuAuthBackendTests(IntegrationTestCase):
                 'inetUserStatus': ['active'],
                 'wmuStudentExpiration': [student_expiration.strftime(self.time_format)],
             }
-            self.assertEqual(self.wmu_backend._verify_user_ldap_status(ldap_info), (False, True))
+            self.assertEqual(
+                self.wmu_backend._verify_user_ldap_status(self.test_ceas_prog_account, ldap_info),
+                (False, True),
+            )
 
             # Set to "11 months, 20 days ago" to check almost out of retention period.
             student_expiration = self.current_time - timezone.timedelta(days=((11 * (365/12)) + 20))
@@ -171,7 +183,10 @@ class WmuAuthBackendTests(IntegrationTestCase):
                 'inetUserStatus': ['active'],
                 'wmuStudentExpiration': [student_expiration.strftime(self.time_format)],
             }
-            self.assertEqual(self.wmu_backend._verify_user_ldap_status(ldap_info), (False, True))
+            self.assertEqual(
+                self.wmu_backend._verify_user_ldap_status(self.test_ceas_prog_account, ldap_info),
+                (False, True),
+            )
 
         with self.subTest('With wmuEnrolled field False, iNetUserStatus True, and within Employee Retention period.'):
             # Aka, wmuEmployeeExpiration before current date, but within 1 year.
@@ -183,7 +198,10 @@ class WmuAuthBackendTests(IntegrationTestCase):
                 'inetUserStatus': ['active'],
                 'wmuEmployeeExpiration': [employee_expiration.strftime(self.time_format)],
             }
-            self.assertEqual(self.wmu_backend._verify_user_ldap_status(ldap_info), (False, True))
+            self.assertEqual(
+                self.wmu_backend._verify_user_ldap_status(self.test_ceas_prog_account, ldap_info),
+                (False, True),
+            )
 
             # Set to "11 months, 20 days ago" to check almost out of retention period.
             employee_expiration = self.current_time - timezone.timedelta(days=((11 * (365/12)) + 20))
@@ -192,7 +210,10 @@ class WmuAuthBackendTests(IntegrationTestCase):
                 'inetUserStatus': ['active'],
                 'wmuEmployeeExpiration': [employee_expiration.strftime(self.time_format)],
             }
-            self.assertEqual(self.wmu_backend._verify_user_ldap_status(ldap_info), (False, True))
+            self.assertEqual(
+                self.wmu_backend._verify_user_ldap_status(self.test_ceas_prog_account, ldap_info),
+                (False, True),
+            )
 
         with self.subTest('With wmuEnrolled field False, iNetUserStatus True, and within neither Retention period.'):
             # Aka, neither wmuStudentExpiration or wmuEmployeeExpiration within 1 year.
@@ -205,7 +226,10 @@ class WmuAuthBackendTests(IntegrationTestCase):
                 'wmuStudentExpiration': [overall_expiration.strftime(self.time_format)],
                 'wmuEmployeeExpiration': [overall_expiration.strftime(self.time_format)],
             }
-            self.assertEqual(self.wmu_backend._verify_user_ldap_status(ldap_info), (False, False))
+            self.assertEqual(
+                self.wmu_backend._verify_user_ldap_status(self.test_ceas_prog_account, ldap_info),
+                (False, False),
+            )
 
     #endregion User Ldap Status Functions
 

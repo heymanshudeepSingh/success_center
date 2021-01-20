@@ -380,6 +380,6 @@ class AdvisingAuthBackend(AbstractLDAPBackend):
                     return models.Major.get_degree_level_as_int('Unknown')
 
         else:
-            # Unkown program_code format.
+            # Unknown program_code format.
             logger.auth_warning('{0}: Could not parse degree_level from program_code "{1}".'.format(uid, program_code))
             return models.Major.get_degree_level_as_int('Unknown')

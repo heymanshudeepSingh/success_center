@@ -16,8 +16,8 @@ from importlib import import_module
 
 # User Class Imports.
 from cae_home import models
-from workspace import simple_ldap_lib
 from workspace import logging as init_logging
+from workspace.ldap_backends import simple_ldap_lib
 
 
 # Import logger.
@@ -115,7 +115,7 @@ class AbstractLDAPBackend(ABC):
                         logger.auth_warning('{0}: User login failed.'.format(username))
                     else:
                         # Run login hook logic for user.
-                        self.run_user_login_hooks(user)
+                        self.run_user_login_hooks(request, user)
                     return user
 
                 except models.User.DoesNotExist:
@@ -124,7 +124,7 @@ class AbstractLDAPBackend(ABC):
                     user = self._validate_ldap_user(user_id, password)
 
                     # Run login hook logic for user.
-                    self.run_user_login_hooks(user)
+                    self.run_user_login_hooks(request, user)
 
                     return user
             else:
