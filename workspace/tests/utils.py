@@ -21,7 +21,7 @@ def run_ldap_tests():
     :return: Bool indicating if ldap unit tests should run or not.
     """
     directory_exists = False
-    credentials_present = True
+    credentials_present = False
 
     # Get library directory. Make sure that there are items inside it.
     ldap_lib_dir = os.path.join(BASE_DIR, 'workspace/ldap_backends/simple_ldap_lib')
@@ -35,13 +35,13 @@ def run_ldap_tests():
     wmu_ldap = settings.WMU_LDAP
     adv_ldap = settings.ADV_LDAP
     for key, value in cae_ldap.items():
-        if str(value) != '':
+        if str(value).strip() != '':
             credentials_present = True
     for key, value in wmu_ldap.items():
-        if str(value) != '':
+        if str(value).strip() != '':
             credentials_present = True
     for key, value in adv_ldap.items():
-        if str(value) != '':
+        if str(value).strip() != '':
             credentials_present = True
 
     # Check if both test values passed.
