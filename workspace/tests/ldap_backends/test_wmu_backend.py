@@ -10,9 +10,12 @@ from django.utils import timezone
 # User Class Imports.
 from cae_home import models
 from cae_home.tests.utils import IntegrationTestCase
-from workspace.tests.utils import run_ldap_tests
-from workspace.tests.utils import prog_or_student_test_account_is_populated
-from workspace.tests.utils import prog_test_account_is_populated, student_test_account_is_populated
+from workspace.tests.utils import (
+    run_ldap_tests,
+    prog_or_student_test_account_is_populated,
+    prog_test_account_is_populated,
+    student_test_account_is_populated
+)
 if run_ldap_tests():
     from workspace.ldap_backends.wmu_auth.wmu_backend import WmuAuthBackend
 
@@ -29,9 +32,9 @@ class WmuAuthBackendTests(IntegrationTestCase):
             cls.time_format = '%Y%m%d%H%M%S%z'
 
             # Get optional environment test accounts.
-            if student_test_account_is_populated():
-                cls.test_ceas_prog_account = str(settings.BACKEND_LDAP_TEST_PROG_ID)
             if prog_test_account_is_populated():
+                cls.test_ceas_prog_account = str(settings.BACKEND_LDAP_TEST_PROG_ID)
+            if student_test_account_is_populated():
                 cls.test_student_account = str(settings.BACKEND_LDAP_TEST_STUDENT_ID)
 
     #region User Create/Update Functions
