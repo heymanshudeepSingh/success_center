@@ -1,6 +1,7 @@
 """
 Tests for CAE Home User app Models.
 """
+
 # System Imports.
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError

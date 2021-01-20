@@ -27,7 +27,7 @@ def get_or_create_login_user_model(request, user_id):
 
     :param request: Django request object.
     :param user_id: Either BroncoNet or Winno of student.
-    :return: The associated "Login User" model or None if not found.
+    :return: The associated "Login User" model | None if not found | TemplateResponse if no local Ldap connection.
     """
     if user_id is None:
         return None
