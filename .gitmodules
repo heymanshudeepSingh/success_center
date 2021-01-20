@@ -1,3 +1,4 @@
-[submodule "settings/simple_ldap_lib"]
-	path = settings/simple_ldap_lib
-	url = https://git.ceas.wmich.edu/Python/SimpleLdapLib.git
+
+[submodule "workspace/ldap_backends/simple_ldap_lib"]
+	path = workspace/ldap_backends/simple_ldap_lib
+	url = https://git.ceas.wmich.edu/Python/simple_ldap_lib.git
