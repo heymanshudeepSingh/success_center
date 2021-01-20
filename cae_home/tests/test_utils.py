@@ -5,7 +5,7 @@ Not to be confused with cae_home/tests/utils.py, which provides extra overall ut
 """
 
 # System Imports.
-import unittest
+import logging, unittest
 from django.conf import settings
 from django.core.management import call_command
 from django.template.response import TemplateResponse
@@ -38,6 +38,9 @@ class CAEHomeViewTests(IntegrationTestCase):
         # Load all relevant fixtures.
         with open(devnull, 'a') as null:
             call_command('loaddata', 'production_models/site_themes', stdout=null)
+
+        # Disable logging for tests.
+        logging.disable(logging.CRITICAL)
 
     @unittest.skipUnless(run_ldap_tests(), 'Missing criteria for LDAP. Skipping Ldap tests.')
     @unittest.skipUnless(student_test_account_is_populated(), 'No Ldap User specified. Skipping Ldap tests.')

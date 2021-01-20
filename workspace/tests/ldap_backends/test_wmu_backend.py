@@ -3,7 +3,7 @@ Tests for Wmu Authentication Backend.
 """
 
 # System Imports.
-import unittest
+import logging, unittest
 from django.conf import settings
 from django.utils import timezone
 
@@ -36,6 +36,9 @@ class WmuAuthBackendTests(IntegrationTestCase):
                 cls.test_ceas_prog_account = str(settings.BACKEND_LDAP_TEST_PROG_ID)
             if student_test_account_is_populated():
                 cls.test_student_account = str(settings.BACKEND_LDAP_TEST_STUDENT_ID)
+
+            # Disable logging for tests.
+            logging.disable(logging.CRITICAL)
 
     #region User Create/Update Functions
 

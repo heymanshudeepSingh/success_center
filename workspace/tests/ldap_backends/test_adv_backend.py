@@ -3,7 +3,7 @@ Tests for Advising Authentication Backend.
 """
 
 # System Imports.
-import unittest
+import logging, unittest
 
 # User Class Imports.
 from cae_home import models
@@ -22,6 +22,9 @@ class AdvisingAuthBackendTests(IntegrationTestCase):
     def setUpTestData(cls):
         if run_ldap_tests():
             cls.adv_backend = AdvisingAuthBackend()
+
+            # Disable logging for tests.
+            logging.disable(logging.CRITICAL)
 
     @unittest.skipUnless(run_ldap_tests(), 'Missing criteria for LDAP. Skipping Ldap tests.')
     def test__create_new_user_from_ldap(self):
