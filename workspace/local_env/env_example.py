@@ -149,10 +149,10 @@ LOGGING_DIRECTORY = os.path.join(BASE_DIR, 'workspace/local_env/logs/')
 #region Testing Settings
 
 # UnitTesting Settings.
-#   * Provided Prog account should be active for WMU ldap system.
-#   * Provided Student account should be active for both CAE and WMU ldap systems.
-BACKEND_LDAP_TEST_PROG_ID = ''          # Name for CAE Center Ldap programmer account.
-BACKEND_LDAP_TEST_STUDENT_ID = ''       # Name for current active Ldap student.
+#   * Provided Prog account should be active for WMU Ldap system.
+#   * Provided Student account should be active in both CAE and WMU Ldap systems.
+BACKEND_LDAP_TEST_PROG_ID = ''          # BroncoNet for CAE Center Ldap programmer account.
+BACKEND_LDAP_TEST_STUDENT_ID = ''       # BroncoNet for active Ldap student.
 
 # Selenium Integration Test Settings.
 SELENIUM_TESTS_BROWSER = 'chrome'   # Set to 'firefox' to use firefox browser instead.
