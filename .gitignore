@@ -1,43 +1,76 @@
+###
+ # GitIgnore file.
+ # Prevents git from commiting any unwanted files.
+ ##
 
-# Do not track local database changes, if using sqlite.
-*.sqlite3
 
-# Do not track DEBUG file.
-DEBUG
+# Do not track system files.
+.DS_Store
+Thumbs.db
 
-# Do not track other projects within the apps folder.
-apps/
 
-# Do not track local environment settings/solution.
-.venv/
-.vscode/
+# Do not track environment settings.
+.env/
 .idea/
+.venv/
 .vs/
+.vscode/
 env/
-node_modules/
+idea/
+venv/
+vs/
+vscode/
 workspace/local_env/
-temp/
 env.py
-package-lock.json
+
 
 # Do not track python cache files.
 *.pyc
 
-# Do not track css/css map/sass map files.
+
+# Do not track temporary files.
+[Tt]mp/
+[Tt]emp/
+[Tt]empfiles/
+[Tt]emp_files/
+*.tmp
+*.temp
+
+
+# Do not track logfiles.
+[Ll]og/
+[Ll]ogs/
+*.log
+*.log.*
+
+
+# Do not track development-related Django files.
+DEBUG
+*.sqlite3
+
+
+# Do not track compiled CSS/JS files.
+dist/
+node_modules/
+*.sass-cache/
 *.css
 *.css.map
-*.sass-cache/
+package-lock.json
 
-# Do not track compiled JS files.
-dist/
+
+# Do not track other projects within the apps folder.
+apps/
+
 
 # Do not track files created from selenium tests.
 geckodriver.log
+
+
+# Do not track migrations for now.
+*/migrations/0*.py
+
 
 # Do not track files created from scripts.
 user_list.txt
 student_list.txt
 student_import_error_list.txt
-
-# Do not track migrations for now.
-*/migrations/0*.py
