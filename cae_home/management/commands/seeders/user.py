@@ -76,10 +76,13 @@ def create_users(style):
     """
     Creates base user models.
     """
-    # Create extra superusers for developers.
-    models.User.get_or_create_superuser('brodriguez8774', '', default_password)  # Brandon
-    models.User.get_or_create_superuser('a', '', 'a')  # Singh
+    # Create extra superusers for developers, using env.py settings.
+    # Use the "SEED_USERS" list for usernames.
+    for username in settings.SEED_USERS:
+        # Create user account with given username and env password.
+        models.User.get_or_create_superuser(username, '', default_password)
 
+    # Create all default users for testing group logic.
     create_permission_group_users(password=default_password)
 
     stdout.write('Populated ' + style.SQL_FIELD('User') + ' models.\n')

@@ -15,6 +15,22 @@ To use in project, please copy file and save at "settings/local_env/env.py".
 from workspace.settings.reusable_settings import *
 
 
+#region User Seed Settings
+
+# Username list for user model seeds.
+# These are used as username values for User seed models used in development.
+SEED_USERS = [
+    # Insert seed user names (as strings) here.
+]
+
+# Password for user model seeds.
+# This is the password used for all the seeded dev accounts (both in normal serving and tests).
+USER_SEED_PASSWORD = 'temppass2'
+
+#endregion User Seed Settings
+
+
+
 #region Site Serve Settings
 
 # Allowed server hosts.
@@ -135,10 +151,6 @@ ADMINS = []
 
 
 #region General Site Settings
-
-# Password for user model seeds.
-# This is the password used for all the "default" accounts (both in normal serving and tests).
-USER_SEED_PASSWORD = 'temppass2'
 
 # Log folder location
 LOGGING_DIRECTORY = os.path.join(BASE_DIR, 'workspace/local_env/logs/')
