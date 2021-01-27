@@ -30,6 +30,39 @@ USER_SEED_PASSWORD = 'temppass2'
 #endregion User Seed Settings
 
 
+#region Database Setup
+
+# Database connection information.
+DATABASES = {
+    # SqLite, for development environments.
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'default-character-set': 'utf8',
+        'TEST': {
+            'NAME': 'testdb.sqlite3',
+        },
+    },
+
+    # MySQL, for production environments.
+    # To use this, uncomment the "mysqlclient" in project requirements.txt and install to your python environment.
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'cae_workspace',
+    #     'USER': 'root',
+    #     'PASSWORD': 'root',
+    #     'HOST': '127.0.0.1',
+    #     'PORT': '3306',
+    #     'default-character-set': 'utf8mb4',
+    #     'CONN_MAX_AGE': 600,    # See http://www.programmersought.com/article/1815911998/ for info.
+    #     'TEST': {
+    #         'NAME': 'testdb.sqlite3',
+    #     },
+    # }
+}
+
+#endregion Database Setup
+
 
 #region Site Serve Settings
 
@@ -94,40 +127,6 @@ ADV_LDAP = {
 }
 
 #endregion Authentication
-
-
-#region Database Setup
-
-# Database connection information.
-DATABASES = {
-    # SqLite, for development environments.
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'default-character-set': 'utf8',
-        'TEST': {
-            'NAME': 'testdb.sqlite3',
-        },
-    },
-
-    # MySQL, for production environments.
-    # To use this, uncomment the "mysqlclient" in project requirements.txt and install to your python environment.
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'NAME': 'cae_workspace',
-    #     'USER': 'root',
-    #     'PASSWORD': 'root',
-    #     'HOST': '127.0.0.1',
-    #     'PORT': '3306',
-    #     'default-character-set': 'utf8mb4',
-    #     'CONN_MAX_AGE': 600,    # See http://www.programmersought.com/article/1815911998/ for info.
-    #     'TEST': {
-    #         'NAME': 'testdb.sqlite3',
-    #     },
-    # }
-}
-
-#endregion Database Setup
 
 
 #region Email Settings
@@ -197,8 +196,13 @@ REST_FRAMEWORK = {
 #endregion Third Party Library Settings
 
 
-REDMINE_URL=''
-REDMINE_USER=''
-REDMINE_PASSWORD=''
+#region Project Specific Settings
 
-CUPS_SERVER=''
+# Values used in DropOff project.
+# Can be left blank if DropOff is not installed locally.
+REDMINE_URL = ''
+REDMINE_USER = ''
+REDMINE_PASSWORD = ''
+CUPS_SERVER = ''
+
+#endregion Project Specific Settings
