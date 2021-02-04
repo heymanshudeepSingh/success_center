@@ -1,12 +1,10 @@
 {% block status_messages %}
-  {% if messages %}
-    <ul id="status-message-container">
-      {% for message in messages %}
-        <li class="message {{ message.tags }}">
-          <p>{{ message }}</p>
-          <p class="exit">x</p>
-        </li>
-      {% endfor %}
-    </ul>
-  {% endif %}
+  <ul class="cae-status-message-container">
+    {% for message in messages %}
+      <li class="message {{ message.tags }}">
+        <p>{{ message }}</p>
+        <p class="exit">x</p>
+      </li>
+    {% endfor %}
+  </ul>
 {% endblock status_messages %}

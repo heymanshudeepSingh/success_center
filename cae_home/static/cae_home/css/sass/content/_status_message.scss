@@ -33,7 +33,7 @@
 //==== START ----- Block ====//
 //===========================//
 
-#status-message-container {
+.cae-status-message-container {
     position: relative;
 
     @include display-flex;
@@ -110,7 +110,7 @@
 .main-content {
 
     @each $theme, $theme-dict in $theme-colors {
-    .theme-#{$theme} & #status-message-container {
+    .theme-#{$theme} & .cae-status-message-container {
 
         .message {
             a {
@@ -142,7 +142,7 @@
 .main-content {
 
     @each $theme, $theme-dict in $theme-colors {
-    .theme-#{$theme} & #status-message-container {
+    .theme-#{$theme} & .cae-status-message-container {
 
         .message {
             a {
@@ -269,7 +269,7 @@
 .main-content {
 
     @each $theme, $theme-dict in $theme-colors {
-    .theme-#{$theme} & #status-message-container {
+    .theme-#{$theme} & .cae-status-message-container {
 
         .message {
             background-color: theme-status($theme, 'default', 'primary');
@@ -336,7 +336,7 @@
 //==== START ----- Block ====//
 //===========================//
 
-#status-message-container {
+.cae-status-message-container {
 
     .message {
         box-sizing: border-box;
