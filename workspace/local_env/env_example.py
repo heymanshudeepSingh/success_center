@@ -90,8 +90,8 @@ STATICFILES_DIRS = (
 # Set desired authentication backend. Defaults to standard Django auth.
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',    # Listed first so test users do not attempt to validate to LDAP.
-    # 'settings.ldap_backends.wmu_auth.cae_backend.CaeAuthBackend',
-    # 'settings.ldap_backends.wmu_auth.cae_backend.WmuAuthBackend',
+    # 'workspace.ldap_backends.wmu_auth.cae_backend.CaeAuthBackend',
+    # 'workspace.ldap_backends.wmu_auth.cae_backend.WmuAuthBackend',
 )
 AUTH_BACKEND_USE_DJANGO_USER_PASSWORDS = False  # If false, always use LDAP and never store user password in Django.
 
