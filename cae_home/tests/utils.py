@@ -3,7 +3,7 @@ CAE Home app testing Utility Functions and Classes.
 """
 
 # System Imports.
-import sys
+import re, sys
 from channels.testing import ChannelsLiveServerTestCase
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -59,19 +59,176 @@ def create_room(room_type, name, slug, **kwargs):
 # |-----------------------------------------------------------------------------
 
 
-class IntegrationTestCase(TestCase):
+def debug_response_content(response_content):
     """
-    Python Unit Testing extension (without Selenium).
+    Print debug page output, with any repeating whitespace characters trimmed down.
+
+    Trimming down helps because Django templating, by default, adds a lot of unnecessary extra whitespace.
+    We don't see this extra whitespace in browsers but it's noticeable if the page is printed out to console.
+    """
+    print('{0} {1} {0}'.format('=' * 10, 'response.content.decode(\'utf-8\')'))
+
+    if len(response_content) > 0:
+        # Replace any repeating space characters.
+        response_content = re.sub('  +', ' ', response_content)
+
+        # Replace any repeating newline characters.
+        response_content = re.sub('\n \n', '\n', response_content)
+        response_content = re.sub('\n\n+', '\n', response_content)
+
+        # Print formatted page content string.
+        print(response_content)
+    else:
+        # No context provided.
+        print('Request "response.context" is empty.')
+
+    print('')
+
+
+def debug_response_context(response_context):
+    """
+    Print debug context output.
+
+    Any individual values that are excessively long are trimmed down.
+    """
+    print('{0} {1} {0}'.format('=' * 10, 'response.context'))
+
+    # Response context object is strange, in that it's basically a dictionary, and it allows .keys() but not .values().
+    # Thus, iterate on keys only and pull respective value.
+    for key in response_context.keys():
+        context_value = str(response_context[key])
+        if len(context_value) > 80:
+            context_value = '"{0}" ... "{1}"'.format(context_value[:40], context_value[-40:])
+        print('{0}: {1}'.format(key, context_value))
+
+    print('')
+
+
+def debug_forms(response_context):
+    """
+    Print debug form output.
+    """
+    if 'form' in response_context or 'formset' in response_context:
+        print('{0} {1} {0}'.format('=' * 10, 'response_context form data'))
+
+    # Print form errors if available.
+    if 'form' in response_context:
+        form = response_context['form']
+
+        print('Provided Form Fields:')
+        fields_submitted = False
+        for key, value in form.data.items():
+            print('    {0}: {1}'.format(key, value))
+            fields_submitted = True
+        if not fields_submitted:
+            print('    No form field data submitted.')
+        print('')
+
+        if not form.is_valid():
+            if len(form.errors) > 0 or len(form.non_field_errors()) > 0:
+                print('Form Invalid:'.format(not form.is_valid()))
+                if len(form.non_field_errors()) > 0:
+                    print('    Non-field Frrors:')
+                    for error in form.non_field_errors():
+                        print('        {0}'.format(error))
+
+                if len(form.errors) > 0:
+                    print('    Field Errors:')
+                    for error in form.errors:
+                        print('        {0}'.format(error))
+
+        else:
+            print('Form Valid.')
+        print('')
+
+    # Print formset errors if available.
+    if 'formset' in response_context:
+        formset = response_context['formset']
+        for form in formset:
+            print('Form(set) Errors:')
+            for error in form.non_field_errors():
+                print('\t{0}'.format(error))
+            for error in form.errors:
+                print('\t{0}'.format(error))
+        print('')
+
+
+def debug_messages(response_context):
+    """
+    Print debug message output.
+    """
+    # Print message text, if available.
+    if 'messages' in response_context:
+        context_value = response_context['messages']
+
+        if len(context_value) > 0:
+            print('{0} {1} {0}'.format('=' * 10, 'response.context[\'messages\']'))
+            for message in response_context:
+                print('\t{0}'.format(message))
+
+
+class BaseTestCase(TestCase):
+    """
+    General expanded test functionality, applicable to all test types.
+    Inherits from the standard django.test.TestCase, so it has all functionality the default Django Testing class does.
     """
     def __init__(self, *args, **kwargs):
+        # Run parent setup logic.
         super().__init__(*args, **kwargs)
+
+        # Save class variables.
         self._debug_print = False
 
     def setUp(self):
-        """
-        Logic to reset state before each individual test.
-        """
+        # Run parent setup logic.
         super().setUp()
+
+    def debug_print(self, response):
+        """
+        Debug printing for when a test has an error.
+
+        With command `python manage.py test`, stdout is displayed for all tests.
+        Thus, until we can figure out how to only display stdout on error, there's not really a better way for this.
+        Must be called manually, when debugging tests.
+
+        :param response: Page response object, generally generated from `self.client.get()` or `self.client.post()`.
+        """
+        # Print out file name.
+        print('')
+        print('')
+        print('')
+        print('-' * 80)
+        print('{0} {1} Debug Printing {0}'.format('-' * 20, self.__class__.__name__))
+        print('-' * 80)
+        print('')
+
+        # Display page content to console.
+        self.debug_print_content(response)
+
+        # Display page context (aka template variables) to console.
+        self.debug_print_context(response)
+
+        # Display any form data to console.
+        self.debug_print_forms(response)
+
+        # Display any message data to console.
+        self.debug_print_messages(response)
+
+        print('')
+        print('')
+        print('')
+
+    def debug_print_content(self, response):
+        debug_response_content(response_content=response.content.decode('utf-8'))
+
+    def debug_print_context(self, response):
+        debug_response_context(response_context=response.context)
+
+    def debug_print_forms(self, response):
+        debug_forms(response_context=response.context)
+
+    def debug_print_messages(self, response):
+        debug_messages(response_context=response.context)
 
     def create_default_users_and_groups(self, password=default_password):
         """
@@ -164,6 +321,25 @@ class IntegrationTestCase(TestCase):
             print(list(Group.objects.all().values_list('name')))
             raise ObjectDoesNotExist('Group matching {0} was not found.'.format(name))
 
+
+class IntegrationTestCase(BaseTestCase):
+    """
+    Python Unit Testing extension (without Selenium).
+    """
+    def __init__(self, *args, **kwargs):
+        # Run parent setup logic.
+        super().__init__(*args, **kwargs)
+
+        self._debug_print = False
+        self.login_url = reverse('cae_home:login')
+
+    def setUp(self):
+        """
+        Logic to reset state before each individual test.
+        """
+        # Run parent setup logic.
+        super().setUp()
+
     def assertURLEqual(self, url, expected, parse_qs=False):
         """
         Given two URLs, make sure all their components (the ones given by
@@ -187,71 +363,97 @@ class IntegrationTestCase(TestCase):
             if x and y and x != y:
                 self.fail('%r != %r (%s doesn\'t match)' % (url, expected, attr))
 
-    def assertPage(self, url, get=True, data=None, expected_url=None, status=200, is_admin_form=False, secure=False):
+    def assertResponse(self, url, title, *args, data=None, expected_redirect_url=None, status=200, get=False, **kwargs):
         """
-
+        Assert for expected view Title, StatusCode, and UrlRedirect.
+        :param url: Url to test.
+        :param title: Expected page title. This is what displays on the browser tab.
+        :param data: Optional POST data to sent to page. Should be in dictionary format.
+        :param expected_redirect_url: Optional url if page is expected to redirect. This should be what it redirects to.
+        :param status: Expected status code for page, after redirections. Defaults to 200.
+        :param get: Bool indicating if request is GET or POST. Defaults POST.
+        :return: The page response object, generated from the request.
         """
+        # Either get data value or an empty dictionary, to prevent mutability errors.
         data = data or {}
-        self.client.force_login(self.user)
+
+        # Get page response.
+        # self.client.force_login(self.user)
         if get:
-            response = self.client.get(url, data=data, follow=True, secure=secure)
+            response = self.client.get(url, data=data, follow=True)
         else:
-            response = self.client.post(url, data=data, follow=True, secure=secure)
+            response = self.client.post(url, data=data, follow=True)
 
         if self._debug_print:
-            print('-' * 80)
-            print(response.content)
-            print('-' * 80)
-            print(response.content.decode('utf-8'))
-            print('-' * 80)
+            self.debug_print(response)
 
-            context = response.context or {}
-
-            # Print form errors if available.
-            if is_admin_form:
-                for error in context.get('errors', []):
-                    print(error)
-            if 'form' in context:
-                print('Form Invalid {0!r}:'.format(
-                    not context['form'].is_valid()))
-                for error in context['form'].non_field_errors():
-                    print('\t{0}'.format(error))
-                for error in context['form'].errors:
-                    print('\t{0}'.format(error))
-                print('-'*80)
-
-            if 'formset' in context:
-                for form in context['formset']:
-                    print('Form(set) Errors:')
-                    for error in form.non_field_errors():
-                        print('\t{0}'.format(error))
-                    for error in form.errors:
-                        print('\t{0}'.format(error))
-                    print('-'*80)
-
-            if 'messages' in context:
-                print('Messages')
-                for message in context['messages']:
-                    print('\t{0}'.format(message))
-
+        # Verify request status code against expected value.
         self.assertEqual(status, response.status_code)
 
-        if expected_url is not None:
-            # Check if redirect is at correct url.
+        # Check if redirect was expected.
+        if expected_redirect_url is not None:
+            # Redirect was expected. Check if redirect is at correct url.
             self.assertTrue(response.redirect_chain, 'Page did not redirect!')
-            self.assertURLEqual(response.redirect_chain[-1][0], expected_url, parse_qs=True)
+            self.assertURLEqual(response.redirect_chain[-1][0], expected_redirect_url, parse_qs=True)
+
+            # Extra testing if redirecting to login page.
+            if expected_redirect_url == self.login_url:
+                self.assertContains(response, 'Please login to see this page.')
+
+        # Check page title.
+        if title is not None:
+            self.assertEqual(title, response.context['page']['title'], 'Incorrect Page Title')
 
         return response
 
-    def assertPageGet(self, url, **kwargs):
-        return self.assertPage(url, True, **kwargs)
+    def assertGetResponse(self, url, title, *args, data=None, expected_redirect_url=None, status=200, **kwargs):
+        """
+        Assert for expected view Title, StatusCode, and UrlRedirect, when page is a GET request.
+        :param url: Url to test.
+        :param title: Expected page title. This is what displays on the browser tab.
+        :param data: Optional POST data to sent to page. Should be in dictionary format.
+        :param expected_redirect_url: Optional url if page is expected to redirect. This should be what it redirects to.
+        :param status: Expected status code for page, after redirections. Defaults to 200.
+        :param get: Bool indicating if request is GET or POST. Defaults POST.
+        :return: The page response object, generated from the request.
+        """
+        return self.assertResponse(
+            url,
+            title,
+            *args,
+            get=True,
+            data=data,
+            expected_redirect_url=expected_redirect_url,
+            status=status,
+            **kwargs,
+        )
 
-    def assertPagePost(self, url, data=None, **kwargs):
+    def assertPostResponse(self, url, title, *args, data=None, expected_redirect_url=None, status=200, **kwargs):
+        """
+        Assert for expected view Title, StatusCode, and UrlRedirect, when page is a POST request.
+        :param url: Url to test.
+        :param title: Expected page title. This is what displays on the browser tab.
+        :param data: Optional POST data to sent to page. Should be in dictionary format.
+        :param expected_redirect_url: Optional url if page is expected to redirect. This should be what it redirects to.
+        :param status: Expected status code for page, after redirections. Defaults to 200.
+        :param get: Bool indicating if request is GET or POST. Defaults POST.
+        :return: The page response object, generated from the request.
+        """
+        # Either get data value or an empty dictionary, to prevent mutability errors.
         data = data or {}
-        return self.assertPage(url, False, data, **kwargs)
+
+        return self.assertResponse(
+            url,
+            title,
+            *args,
+            data=data,
+            expected_redirect_url=expected_redirect_url,
+            status=status,
+            **kwargs,
+        )
 
 
-class LiveServerTestCase(ChannelsLiveServerTestCase):
+class LiveServerTestCase(ChannelsLiveServerTestCase, BaseTestCase):
     """
     Test with Selenium to verify things like javascript.
 
