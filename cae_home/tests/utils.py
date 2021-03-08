@@ -4,23 +4,25 @@ CAE Home app testing Utility Functions and Classes.
 
 # System Imports.
 import re, sys
-from channels.testing import ChannelsLiveServerTestCase
+from contextlib import contextmanager
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group, Permission
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.db.models import ObjectDoesNotExist
 from django.http import QueryDict
 from django.test import TestCase
 from django.urls import reverse
-from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support.expected_conditions import staleness_of
 from urllib.parse import ParseResult, urlparse
 
 # User Class Imports.
 from .. import models
+from cae_home.management.commands.fixtures.user import create_site_themes
 from cae_home.management.commands.seeders.user import create_groups, create_permission_group_users
 
 
@@ -167,7 +169,7 @@ def debug_messages(response_context):
                 print('\t{0}'.format(message))
 
 
-class BaseTestCase(TestCase):
+class AbstractTestHelper():
     """
     General expanded test functionality, applicable to all test types.
     Inherits from the standard django.test.TestCase, so it has all functionality the default Django Testing class does.
@@ -178,10 +180,6 @@ class BaseTestCase(TestCase):
 
         # Save class variables.
         self._debug_print = False
-
-    def setUp(self):
-        # Run parent setup logic.
-        super().setUp()
 
     def debug_print(self, response):
         """
@@ -322,7 +320,11 @@ class BaseTestCase(TestCase):
             raise ObjectDoesNotExist('Group matching {0} was not found.'.format(name))
 
 
-class IntegrationTestCase(BaseTestCase):
+class BaseTestCase(TestCase, AbstractTestHelper):
+    pass
+
+
+class IntegrationTestCase(TestCase, AbstractTestHelper):
     """
     Python Unit Testing extension (without Selenium).
     """
@@ -453,7 +455,7 @@ class IntegrationTestCase(BaseTestCase):
         )
 
 
-class LiveServerTestCase(ChannelsLiveServerTestCase, BaseTestCase):
+class LiveServerTestCase(StaticLiveServerTestCase, AbstractTestHelper):
     """
     Test with Selenium to verify things like javascript.
 
@@ -493,6 +495,7 @@ class LiveServerTestCase(ChannelsLiveServerTestCase, BaseTestCase):
         function_that_breaks()
 
     """
+    _drivers = None
     serve_static = True
 
     #region Class Setup and Teardown
@@ -502,40 +505,13 @@ class LiveServerTestCase(ChannelsLiveServerTestCase, BaseTestCase):
         """
         Logic to run once, before any tests.
         """
+        # Call parent logic.
         super().setUpClass()
 
-        try:
-            if settings.SELENIUM_TESTS_BROWSER == 'chrome':
-                # NOTE: Requires "chromedriver" binary to be installed in $PATH
-                # https://sites.google.com/a/chromium.org/chromedriver/getting-started
-                cls._options = webdriver.ChromeOptions()
-            elif settings.SELENIUM_TESTS_BROWSER == 'firefox':
-                cls._options = webdriver.FirefoxOptions()
-            else:
-                raise ValueError('Unknown browser defined in selenium settings.')
+        cls._drivers = {}
 
-            if settings.SELENIUM_TESTS_HEADLESS:
-                cls._options.add_argument('headless')  # --headless
-            cls._drivers = []
-        except:
-            if settings.SELENIUM_TESTS_BROWSER == 'chrome':
-                sys.stderr.write('\n\n {0} \n |\n'.format('-' * 80))
-                sys.stderr.write(' | ERROR: See {0} on how to setup Selenium with Chrome.\n'.format(
-                    'https://sites.google.com/a/chromium.org/chromedriver/getting-started'
-                ))
-                sys.stderr.write(' |\n {0} \n\n'.format('-' * 80))
-                super().tearDownClass()
-            elif settings.SELENIUM_TESTS_BROWSER == 'firefox':
-                sys.stderr.write('\n\n {0} \n |\n'.format('-' * 80))
-                sys.stderr.write(' | ERROR: See {0} on how to setup Selenium with Firefox.\n'.format(
-                    'https://github.com/mozilla/geckodriver'
-                ))
-                sys.stderr.write(' |\n {0} \n\n'.format('-' * 80))
-                super().tearDownClass()
-            else:
-                super().tearDownClass()
-                raise ValueError('Unknown browser defined in selenium settings.')
-            raise
+        # Initialize default user and site theme models.
+        create_site_themes(None)
 
     @classmethod
     def create_driver(cls):
@@ -545,14 +521,20 @@ class LiveServerTestCase(ChannelsLiveServerTestCase, BaseTestCase):
         been called.
         """
         driver = None
+
         try:
             if settings.SELENIUM_TESTS_BROWSER == 'chrome':
-                driver = webdriver.Chrome(options=cls._options)
+                from selenium.webdriver.chrome.webdriver import WebDriver
+                driver = WebDriver()
             elif settings.SELENIUM_TESTS_BROWSER == 'firefox':
-                driver = webdriver.Firefox(options=cls._options)
+                from selenium.webdriver.firefox.webdriver import WebDriver
+                driver = WebDriver()
             else:
                 raise ValueError('Unknown browser defined in selenium settings.')
-            cls._drivers.append(driver)
+
+            driver_array_index = len(cls._drivers)
+            driver._driver_array_index = driver_array_index
+            cls._drivers[driver_array_index] = driver
         except:
             if settings.SELENIUM_TESTS_BROWSER == 'chrome':
                 sys.stderr.write('\n\n {0} \n |\n'.format('-' * 80))
@@ -570,7 +552,20 @@ class LiveServerTestCase(ChannelsLiveServerTestCase, BaseTestCase):
                 raise ValueError('Unknown browser defined in selenium settings.')
             raise
 
+        # # Set driver "implicit wait".
+        # # This is the number of seconds to have the driver wait, on searching for a DOM element that isn't present.
+        # driver.implicitly_wait(3)
+
         return driver
+
+    @classmethod
+    def close_driver(cls, driver):
+        """
+        Closes browser window and associated driver.
+        """
+        driver_index = driver._driver_array_index
+        driver.quit()
+        del cls._drivers[driver_index]
 
     @classmethod
     def tearDownClass(cls):
@@ -578,148 +573,139 @@ class LiveServerTestCase(ChannelsLiveServerTestCase, BaseTestCase):
         Logic to run once, after all tests.
         """
         # Quit all browser windows
-        for driver in cls._drivers:
+        for driver in cls._drivers.values():
             driver.quit()
+
+        # Call parent logic.
         super().tearDownClass()
 
     def setUp(self):
         """
         Logic to reset state before each individual test.
         """
+        # Call parent logic.
         super().setUp()
 
     def tearDown(self):
         """
         Logic to reset state after each individual test.
         """
+        # Call parent logic.
         super().tearDown()
 
         # Close all windows
-        for driver in self._drivers:
+        for driver in self._drivers.values():
             self._close_all_new_windows(driver)
 
     #endregion Class Setup and Teardown
 
+    def assertPageTitle(self, driver, expected_title, err_msg=None):
+        """
+        Asserts that current page matches expected title.
+        :param driver: Driver for browser window to test in.
+        :param expected_title: Expected title value.
+        :param err_msg: Optional formatted error message for unique error.
+        """
+        if err_msg is None:
+            'Page title ("{0}") does not exist. Did you load the correct url?'.format(expected_title)
+
+        self.assertTrue(expected_title in driver.title, err_msg)
+
+    def assertPageHeader(self, driver, expected_header, err_msg=None):
+        """
+        Asserts that current page matches the expected header.
+        :param driver: Driver for browser window to test in.
+        :param expected_header: Expected header value.
+        :param err_msg: Optional formatted error message for unique error.
+        """
+        if err_msg is None:
+            'Page header ("{0}") does not exist. Did you load the correct url?'.format(expected_header)
+
+        self.assertTrue(expected_header in driver.page_source, err_msg)
+
+    def assertPageContains(self, driver, expected_page_content):
+        """
+        Asserts that current page contains the expected content.
+        :param driver: Driver for browser window to test in.
+        :param expected_page_content: Expected content value.
+        """
+        self.assertTrue(expected_page_content in driver.page_source)
+
+    def assertPageNotContains(self, driver, expected_page_content):
+        """
+        Asserts that current page does not contain the expected content.
+        :param driver: Driver for browser window to test in.
+        :param expected_page_content: Expected content value.
+        """
+        self.assertFalse(expected_page_content in driver.page_source)
 
     #region Helper Functions
 
-    #region User Management Helper Functions
-
-    def create_default_users_and_groups(self, password=default_password):
-        """
-        Create expected/default groups and dummy users to associate with them.
-        """
-        create_groups()
-        create_permission_group_users(password=password, with_names=False)
-
-    def get_user(self, username, password=default_password):
-        """
-        Returns a user with the given username.
-        :param username: Username to search.
-        :param password: Password for user.
-        """
-        try:
-            # Get user.
-            user = UserModel.objects.get(username=username)
-
-            # Check that user has associated password string saved.
-            if not hasattr(user, 'password_string'):
-                user.password_string = password
-
-            return user
-        except ObjectDoesNotExist:
-            # Failed to find user.
-            print(list(UserModel.objects.all().values_list('username')))
-            raise ObjectDoesNotExist('User matching {0} was not found.')
-
-    def create_user(self, username, password=default_password, permissions=None, groups=None, **kwargs):
-        """
-        Create new user. Optionally pass permissions/groups.
-        :param username: Username to use.
-        :param password: Password for user.
-        :param permissions: Optional permissions to add.
-        :param groups: Optional permission groups to add.
-        :param kwargs: Passed to UserModel.objects.create_user().
-        :return: Instance of created user.
-        """
-        # Create user.
-        user = UserModel.objects.create_user(username=username, password=password, **kwargs)
-        user.password_string = password
-
-        # Check for optional permissions.
-        if permissions:
-            if isinstance(permissions, list) or isinstance(permissions, tuple):
-                for permission in permissions:
-                    self.add_permission(user, permission)
-            else:
-                self.add_permission(user, permissions)
-
-        # Check for optional groups.
-        if groups:
-            if isinstance(groups, list) or isinstance(groups, tuple):
-                for group in groups:
-                    self.add_group(user, group)
-            else:
-                self.add_group(user, groups)
-
-        return user
-
-    def add_permission(self, user, name):
-        """
-        Add a permission to the given user.
-        Ex: 'change_order'
-        On failure, prints out all possible permissions and moves to next test.
-        :param user: User object to add permission to.
-        :param name: Permission name to add.
-        """
-        try:
-            # Add permission.
-            permission = Permission.objects.get(codename=name)
-            user.user_permissions.add(permission)
-        except ObjectDoesNotExist:
-            # Failed to find permission.
-            print(list(Permission.objects.all().values_list('codename')))
-            raise ObjectDoesNotExist('Permission matching {0} was not found.'.format(name))
-
-
-    def add_group(self, user, name):
-        """
-        Add a permission group to the given user.
-        Ex: 'CAE Admin'
-        :param user: User object to add permission to.
-        :param name: Group name to add.
-        """
-        try:
-            # Add group.
-            group = Group.objects.get(name=name)
-            user.groups.add(group)
-        except ObjectDoesNotExist:
-            # Failed to find group.
-            print(list(Group.objects.all().values_list('name')))
-            raise ObjectDoesNotExist('Group matching {0} was not found.'.format(name))
-
-    def _login(self, driver, username, password):
+    def _login(self, driver, username, password, redirect_page_title=None, redirect_page_header=None):
         """
         Attempt to login on given browser window with given user.
         :param driver: Browser manager instance to login on.
         :param username: Username to login with.
         :param password: Password associated with user.
+        :param redirect_page_title: Optional title to check for after login redirect.
+        :param redirect_page_header: Optional header (H1 element) to check for after login redirect.
         """
+        self.page_stale_check = driver.find_element_by_tag_name('html')
+
         # Get proper login url.
         login_url = settings.LOGIN_URL
         if not login_url.startswith('/'):
             # Might be a named url pattern.
             login_url = reverse(login_url)
 
+        # Load login page.
+        driver.get('{0}{1}'.format(self.live_server_url, login_url))
+
+        # Test that page loaded successfully.
+        self.assertPageTitle(driver, 'Login | CAE Center')
+
         # Attempt login.
-        driver.get(self.live_server_url + login_url)
         driver.find_element_by_name('username').send_keys(username)
         driver.find_element_by_name('password').send_keys(password)
         driver.find_element_by_css_selector('[type="submit"]').click()
 
-    #endregion User Management Helper Functions
+        # Wait for new page to load.
+        self._wait_for_page_load(driver)
+
+        # Check for optional page redirect title.
+        if redirect_page_title:
+            err_msg = 'Login redirect page title ("{0}") does not exist. Did you login with the correct user?'.format(
+                redirect_page_title,
+            )
+            self.assertPageTitle(driver, redirect_page_title, err_msg=err_msg)
+
+        # Check for optional page redirect header.
+        if redirect_page_header:
+            err_msg = 'Login redirect page header ("{0}") does not exist. Did you login with the correct user?'.format(
+                redirect_page_header,
+            )
+            self.assertPageHeader(driver, redirect_page_header, err_msg)
 
     #region Wait Helper Functions
+
+    # @contextmanager
+    def _wait_for_page_load(self, driver, timeout=5):
+        """
+        Waits for a new page to load.
+        Should be used directly after expecting a new page load, such as a form button click that takes the user to a
+        new page.
+
+        Logic source from:
+        http://www.obeythetestinggoat.com/how-to-get-selenium-to-wait-for-page-load-after-a-click.html
+
+        :param driver: Browser manager instance to check for page load on.
+        :param timeout: Seconds to wait for timeout. Default of 5.
+        """
+        old_page = driver.find_element_by_tag_name('html')
+        yield
+        WebDriverWait(driver, timeout).until(
+            staleness_of(old_page)
+        )
 
     def _wait_for_id(self, driver, element_id, msg=None, wait_time=10, wait_for_remove=False):
         """
