@@ -63,7 +63,7 @@ def login_redirect(request):
                     return redirect('cae_web_core:index')
 
         # Check if STEP (Success Center) employee.
-        if 'success_center' in settings.INSTALLED_CAE_PROJECTS:
+        if 'success_center_core' in settings.INSTALLED_CAE_PROJECTS:
             for step_group in step_employee_groups:
                 if step_group in user_groups:
                     return redirect('success_center_core:index')
@@ -108,7 +108,7 @@ def logout(request):
                     url_set = True
 
         # Check if STEP (Success Center) employee.
-        if not url_set and 'success_center' in settings.INSTALLED_CAE_PROJECTS:
+        if not url_set and 'success_center_core' in settings.INSTALLED_CAE_PROJECTS:
             for step_group in step_employee_groups:
                 if step_group in user_groups:
                     logout_redirect_url = redirect('success_center_core:index')

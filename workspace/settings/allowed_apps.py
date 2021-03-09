@@ -5,11 +5,9 @@ Manages and auto-installs apps for project.
 # User Class Imports.
 from workspace.settings.reusable_settings import *
 
-
 APP_DIR = os.path.join(BASE_DIR, 'apps')
 
 debug_print('')
-
 
 # Django base apps, any 3rd party add-on apps, and CAE_Home app.
 # All other CAE Apps should be defined under the "Allowed_CAE_Apps" setting.
@@ -32,7 +30,6 @@ INSTALLED_APPS = [
 
     'webpack_loader',
 ]
-
 
 # List of allowed apps to automatically install.
 # Formatted as a dictionary of sub-dictionary values.
@@ -110,12 +107,12 @@ ALLOWED_CAE_PROJECTS = {
         'url-prefix': 'success_center',
         'related_apps': {
             'success_center_core': {},
+            'success_center_timesheets': {},
+
         },
         'third_party_apps': [],
     },
 }
-
-
 
 casefolded_project_dict = {}
 # Set all project keys to be case insensitive.
@@ -124,7 +121,6 @@ for key in ALLOWED_CAE_PROJECTS.keys():
     casefolded_project_dict[str(key).casefold()]['official_name'] = key
 
 ALLOWED_CAE_PROJECTS = casefolded_project_dict
-
 
 # Automatically populated for automatic url generation on home page. Do not edit.
 INSTALLED_CAE_PROJECTS = {}
@@ -240,13 +236,11 @@ for project_folder_name in project_folder_list:
 for project_name in excluded_project_list:
     debug_print('   {0}Excluded Project{1}: {2}'.format(ConsoleColors.bold_red, ConsoleColors.reset, project_name))
 
-
 # Create list of urls, formatted in way templating can understand (For some reason, above implementations resulted
 # in templates only recognizing project_name keys, but nothing further).
 INSTALLED_APP_DETAILS = []
 for project, project_settings in INSTALLED_CAE_PROJECTS.items():
     INSTALLED_APP_DETAILS.append(project_settings)
-
 
 # Define Admin_Reorder variable for third party "admin customization" app.
 ADMIN_REORDER = (
@@ -292,6 +286,5 @@ for project, project_settings in INSTALLED_CAE_PROJECTS.items():
     for app, app_name in project_settings['related_apps'].items():
         formatted_name = app.replace('_', ' ').title().replace('Cae', 'CAE')
         ADMIN_REORDER += ({'app': app, 'label': formatted_name},)
-
 
 debug_print('')
