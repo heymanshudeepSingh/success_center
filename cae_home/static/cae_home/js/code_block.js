@@ -5,16 +5,16 @@
 
 /**
  *  Create function with JQuery-esque syntax.
- *  IE: Call with either:
- *      $(element).code_block()
+ *  IE: Call with:
+ *      $(element).cae__codeBlock()
  */
 (function( $ ) {
 
     // Function call name for base "Code Block" element.
-    $.fn.code_block = function() {
+    $.fn.cae__codeBlock = function() {
 
         this.each(function() {
-            formatCodeBlockElement(this);
+            window.cae_functions['codeBlock__formatCodeBlockElement'](this);
         });
 
         // Allow other functions to chain off element, if desired.
@@ -29,7 +29,7 @@
  * Function to format code block html/css element.
  *  :code_container: The element to manipulate.
  */
-function formatCodeBlockElement(code_container) {
+window.cae_functions['codeBlock__formatCodeBlockElement'] = function(code_container) {
 
     let pre_element, code_element, inner_element_html;
 
@@ -78,7 +78,7 @@ function formatCodeBlockElement(code_container) {
         $(code_container).append(pre_element);
 
         // Standardize code element spacing, using "pre" element.
-        resetCodeTabbing(pre_element);
+        window.cae_functions['codeBlock__resetCodeTabbing'](pre_element);
 
         // Escaped characters seem to be fine in this case so do nothing further.
 
@@ -92,10 +92,10 @@ function formatCodeBlockElement(code_container) {
         pre_element.append(code_element);
 
         // Standardize code element spacing, using "pre" element.
-        resetCodeTabbing(pre_element);
+        window.cae_functions['codeBlock__resetCodeTabbing'](pre_element);
 
         // For some reason, escaped characters will not display properly here. Correct this with "pre" element.
-        correctCodeEscapedChars(pre_element);
+        window.cae_functions['codeBlock__correctCodeEscapedChars'](pre_element);
 
     } else if (pre_element == null && code_element != null) {
         // Only "code" element was found. Create "pre" element.
@@ -107,10 +107,10 @@ function formatCodeBlockElement(code_container) {
         code_container.append(pre_element);
 
         // Standardize code element spacing, using "pre" element.
-        resetCodeTabbing(pre_element);
+        window.cae_functions['codeBlock__resetCodeTabbing'](pre_element);
 
         // For some reason, escaped characters will not display properly here. Correct this with "pre" element.
-        correctCodeEscapedChars(pre_element);
+        window.cae_functions['codeBlock__correctCodeEscapedChars'](pre_element);
 
         // Finally, do one more step to correct top spacing.
         inner_element_html = $(pre_element).html();
@@ -121,7 +121,7 @@ function formatCodeBlockElement(code_container) {
         // Both "pre" and "code" elements exist. Nothing to create.
 
         // Standardize code element spacing, using "pre" element.
-        resetCodeTabbing(pre_element);
+        window.cae_functions['codeBlock__resetCodeTabbing'](pre_element);
 
         // Escaped characters seem to be fine in this case so do nothing further.
     }
@@ -141,7 +141,7 @@ function formatCodeBlockElement(code_container) {
  * Replace extra spacing at start of code blocks.
  * This makes it so it doesn't matter where our code elements are nested within our template code.
  */
-function resetCodeTabbing(reset_element) {
+window.cae_functions['codeBlock__resetCodeTabbing'] = function(reset_element) {
     let html = $(reset_element).html();
     let pattern = html.match(/\s*\n[\t\s]*/);
     $(reset_element).html(html.replace(new RegExp(pattern, "g"),'\n'));
@@ -152,10 +152,10 @@ function resetCodeTabbing(reset_element) {
  * Handle for escaped characters, such as the "<" sign being typed as "&lt;".
  * This makes it so the intended characters will always display, instead of the escaped versions.
  */
-function correctCodeEscapedChars(escaped_element) {
+window.cae_functions['codeBlock__correctCodeEscapedChars'] = function(escaped_element) {
     let escaped_element_html = $(escaped_element).html();
     $(escaped_element).empty();
-    $(escaped_element).append(htmlDecode(escaped_element_html));
+    $(escaped_element).append(window.cae_functions['codeBlock__htmlDecode'](escaped_element_html));
 }
 
 
@@ -164,12 +164,12 @@ function correctCodeEscapedChars(escaped_element) {
  *
  * From https://stackoverflow.com/a/34064434
  */
-function htmlDecode(html_input) {
+window.cae_functions['codeBlock__htmlDecode'] = function(html_input) {
   let doc = new DOMParser().parseFromString(html_input, "text/html");
   return doc.documentElement.textContent;
 }
 
 
 $(document).ready(function() {
-    $('.code-block').code_block();
+    $('.code-block').cae__codeBlock();
 });

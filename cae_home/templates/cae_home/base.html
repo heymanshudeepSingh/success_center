@@ -52,6 +52,14 @@
 
       {% block base_scripts %}
 
+        <script>
+          // Create base "window.xyz" scope elements, to act as general containers and help namespace custom JavaScript
+          // logic. Without these, production "minimization-compilation" seems to arbitrarily lose some global
+          // variables/functions, while having no problems with others. I can only assume it's some namespacing issue.
+          window.cae_functions = {};
+          window.cae_vars = {};
+        </script>
+
         {% if site_debug %}
           <script src="{% static 'third_party/js/jquery_3.5.1.js' %}"></script>
           <script src="{% static 'third_party/js/react_17.0.1_development.js' %}"></script>

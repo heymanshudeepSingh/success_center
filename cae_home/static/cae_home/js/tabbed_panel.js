@@ -8,27 +8,27 @@
 $('.panel.tabs').each(function() {
 
     // Save panel body element.
-    var panel_body = $(this).children('.body, .content');
+    let panel_body = $(this).children('.body, .content');
 
     // Detach all tab elements inside body.
-    var tabs = $(panel_body).children('.tab').detach();
+    let tabs = $(panel_body).children('.tab').detach();
 
     // Create tab elements.
-    var first_tab = true;
-    var tab_name_array = [];
-    var tab_nav = $('<ul class="tab-nav"></ul>');
-    var tab_content = $('<div class="tab-content"></div>');
+    let first_tab = true;
+    let tab_name_array = [];
+    let tab_nav = $('<ul class="tab-nav"></ul>');
+    let tab_content = $('<div class="tab-content"></div>');
 
     $(tabs).each(function() {
 
         // Create tab navigation element.
-        var header = $(this).children(':header:first()').detach();
-        var tab_child = $('<li></li>').append(header);
+        let header = $(this).children(':header:first()').detach();
+        let tab_child = $('<li></li>').append(header);
         tab_name_array.push($(header).text());
 
         // Set onclick tab functionality.
         $(tab_child).on('click', function() {
-            toggleSelectedPanelTab(this);
+            window.cae_functions['tabbedPanels__toggleSelectedPanelTab'](this);
         });
 
         // Attach to parent.
@@ -57,14 +57,14 @@ $('.panel.tabs').each(function() {
 /**
  * Handles tab click events.
  */
-function toggleSelectedPanelTab(selected_tab) {
+window.cae_functions['tabbedPanels__toggleSelectedPanelTab'] = function(selected_tab) {
 
     // Remove 'selected' class from all tab-nav siblings and apply to self.
     $(selected_tab).siblings('.selected').removeClass('selected');
     $(selected_tab).addClass('selected');
 
     // Toggle tab-content styles to show/hide.
-    var tab_content = $(selected_tab).parent().parent().children('.tab-content');
+    let tab_content = $(selected_tab).parent().parent().children('.tab-content');
     $(tab_content).children().each(function() {
         $(this).removeClass('selected');
 

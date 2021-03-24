@@ -6,18 +6,18 @@
 /**
  *  Create function with JQuery-esque syntax.
  *  IE: Call with either:
- *      $(element).selectButtons()
- *      $(element).selectButtonsSide()
+ *      $(element).cae__selectButtons()
+ *      $(element).cae__selectButtonsSide()
  */
 (function( $ ) {
 
     // Function call name for base "SelectButtons" widget.
-    $.fn.selectButtons = function() {
+    $.fn.cae__selectButtons = function() {
 
         // Go through each element with function.
         // Filter out anything that isn't a select form field.
         this.filter("select").each(function() {
-            createSelectButtonWidget(this);
+            window.cae_functions['selectButtons__createSelectButtonWidget'](this);
         });
 
         // Allow other functions to chain off element, if desired.
@@ -26,12 +26,12 @@
     };
 
     // Function call name for "SelectButtonsSide" widget.
-    $.fn.selectButtonsSide = function() {
+    $.fn.cae__selectButtonsSide = function() {
 
         // Go through each element with function.
         // Filter out anything that isn't a select form field.
         this.filter("select").each(function() {
-            createSelectButtonWidget(this, true);
+            window.cae_functions['selectButtons__createSelectButtonWidget'](this, true);
         });
 
         // Allow other functions to chain off element, if desired.
@@ -47,24 +47,24 @@
  *  :select_element: The widget element to manipulate.
  *  :display_side: Boolean to determine if widget should be rendered on side.
  */
-function createSelectButtonWidget(select_element, display_side=false) {
+window.cae_functions['selectButtons__createSelectButtonWidget'] = function(select_element, display_side=false) {
 
     // If widget is meant to display on side, we need to move element within form.
     if (display_side) {
 
         // Get parent form.
-        var parent_container = $(select_element).parent().parent().parent();
+        let parent_container = $(select_element).parent().parent().parent();
 
         // Add css class to form to handle columns.
         $(parent_container).addClass('multi-col');
 
         // Get widget to move and add it to a seperate sub-div.
-        var right_form_inputs = $('<div class="form-col mobile-display-first"></div>');
-        var full_widget = $(select_element).parent().parent();
+        let right_form_inputs = $('<div class="form-col mobile-display-first"></div>');
+        let full_widget = $(select_element).parent().parent();
         $(full_widget).appendTo(right_form_inputs);
 
         // Move all remaining children in form to sub-div.
-        var left_form_inputs = $('<div class="form-col"></div>');
+        let left_form_inputs = $('<div class="form-col"></div>');
         $(parent_container).children().each(function() {
             $(this).appendTo(left_form_inputs);
         });
@@ -76,10 +76,10 @@ function createSelectButtonWidget(select_element, display_side=false) {
 
 
     // Parse select element to create selection_list.
-    var selection_list = [];
+    let selection_list = [];
     $(select_element).children().each(function() {
-        child_value = this['value'];
-        child_data = this['childNodes'][0]['data'];
+        let child_value = this['value'];
+        let child_data = this['childNodes'][0]['data'];
 
         // Ignore placeholder item.
         if (child_data != '---------') {
@@ -91,9 +91,9 @@ function createSelectButtonWidget(select_element, display_side=false) {
     });
 
     // Now create new widget with selection_list data.
-    button_widget = $('<div class="select-buttons"></div>');
+    let button_widget = $('<div class="select-buttons"></div>');
     $(selection_list).each(function() {
-        button_instance = $('<div class="select-item"><p>' + this['text'] + '</p></div>');
+        let button_instance = $('<div class="select-item"><p>' + this['text'] + '</p></div>');
         button_instance.data('id', this['pk']);
         button_widget.append(button_instance);
     });
@@ -102,7 +102,7 @@ function createSelectButtonWidget(select_element, display_side=false) {
     $(select_element).addClass('accessibility-element');
     $(select_element).parent().append(button_widget);
     $('form .select-buttons .select-item').on('click', function() {
-        toggleSelectbutton(this);
+        window.cae_functions['selectButtons__toggleSelectbutton'](this);
     });
 }
 
@@ -110,8 +110,8 @@ function createSelectButtonWidget(select_element, display_side=false) {
 /**
  * Toggles selection class to make selection obvious to user.
  */
-function toggleSelectbutton(selected_button) {
-    console.log('Clicked button');
+window.cae_functions['selectButtons__toggleSelectbutton'] = function(selected_button) {
+    // console.log('Clicked button');
     // console.log(selected_button);
 
     // First remove selected class from sibling elements.
@@ -127,7 +127,7 @@ function toggleSelectbutton(selected_button) {
     $(selected_button).addClass('selected');
 
     // Save selected id to original input element.
-    parent_element = $(selected_button).parent().siblings('.accessibility-element')[0];
+    let parent_element = $(selected_button).parent().siblings('.accessibility-element')[0];
     $(parent_element).val($(selected_button).data('id'));
 }
 
@@ -137,6 +137,6 @@ function toggleSelectbutton(selected_button) {
  */
 $(document).ready(function() {
     // Generate form widgets on page load.
-    $('.form-widget-select-buttons').selectButtons();
-    $('.form-widget-select-buttons-side').selectButtonsSide();
+    $('.form-widget-select-buttons').cae__selectButtons();
+    $('.form-widget-select-buttons-side').cae__selectButtonsSide();
 });

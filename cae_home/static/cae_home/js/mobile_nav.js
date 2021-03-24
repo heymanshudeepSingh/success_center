@@ -3,87 +3,86 @@
  */
 
 
+/**
+ * Add appropriate font sizing based on mobile display or not.
+ */
+window.cae_functions['mobileNav__addFontSizingClasses'] = function() {
+    let font_size_class = null;
+
+    if ($(window).width() > window.cae_vars['mobileNav__windowCutoff']) {
+        // Currently in desktop mode.
+        font_size_class = 'font-size-' + user_site_option_desktop_font_size;
+    } else {
+        // Currently in mobile mode.
+        font_size_class = 'font-size-' + user_site_option_mobile_font_size;
+    }
+
+    if (font_size_class != 'font-size-') {
+        window.cae_vars['body'].removeClass('font-size-base');
+        window.cae_vars['body'].addClass(font_size_class);
+    }
+}
+
+
+/**
+ * Remove all possible font-sizing classes from base element.
+ */
+window.cae_functions['mobileNav__removeFontSizingClasses'] = function() {
+    window.cae_vars['body'].removeClass('font-size-xs font-size-sm font-size-base font-size-md font-size-lg font-size-xl');
+}
+
+
+/**
+ * Hide mobile nav menu.
+ */
+window.cae_functions['mobileNav__hideMobileNav'] = function() {
+    // console.log("Hiding mobile nav.");
+
+    $(window.cae_vars['mobileNav__headerBottom']).css("display", "none");
+    $(window.cae_vars['mobileNav__headerBottom']).empty();
+}
+
+
 // Wait for full page load.
 $(document).ready(function() {
     // console.log("Loaded mobile_nav.js file.");
 
-    var mobile_window_cutoff = 857;
-
-    var body = $('body');
-    var mobile_icon = $('.mobile-nav-icon');
-    var main_nav = $('.nav-header-main > ul').clone();
-    var header_bottom = $('.header-bottom');
+    window.cae_vars['mobileNav__windowCutoff'] = 857;
+    window.cae_vars['body'] = $('body');
+    window.cae_vars['mobileNav__mobileIcon'] = $('.mobile-nav-icon');
+    window.cae_vars['mobileNav__mainNav'] = $('.nav-header-main > ul').clone();
+    window.cae_vars['mobileNav__headerBottom'] = $('.header-bottom');
 
     // Set initial font size classes.
-    add_font_sizing_classes();
-
-
-    /**
-     * Hide mobile nav menu.
-     */
-    function hide_mobile_nav() {
-        // console.log("Hiding mobile nav.");
-
-        $(header_bottom).css("display", "none");
-        $(header_bottom).empty();
-    }
+    window.cae_functions['mobileNav__addFontSizingClasses']();
 
 
     /**
      * Mobile Icon click handling.
      */
-    mobile_icon.on("click", function() {
+    window.cae_vars['mobileNav__mobileIcon'].on("click", function() {
         // console.log("Mobile icon clicked.");
 
         if ($(".header-bottom").css("display") == "none") {
             // console.log("Showing mobile nav.");
 
             $(".header-bottom").append("<nav></nav>");
-            $(".header-bottom nav").append(main_nav);
+            $(".header-bottom nav").append(window.cae_vars['mobileNav__mainNav']);
             $(".header-bottom").css("display", "flex");
         } else {
-            hide_mobile_nav();
+            window.cae_functions['mobileNav__hideMobileNav']();
         }
     });
 
 
     // Hide nav on other element clicks.
     $("main").on("click", function(event) {
-        hide_mobile_nav();
+        window.cae_functions['mobileNav__hideMobileNav']();
     });
 
     $("footer").on("click", function(event) {
-        hide_mobile_nav();
+        window.cae_functions['mobileNav__hideMobileNav']();
     });
-
-
-    /**
-     * Add appropriate font sizing based on mobile display or not.
-     */
-    function add_font_sizing_classes() {
-        var font_size_class = null;
-
-        if ($(window).width() > mobile_window_cutoff) {
-            // Currently in desktop mode.
-            font_size_class = 'font-size-' + user_site_option_desktop_font_size;
-        } else {
-            // Currently in mobile mode.
-            font_size_class = 'font-size-' + user_site_option_mobile_font_size;
-        }
-
-        if (font_size_class != 'font-size-') {
-            body.removeClass('font-size-base');
-            body.addClass(font_size_class);
-        }
-    }
-
-
-    /**
-     * Remove all possible font-sizing classes from base element.
-     */
-    function remove_font_sizing_classes() {
-        body.removeClass('font-size-xs font-size-sm font-size-base font-size-md font-size-lg font-size-xl');
-    }
 
 
     /**
@@ -91,12 +90,12 @@ $(document).ready(function() {
      */
      $(window).on('resize', function() {
         // Reset font sizing based on window.
-        remove_font_sizing_classes();
-        add_font_sizing_classes();
+        window.cae_functions['mobileNav__removeFontSizingClasses']();
+        window.cae_functions['mobileNav__addFontSizingClasses']();
 
         // Toggle nav menu based on width.
-        if ($(window).width() >= mobile_window_cutoff) {
-            hide_mobile_nav();
+        if ($(window).width() >= window.cae_vars['mobileNav__windowCutoff']) {
+            window.cae_functions['mobileNav__hideMobileNav']();
         }
      });
 

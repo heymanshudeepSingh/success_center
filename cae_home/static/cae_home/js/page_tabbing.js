@@ -7,46 +7,47 @@
 
 
 // Global Variables.
-var pagetabs_header_dict = {
+window.cae_vars['pageTabbing__headerDict'] = {      // Dict to hold all parsed tab header values.
     "All": [],
     "Other": [],
 };
-var allow_all_headers = true;
-var pagetabs_header_ordering = [];
-var page_tabbable_topics =[];
-var generate_page_tab_bool = true;
+window.cae_vars['pageTabbing__allowAllHeaders'] = true;     // Bool indicating if h2 headers get lumped into "other".
+window.cae_vars['pageTabbing__headerOrdering'] = [];        // Array to preserve ordering of tab headers.
+window.cae_vars['pageTabbing__topics'] =[];                 // List of "allowed" topics if lumping into "other".
+window.cae_vars['pageTabbing__generatationBool'] = true;    // Bool saving if we should generate tabs to begin with.
 
 
 /**
  * The start of page tabbing logic.
  */
-function page_tab_generation_main() {
+window.cae_functions['pageTabbing__pageTabGenerationMain'] = function () {
     // Get default pagetab content container.
-    var pagetab_content_containers = document.getElementsByClassName("page-tabs");
+    let pagetab_content_containers = document.getElementsByClassName("page-tabs");
+    let index = 0;
 
     // Handle for each pagetab container found on page. This allows multiple to exist on a page, if desired.
-    for (var index = 0; index < pagetab_content_containers.length; index++) {
+    for (index = 0; index < pagetab_content_containers.length; index++) {
         // Populate variables.
-        pagetabs_header_dict = {
+        window.cae_vars['pageTabbing__headerDict'] = {
             "All": [],
             "Other": [],
         };
-        pagetabs_header_ordering = [];
-        page_tabbable_topics = [];
+        window.cae_vars['pageTabbing__headerOrdering'] = [];
+        window.cae_vars['pageTabbing__topics'] = [];
 
         // Get tabbable topics, if provided.
-        tabbable_topics = pagetab_content_containers[index].dataset.headers;
+        let tabbable_topics = pagetab_content_containers[index].dataset.headers;
         if (tabbable_topics != null && tabbable_topics != "") {
             // Header topics provided. Parse and use that for tabbing.
-            allow_all_headers = false;
-            page_tabbable_topics = tabbable_topics.split(", ");
+            window.cae_vars['pageTabbing__allowAllHeaders'] = false;
+            window.cae_vars['pageTabbing__topics'] = tabbable_topics.split(", ");
         } else {
             // Header topics not provided. Default to using all found H2 elements.
-            allow_all_headers = true;
+            window.cae_vars['pageTabbing__allowAllHeaders'] = true;
         }
 
-        populate_page_tab_variables(pagetab_content_containers[index]);
-        generate_page_tabs(pagetab_content_containers[index], index);
+        window.cae_functions['pageTabbing__populatePageTabVariables'](pagetab_content_containers[index]);
+        window.cae_functions['pageTabbing__generatePageTabs'](pagetab_content_containers[index], index);
     }
 }
 
@@ -59,14 +60,15 @@ function page_tab_generation_main() {
  * If at least one H2 header has been found, then the element is stored under both header_dict["all"] and
  * header_dict[<header_name>], where <header_name> is the most recently found H2 element.
  */
-function populate_page_tab_variables(pagetab_content_container) {
-    var current_header = "Other";
+window.cae_functions['pageTabbing__populatePageTabVariables'] = function(pagetab_content_container) {
+    let current_header = "Other";
+    let index = 0;
 
     // Loop through all child content elements.
-    var page_length = pagetab_content_container.childNodes.length;
-    for (var index = 0; index < page_length; index++) {
+    let page_length = pagetab_content_container.childNodes.length;
+    for (index = 0; index < page_length; index++) {
         // Save current element for easy reference.
-        var current_element = pagetab_content_container.childNodes[index];
+        let current_element = pagetab_content_container.childNodes[index];
 
         // Check if element is empty. We can skip these.
         if (current_element.nodeName == "#text" && current_element.data.trim() == "") {
@@ -79,11 +81,14 @@ function populate_page_tab_variables(pagetab_content_container) {
                 current_header = current_element.firstChild.nodeValue;
 
                 // Check if item is in "tabbable topics" array. By default, all headers are allowed.
-                if (allow_all_headers || page_tabbable_topics.includes(current_header)) {
+                if (
+                    window.cae_vars['pageTabbing__allowAllHeaders'] ||
+                    window.cae_vars['pageTabbing__topics'].includes(current_header)
+                ) {
                     // Item is in "tabbable topics" array. We can create a new page tab for this content.
                     // Create new key with header value, and also push to ordering dict to preserve page content ordering.
-                    pagetabs_header_dict[current_header] = [];
-                    pagetabs_header_ordering.push(current_header);
+                    window.cae_vars['pageTabbing__headerDict'][current_header] = [];
+                    window.cae_vars['pageTabbing__headerOrdering'].push(current_header);
                 } else {
                     // Item is not in "tabbable topics" array. Put content into "Other" tab.
                     current_header = "Other";
@@ -91,15 +96,15 @@ function populate_page_tab_variables(pagetab_content_container) {
             }
 
             // Add element into "all" key.
-            pagetabs_header_dict["All"].push(pagetab_content_container.childNodes[index].cloneNode(true));
+            window.cae_vars['pageTabbing__headerDict']["All"].push(pagetab_content_container.childNodes[index].cloneNode(true));
             // Also add element to dictionary, under current found header.
-            pagetabs_header_dict[current_header].push(pagetab_content_container.childNodes[index]);
+            window.cae_vars['pageTabbing__headerDict'][current_header].push(pagetab_content_container.childNodes[index]);
         }
     }
 
     // Check if any elements were added to "Other" section. If so, add "Other" to list of dict values.
-    if (pagetabs_header_dict["Other"].length > 0) {
-        pagetabs_header_ordering.push("Other");
+    if (window.cae_vars['pageTabbing__headerDict']["Other"].length > 0) {
+        window.cae_vars['pageTabbing__headerOrdering'].push("Other");
     }
 }
 
@@ -107,99 +112,105 @@ function populate_page_tab_variables(pagetab_content_container) {
 /**
  * Generates actual tab navigation elements on page.
  */
-function generate_page_tabs(pagetab_content_container, element_num) {
+window.cae_functions['pageTabbing__generatePageTabs'] = function(pagetab_content_container, element_num) {
+    let index = 0;
+    let inner_index = 0;
+    let tab_index = 0;
 
     // Check if we have at least two unique headers to create tabs for.
     // If so, generate pagetabs html. Otherwise, leave page as is.
-    header_array_clone = pagetabs_header_ordering.slice();
+    let header_array_clone = window.cae_vars['pageTabbing__headerOrdering'].slice();
 
     // We don't want to count the "Other" tab for counting purposes. It may or may not be present.
     if (header_array_clone.includes("Other")) {
-        var index = header_array_clone.indexOf("Other");
+        index = header_array_clone.indexOf("Other");
         header_array_clone.splice(index, 1);
     }
 
     // Now that we have an array of only "unique" tab values, check length.
     if (header_array_clone.length >= 2) {
-        generate_page_tab_bool = true;
+        window.cae_vars['pageTabbing__generatationBool'] = true;
     } else {
-        generate_page_tab_bool = false;
+        window.cae_vars['pageTabbing__generatationBool'] = false;
     }
 
     // Only proceed to manipulate page if page tabs should be generated.
-    if (generate_page_tab_bool) {
+    if (window.cae_vars['pageTabbing__generatationBool']) {
         // Create parent tab container.
-        var page_tabs = document.createElement("nav");
+        let page_tabs = document.createElement("nav");
         page_tabs.className = "pagetabs-tab-container";
         page_tabs_ul = document.createElement("ul")
         page_tabs.appendChild(page_tabs_ul);
 
         // Create parent content container.
-        var page_divs = document.createElement("div");
+        let page_divs = document.createElement("div");
         page_divs.className = "pagetabs-content-container";
 
         // Default "All" tab. Will always be present in a page tabs page.
         // Create tab for "All".
-        var all_tab = document.createElement("li");
+        let all_tab = document.createElement("li");
         all_tab.id = "pagetabs-" + element_num + "-all-tab";
         all_tab.className = "pagetabs-tab-element selected";
         all_tab.innerHTML = "All";
         page_tabs_ul.append(all_tab);
 
         // Create page content div for "All".
-        var all_div = document.createElement("div");
+        let all_div = document.createElement("div");
         all_div.id = "pagetabs-" + element_num + "-all-div";
         all_div.className = "pagetabs-content-element";
-        var all_arr_length = pagetabs_header_dict["All"].length;
+        let all_arr_length = window.cae_vars['pageTabbing__headerDict']["All"].length;
         for (index = 0; index < all_arr_length; index++) {
-            all_div.appendChild(pagetabs_header_dict["All"][index]);
+            all_div.appendChild(window.cae_vars['pageTabbing__headerDict']["All"][index]);
         }
         page_divs.append(all_div);
 
         // In most cases, we will have an automatically generated "Other" tab, too.
         // Create tab for "Other".
-        var other_tab = document.createElement("li");
+        let other_tab = document.createElement("li");
         other_tab.id = "pagetabs-" + element_num + "-other-tab";
         other_tab.className = "pagetabs-tab-element";
         other_tab.innerHTML = "Other";
 
         // Create page content for "Other".
-        var other_div = document.createElement("div");
+        let other_div = document.createElement("div");
         other_div.id = "pagetabs" + element_num + "-other-div";
         other_div.className = "pagetabs-content-element";
 
         // Loop through all values present in ordering array to dynamically add all other headers.
         // Looping through this way ensures we preserve page content ordering.
-        for (var index = 0; index < pagetabs_header_ordering.length; index++) {
+        for (index = 0; index < window.cae_vars['pageTabbing__headerOrdering'].length; index++) {
 
             // Check if header item is in "tabbable topics" array.
-            if (allow_all_headers || page_tabbable_topics.includes(pagetabs_header_ordering[index])) {
+            if (
+                window.cae_vars['pageTabbing__allowAllHeaders'] ||
+                window.cae_vars['pageTabbing__topics'].includes(window.cae_vars['pageTabbing__headerOrdering'][index])
+            ) {
                 // Item is in "tabbable topics" array. We can create a new page tab for this content.
-                var curr_header = pagetabs_header_ordering[index];
-                var header_slug = slugify_text(curr_header);
+                let curr_header = window.cae_vars['pageTabbing__headerOrdering'][index];
+                let header_slug = window.cae_functions['pageTabbing__slugifyText'](curr_header);
 
                 // Create tab for current header.
-                var curr_tab = document.createElement("li");
+                let curr_tab = document.createElement("li");
                 curr_tab.id = "pagetabs-" + element_num + "-" + header_slug + "-tab";
                 curr_tab.className = "pagetabs-tab-element";
                 curr_tab.innerHTML = curr_header;
                 page_tabs_ul.append(curr_tab);
 
                 // Create page content div for current header.
-                var curr_div = document.createElement("div");
+                let curr_div = document.createElement("div");
                 curr_div.id = "pagetabs-" + element_num + "-" + header_slug + "-div";
                 curr_div.className = "pagetabs-content-element";
-                var array_length = pagetabs_header_dict[curr_header].length;
-                for (var inner_index = 0; inner_index < array_length; inner_index++) {
-                    curr_div.appendChild(pagetabs_header_dict[curr_header][inner_index]);
+                let array_length = window.cae_vars['pageTabbing__headerDict'][curr_header].length;
+                for (inner_index = 0; inner_index < array_length; inner_index++) {
+                    curr_div.appendChild(window.cae_vars['pageTabbing__headerDict'][curr_header][inner_index]);
                 }
                 page_divs.append(curr_div);
 
             } else {
                 // Item is not in "tabbable topics" array. Put content into "Other" tab.
-                var array_length = pagetabs_header_dict["Other"].length;
-                for (var inner_index = 0; inner_index < array_length; inner_index++) {
-                    other_div.appendChild(pagetabs_header_dict["Other"][inner_index]);
+                let array_length = window.cae_vars['pageTabbing__headerDict']["Other"].length;
+                for (inner_index = 0; inner_index < array_length; inner_index++) {
+                    other_div.appendChild(window.cae_vars['pageTabbing__headerDict']["Other"][inner_index]);
                 }
             }
         }
@@ -209,9 +220,9 @@ function generate_page_tabs(pagetab_content_container, element_num) {
             // Other tab has elements and should exist.
             page_tabs_ul.append(other_tab);
             page_divs.append(other_div);
-        } else if (pagetabs_header_ordering.includes("Other")) {
+        } else if (window.cae_vars['pageTabbing__headerOrdering'].includes("Other")) {
             // "Other" tab does not have elements and should not exist.
-            pagetabs_header_ordering.splice("Other", 1);
+            window.cae_vars['pageTabbing__headerOrdering'].splice("Other", 1);
         }
 
         // Make sure nothing is in container element so we can rebuild it. Everything should be processed by now.
@@ -225,31 +236,31 @@ function generate_page_tabs(pagetab_content_container, element_num) {
 
         // Add "All" value to start of array.
         // If we have tabs at all, then this is always present and first.
-        pagetabs_header_ordering.unshift("All");
+        window.cae_vars['pageTabbing__headerOrdering'].unshift("All");
         current_tab_parent = document.getElementsByClassName("pagetabs-tab-container")[element_num].childNodes[0];
 
         // Add click event listeners for pagetabs.
-        for (var index = 0; index < pagetabs_header_ordering.length; index++) {
+        for (index = 0; index < window.cae_vars['pageTabbing__headerOrdering'].length; index++) {
             // Get tab elements.
-            var current_tab = current_tab_parent.childNodes[index];
+            let current_tab = current_tab_parent.childNodes[index];
 
             // Add click handling to tab elements.
             current_tab.addEventListener("click", function() {
                 // Get index of clicked tab element.
                 // Do this by cycling back through parent container until we get to first child, and counting each.
 
-                var element_index = 0;
-                var current_tab = this;
+                let element_index = 0;
+                let current_tab = this;
                 while (current_tab.previousSibling != null) {
                     current_tab = current_tab.previousSibling;
                     element_index++;
                 }
 
                 // Hide all div tab-sections, except the one clicked.
-                for (var tab_index = 0; tab_index < pagetabs_header_ordering.length; tab_index++) {
+                for (tab_index = 0; tab_index < window.cae_vars['pageTabbing__headerOrdering'].length; tab_index++) {
                     // Get parent of content elements to hide/show.
-                    tab_container = this.parentNode;
-                    content_container = document.getElementsByClassName("pagetabs-content-container")[element_num];
+                    let tab_container = this.parentNode;
+                    let content_container = document.getElementsByClassName("pagetabs-content-container")[element_num];
 
                     // Check if same index as clicked. If so, show instead.
                     if (element_index == tab_index) {
@@ -274,7 +285,7 @@ function generate_page_tabs(pagetab_content_container, element_num) {
             });
 
             // Also hide all content, initially. Otherwise we'll have duplicates on page.
-            var tab_content = document.getElementsByClassName("pagetabs-content-container")[element_num].childNodes[index];
+            let tab_content = document.getElementsByClassName("pagetabs-content-container")[element_num].childNodes[index];
             tab_content.style.display = "none";
         }
 
@@ -290,10 +301,10 @@ function generate_page_tabs(pagetab_content_container, element_num) {
  * Slugs are safe for urls and html id's.
  * Essentially, all letters are converted to lowercase, and whitespace is converted to dashes.
  */
-function slugify_text(orig_text) {
+window.cae_functions['pageTabbing__slugifyText'] = function(orig_text) {
     return orig_text.toLowerCase().replace(/ /g, "-");
 }
 
 
 // Run "page Tab Generation" logic.
-page_tab_generation_main();
+window.cae_functions['pageTabbing__pageTabGenerationMain']();

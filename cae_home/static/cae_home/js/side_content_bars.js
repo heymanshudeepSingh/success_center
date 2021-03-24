@@ -7,6 +7,43 @@
  */
 
 
+/**
+ * Hide left bar.
+ */
+window.cae_functions['sideContentBars__hideLeftBar'] = function() {
+    $('#content-bar-left .bar-content').addClass('hidden');
+    $('#content-bar-left .arrow-right').removeClass('hidden');
+    $('#content-bar-left .arrow-left').addClass('hidden');
+}
+
+/**
+ * Display left bar.
+ */
+window.cae_functions['sideContentBars__showLeftBar'] = function() {
+    $('#content-bar-left .bar-content').removeClass('hidden');
+    $('#content-bar-left .arrow-right').addClass('hidden');
+    $('#content-bar-left .arrow-left').removeClass('hidden');
+}
+
+/**
+ * Hide right bar.
+ */
+window.cae_functions['sideContentBars__hideRightBar'] = function() {
+    $('#content-bar-right .bar-content').addClass('hidden');
+    $('#content-bar-right .arrow-left').removeClass('hidden');
+    $('#content-bar-right .arrow-right').addClass('hidden');
+}
+
+/**
+ *  Display right bar.
+ */
+window.cae_functions['sideContentBars__showRightBar'] = function() {
+    $('#content-bar-right .bar-content').removeClass('hidden');
+    $('#content-bar-right .arrow-left').addClass('hidden');
+    $('#content-bar-right .arrow-right').removeClass('hidden');
+}
+
+
 // Wait for full page load.
 $(document).ready(function() {
     // console.log('Started side_content_bars.js file.');
@@ -16,72 +53,35 @@ $(document).ready(function() {
         $('#content-bar-left').remove();
     } else {
         $('#content-bar-left').removeClass('hidden');
-        hide_left_bar();
+        window.cae_functions['sideContentBars__hideLeftBar']();
     }
     if ($('#content-bar-right .bar-content').children().length == 0) {
         $('#content-bar-right').remove();
     } else {
         $('#content-bar-right').removeClass('hidden');
-        hide_right_bar();
+        window.cae_functions['sideContentBars__hideRightBar']();
     }
 
     // Handle menu clicks.
     // Hide left bar on left arrow click.
     $('#content-bar-left .arrow-left').on('click', function() {
         // console.log('Clicked left arrow.');
-        hide_left_bar();
+        window.cae_functions['sideContentBars__hideLeftBar']();
     });
     // Show left bar on right arrow click.
     $('#content-bar-left .arrow-right').on('click', function() {
         // console.log('Clicked right arrow.');
-        show_left_bar()
+        window.cae_functions['sideContentBars__showLeftBar']()
     });
     // Hide right bar on right arrow click.
     $('#content-bar-right .arrow-right').on('click', function() {
         // console.log('Clicked left arrow.');
-        hide_right_bar();
+        window.cae_functions['sideContentBars__hideRightBar']();
     });
     // Show right bar on left arrow click.
     $('#content-bar-right .arrow-left').on('click', function() {
         // console.log('Clicked right arrow.');
-        show_right_bar()
+        window.cae_functions['sideContentBars__showRightBar']()
     });
-
-
-    /**
-     * Hide left bar.
-     */
-    function hide_left_bar() {
-        $('#content-bar-left .bar-content').addClass('hidden');
-        $('#content-bar-left .arrow-right').removeClass('hidden');
-        $('#content-bar-left .arrow-left').addClass('hidden');
-    }
-
-    /**
-     * Display left bar.
-     */
-    function show_left_bar() {
-        $('#content-bar-left .bar-content').removeClass('hidden');
-        $('#content-bar-left .arrow-right').addClass('hidden');
-        $('#content-bar-left .arrow-left').removeClass('hidden');
-    }
-
-    /**
-     * Hide right bar.
-     */
-    function hide_right_bar() {
-        $('#content-bar-right .bar-content').addClass('hidden');
-        $('#content-bar-right .arrow-left').removeClass('hidden');
-        $('#content-bar-right .arrow-right').addClass('hidden');
-    }
-
-    /**
-     *  Display right bar.
-     */
-    function show_right_bar() {
-        $('#content-bar-right .bar-content').removeClass('hidden');
-        $('#content-bar-right .arrow-left').addClass('hidden');
-        $('#content-bar-right .arrow-right').removeClass('hidden');
-    }
 
 });

@@ -6,17 +6,17 @@
 /**
  *  Create function with JQuery-esque syntax.
  *  IE: Call with:
- *      $(element).signatureFormField()
+ *      $(element).cae__signatureFormField()
  */
 (function( $ ) {
 
     // Function call name for base "Signature Form" widget.
-    $.fn.signatureField = function() {
+    $.fn.cae__signatureField = function() {
 
         // Go through each element with function.
         // Filter out anything that isn't a signature form field.
         this.filter('.form-widget-signature-field').each(function() {
-            createSignatureFormWidget(this);
+            window.cae_functions['signature__createSignatureFormWidget'](this);
         });
 
         // Allow other functions to chain off element, if desired.
@@ -31,13 +31,13 @@
  * Function to create specialized form widget.
  *  :signature_element: The widget element to manipulate.
  */
-function createSignatureFormWidget(signature_element) {
+window.cae_functions['signature__createSignatureFormWidget'] = function(signature_element) {
 
     // Get elements.
-    var signature_parent = $(signature_element).parent().parent();
-    var parent_form = $(signature_parent).parent().parent();
-    var widget_field_error = $(signature_parent).prev();
-    var signature_data = $(signature_element).attr('value');
+    let signature_parent = $(signature_element).parent().parent();
+    let parent_form = $(signature_parent).parent().parent();
+    let widget_field_error = $(signature_parent).prev();
+    let signature_data = $(signature_element).attr('value');
 
     // Verify field error exists.
     if ( ! ( ($(widget_field_error).is('div')) && ($(widget_field_error).attr('class') == 'alert error') ) ) {
@@ -61,12 +61,12 @@ function createSignatureFormWidget(signature_element) {
     });
 
     // Create widget elements.
-    var signature_widget = $('<fieldset class="signature-widget"></fieldset>');
-    var widget_legend = $('<legend><h4>Signature</h4></legend>');
-    var widget_signature_pad = $('<canvas class="signature-pad" width="500px" height="150px"></canvas>');
-    var widget_signature_pad_container = $('<div class="signature-wrapper"></div>');
-    var widget_clear = $('<button class="signature-widget-clear secondary">Clear</button>');
-    var widget_input = signature_element;
+    let signature_widget = $('<fieldset class="signature-widget"></fieldset>');
+    let widget_legend = $('<legend><h4>Signature</h4></legend>');
+    let widget_signature_pad = $('<canvas class="signature-pad" width="500px" height="150px"></canvas>');
+    let widget_signature_pad_container = $('<div class="signature-wrapper"></div>');
+    let widget_clear = $('<button class="signature-widget-clear secondary">Clear</button>');
+    let widget_input = signature_element;
     $(widget_input).hide();
 
     // Combine and readd widget elements.
@@ -82,7 +82,7 @@ function createSignatureFormWidget(signature_element) {
     $(signature_parent).append(signature_widget);
 
     // Load 3rd Party signature element into canvas widget.
-    var signature_pad = new SignaturePad($(widget_signature_pad).get(0), {});
+    let signature_pad = new SignaturePad($(widget_signature_pad).get(0), {});
 
     // Populated form data, if provided.
     if (typeof signature_data !== typeof undefined && signature_data !== false) {
@@ -90,7 +90,7 @@ function createSignatureFormWidget(signature_element) {
     }
 
     // Find form's "submit" button and add event listener.
-    var form_submit = null;
+    let form_submit = null;
     $(parent_form).children().each(function () {
 
         // Examine each direct grandchild.
@@ -128,7 +128,7 @@ function createSignatureFormWidget(signature_element) {
  * Handle for signature change.
  # I'm not sure if this was doing anything?
  */
-function formSignatureOnChange() {
+window.cae_functions['signature__formSignatureOnChange'] = function() {
     // var mycanvas = document.getElementById("signature"); //get your canvas
     // var image = mycanvas.toDataURL(); //Convert
     // var image_arr = image.split(',')
@@ -141,5 +141,5 @@ function formSignatureOnChange() {
  */
 $(document).ready(function() {
     // Generate form widgets on page load.
-    $('.form-widget-signature-field').signatureField();
+    $('.form-widget-signature-field').cae__signatureField();
 });

@@ -52,7 +52,7 @@ $(document).ready(function() {
  *  :param status_type: Type of message to send.
  *  :return: None on success or string on bad status_type.
  */
-function generateStatusMessage(message, status_type) {
+window.cae_functions['statusMessages__generateStatusMessage'] = function(message, status_type) {
 
     console.log('starting message function');
 
