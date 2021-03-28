@@ -4,7 +4,7 @@ CAE Home app testing Utility Functions and Classes.
 
 # System Imports.
 import re, sys
-from contextlib import contextmanager
+from channels.testing import ChannelsLiveServerTestCase
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group, Permission
@@ -455,7 +455,7 @@ class IntegrationTestCase(TestCase, AbstractTestHelper):
         )
 
 
-class LiveServerTestCase(StaticLiveServerTestCase, AbstractTestHelper):
+class LiveServerTestCase(ChannelsLiveServerTestCase, AbstractTestHelper):
     """
     Test with Selenium to verify things like javascript.
 
