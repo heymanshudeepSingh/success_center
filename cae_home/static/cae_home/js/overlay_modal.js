@@ -16,13 +16,13 @@
 
 
 window.cae_vars['overlayModal__container'] = $('#overlay-modal-container');
-window.cae_vars['overlay_modal'] = $('#overlay-modal');
+window.cae_vars['overlayModal__modal'] = $('#overlay-modal');
 // console.log(window.cae_vars['overlayModal__container']);
 // console.log(window.cae_vars['overlay_modal']);
 
 
 // Prevent clicks within modal from exiting overlay.
-$(window.cae_vars['overlay_modal']).click(function(event) {
+$(window.cae_vars['overlayModal__modal']).click(function(event) {
     event.stopPropagation();
     // console.log("Overlay modal clicked.");
 });
@@ -39,8 +39,8 @@ $(window.cae_vars['overlayModal__container']).click(function(event) {
  * Hide overlay modal.
  */
 window.cae_functions['overlayModal__hideModal'] = function() {
+    // console.log('Hiding overlay modal.');
     window.cae_vars['overlayModal__container'].addClass('hidden');
-    // console.log("Overlay modal hidden.");
 }
 
 
@@ -48,6 +48,6 @@ window.cae_functions['overlayModal__hideModal'] = function() {
  * Show overlay modal.
  */
 window.cae_functions['overlayModal__showModal'] = function() {
+    console.log('Showing overlay modal.');
     window.cae_vars['overlayModal__container'].removeClass('hidden');
-    // console.log("overlay modal shown.");
 }
