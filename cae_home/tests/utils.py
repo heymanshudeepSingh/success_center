@@ -474,13 +474,13 @@ class LiveServerTestCase(ChannelsLiveServerTestCase, AbstractTestHelper):
                 super().setUpClass()
 
                 # Two browser windows, each with a different user.
-                cls.driver1 = cls.create_driver()
-                cls.driver2 = cls.create_driver()
+                driver_1 = cls.create_driver()
+                driver_2 = cls.create_driver()
 
             def test_thing(self):
-                # Login with first window (self.driver1)
-                self._login(self.driver1, self.user1.username, self.password1)
-                # Go to a url
+                # Login with first window (self.driver1).
+                self._login(self.driver_1, self.user_1.username, self.password_1)
+                # Go to a url.
                 self.driver1.get(self.live_server_url + reverse('cae_web_core:room_schedule', args=['classroom']))
 
     See cae_web_core/tests/functional/test_room_schedules.py for a thorough example.
@@ -493,6 +493,17 @@ class LiveServerTestCase(ChannelsLiveServerTestCase, AbstractTestHelper):
         time.sleep(30) # Wait 30 seconds
 
         function_that_breaks()
+
+    Note that by default, any checks for an element on the page will instantly fail if the element is not available at
+    that exact second.
+    To change this functionality, and say, "wait 3 seconds for element before failing", you can use the
+    "implicitly_wait()" function:
+
+        driver_1 = cls.create_driver()
+        driver_1.implicitly_wait(3)
+
+    This is particularly useful in cases such as JavaScript, where we can't have a "wait for page load" function to
+    ensure the JavaScript is executed before continuing.
 
     """
     _drivers = None
