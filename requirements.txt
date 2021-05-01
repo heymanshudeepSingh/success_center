@@ -52,11 +52,11 @@ tblib
  # Optional Imports
  ##
 # For connecting to mysql. Not necessary if using sqlite during development.
-#mysqlclient==1.4.6
+mysqlclient==1.4.6
 # For ldap connection. Only necessary when CaeAuthBackend is turned on.
-#ldap3==2.7
+ldap3==2.7
 # For putting on a production server. Required for Apache/Daphne to use a Python virtual environment.
-#uWSGI==2.0.18
+uWSGI==2.0.18
 
 
 ###

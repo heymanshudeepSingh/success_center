@@ -1,17 +1,62 @@
-body {
-    Background-color: red;
+$buttonbgcolor: #fcc30f;
+$buttonborder: 1px solid #d3a103;;
+$fontsize: 18px;
+$radius: 5px;
+
+a {
+    color: #986516;
+    text-decoration: none;
+    &:hover {
+    color: white;
+    text-decoration:none;
+    cursor:pointer;
 }
-div .container {
-  display: flex; /* or inline-flex */
-    background-color: #fcc30f;
-}
-.head
-{
-    display: flex;
 }
 
-.primary {
-    color: #fff;
-    background-color: #bf5329;
-    border-color: #aa4a24;
+
+
+.button {
+    &-primary {
+        background-color: $buttonbgcolor;
+        border: $buttonborder ;
+        border-radius: $radius;
+        color: #986516;
+        display: inline-block;
+        padding: 6px 12px;
+        margin: 2px;
+        font-family: "Open Sans","Lato","Source Sans Pro",sans-serif;
+    }
 }
+
+.flex_base{
+    display: flex;
+    flex-direction: column;
+}
+div {
+    &.container{
+        @extend .flex_base;
+        justify-content: center;
+        position: relative;
+
+
+
+
+    }
+    &.head
+    {
+        @extend .flex_base;
+        align-items: center;
+        background-color: #fcc30f;
+        position: relative;
+
+    }
+    &.body{
+        @extend .flex_base;
+        align-content: space-between;
+        background-color : yellow;
+    }
+}
+
+
+
+
