@@ -38,6 +38,43 @@ div {
         justify-content: center;
         position: relative;
 
+        .container-head {
+            @extend .flex_base;
+            align-items: center;
+            background-color: red;
+            position: relative;
+
+        }
+
+         .container-body {
+             @extend .flex_base;
+             align-content: space-between;
+             background-color: pink;
+
+             .container-body-heading{
+                 @extend .flex_base;
+                 background-color: deeppink;
+                 flex: 1;
+                 grid-column-start: 1;
+                 grid-column-end: 9;
+
+                 .content{
+                     background-color: #fff;
+                     border-color: #1565c0;
+                     display: grid;
+                     grid-template-columns: repeat(auto-fill, 25%);
+
+                 }
+
+
+             }
+
+             .container-body-content{
+                 flex: 2;
+                 background-color:cornflowerblue;
+
+             }
+         }
 
 
 
@@ -46,14 +83,27 @@ div {
     {
         @extend .flex_base;
         align-items: center;
-        background-color: #fcc30f;
+        background-color: red;
         position: relative;
 
     }
     &.body{
         @extend .flex_base;
         align-content: space-between;
-        background-color : yellow;
+        align-items: center;
+        background-color : pink;
+
+         &.heading{
+
+            flex: 1;
+            background-color: red;
+
+
+        }
+        &.days_of_week{
+            flex: 1;
+            background-color: blue;
+        }
     }
 }
 
