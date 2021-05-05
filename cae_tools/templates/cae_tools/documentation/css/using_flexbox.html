@@ -1,0 +1,653 @@
+{% extends 'cae_tools/documentation/css/main.html' %}
+{% load static %}
+
+
+{% block title_page_name %}CSS Flexbox |  {{ block.super }}{% endblock title_page_name %}
+
+
+{% block content %}
+  {{ block.super }}
+
+  <h2>Using FlexBox</h2>
+
+  <div class="alert warn">
+    <p>
+      Note: When working with flexbox, it's always best to start with the largest, outer-most elements and work inwards.
+    </p>
+  </div>
+
+  <p>
+    The "flex-box" style is a (comparatively) newer element <span class="highlight code">display</span> property. It can
+    be given to an element with <span class="highlight code">display: flex;</span> (but see
+    <a href="">project mixins</a> for a better way to handle this, within Workspace code).
+  </p>
+
+  <p>
+    In most situations, the flex-box style, is simply better to used than the original
+    <span class="highlight code">block</span>, <span class="highlight code">inline</span>, or
+    <span class="highlight code">inline-block</span> options. The benefit is that flex-box is a lot more dynamic, and
+    handles screen sizes much more intelligently.
+  </p>
+  <p>
+    Furthermore, elements (such as divs) with the flex-box style can be nested within each other to create responsive
+    content in as many layers as is needed.
+  </p>
+  <p>
+    Note that nearly all Workspace CSS effectively defaults to giving elements the flex-box style.
+  </p>
+
+  <article class="color">
+    <h3>Note on Flex-Grid</h3>
+    <p>
+      There is an alternative style to "flex-box", called "flex-grid". These two function incredibly similar. The main
+      difference is that a flex-box element is designed to only handle one axis at a time (vertical or horizontal).
+      Meanwhile, a flex-grid element is designed to handle both the x and y axis at once.
+    </p>
+    <p>
+      That sounds superior in theory, right? Why would anyone use a flex-box then? Why not just always use flex-grid?
+    </p>
+    <p>
+      The drawback to flex-grid is that it's actually <b>much</b> less flexible (no pun intended), overall. Plus, by
+      simply nesting two elements with flex-box, you can get control both vertical and horizontal directions
+      anyway.
+    </p>
+    <p>
+      To rephrase, flex-grid tends to be more work to maintain, if the element ever needs to change in the future. And
+      it otherwise gives minimal benefit over flex-box. So flex-box is generally just better to use anyway.
+    </p>
+  </article>
+
+  <article class="color">
+    <h3>Creating Responsive Flex Content</h3>
+    <p>
+      Since flex-box is so integral to CAE Workspace CSS, we include a brief guide here to using it, even though this
+      logic isn't unique to the Workspace (and thus applicable to all web projects). For a full guide to everything a
+      flex-box element can do, see
+      <a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">
+        https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+      </a>.
+    </p>
+
+    <p>
+      The following examples show a step-by-step guide of using flex-elements to display a set of 20 red squares in a
+      grid-like, manner, with both axises adjusting dynamically based on page size.
+    </p>
+
+    <article class="color">
+      <h4>Step 1 - Create an Outer, Parent Container</h4>
+
+      <p>
+        First, we'll always need an outer container that acts as a "parent". This is as simple as creating a div (or
+        other element) and giving it the flex-box style. In this case, we tell this parent element to span the
+        vertical axis.
+      </p>
+
+      <br>
+
+      <div style="display: flex; flex-direction: column; width: 100%; max-height: 50vh; overflow: auto; color: white; font-weight: bold;">
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="color">
+      <h4>Step 2 - Set Flex Wrap Options</h4>
+
+      <p>
+        Next, we update our initial flex parent to allow wrapping of child elements.
+      </p>
+
+      <br>
+
+      <div style="display: flex; flex-direction: column; flex-wrap: wrap; width: 100%; max-height: 50vh; overflow: auto; color: white; font-weight: bold;">
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+      </div>
+
+      <p>
+        Note that this already lays the data out decently. But elements are skewed towards the top-left side of the
+        parent element, instead of being evenly distributed across horizontal and vertical directions.
+      </p>
+    </article>
+
+    <article class="color">
+      <h4>Step 3 - Set Flex Justification Options</h4>
+
+      <p>
+        We can fix this by telling child elements to align themselves evenly across available space.
+      </p>
+
+      <br>
+
+      <div style="display: flex; flex-direction: column; flex-wrap: wrap; justify-content: space-around; width: 100%; max-height: 50vh; overflow: auto; color: white; font-weight: bold;">
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+        <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+          <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+          <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+        </div>
+      </div>
+
+      <p>
+        It's almost there, but now it's only technically spacing for the vertical axis. Since our parent element only
+        controls the vertical axis, the horizontal axis is currently ignored, and thus our content is still skewed to
+        the left-hand side of our element.
+      </p>
+    </article>
+
+    <article class="color">
+      <h4>Step 4 - Create an Inner Container, to Handle the for both Axis Directions</h4>
+
+      <p>
+        We now create a second "parent" flexbox element. This should be nested within the first parent, be given
+        the flex-box style, and be set to control the other axis. In our example, that means it will control the
+        horizontal axis.
+      </p>
+
+      <br>
+
+      <div style="display: flex; flex-direction: column; flex-wrap: wrap; justify-content: space-around; width: 100%; max-height: 50vh; overflow: auto; color: white; font-weight: bold;">
+        <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around; width: 100%; max-height: 50vh; overflow: auto;">
+          <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red;">
+            <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+          </div>
+          <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+            <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+          </div>
+          <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+            <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+          </div>
+          <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+            <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+          </div>
+          <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+            <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+          </div>
+          <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+            <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+          </div>
+          <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+            <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+          </div>
+          <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+            <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+          </div>
+          <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+            <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+          </div>
+          <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+            <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+          </div>
+          <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+            <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+          </div>
+          <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+            <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+          </div>
+          <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+            <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+          </div>
+          <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+            <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+          </div>
+          <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+            <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+          </div>
+          <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+            <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+          </div>
+          <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+            <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+          </div>
+          <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+            <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+          </div>
+          <div style="width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+            <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+          </div>
+        </div>
+      </div>
+
+      <p>
+        Now our content is looking much more uniform. Everything is distributed evenly in across our parent elements.
+        But what about the child content? The letters still have ugly alignment.
+      </p>
+    </article>
+
+    <article class="color">
+      <h4>Step 5 - Apply Flexbox to Child Elements</h4>
+
+      <p>
+        We can nest flexbox elements infinitely. So in this case, our child elements are aligned poorly, which means
+        we can repeat the above steps to apply flexbox to the children as well.
+      </p>
+
+      <p>
+        In this case, we only need to style on the horizontal axis, so we apply a horizontal flexbox. Doing so makes our
+        text elements line up nicely, with even spacing between them.
+      </p>
+
+      <br>
+
+      <div style="display: flex; flex-direction: column; flex-wrap: wrap; justify-content: space-around; width: 100%; max-height: 50vh; overflow: auto; color: white; font-weight: bold;">
+        <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around; width: 100%; max-height: 50vh; overflow: auto;">
+          <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around; width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red;">
+            <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+          </div>
+          <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around; width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+            <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+          </div>
+          <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around; width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+            <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+          </div>
+          <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around; width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+            <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+          </div>
+          <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around; width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+            <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+          </div>
+          <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around; width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+            <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+          </div>
+          <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around; width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+            <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+          </div>
+          <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around; width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+            <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+          </div>
+          <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around; width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+            <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+          </div>
+          <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around; width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+            <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+          </div>
+          <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around; width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+            <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+          </div>
+          <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around; width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+            <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+          </div>
+          <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around; width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+            <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+          </div>
+          <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around; width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+            <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+          </div>
+          <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around; width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+            <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+          </div>
+          <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around; width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+            <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+          </div>
+          <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around; width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+            <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+          </div>
+          <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around; width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+            <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+          </div>
+          <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around; width: 10%; height 50px; margin: 25px 5% 25px 5%; padding: 0; background: red; font-size: 10px;">
+            <p style="margin: 0; padding: 0; font-size: 10px">A</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">B</p>
+            <p style="margin: 0; padding: 0; font-size: 10px">C</p>
+          </div>
+        </div>
+      </div>
+
+      <p>
+        If these children had grandchildren elements, then we could further apply flex to those, repeating to
+        sub-elements as necessary until we get our final desired styling.
+      </p>
+
+    </article>
+
+  </article>
+{% endblock content %}

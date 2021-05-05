@@ -1,0 +1,82 @@
+{% extends 'cae_tools/documentation/css/main.html' %}
+{% load static %}
+
+
+{% block title_page_name %}General CSS Logic |  {{ block.super }}{% endblock title_page_name %}
+
+
+{% block content %}
+  {{ block.super }}
+
+  <h2>General CSS Logic</h2>
+
+  <article class="color">
+    <h3>Compiling CSS</h3>
+    <p>
+      Since the CAE Workspace CSS is written in Sass, it needs to be compiled on initial project download, and then
+      again every time changes are made. See
+      <a href="{% url 'cae_tools:documentation_general_setup' %}">Custom Scripts</a> for more information.
+    </p>
+  </article>
+
+  <article class="color">
+    <h3>Sass Files</h3>
+    <p>
+      A majority of CSS for all projects is located in Sass files, found at
+      <span class="highlight primary">&lt;project_root&gt;/cae_home/static/cae_home/css/sass/</span>. Within this
+      folder, any files names NOT prefixed with an underscore are considered to be "entrypoint files", and will be read
+      in by the Sass compiler script.
+    </p>
+    <p>
+      For organization, Sass logic is then divided into separate files, based on the general purpose of the styling. Due
+      to size of the <span class="highlight">content</span> stylings, these are then further subdivided within their own
+      folder.
+    </p>
+
+    <article class="color">
+      <h4>Project Sass Variables</h4>
+      <p>
+        Any variables or "universal" logic are found within the <span class="highlight">variables</span> folder.
+        Anything here is likely used across multiple other Sass files, if not imported into nearly every Sass file found
+        within Workspace.
+      </p>
+
+      <p>
+        The <span class="highlight primary">_core.scss</span> file merges all other CSS files in the
+        <span class="highlight">variables</span> folder, as well as contains some functions to make it easier to access
+        various color theme style values (because Sass syntax for accessing these is really gross).
+      </p>
+
+      <p>
+        The <span class="highlight primary">_colors.scss</span> file contains various color definitions that may or may
+        not be helpful for later reference. Includes things such as "Officially approved WMU colors as of 2018", "colors
+        taken directly from wmich.edu as of 2018", etc.
+      </p>
+
+      <p>
+        The <span class="highlight primary">_element_groups.scss</span> file contains various definitions of groupings.
+        These are used for looping through elements in other files, to ensure consistency across CSS. Whenever looping
+        through values in Sass, ideally the loop grouping should be defined in this file.
+      </p>
+
+      <p>
+        The <span class="highlight primary">_font_sizing.scss</span> file contains various sizing definitions for site
+        font options.
+      </p>
+
+      <p>
+        The <span class="highlight primary">_mixins.scss</span> file contains SASS mixin functions to expand certain CSS
+        values for backwards-browser compatibility. For example, instead of the standard
+        <span class="highlight code">display: flex-box;</span>, one should use
+        <span class="highlight code">@include display-flex;</span> to call this file's backwards-compatible flex-box
+        styles. This is particularly important since the CAE Center serves various sites for WMU, which means we may
+        have to support really old machines that use way outdated browsers.
+      </p>
+
+      <p>
+        The <span class="highlight primary">_screen_sizing.scss</span> file contains various sizing definitions for site
+        "responsive CSS" stylings (aka, adjusting dynamically based on browser screen size).
+      </p>
+    </article>
+  </article>
+{% endblock content %}

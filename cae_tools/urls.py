@@ -25,8 +25,11 @@ urlpatterns = [
     path('documentation/css_examples/text_highlighting', views.css_text_highlighting, name='css_text_highlighting'),
     path('documentation/css_examples/', views.css_examples, name='css_examples'),
 
+    # CSS documentation urls.
+    path('documentation/css/general_logic/', views.docs_css_general_logic, name='documentation_css_general'),
+    path('documentation/css/using_flexbox/', views.docs_css_using_flexbox, name='documentation_css_flexbox'),
+
     # Custom Workspace Logic Documentation.
-    path('documentation/css/', views.docs_css, name='documentation_css'),
     path('documentation/general_setup/', views.docs_general_setup, name='documentation_general_setup'),
 
     # JavaScript documentation urls.
