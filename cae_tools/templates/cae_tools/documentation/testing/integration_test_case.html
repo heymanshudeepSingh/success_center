@@ -1,0 +1,71 @@
+{% extends 'cae_tools/documentation/testing/main.html' %}
+{% load static %}
+
+
+{% block title_page_name %}IntegrationTestCase Utility Class |  {{ block.super }}{% endblock title_page_name %}
+
+
+{% block content %}
+  {{ block.super }}
+
+  <h2>IntegrationTestCase Utility Class</h2>
+  <p>
+    The Workspace IntegrationTestCase utility class is designed to use for a majority of UnitTests. A majority of custom
+    functionality in this class provides additional <span class="highlight code">assert()</span> statements, on top of
+    what already comes in the standard default Django TestCase class.
+  </p>
+  <p>
+    This utility class has all the functionality provided in the BaseTestCase utility class, as well as:
+  </p>
+
+  <article class="color">
+    <h3>Assert Url Equal</h3>
+    <p>
+      The <span class="highlight code">self.assertURLEqual()</span> function takes in two URLs and compares them.
+    </p>
+    <p>
+      One url should be the "expected url", written as a string, and the other should be a literal url from a Django
+      response object, after doing a page query.
+    </p>
+    <p>
+      This function compares the two, urls to assert they match. This includes url parameters, if it's a GET request.
+      Set the <span class="highlight code">parse_qs</span> arg to True in order to ignore parameter ordering, but
+      otherwise still verify that urls and associated parameters match.
+    </p>
+  </article>
+
+  <article class="color">
+    <h3>Assert Response</h3>
+    <p>
+      The <span class="highlight code">self.assertResponse()</span> function takes in a few parameters and attempts to
+      create a corresponding Django Response page object.
+    </p>
+    <p>
+      This function then tests for some common values on the acquired Django Resposne page object, such as verifying
+      url, page Title, and checking if the page had redirected or not during request processing.
+    </p>
+    <p>
+      Note: This will automatically call the above <span class="highlight code">self.assertURLEqual()</span> function,
+      so calling it again to verify the page url is unnecessary.
+    </p>
+  </article>
+
+  <article class="color">
+    <h3>Assert GET Response</h3>
+    <p>
+      The <span class="highlight code">self.assertGetResponse()</span> function is effectively a wrapper for the above
+      <span class="highlight code">self.assertResponse()</span> function. It handles the same, except that it will
+      handle some args for you, to set for a GET response.
+    </p>
+
+  </article>
+
+  <article class="color">
+    <h3>Assert POST Response</h3>
+    <p>
+      The <span class="highlight code">self.assertPostResponse()</span> function is effectively a wrapper for the above
+      <span class="highlight code">self.assertResponse()</span> function. It handles the same, except that it will
+      handle some args for you, to set for a POST response.
+    </p>
+  </article>
+{% endblock content %}

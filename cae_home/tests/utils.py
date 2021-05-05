@@ -21,44 +21,12 @@ from selenium.webdriver.support.expected_conditions import staleness_of
 from urllib.parse import ParseResult, urlparse
 
 # User Class Imports.
-from .. import models
 from cae_home.management.commands.fixtures.user import create_site_themes
 from cae_home.management.commands.seeders.user import create_groups, create_permission_group_users
 
 
 UserModel = get_user_model()  # pylint: disable=invalid-name
 default_password = settings.USER_SEED_PASSWORD
-
-
-# |-----------------------------------------------------------------------------
-# | Helpers - Used in below functions
-# |-----------------------------------------------------------------------------
-
-
-# NOTE: These two aren't currently used, since tests can load fixtures.
-# They are here as example create_blank functions in tests/utils.py of an app.
-def create_room_type(name, slug, **kwargs):
-    room_type = models.RoomType.objects.create(
-        name=name,
-        slug=slug,
-        **kwargs,
-    )
-
-    return room_type
-
-
-def create_room(room_type, name, slug, **kwargs):
-    room = models.Room.objects.create(
-        room_type=room_type,
-        name=name,
-        slug=slug,
-        **kwargs,
-    )
-
-
-# |-----------------------------------------------------------------------------
-# | Classes - Util Classes for testing
-# |-----------------------------------------------------------------------------
 
 
 def debug_response_content(response_content):

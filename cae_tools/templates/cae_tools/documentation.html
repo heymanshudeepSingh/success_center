@@ -47,6 +47,15 @@
             <li><a href="{% url 'cae_tools:documentation_ldap_utility_connectors' %}">Utility Connectors</a></li>
           </ul>
         </li>
+        <li>
+          <p>Testing</p>
+          <ul>
+              <li><a href="{% url 'cae_tools:documentation_testing_running_tests' %}">Running Tests</a></li>
+              <li><a href="{% url 'cae_tools:documentation_testing_base_test_case' %}">BaseTestCase Utility Class</a></li>
+              <li><a href="{% url 'cae_tools:documentation_testing_integration_test_case' %}">IntegrationTestCase Utility Class</a></li>
+              <li><a href="{% url 'cae_tools:documentation_testing_live_server_test_case' %}">LiveServerTestCase Utility Class</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
 
@@ -82,7 +91,6 @@
     <li><a href="{% url 'cae_tools:documentation_seeds_and_fixtures' %}">Seeds and Fixture</a></li>
     <li><a href="{% url 'cae_tools:documentation_subprojects' %}">Sub Projects</a></li>
     <li><a href="{% url 'cae_tools:documentation_templates' %}">Templates</a></li>
-    <li><a href="{% url 'cae_tools:documentation_tests' %}">Testing</a></li>
     <li><a href="{% url 'cae_tools:documentation_views' %}">Views</a></li>
   </ul>
 {% endblock content %}

@@ -1,0 +1,208 @@
+{% extends 'cae_tools/documentation/testing/main.html' %}
+{% load static %}
+
+
+{% block title_page_name %}LiveServerTestCase Utility Class |  {{ block.super }}{% endblock title_page_name %}
+
+
+{% block content %}
+  {{ block.super }}
+
+  <h2>LiveServerTestCase Utility Class</h2>
+  <div class="alert warning">
+    <div>
+      <p>
+        When writing Selenium tests, reminder to please add <span class="highlight code">@tag('functional')</span> above
+        any and all functions that generate a Selenium driver instance. Tag can be imported from from
+        <span class="highlight code">django.test import tag</span>.
+      </p>
+      <p>
+        This allows programmers to disable running Selenium tests with the
+        <span class="highlight code">--exclude-tag=functional</span> command line arg.
+      </p>
+    </div>
+  </div>
+  <p>
+    The Workspace LiveServerTestCase utility class is designed to use for specifically in Selenium tests. Aka, it's
+    meant for use when running tests that require a live mock-browser instance. A majority of custom functionality this
+    class provides is specifically to make use of Selenium easier and more streamlined.
+  </p>
+  <p>
+    Reminder that Selenium tests tend to be a lot more expensive to run, as they take longer than all other test types.
+    So they should only be used sparingly when needed, such as to verify Session data logic, Javascript/React logic,
+    Django Channels logic, or similar logic that's impossible to verify without a browser instance.
+  </p>
+  <p>
+    This utility class has all the functionality provided in the BaseTestCase utility class, as well as:
+  </p>
+
+  <article class="color">
+    <h3>Login</h3>
+    <p>
+      The <span class="highlight code">self._login()</span> function attempts to run Django authentication to log in
+      with the corresponding username and password. Then does some basic checks to verify that the login occurred
+      successfully.
+    </p>
+    <p>
+      In other words, it's a easy helper function to quickly log in with a given User.
+    </p>
+    <p>
+      If provided, it also verifies that login action redirected to a specific page, calling
+      <span class="highlight code">self.assertPageTitle()</span> and
+      <span class="highlight code">self.assertPageHeader()</span>.
+    </p>
+  </article>
+
+  <article class="color">
+    <h3>Selenium Driver/Window Management</h3>
+
+    <article class="color">
+      <h4>Create Driver</h4>
+      <p>
+        The <span class="highlight code">self.create_driver()</span> function will generate and return a new Selenium
+        window (aka "driver") instance, with the browser of choice specified in the local env.py file.
+      </p>
+    </article>
+
+    <article class="color">
+      <h4>Close Driver</h4>
+      <p>
+        The <span class="highlight code">self.close_driver()</span> function will close and destroy the passed Selenium
+        window (aka "driver") instance.
+      </p>
+      <p>
+        This should be called as soon as any driver windows are no longer used in a given Selenium test, in order to
+        minimize computer resources used by Selenium tests, and to help speed up how long Selenium tests take to run.
+      </p>
+    </article>
+
+    <article class="color">
+      <h4>Open New Window</h4>
+      <p>
+        The <span class="highlight code">self._open_new_window()</span> function opens a new browser window, associated
+        with a given Selenium browser instance.
+      </p>
+      <p>
+        Not sure if this is better or worse than just creating a new selenium driver instance. This may be more resource
+        efficient. TODO: Research further.
+      </p>
+    </article>
+
+    <article class="color">
+      <h4>Close All New Windows</h4>
+      <p>
+        The <span class="highlight code">self._close_all_new_windows()</span> function will close all browser windows
+        associated with a given Selenium browser instance.
+      </p>
+      <p>
+        Chances are, the <span class="highlight code">self.close_driver()</span> function may be generally more
+        applicable than this function. But still provided just in case.
+      </p>
+    </article>
+
+    <article class="color">
+      <h4>Switch to Window</h4>
+      <p>
+        The <span class="highlight code">self._switch_to_window()</span> function will switch the selected browser
+        window associated with the current Selenium browser instance.
+      </p>
+    </article>
+  </article>
+
+  <article class="color">
+    <h3>Assertions</h3>
+
+    <article class="color">
+      <h4>Assert Page Title</h4>
+      <p>
+        The <span class="highlight code">self.assertPageTitle()</span> function takes in a Selenium driver instance, and
+        asserts that the corresponding window has the provided Title value. Note that title is case sensitive.
+      </p>
+      <p>
+        Reminder that the "title" of a page is the value that shows at the top of the browser, when you have multiple
+        browser tabs open.
+      </p>
+    </article>
+
+    <article class="color">
+      <h4>Assert Page Header</h4>
+      <p>
+        The <span class="highlight code">self.assertPageHeader()</span> function takes in a Selenium driver instance,
+        and asserts that the corresponding window has the provided H1 Header value. Note that Header is case sensitive.
+      </p>
+      <p>
+        Reminder that any given page should only have one single H1 Header element, and is usually displayed at the top
+        of the page, to indicate what the page is for.
+      </p>
+    </article>
+
+    <article class="color">
+      <h4>Assert Page Contains</h4>
+      <p>
+        The <span class="highlight code">self.assertPageContains()</span> function takes in a Selenium driver instance,
+        and asserts that the corresponding window contains the provided text value somewhere in the page.
+      </p>
+    </article>
+
+    <article class="color">
+      <h4>Assert Page Not Contains</h4>
+      <p>
+        The <span class="highlight code">self.assertPageNotContains()</span> function takes in a Selenium driver
+        instance, and asserts that the provided text value IS NOT found anywhere in the corresponding window page.
+      </p>
+    </article>
+  </article>
+
+  <article class="color">
+    <h3>Driver Wait Functions</h3>
+
+    <article class="color">
+      <h4>Wait for Page Load</h4>
+      <p>
+        The <span class="highlight code">self._wait_for_page_load()</span> function takes in a Selenium driver instance,
+        and forces a wait for a new page instance to load.
+      </p>
+      <p>
+        Can be useful to call immediately after using a Selenium driver instance to click a page link. That way, the
+        next page should be loaded before any further Selenium logic occurs.
+      </p>
+    </article>
+
+    <article class="color">
+      <h4>Wait for ID</h4>
+      <p>
+        The <span class="highlight code">self._wait_for_id()</span> function takes in a Selenium driver instance, and
+        forces a wait for an element with the provided ID to exist on the page.
+      </p>
+      <p>
+        Can be useful such as when dealing with JavaScript that changes/creates page elements.
+      </p>
+    </article>
+
+    <article class="color">
+      <h4>Wait for CSS</h4>
+      <p>
+        The <span class="highlight code">self._wait_for_css()</span> function takes in a Selenium driver instance, and
+        forces a wait for an element with the provided CSS to exist on the page.
+      </p>
+      <p>
+        Can be useful such as when dealing with JavaScript that changes/creates page elements.
+      </p>
+    </article>
+
+    <article class="color">
+      <h4>Wait for xPath</h4>
+      <p>
+        The <span class="highlight code">self._wait_for_xpath()</span> function takes in a Selenium driver instance, and
+        forces a wait for an element with the provided xPath value to exist on the page.
+      </p>
+      <p>
+        Note that xPath is a Selenium syntax to try to grab elements. It can be used for checking elements that may not
+        have a unique ID or CSS value.
+      </p>
+      <p>
+        Can be useful such as when dealing with JavaScript that changes/creates page elements.
+      </p>
+    </article>
+  </article>
+{% endblock content %}

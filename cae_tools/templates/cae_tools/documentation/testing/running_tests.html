@@ -1,0 +1,91 @@
+{% extends 'cae_tools/documentation/testing/main.html' %}
+{% load static %}
+
+
+{% block title_page_name %}Running Project Tests |  {{ block.super }}{% endblock title_page_name %}
+
+
+{% block content %}
+  {{ block.super }}
+
+  <h2>Running Project Tests</h2>
+  <p>
+    To run any UnitTests in Workspace or associated subprojects, you'll always want to open a terminal window and cd
+    to the Workspace project root. From there, you have a few options:
+  </p>
+
+  <article class="color">
+    <h3>Universal Options</h3>
+    <p>
+      The following options apply regardless of using Django UnitTests or Pytest for running testing logic.
+    </p>
+
+    <article class="color">
+      <h4>Running Only Specific Tests</h4>
+      <p>
+        Run only tests in a specific directory, by appending the directory location to the end of the command.
+        Alternatively, run only tests in a specific file by doing the path to the file, instead of a directory.
+      </p>
+    </article>
+    <article class="color">
+      <h4>Disabling Selenium Tests for Faster Test Runs</h4>
+      <p>
+        CAE Workspace projects use Selenium for some tests, in order to create mock-browser instances and actively
+        manipulate the browser window. However, the drawback is that these tests are more expensive, and thus take
+        significantly longer to run.
+      </p>
+      <p>
+        To have quicker tests, you can temporarily disable all Selenium tests from running by appending the argument
+        <span class="highlight code">--exclude-tag=functional</span>.
+      </p>
+    </article>
+  </article>
+
+  <article class="color">
+    <h3>Pytest</h3>
+    <p>
+      This is the preferred way to run UnitTests in Django. Mostly, it just handles input/output a bit differently than
+      the "standard" way to run UnitTests (described below).
+    </p>
+    <p>
+      Specifically, PyTest tends to hide all console output for tests that pass. This means it's possible to add useful
+      console output that's built into the utility Test classes, but this output will only display when a test fails.
+      Aka, it won't clutter your console with a bunch of garbage for working UnitTests.
+    </p>
+    <p>
+      Thus, generally writing tests tends to be a bit easier and faster to debug when doing so with PyTest.
+    </p>
+
+    <br>
+
+    <p>
+      Run with the <span class="highlight code">pytest</span> command.
+    </p>
+    <p>
+      Optionally run the tests in parallel with <span class="highlight code">pytest -n auto</span>.
+    </p>
+
+  </article>
+
+  <article class="color">
+    <h3>Django UnitTests</h3>
+
+    <p>
+      This is the "standard" way to run UnitTests in Django. It's built into Django and should provide all the basic
+      functionality you need.
+    </p>
+
+    <br>
+
+    <p>
+      Run with the <span class="highlight code">python manage.py test</span> command.
+    </p>
+    <p>
+      Optionally run the tests in parallel with <span class="highlight code">python manage.py test --parallel</span>.
+    </p>
+    <p>
+      Finally, in either case, you can run only tests in a specific directory, by appending the directory location
+      to the end of the command.
+    </p>
+  </article>
+{% endblock content %}

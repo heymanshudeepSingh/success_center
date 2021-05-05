@@ -1,0 +1,28 @@
+{% extends 'cae_tools/documentation/main.html' %}
+{% load static %}
+
+
+{% block title_page_name %}Custom "Testing" Logic |  {{ block.super }}{% endblock title_page_name %}
+
+
+{% block sub_nav %}
+  <li><a href="{% url 'cae_tools:documentation_testing_running_tests' %}">Running Tests</a></li>
+  <li><a href="{% url 'cae_tools:documentation_testing_base_test_case' %}">BaseTestCase Utility Class</a></li>
+  <li><a href="{% url 'cae_tools:documentation_testing_integration_test_case' %}">IntegrationTestCase Utility Class</a></li>
+  <li><a href="{% url 'cae_tools:documentation_testing_live_server_test_case' %}">LiveServerTestCase Utility Class</a></li>
+{% endblock sub_nav %}
+
+
+{% block content %}
+  <h1>Documentation - Custom Workspace "Testing" Logic</h1>
+  <p>
+    CAE Workspace makes use of standard Django UnitTests for a majority of testing. For any tests that require
+    mock-server instances, we use Selenium.
+  </p>
+  <p>
+    In either case, there are custom utility classes in <span class="highlight primary">cae_home/tests/utils.py</span>,
+    in order to make testing a little bit easier to write. These utility test classes inherit from the standard
+    <span class="highlight code">from django.test import TestCase</span>, so they have all the original functionality
+    that Django provides, as well as the custom Workspace additions.
+  </p>
+{% endblock content %}

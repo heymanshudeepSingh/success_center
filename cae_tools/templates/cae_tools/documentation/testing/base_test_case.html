@@ -1,0 +1,87 @@
+{% extends 'cae_tools/documentation/testing/main.html' %}
+{% load static %}
+
+
+{% block title_page_name %}BaseTestCase Utility Class |  {{ block.super }}{% endblock title_page_name %}
+
+
+{% block content %}
+  {{ block.super }}
+
+  <h2>BaseTestCase Utility Class</h2>
+  <p>
+    The Workspace BaseTestCase utility class is the most basic/minimal custom test utility class. All other test classes
+    have this logic, plus more.
+  </p>
+  <p>
+    The BaseTestCase utility class has the following helper logic:
+  </p>
+
+  <article class="color">
+    <h3>Debug Print</h3>
+    <p>
+      The <span class="highlight code">self.debug_print()</span> function displays out a handful of helpful Django debug
+      information, such as current context data, current form data, and any messages stored within the current response
+      context.
+    </p>
+    <p>
+      This can be very useful when trying to debug a test you're writing, when it doesn't seem to be behaving as you'd
+      expect.
+    </p>
+    <p>
+      Note: This is automatically called on error, when running tests via <a href="">PyTest</a> (recommended way to run
+      tests).
+    </p>
+  </article>
+
+  <article class="color">
+    <h3>Create Default Users and Groups</h3>
+    <p>
+      The <span class="highlight code">self.create_default_users_and_groups()</span> function is good to call at the
+      start of any tests that needs (login) User model data. This function will automatically generate (login) User
+      models, as specified in <span class="highlight primary">cae_home/management/commands/seeders/user.py</span>.
+    </p>
+  </article>
+
+  <article class="color">
+    <h3>Get User</h3>
+    <p>
+      The <span class="highlight code">self.get_user()</span> function will attempt to get a (login) User model with
+      the provided username value.
+    </p>
+    <p>
+      On failure, it will print all available (login) User models, and raise an ObjectDoesNotExist error.
+    </p>
+  </article>
+
+  <article class="color">
+    <h3>Create User</h3>
+    <p>
+      The <span class="highlight code">self.create_user()</span> function will create a (login) User model with the
+      provided username/password/permission/group values.
+    </p>
+    <p>
+      In other words, it's a easy helper function to create new (login) User models quickly.
+    </p>
+  </article>
+
+  <article class="color">
+    <h3>Add Permission</h3>
+    <p>
+      The <span class="highlight code">self.add_permission()</span> function add a Django Permission to the given user.
+    </p>
+    <p>
+      On failure, it will print all available Permission model values, and raise an ObjectDoesNotExist error.
+    </p>
+  </article>
+
+  <article class="color">
+    <h3>Add Group</h3>
+    <p>
+      The <span class="highlight code">self.add_group()</span> function add a Django Group to the given user.
+    </p>
+    <p>
+      On failure, it will print all available Group model values, and raise an ObjectDoesNotExist error.
+    </p>
+  </article>
+{% endblock content %}

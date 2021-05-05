@@ -50,7 +50,12 @@ urlpatterns = [
 
     path('documentation/subprojects/', views.docs_subprojects, name='documentation_subprojects'),
     path('documentation/templates/', views.docs_templates, name='documentation_templates'),
-    path('documentation/tests/', views.docs_tests, name='documentation_tests'),
+
+    path('documentation/testing/running_tests/', views.docs_running_tests, name='documentation_testing_running_tests'),
+    path('documentation/testing/base_test_case/', views.docs_base_test_case, name='documentation_testing_base_test_case'),
+    path('documentation/testing/integration_test_case/', views.docs_integration_test_case, name='documentation_testing_integration_test_case'),
+    path('documentation/testing/live_server_test_case/', views.docs_live_server_test_case, name='documentation_testing_live_server_test_case'),
+
     path('documentation/views/', views.docs_views, name='documentation_views'),
     path('documentation/', views.documentation, name='documentation'),
 
