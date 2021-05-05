@@ -8,14 +8,6 @@ from django.template.response import TemplateResponse
 # User Imports.
 
 
-def docs_ldap(request):
-    """
-    Documentation of custom "LDAP" logic in project.
-    """
-    # Render template to user.
-    return TemplateResponse(request, 'cae_tools/documentation/ldap.html', {})
-
-
 def docs_ldap_setup(request):
     """
     Documentation of LDAP setup.

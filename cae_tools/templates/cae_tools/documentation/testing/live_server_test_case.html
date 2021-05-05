@@ -6,9 +6,6 @@
 
 
 {% block content %}
-  {{ block.super }}
-
-  <h2>LiveServerTestCase Utility Class</h2>
   <div class="alert warning">
     <div>
       <p>
@@ -22,6 +19,10 @@
       </p>
     </div>
   </div>
+
+  {{ block.super }}
+
+  <h2>LiveServerTestCase Utility Class</h2>
   <p>
     The Workspace LiveServerTestCase utility class is designed to use for specifically in Selenium tests. Aka, it's
     meant for use when running tests that require a live mock-browser instance. A majority of custom functionality this

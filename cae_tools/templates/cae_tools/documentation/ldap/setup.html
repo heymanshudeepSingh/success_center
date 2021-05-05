@@ -27,9 +27,9 @@
       commands:
     </p>
     <p>For Arch Linux:</p>
-    <p class="highlight info">sudo pacman -Syy libldap libsasl</p>
+    <p class="highlight code">sudo pacman -Syy libldap libsasl</p>
     <p>For Ubuntu:</p>
-    <p class="highlight info">sudo apt-get install libldap2-dev libsasl2-dev</p>
+    <p class="highlight code">sudo apt-get install libldap2-dev libsasl2-dev</p>
 
     <h4>Installing LDAP Python Packages</h4>
     <p>
@@ -43,7 +43,7 @@
     <p>
       With a terminal at project root, load your desired Python environment and run:
     </p>
-    <p class="highlight info">pip install -r requirements.txt</p>
+    <p class="highlight code">pip install -r requirements.txt</p>
   </article>
 
   <br>
@@ -71,7 +71,7 @@
     </p>
     <p>
       These credentials can be put into the CAE Workspace
-      <a href="{% url 'cae_tools:documentation_settings' %}">local environment settings file</a>.
+      <a href="{% url 'cae_tools:documentation_settings_local_environment' %}">local environment settings file</a>.
     </p>
     <p>
       While you're here, be sure to also set the <span class="highlight primary">BACKEND_LDAP_TEST_ID</span> variables

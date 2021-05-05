@@ -31,7 +31,6 @@ from .general_setup import docs_general_setup
 
 # Custom "JavaScript" Logic Documentation.
 from .javascript import (
-    docs_javascript,
     docs_javascript_passing_variables,
     docs_javascript_libraries,
 )
@@ -39,7 +38,6 @@ from .javascript import (
 
 # Custom "LDAP" Logic Documentation.
 from .ldap import (
-    docs_ldap,
     docs_ldap_setup,
     docs_ldap_auth_backends,
     docs_ldap_utility_connectors,
@@ -57,7 +55,6 @@ from .seeds_and_fixtures import docs_seeds_and_fixtures
 
 # Custom "Settings" Logic Documentation.
 from .settings import (
-    docs_settings,
     docs_settings_organization,
     docs_settings_local_environment,
     docs_settings_dev_password,
