@@ -53,98 +53,97 @@ div {
 
          .container-body {
              display: flex;
-             background-color: pink;
+             background-color: 	#787878;
              width: 70%;
              margin: auto;
 
 
-             .container-body-content {
+             .container-body-head {
                  display: flex;
-                 background-color: blueviolet;
                  flex-direction: column;
                  width: 100%;
 
-                .container-body-head {
+                .container-body-content {
                     display: flex;
                     flex-direction: row;
                     width: 100%;
 
-                    > div {
-                        background-color: white;
+                    > * {
+                        background-color: #787878;
                         flex-direction: column;
                         width: 100%;
+                        white-space: nowrap;
+                        margin: 5px;
+                        padding: 5px;
+                        border-right: 1px solid black;
+                        align-items: center;
+
                     }
 
                     .Day {
                         display: flex;
-                        border: 2px solid #1565c0;
                         padding: 2px;
-                        background-color: orange;
-                        flex-direction: column;
+                        white-space: nowrap;
+                        width: 100%;
 
                     }
 
                     .Date {
                         display: flex;
-                        background-color: rebeccapurple;
                         padding: 2px;
-                        flex-direction: column;
+                        white-space: nowrap;
+                        width: 100%;
                     }
 
                     .Morning-Begin {
                         display: flex;
-                        background-color: pink;
-                        border: 2px solid #1565c0;
                         padding: 2px;
-                        flex-direction: column;
+                        white-space: nowrap;
+                        width: 100%;
                     }
 
                     .Morning-End {
                         display: flex;
-                        background-color: pink;
-                        border: 2px solid #1565c0;
                         padding: 2px;
-                        flex-direction: column;
+                        white-space: nowrap;
+                        width: 100%;
                     }
 
                     .Afternoon-Begin {
                         display: flex;
-                        background-color: pink;
-                        border: 3px solid black;
                         padding: 2px;
-                        flex-direction: column;
+                        white-space: nowrap;
+                        width: 100%;
                     }
 
                     .Afternoon-End {
                         display: flex;
-                        background-color: pink;
-                        border: 4px solid #1565c0;
                         padding: 2px;
-                        flex-direction: column;
+                        white-space: nowrap;
+                        width: 100%;
                     }
 
                     .Evening-Begin {
                         display: flex;
-                        background-color: pink;
-                        border: 2px solid #1565c0;
                         padding: 2px;
-                        flex-direction: column;
+                        white-space: nowrap;
+                        width: 100%;
                     }
 
                     .Evening-End {
                         display: flex;
-                        background-color: pink;
-                        border: 2px solid #1565c0;
                         padding: 2px;
-                        flex-direction: column;
+                        white-space: nowrap;
+                        width: 100%;
                     }
 
                     .Total {
                         display: flex;
-                        background-color: pink;
-                        border: 2px solid #1565c0;
                         padding: 2px;
                         flex-direction: row;
+                        width: 100%;
+                        white-space: nowrap;
+                        align-items: flex-start;
                     }
                 }
 
@@ -152,7 +151,6 @@ div {
 
              .container-body-content{
                  flex: 2;
-                 background-color:cornflowerblue;
 
              }
          }
