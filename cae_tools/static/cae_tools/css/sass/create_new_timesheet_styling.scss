@@ -39,11 +39,12 @@ div {
         position: relative;
         overflow-x:hidden;
         margin: auto;
+        background-color: #f5f8fa;
 
         .container-head {
             @extend .flex_base;
             align-items: center;
-            background-color: red;
+            background-color: #f5f8fa;
             position: relative;
             padding: 3px;
             margin: auto;
@@ -53,7 +54,7 @@ div {
 
          .container-body {
              display: flex;
-             background-color: 	#787878;
+             background-color: 	#f5f8fa;
              width: 70%;
              margin: auto;
 
@@ -66,10 +67,10 @@ div {
                 .container-body-content {
                     display: flex;
                     flex-direction: row;
-                    width: 100%;
+                    width: 106%;
 
                     > * {
-                        background-color: #787878;
+                        background-color: #f5f8fa;
                         flex-direction: column;
                         width: 100%;
                         white-space: nowrap;
@@ -86,6 +87,8 @@ div {
                         white-space: nowrap;
                         width: 100%;
 
+
+
                     }
 
                     .Date {
@@ -100,6 +103,9 @@ div {
                         padding: 2px;
                         white-space: nowrap;
                         width: 100%;
+                        p{
+                            padding-right: 10px;
+                        }
                     }
 
                     .Morning-End {
@@ -107,6 +113,9 @@ div {
                         padding: 2px;
                         white-space: nowrap;
                         width: 100%;
+                        p{
+                            padding-right: 10px;
+                        }
                     }
 
                     .Afternoon-Begin {
@@ -114,6 +123,9 @@ div {
                         padding: 2px;
                         white-space: nowrap;
                         width: 100%;
+                        p{
+                            padding-right: 10px;
+                        }
                     }
 
                     .Afternoon-End {
@@ -121,6 +133,9 @@ div {
                         padding: 2px;
                         white-space: nowrap;
                         width: 100%;
+                        p{
+                            padding-right: 10px;
+                        }
                     }
 
                     .Evening-Begin {
@@ -128,6 +143,9 @@ div {
                         padding: 2px;
                         white-space: nowrap;
                         width: 100%;
+                        p{
+                            padding-right: 10px;
+                        }
                     }
 
                     .Evening-End {
@@ -135,6 +153,9 @@ div {
                         padding: 2px;
                         white-space: nowrap;
                         width: 100%;
+                        p{
+                            padding-right: 10px;
+                        }
                     }
 
                     .Total {
@@ -144,6 +165,7 @@ div {
                         width: 100%;
                         white-space: nowrap;
                         align-items: flex-start;
+
                     }
                 }
 
@@ -162,7 +184,7 @@ div {
     {
         @extend .flex_base;
         align-items: center;
-        background-color: red;
+        background-color: #f5f8fa;
         position: relative;
 
     }
