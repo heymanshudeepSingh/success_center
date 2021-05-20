@@ -455,7 +455,7 @@ class UserIntermediaryAdmin(admin.ModelAdmin):
         }),
         ('Advanced', {
             'classes': ('collapse',),
-            'fields': ('id', 'is_active', 'slug', 'date_created', 'date_modified'),
+            'fields': ('id', 'is_active', 'last_ldap_check', 'slug', 'date_created', 'date_modified'),
         }),
     )
 

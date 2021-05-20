@@ -273,8 +273,8 @@ class WmuUserMajorRelationship(models.Model):
         :param major: Major model object to check against.
         :return: Boolean indicating if student is actively pursuing major.
         """
-        if WmuUserMajorRelationship.objects.filter(wmu_user=wmu_user, major=major, is_active=True,).exists():
-            # relation exists where "active" field is True. User is actively pursuing major.
+        if WmuUserMajorRelationship.objects.filter(wmu_user=wmu_user, major=major, is_active=True).exists():
+            # Relation exists where "active" field is True. User is actively pursuing major.
             return True
         else:
             # Relation does not exist where active is True. User is not actively pursuing major.
@@ -379,6 +379,7 @@ class UserIntermediary(models.Model):
     first_name = models.CharField(max_length=MAX_LENGTH, blank=True)
     last_name = models.CharField(max_length=MAX_LENGTH, blank=True)
     is_active = models.BooleanField(default=True)
+    last_ldap_check = models.DateField(default=timezone.now)
 
     # Self-setting/Non-user-editable fields.
     slug = models.SlugField(
@@ -581,7 +582,12 @@ class Profile(models.Model):
         verbose_name_plural = 'Profiles'
 
     def __str__(self):
-        return '{0}'.format(self.userintermediary.bronco_net)
+        try:
+            return '{0}'.format(self.userintermediary.bronco_net)
+        except Profile.userintermediary.RelatedObjectDoesNotExist:
+            # Profile for a User that had associated models deleted.
+            # Ideally, the profile should be deleted as well so this never occurs.
+            return 'Deleted User Profile'
 
     def save(self, *args, **kwargs):
         """

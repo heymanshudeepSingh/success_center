@@ -13,6 +13,7 @@ from phonenumber_field.phonenumber import PhoneNumber
 
 # User Class Imports.
 from cae_home import models
+from cae_home.models.user import compare_user_and_wmuuser_models
 from workspace import logging as init_logging
 from workspace.ldap_backends.base_auth import AbstractLDAPBackend
 from workspace.ldap_backends.wmu_auth.adv_backend import AdvisingAuthBackend
@@ -429,8 +430,15 @@ class WmuAuthBackend(AbstractLDAPBackend):
 
         # Update phone number info.
         if phone_number != '':
-            user_profile.phone_number = PhoneNumber.from_string(phone_number)
-            user_profile.save()
+            # Phone number is not empty. Attempt to save.
+            prior_phone_number = user_profile.phone_number
+            try:
+                user_profile.phone_number = PhoneNumber.from_string(phone_number)
+                user_profile.save()
+            except:
+                # Ldap phone number value is garbage. Write to log and otherwise skip handling.
+                logger.auth_error('User "{0}" update failed to set phone number of "{1}".'.format(uid, phone_number))
+                phone_number = prior_phone_number
 
         return phone_number
 
@@ -461,17 +469,32 @@ class WmuAuthBackend(AbstractLDAPBackend):
                 user_ldap_status_is_active = user_ldap_status[0]
                 user_ldap_status_in_retention = user_ldap_status[1]
 
-                # Get models.
-                login_user = models.User.objects.get(username=uid)
-                wmu_user = models.WmuUser.objects.get(bronco_net=uid)
+                # Handle associated (login) User model, if present.
+                try:
+                    login_user = models.User.objects.get(username=uid)
 
-                # Set active fields.
-                login_user.is_active = user_ldap_status_is_active
-                wmu_user.is_active = user_ldap_status_in_retention
+                    # If we got this far, then (login) User model exists. Set fields appropriately.
+                    login_user.is_active = user_ldap_status_is_active
+                    login_user.userintermediary.last_ldap_check = timezone.now()
+                    login_user.save()
+                except models.User.DoesNotExist:
+                    # Does not exist for (login) User. This is fine.
+                    pass
 
-                # Save models.
-                login_user.save()
-                wmu_user.save()
+                # Handle associated WmuUser model, if present.
+                try:
+                    wmu_user = models.WmuUser.objects.get(bronco_net=uid)
+                    wmu_user.is_active = user_ldap_status_in_retention
+                    wmu_user.userintermediary.last_ldap_check = timezone.now()
+                    wmu_user.save()
+
+                # If we got this far, then (login) User model exists. Set fields appropriately.
+                except models.WmuUser.objects.DoesNotExist:
+                    # Does not exist for WmuUser. This is fine.
+                    pass
+
+            # Now that ldap calls have occurred, double check that data for user models has synced.
+            compare_user_and_wmuuser_models(uid)
 
             return user_ldap_status
 
