@@ -58,16 +58,17 @@ class UserToCAECenterEmployeeListFilter(admin.SimpleListFilter):
             'CAE Director', 'CAE Building Coordinator',
             'CAE Admin GA', 'CAE Admin',
             'CAE Programmer GA', 'CAE Programmer',
-            'CAE Attendant',    'CAE Director Inactive',
+            'CAE Attendant',
+            'CAE Director Inactive',
             'CAE Building Coordinator Inactive',
             'CAE Attendant Inactive',
             'CAE Admin Inactive',
             'CAE Programmer Inactive',
         ]
         if self.value() == 'yes':
-            return queryset.filter(groups__name__in=cae_center_groups)
+            return queryset.filter(groups__name__in=cae_center_groups).distinct()
         if self.value() == 'no':
-            return queryset.exclude(groups__name__in=cae_center_groups)
+            return queryset.exclude(groups__name__in=cae_center_groups).distinct()
 
 
 class UserIntermediaryToUserListFilter(admin.SimpleListFilter):
