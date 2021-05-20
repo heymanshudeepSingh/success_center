@@ -125,11 +125,11 @@ class WmuAuthBackend(AbstractLDAPBackend):
         :param user_ldap_info: User's info from LDAP.
         :return: Instance of User model.
         """
-        # For now, just make sure the associated Wmu User model is created and up to date.
-        self.create_or_update_wmu_user_model(uid, user_ldap_info=user_ldap_info)
-
         # Verify and set user ldap "active" status, according to main campus.
         self.verify_user_ldap_status(uid)
+
+        # For now, just make sure the associated Wmu User model is created and up to date.
+        self.create_or_update_wmu_user_model(uid, user_ldap_info=user_ldap_info)
 
         logger.auth_info('{0}: User model has been updated.'.format(uid))
 
@@ -466,32 +466,39 @@ class WmuAuthBackend(AbstractLDAPBackend):
                 wmu_user = models.WmuUser.objects.get(bronco_net=uid)
 
                 # Set active fields.
-                login_user.active = user_ldap_status_is_active
-                wmu_user.active = user_ldap_status_in_retention
+                login_user.is_active = user_ldap_status_is_active
+                wmu_user.is_active = user_ldap_status_in_retention
 
                 # Save models.
                 login_user.save()
                 wmu_user.save()
 
             return user_ldap_status
-        else:
-            # Ldap info failed to return.
 
-            # Check if we should update User and Wmu User model "active" fields.
-            if set_model_active_fields:
-                # Get models.
-                login_user = models.User.objects.get(username=uid)
-                wmu_user = models.WmuUser.objects.get(bronconet=uid)
+        # Below section commented out for security concerns.
+        # Won't Ldap fail to return on internet loss or main campus going down?
+        # So if either happens while this below section tries to run, then all users will automatically be set to
+        # inactive, probably?
+        # Look into at a later date.
 
-                # Set active fields.
-                login_user.active = False
-                wmu_user.active = False
-
-                # Save models.
-                login_user.save()
-                wmu_user.save()
-
-            return None
+        # else:
+        #     # Ldap info failed to return.
+        #
+        #     # Check if we should update User and Wmu User model "active" fields.
+        #     if set_model_active_fields:
+        #         # Get models.
+        #         login_user = models.User.objects.get(username=uid)
+        #         wmu_user = models.WmuUser.objects.get(bronconet=uid)
+        #
+        #         # Set active fields.
+        #         login_user.is_active = False
+        #         wmu_user.is_active = False
+        #
+        #         # Save models.
+        #         login_user.save()
+        #         wmu_user.save()
+        #
+        #     return None
 
     def _verify_user_ldap_status(self, uid, ldap_info):
         """
@@ -539,13 +546,18 @@ class WmuAuthBackend(AbstractLDAPBackend):
 
                     # Get wmuEmployeeExpiration.
                     try:
-                        employee_expiration = datetime.datetime.strptime(
-                            str(ldap_info['wmuEmployeeExpiration'][0]),
-                            '%Y%m%d%H%M%S%z',
-                        )
+                        expiration_field = str(ldap_info['wmuEmployeeExpiration'][0]).strip()
+
+                        # Check length and handle accordingly.
+                        if len(expiration_field) == 8:
+                            # Only 8 digits. Likely YYYYMMDD format.
+                            employee_expiration = datetime.datetime.strptime(expiration_field, '%Y%m%d').date()
+                        else:
+                            # More than 8 digits. Likely full datetime set.
+                            employee_expiration = datetime.datetime.strptime(expiration_field, '%Y%m%d%H%M%S%z').date()
 
                         # Check if falls within valid employment period.
-                        if employee_expiration is not None and employee_expiration >= timezone.now():
+                        if employee_expiration is not None and employee_expiration >= timezone.now().date():
                             # Not enrolled, but still employed.
                             return (True, True)
                     except (KeyError, IndexError):
@@ -554,16 +566,21 @@ class WmuAuthBackend(AbstractLDAPBackend):
 
                     # Get wmuStudentExpiration.
                     try:
-                        student_expiration = datetime.datetime.strptime(
-                            str(ldap_info['wmuStudentExpiration'][0]),
-                            '%Y%m%d%H%M%S%z',
-                        )
+                        expiration_field = str(ldap_info['wmuStudentExpiration'][0]).strip()
+
+                        # Check length and handle accordingly.
+                        if len(expiration_field) == 8:
+                            # Only 8 digits. Likely YYYYMMDD format.
+                            student_expiration = datetime.datetime.strptime(expiration_field, '%Y%m%d').date()
+                        else:
+                            # More than 8 digits. Likely full datetime set.
+                            student_expiration = datetime.datetime.strptime(expiration_field, '%Y%m%d%H%M%S%z').date()
                     except (KeyError, IndexError):
                         # Failed to get student_expiration. Set to None.
                         student_expiration = None
 
                     # Check if both are out of retention policy (12 months).
-                    one_year_ago = (timezone.now() - timezone.timedelta(days=365))
+                    one_year_ago = (timezone.now() - timezone.timedelta(days=365)).date()
                     if (student_expiration is not None and student_expiration >= one_year_ago) or \
                         (employee_expiration is not None and employee_expiration >= one_year_ago):
 
