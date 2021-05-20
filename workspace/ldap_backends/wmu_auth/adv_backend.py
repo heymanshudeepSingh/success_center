@@ -6,6 +6,7 @@ Note that, to work, these need the simple_ldap_lib git submodule imported, and t
 
 # System Imports.
 from django.conf import settings
+from django.utils import timezone
 from django.utils.text import slugify
 
 # User Class Imports.
@@ -102,43 +103,54 @@ class AdvisingAuthBackend(AbstractLDAPBackend):
         wmu_user = models.WmuUser.objects.get(bronco_net=uid)
 
         returned_majors = self.get_student_major(uid)
+        handled_majors = []
 
         # Check if student is currently associated with more than one major.
         if isinstance(returned_majors, list):
+
             # Student is associated with more than one major. Handle for all.
             for returned_major in returned_majors:
+                handled_majors.append(returned_major)
 
                 # Check each major to see if relation is in django's models and active.
                 if not models.WmuUserMajorRelationship.check_if_user_has_major_active(wmu_user, returned_major):
                     # Relation not found. Create new.
-                    logger.auth_info('{0}: Django major "{1}" does not match User\'s return value from ldap "{2}".'\
-                            ' Updating...'.format(
-                        uid,
-                        wmu_user.major.all(),
-                        returned_majors,
-                    ))
-                    models.WmuUserMajorRelationship.objects.create(
-                        wmu_user=wmu_user,
-                        major=returned_major,
-                    )
+                    stmt = '{0}: Django major "{1}" does not match User\'s return value from ldap "{2}". Updating...'
+                    logger.auth_info(stmt.format(uid, wmu_user.major.filter(is_active=True), returned_majors))
+                    models.WmuUserMajorRelationship.objects.create(wmu_user=wmu_user, major=returned_major)
 
         else:
             # Student is only associated with one major.
             returned_major = returned_majors
+            handled_majors.append(returned_major)
+
+            # Check for "Unknown" major.
+            if returned_major.slug == 'unk':
+                # Is unknown major. Only set if student does not already have any associated majors.
+                user_major_set = wmu_user.major.filter(is_active=True)
+                if len(user_major_set) > 0:
+                    # User has one or more active majors. Set previous major(s) to inactive.
+                    for major in user_major_set:
+                        self.deactivate_student_major(uid, major)
+
+                    # Return to prevent assigning "Unknown" major to user.
+                    return
 
             # Check if relation is in django's models and active.
             if not models.WmuUserMajorRelationship.check_if_user_has_major_active(wmu_user, returned_major):
                 # Relation not found. Create new.
-                logger.auth_info('{0}: Django major "{1}" does not match new User\'s return value from ldap "{2}". '\
-                        'Updating...'.format(
-                    uid,
-                    wmu_user.major.all(),
-                    returned_majors,
-                ))
-                models.WmuUserMajorRelationship.objects.create(
-                    wmu_user=wmu_user,
-                    major=returned_major,
-                )
+                stmt = '{0}: Django major "{1}" does not match new User\'s return value from ldap "{2}". Updating...'
+                logger.auth_info(stmt.format(uid, wmu_user.major.filter(is_active=True), returned_majors))
+                models.WmuUserMajorRelationship.objects.create(wmu_user=wmu_user, major=returned_major)
+
+        # Now disable any "active" majors that were not returned by LDAP.
+        user_major_set = wmu_user.major.filter(is_active=True)
+        for major in user_major_set:
+            # Check if specific major was handled already.
+            if major not in handled_majors:
+                # Was not handled, which means it wasn't returned in LDAP.
+                # Set previous major(s) to inactive.
+                self.deactivate_student_major(uid, major)
 
     def get_student_major(self, uid):
         """
@@ -154,10 +166,7 @@ class AdvisingAuthBackend(AbstractLDAPBackend):
 
         # Check if program code was valid.
         if student_code is not None and student_code != '':
-            logger.auth_info('{0}: Found student wmuProgramCode: {1}'.format(
-                uid,
-                student_code,
-            ))
+            logger.auth_info('{0}: Found student wmuProgramCode: {1}'.format(uid, student_code))
 
             search_base = 'ou=Majors,ou=WMUCourses,o=wmich.edu,dc=wmich,dc=edu'
             search_filter = '(wmuStudentMajor={0})'.format(student_code)
@@ -173,7 +182,7 @@ class AdvisingAuthBackend(AbstractLDAPBackend):
 
             return major
         else:
-
+            # Student major not found.
             logger.auth_warning('{0}: Failed to get wmuStudentMajor LDAP field. Defaulting to "Unknown" major.'.format(
                 uid,
             ))
@@ -383,3 +392,34 @@ class AdvisingAuthBackend(AbstractLDAPBackend):
             # Unknown program_code format.
             logger.auth_warning('{0}: Could not parse degree_level from program_code "{1}".'.format(uid, program_code))
             return models.Major.get_degree_level_as_int('Unknown')
+
+    def deactivate_student_major(self, uid, major):
+        """
+        Deactivates a single WmuUserMajorRelationship model.
+        :param uid: BroncoNet of relationship to set to active.
+        :param major: Major of relationship to set to inactive.
+        """
+        # Get associated model objects.
+        wmu_user = models.WmuUser.objects.get(bronco_net=uid)
+        login_user = wmu_user.userintermediary.user
+        model_relationship = wmu_user.wmuusermajorrelationship_set.get(wmu_user=wmu_user, major=major)
+
+        # Set deactivation date.
+        # If associated (login) User model exists and is inactive, use last login date.
+        # Otherwise, if associated WmuUser model is inactive, use last modified date.
+        # Otherwise, set to current date.
+        deactivation_date = timezone.now()
+        if login_user is not None:
+            if not login_user.is_active:
+                # Associated (login) User exists and is no longer active. Set date based on that.
+                deactivation_date = login_user.last_login
+        elif not wmu_user.is_active:
+            # WmuUser account is no longer active. Set date based on that.
+            deactivation_date = wmu_user.date_modified
+        model_relationship.date_stopped = deactivation_date
+
+        # Set relationship to inactive.
+        model_relationship.is_active = False
+
+        # Save relationship changes.
+        model_relationship.save()
