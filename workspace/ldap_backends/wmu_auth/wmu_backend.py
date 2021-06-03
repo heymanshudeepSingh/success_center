@@ -127,7 +127,14 @@ class WmuAuthBackend(AbstractLDAPBackend):
         :return: Instance of User model.
         """
         # Verify and set user ldap "active" status, according to main campus.
-        self.verify_user_ldap_status(uid)
+        # First we check last call to LDAP, saved in associated UserIntermediary model.
+        # This is to avoid unnecessary repeated LDAP calls with in a short timespan.
+        user_intermediary = models.UserIntermediary.objects.get(bronco_net=uid)
+        one_day_ago = timezone.now().date() - timezone.timedelta(days=1)
+        if user_intermediary.last_ldap_check <= one_day_ago:
+            # Last LDAP check was more than a day ago.
+            # Verify and set user ldap "active" status, according to main campus.
+            self.verify_user_ldap_status(uid)
 
         # For now, just make sure the associated Wmu User model is created and up to date.
         self.create_or_update_wmu_user_model(uid, user_ldap_info=user_ldap_info)
@@ -258,11 +265,12 @@ class WmuAuthBackend(AbstractLDAPBackend):
         self._update_user_email_fields(uid, user_ldap_info)
         self._update_user_phone_fields(uid, user_ldap_info)
 
-        # Check last call to LDAP, saved in associated UserIntermediary model.
+        # Verify and set user ldap "active" status, according to main campus.
+        # First we check last call to LDAP, saved in associated UserIntermediary model.
         # This is to prevent double checking when updating a (login) User model. Or just to avoid unnecessary repeated
         # LDAP calls with in a short timespan.
         user_intermediary = models.UserIntermediary.objects.get(bronco_net=uid)
-        one_day_ago = timezone.now() - timezone.timedelta(days=1)
+        one_day_ago = timezone.now().date() - timezone.timedelta(days=1)
         if user_intermediary.last_ldap_check <= one_day_ago:
             # Last LDAP check was more than a day ago.
             # Verify and set user ldap "active" status, according to main campus.
