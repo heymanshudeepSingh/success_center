@@ -23,6 +23,10 @@ from workspace.ldap_backends.wmu_auth.adv_backend import AdvisingAuthBackend
 logger = init_logging.get_logger(__name__)
 
 
+CAE_CENTER_EXCLUDE_GROUPS = ['CAE Director', 'CAE Admin GA', 'CAE Programmer GA']
+CAE_CENTER_MANAGEMENT = ['CAE Director', 'CAE Building Coordinator']
+
+
 class WmuAuthBackend(AbstractLDAPBackend):
     """
     Custom authentication through the WMU main campus LDAP.
@@ -133,9 +137,18 @@ class WmuAuthBackend(AbstractLDAPBackend):
         one_day_ago = timezone.now().date() - timezone.timedelta(days=1)
         if user_intermediary.last_ldap_check <= one_day_ago:
             # Last LDAP check was more than a day ago.
-            # Verify and set user ldap "active" status, according to main campus.
-            logger.auth_info('{0}: Checking user is_active status against LDAP.'.format(uid))
-            self.verify_user_ldap_status(uid)
+
+            # Proceed if user is not part of specific CAE Center exclusion groups.
+            # These are excluded from is_active auto-update logic to ensure some users can always access projects,
+            # regardless of if main campus LDAP is wonky or not.
+            exclude_user = False
+            if user_intermediary.user is not None:
+                exclude_user = user_intermediary.user.groups.filter(name__in=CAE_CENTER_EXCLUDE_GROUPS).exists()
+
+            if not exclude_user:
+                # Verify and set user ldap "active" status, according to main campus.
+                logger.auth_info('{0}: Checking user is_active status against LDAP.'.format(uid))
+                self.verify_user_ldap_status(uid)
 
         # For now, just make sure the associated Wmu User model is created and up to date.
         self.create_or_update_wmu_user_model(uid, user_ldap_info=user_ldap_info)
@@ -274,9 +287,18 @@ class WmuAuthBackend(AbstractLDAPBackend):
         one_day_ago = timezone.now().date() - timezone.timedelta(days=1)
         if user_intermediary.last_ldap_check <= one_day_ago:
             # Last LDAP check was more than a day ago.
-            # Verify and set user ldap "active" status, according to main campus.
-            logger.auth_info('{0}: Checking user is_active status against LDAP.'.format(uid))
-            self.verify_user_ldap_status(uid)
+
+            # Proceed if user is not part of specific CAE Center exclusion groups.
+            # These are excluded from is_active auto-update logic to ensure some users can always access projects,
+            # regardless of if main campus LDAP is wonky or not.
+            exclude_user = False
+            if user_intermediary.user is not None:
+                exclude_user = user_intermediary.user.groups.filter(name__in=CAE_CENTER_EXCLUDE_GROUPS).exists()
+
+            if not exclude_user:
+                # Verify and set user ldap "active" status, according to main campus.
+                logger.auth_info('{0}: Checking user is_active status against LDAP.'.format(uid))
+                self.verify_user_ldap_status(uid)
 
         # Update major.
         adv_ldap = AdvisingAuthBackend()
@@ -437,6 +459,13 @@ class WmuAuthBackend(AbstractLDAPBackend):
         :param user_ldap_info: User's LDAP info.
         :return: Found PhoneNumber value.
         """
+        # Check if user is CAE management position. Avoid auto-updating number if so.
+        user_model = models.User.objects.get(username=uid)
+        if user_model.groups.filter(name__in=CAE_CENTER_MANAGEMENT).exists():
+            # User is part of CAE Center management. Skip auto phone number update.
+            user_profile = models.Profile.get_profile(uid)
+            return user_profile.phone_number
+
         # Get associated user profile.
         user_profile = models.Profile.get_profile(uid)
         if user_profile is None:
