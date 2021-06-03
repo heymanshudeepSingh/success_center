@@ -74,6 +74,36 @@ class UserToCAECenterEmployeeListFilter(admin.SimpleListFilter):
             return queryset.exclude(groups__name__in=CAE_CENTER_GROUPS).distinct()
 
 
+class UserToWmuUserListFilter(admin.SimpleListFilter):
+    """
+    Filter for (login) User model Admin to show models associated with a valid WmuUser model.
+    """
+    # Label to display for filter.
+    title = 'Associated with WMU User'
+
+    # This is the name used in the url for this filter.
+    # Can be set to anything you want, as long as it's unique to other filters in this model.
+    parameter_name = 'wmu_user'
+
+    def lookups(self, request, model_admin):
+        """
+        This defines the filter options.
+        """
+        return (
+            ('yes', 'Yes'),
+            ('no', 'No'),
+        )
+
+    def queryset(self, request, queryset):
+        """
+        This processes the filter option (defined above, in "lookups") when selected by a user.
+        """
+        if self.value() == 'yes':
+            return queryset.filter(userintermediary__wmu_user__isnull=False)
+        if self.value() == 'no':
+            return queryset.filter(userintermediary__wmu_user__isnull=True)
+
+
 class UserIntermediaryToUserListFilter(admin.SimpleListFilter):
     """
     Filter for UserIntermediary model Admin to show models associated with a valid (login) User model.
@@ -132,6 +162,36 @@ class UserIntermediaryToWmuUserListFilter(admin.SimpleListFilter):
             return queryset.filter(wmu_user__isnull=False)
         if self.value() == 'no':
             return queryset.filter(wmu_user__isnull=True)
+
+
+class WmuUserToUserListFilter(admin.SimpleListFilter):
+    """
+    Filter for WmuUser model Admin to show models associated with a valid (login) User model.
+    """
+    # Label to display for filter.
+    title = 'Associated with Login User'
+
+    # This is the name used in the url for this filter.
+    # Can be set to anything you want, as long as it's unique to other filters in this model.
+    parameter_name = 'login_user'
+
+    def lookups(self, request, model_admin):
+        """
+        This defines the filter options.
+        """
+        return (
+            ('yes', 'Yes'),
+            ('no', 'No'),
+        )
+
+    def queryset(self, request, queryset):
+        """
+        This processes the filter option (defined above, in "lookups") when selected by a user.
+        """
+        if self.value() == 'yes':
+            return queryset.filter(userintermediary__user__isnull=False)
+        if self.value() == 'no':
+            return queryset.filter(userintermediary__user__isnull=True)
 
 
 class WmuUserToCaeUserListFilter(admin.SimpleListFilter):
@@ -236,7 +296,7 @@ class ProfileToUserListFilter(admin.SimpleListFilter):
 
 class ProfileToWmuUserListFilter(admin.SimpleListFilter):
     """
-    Filter for Profile model Admin to show models associated with a valid (login) User model.
+    Filter for Profile model Admin to show models associated with a valid WmuUser model.
     """
     # Label to display for filter.
     title = 'Associated with WMU User'
@@ -407,7 +467,14 @@ class UserAdmin(BaseUserAdmin):
         list_display = ('id',) + list_display
 
     # Fields to filter by in admin list view.
-    list_filter = ('is_active', UserToCAECenterEmployeeListFilter, 'groups', 'is_staff', 'is_superuser')
+    list_filter = (
+        'is_active',
+        UserToCAECenterEmployeeListFilter,
+        'groups',
+        UserToWmuUserListFilter,
+        'is_staff',
+        'is_superuser',
+    )
 
     # Remove individual permission list from admin detail view. Should only ever use group permissions.
     old_list = BaseUserAdmin.fieldsets[2][1]['fields']
@@ -529,7 +596,7 @@ class WmuUserAdmin(admin.ModelAdmin):
     ordering = ('-is_active', 'bronco_net')
 
     # Fields to filter by in admin list view.
-    list_filter = ('is_active', WmuUserToCaeUserListFilter, WmuUserToMajorListFilter)
+    list_filter = ('is_active', WmuUserToUserListFilter, WmuUserToCaeUserListFilter, WmuUserToMajorListFilter)
 
     # Fields to search in admin list view.
     search_fields = ('bronco_net', 'winno', 'first_name', 'last_name')
