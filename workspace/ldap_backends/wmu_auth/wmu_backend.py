@@ -134,6 +134,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
         if user_intermediary.last_ldap_check <= one_day_ago:
             # Last LDAP check was more than a day ago.
             # Verify and set user ldap "active" status, according to main campus.
+            logger.auth_info('{0}: Checking user is_active status against LDAP.'.format(uid))
             self.verify_user_ldap_status(uid)
 
         # For now, just make sure the associated Wmu User model is created and up to date.
@@ -274,6 +275,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
         if user_intermediary.last_ldap_check <= one_day_ago:
             # Last LDAP check was more than a day ago.
             # Verify and set user ldap "active" status, according to main campus.
+            logger.auth_info('{0}: Checking user is_active status against LDAP.'.format(uid))
             self.verify_user_ldap_status(uid)
 
         # Update major.
@@ -487,6 +489,8 @@ class WmuAuthBackend(AbstractLDAPBackend):
                 # Fields need updating.
                 user_ldap_status_is_active = user_ldap_status[0]
                 user_ldap_status_in_retention = user_ldap_status[1]
+                logger.auth_info('{0}: is_active (Login) User status - {1}'.format(uid, user_ldap_status_is_active))
+                logger.auth_info('{0}: is_active WmuUser status - {1}'.format(uid, user_ldap_status_in_retention))
 
                 # Handle associated (login) User model, if present.
                 try:
@@ -569,6 +573,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
             # Check wmuEnrolled field.
             if field_to_check == 'true':
                 # User is currently enrolled.
+                logger.auth_info('{0}: is_active LDAP check - Verified wmuEnrolled.'.format(uid))
                 return (True, True)
 
             else:
@@ -584,6 +589,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
                 # Check iNetUserStatus field.
                 if field_to_check != 'active':
                     # Not enrolled and not active. Can set user to inactive in Django.
+                    logger.auth_info('{0}: is_active LDAP check - Verified inetUserStatus.'.format(uid))
                     return (False, False)
                 else:
                     # User is not enrolled but is "active".
@@ -601,6 +607,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
                     kerberos_status = ldap_info['wmuKerberosUserStatus'][0].strip()
                     if kerberos_status != 'active':
                         # Kerberos field returns non-active value. User is probably no longer student/working here?
+                        logger.auth_info('{0}: is_active LDAP check - Verified wmuKerberosUserStatus.'.format(uid))
                         return (False, False)
 
                     # If we got this far, then above experimental logic kerberos returned fine.
@@ -621,6 +628,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
                         # Check if falls within valid employment period.
                         if employee_expiration is not None and employee_expiration >= timezone.now().date():
                             # Not enrolled, but still employed.
+                            logger.auth_info('{0}: is_active LDAP check - Verified wmuEmployeeExpiration.'.format(uid))
                             return (True, True)
                     except (KeyError, IndexError):
                         # Failed to get employee_expiration. Set to None.
@@ -647,9 +655,11 @@ class WmuAuthBackend(AbstractLDAPBackend):
                         (employee_expiration is not None and employee_expiration >= one_year_ago):
 
                         # Not enrolled, but within either student or employee retention period.
+                        logger.auth_info('{0}: is_active LDAP check - Verified wmuStudentExpiration.'.format(uid))
                         return (False, True)
 
                     # Not enrolled and not within retention periods.
+                    logger.auth_info('{0}: is_active LDAP check - No verified matches.'.format(uid))
                     return (False, False)
 
         except KeyError as err:
