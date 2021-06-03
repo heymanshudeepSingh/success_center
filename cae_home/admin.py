@@ -40,6 +40,11 @@ class MajorInline(admin.TabularInline):
     model = models.WmuUser.major.through
     extra = 1
 
+
+class GroupMembershipInline(admin.TabularInline):
+    model = models.GroupMembership
+    extra = 1
+
 #endregion Model Inlines
 
 
@@ -462,6 +467,8 @@ class SoftwareExpiryToYearListFilter(admin.SimpleListFilter):
 #region User Model Admin
 
 class UserAdmin(BaseUserAdmin):
+    inlines = (GroupMembershipInline,)
+
     # Fields to display in admin list view.
     list_display = ('username', 'get_winno', 'first_name', 'last_name', 'get_user_groups')
     if settings.DEBUG:
@@ -585,11 +592,14 @@ class GroupMembershipAdmin(admin.ModelAdmin):
     list_filter = ('user', 'group')
 
     # Read only fields for admin detail view.
-    readonly_fields = ('id', 'date_created', 'date_modified')
+    readonly_fields = ('id', 'date_created', 'date_modified', 'related_models',)
 
     # Fieldset organization for admin detail view.
     fieldsets = (
         (None, {
+            'fields': ('related_models',),
+        }),
+        ('General', {
             'fields': ('user', 'group', 'date_joined', 'date_left'),
         }),
         ('Advanced', {
@@ -597,6 +607,23 @@ class GroupMembershipAdmin(admin.ModelAdmin):
             'fields': ('id', 'date_created', 'date_modified'),
         }),
     )
+
+    def related_models(self, obj):
+        """
+        Creates string of related models, for ease of Admin navigation.
+        """
+        related_model_str = ''
+
+        # Get FK url.
+        fk_link = reverse('admin:cae_home_user_change', args=[obj.user.id])
+        fk_link = mark_safe('<a href="{0}">{1}</a>'.format(fk_link, 'Associated User Model'))
+
+        # Add to string.
+        related_model_str += fk_link
+
+        # Return formatted string.
+        return mark_safe(related_model_str)
+    related_models.short_description = 'Related Models'
 
 
 class UserIntermediaryAdmin(admin.ModelAdmin):
