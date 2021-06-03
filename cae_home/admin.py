@@ -547,7 +547,7 @@ class UserIntermediaryAdmin(admin.ModelAdmin):
     ordering = ('-is_active', 'bronco_net')
 
     # Fields to filter by in admin list view.
-    list_filter = (UserIntermediaryToUserListFilter, UserIntermediaryToWmuUserListFilter)
+    list_filter = ('is_active', UserIntermediaryToUserListFilter, UserIntermediaryToWmuUserListFilter)
 
     # Fields to search in admin list view.
     search_fields = ('bronco_net', 'wmu_user__winno', 'first_name', 'last_name')
