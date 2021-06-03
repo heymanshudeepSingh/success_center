@@ -6,7 +6,8 @@ Admin view for CAE Home app.
 from django.conf import settings
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from django.db.models import Q
+from django.urls import reverse
+from django.utils.html import escape, mark_safe
 
 # User Class Imports.
 from . import models
@@ -491,6 +492,26 @@ class UserAdmin(BaseUserAdmin):
     #         new_list += (item,)
     # BaseUserAdmin.fieldsets = new_list
 
+    # Update fieldset default first row to have a title.
+    updated_first_row = ('Login Info', BaseUserAdmin.fieldsets[0][1]),
+    new_fieldsets = ()
+    for index in range(len(BaseUserAdmin.fieldsets)):
+        if index == 0:
+            new_fieldsets += updated_first_row
+        else:
+            new_fieldsets += (BaseUserAdmin.fieldsets[index],)
+    BaseUserAdmin.fieldsets = new_fieldsets
+
+    # Add related model links to fieldsets.
+    new_first_row = (None, {
+        'fields': ('related_models',),
+    }),
+    updated_fieldsets = new_first_row + BaseUserAdmin.fieldsets
+    BaseUserAdmin.fieldsets = updated_fieldsets
+
+    # Update hidden fields.
+    BaseUserAdmin.readonly_fields += ('related_models',)
+
     def get_winno(self, obj):
         """
         Return associated winno from WmuUser model, if present.
@@ -511,6 +532,47 @@ class UserAdmin(BaseUserAdmin):
             groups.append(group.name)
         return ', '.join(groups)
     get_user_groups.short_description = 'User Groups'
+
+    def related_models(self, obj):
+        """
+        Creates string of related models, for ease of Admin navigation.
+        """
+        related_model_str = ''
+
+        # Handle if related WmuUser exists.
+        if obj.userintermediary.wmu_user is not None:
+            # Get FK url.
+            fk_link = reverse('admin:cae_home_wmuuser_change', args=[obj.userintermediary.wmu_user.id])
+            fk_link = mark_safe('<a href="{0}">{1}</a>'.format(fk_link, 'WmuUser Model'))
+
+            # Add to string.
+            if related_model_str != '':
+                related_model_str += '&nbsp; &nbsp; | &nbsp; &nbsp;'
+            related_model_str += fk_link
+
+        # Handle for related UserIntermediary.
+        # Get FK url.
+        fk_link = reverse('admin:cae_home_userintermediary_change', args=[obj.userintermediary.id])
+        fk_link = mark_safe('<a href="{0}">{1}</a>'.format(fk_link, 'UserIntermediary Model'))
+
+        # Add to string.
+        if related_model_str != '':
+            related_model_str += '&nbsp; &nbsp; | &nbsp; &nbsp;'
+        related_model_str += fk_link
+
+        # Handle if related Profile exists (it should, unconditionally. But check anyways to be safe).
+        if obj.userintermediary.profile is not None:
+            fk_link = reverse('admin:cae_home_profile_change', args=[obj.userintermediary.profile.id])
+            fk_link = mark_safe('<a href="{0}">{1}</a>'.format(fk_link, 'Profile Model'))
+
+            # Add to string.
+            if related_model_str != '':
+                related_model_str += '&nbsp; &nbsp; | &nbsp; &nbsp;'
+            related_model_str += fk_link
+
+        # Return formatted string.
+        return mark_safe(related_model_str)
+    related_models.short_description = 'Related Models'
 
 
 class GroupMembershipAdmin(admin.ModelAdmin):
@@ -543,6 +605,8 @@ class UserIntermediaryAdmin(admin.ModelAdmin):
     if settings.DEBUG:
         list_display = ('id',) + list_display
 
+    # list_display_links = ('(Login) User', 'WmuUser')
+
     # Default field ordering in admin list view.
     ordering = ('-is_active', 'bronco_net')
 
@@ -553,12 +617,15 @@ class UserIntermediaryAdmin(admin.ModelAdmin):
     search_fields = ('bronco_net', 'wmu_user__winno', 'first_name', 'last_name')
 
     # Read only fields for admin detail view.
-    readonly_fields = ('id', 'date_created', 'date_modified', 'is_active')
+    readonly_fields = ('id', 'date_created', 'date_modified', 'is_active', 'related_models')
 
     # Fieldset organization for admin detail view.
     fieldsets = (
         (None, {
-            'fields': ('bronco_net',),
+            'fields': ('related_models',),
+        }),
+        ('General', {
+            'fields': ('bronco_net', 'winno', 'first_name', 'last_name'),
         }),
         ('Relations', {
             'fields': ('user', 'wmu_user', 'profile'),
@@ -583,6 +650,46 @@ class UserIntermediaryAdmin(admin.ModelAdmin):
     get_winno.short_description = 'Winno'
     get_winno.admin_order_field = 'wmu_user__winno'
 
+    def related_models(self, obj):
+        """
+        Creates string of related models, for ease of Admin navigation.
+        """
+        related_model_str = ''
+
+        # Handle if related (login) User exists.
+        if obj.user is not None:
+            # Get FK url.
+            fk_link = reverse('admin:cae_home_user_change', args=[obj.user.id])
+            fk_link = mark_safe('<a href="{0}">{1}</a>'.format(fk_link, '(Login) User Model'))
+
+            # Add to string.
+            related_model_str += fk_link
+
+        # Handle if related WmuUser exists.
+        if obj.wmu_user is not None:
+            # Get FK url.
+            fk_link = reverse('admin:cae_home_wmuuser_change', args=[obj.wmu_user.id])
+            fk_link = mark_safe('<a href="{0}">{1}</a>'.format(fk_link, 'WmuUser Model'))
+
+            # Add to string.
+            if related_model_str != '':
+                related_model_str += '&nbsp; &nbsp; | &nbsp; &nbsp;'
+            related_model_str += fk_link
+
+        # Handle if related Profile exists (it should, unconditionally. But check anyways to be safe).
+        if obj.profile is not None:
+            fk_link = reverse('admin:cae_home_profile_change', args=[obj.profile.id])
+            fk_link = mark_safe('<a href="{0}">{1}</a>'.format(fk_link, 'Profile Model'))
+
+            # Add to string.
+            if related_model_str != '':
+                related_model_str += '&nbsp; &nbsp; | &nbsp; &nbsp;'
+            related_model_str += fk_link
+
+        # Return formatted string.
+        return mark_safe(related_model_str)
+    related_models.short_description = 'Related Models'
+
 
 class WmuUserAdmin(admin.ModelAdmin):
     inlines = (MajorInline,)
@@ -602,11 +709,14 @@ class WmuUserAdmin(admin.ModelAdmin):
     search_fields = ('bronco_net', 'winno', 'first_name', 'last_name')
 
     # Read only fields for admin detail view.
-    readonly_fields = ('id', 'date_created', 'date_modified', 'official_email', 'shorthand_email')
+    readonly_fields = ('id', 'date_created', 'date_modified', 'official_email', 'shorthand_email', 'related_models')
 
     # Organize fieldsets for admin detail view.
     fieldsets = (
         (None, {
+            'fields': ('related_models',),
+        }),
+        ('General', {
             'fields': ('user_type', 'bronco_net', 'winno', 'first_name', 'middle_name', 'last_name'),
         }),
         ('Contact Info', {
@@ -638,6 +748,45 @@ class WmuUserAdmin(admin.ModelAdmin):
             return ''
     get_user_groups.short_description = 'User Groups'
 
+    def related_models(self, obj):
+        """
+        Creates string of related models, for ease of Admin navigation.
+        """
+        related_model_str = ''
+
+        # Handle if related (login) User exists.
+        if obj.userintermediary.user is not None:
+            # Get FK url.
+            fk_link = reverse('admin:cae_home_user_change', args=[obj.userintermediary.user.id])
+            fk_link = mark_safe('<a href="{0}">{1}</a>'.format(fk_link, '(Login) User Model'))
+
+            # Add to string.
+            related_model_str += fk_link
+
+        # Handle for related UserIntermediary.
+        # Get FK url.
+        fk_link = reverse('admin:cae_home_userintermediary_change', args=[obj.userintermediary.id])
+        fk_link = mark_safe('<a href="{0}">{1}</a>'.format(fk_link, 'UserIntermediary Model'))
+
+        # Add to string.
+        if related_model_str != '':
+            related_model_str += '&nbsp; &nbsp; | &nbsp; &nbsp;'
+        related_model_str += fk_link
+
+        # Handle if related Profile exists (it should, unconditionally. But check anyways to be safe).
+        if obj.userintermediary.profile is not None:
+            fk_link = reverse('admin:cae_home_profile_change', args=[obj.userintermediary.profile.id])
+            fk_link = mark_safe('<a href="{0}">{1}</a>'.format(fk_link, 'Profile Model'))
+
+            # Add to string.
+            if related_model_str != '':
+                related_model_str += '&nbsp; &nbsp; | &nbsp; &nbsp;'
+            related_model_str += fk_link
+
+        # Return formatted string.
+        return mark_safe(related_model_str)
+    related_models.short_description = 'Related Models'
+
 
 class ProfileAdmin(admin.ModelAdmin):
     # Fields to display in admin list view.
@@ -660,10 +809,13 @@ class ProfileAdmin(admin.ModelAdmin):
     )
 
     # Read only fields for admin detail view.
-    readonly_fields = ('id', 'date_created', 'date_modified')
+    readonly_fields = ('id', 'date_created', 'date_modified', 'related_models')
 
     # Fieldset organization for admin detail view.
     fieldsets = (
+        (None, {
+            'fields': ('related_models',),
+        }),
         ('User Info', {
             'fields': ('address', 'phone_number'),
         }),
@@ -713,6 +865,46 @@ class ProfileAdmin(admin.ModelAdmin):
         return '{0}'.format(obj.userintermediary.last_name)
     get_last_name.short_description = 'Last Name'
     get_last_name.admin_order_field = 'userintermediary__last_name'
+
+    def related_models(self, obj):
+        """
+        Creates string of related models, for ease of Admin navigation.
+        """
+        related_model_str = ''
+
+        # Handle if related (login) User exists.
+        if obj.userintermediary.user is not None:
+            # Get FK url.
+            fk_link = reverse('admin:cae_home_user_change', args=[obj.userintermediary.user.id])
+            fk_link = mark_safe('<a href="{0}">{1}</a>'.format(fk_link, '(Login) User Model'))
+
+            # Add to string.
+            related_model_str += fk_link
+
+        # Handle if related WmuUser exists.
+        if obj.userintermediary.wmu_user is not None:
+            # Get FK url.
+            fk_link = reverse('admin:cae_home_wmuuser_change', args=[obj.userintermediary.wmu_user.id])
+            fk_link = mark_safe('<a href="{0}">{1}</a>'.format(fk_link, 'WmuUser Model'))
+
+            # Add to string.
+            if related_model_str != '':
+                related_model_str += '&nbsp; &nbsp; | &nbsp; &nbsp;'
+            related_model_str += fk_link
+
+        # Handle for related UserIntermediary.
+        # Get FK url.
+        fk_link = reverse('admin:cae_home_userintermediary_change', args=[obj.userintermediary.id])
+        fk_link = mark_safe('<a href="{0}">{1}</a>'.format(fk_link, 'UserIntermediary Model'))
+
+        # Add to string.
+        if related_model_str != '':
+            related_model_str += '&nbsp; &nbsp; | &nbsp; &nbsp;'
+        related_model_str += fk_link
+
+        # Return formatted string.
+        return mark_safe(related_model_str)
+    related_models.short_description = 'Related Models'
 
 
 class AddressAdmin(admin.ModelAdmin):
