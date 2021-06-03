@@ -6,6 +6,7 @@ Admin view for CAE Home app.
 from django.conf import settings
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from django.db.models import Q
 
 # User Class Imports.
 from . import models
@@ -17,6 +18,19 @@ try:
 except ImportError:
     # Assume that CAE_Web project isn't present.
     RoomEventInline = None
+
+
+CAE_CENTER_GROUPS = [
+    'CAE Director', 'CAE Building Coordinator',
+    'CAE Admin GA', 'CAE Admin',
+    'CAE Programmer GA', 'CAE Programmer',
+    'CAE Attendant',
+    'CAE Director Inactive',
+    'CAE Building Coordinator Inactive',
+    'CAE Attendant Inactive',
+    'CAE Admin Inactive',
+    'CAE Programmer Inactive',
+]
 
 
 #region Model Inlines
@@ -54,21 +68,10 @@ class UserToCAECenterEmployeeListFilter(admin.SimpleListFilter):
         """
         This processes the filter option (defined above, in "lookups") when selected by a user.
         """
-        cae_center_groups = [
-            'CAE Director', 'CAE Building Coordinator',
-            'CAE Admin GA', 'CAE Admin',
-            'CAE Programmer GA', 'CAE Programmer',
-            'CAE Attendant',
-            'CAE Director Inactive',
-            'CAE Building Coordinator Inactive',
-            'CAE Attendant Inactive',
-            'CAE Admin Inactive',
-            'CAE Programmer Inactive',
-        ]
         if self.value() == 'yes':
-            return queryset.filter(groups__name__in=cae_center_groups).distinct()
+            return queryset.filter(groups__name__in=CAE_CENTER_GROUPS).distinct()
         if self.value() == 'no':
-            return queryset.exclude(groups__name__in=cae_center_groups).distinct()
+            return queryset.exclude(groups__name__in=CAE_CENTER_GROUPS).distinct()
 
 
 class UserIntermediaryToUserListFilter(admin.SimpleListFilter):
@@ -129,6 +132,46 @@ class UserIntermediaryToWmuUserListFilter(admin.SimpleListFilter):
             return queryset.filter(wmu_user__isnull=False)
         if self.value() == 'no':
             return queryset.filter(wmu_user__isnull=True)
+
+
+class WmuUserToCaeUserListFilter(admin.SimpleListFilter):
+    """
+    Filter for WmuUser model Admin to show models associated with a (Login) User that is a CAE Center employee.
+    """
+    # Label to display for filter.
+    title = 'CAE Employee'
+
+    # This is the name used in the url for this filter.
+    # Can be set to anything you want, as long as it's unique to other filters in this model.
+    parameter_name = 'cae_employee'
+
+    def lookups(self, request, model_admin):
+        """
+        This defines the filter options.
+        """
+        return (
+            ('yes', 'Yes'),
+            ('no', 'No'),
+        )
+
+    def queryset(self, request, queryset):
+        """
+        This processes the filter option (defined above, in "lookups") when selected by a user.
+        """
+        # First get all models that have an associated (login) User model.
+        cae_user_list = queryset.filter(userintermediary__user__isnull=False)
+
+        # Next, further filter to get only users associated with a CAE Center group.
+        cae_user_list = cae_user_list.filter(userintermediary__user__groups__name__in=CAE_CENTER_GROUPS).distinct()
+
+        if self.value() == 'yes':
+            return cae_user_list
+        if self.value() == 'no':
+            # Get all Pk's of known CAE Users.
+            cae_user_list = cae_user_list.values_list('id')
+
+            # Get query by excluding any users where the pk matches a known CAE User.
+            return queryset.exclude(id__in=cae_user_list)
 
 
 class WmuUserToMajorListFilter(admin.SimpleListFilter):
@@ -486,7 +529,7 @@ class WmuUserAdmin(admin.ModelAdmin):
     ordering = ('-is_active', 'bronco_net')
 
     # Fields to filter by in admin list view.
-    list_filter = ('is_active', WmuUserToMajorListFilter)
+    list_filter = ('is_active', WmuUserToCaeUserListFilter, WmuUserToMajorListFilter)
 
     # Fields to search in admin list view.
     search_fields = ('bronco_net', 'winno', 'first_name', 'last_name')
