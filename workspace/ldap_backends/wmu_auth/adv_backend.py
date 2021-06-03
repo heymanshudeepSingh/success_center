@@ -102,6 +102,17 @@ class AdvisingAuthBackend(AbstractLDAPBackend):
         """
         wmu_user = models.WmuUser.objects.get(bronco_net=uid)
 
+        # First handle if user model is no longer active.
+        if wmu_user.is_active is False:
+            # Disable any "active" majors for WmuUser.
+            user_major_set = wmu_user.major.filter(is_active=True)
+            for major in user_major_set:
+                self.deactivate_student_major(uid, major)
+
+            # User is inactive so no further logic is required here.
+            return
+
+        # If we made it this far, then WmuUser model is active. Proceed with LDAP calls to sync with main campus.
         returned_majors = self.get_student_major(uid)
         handled_majors = []
 

@@ -258,6 +258,16 @@ class WmuAuthBackend(AbstractLDAPBackend):
         self._update_user_email_fields(uid, user_ldap_info)
         self._update_user_phone_fields(uid, user_ldap_info)
 
+        # Check last call to LDAP, saved in associated UserIntermediary model.
+        # This is to prevent double checking when updating a (login) User model. Or just to avoid unnecessary repeated
+        # LDAP calls with in a short timespan.
+        user_intermediary = models.UserIntermediary.objects.get(bronco_net=uid)
+        one_day_ago = timezone.now() - timezone.timedelta(days=1)
+        if user_intermediary.last_ldap_check <= one_day_ago:
+            # Last LDAP check was more than a day ago.
+            # Verify and set user ldap "active" status, according to main campus.
+            self.verify_user_ldap_status(uid)
+
         # Update major.
         adv_ldap = AdvisingAuthBackend()
         adv_ldap.add_or_update_major(uid)
@@ -339,7 +349,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
                     model_updated = True
 
             else:
-                # update last name info.
+                # Update last name info.
                 if login_user_model.last_name != last_name:
                     login_user_model.last_name = last_name
                     model_updated = True
@@ -452,6 +462,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
         If student is not enrolled/employed, we do a few extra checks to see if we can get useful data anyways.
         :param uid: BroncoNet of student to check.
         :param set_model_active_fields: Bool indicating if user "active" fields should be set based on ldap status.
+            Mostly used for testing purposes.
         :return: None if no ldap data returned | (True, True) if actively enrolled/employed |
             (False, True) if not enrolled/employed, but within retention period (12 months) |
             (False, False) if not enrolled/employed, and outside of retention period.
@@ -484,11 +495,12 @@ class WmuAuthBackend(AbstractLDAPBackend):
                 # Handle associated WmuUser model, if present.
                 try:
                     wmu_user = models.WmuUser.objects.get(bronco_net=uid)
+
+                    # If we got this far, then WmuUser model exists. Set fields appropriately.
                     wmu_user.is_active = user_ldap_status_in_retention
                     wmu_user.userintermediary.last_ldap_check = timezone.now()
                     wmu_user.save()
 
-                # If we got this far, then (login) User model exists. Set fields appropriately.
                 except models.WmuUser.objects.DoesNotExist:
                     # Does not exist for WmuUser. This is fine.
                     pass
@@ -503,7 +515,8 @@ class WmuAuthBackend(AbstractLDAPBackend):
         # So if either happens while this below section tries to run, then all users will automatically be set to
         # inactive, probably?
         # Look into at a later date.
-
+        else:
+            raise ValidationError('Ldap returned None for "{0}"'.format(uid))
         # else:
         #     # Ldap info failed to return.
         #
@@ -565,7 +578,25 @@ class WmuAuthBackend(AbstractLDAPBackend):
                     # Not enrolled and not active. Can set user to inactive in Django.
                     return (False, False)
                 else:
-                    # User is not enrolled but is active.
+                    # User is not enrolled but is "active".
+                    # NOTE: As of June 2021, this seems to stay set to active even for really really old students that
+                    # graduated forever ago. Aka, the "inetUserStatus" LDAP field may be useless now.
+
+                    # The below "expiration" logic should work in theory. However, thanks to main campus LDAP being as
+                    # reliable as ever, it does not seem to update properly.
+                    # For example, some "EmployeeExpiration" values will show a date of years ago, for students that
+                    # are still actively working.
+                    # Meanwhile, some "StudentExpiration" values will show a date of two to three years in the future.
+                    # It just seems really really unreliable.
+                    # Thus, experimentally use the below logic first. If this chunk of logic leads to User "active"
+                    # check issues, then remove.
+                    kerberos_status = ldap_info['wmuKerberosUserStatus'][0].strip()
+                    if kerberos_status != 'active':
+                        # Kerberos field returns non-active value. User is probably no longer student/working here?
+                        return (False, False)
+
+                    # If we got this far, then above experimental logic kerberos returned fine.
+                    # That means user is (probably) still enrolled/employeed somehow. But run below checks to be safe.
 
                     # Get wmuEmployeeExpiration.
                     try:
