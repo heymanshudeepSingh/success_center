@@ -55,6 +55,11 @@ def compare_user_and_wmuuser_models(uid):
     if user_model is not None and wmu_user_model is not None:
         # Logic for when both models exist.
 
+        # Handle group membership based on is_active status.
+        if user_model.is_active is False and user_model.groups.all().exists():
+            user_model.groups.clear()
+            model_updated = True
+
         # Update winno if not matching.
         if user_intermediary.winno != wmu_user_model.winno:
             user_intermediary.winno = wmu_user_model.winno
@@ -116,6 +121,11 @@ def compare_user_and_wmuuser_models(uid):
 
     elif user_model is not None:
         # Logic for when BroncoNet only has associated (login) User model.
+
+        # Handle group membership based on is_active status.
+        if user_model.is_active is False and user_model.groups.all().exists():
+            user_model.groups.clear()
+            model_updated = True
 
         # Update first name if not matching.
         if user_intermediary.first_name != user_model.first_name:
