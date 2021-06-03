@@ -26,27 +26,39 @@ def compare_user_and_wmuuser_models(uid):
     Validates user info between login_user model and wmu_user model.
     :param uid: Id (BroncoNet) of user to validate.
     """
-    has_login_user = False
-    has_wmu_user = False
+    user_model = None
+    wmu_user_model = None
+    model_updated = False
+
+    # Get UserIntermediary value for user.
+    user_intermediary = UserIntermediary.objects.get(bronco_net=uid)
+
+    # Before anything, make sure UserIntermediary has Winno field populated.
+    if user_intermediary.winno == '':
+        # For now, default to the UserIntermediary's BroncoNet, because that should be unique.
+        user_intermediary.winno = user_intermediary.bronco_net
+        user_intermediary.save()
 
     # Attempt to get associated (login) User model.
     try:
         user_model = User.objects.get(username=uid)
-        has_login_user = True
     except ObjectDoesNotExist:
         pass    # BroncoNet does not have an associated (login) User model.
 
     # Attempt to get associated WmuUser model.
     try:
         wmu_user_model = WmuUser.objects.get(bronco_net=uid)
-        has_wmu_user = True
     except ObjectDoesNotExist:
         pass    # BroncoNet does not have an associated WmuUser model.
 
-    model_updated = False
-    if has_login_user and has_wmu_user:
+    # Handle based on which user models do or do not exist.
+    if user_model is not None and wmu_user_model is not None:
         # Logic for when both models exist.
-        user_intermediary = UserIntermediary.objects.get(bronco_net=uid)
+
+        # Update winno if not matching.
+        if user_intermediary.winno != wmu_user_model.winno:
+            user_intermediary.winno = wmu_user_model.winno
+            model_updated = True
 
         # Check that first_name values are the same.
         if user_model.first_name != wmu_user_model.first_name:
@@ -77,7 +89,10 @@ def compare_user_and_wmuuser_models(uid):
             model_updated = True
 
         # Check that email values are the same.
-        if user_model.email != wmu_user_model.official_email:
+        if (
+            user_model.email != wmu_user_model.official_email and
+            (wmu_user_model.official_email != None and wmu_user_model.official_email != '')
+        ):
             user_model.email = wmu_user_model.official_email
             model_updated = True
 
@@ -99,9 +114,8 @@ def compare_user_and_wmuuser_models(uid):
             wmu_user_model.save()
             user_intermediary.save()
 
-    elif has_login_user:
+    elif user_model is not None:
         # Logic for when BroncoNet only has associated (login) User model.
-        user_intermediary = UserIntermediary.objects.get(bronco_net=uid)
 
         # Update first name if not matching.
         if user_intermediary.first_name != user_model.first_name:
@@ -129,9 +143,13 @@ def compare_user_and_wmuuser_models(uid):
         if model_updated:
             user_intermediary.save()
 
-    elif has_wmu_user:
+    elif wmu_user_model is not None:
         # Logic for when BroncoNet only has associated WmuUser model.
-        user_intermediary = UserIntermediary.objects.get(bronco_net=uid)
+
+        # Update winno if not matching.
+        if user_intermediary.winno != wmu_user_model.winno:
+            user_intermediary.winno = wmu_user_model.winno
+            model_updated = True
 
         # Update first name if not matching.
         if user_intermediary.first_name != wmu_user_model.first_name:
@@ -376,6 +394,7 @@ class UserIntermediary(models.Model):
 
     # Model fields.
     bronco_net = models.CharField(max_length=MAX_LENGTH, blank=True, unique=True)
+    winno = models.CharField(max_length=MAX_LENGTH, blank=True, default='')
     first_name = models.CharField(max_length=MAX_LENGTH, blank=True)
     last_name = models.CharField(max_length=MAX_LENGTH, blank=True)
     is_active = models.BooleanField(default=True)
