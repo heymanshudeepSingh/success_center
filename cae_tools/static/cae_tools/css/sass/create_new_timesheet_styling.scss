@@ -37,32 +37,46 @@ div {
         @extend .flex_base;
         justify-content: center;
         position: relative;
-        overflow-x:hidden;
-        margin: auto;
+        margin: 50px;
         background-color: #f5f8fa;
+        border-radius: $radius;
 
         .container-head {
             @extend .flex_base;
             align-items: center;
             background-color: #f5f8fa;
             position: relative;
-            padding: 3px;
-            margin: auto;
-            width: 70%;
+            max-width: 100%;
+
 
         }
 
          .container-body {
              display: flex;
              background-color: 	#f5f8fa;
-             width: 70%;
              margin: auto;
+             max-width: 100%;
+             overflow: hidden;
+
 
 
              .container-body-head {
                  display: flex;
-                 flex-direction: column;
+                 flex-direction: row;
                  width: 100%;
+                 align-items: center;
+
+                 p {
+                     background-color: #f5f8fa;
+                     flex-direction: column;
+                     width: 100%;
+                     white-space: nowrap;
+                     margin: 5px;
+                     padding: 5px;
+                     border-right: 1px solid #000;
+                     align-items: center;
+                 }
+             }
 
                 .container-body-content {
                     display: flex;
@@ -79,131 +93,110 @@ div {
                         border-right: 1px solid black;
                         align-items: center;
 
-                    }
-
-                    .Day {
-                        display: flex;
-                        padding: 2px;
-                        white-space: nowrap;
-                        width: 100%;
-
-
 
                     }
-
-                    .Date {
-                        display: flex;
-                        padding: 2px;
-                        white-space: nowrap;
-                        width: 100%;
+                    >* select{
+                        border-radius: $radius;
+                        background-color: #f5f8fa;
                     }
 
-                    .Morning-Begin {
-                        display: flex;
-                        padding: 2px;
-                        white-space: nowrap;
-                        width: 100%;
-                        p{
-                            padding-right: 10px;
-                        }
-                    }
 
-                    .Morning-End {
-                        display: flex;
-                        padding: 2px;
-                        white-space: nowrap;
-                        width: 100%;
-                        p{
-                            padding-right: 10px;
-                        }
-                    }
 
-                    .Afternoon-Begin {
-                        display: flex;
-                        padding: 2px;
-                        white-space: nowrap;
-                        width: 100%;
-                        p{
-                            padding-right: 10px;
-                        }
-                    }
+            //        .Morning-Begin {
+            //            display: flex;
+            //            padding: 2px;
+            //            white-space: nowrap;
+            //            width: 100%;
+            //            p{
+            //                padding-right: 10px;
+            //            }
+            //        }
+            //
+            //        .Morning-End {
+            //            display: flex;
+            //            padding: 2px;
+            //            white-space: nowrap;
+            //            width: 100%;
+            //            p{
+            //                padding-right: 10px;
+            //            }
+            //        }
+            //
+            //        .Afternoon-Begin {
+            //            display: flex;
+            //            padding: 2px;
+            //            white-space: nowrap;
+            //            width: 100%;
+            //            p{
+            //                padding-right: 10px;
+            //            }
+            //        }
+            //
+            //        .Afternoon-End {
+            //            display: flex;
+            //            padding: 2px;
+            //            white-space: nowrap;
+            //            width: 100%;
+            //            p{
+            //                padding-right: 10px;
+            //            }
+            //        }
+            //
+            //        .Evening-Begin {
+            //            display: flex;
+            //            padding: 2px;
+            //            white-space: nowrap;
+            //            width: 100%;
+            //            p{
+            //                padding-right: 10px;
+            //            }
+            //        }
+            //
+            //        .Evening-End {
+            //            display: flex;
+            //            padding: 2px;
+            //            white-space: nowrap;
+            //            width: 100%;
+            //            p{
+            //                padding-right: 10px;
+            //            }
+            //        }
+            //
+            //        .Total {
+            //            display: flex;
+            //            padding: 2px;
+            //            //flex-direction: row;
+            //            width: 100%;
+            //            white-space: nowrap;
+            //            align-items: flex-start;
+            //
+            //        }
+            //    }
+            //
+            // .Day {
+            //        display: flex;
+            //        flex-direction: column;
+            //        padding: 2px;
+            //        white-space: nowrap;
+            //        width: 100%;
+            //
+            //
+            //
+            //        }
+            //
+            //.Date {
+            //    display: flex;
+            //    flex-direction: column;
+            //    padding: 2px;
+            //    white-space: nowrap;
+            //    width: 100%;
+            //}
 
-                    .Afternoon-End {
-                        display: flex;
-                        padding: 2px;
-                        white-space: nowrap;
-                        width: 100%;
-                        p{
-                            padding-right: 10px;
-                        }
-                    }
-
-                    .Evening-Begin {
-                        display: flex;
-                        padding: 2px;
-                        white-space: nowrap;
-                        width: 100%;
-                        p{
-                            padding-right: 10px;
-                        }
-                    }
-
-                    .Evening-End {
-                        display: flex;
-                        padding: 2px;
-                        white-space: nowrap;
-                        width: 100%;
-                        p{
-                            padding-right: 10px;
-                        }
-                    }
-
-                    .Total {
-                        display: flex;
-                        padding: 2px;
-                        flex-direction: row;
-                        width: 100%;
-                        white-space: nowrap;
-                        align-items: flex-start;
-
-                    }
-                }
-
-             }
-
-             .container-body-content{
-                 flex: 2;
-
-             }
          }
 
-
-
     }
-    &.head
-    {
-        @extend .flex_base;
-        align-items: center;
-        background-color: #f5f8fa;
-        position: relative;
 
-    }
-    //&.body{
-    //    @extend .flex_base;
-    //    align-content: space-between;
-    //    align-items: center;
-    //    background-color : pink;
-    //
-    //     &.heading{
-    //
-    //        flex: 1;
-    //        background-color: red;
-    //
-    //
-    //    }
-
-    //}
-}
+}}
 
 
 
