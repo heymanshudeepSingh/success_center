@@ -26,6 +26,17 @@ a {
         margin: 2px;
         font-family: "Open Sans","Lato","Source Sans Pro",sans-serif;
     }
+    &-submit{
+        width: 100%;
+        background-color: $buttonbgcolor;
+        border: $buttonborder ;
+        border-radius: $radius;
+        color: #986516;
+        display: inline-block;
+        padding: 6px 12px;
+        margin: 2px;
+        font-family: "Open Sans","Lato","Source Sans Pro",sans-serif;
+    }
 }
 
 .flex_base{
@@ -40,6 +51,7 @@ div {
         margin: 50px;
         background-color: #f5f8fa;
         border-radius: $radius;
+        font-family: "Source Sans Pro","Open Sans","Lato",sans-serif;
 
         .alert-error{
             background-color: #b91233;
@@ -86,6 +98,7 @@ div {
             background-color: #f5f8fa;
             position: relative;
             max-width: 100%;
+            font-family: "Source Sans Pro","Open Sans","Lato",sans-serif;
 
 
         }
@@ -97,13 +110,16 @@ div {
              max-width: 100%;
              overflow: hidden;
 
-
+              p.grand_total{
+                         float: right;
+                    }
 
              .container-body-head {
                  display: flex;
                  flex-direction: row;
                  width: 100%;
                  align-items: center;
+                 font-family: "Source Sans Pro","Open Sans","Lato",sans-serif;
 
                  p {
                      background-color: #f5f8fa;
@@ -114,6 +130,8 @@ div {
                      padding: 5px;
                      border-right: 1px solid #000;
                      align-items: center;
+                     font-family: "Source Sans Pro","Open Sans","Lato",sans-serif;
+
                  }
              }
 
@@ -121,6 +139,7 @@ div {
                     display: flex;
                     flex-direction: row;
                     width: 106%;
+                    font-family: "Source Sans Pro","Open Sans","Lato",sans-serif;
 
                     > * {
                         background-color: #f5f8fa;
@@ -131,9 +150,11 @@ div {
                         padding: 5px;
                         border-right: 1px solid black;
                         align-items: center;
+                        font-family: "Source Sans Pro","Open Sans","Lato",sans-serif;
 
 
                     }
+
                     >* select{
                         border-radius: $radius;
                         background-color: #f5f8fa;
