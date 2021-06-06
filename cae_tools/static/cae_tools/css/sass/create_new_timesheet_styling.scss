@@ -41,6 +41,45 @@ div {
         background-color: #f5f8fa;
         border-radius: $radius;
 
+        .alert-error{
+            background-color: #b91233;
+            border: 1px solid #81000e;
+            color: rgba(255,255,255,.75);
+            box-sizing: border-box;
+            -webkit-transition: padding .7s,margin .7s,font-size .7s,color .5s,background-color .5s,border .5s,border-radius .5s,opacity .7s linear,visibility 0s .7s;
+            -moz-transition: padding .7s,margin .7s,font-size .7s,color .5s,background-color .5s,border .5s,border-radius .5s,opacity .7s linear,visibility 0s .7s;
+            -o-transition: padding .7s,margin .7s,font-size .7s,color .5s,background-color .5s,border .5s,border-radius .5s,opacity .7s linear,visibility 0s .7s;
+            transition: padding .7s,margin .7s,font-size .7s,color .5s,background-color .5s,border .5s,border-radius .5s,opacity .7s linear,visibility 0s .7s;
+            position: relative;
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-flex-direction: row;
+            -moz-flex-direction: row;
+            -ms-flex-direction: row;
+            flex-direction: row;
+            -webkit-justify-content: center;
+            -moz-justify-content: center;
+            -ms-justify-content: center;
+            justify-content: center;
+            -webkit-align-items: center;
+            -moz-align-items: center;
+            -ms-align-items: center;
+            align-items: center;
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            vertical-align: baseline;
+            border: 0;
+            margin: 0;
+            padding: 0;
+            font-family: "Source Sans Pro","Open Sans","Lato",sans-serif;
+            height: 40px;
+            border-radius: 10px;
+
+        }
         .container-head {
             @extend .flex_base;
             align-items: center;
