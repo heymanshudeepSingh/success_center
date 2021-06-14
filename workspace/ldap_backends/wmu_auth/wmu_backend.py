@@ -460,11 +460,15 @@ class WmuAuthBackend(AbstractLDAPBackend):
         :return: Found PhoneNumber value.
         """
         # Check if user is CAE management position. Avoid auto-updating number if so.
-        user_model = models.User.objects.get(username=uid)
-        if user_model.groups.filter(name__in=CAE_CENTER_MANAGEMENT).exists():
-            # User is part of CAE Center management. Skip auto phone number update.
-            user_profile = models.Profile.get_profile(uid)
-            return user_profile.phone_number
+        try:
+            user_model = models.User.objects.get(username=uid)
+            if user_model.groups.filter(name__in=CAE_CENTER_MANAGEMENT).exists():
+                # User is part of CAE Center management. Skip auto phone number update.
+                user_profile = models.Profile.get_profile(uid)
+                return user_profile.phone_number
+        except models.User.DoesNotExist:
+            # Corresponding (login) User model does not exist for associated profile. This is fine and likely a student.
+            pass
 
         # Get associated user profile.
         user_profile = models.Profile.get_profile(uid)
