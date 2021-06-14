@@ -43,7 +43,7 @@ class MajorInline(admin.TabularInline):
 
 class GroupMembershipInline(admin.TabularInline):
     model = models.GroupMembership
-    extra = 1
+    extra = 0
 
 #endregion Model Inlines
 
