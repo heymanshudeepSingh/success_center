@@ -3,16 +3,12 @@ Signals for CAE Home app.
 """
 
 # System Imports.
-import pytz
-from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.core.management import call_command
-from django.conf import settings
 from django.db import models, transaction
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from django.utils.text import slugify
-from phonenumber_field.modelfields import PhoneNumberField
+from django.utils import timezone
 from os import devnull
 
 # User Class Imports.
@@ -89,7 +85,13 @@ def userintermediary_model_post_save(sender, instance, created, **kwargs):
 
         # Associate profile with UserIntermediary.
         instance.profile = profile
+
+        # Set "last ldap check" value such that user will be ran on next script execution.
+        instance.last_ldap_check = timezone.now() - timezone.timedelta(days=365)
+
+        # Save all changes to UserIntermediary model.
         instance.save()
+
     else:
         # Just updating an existing profile. Save.
         instance.profile.save()
