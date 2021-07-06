@@ -8,8 +8,7 @@ from channels.testing import ChannelsLiveServerTestCase
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group, Permission
-from django.contrib.staticfiles.testing import StaticLiveServerTestCase
-from django.db.models import ObjectDoesNotExist
+from django.core.exceptions import ValidationError
 from django.http import QueryDict
 from django.test import TestCase
 from django.urls import reverse
@@ -23,6 +22,11 @@ from urllib.parse import ParseResult, urlparse
 # User Class Imports.
 from cae_home.management.commands.fixtures.user import create_site_themes
 from cae_home.management.commands.seeders.user import create_groups, create_permission_group_users
+from workspace import logging as init_logging
+
+
+# Import logger.
+logger = init_logging.get_logger(__name__)
 
 
 # Module Variables.
@@ -390,99 +394,370 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
             if attr == 'path':
                 if x != y:
                     self.fail('{0!r} != {1!r} Path\'s don\'t match'.format(url, expected))
+
             if parse_qs and attr == 'query':
                 x, y = QueryDict(x), QueryDict(y)
+
             if x and y and x != y:
                 self.fail('%r != %r (%s doesn\'t match)' % (url, expected, attr))
 
-    def assertResponse(self, url, title, *args, data=None, expected_redirect_url=None, status=200, get=False, **kwargs):
+    def assertResponse(
+        self,
+        url, title, *args,
+        user=None, get=False, data=None, status=200, expected_redirect_url=None, expected_messages=None,
+        expected_context=None, **kwargs,
+    ):
         """
         Assert for expected view Title, StatusCode, and UrlRedirect.
         :param url: Url to test.
         :param title: Expected page title. This is what displays on the browser tab.
-        :param data: Optional POST data to sent to page. Should be in dictionary format.
-        :param expected_redirect_url: Optional url if page is expected to redirect. This should be what it redirects to.
-        :param status: Expected status code for page, after redirections. Defaults to 200.
         :param get: Bool indicating if request is GET or POST. Defaults POST.
+        :param user: User to login with. If None, then tests response when not logged in.
+        :param data: Optional POST data to sent to page. Should be in dictionary format.
+        :param status: Expected status code for page, after redirections. Defaults to 200.
+        :param expected_redirect_url: Optional url if page is expected to redirect. This should be what it redirects to.
+        :param expected_messages: Expected message(s) to see on page. Aka, notifications that appear near top of page.
+        :param expected_context: Expected context to see on page. Can be text or html elements.
         :return: The page response object, generated from the request.
         """
-        # Either get data value or an empty dictionary, to prevent mutability errors.
+        # Either get value or an empty list/dict, to prevent mutability errors.
         data = data or {}
+        expected_messages = expected_messages or []
+        expected_context = expected_context or []
+
+        # Handle user.
+        if user is not None:
+            # Get corresponding User model and login.
+            user = self.get_user(user)
+            self.client.force_login(user)
+        else:
+            # No user value provided. Ensure no user is currently logged in.
+            self.client.logout()
 
         # Get page response.
-        # self.client.force_login(self.user)
         if get:
             response = self.client.get(url, data=data, follow=True)
         else:
             response = self.client.post(url, data=data, follow=True)
 
+        # Handle debug printing.
         if self._debug_print:
             self.debug_print(response)
 
-        # Verify request status code against expected value.
-        self.assertEqual(status, response.status_code)
+        # Verify request status code against expected value (after potential redirects).
+        if status is not None:
+            self.assertEqual(status, response.status_code)
 
-        # Check if redirect was expected.
-        if expected_redirect_url is not None:
-            # Redirect was expected. Check if redirect is at correct url.
-            self.assertTrue(response.redirect_chain, 'Page did not redirect!')
-            self.assertURLEqual(response.redirect_chain[-1][0], expected_redirect_url, parse_qs=True)
+        # Check redirects.
+        if response.redirect_chain:
+            # Redirect occurred. Check if it was expected.
+            if expected_redirect_url is not None:
+                # Redirect was expected. Ensure is at correct url.
+                self.assertURLEqual(response.redirect_chain[-1][0], expected_redirect_url, parse_qs=True)
 
-            # Extra testing if redirecting to login page.
-            if expected_redirect_url == self.login_url:
-                self.assertContains(response, 'Please login to see this page.')
+                # If redirecting to login page and no custom messages provided, then check for basic login message.
+                if (
+                    (expected_redirect_url == self.login_url) and
+                    (expected_messages is None or len(expected_messages) == 0)
+                ):
+                    expected_messages = ['Please login to see this page.']
+
+            else:
+                # Redirect was not expected.
+                raise ValueError('Got unexpected redirects: {0}'.format(response.redirect_chain))
+
+        else:
+            # Redirect did not occur.
+            if expected_redirect_url is not None:
+                # Redirect was expected.
+                raise ValueError('Expected redirect to "{0}". No redirect occurred.'.format(expected_redirect_url))
 
         # Check page title.
         if title is not None:
             self.assertEqual(title, response.context['page']['title'], 'Incorrect Page Title')
 
+        # Check expected messages for page.
+        if isinstance(expected_messages, list) or isinstance(expected_messages, tuple):
+            # Is list of messages. Check all.
+            for expected_message in expected_messages:
+                self.assertContains(response, expected_message)
+        elif expected_messages is not None:
+            # Is likely single message. Check if exists in response.
+            self.assertContains(response, str(expected_messages))
+
+        # Check expected context for page.
+        if isinstance(expected_context, list) or isinstance(expected_context, tuple):
+            # Is list of context items. Check all.
+            for expected_value in expected_context:
+                self.assertContains(response, expected_value)
+        elif expected_context is not None:
+            # Is likely single context item. Check if exists in response.
+            self.assertContains(response, str(expected_context))
+
+        # All assertions passed so far. Return found page response.
         return response
 
-    def assertGetResponse(self, url, title, *args, data=None, expected_redirect_url=None, status=200, **kwargs):
+    def assertGetResponse(
+        self,
+        url, title, *args,
+        user=None, data=None, status=200, expected_redirect_url=None, expected_messages=None, expected_context=None,
+        **kwargs,
+    ):
         """
         Assert for expected view Title, StatusCode, and UrlRedirect, when page is a GET request.
         :param url: Url to test.
         :param title: Expected page title. This is what displays on the browser tab.
+        :param user: User to login with. If None, then tests response when not logged in.
         :param data: Optional POST data to sent to page. Should be in dictionary format.
-        :param expected_redirect_url: Optional url if page is expected to redirect. This should be what it redirects to.
         :param status: Expected status code for page, after redirections. Defaults to 200.
-        :param get: Bool indicating if request is GET or POST. Defaults POST.
+        :param expected_redirect_url: Optional url if page is expected to redirect. This should be what it redirects to.
+        :param expected_messages: Expected message(s) to see on page. Aka, notifications that appear near top of page.
+        :param expected_context: Expected context to see on page. Can be text or html elements.
         :return: The page response object, generated from the request.
         """
+        # Call base function to handle actual logic.
         return self.assertResponse(
             url,
             title,
             *args,
+            user=user,
             get=True,
             data=data,
-            expected_redirect_url=expected_redirect_url,
             status=status,
+            expected_redirect_url=expected_redirect_url,
+            expected_messages=expected_messages,
+            expected_context=expected_context,
             **kwargs,
         )
 
-    def assertPostResponse(self, url, title, *args, data=None, expected_redirect_url=None, status=200, **kwargs):
+    def assertPostResponse(
+        self,
+        url, title, *args,
+        user=None, data=None, status=200, expected_redirect_url=None, expected_messages=None, expected_context=None,
+        **kwargs,
+    ):
         """
         Assert for expected view Title, StatusCode, and UrlRedirect, when page is a POST request.
         :param url: Url to test.
         :param title: Expected page title. This is what displays on the browser tab.
+        :param user: User to login with. If None, then tests response when not logged in.
         :param data: Optional POST data to sent to page. Should be in dictionary format.
-        :param expected_redirect_url: Optional url if page is expected to redirect. This should be what it redirects to.
         :param status: Expected status code for page, after redirections. Defaults to 200.
-        :param get: Bool indicating if request is GET or POST. Defaults POST.
+        :param expected_redirect_url: Optional url if page is expected to redirect. This should be what it redirects to.
+        :param expected_messages: Expected message(s) to see on page. Aka, notifications that appear near top of page.
+        :param expected_context: Expected context to see on page. Can be text or html elements.
         :return: The page response object, generated from the request.
         """
-        # Either get data value or an empty dictionary, to prevent mutability errors.
-        data = data or {}
-
+        # Call base function to handle actual logic.
         return self.assertResponse(
             url,
             title,
             *args,
+            user=user,
+            get=False,
             data=data,
-            expected_redirect_url=expected_redirect_url,
             status=status,
+            expected_redirect_url=expected_redirect_url,
+            expected_messages=expected_messages,
+            expected_context=expected_context,
             **kwargs,
         )
+
+    def assertWhitelistUserAccess(
+        self,
+        url, title, whitelist_users, *args,
+        get=False, data=None, status=200, expected_redirect_url=None, expected_messages=None, expected_context=None,
+        **kwargs
+    ):
+        """
+        Assert that the given (login) User(s) can access the given url.
+        Mostly used to verify expected User Permission/Group url accessing.
+
+        :param url: Url to test.
+        :param title: Expected page title. This is what displays on the browser tab.
+        :param whitelist_users: User(s) that should be able to access view. Should result in anything except login
+                                redirect, 403, or 404.
+        :param user: User to login with. If None, then tests response when not logged in.
+        :param data: Optional POST data to sent to page. Should be in dictionary format.
+        :param status: Expected status code for page, after redirections. Defaults to 200.
+        :param expected_redirect_url: Optional url if page is expected to redirect. This should be what it redirects to.
+        :param expected_messages: Expected message(s) to see on page. Aka, notifications that appear near top of page.
+        :param expected_context: Expected context to see on page. Can be text or html elements.
+        :return: The page response object, generated from the request.
+        """
+        valid_users_provided = False
+        whitelist_user_list = []
+
+        # Validate provided whitelist user(s).
+        if isinstance(whitelist_users, list) or isinstance(whitelist_users, tuple):
+            # Is array of Users. Check that at least one is an actual valid user.
+            for whitelist_user in whitelist_users:
+                try:
+                    whitelist_user_list.append(self.get_user(whitelist_user))
+                    valid_users_provided = True
+                except get_user_model().DoesNotExist:
+                    # Not a valid (login) User. Provide warning but otherwise skip.
+                    logger.warning('Invalid "whitelist user" of "{0}" provided.'.format(whitelist_user))
+
+        else:
+            # Likely a single User. Validate.
+            try:
+                whitelist_user_list.append(self.get_user(whitelist_users))
+                valid_users_provided = True
+            except get_user_model().DoesNotExist:
+                # Not a valid (login) User. Provide warning but otherwise skip.
+                logger.warning('Invalid "whitelist user" of "{0}" provided.'.format(whitelist_users))
+
+        # Check that at least one valid user was provided to test view on.
+        if not valid_users_provided:
+            print('Provided whitelist_users: {0}'.format(whitelist_users))
+            raise ValidationError('No valid users provided.')
+
+        # Loop through all validated users in list.
+        for whitelist_user in whitelist_user_list:
+            print('Checking user: "{0}" at "{1}"'.format(whitelist_user, url))
+
+            # Call base function to handle actual logic.
+            response = self.assertResponse(
+                url,
+                title,
+                *args,
+                user=whitelist_user,
+                get=get,
+                data=data,
+                status=None,
+                expected_redirect_url=expected_redirect_url,
+                expected_messages=expected_messages,
+                expected_context=expected_context,
+                **kwargs,
+            )
+
+            # Check status code. Should be anything except login redirect, 403, or 404.
+            if response.status_code == 403:
+                # Got 403. Raise error.
+                raise ValueError(
+                    'Whitelist user "{0}" unable to access url at "{1}". Got 403.'.format(whitelist_user, url),
+                )
+
+            elif response.status_code == 404:
+                # Got 404. Raise error.
+                raise ValueError(
+                    'Whitelist user "{0}" unable to access url at "{1}". Got 404.'.format(whitelist_user, url),
+                )
+
+            elif response.redirect_chain:
+                # Got redirect. Check if login url.
+                if response.url == self.login_url:
+                    # Redirected to login page. Raise error.
+                    raise ValueError(
+                        'Whitelist user "{0}" unable to access url at "{1}". Got redirect to login page.'.format(
+                            whitelist_user,
+                            url,
+                        )
+                    )
+
+            # Any other response values should be fine.
+
+            # Check exact status match, if provided.
+            if status:
+                self.assertEqual(response.status_code, status)
+
+    def assertBlacklistUserAccess(
+        self,
+        url, title, blacklist_users, *args,
+        get=False, data=None, status=None, expected_redirect_url=None, expected_messages=None, expected_context=None,
+        **kwargs
+    ):
+        """
+        Assert that the given (login) User(s) cannot access the given url.
+
+        :param url: Url to test.
+        :param title: Expected page title. This is what displays on the browser tab.
+        :param blacklist_users: User(s) that should NOT be able to access view. Should result in either login redirect,
+                                403, or 404.
+        :param user: User to login with. If None, then tests response when not logged in.
+        :param data: Optional POST data to sent to page. Should be in dictionary format.
+        :param status: Expected status code for page, after redirections. Defaults to 200.
+        :param expected_redirect_url: Optional url if page is expected to redirect. This should be what it redirects to.
+        :param expected_messages: Expected message(s) to see on page. Aka, notifications that appear near top of page.
+        :param expected_context: Expected context to see on page. Can be text or html elements.
+        :return: The page response object, generated from the request.
+        """
+        valid_users_provided = False
+        blacklist_user_list = []
+
+        # Validate provided blacklist user(s).
+        if isinstance(blacklist_users, list) or isinstance(blacklist_users, tuple):
+            # Is array of Users. Check that at least one is an actual valid user.
+            for blacklist_user in blacklist_users:
+                try:
+                    blacklist_user_list.append(self.get_user(blacklist_user))
+                    valid_users_provided = True
+                except get_user_model().DoesNotExist:
+                    # Not a valid (login) User. Provide warning but otherwise skip.
+                    logger.warning('Invalid "blacklist user" of "{0}" provided.'.format(blacklist_user))
+
+        else:
+            # Likely a single User. Validate.
+            try:
+                blacklist_user_list.append(self.get_user(blacklist_users))
+                valid_users_provided = True
+            except get_user_model().DoesNotExist:
+                # Not a valid (login) User. Provide warning but otherwise skip.
+                logger.warning('Invalid "blacklist user" of "{0}" provided.'.format(blacklist_users))
+
+        # Check that at least one valid user was provided to test view on.
+        if not valid_users_provided:
+            print('Provided blacklist_users: {0}'.format(blacklist_users))
+            raise ValidationError('No valid users provided.')
+
+        # Loop through all validated users in list.
+        for blacklist_user in blacklist_user_list:
+            print('Checking user: "{0}" at "{1}"'.format(blacklist_user, url))
+
+            # Call base function to handle actual logic.
+            response = self.assertResponse(
+                url,
+                title,
+                *args,
+                user=blacklist_user,
+                get=get,
+                data=data,
+                status=None,
+                expected_redirect_url=expected_redirect_url,
+                expected_messages=expected_messages,
+                expected_context=expected_context,
+                **kwargs,
+            )
+
+            # Check status code. Should be anything except login redirect or 404.
+            if response.status_code == 403 or response.status_code == 404:
+                # Got 403/404. This is fine.
+                pass
+
+            elif response.redirect_chain:
+                # Got redirect. Check if login url.
+                if response.url == self.login_url:
+                    # Redirected to login page. This is fine.
+                    pass
+
+                else:
+                    # Redirected to non-login page. Raise error.
+                    raise ValueError(
+                        'Blacklist user "{0}" is able to access url at "{1}". Got redirect but otherwise accessed '
+                        'fine.'.format(
+                            blacklist_user,
+                            url,
+                        )
+                    )
+
+            else:
+                # Any other values should raise error.
+                raise ValueError('Blacklist user "{0}" is able to access url at "{1}".'.format(blacklist_user, url))
+
+            # Check exact status match, if provided.
+            if status:
+                self.assertEqual(response.status_code, status)
 
 
 class LiveServerTestCase(AbstractTestHelper, ChannelsLiveServerTestCase):
