@@ -25,9 +25,11 @@ from cae_home.management.commands.fixtures.user import create_site_themes
 from cae_home.management.commands.seeders.user import create_groups, create_permission_group_users
 
 
-UserModel = get_user_model()  # pylint: disable=invalid-name
+# Module Variables.
 default_password = settings.USER_SEED_PASSWORD
 
+
+# region Util Functions
 
 def debug_response_content(response_content):
     """
@@ -135,19 +137,45 @@ def debug_messages(response_context):
             print('{0} {1} {0}'.format('=' * 10, 'response.context[\'messages\']'))
             for message in response_context:
                 print('\t{0}'.format(message))
+        print('')
 
+
+def debug_permissions(user):
+    """
+    Print debug user permission/group output.
+    """
+    # Check if user proper user provided.
+    if isinstance(user, get_user_model()):
+        print('{0} {1} {0}'.format('=' * 10, 'User Groups & Permissions'))
+
+        # Print current user.
+        print('Username: {0}    -    {1} {2}'.format(user.username, user.first_name, user.last_name))
+
+        # Print user groups.
+        print('User Groups: {0}'.format(user.groups.all()))
+        print('')
+
+        # Print user permissions.
+        print('User Permissions: {0}'.format(user.user_permissions.all()))
+        print('')
+
+# endregion Util Functions
+
+
+# region Util Classes
 
 class AbstractTestHelper():
     """
     General expanded test functionality, applicable to all test types.
-    Inherits from the standard django.test.TestCase, so it has all functionality the default Django Testing class does.
     """
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, debug_print=True, **kwargs):
         # Run parent setup logic.
         super().__init__(*args, **kwargs)
 
         # Save class variables.
-        self._debug_print = False
+        self._debug_print = debug_print
+
+    # region Debug Util Functions
 
     def debug_print(self, response):
         """
@@ -180,21 +208,28 @@ class AbstractTestHelper():
         # Display any message data to console.
         self.debug_print_messages(response)
 
+        # Display user groups
+
         print('')
         print('')
         print('')
 
     def debug_print_content(self, response):
-        debug_response_content(response_content=response.content.decode('utf-8'))
+        debug_response_content(response.content.decode('utf-8'))
 
     def debug_print_context(self, response):
-        debug_response_context(response_context=response.context)
+        debug_response_context(response.context)
 
     def debug_print_forms(self, response):
-        debug_forms(response_context=response.context)
+        debug_forms(response.context)
 
     def debug_print_messages(self, response):
-        debug_messages(response_context=response.context)
+        debug_messages(response.context)
+
+    def debug_print_permissions(self, response):
+        debug_messages(response.context['user'])
+
+    # endregion Debug Util Functions
 
     def create_default_users_and_groups(self, password=default_password):
         """
@@ -202,26 +237,6 @@ class AbstractTestHelper():
         """
         create_groups()
         create_permission_group_users(password=password, with_names=False)
-
-    def get_user(self, username, password=default_password):
-        """
-        Returns a user with the given username.
-        :param username: Username to search.
-        :param password: Password for user.
-        """
-        try:
-            # Get user.
-            user = UserModel.objects.get(username=username)
-
-            # Check that user has associated password string saved.
-            if not hasattr(user, 'password_string'):
-                user.password_string = password
-
-            return user
-        except ObjectDoesNotExist:
-            # Failed to find user.
-            print(list(UserModel.objects.all().values_list('username')))
-            raise ObjectDoesNotExist('User matching {0} was not found.')
 
     def create_user(self, username, password=default_password, permissions=None, groups=None):
         """
@@ -233,74 +248,121 @@ class AbstractTestHelper():
         :return: Instance of created user.
         """
         # Create user.
-        user = UserModel.objects.create_user(username=username, password=password)
+        user = get_user_model().objects.create_user(username=username, password=password)
         user.password_string = password
 
         # Check for optional permissions.
         if permissions:
             if isinstance(permissions, list) or isinstance(permissions, tuple):
                 for permission in permissions:
-                    self.add_permission(user, permission)
+                    self.add_user_permission(permission, user)
             else:
-                self.add_permission(user, permissions)
+                self.add_user_permission(permissions, user)
 
         # Check for optional groups.
         if groups:
             if isinstance(groups, list) or isinstance(groups, tuple):
                 for group in groups:
-                    self.add_group(user, group)
+                    self.add_user_group(group, user)
             else:
-                self.add_group(user, groups)
+                self.add_user_group(groups, user)
 
         return user
 
-    def add_permission(self, user, name):
+    def get_user(self, user, password=default_password):
+        """
+        Returns a user with the given username.
+        :param user: User to return.
+        :param password: Password for user.
+        """
+        # Check if already User model.
+        if isinstance(user, get_user_model()):
+            # Is User model. Return as-is.
+            user = user
+
+        try:
+            # Get user.
+            user = get_user_model().objects.get(username=user)
+
+        except get_user_model().DoesNotExist:
+            # Failed to find user.
+            print(list(get_user_model().objects.all().values_list('username')))
+            raise get_user_model().DoesNotExist('User matching {0} was not found.')
+
+        # If we made it this far, valid (login) User model returned.
+        # Check that user has associated password string saved.
+        if not hasattr(user, 'password_string'):
+            user.password_string = password
+
+        return user
+
+    def add_user_permission(self, user_permission, user):
         """
         Add a permission to the given user.
-        Ex: 'change_order'
-        On failure, prints out all possible permissions and moves to next test.
-        :param user: User object to add permission to.
-        :param name: Permission name to add.
+        On failure, prints out all possible permissions.
+        :param user_permission: Permission name to add.
+        :param user: User to add permission to.
         """
-        try:
-            # Add permission.
-            permission = Permission.objects.get(codename=name)
-            user.user_permissions.add(permission)
-        except ObjectDoesNotExist:
-            # Failed to find permission.
-            print(list(Permission.objects.all().values_list('codename')))
-            raise ObjectDoesNotExist('Permission matching {0} not found.'.format(name))
+        # Check if already permission model.
+        if isinstance(user_permission, Permission):
+            # Is already Permission model.
+            permission = user_permission
 
-    def add_group(self, user, name):
+        else:
+            # Is not Permission model. Attempt to get.
+            try:
+                permission = Permission.objects.get(codename=user_permission)
+            except Permission.DoesNotExist:
+                # Failed to get by codename. Try by name.
+                try:
+                    permission = Permission.objects.get(name=user_permission)
+
+                except Permission.DoesNotExist:
+                    # Failed to find permission.
+                    print(list(Permission.objects.all().values_list('codename')))
+                    raise Permission.DoesNotExist('Permission matching "{0}" not found.'.format(user_permission))
+
+        # If we made it this far, then valid Permission acquired. Add to User.
+        self.get_user(user).user_permissions.add(permission)
+
+    def add_user_group(self, user_group, user):
         """
         Add a permission group to the given user.
         Ex: 'CAE Admin'
-        :param user: User object to add permission to.
-        :param name: Group name to add.
+
+        :param user_group: Group to add.
+        :param user: User to add Group to.
         """
-        try:
-            # Add group.
-            group = Group.objects.get(name=name)
-            user.groups.add(group)
-        except ObjectDoesNotExist:
-            # Failed to find group.
-            print(list(Group.objects.all().values_list('name')))
-            raise ObjectDoesNotExist('Group matching {0} was not found.'.format(name))
+        # Check if already Group model.
+        if isinstance(user_group, Group):
+            # Is already Group model.
+            group = user_group
+
+        else:
+            # Is not Group model. Attempt to get.
+            try:
+                group = Group.objects.get(name=user_group)
+            except Group.DoesNotExist:
+                # Failed to find group.
+                print(list(Group.objects.all().values_list('name')))
+                raise Group.DoesNotExist('Group matching "{0}" was not found.'.format(user_group))
+
+        # If we made it this far, then valid Group acquired. Add to User.
+        self.get_user(user).groups.add(group)
 
 
-class BaseTestCase(TestCase, AbstractTestHelper):
-    pass
-
-
-class IntegrationTestCase(TestCase, AbstractTestHelper):
+class IntegrationTestCase(AbstractTestHelper, TestCase):
     """
     Python Unit Testing extension (without Selenium).
+    Most minimalistic test class that inherits from AbstractTestHelper.
+
+    Inherits from the standard django.test.TestCase, so it has all functionality the default Django Testing class does.
     """
     def __init__(self, *args, **kwargs):
         # Run parent setup logic.
         super().__init__(*args, **kwargs)
 
-        self._debug_print = False
+        # Get home url.
         self.login_url = reverse('cae_home:login')
 
     def setUp(self):
@@ -423,7 +485,7 @@ class IntegrationTestCase(TestCase, AbstractTestHelper):
         )
 
 
-class LiveServerTestCase(ChannelsLiveServerTestCase, AbstractTestHelper):
+class LiveServerTestCase(AbstractTestHelper, ChannelsLiveServerTestCase):
     """
     Test with Selenium to verify things like javascript.
 
@@ -478,6 +540,10 @@ class LiveServerTestCase(ChannelsLiveServerTestCase, AbstractTestHelper):
     serve_static = True
 
     #region Class Setup and Teardown
+
+    def __init__(self, *args, **kwargs):
+        # Run parent setup logic.
+        super().__init__(*args, **kwargs)
 
     @classmethod
     def setUpClass(cls):
@@ -772,3 +838,5 @@ class LiveServerTestCase(ChannelsLiveServerTestCase, AbstractTestHelper):
     #endregion Window Manipulation Helper Functions
 
     #endregion Helper Functions
+
+# endregion Util Classes
