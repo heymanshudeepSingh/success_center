@@ -69,3 +69,24 @@ class ConsoleColors:
     bold_blue = '\033[1;34m'
 
 
+# Define helper user-value lists, mostly for testing purposes.
+CAE_CENTER_TEST_USERS = [
+    'cae_building_coordinator',
+    'cae_director',
+    'cae_admin',
+    'cae_attendant',
+    'cae_programmer',
+    'cae_admin_ga',
+    'cae_programmer_ga',
+]
+CAE_CENTER_GROUPS = [
+    'CAE Building Coordinator',
+    'CAE Director',
+    'CAE Admin GA',
+    'CAE Programmer GA',
+    'CAE Admin',
+    'CAE Attendant',
+    'CAE Programmer',
+]
+SUCCESS_CENTER_TEST_USERS = ['step_admin', 'step_employee']
+SUCCESS_CENTER_GROUPS = ['STEP Admin', 'STEP Employee']
