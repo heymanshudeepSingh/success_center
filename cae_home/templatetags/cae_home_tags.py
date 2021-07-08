@@ -95,3 +95,14 @@ def datetime_as_time_passed(datetime_value, *args, display_seconds=False):
         passed_minutes,
         passed_seconds_string,
     )
+
+
+@register.filter
+def dict_key(dictionary, key):
+    """
+    Allows accessing dictionary values from Django templates.
+    :param dictionary: Dictionary to access.
+    :param key: Key to attempt to get value from.
+    :return: Value corresponding to dict key, or empty string if key is not present.
+    """
+    return dictionary.get(key, '')
