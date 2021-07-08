@@ -9,6 +9,7 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group, Permission
 from django.core.exceptions import ValidationError
+from django.db.models.query import QuerySet
 from django.http import QueryDict
 from django.test import TestCase
 from django.urls import reverse
@@ -41,22 +42,28 @@ def debug_response_content(response_content):
 
     Trimming down helps because Django templating, by default, adds a lot of unnecessary extra whitespace.
     We don't see this extra whitespace in browsers but it's noticeable if the page is printed out to console.
+
+    Note the the below IntegrationTestCase class' get_response_content() function has a similar purpose, but trims much
+    more thoroughly. We use a less thorough version here for printout, so that the values are actually human-readable
+    and not a giant wall of unmanageable text.
     """
     print('{0} {1} {0}'.format('=' * 10, 'response.content.decode(\'utf-8\')'))
 
     if len(response_content) > 0:
+
         # Replace any repeating space characters.
-        response_content = re.sub('  +', ' ', response_content)
+        response_content = re.sub(r'  +', ' ', response_content)
 
         # Replace any repeating newline characters.
-        response_content = re.sub('\n \n', '\n', response_content)
-        response_content = re.sub('\n\n+', '\n', response_content)
+        response_content = re.sub(r'<br>|</br>', '\n', response_content)
+        response_content = re.sub(r'(\n|\r)+', '\n', response_content)
+        response_content = re.sub(r'((\n)+)((\s)+)|((\s)+)((\n)+)', '\n', response_content)
 
         # Print formatted page content string.
         print(response_content)
     else:
         # No context provided.
-        print('Request "response.context" is empty.')
+        print('Request "response.content" is empty.')
 
     print('')
 
@@ -139,7 +146,7 @@ def debug_messages(response_context):
 
         if len(context_value) > 0:
             print('{0} {1} {0}'.format('=' * 10, 'response.context[\'messages\']'))
-            for message in response_context:
+            for message in context_value:
                 print('\t{0}'.format(message))
         print('')
 
@@ -212,7 +219,8 @@ class AbstractTestHelper():
         # Display any message data to console.
         self.debug_print_messages(response)
 
-        # Display user groups
+        # Display user groups.
+        self.debug_print_permissions(response)
 
         print('')
         print('')
@@ -231,7 +239,7 @@ class AbstractTestHelper():
         debug_messages(response.context)
 
     def debug_print_permissions(self, response):
-        debug_messages(response.context['user'])
+        debug_permissions(response.context['user'])
 
     # endregion Debug Util Functions
 
@@ -279,19 +287,31 @@ class AbstractTestHelper():
         :param user: User to return.
         :param password: Password for user.
         """
+        # Check for iterable types. Likely an accident and meant to iterate through said types.
+        if isinstance(user, list):
+            raise TypeError('Expected type "User", got type "List". Did you mean to iterate on this list?')
+
+        elif isinstance(user, tuple):
+            raise TypeError('Expected type "User", got type "Tuple". Did you mean to iterate on this tuple?')
+
+        elif isinstance(user, QuerySet):
+            raise TypeError('Expected type "User", got type "QuerySet". Did you mean to iterate on this QuerySet?')
+
         # Check if already User model.
         if isinstance(user, get_user_model()):
             # Is User model. Return as-is.
             user = user
 
-        try:
-            # Get user.
-            user = get_user_model().objects.get(username=user)
+        else:
+            # Is not user model. Attempt to get.
+            try:
+                print('Attempting to get user "{0}"'.format(user))
+                user = get_user_model().objects.get(username=user)
 
-        except get_user_model().DoesNotExist:
-            # Failed to find user.
-            print(list(get_user_model().objects.all().values_list('username')))
-            raise get_user_model().DoesNotExist('User matching {0} was not found.')
+            except get_user_model().DoesNotExist:
+                # Failed to find user. Output messages.
+                print('Valid Users: {0}'.format(list(get_user_model().objects.all().values_list('username'))))
+                raise get_user_model().DoesNotExist('User matching {0} was not found.'.format(user))
 
         # If we made it this far, valid (login) User model returned.
         # Check that user has associated password string saved.
@@ -323,7 +343,7 @@ class AbstractTestHelper():
 
                 except Permission.DoesNotExist:
                     # Failed to find permission.
-                    print(list(Permission.objects.all().values_list('codename')))
+                    print('Valid Permissions: {0}'.format(list(Permission.objects.all().values_list('codename'))))
                     raise Permission.DoesNotExist('Permission matching "{0}" not found.'.format(user_permission))
 
         # If we made it this far, then valid Permission acquired. Add to User.
@@ -348,7 +368,7 @@ class AbstractTestHelper():
                 group = Group.objects.get(name=user_group)
             except Group.DoesNotExist:
                 # Failed to find group.
-                print(list(Group.objects.all().values_list('name')))
+                print('Valid Groups: {0}'.format(list(Group.objects.all().values_list('name'))))
                 raise Group.DoesNotExist('Group matching "{0}" was not found.'.format(user_group))
 
         # If we made it this far, then valid Group acquired. Add to User.
@@ -403,27 +423,27 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
 
     def assertResponse(
         self,
-        url, title, *args,
+        url, expected_title, *args,
         user=None, get=False, data=None, status=200, expected_redirect_url=None, expected_messages=None,
-        expected_context=None, **kwargs,
+        expected_content=None, **kwargs,
     ):
         """
         Assert for expected view Title, StatusCode, and UrlRedirect.
         :param url: Url to test.
-        :param title: Expected page title. This is what displays on the browser tab.
+        :param expected_title: Expected page title. This is what displays on the browser tab.
         :param get: Bool indicating if request is GET or POST. Defaults POST.
         :param user: User to login with. If None, then tests response when not logged in.
         :param data: Optional POST data to sent to page. Should be in dictionary format.
         :param status: Expected status code for page, after redirections. Defaults to 200.
         :param expected_redirect_url: Optional url if page is expected to redirect. This should be what it redirects to.
         :param expected_messages: Expected message(s) to see on page. Aka, notifications that appear near top of page.
-        :param expected_context: Expected context to see on page. Can be text or html elements.
+        :param expected_content: Expected context to see on page. Can be text or html elements.
         :return: The page response object, generated from the request.
         """
         # Either get value or an empty list/dict, to prevent mutability errors.
         data = data or {}
         expected_messages = expected_messages or []
-        expected_context = expected_context or []
+        expected_content = expected_content or []
 
         # Handle user.
         if user is not None:
@@ -440,6 +460,9 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
         else:
             response = self.client.post(url, data=data, follow=True)
 
+        # Get response content and context. We have both trimmed, to have contain whitespace data and no newlines.
+        response_content = self.get_response_content(response)
+
         # Handle debug printing.
         if self._debug_print:
             self.debug_print(response)
@@ -450,17 +473,22 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
 
         # Check redirects.
         if response.redirect_chain:
+
             # Redirect occurred. Check if it was expected.
             if expected_redirect_url is not None:
                 # Redirect was expected. Ensure is at correct url.
                 self.assertURLEqual(response.redirect_chain[-1][0], expected_redirect_url, parse_qs=True)
 
-                # If redirecting to login page and no custom messages provided, then check for basic login message.
-                if (
-                    (expected_redirect_url == self.login_url) and
-                    (expected_messages is None or len(expected_messages) == 0)
-                ):
-                    expected_messages = ['Please login to see this page.']
+                # Cut off any url args, if present, to compare url directly.
+                trimmed_url = response.redirect_chain[-1][0]
+                trimmed_url = trimmed_url.split('?')[0] if '?' in trimmed_url else trimmed_url
+
+                # Check if redirecting to login page.
+                if trimmed_url == self.login_url:
+
+                    # If no page context provided, check for basic login page values.
+                    if len(expected_content) == 0:
+                        expected_content = ['Login', 'Username', 'Password', 'Keep Me Logged In', 'Submit']
 
             else:
                 # Redirect was not expected.
@@ -473,26 +501,65 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
                 raise ValueError('Expected redirect to "{0}". No redirect occurred.'.format(expected_redirect_url))
 
         # Check page title.
-        if title is not None:
-            self.assertEqual(title, response.context['page']['title'], 'Incorrect Page Title')
+        if expected_title is not None:
+            # Get actual title and trim any extra whitespace characters.
+            actual_title = self.get_page_title(response_content)
+
+            # Check value against expected.
+            self.assertEqual(expected_title, actual_title, 'Incorrect Page Title')
 
         # Check expected messages for page.
-        if isinstance(expected_messages, list) or isinstance(expected_messages, tuple):
-            # Is list of messages. Check all.
-            for expected_message in expected_messages:
-                self.assertContains(response, expected_message)
-        elif expected_messages is not None:
-            # Is likely single message. Check if exists in response.
-            self.assertContains(response, str(expected_messages))
+        if 'messages' not in response.context or len(response.context['messages']) == 0:
+            # No message data found in response.
+            if len(expected_messages) > 0:
+                # One or more messages were expected. Print out data and raise error.
+                print('Expected Messages:')
+                if isinstance(expected_messages, list) or isinstance(expected_messages, tuple):
+                    for expected_message in expected_messages:
+                        print('    {0}'.format(expected_message))
+                else:
+                    print('    {0}'.format(expected_messages))
+
+                err_msg = 'No messages found in response, yet messages were expected.'
+                print(err_msg)
+                raise ValueError(err_msg)
+
+        else:
+            # Message data found in response. Gather into easy to compare list format.
+            temp_msg_data = response.context['messages']
+            response_messages = []
+            for response_message in temp_msg_data:
+                response_messages.append(response_message.message)
+
+            if expected_messages is None or len(expected_messages) == 0:
+                # No messages were expected. Print out data and raise error.
+                print('Response Messages:')
+                for response_message in response_messages:
+                    print('    {0}'.format(response_message))
+
+                err_msg = 'No messages were expected, yet messages found in response.'
+                print(err_msg)
+                raise ValueError(err_msg)
+
+            else:
+                # Messages were expected and also found in response. Compare values.
+                if isinstance(expected_messages, list) or isinstance(expected_messages, tuple):
+                    # Is list of messages. Check all.
+                    for expected_message in expected_messages:
+                        self.assertIn(expected_message, response_messages)
+
+                elif expected_messages:
+                    # Is likely single message. Check if exists in response message data.
+                    self.assertIn(expected_messages, response_messages)
 
         # Check expected context for page.
-        if isinstance(expected_context, list) or isinstance(expected_context, tuple):
+        if isinstance(expected_content, list) or isinstance(expected_content, tuple):
             # Is list of context items. Check all.
-            for expected_value in expected_context:
-                self.assertContains(response, expected_value)
-        elif expected_context is not None:
+            for expected_value in expected_content:
+                self.assertPageContent(response, expected_value)
+        elif expected_content is not None:
             # Is likely single context item. Check if exists in response.
-            self.assertContains(response, str(expected_context))
+            self.assertPageContent(response, str(expected_content))
 
         # All assertions passed so far. Return found page response.
         return response
@@ -500,7 +567,7 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
     def assertGetResponse(
         self,
         url, title, *args,
-        user=None, data=None, status=200, expected_redirect_url=None, expected_messages=None, expected_context=None,
+        user=None, data=None, status=200, expected_redirect_url=None, expected_messages=None, expected_content=None,
         **kwargs,
     ):
         """
@@ -512,7 +579,7 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
         :param status: Expected status code for page, after redirections. Defaults to 200.
         :param expected_redirect_url: Optional url if page is expected to redirect. This should be what it redirects to.
         :param expected_messages: Expected message(s) to see on page. Aka, notifications that appear near top of page.
-        :param expected_context: Expected context to see on page. Can be text or html elements.
+        :param expected_content: Expected context to see on page. Can be text or html elements.
         :return: The page response object, generated from the request.
         """
         # Call base function to handle actual logic.
@@ -526,14 +593,14 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
             status=status,
             expected_redirect_url=expected_redirect_url,
             expected_messages=expected_messages,
-            expected_context=expected_context,
+            expected_content=expected_content,
             **kwargs,
         )
 
     def assertPostResponse(
         self,
         url, title, *args,
-        user=None, data=None, status=200, expected_redirect_url=None, expected_messages=None, expected_context=None,
+        user=None, data=None, status=200, expected_redirect_url=None, expected_messages=None, expected_content=None,
         **kwargs,
     ):
         """
@@ -545,7 +612,7 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
         :param status: Expected status code for page, after redirections. Defaults to 200.
         :param expected_redirect_url: Optional url if page is expected to redirect. This should be what it redirects to.
         :param expected_messages: Expected message(s) to see on page. Aka, notifications that appear near top of page.
-        :param expected_context: Expected context to see on page. Can be text or html elements.
+        :param expected_content: Expected context to see on page. Can be text or html elements.
         :return: The page response object, generated from the request.
         """
         # Call base function to handle actual logic.
@@ -559,14 +626,61 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
             status=status,
             expected_redirect_url=expected_redirect_url,
             expected_messages=expected_messages,
-            expected_context=expected_context,
+            expected_content=expected_content,
             **kwargs,
         )
+
+    def assertPageContent(self, response, expected_content):
+        """
+        Behaves similar to default assertContains() function.
+        The main difference is that Django templating may create large amounts of whitespace in the literal html value.
+        Sometimes in places where we don't expected it.
+
+        This custom assertion accounts for that, by taking the "expected_content" variable, and replaces all spaces with
+        regex whitespace matches.
+        :param response:
+        :param expected_content: Expected value to find on page
+        """
+        orig_expected_content = expected_content
+
+        # Replace html linebreak with actual newline character.
+        expected_content = re.sub('<br>|</br>', '\n', expected_content)
+
+        # Replace any special characters, to prevent unexpected errors in comparison.
+        # Not currently used, but left for debugging purposes. Uncomment to escape known special regex characters.
+        # expected_content = self.escape_special_regex_chars(expected_content)
+
+        # Reduce any whitespace (including repeated whitespace) down to a single space.
+        expected_content = re.sub(r'(\s)+', ' ', expected_content)
+
+        # Split on spaces, to convert to regex.
+        expected_content_split = expected_content.split(' ')
+
+        # Convert to regex, such that anything previously a space will match any amount of whitespace in the response.
+        expected_content = r'((\s)*)'
+        for value in expected_content_split:
+            # Add section to string.
+            expected_content += value
+
+            # Add check for 0 or more whitespace.
+            expected_content += r'((\s)*)'
+
+        # Get trimmed response content to compare against.
+        response_content = self.get_response_content(response)
+
+        # Escape any regex special characters, to prevent unexpected errors/mismatches.
+        # Not currently used, but left for debugging purposes. Uncomment to escape known special regex characters.
+        # response_content = self.escape_special_regex_chars(response_content)
+
+        # Compare expected (and formatted) regex string against actual page content.
+        if not re.search(expected_content, response_content):
+            # Failed to find match. Raise validation error.
+            raise ValueError('Failed to find "{0}" in page content.'.format(orig_expected_content))
 
     def assertWhitelistUserAccess(
         self,
         url, title, whitelist_users, *args,
-        get=False, data=None, status=200, expected_redirect_url=None, expected_messages=None, expected_context=None,
+        get=False, data=None, status=200, expected_redirect_url=None, expected_messages=None, expected_content=None,
         **kwargs
     ):
         """
@@ -582,14 +696,18 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
         :param status: Expected status code for page, after redirections. Defaults to 200.
         :param expected_redirect_url: Optional url if page is expected to redirect. This should be what it redirects to.
         :param expected_messages: Expected message(s) to see on page. Aka, notifications that appear near top of page.
-        :param expected_context: Expected context to see on page. Can be text or html elements.
+        :param expected_content: Expected context to see on page. Can be text or html elements.
         :return: The page response object, generated from the request.
         """
         valid_users_provided = False
         whitelist_user_list = []
 
         # Validate provided whitelist user(s).
-        if isinstance(whitelist_users, list) or isinstance(whitelist_users, tuple):
+        if (
+            isinstance(whitelist_users, list) or
+            isinstance(whitelist_users, tuple) or
+            isinstance(whitelist_users, QuerySet)
+        ):
             # Is array of Users. Check that at least one is an actual valid user.
             for whitelist_user in whitelist_users:
                 try:
@@ -597,7 +715,9 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
                     valid_users_provided = True
                 except get_user_model().DoesNotExist:
                     # Not a valid (login) User. Provide warning but otherwise skip.
-                    logger.warning('Invalid "whitelist user" of "{0}" provided.'.format(whitelist_user))
+                    err_msg = 'Invalid "whitelist user" of "{0}" provided.'.format(whitelist_user)
+                    print(err_msg)
+                    logger.warning(err_msg)
 
         else:
             # Likely a single User. Validate.
@@ -606,7 +726,9 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
                 valid_users_provided = True
             except get_user_model().DoesNotExist:
                 # Not a valid (login) User. Provide warning but otherwise skip.
-                logger.warning('Invalid "whitelist user" of "{0}" provided.'.format(whitelist_users))
+                err_msg = 'Invalid "whitelist user" of "{0}" provided.'.format(whitelist_users)
+                print(err_msg)
+                logger.warning(err_msg)
 
         # Check that at least one valid user was provided to test view on.
         if not valid_users_provided:
@@ -615,7 +737,7 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
 
         # Loop through all validated users in list.
         for whitelist_user in whitelist_user_list:
-            print('Checking user: "{0}" at "{1}"'.format(whitelist_user, url))
+            print('Checking whitelist user: "{0}" at "{1}"'.format(whitelist_user, url))
 
             # Call base function to handle actual logic.
             response = self.assertResponse(
@@ -628,7 +750,7 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
                 status=None,
                 expected_redirect_url=expected_redirect_url,
                 expected_messages=expected_messages,
-                expected_context=expected_context,
+                expected_content=expected_content,
                 **kwargs,
             )
 
@@ -647,7 +769,7 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
 
             elif response.redirect_chain:
                 # Got redirect. Check if login url.
-                if response.url == self.login_url:
+                if response.redirect_chain[-1][0] == self.login_url:
                     # Redirected to login page. Raise error.
                     raise ValueError(
                         'Whitelist user "{0}" unable to access url at "{1}". Got redirect to login page.'.format(
@@ -665,7 +787,7 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
     def assertBlacklistUserAccess(
         self,
         url, title, blacklist_users, *args,
-        get=False, data=None, status=None, expected_redirect_url=None, expected_messages=None, expected_context=None,
+        get=False, data=None, status=None, expected_redirect_url=None, expected_messages=None, expected_content=None,
         **kwargs
     ):
         """
@@ -680,14 +802,18 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
         :param status: Expected status code for page, after redirections. Defaults to 200.
         :param expected_redirect_url: Optional url if page is expected to redirect. This should be what it redirects to.
         :param expected_messages: Expected message(s) to see on page. Aka, notifications that appear near top of page.
-        :param expected_context: Expected context to see on page. Can be text or html elements.
+        :param expected_content: Expected context to see on page. Can be text or html elements.
         :return: The page response object, generated from the request.
         """
         valid_users_provided = False
         blacklist_user_list = []
 
         # Validate provided blacklist user(s).
-        if isinstance(blacklist_users, list) or isinstance(blacklist_users, tuple):
+        if (
+            isinstance(blacklist_users, list) or
+            isinstance(blacklist_users, tuple) or
+            isinstance(blacklist_users, QuerySet)
+        ):
             # Is array of Users. Check that at least one is an actual valid user.
             for blacklist_user in blacklist_users:
                 try:
@@ -695,7 +821,9 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
                     valid_users_provided = True
                 except get_user_model().DoesNotExist:
                     # Not a valid (login) User. Provide warning but otherwise skip.
-                    logger.warning('Invalid "blacklist user" of "{0}" provided.'.format(blacklist_user))
+                    err_msg = 'Invalid "blacklist user" of "{0}" provided.'.format(blacklist_user)
+                    print(err_msg)
+                    logger.warning(err_msg)
 
         else:
             # Likely a single User. Validate.
@@ -704,7 +832,9 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
                 valid_users_provided = True
             except get_user_model().DoesNotExist:
                 # Not a valid (login) User. Provide warning but otherwise skip.
-                logger.warning('Invalid "blacklist user" of "{0}" provided.'.format(blacklist_users))
+                err_msg = 'Invalid "blacklist user" of "{0}" provided.'.format(blacklist_users)
+                print(err_msg)
+                logger.warning(err_msg)
 
         # Check that at least one valid user was provided to test view on.
         if not valid_users_provided:
@@ -713,7 +843,7 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
 
         # Loop through all validated users in list.
         for blacklist_user in blacklist_user_list:
-            print('Checking user: "{0}" at "{1}"'.format(blacklist_user, url))
+            print('Checking blacklist user: "{0}" at "{1}"'.format(blacklist_user, url))
 
             # Call base function to handle actual logic.
             response = self.assertResponse(
@@ -726,7 +856,7 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
                 status=None,
                 expected_redirect_url=expected_redirect_url,
                 expected_messages=expected_messages,
-                expected_context=expected_context,
+                expected_content=expected_content,
                 **kwargs,
             )
 
@@ -737,7 +867,7 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
 
             elif response.redirect_chain:
                 # Got redirect. Check if login url.
-                if response.url == self.login_url:
+                if response.redirect_chain[-1][0] == self.login_url:
                     # Redirected to login page. This is fine.
                     pass
 
@@ -758,6 +888,122 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
             # Check exact status match, if provided.
             if status:
                 self.assertEqual(response.status_code, status)
+
+    def get_response_content(self, response):
+        """
+        Returns response content, but stripped to have no newline characters.
+
+        Note that the above, module-level debug_response_content() function has a similar purpose, but trims much less
+        thoroughly. We use a more thorough version here, because it's less human-readable but better for matching direct
+        expected values programmatically.
+        :param response: Page content from the response object. This is what displays as html.
+        :return: Trimmed response content.
+        """
+        # Get base response content.
+        response_content = response.content.decode('utf-8')
+
+        # Replace html linebreak with actual newline character.
+        response_content = re.sub('<br>|</br>', '\n', response_content)
+
+        # Replace any whitespace trapped between newline characters.
+        # This is empty/dead space, likely generated by how Django handles templating.
+        response_content = re.sub(r'((\n|\r)+)((\s)+)((\n|\r)+)', '\n', response_content)
+
+        # Replace any newline characters.
+        response_content = re.sub(r'(\n|\r)+', '', response_content)
+
+        # Replace any repeating whitespace characters.
+        response_content = re.sub(r'(\s)+', ' ', response_content)
+
+        # Remove any whitespace directly before an opening html bracket ( < ).
+        response_content = re.sub(r'((\s)+)<', '<', response_content)
+
+        # Remove any whitespace directly after a closing html bracket ( > ).
+        response_content = re.sub(r'>((\s)+)', '>', response_content)
+
+        # Remove any whitespace around an opening array bracket ( [ ). Also accounts for possible html code version.
+        response_content = re.sub(r'((\s)*)\[((\s)*)', '[', response_content)
+        response_content = re.sub(r'((\s)*)&#91;((\s)*)', '&#91;', response_content)
+
+        # Remove any whitespace around a closing array bracket ( ] ). Also accounts for possible html code version.
+        response_content = re.sub(r'((\s)*)]((\s)*)', ']', response_content)
+        response_content = re.sub(r'((\s)*)&#93;((\s)*)', '&#93;', response_content)
+
+        # Remove any whitespace around an opening dict bracket ( { ). Also accounts for possible html code version.
+        response_content = re.sub(r'((\s)*){((\s)*)', '{', response_content)
+        response_content = re.sub(r'((\s)*)&#123;((\s)*)', '&#123;', response_content)
+
+        # Remove any whitespace around a closing dict bracket ( } ). Also accounts for possible html code version.
+        response_content = re.sub(r'((\s)*)}((\s)*)', '}', response_content)
+        return re.sub(r'((\s)*)&#125;((\s)*)', '&#125;', response_content)
+
+    def get_page_title(self, response_content):
+        """
+        Returns direct title from page content. Title is stripped to have no newline characters, and no repeating
+        whitespace characters.
+        :param response_content: Page content from the response object. This is what displays as html.
+        :return: Trimmed page title.
+        """
+        # Find title html element.
+        response_title = re.search(r'<title>([\S\s]+)</title>', response_content).group(1)
+
+        # Strip any newlines from title. This is unnecessary if above get_response_content() function is called prior to
+        # this one. But this line is present anyways in case the above function is skipped for whatever reason.
+        response_title = re.sub(r'(\n|\r)+', '', response_title)
+
+        # Remove any repeating whitespace, and remove any outer whitespace on title string.
+        return re.sub(r'(\s)+', ' ', response_title).strip()
+
+    def escape_special_regex_chars(self, str_value):
+        """
+        Escapes known possible "special characters" in regex to the equivalent html code.
+
+        Note: Was used in debugging assertPageContains() function. Is not currently called.
+        Left here in case further debugging of regex comparison is needed in the future.
+
+        :param str_value: String to replace characters of.
+        :return: Converted string.
+        """
+        # Escape special characters.
+        special_char_list = ['.', '+', '*', '?', '^', '$', '(', ')', '[', ']', '{', '}', '|', '\\']
+
+        # Find any special characters in strings and escape them.
+        for special_char in special_char_list:
+
+            # Check if in provided string.
+            if special_char in str_value:
+                # Character is in string. Replace with corresponding html code.
+
+                if special_char == '.':
+                    str_value = str_value.replace('.', '&#46;')
+                elif special_char == '+':
+                    str_value = str_value.replace('+', '&#43;')
+                elif special_char == '*':
+                    str_value = str_value.replace('*', '&#42;')
+                elif special_char == '?':
+                    str_value = str_value.replace('?', '&#63;')
+                elif special_char == '^':
+                    str_value = str_value.replace('^', '&#94;')
+                elif special_char == '$':
+                    str_value = str_value.replace('$', '&#36;')
+                elif special_char == '(':
+                    str_value = str_value.replace('(', '&#40;')
+                elif special_char == ')':
+                    str_value = str_value.replace(')', '&#41;')
+                elif special_char == '[':
+                    str_value = str_value.replace('[', '&#91;')
+                elif special_char == ']':
+                    str_value = str_value.replace(']', '&#93;')
+                elif special_char == '{':
+                    str_value = str_value.replace('{', '&#123;')
+                elif special_char == '}':
+                    str_value = str_value.replace('}', '&#125;')
+                elif special_char == '|':
+                    str_value = str_value.replace('|', '&#124;')
+                elif special_char == '\\':
+                    str_value = str_value.replace('\\', '&#92;')
+
+        return str_value
 
 
 class LiveServerTestCase(AbstractTestHelper, ChannelsLiveServerTestCase):

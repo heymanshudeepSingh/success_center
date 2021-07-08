@@ -155,7 +155,7 @@ class CAEHomeUtilsTests(IntegrationTestCase):
         # Create test user.
         test_user = self.create_user('test_user')
 
-        with self.subTest('With User model value'):
+        with self.subTest('Success - With User model value'):
             return_value = self.get_user(test_user)
 
             # Verify models match.
@@ -165,7 +165,7 @@ class CAEHomeUtilsTests(IntegrationTestCase):
             self.assertTrue(hasattr(test_user, 'password_string'))
             self.assertTrue(test_user.password_string, default_password)
 
-        with self.subTest('With username value'):
+        with self.subTest('Success - With username value'):
             return_value = self.get_user('test_user')
 
             # Verify models match.
@@ -175,7 +175,7 @@ class CAEHomeUtilsTests(IntegrationTestCase):
             self.assertTrue(hasattr(test_user, 'password_string'))
             self.assertTrue(test_user.password_string, default_password)
 
-        with self.subTest('Different password'):
+        with self.subTest('Success - Different password'):
             password = 'newTestValue12345'
             return_value = self.get_user('test_user', password=password)
 
@@ -186,9 +186,22 @@ class CAEHomeUtilsTests(IntegrationTestCase):
             self.assertTrue(hasattr(return_value, 'password_string'))
             self.assertTrue(return_value.password_string, password)
 
-        with self.subTest('User does not exist'):
+        with self.subTest('Failure - User does not exist'):
             with self.assertRaises(get_user_model().DoesNotExist):
                 self.get_user('Bad Value')
+
+        with self.subTest('Failure - With iterable values'):
+            # Pass list.
+            with self.assertRaises(TypeError):
+                self.get_user([1, 2, 3])
+
+            # Pass tuple.
+            with self.assertRaises(TypeError):
+                self.get_user((1, 2, 3))
+
+            # Pass queryset.
+            with self.assertRaises(TypeError):
+                self.get_user(get_user_model().objects.all())
 
     def test_add_user_permission(self):
         """
