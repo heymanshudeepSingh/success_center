@@ -210,7 +210,7 @@ function main() {
 
         echo -e "${color_blue}Everything set up. Now running project tests...${color_reset}"
         echo ""
-        python manage.py test
+        pytest -n auto
 
         deactivate
 
