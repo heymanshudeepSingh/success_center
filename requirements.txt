@@ -42,10 +42,15 @@ python-redmine==2.3.0
 ###
  # Packages for Testing
  ##
-# Testing with an actual browser, to test JavaScript.
-selenium==3.141.0
 # Allows running manage.py tests in parallel (use the "--parallel" command).
 tblib
+# Packages for Django + Pytest. Note xdist is required for running tests parallel.
+pytest
+pytest-django
+pytest-xdist
+# Testing with an actual browser, to test JavaScript.
+selenium==3.141.0
+
 
 
 ###

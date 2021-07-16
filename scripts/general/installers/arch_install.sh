@@ -28,12 +28,15 @@ function main() {
     mysql=$return_value
     echo ""
 
-    # Install packman packages.
+    # Install pacman packages.
     echo -e "${color_blue}Updating pacman package list...${color_reset}"
     pacman -Syy > /dev/null
 
     echo -e "${color_blue}Installing gitk dependencies...${color_reset}"
     pacman -S tk --needed --noconfirm> /dev/null
+
+    cho -e "${color_blue}Installing pytest dependencies...${color_reset}"
+    pacman -S python-pytest --needed --noconfirm> /dev/null
 
     echo -e "${color_blue}Installing redis dependencies...${color_reset}"
     pacman -S redis --needed --noconfirm > /dev/null
