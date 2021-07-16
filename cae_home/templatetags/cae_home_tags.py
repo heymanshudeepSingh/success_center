@@ -105,4 +105,12 @@ def dict_key(dictionary, key):
     :param key: Key to attempt to get value from.
     :return: Value corresponding to dict key, or empty string if key is not present.
     """
-    return dictionary.get(key, '')
+    if isinstance(dictionary, dict):
+        return dictionary.get(key, '')
+    else:
+        raise TypeError(
+            'Template attempting to get dictionary value. But "{0}" is type "{1}", not dict.'.format(
+                dictionary,
+                type(dictionary),
+            )
+        )
