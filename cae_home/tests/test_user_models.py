@@ -10,6 +10,7 @@ from phonenumber_field.phonenumber import PhoneNumber
 
 # User Class Imports.
 from .. import models
+from cae_home.management.commands.fixtures.wmu import create_departments
 from cae_home.tests.utils import IntegrationTestCase
 
 
@@ -540,6 +541,9 @@ class WmuUserTests(IntegrationTestCase):
     """
     @classmethod
     def setUpTestData(cls):
+        # Import Department model fixtures.
+        create_departments(None)
+
         cls.major = models.Major.create_dummy_model()
         cls.user_type = models.WmuUser.PROFESSOR
 
