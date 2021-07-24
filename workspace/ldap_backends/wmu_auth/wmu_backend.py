@@ -633,7 +633,8 @@ class WmuAuthBackend(AbstractLDAPBackend):
                     # reliable as ever, it does not seem to update properly.
                     # For example, some "EmployeeExpiration" values will show a date of years ago, for students that
                     # are still actively working.
-                    # Meanwhile, some "StudentExpiration" values will show a date of two to three years in the future.
+                    # Meanwhile, for the same above student, the "StudentExpiration" values may show a date of two to
+                    # three years in the future.
                     # It just seems really really unreliable.
                     # Thus, experimentally use the below logic first. If this chunk of logic leads to User "active"
                     # check issues, then remove.
@@ -886,4 +887,3 @@ class WmuAuthBackend(AbstractLDAPBackend):
         return backup_name
 
     #endregion Ldap Get Attr Functions
-

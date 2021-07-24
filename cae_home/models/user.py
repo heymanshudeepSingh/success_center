@@ -227,14 +227,14 @@ def check_all_group_memberships():
     """
     Checks/updates membership of groups for all existing users.
     """
-    # First update for active users.
+    # First, update for active users.
     active_users = User.objects.filter(is_active=True)
 
     # Loop through all active users.
     for user in active_users:
         check_user_group_membership(user.username)
 
-    # Now update for inactive users.
+    # Now, update for inactive users.
     inactive_users = User.objects.filter(is_active=False)
 
     # Attempt to find any open GroupMembership that reference inactive users.
