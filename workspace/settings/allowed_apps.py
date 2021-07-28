@@ -110,6 +110,7 @@ ALLOWED_CAE_PROJECTS = {
         'url-prefix': 'success_center',
         'related_apps': {
             'success_center_core': {},
+            'success_center_timesheets': {},
         },
         'third_party_apps': [],
     },
