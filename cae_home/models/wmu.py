@@ -4,7 +4,7 @@ Definitions of "WMU" related Core Models.
 
 # System Imports.
 import datetime
-from django.core.exceptions import ObjectDoesNotExist, ValidationError
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import Q
 from django.utils.text import slugify
@@ -49,21 +49,29 @@ class Department(models.Model):
     def create_dummy_model():
         """
         Attempts to get or create a dummy model.
-        Used for testing.
+
+        Useful for when UnitTesting requires an instance of this model,
+        but test does not care what values the model actually has.
         """
+        # Define "dummy model" values.
         name = 'Dummy Department'
         slug = slugify(name)
+
+        # Attempt to get corresponding model instance, if there is one.
         try:
-            return Department.objects.get(
+            department = Department.objects.get(
                 name=name,
                 slug=slug,
             )
-        except ObjectDoesNotExist:
-            return Department.objects.create(
+        except Department.DoesNotExist:
+            # Instance not found. Create new model.
+            department = Department.objects.create(
                 name=name,
                 slug=slug,
             )
 
+        # Return "dummy model" instance.
+        return department
 
 class RoomType(models.Model):
     """
@@ -101,20 +109,29 @@ class RoomType(models.Model):
     def create_dummy_model():
         """
         Attempts to get or create a dummy model.
-        Used for testing.
+
+        Useful for when UnitTesting requires an instance of this model,
+        but test does not care what values the model actually has.
         """
+        # Define "dummy model" values.
         name = 'Dummy Room Type'
         slug = slugify(name)
+
+        # Attempt to get corresponding model instance, if there is one.
         try:
-            return RoomType.objects.get(
+            room_type = RoomType.objects.get(
                 name=name,
                 slug=slug,
             )
-        except ObjectDoesNotExist:
-            return RoomType.objects.create(
+        except RoomType.DoesNotExist:
+            # Instance not found. Create new model.
+            room_type = RoomType.objects.create(
                 name=name,
                 slug=slug,
             )
+
+        # Return "dummy model" instance.
+        return room_type
 
 
 # class RoomManager(models.Manager):
@@ -174,30 +191,40 @@ class Room(models.Model):
     def create_dummy_model():
         """
         Attempts to get or create a dummy model.
-        Used for testing.
+
+        Useful for when UnitTesting requires an instance of this model,
+        but test does not care what values the model actually has.
         """
+        # Define "dummy model" values.
         name = 'Dummy Room'
         slug = slugify(name)
         department = Department.create_dummy_model()
         room_type = RoomType.create_dummy_model()
+
+        # Attempt to get corresponding model instance, if there is one.
         try:
-            return Room.objects.get(
+            room = Room.objects.get(
                 name=name,
                 slug=slug,
                 department=department,
                 room_type=room_type,
                 is_row=False,
             )
-        except ObjectDoesNotExist:
+        except Room.DoesNotExist:
+            # Instance not found. Create new model.
             room = Room.objects.create(
                 name=name,
                 slug=slug,
                 room_type=room_type,
                 is_row=False,
             )
+
+            # Add corresponding Department model relation.
             room.department.add(department)
             room.save()
-            return room
+
+        # Return "dummy model" instance.
+        return room
 
     @staticmethod
     def get_cae_center_rooms():
@@ -306,28 +333,37 @@ class Major(models.Model):
     def create_dummy_model():
         """
         Attempts to get or create a dummy model.
-        Used for testing.
+
+        Useful for when UnitTesting requires an instance of this model,
+        but test does not care what values the model actually has.
         """
+        # Define "dummy model" values.
         department = Department.create_dummy_model()
         code = 'dummy'
         slug = slugify(code)
         name = 'Dummy Major'
+
+        # Attempt to get corresponding model instance, if there is one.
         try:
-            return Major.objects.get(
+            major = Major.objects.get(
                 student_code=code,
                 program_code=code,
                 slug=slug,
                 name=name,
                 department=department,
             )
-        except ObjectDoesNotExist:
-            return Major.objects.create(
+        except Major.DoesNotExist:
+            # Instance not found. Create new model.
+            major = Major.objects.create(
                 student_code=code,
                 program_code=code,
                 slug=slug,
                 name=name,
                 department=department,
             )
+
+        # Return "dummy model" instance.
+        return major
 
 
 class SemesterDate(models.Model):
@@ -388,17 +424,26 @@ class SemesterDate(models.Model):
     def create_dummy_model():
         """
         Attempts to get or create a dummy model.
-        Used for testing.
+
+        Useful for when UnitTesting requires an instance of this model,
+        but test does not care what values the model actually has.
         """
+        # Define "dummy model" values.
         start_date = datetime.datetime.strptime('2010 01 01', '%Y %m %d')
         end_date = datetime.datetime.strptime('2010 04 01', '%Y %m %d')
+
+        # Attempt to get corresponding model instance, if there is one.
         try:
-            return SemesterDate.objects.get(
+            semester_date = SemesterDate.objects.get(
                 start_date=start_date,
                 end_date=end_date,
             )
-        except ObjectDoesNotExist:
-            return SemesterDate.objects.create(
+        except SemesterDate.DoesNotExist:
+            # Instance not found. Create new model.
+            semester_date = SemesterDate.objects.create(
                 start_date=start_date,
                 end_date=end_date,
             )
+
+        # Return "dummy model" instance.
+        return semester_date

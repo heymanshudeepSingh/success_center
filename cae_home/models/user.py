@@ -527,13 +527,18 @@ class WmuUser(models.Model):
     def create_dummy_model():
         """
         Attempts to get or create a dummy model.
-        Used for testing.
+
+        Useful for when UnitTesting requires an instance of this model,
+        but test does not care what values the model actually has.
         """
+        # Define "dummy model" values.
         major = Major.create_dummy_model()
         bronco_net = 'dummy123'
         winno = 'dummy12345'
         first_name = 'Dummy First'
         last_name = 'Dummy Last'
+
+        # Attempt to get corresponding model instance, if there is one.
         try:
             wmu_user = WmuUser.objects.get(
                 bronco_net=bronco_net,
@@ -541,19 +546,23 @@ class WmuUser(models.Model):
                 first_name=first_name,
                 last_name=last_name,
             )
-            return wmu_user
-        except ObjectDoesNotExist:
+        except WmuUser.DoesNotExist:
+            # Instance not found. Create new model.
             wmu_user = WmuUser.objects.create(
                 bronco_net=bronco_net,
                 winno=winno,
                 first_name=first_name,
                 last_name=last_name,
             )
+
+            # Also add relationship of WmuUser to Major.
             WmuUserMajorRelationship.objects.create(
                 wmu_user=wmu_user,
                 major=major,
             )
-            return wmu_user
+
+        # Return "dummy model" instance.
+        return wmu_user
 
 
 class Profile(models.Model):
@@ -669,10 +678,11 @@ class Profile(models.Model):
         """
         Given a valid bronco id, return the associated profile.
         """
+        print('searching for bronco_net of "{0}"'.format(bronco_net))
         try:
             user_intermediary = UserIntermediary.objects.get(bronco_net=bronco_net)
             return user_intermediary.profile
-        except ObjectDoesNotExist:
+        except UserIntermediary.DoesNotExist:
             return None
 
 
@@ -801,29 +811,38 @@ class Address(models.Model):
     def create_dummy_model():
         """
         Attempts to get or create a dummy model.
-        Used for testing.
+
+        Useful for when UnitTesting requires an instance of this model,
+        but test does not care what values the model actually has.
         """
+        # Define "dummy model" values.
         street = '1234 Dummy Lane'
         optional_street = 'Apt 1234'
         city = 'Kalamazoo'
         state = 21
         zip = '49008'
+
+        # Attempt to get corresponding model instance, if there is one.
         try:
-            return Address.objects.get(
+            address = Address.objects.get(
                 street=street,
                 optional_street=optional_street,
                 city=city,
                 state=state,
                 zip=zip
             )
-        except ObjectDoesNotExist:
-            return Address.objects.create(
+        except Address.DoesNotExist:
+            # Instance not found. Create new model.
+            address = Address.objects.create(
                 street=street,
                 optional_street=optional_street,
                 city=city,
                 state=state,
                 zip=zip
             )
+
+        # Return "dummy model" instance.
+        return address
 
 
 class SiteTheme(models.Model):
@@ -867,19 +886,26 @@ class SiteTheme(models.Model):
         Attempts to get or create a dummy model.
         Used for testing.
         """
+        # Define "dummy model" values.
         name = 'Dummy Site Theme'
         slug = slugify(name)
+
+        # Attempt to get corresponding model instance, if there is one.
         try:
-            return SiteTheme.objects.get(
+            site_theme = SiteTheme.objects.get(
                 display_name=name,
                 file_name=slug,
                 slug=slug,
             )
-        except ObjectDoesNotExist:
-            return SiteTheme.objects.create(
+        except SiteTheme.DoesNotExist:
+            # Instance not found. Create new model.
+            site_theme = SiteTheme.objects.create(
                 display_name=name,
                 file_name=slug,
                 slug=slug,
             )
+
+        # Return "dummy model" instance.
+        return site_theme
 
 #endregion Models

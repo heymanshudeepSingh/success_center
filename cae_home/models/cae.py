@@ -4,11 +4,8 @@ Definitions of "CAE Center" related Core Models.
 
 # System Imports.
 from django.db import models
-from django.db.models import ObjectDoesNotExist
 from django.utils import timezone
 from django.utils.text import slugify
-
-# User Imports.
 
 
 MAX_LENGTH = 255
@@ -58,14 +55,22 @@ class Asset(models.Model):
 
     @staticmethod
     def create_dummy_model():
-        serial_number = "12345"
-        asset_tag = "A12345"
-        brand_name = "Popular Brand"
-        mac_address = "FFFFFFFFFF"
-        ip_address = "127.0.0.1"
-        device_name = "Device"
-        description = "It does something."
+        """
+        Attempts to get or create a dummy model.
 
+        Useful for when UnitTesting requires an instance of this model,
+        but test does not care what values the model actually has.
+        """
+        # Define "dummy model" values.
+        serial_number = '12345'
+        asset_tag = 'A12345'
+        brand_name = 'Popular Brand'
+        mac_address = 'FFFFFFFFFF'
+        ip_address = '127.0.0.1'
+        device_name = 'Device'
+        description = 'It does something.'
+
+        # Attempt to get corresponding model instance, if there is one.
         try:
             asset = Asset.objects.get(
                 serial_number=serial_number,
@@ -76,8 +81,8 @@ class Asset(models.Model):
                 device_name=device_name,
                 description=description
             )
-            return asset
-        except ObjectDoesNotExist:
+        except Asset.DoesNotExist:
+            # Instance not found. Create new model.
             asset = Asset.objects.create(
                 serial_number=serial_number,
                 asset_tag=asset_tag,
@@ -87,7 +92,9 @@ class Asset(models.Model):
                 device_name=device_name,
                 description=description
             )
-            return asset
+
+        # Return "dummy model" instance.
+        return asset
 
 
 class Software(models.Model):
@@ -129,20 +136,29 @@ class Software(models.Model):
     def create_dummy_model():
         """
         Attempts to get or create a dummy model.
-        Used for testing.
+
+        Useful for when UnitTesting requires an instance of this model,
+        but test does not care what values the model actually has.
         """
+        # Define "dummy model" values.
         name = 'Dummy Software'
         slug = slugify(name)
+
+        # Attempt to get corresponding model instance, if there is one.
         try:
-            return Software.objects.get(
+            software = Software.objects.get(
                 name=name,
                 slug=slug,
             )
-        except ObjectDoesNotExist:
-            return Software.objects.create(
+        except Software.DoesNotExist:
+            # Instance not found. Create new model.
+            software = Software.objects.create(
                 name=name,
                 slug=slug,
             )
+
+        # Return "dummy model" instance.
+        return software
 
 
 class SoftwareDetail(models.Model):
@@ -205,20 +221,29 @@ class SoftwareDetail(models.Model):
     def create_dummy_model():
         """
         Attempts to get or create a dummy model.
-        Used for testing.
+
+        Useful for when UnitTesting requires an instance of this model,
+        but test does not care what values the model actually has.
         """
+        # Define "dummy model" values.
         software = Software.create_dummy_model()
         version = 5
         expiration = timezone.datetime.strptime('2020-01-01', '%Y-%m-%d')
+
+        # Attempt to get corresponding model instance, if there is one.
         try:
-            return SoftwareDetail.objects.get(
+            software_detail = SoftwareDetail.objects.get(
                 software=software,
                 version=version,
                 expiration=expiration,
             )
-        except ObjectDoesNotExist:
-            return SoftwareDetail.objects.create(
+        except SoftwareDetail.DoesNotExist:
+            # Instance not found. Create new model.
+            software_detail = SoftwareDetail.objects.create(
                 software=software,
                 version=version,
                 expiration=expiration,
             )
+
+        # Return "dummy model" instance.
+        return software_detail
