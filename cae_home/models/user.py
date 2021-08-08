@@ -678,7 +678,6 @@ class Profile(models.Model):
         """
         Given a valid bronco id, return the associated profile.
         """
-        print('searching for bronco_net of "{0}"'.format(bronco_net))
         try:
             user_intermediary = UserIntermediary.objects.get(bronco_net=bronco_net)
             return user_intermediary.profile

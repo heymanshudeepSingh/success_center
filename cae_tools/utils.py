@@ -194,8 +194,6 @@ def test_mass_email():
             # Non-list, or empty list.
             raise ValueError('Invalid settings "ADMINS" value of "{0}".'.format(admins))
 
-        print('email_To: {0}'.format(email_to))
-
         # Compose email contents.
         email_subject = 'Test "Mass Email" from CAE Workspace Project'
         email_message = \
