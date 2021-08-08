@@ -51,6 +51,7 @@ function main_help() {
     echo ""
     echo -e "${color_blue}General${color_reset}:"
     echo "    first_time_setup - Installs dependencies and sets up project for the first time on a machine."
+    echo "    clear_pycache - Clears all auto-generated Pycache files from project folders."
     echo "    compile_css - Compiles all SASS files to CSS."
     echo "    compile_js - Compiles all React files to JS."
     echo "    update_npm - Attempts to update all npm dependencies."
@@ -119,6 +120,31 @@ function setup_help () {
 
 
 ###
+ # Runs the script for clearing auto-generated Pycache files.
+ ##
+function clear_pycache () {
+    ./general/clear_pycache.sh "${@}"
+}
+
+
+###
+ # Displays helper text for script.
+ ##
+function clear_pycache_help () {
+    echo -e "${color_blue}Script${color_reset}: clear_pycache.sh"
+    echo "    Clears all auto-generated Pycache files found in all project folders."
+    echo "    Includes both CAE Workspace and supbrojects in the \"apps\" directory."
+    echo ""
+    echo "    Generally shouldn't be needed. But on very rare occasions (depending on your OS and python setup), you"
+    echo "    may run into errors about Pycache."
+    echo ""
+    echo "    These errors are generally the result of Pycache not auto-updating/auto-generating files properly."
+    echo "    Simply removing all Pycache files to force auto-generation will usually fix these errors."
+    echo ""
+}
+
+
+###
  # Runs the script for compiling css.
  ##
 function compile_css () {
@@ -144,7 +170,7 @@ function sass () {
 function compile_css_help () {
     echo -e "${color_blue}Script${color_reset}: compile_css.sh"
     echo "    Compiles all project SASS files to CSS."
-    echo "    Includes both CAE Workspace and includes supbrojects in the \"apps\" directory."
+    echo "    Includes both CAE Workspace and supbrojects in the \"apps\" directory."
     echo ""
     echo "    To be found, SASS files should be located in the \"<app_name>/static/<app_name>/css/sass/\" folder."
     echo "    Located files will be compiled to the \"<app_name>/static/<app_name>/css/\" folder."
@@ -207,7 +233,7 @@ function compile_javascript () {
 function compile_js_help () {
     echo -e "${color_blue}Script${color_reset}: compile_js.sh"
     echo "    Compiles all project React files to JS."
-    echo "    Includes both CAE Workspace and includes supbrojects in the \"apps\" directory."
+    echo "    Includes both CAE Workspace and supbrojects in the \"apps\" directory."
     echo ""
     echo "    To be found, React files should be located in the \"<app_name>/static/<app_name>/js/react/\" folder."
     echo "    Located files will be compiled to the \"<app_name>/static/<app_name>/js/\" folder."
@@ -354,6 +380,7 @@ function migrations_reset () {
 function reset_migrations_help () {
     echo -e "${color_blue}Script${color_reset}: reset_migrations.sh"
     echo "    Removes all uncommited migration files."
+    echo "    Includes both CAE Workspace and supbrojects in the \"apps\" directory."
     echo ""
     echo -e "${color_blue}Params${color_reset}:"
     echo "    * force - Forces script to skip user confirmation promps."
