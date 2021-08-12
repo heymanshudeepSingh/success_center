@@ -55,16 +55,16 @@ function main () {
         valid_python=""
         while [[ ! $valid_python ]]
         do
-            echo -e "Enter Python version for Project ${color_cyan}[ 3.6, 3.7, 3.8 ]${color_reset}:"
+            echo -e "Enter Python version for Project ${color_cyan}[ 3.7, 3.8, 3.9 ]${color_reset}:"
             read user_input
-            if [[ $user_input = "3.6" ]] || [[ $user_input = "3.7" ]] || [[ $user_input = "3.8" ]]
+            if [[ $user_input = "3.7" ]] || [[ $user_input = "3.8" ]] || [[ $user_input = "3.9" ]]
             then
                 echo ""
                 valid_python=true
                 python_version=$user_input
                 echo ""
             else
-                echo "Invalid input. Please enter version, such as \"3.6\" or \"3.7\"."
+                echo "Invalid input. Please enter version, such as \"3.8\" or \"3.9\"."
                 echo ""
                 echo ""
             fi
@@ -116,6 +116,9 @@ function main () {
     apt-get install libcups2-dev -y > /dev/null 2>&1
     apt-get install smbclient -y > /dev/null 2>&1
 
+    # Install Misc packages.
+    sudo apt install libffi-dev     # Seems required for Ubuntu16 to install requirements.txt file when using Python3.9.
+
     # Optionally install Mysql packages.
     if [[ "$mysql" == true ]]
     then
@@ -141,7 +144,7 @@ function main () {
         # Google Chrome "chromium" driver for running selenium with chrome.
         if [[ ! -f "/usr/local/bin/chromedriver" ]]
         then
-            wget https://chromedriver.storage.googleapis.com/93.0.4577.15/chromedriver_linux64.zip
+            wget https://chromedriver.storage.googleapis.com/92.0.4515.107/chromedriver_linux64.zip
             unzip chromedriver_linux64.zip -d /usr/local/bin/ > /dev/null
             chmod +x /usr/local/bin/chromedriver > /dev/null
             rm chromedriver_linux64.zip > /dev/null
