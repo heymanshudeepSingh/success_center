@@ -141,7 +141,7 @@ function main () {
         # Google Chrome "chromium" driver for running selenium with chrome.
         if [[ ! -f "/usr/local/bin/chromedriver" ]]
         then
-            wget https://chromedriver.storage.googleapis.com/2.46/chromedriver_linux64.zip
+            wget https://chromedriver.storage.googleapis.com/93.0.4577.15/chromedriver_linux64.zip
             unzip chromedriver_linux64.zip -d /usr/local/bin/ > /dev/null
             chmod +x /usr/local/bin/chromedriver > /dev/null
             rm chromedriver_linux64.zip > /dev/null
@@ -149,10 +149,10 @@ function main () {
         # Firefox "gecko" driver for running selenium with firefox.
         if [[ ! -f "/usr/local/bin/geckodriver" ]]
         then
-            wget https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-linux64.tar.gz
-            sh -c 'tar -x geckodriver -zf geckodriver-v0.24.0-linux64.tar.gz -O > /usr/local/bin/geckodriver' > /dev/null
+            wget https://github.com/mozilla/geckodriver/releases/download/v0.29.1/geckodriver-v0.29.1-linux64.tar.gz
+            sh -c 'tar -x geckodriver -zf geckodriver-v0.29.1-linux64.tar.gz -O > /usr/local/bin/geckodriver' > /dev/null
             chmod +x /usr/local/bin/geckodriver > /dev/null
-            rm geckodriver-v0.24.0-linux64.tar.gz > /dev/null
+            rm geckodriver-v0.29.1-linux64.tar.gz > /dev/null
         fi
     else
         echo -e "${color_blue}Skipping Selenium Testing dependencies...${color_reset}"
