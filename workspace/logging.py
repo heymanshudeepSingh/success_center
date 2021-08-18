@@ -22,6 +22,7 @@ first_logging_call = True
 log_handler_class = 'workspace.logging.RotatingFileHandler'
 log_handler_file_max_bytes = 1024 * 1024  # Roughly 1 MB.
 log_handler_file_backup_count = 20
+LOGGING = None
 
 
 def get_logger(caller, log_dir=None):
@@ -76,18 +77,22 @@ def _initialize_logger_settings(log_dir, debug=False):
     add_logging_level('AUTH_ERROR', 45)
 
     # Load dictionary of settings into logger.
-    logging.config.dictConfig(_create_logging_dict(log_dir))
+    global LOGGING
+    LOGGING = _create_logging_dict(log_dir)
+    # logging.config.dictConfig(LOGGING)    # Normally we call this for initializing logging in Python projects.
+    # However, Django doesn't seem to need it as long as we define LOGGING as the logging dictionary somewhere in the
+    # settings. In our case, this is imported in extra_settings.py.
+    # In face, Django seems to error with this line, as of Django3.1.
 
     # Now that logging has been initialized once, we don't need to call this function again for the duration of program
     # runtime. Set "first_logging_call" variable accordingly.
     global first_logging_call
     first_logging_call = False
 
-    # Optionally test that logging is working as expected.
+    # Optionally print out debug logging info.
     if debug:
-        logger = logging.getLogger(__name__)
-        logger.info('Logging initialized.')
-        logger.debug('Logging directory: {0}'.format(log_dir))
+        debug_print('Logging initialized.')
+        debug_print('Logging directory: {0}'.format(log_dir))
 
 
 def _create_logging_dict(log_directory):

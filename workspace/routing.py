@@ -14,10 +14,11 @@ from importlib import import_module
 
 # User Class Imports.
 from cae_home import routing as cae_home_routing
+from workspace.settings.reusable_settings import debug_print
 
 
 # Import logger.
-logger = logging.getLogger(__name__)
+# logger = logging.getLogger(__name__)
 
 
 # Variable to gather all app routing.
@@ -38,10 +39,10 @@ for project, project_settings in settings.INSTALLED_CAE_PROJECTS.items():
                 url(r'^ws/{0}/'.format(url_prefix), URLRouter(app_routing.websocket_urlpatterns))
             )
         except ModuleNotFoundError:
-            logger.info("Assuming no routing to import for {0}".format(app_name))
+            debug_print("Assuming no routing to import for {0}".format(app_name))
         except:
             # No valid app routes. Skipping.
-            logger.exception("Error importing routing for {0}".format(app_name), exc_info=True)
+            debug_print("Error importing routing for {0}".format(app_name), exc_info=True)
 
 
 # Create actual routes, with authentication.

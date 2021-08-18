@@ -74,18 +74,34 @@ LOGOUT_REDIRECT_URL = LOGIN_URL
 
 # Local environment setup.
 if DEBUG:
-    debug_print('Successfully imported {0}development{1} environment settings.'
-                .format(ConsoleColors.bold_blue, ConsoleColors.reset))
+    debug_print(
+        'Successfully imported {0}development{1} environment settings.'.format(
+            ConsoleColors.bold_blue,
+            ConsoleColors.reset,
+        )
+    )
 else:
-    debug_print('Successfully imported {0}production{1} environment settings.'
-                .format(ConsoleColors.bold_blue, ConsoleColors.reset))
+    debug_print(
+        'Successfully imported {0}production{1} environment settings.'.format(
+            ConsoleColors.bold_blue,
+            ConsoleColors.reset,
+        )
+    )
 
 
-# Set custom debug variable aliases, based on DEBUG.
-# Necessary for unit testing, or else tests referring to development urls will automatically fail.
-# DEBUG may potentially have other unexpected logic set by Django, in the future.
-# Thus setting a custom equivalent here saves potential future headache.
-# This value is effectively a custom variable that's equivalent to DEBUG, but minus the extra logic Django provides.
+"""
+Set custom debug variable aliases, based on DEBUG.
+
+Necessary for unit testing, or else tests referring to development urls will automatically fail.
+DEBUG may also potentially have other unexpected logic set by Django, in the future.
+
+Thus setting a custom equivalent here saves potential future headache.
+This value is effectively a custom variable that's equivalent to DEBUG, but minus the extra logic Django provides.
+
+Note that while it technically isn't necessary, we have multiple aliases for the same value. No real reason other
+than to (hopefully) cover all the "most intuitive" possible names, that way you don't have to remember a specific one
+when trying to actually use it in tests, etc.
+"""
 if DEBUG:
     DEV_URLS = True
     DEV_MODE = True
@@ -96,6 +112,10 @@ else:
     DEV_MODE = False
     DEBUG_MODE = False
     PROD_MODE = True
+
+
+# As of Django3.2, model PK's can be set to various different values. This line ensures we keep the original behavior.
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 #endregion Environment Values
 
