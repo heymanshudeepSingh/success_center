@@ -13,28 +13,28 @@ wheel
  # Core Python Packages
  ##
 # Core Django framework.
-Django==3.0.5
+Django~=3.1.0               # Django3.2 seems to have a similar issue as channels-redis.
 # Support for websocket connections.
-channels==2.4.0
-channels-redis==2.4.2
+channels~=2.4.0             # Cannot upgrade to 3.x until we upgrade server from Ubuntu16. Ubuntu16 cannot handle Redis
+channels-redis~=2.4.0       # version 5, which seems required for 3.x and higher.
 # Third party app for admin view customization.
 django-modeladmin-reorder==0.3.1
 # Third party apps for phone number fields and phone number seeding.
-django-phonenumber-field==4.0.0
-phonenumbers==8.12.2
+django-phonenumber-field==5.2.0
+phonenumbers==8.12.30
 faker-e164==0.1.0
 # Support for easy model API access.
-djangorestframework==3.11.0
+djangorestframework==3.12.4
 # DjangoRest model filtering support.
-django-filter==2.2.0
+django-filter==2.4.0
 # Faker library for automatic model seeding.
-Faker==4.0.3
+Faker==8.11.0
 # Read .xls and .xlsx Excel files (Deprecated, but required for .xls)
-xlrd==1.2.0
+xlrd==2.0.1
 # Pdf creation.
-fpdf2==2.0.6
+fpdf2==2.4.2
 # Printer connection.
-pycups==1.9.74
+pycups==2.0.1
 # Redmine communication.
 python-redmine==2.3.0
 
@@ -49,7 +49,7 @@ pytest
 pytest-django
 pytest-xdist
 # Testing with an actual browser, to test JavaScript.
-selenium==3.141.0
+selenium
 
 
 
@@ -57,11 +57,11 @@ selenium==3.141.0
  # Optional Imports
  ##
 # For connecting to mysql. Not necessary if using sqlite during development.
-#mysqlclient==1.4.6
+mysqlclient==2.0.3
 # For ldap connection. Only necessary when CaeAuthBackend is turned on.
-#ldap3==2.7
+ldap3==2.9.1
 # For putting on a production server. Required for Apache/Daphne to use a Python virtual environment.
-#uWSGI==2.0.18
+uWSGI==2.0.19.1
 
 
 ###
@@ -79,34 +79,37 @@ python-decouple
  #      pip freeze -r requirements.txt
  ##
 aioredis==1.3.1
-asgiref==3.2.7
+asgiref==3.4.1
 async-timeout==3.0.1
-attrs==19.3.0
-autobahn==20.4.3
+attrs==21.2.0
+autobahn==21.3.1
 Automat==20.2.0
-Babel==2.8.0
-cffi==1.14.0
+certifi==2021.5.30
+cffi==1.14.6
+charset-normalizer==2.0.4
 constantly==15.1.0
-cryptography==2.9.2
+cryptography==3.4.7
 daphne==2.5.0
-hiredis==1.0.1
-hyperlink==19.0.0
-idna==2.9
-incremental==17.5.0
+hiredis==2.0.0
+hyperlink==21.0.0
+idna==3.2
+incremental==21.3.0
 msgpack==0.6.2
-phonenumberslite==8.12.2
+phonenumberslite==8.12.30
+Pillow==8.3.1
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
 pycparser==2.20
-PyHamcrest==2.0.2
-pyOpenSSL==19.1.0
-python-dateutil==2.8.1
-pytz==2020.1
-service-identity==18.1.0
-six==1.14.0
-sqlparse==0.3.1
+pyOpenSSL==20.0.1
+python-dateutil==2.8.2
+pytz==2021.1
+requests==2.26.0
+service-identity==21.1.0
+six==1.16.0
+sqlparse==0.4.1
 text-unidecode==1.3
-Twisted==20.3.0
-txaio==20.4.1
-urllib3==1.25.9
-zope.interface==5.1.0
+Twisted==21.7.0
+txaio==21.2.1
+typing-extensions==3.10.0.0
+urllib3==1.26.6
+zope.interface==5.4.0
