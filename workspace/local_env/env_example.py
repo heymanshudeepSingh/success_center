@@ -82,6 +82,12 @@ STATICFILES_DIRS = (
     # Path to any additional, non-standard static directories.
 )
 
+
+# Allows giving static files unique hashes, which force browsers to automatically download when files change.
+# However, requires site to be set up to serve static in production mode.
+# Uncomment in production. Leave commented out in development.
+# STATICFILES_STORAGE = 'workspace.settings.static_storage.ForgivingManifestStaticFilesStorage'
+
 #endregion Site Serve Settings
 
 

@@ -86,10 +86,6 @@ CHANNEL_LAYERS = {
 }
 
 
-# Uncomment in production.
-# STATICFILES_STORAGE = 'workspace.settings.static_storage.ForgivingManifestStaticFilesStorage'
-
-
 # User Model.
 AUTH_USER_MODEL = 'cae_home.User'
 
