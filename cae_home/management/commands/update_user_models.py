@@ -73,17 +73,34 @@ class Command(BaseCommand):
         # Get list of all active user models.
         active_user_list = get_user_model().objects.filter(is_active=True)
         handled_list = []
+        non_ldap_usernames = ['step_admin']
 
+        # Check for "update_all_bool".
+        # If True, we automatically set all user model "last ldap check" values to two months ago.
+        # This guarantees all user models will have update logic ran.
+        if update_all_bool:
+            for user_model in active_user_list:
+                # Check for custom/special UserNames to exclude from LDAP logic.
+                if str(user_model.username).strip() not in non_ldap_usernames:
+
+                    # Get date of "two months ago".
+                    two_months_ago = timezone.localdate() - timezone.timedelta(days=60)
+
+                    # Set "last ldap check" field to above date.
+                    user_model.userintermediary.last_ldap_check = two_months_ago
+                    user_model.userintermediary.save()
+
+        # Loop through all known active users.
         for user_model in active_user_list:
             last_user_ldap_check = user_model.userintermediary.last_ldap_check
 
             # Check for custom/special UserNames to exclude from LDAP logic.
-            if str(user_model.username).strip() not in ['step_admin']:
+            if str(user_model.username).strip() not in non_ldap_usernames:
 
                 # To avoid flooding main campus LDAP with a bunch of calls on a single day, do calls randomly.
                 # We want to check (login) User is_active once a month, so give approximately a one in 30 chance.
                 # Assumes one call per night.
-                if update_all_bool or random.randint(1, 30) == 1:
+                if random.randint(1, 30) == 1:
                     # RNG has dictated we check this user's ldap info.
                     handled_list = self.login_user_update(wmu_auth, user_model, handled_list)
                 else:
@@ -137,12 +154,31 @@ class Command(BaseCommand):
 
         # Get list of all active user models.
         active_user_list = models.WmuUser.objects.filter(is_active=True)
+        non_ldap_usernames = ['ceas_cae', 'ceas_prog']
+
+        # Check for "update_all_bool".
+        # If True, we automatically set all user model "last ldap check" values to two months ago.
+        # This guarantees all user models will have update logic ran.
+        if update_all_bool:
+            for user_model in active_user_list:
+                # Check for custom/special UserNames to exclude from LDAP logic.
+                # Also exclude any users that were handled in the (login) User model function (above)
+                if (
+                    str(user_model.username).strip() not in non_ldap_usernames and
+                    str(user_model.username).strip() not in handled_list
+                ):
+                    # Get date of "two months ago".
+                    two_months_ago = timezone.localdate() - timezone.timedelta(days=60)
+
+                    # Set "last ldap check" field to above date.
+                    user_model.userintermediary.last_ldap_check = two_months_ago
+                    user_model.userintermediary.save()
 
         for wmu_user_model in active_user_list:
             last_user_ldap_check = wmu_user_model.userintermediary.last_ldap_check
 
             # Check for custom/special UserNames to exclude from LDAP logic.
-            if str(wmu_user_model.bronco_net).strip() not in ['ceas_cae', 'ceas_prog']:
+            if str(wmu_user_model.bronco_net).strip() not in non_ldap_usernames:
 
                 # Verify we didn't already handle this user in (login) User logic, above.
                 if str(wmu_user_model.bronco_net).strip() not in handled_list:
