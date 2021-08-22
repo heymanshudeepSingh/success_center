@@ -117,7 +117,8 @@ function main () {
     apt-get install smbclient -y > /dev/null 2>&1
 
     # Install Misc packages.
-    sudo apt install libffi-dev     # Seems required for Ubuntu16 to install requirements.txt file when using Python3.9.
+    # Seems required for Ubuntu16 to install requirements.txt file when using Python3.9.
+    sudo apt install libffi-dev -y > /dev/null 2>&1
 
     # Optionally install Mysql packages.
     if [[ "$mysql" == true ]]
