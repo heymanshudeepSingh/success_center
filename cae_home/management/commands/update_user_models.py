@@ -164,8 +164,8 @@ class Command(BaseCommand):
                 # Check for custom/special UserNames to exclude from LDAP logic.
                 # Also exclude any users that were handled in the (login) User model function (above)
                 if (
-                    str(user_model.username).strip() not in non_ldap_usernames and
-                    str(user_model.username).strip() not in handled_list
+                    str(user_model.bronco_net).strip() not in non_ldap_usernames and
+                    str(user_model.bronco_net).strip() not in handled_list
                 ):
                     # Get date of "two months ago".
                     two_months_ago = timezone.localdate() - timezone.timedelta(days=60)
