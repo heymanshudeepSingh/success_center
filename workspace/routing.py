@@ -10,7 +10,7 @@ from channels.auth import AuthMiddlewareStack
 from channels.routing import ProtocolTypeRouter, URLRouter
 from django.conf import settings
 from django.conf.urls import url
-# from django.core.asgi import get_asgi_application     # Uncomment once we upgrade to channels-redis 3.x.
+from django.core.asgi import get_asgi_application
 from importlib import import_module
 
 # User Class Imports.
@@ -48,7 +48,7 @@ for project, project_settings in settings.INSTALLED_CAE_PROJECTS.items():
 
 # Create actual routes, with authentication.
 application = ProtocolTypeRouter({
-    # 'http': get_asgi_application(),       # Uncomment once we upgrade to channels-redis 3.x.
+    'http': get_asgi_application(),
     'websocket': AuthMiddlewareStack(
         URLRouter(
             url_routes
