@@ -9,8 +9,8 @@ import logging
 from channels.auth import AuthMiddlewareStack
 from channels.routing import ProtocolTypeRouter, URLRouter
 from django.conf import settings
-from django.conf.urls import url
 from django.core.asgi import get_asgi_application
+from django.urls import re_path
 from importlib import import_module
 
 # User Class Imports.
@@ -24,7 +24,7 @@ from workspace.settings.reusable_settings import debug_print
 
 # Variable to gather all app routing.
 url_routes = [
-    url('^ws/cae_home/', URLRouter(cae_home_routing.websocket_urlpatterns)),
+    re_path('^ws/cae_home/', URLRouter(cae_home_routing.websocket_urlpatterns)),
 ]
 
 
@@ -37,7 +37,7 @@ for project, project_settings in settings.INSTALLED_CAE_PROJECTS.items():
             # Then, add the new routing to url_routes.
             app_routing = import_module('{0}.routing'.format(app_name))
             url_routes.append(
-                url(r'^ws/{0}/'.format(url_prefix), URLRouter(app_routing.websocket_urlpatterns))
+                re_path(r'^ws/{0}/'.format(url_prefix), URLRouter(app_routing.websocket_urlpatterns))
             )
         except ModuleNotFoundError:
             debug_print("Assuming no routing to import for {0}".format(app_name))

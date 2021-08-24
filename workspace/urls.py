@@ -6,9 +6,9 @@ Note: Urls will automatically be prefixed with "<url-prefix>/" as defined in all
 
 # System Imports.
 from django.conf import settings
-from django.conf.urls import include, url
+from django.conf.urls import include
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 from rest_framework import routers
 
 # User Class Imports.
@@ -57,7 +57,7 @@ for project, project_settings in settings.INSTALLED_CAE_PROJECTS.items():
         try:
             # Add app's urls to urlpatterns variable.
             urlpatterns.append(
-                url(r'^{0}/'.format(url_prefix), include('{0}.urls'.format(app_name))),
+                re_path(r'^{0}/'.format(url_prefix), include('{0}.urls'.format(app_name))),
             )
         except ImportError:
             reusable_settings.debug_print('{0}Warning{1}: No valid urls for {2}:{3}. Skipping app url import.'.format(
