@@ -13,10 +13,10 @@ wheel
  # Core Python Packages
  ##
 # Core Django framework.
-Django~=3.1.0               # Django3.2 seems to have a similar issue as channels-redis.
+Django==3.2.6
 # Support for websocket connections.
-channels~=2.4.0             # Cannot upgrade to 3.x until we upgrade server from Ubuntu16. Ubuntu16 cannot handle Redis
-channels-redis~=2.4.0       # version 5, which seems required for 3.x and higher.
+channels==3.0.4
+channels-redis==3.3.0
 # Third party app for admin view customization.
 django-modeladmin-reorder==0.3.1
 # Third party apps for phone number fields and phone number seeding.
@@ -28,7 +28,7 @@ djangorestframework==3.12.4
 # DjangoRest model filtering support.
 django-filter==2.4.0
 # Faker library for automatic model seeding.
-Faker==8.11.0
+Faker==8.12.0
 # Read .xls and .xlsx Excel files (Deprecated, but required for .xls)
 xlrd==2.0.1
 # Pdf creation.
@@ -89,12 +89,12 @@ cffi==1.14.6
 charset-normalizer==2.0.4
 constantly==15.1.0
 cryptography==3.4.7
-daphne==2.5.0
+daphne==3.0.2
 hiredis==2.0.0
 hyperlink==21.0.0
 idna==3.2
 incremental==21.3.0
-msgpack==0.6.2
+msgpack==1.0.2
 phonenumberslite==8.12.30
 Pillow==8.3.1
 pyasn1==0.4.8
