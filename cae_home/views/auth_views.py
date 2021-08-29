@@ -57,10 +57,10 @@ def login_redirect(request):
                 return redirect('cae_home:index')
 
         # Check if CAE Center employee.
-        if  'cae_web' in settings.INSTALLED_CAE_PROJECTS:
+        if 'cae_web' in settings.INSTALLED_CAE_PROJECTS:
             for cae_group in cae_employee_groups:
                 if cae_group in user_groups:
-                    return redirect('cae_web_core:index')
+                    return redirect('cae_web_shifts:stats')
 
         # Check if STEP (Success Center) employee.
         if 'success_center' in settings.INSTALLED_CAE_PROJECTS:
