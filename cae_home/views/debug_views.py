@@ -11,7 +11,6 @@ from django.template.response import TemplateResponse
 
 # User Imports.
 from workspace import logging as init_logging
-from cae_tools.utils import test_mass_email as utils_test_mass_email
 from cae_tools.utils import test_single_email as utils_test_single_email
 
 
@@ -79,22 +78,6 @@ def test_single_email(request):
     if settings.DEBUG:
         # Run test.
         utils_test_single_email()
-
-        # Redirect to home.
-        return redirect('cae_home:index')
-    else:
-        raise Http404()
-
-
-def test_mass_email(request):
-    """
-    Tests sending of email with "send_mass_mail" function.
-    This function is far more efficient when sending multiple emails. We are likely to use this as the default.
-    Note that, despite the name, send_mass_email can still send a single email, if desired.
-    """
-    if settings.DEBUG:
-        # Run test.
-        utils_test_mass_email()
 
         # Redirect to home.
         return redirect('cae_home:index')

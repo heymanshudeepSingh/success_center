@@ -27,7 +27,6 @@ from .debug_views import test_400_error
 from .debug_views import test_403_error
 from .debug_views import test_500_error
 from .debug_views import test_single_email
-from .debug_views import test_mass_email
 
 # DjangoRest views.
 from .django_rest_views import DepartmentViewSet

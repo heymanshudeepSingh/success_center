@@ -55,5 +55,4 @@ if settings.DEV_URLS:
 
         # Email Testing.
         path('test_single_email/', views.test_single_email, name='test_single_email'),
-        path('test_mass_email/', views.test_mass_email, name='test_mass_email'),
     ]
