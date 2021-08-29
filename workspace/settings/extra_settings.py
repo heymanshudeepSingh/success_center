@@ -59,6 +59,7 @@ except FileNotFoundError:
 
 # Setup logging.
 init_logging.get_logger(__name__, LOGGING_DIRECTORY)
+LOGGING = init_logging.LOGGING
 
 
 #region Url Redirection Settings
