@@ -546,7 +546,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
                     wmu_user.userintermediary.last_ldap_check = timezone.now()
                     wmu_user.save()
 
-                except models.WmuUser.objects.DoesNotExist:
+                except models.WmuUser.DoesNotExist:
                     # Does not exist for WmuUser. This is fine.
                     pass
 
