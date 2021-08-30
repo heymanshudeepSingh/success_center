@@ -132,6 +132,13 @@ class CaeAuthBackend(AbstractLDAPBackend):
 
         Should only be called on known, valid and authenticated users.
         Should only invoke this method through the "create_or_update_user_model" function.
+
+        Note that this function sets initial CAE Group membership, but does not take it away.
+        It's technically possible for a user to belong to multiple groups (ex: both admin and programmer at once, while
+        transitioning), which LDAP may not account for well.
+        This is fine because all groups are removed when a user becomes inactive. And for any exceptions, we can
+        (and should) manually update the user group membership.
+        
         :param uid: Confirmed valid ldap uid.
         :return: Instance of User model.
         """
