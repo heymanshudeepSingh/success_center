@@ -100,6 +100,7 @@ AUTHENTICATION_BACKENDS = (
     # 'workspace.ldap_backends.wmu_auth.cae_backend.WmuAuthBackend',
 )
 AUTH_BACKEND_USE_DJANGO_USER_PASSWORDS = False  # If false, always use LDAP and never store user password in Django.
+AUTH_BACKEND_DEBUG = False  # Determines if authentication backend should run debug logging or not. Defaults to off.
 
 # LDAP settings used when CAEAuthBackend is active.
 CAE_LDAP = {
