@@ -34,10 +34,10 @@ class WmuAuthBackend(AbstractLDAPBackend):
     def setup_abstract_class(self):
         """
         Note: "check_credentials" value is set to False, because otherwise it will ping the LDAP server to verify
-            the "master" credentials every time this Auth Backend is called.
+        the "master" credentials every time this Auth Backend is called.
 
-            When set to active in settings, this backend is used every time a page needs to check permissions. So
-            enabling "check_credentials" would potentially add a lot of extra time to each page load.
+        When set to active in settings, this backend is used every time a page needs to check permissions. So
+        enabling "check_credentials" would potentially add a lot of extra time to each page load.
         """
         # Set allowed email value in username.
         self.regex_username_match = self.regex_username_match.format('wmich.edu')
@@ -132,7 +132,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
         """
         # Verify and set user ldap "active" status, according to main campus.
         # First we check last call to LDAP, saved in associated UserIntermediary model.
-        # This is to avoid unnecessary repeated LDAP calls with in a short timespan.
+        # This is to avoid unnecessary repeated main campus LDAP calls with in a short timespan.
         user_intermediary = models.UserIntermediary.objects.get(bronco_net=uid)
         one_day_ago = timezone.now().date() - timezone.timedelta(days=1)
         if user_intermediary.last_ldap_check <= one_day_ago:
@@ -282,7 +282,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
         # Verify and set user ldap "active" status, according to main campus.
         # First we check last call to LDAP, saved in associated UserIntermediary model.
         # This is to prevent double checking when updating a (login) User model. Or just to avoid unnecessary repeated
-        # LDAP calls with in a short timespan.
+        # main campus LDAP calls with in a short timespan.
         user_intermediary = models.UserIntermediary.objects.get(bronco_net=uid)
         one_day_ago = timezone.now().date() - timezone.timedelta(days=1)
         if user_intermediary.last_ldap_check <= one_day_ago:
@@ -530,7 +530,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
                     login_user = models.User.objects.get(username=uid)
 
                     # If we got this far, then (login) User model exists. Set fields appropriately.
-                    login_user.is_active = user_ldap_status_is_active
+                    login_user.userintermediary.wmu_is_active = user_ldap_status_is_active
                     login_user.userintermediary.last_ldap_check = timezone.now()
                     login_user.save()
                 except models.User.DoesNotExist:
@@ -542,7 +542,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
                     wmu_user = models.WmuUser.objects.get(bronco_net=uid)
 
                     # If we got this far, then WmuUser model exists. Set fields appropriately.
-                    wmu_user.is_active = user_ldap_status_in_retention
+                    wmu_user.userintermediary.wmu_is_active = user_ldap_status_in_retention
                     wmu_user.userintermediary.last_ldap_check = timezone.now()
                     wmu_user.save()
 

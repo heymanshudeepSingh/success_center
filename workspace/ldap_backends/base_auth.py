@@ -1,7 +1,12 @@
 """
 Base/Universal logic for custom authentication backends.
+This is only the abstract class uses in the CAE/Wmu LDAP authentication backends.
 
-Note that, to work, this needs the simple_ldap_lib git submodule imported, and the correct env settings set.
+Authentication backends are not called directly, but rather define as a list in env.py.
+Values in the env.py list are then automatically called, in order (stopping on first success) every time
+a user attempts to log in.
+
+Note: To work, this needs the simple_ldap_lib git submodule imported, and the correct env settings set.
 """
 
 # System Imports.
@@ -209,7 +214,7 @@ class AbstractLDAPBackend(ABC):
         )
 
         if auth_search_return[0]:
-            # User validated successfully through ldap. Create new django user.
+            # User validated successfully through ldap. Create (or update) corresponding django user.
             logger.auth_info('{0}: {1}'.format(user_id, auth_search_return[1]))
             user = self.create_or_update_user_model(uid, password)
         else:

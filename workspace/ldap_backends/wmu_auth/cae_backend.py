@@ -27,10 +27,10 @@ class CaeAuthBackend(AbstractLDAPBackend):
     def setup_abstract_class(self):
         """
         Note: "check_credentials" value is set to False, because otherwise it will ping the LDAP server to verify
-            the "master" credentials every time this Auth Backend is called.
+        the "master" credentials every time this Auth Backend is called.
 
-            When set to active in settings, this backend is used every time a page needs to check permissions. So
-            enabling "check_credentials" would potentially add a lot of extra time to each page load.
+        When set to active in settings, this backend is used every time a page needs to check permissions. So
+        enabling "check_credentials" would potentially add a lot of extra time to each page load.
         """
         # Set allowed email value in username.
         self.regex_username_match = self.regex_username_match.format('wmich.edu')
@@ -78,7 +78,7 @@ class CaeAuthBackend(AbstractLDAPBackend):
         :return: Instance of User model.
         """
         # Connect to LDAP server and pull user's full info.
-        ldap_user_info = self.get_ldap_user_info(uid, attributes=['uid', 'givenName', 'sn', ])
+        ldap_user_info = self.get_ldap_user_info(uid, attributes=['uid', 'givenName', 'sn'])
 
         # Check if we got LDAP response. If not, user does not exist in CAE LDAP.
         if ldap_user_info is not None:
@@ -138,7 +138,7 @@ class CaeAuthBackend(AbstractLDAPBackend):
         transitioning), which LDAP may not account for well.
         This is fine because all groups are removed when a user becomes inactive. And for any exceptions, we can
         (and should) manually update the user group membership.
-        
+
         :param uid: Confirmed valid ldap uid.
         :return: Instance of User model.
         """
@@ -147,28 +147,48 @@ class CaeAuthBackend(AbstractLDAPBackend):
         ldap_user_groups = self.get_ldap_user_groups(uid)
 
         # Set user group types.
+        found_in_cae_ldap = False
         user_groups = login_user.groups.all().values_list('name', flat=True)
         if ldap_user_groups['director']:
             # Check if user is already in group.
             if 'CAE Director' not in user_groups:
                 login_user.groups.add(Group.object.get(name='CAE Director'))
                 logger.auth_info('{0}: Added user to CAE Director group.'.format(uid))
+            found_in_cae_ldap = True
         if ldap_user_groups['attendant']:
             # Check if user is already in group.
             if 'CAE Attendant' not in user_groups:
                 login_user.groups.add(Group.objects.get(name='CAE Attendant'))
                 logger.auth_info('{0}: Added user to CAE Attendant group.'.format(uid))
+            found_in_cae_ldap = True
         if ldap_user_groups['admin']:
             # Check if user is already in group.
             if 'CAE Admin' not in user_groups:
                 login_user.groups.add(Group.objects.get(name='CAE Admin'))
                 logger.auth_info('{0}: Added user to CAE Admin group.'.format(uid))
+            found_in_cae_ldap = True
         if ldap_user_groups['programmer']:
             # Check if user is already in group.
             if 'CAE Programmer' not in user_groups:
                 login_user.groups.add(Group.objects.get(name='CAE Programmer'))
-                login_user.is_staff = True
                 logger.auth_info('{0}: Added user to CAE Programmer group.'.format(uid))
+            found_in_cae_ldap = True
+
+            # All programmer users should have admin access.
+            if not login_user.is_staff:
+                login_user.is_staff = True
+
+        # Set is_active value if found in any CAE LDAP groups.
+        # This is because the CAE Center manually removes people as soon as they graduate/quit/otherwise stop working
+        # here. So if someone is found in the CAE LDAP at all, then they're a valid user and should be able to login.
+        if found_in_cae_ldap:
+            # Found in CAE LDAP. User should be active, unconditionally.
+            if not login_user.user_intermediary.cae_is_active:
+                login_user.user_intermediary.cae_is_active = True
+        else:
+            # Not found in CAE LDAP. Set to possibly inactive, depending on main campus LDAP status.
+            if login_user.user_intermediary.cae_is_active:
+                login_user.user_intermediary.cae_is_active = False
 
         # Save model.
         login_user.save()
