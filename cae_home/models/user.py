@@ -51,145 +51,116 @@ def compare_user_and_wmuuser_models(uid):
     except ObjectDoesNotExist:
         pass    # BroncoNet does not have an associated WmuUser model.
 
-    # Handle based on which user models do or do not exist.
-    if user_model is not None and wmu_user_model is not None:
-        # Logic for when both models exist.
+    # Verify model had at least one of (login) User or WmuUser models.
+    if not user_model and not wmu_user_model:
+        # BroncoNet somehow does not have an associated (login) User model or WmuUser model.
+        raise ValidationError('Could not find associated user models for BroncoNet {0}.'.format(id))
 
-        # Handle group membership based on is_active status.
-        if user_model.is_active is False and user_model.groups.all().exists():
-            user_model.groups.clear()
-            model_updated = True
+    # Below logic attempts to update corresponding (login) User, WmuUser, and UserIntermediary models.
 
-        # Update winno if not matching.
+    # Sync winno values.
+    if wmu_user_model:
+        # WmuUser model exists.
         if user_intermediary.winno != wmu_user_model.winno:
             user_intermediary.winno = wmu_user_model.winno
             model_updated = True
 
-        # Check that first_name values are the same.
+    # Sync first_name values.
+    if user_model and wmu_user_model:
+        # Both (login) User and WmuUser models exist.
         if user_model.first_name != wmu_user_model.first_name:
             # WmuUser model has priority for this field. If empty for WmuUser model, fallback to User model value.
             model_updated = True
-            if wmu_user_model.first_name != '':
-                user_model.first_name = wmu_user_model.first_name
+            first_name = wmu_user_model.first_name.strip()
+            if first_name != '':
+                user_model.first_name = first_name
             else:
                 wmu_user_model.first_name = user_model.first_name
-
-        # Also compare first_name in UserIntermediary.
+    if user_model:
+        # (Login) User exists, so also compare first_name in UserIntermediary.
         if user_intermediary.first_name != user_model.first_name:
             user_intermediary.first_name = user_model.first_name
             model_updated = True
-
-        # Check that last_name values are the same.
-        if user_model.last_name != wmu_user_model.last_name:
-            # WmuUser model has priority for this field. If empty for WmuUser model, fallback to User model value.
-            model_updated = True
-            if wmu_user_model.last_name != '':
-                user_model.last_name = wmu_user_model.last_name
-            else:
-                wmu_user_model.last_name = user_model.last_name
-
-        # Also compare last_name in UserIntermediary.
-        if user_intermediary.last_name != user_model.last_name:
-            user_intermediary.last_name = user_model.last_name
-            model_updated = True
-
-        # Check that email values are the same.
-        if (
-            user_model.email != wmu_user_model.official_email and
-            (wmu_user_model.official_email != None and wmu_user_model.official_email != '')
-        ):
-            user_model.email = wmu_user_model.official_email
-            model_updated = True
-
-        # Check is_active values.
-        if user_model.is_active or wmu_user_model.is_active:
-            # At least one of User or WmuUser models is active.
-            if not user_intermediary.is_active:
-                user_intermediary.is_active = True
-                model_updated = True
-        else:
-            # Neither User or WmuUser model is active.
-            if user_intermediary.is_active:
-                user_intermediary.is_active = False
-                model_updated = True
-
-        # Check if models were updated. If so, save.
-        if model_updated:
-            user_model.save()
-            wmu_user_model.save()
-            user_intermediary.save()
-
-    elif user_model is not None:
-        # Logic for when BroncoNet only has associated (login) User model.
-
-        # Handle group membership based on is_active status.
-        if user_model.is_active is False and user_model.groups.all().exists():
-            user_model.groups.clear()
-            model_updated = True
-
-        # Update first name if not matching.
-        if user_intermediary.first_name != user_model.first_name:
-            user_intermediary.first_name = user_model.first_name
-            model_updated = True
-
-        # Update last name if not matching.
-        if user_intermediary.last_name != user_model.last_name:
-            user_intermediary.last_name = user_model.last_name
-            model_updated = True
-
-        # Check is_active values.
-        if user_model.is_active:
-            if not user_intermediary.is_active:
-                # User model is active. Update UserIntermediary accordingly.
-                user_intermediary.is_active = True
-                model_updated = True
-        else:
-            if user_intermediary.is_active:
-                # User model is inactive. Update UserIntermediary accordingly.
-                user_intermediary.is_active = False
-                model_updated = True
-
-        # Check if models were updated. If so, save.
-        if model_updated:
-            user_intermediary.save()
-
-    elif wmu_user_model is not None:
-        # Logic for when BroncoNet only has associated WmuUser model.
-
-        # Update winno if not matching.
-        if user_intermediary.winno != wmu_user_model.winno:
-            user_intermediary.winno = wmu_user_model.winno
-            model_updated = True
-
-        # Update first name if not matching.
+    if wmu_user_model:
+        # WmuUser exists, so also compare first_name in UserIntermediary.
         if user_intermediary.first_name != wmu_user_model.first_name:
             user_intermediary.first_name = wmu_user_model.first_name
             model_updated = True
 
-        # Update last name if not matching.
+    # Sync last_name values.
+    if user_model and wmu_user_model:
+        # Both (login) User and WmuUser models exist.
+        if user_model.last_name != wmu_user_model.last_name:
+            # WmuUser model has priority for this field. If empty for WmuUser model, fallback to User model value.
+            model_updated = True
+            last_name = wmu_user_model.last_name.strip()
+            if last_name != '':
+                user_model.last_name = last_name
+            else:
+                wmu_user_model.last_name = user_model.last_name
+    if user_model:
+        # (Login) User exists, so also compare last_name in UserIntermediary.
+        if user_intermediary.last_name != user_model.last_name:
+            user_intermediary.last_name = user_model.last_name
+            model_updated = True
+    if wmu_user_model:
+        # WmuUser exists, so also compare last_name in UserIntermediary.
         if user_intermediary.last_name != wmu_user_model.last_name:
             user_intermediary.last_name = wmu_user_model.last_name
             model_updated = True
 
-        # Check is_active values.
-        if wmu_user_model.is_active:
-            if not user_intermediary.is_active:
-                # User model is active. Update UserIntermediary accordingly.
-                user_intermediary.is_active = True
+    # Sync email values.
+    if user_model and wmu_user_model:
+        # Both (login) User and WmuUser models exist.
+        if (
+            user_model.email != wmu_user_model.official_email and
+            (wmu_user_model.official_email is not None and wmu_user_model.official_email != '')
+        ):
+            user_model.email = wmu_user_model.official_email
+            model_updated = True
+
+    # Sync is_active values.
+    if user_model:
+        # (Login) User model exists.
+        if user_intermediary.cae_is_active or user_intermediary.wmu_is_active:
+            # At least one of the LDAP auths came back as "active". Set (login) User model accordingly.
+            if not user_model.is_active:
+                user_model.is_active = True
                 model_updated = True
         else:
-            if user_intermediary.is_active:
-                # User model is inactive. Update UserIntermediary accordingly.
-                user_intermediary.is_active = False
+            # Neither LDAP auth came back as "active". Set (login) User model accordingly.
+            if user_model.is_active:
+                user_model.is_active = False
+                user_model.is_staff = False
+                model_updated = True
+    if wmu_user_model:
+        # WmuUser model exists.
+        if user_intermediary.cae_is_active or user_intermediary.wmu_is_active:
+            # At least one of the LDAP auths came back as "active". Set WmuUser model accordingly.
+            if not wmu_user_model.is_active:
+                wmu_user_model.is_active = True
+                model_updated = True
+        else:
+            # Neither LDAP auth came back as "active". Set WmuUser model accordingly.
+            if wmu_user_model.is_active:
+                wmu_user_model.is_active = False
                 model_updated = True
 
-        # Check if models were updated. If so, save.
-        if model_updated:
-            user_intermediary.save()
+    # Handle group membership based on is_active status.
+    if user_model:
+        # (Login) User model exists.
+        if user_model.is_active is False and user_model.groups.all().exists():
+            # (Login) User is not active, but model has one or more Auth Group relations. Remove all.
+            user_model.groups.clear()
+            model_updated = True
 
-    else:
-        # BroncoNet somehow does not have an associated (login) User model or WmuUser model.
-        raise ValidationError('Could not find associated user models for BroncoNet {0}.'.format(id))
+    # If any model values were updated, then save all three corresponding models.
+    if model_updated:
+        if user_model:
+            user_model.save()
+        if wmu_user_model:
+            wmu_user_model.save()
+        user_intermediary.save()
 
 
 def check_user_group_membership(uid):
@@ -407,8 +378,14 @@ class UserIntermediary(models.Model):
     winno = models.CharField(max_length=MAX_LENGTH, blank=True, default='')
     first_name = models.CharField(max_length=MAX_LENGTH, blank=True)
     last_name = models.CharField(max_length=MAX_LENGTH, blank=True)
-    is_active = models.BooleanField(default=True)
-    last_ldap_check = models.DateField(default=timezone.now)
+
+    # LDAP sync values.
+    # Note that the two is_active values default to True.
+    # This is so that authentication when LDAP is disabled (such as in development) doesn't automatically disable users.
+    # If LDAP is enabled, then the below values should set to proper values on first login so it doesn't matter.
+    cae_is_active = models.BooleanField(default=True, help_text='Tracks if CAE LDAP says user is active.')
+    wmu_is_active = models.BooleanField(default=True, help_text='Tracks if WMU LDAP says user is active.')
+    last_ldap_check = models.DateField(default=timezone.now, help_text='Date of user\'s last sync with LDAP.')
 
     # Self-setting/Non-user-editable fields.
     slug = models.SlugField(

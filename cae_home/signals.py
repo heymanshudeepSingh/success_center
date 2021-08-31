@@ -46,7 +46,7 @@ def user_model_post_save(sender, instance, created, **kwargs):
     post_save.disconnect(userintermediary_model_post_save, sender=models.UserIntermediary)
     post_save.disconnect(wmuuser_model_post_save, sender=models.WmuUser)
 
-    # Run comparison method to sync AuthUser and WmuUser models.
+    # Run comparison method to sync all corresponding user models.
     compare_user_and_wmuuser_models(instance.username)
 
     # Run logic to update group membership dates.
@@ -96,6 +96,28 @@ def userintermediary_model_post_save(sender, instance, created, **kwargs):
         # Just updating an existing profile. Save.
         instance.profile.save()
 
+    # Check that values are consistent between user models.
+    # First disconnect related post_save signals to prevent recursion errors.
+    post_save.disconnect(user_model_post_save, sender=models.User)
+    post_save.disconnect(userintermediary_model_post_save, sender=models.UserIntermediary)
+    post_save.disconnect(wmuuser_model_post_save, sender=models.WmuUser)
+
+    # Run comparison method to sync all corresponding user models.
+    compare_user_and_wmuuser_models(instance.bronco_net)
+
+    # Run logic to update group membership dates.
+    # Note that we have to wait for the full transaction to complete, as per:
+    # https://stackoverflow.com/questions/1925383/issue-with-manytomany-relationships-not-updating-immediately-after-save
+    # https://stackoverflow.com/questions/950214/run-code-after-transaction-commit-in-django
+    transaction.on_commit(
+        lambda: check_user_group_membership(instance.bronco_net)
+    )
+
+    # Reconnect related post_save signals.
+    post_save.connect(user_model_post_save, sender=models.User)
+    post_save.connect(userintermediary_model_post_save, sender=models.UserIntermediary)
+    post_save.connect(wmuuser_model_post_save, sender=models.WmuUser)
+
 
 @receiver(post_save, sender=models.WmuUser)
 def wmuuser_model_post_save(sender, instance, created, **kwargs):
@@ -127,8 +149,17 @@ def wmuuser_model_post_save(sender, instance, created, **kwargs):
     post_save.disconnect(userintermediary_model_post_save, sender=models.UserIntermediary)
     post_save.disconnect(wmuuser_model_post_save, sender=models.WmuUser)
 
-    # Run comparison method.
+    # Run comparison method to sync all corresponding user models.
     compare_user_and_wmuuser_models(instance.bronco_net)
+
+    # Run logic to update group membership dates.
+    # Note that we have to wait for the full transaction to complete, as per:
+    # https://stackoverflow.com/questions/1925383/issue-with-manytomany-relationships-not-updating-immediately-after-save
+    # https://stackoverflow.com/questions/950214/run-code-after-transaction-commit-in-django
+    if instance.userintermediary and instance.userintermediary.user:
+        transaction.on_commit(
+            lambda: check_user_group_membership(instance.username)
+        )
 
     # Reconnect related post_save signals.
     post_save.connect(user_model_post_save, sender=models.User)

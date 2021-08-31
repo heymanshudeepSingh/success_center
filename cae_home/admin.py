@@ -635,16 +635,21 @@ class UserIntermediaryAdmin(admin.ModelAdmin):
     # list_display_links = ('(Login) User', 'WmuUser')
 
     # Default field ordering in admin list view.
-    ordering = ('-is_active', 'bronco_net')
+    ordering = ('-cae_is_active', '-wmu_is_active', 'bronco_net')
 
     # Fields to filter by in admin list view.
-    list_filter = ('is_active', UserIntermediaryToUserListFilter, UserIntermediaryToWmuUserListFilter)
+    list_filter = (
+        'cae_is_active',
+        'wmu_is_active',
+        UserIntermediaryToUserListFilter,
+        UserIntermediaryToWmuUserListFilter,
+    )
 
     # Fields to search in admin list view.
     search_fields = ('bronco_net', 'wmu_user__winno', 'first_name', 'last_name')
 
     # Read only fields for admin detail view.
-    readonly_fields = ('id', 'date_created', 'date_modified', 'is_active', 'related_models')
+    readonly_fields = ('id', 'date_created', 'date_modified', 'related_models')
 
     # Fieldset organization for admin detail view.
     fieldsets = (
@@ -657,9 +662,12 @@ class UserIntermediaryAdmin(admin.ModelAdmin):
         ('Relations', {
             'fields': ('user', 'wmu_user', 'profile'),
         }),
+        ('User Active', {
+            'fields': ('cae_is_active', 'wmu_is_active'),
+        }),
         ('Advanced', {
             'classes': ('collapse',),
-            'fields': ('id', 'is_active', 'last_ldap_check', 'slug', 'date_created', 'date_modified'),
+            'fields': ('id', 'last_ldap_check', 'slug', 'date_created', 'date_modified'),
         }),
     )
 
@@ -822,7 +830,7 @@ class ProfileAdmin(admin.ModelAdmin):
         list_display = ('id',) + list_display
 
     # Default field ordering in admin list view.
-    ordering = ('-userintermediary__is_active', 'userintermediary__bronco_net')
+    ordering = ('-userintermediary__cae_is_active', '-userintermediary__wmu_is_active',  'userintermediary__bronco_net')
 
     # Fields to filter by in admin list view.
     list_filter = (ProfileToUserListFilter, ProfileToWmuUserListFilter)
