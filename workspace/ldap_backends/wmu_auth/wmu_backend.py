@@ -522,6 +522,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
                 # Fields need updating.
                 user_ldap_status_is_active = user_ldap_status[0]
                 user_ldap_status_in_retention = user_ldap_status[1]
+                wmu_user_is_active = (user_ldap_status_is_active or user_ldap_status_in_retention)
                 logger.auth_info('{0}: is_active (Login) User status - {1}'.format(uid, user_ldap_status_is_active))
                 logger.auth_info('{0}: is_active WmuUser status - {1}'.format(uid, user_ldap_status_in_retention))
 
@@ -530,7 +531,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
                     login_user = models.User.objects.get(username=uid)
 
                     # If we got this far, then (login) User model exists. Set fields appropriately.
-                    login_user.userintermediary.wmu_is_active = user_ldap_status_is_active
+                    login_user.userintermediary.wmu_is_active = wmu_user_is_active
                     login_user.userintermediary.last_ldap_check = timezone.now()
                     login_user.save()
                 except models.User.DoesNotExist:
@@ -542,7 +543,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
                     wmu_user = models.WmuUser.objects.get(bronco_net=uid)
 
                     # If we got this far, then WmuUser model exists. Set fields appropriately.
-                    wmu_user.userintermediary.wmu_is_active = user_ldap_status_in_retention
+                    wmu_user.userintermediary.wmu_is_active = wmu_user_is_active
                     wmu_user.userintermediary.last_ldap_check = timezone.now()
                     wmu_user.save()
 
@@ -555,31 +556,11 @@ class WmuAuthBackend(AbstractLDAPBackend):
 
             return user_ldap_status
 
-        # Below section commented out for security concerns.
         # Won't Ldap fail to return on internet loss or main campus going down?
-        # So if either happens while this below section tries to run, then all users will automatically be set to
-        # inactive, probably?
-        # Look into at a later date.
+        # Not sure if raising a ValidationError is the best way to handle this. But it should rarely be an issue,
+        # at least. Look into at a later date.
         else:
             raise ValidationError('Ldap returned None for "{0}"'.format(uid))
-        # else:
-        #     # Ldap info failed to return.
-        #
-        #     # Check if we should update User and Wmu User model "active" fields.
-        #     if set_model_active_fields:
-        #         # Get models.
-        #         login_user = models.User.objects.get(username=uid)
-        #         wmu_user = models.WmuUser.objects.get(bronconet=uid)
-        #
-        #         # Set active fields.
-        #         login_user.is_active = False
-        #         wmu_user.is_active = False
-        #
-        #         # Save models.
-        #         login_user.save()
-        #         wmu_user.save()
-        #
-        #     return None
 
     def _verify_user_ldap_status(self, uid, ldap_info):
         """

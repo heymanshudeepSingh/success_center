@@ -121,6 +121,19 @@ class CaeAuthBackend(AbstractLDAPBackend):
 
         else:
             # User does not exist in CAE LDAP. Try WMU LDAP instead.
+
+            # First though, check if Django User model exists at all. If so, remove "cae_is_active" flag.
+            try:
+                login_user = models.User.objects.get(username=uid)
+
+                # (Login) User model associated with id. Remove flag, if present.
+                if login_user.userintermediary.cae_is_active:
+                    login_user.userintermediary.cae_is_active = False
+                    login_user.save()
+            except models.User.DoesNotExist:
+                # No (login) User model associated with id. This is fine.
+                pass
+
             from workspace.ldap_backends.wmu_auth import wmu_backend
             wmu_ldap = wmu_backend.WmuAuthBackend()
             return wmu_ldap.create_or_update_user_model(uid, password)
@@ -183,12 +196,12 @@ class CaeAuthBackend(AbstractLDAPBackend):
         # here. So if someone is found in the CAE LDAP at all, then they're a valid user and should be able to login.
         if found_in_cae_ldap:
             # Found in CAE LDAP. User should be active, unconditionally.
-            if not login_user.user_intermediary.cae_is_active:
-                login_user.user_intermediary.cae_is_active = True
+            if not login_user.userintermediary.cae_is_active:
+                login_user.userintermediary.cae_is_active = True
         else:
             # Not found in CAE LDAP. Set to possibly inactive, depending on main campus LDAP status.
-            if login_user.user_intermediary.cae_is_active:
-                login_user.user_intermediary.cae_is_active = False
+            if login_user.userintermediary.cae_is_active:
+                login_user.userintermediary.cae_is_active = False
 
         # Save model.
         login_user.save()
