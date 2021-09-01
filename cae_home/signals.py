@@ -158,7 +158,7 @@ def wmuuser_model_post_save(sender, instance, created, **kwargs):
     # https://stackoverflow.com/questions/950214/run-code-after-transaction-commit-in-django
     if instance.userintermediary and instance.userintermediary.user:
         transaction.on_commit(
-            lambda: check_user_group_membership(instance.username)
+            lambda: check_user_group_membership(instance.bronco_net)
         )
 
     # Reconnect related post_save signals.
