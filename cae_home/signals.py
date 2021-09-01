@@ -109,9 +109,10 @@ def userintermediary_model_post_save(sender, instance, created, **kwargs):
     # Note that we have to wait for the full transaction to complete, as per:
     # https://stackoverflow.com/questions/1925383/issue-with-manytomany-relationships-not-updating-immediately-after-save
     # https://stackoverflow.com/questions/950214/run-code-after-transaction-commit-in-django
-    transaction.on_commit(
-        lambda: check_user_group_membership(instance.bronco_net)
-    )
+    if instance.user:
+        transaction.on_commit(
+            lambda: check_user_group_membership(instance.bronco_net)
+        )
 
     # Reconnect related post_save signals.
     post_save.connect(user_model_post_save, sender=models.User)
@@ -158,7 +159,7 @@ def wmuuser_model_post_save(sender, instance, created, **kwargs):
     # https://stackoverflow.com/questions/950214/run-code-after-transaction-commit-in-django
     if instance.userintermediary and instance.userintermediary.user:
         transaction.on_commit(
-            lambda: check_user_group_membership(instance.bronco_net)
+            lambda: check_user_group_membership(instance.userintermediary.user.username)
         )
 
     # Reconnect related post_save signals.
