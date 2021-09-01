@@ -95,17 +95,17 @@ SUCCESS_CENTER_GROUPS = ['STEP Admin', 'STEP Employee']
 # Predefined Email Sections.
 cae_email_header = """
 <span style="font-size:8pt; color: #757B80;">
-This is an automatically generated email. Please do not respond to this email.
-If you have any questions or concerns, please contact the CAE Center.
+This is an automatically generated email. Please do not respond to this email.<br>
+If you have any questions or concerns, please contact the CAE Center.<br>
 </span>
 """
 
 cae_email_footer = """
 <span style="font-size:8pt; font-weight: bold;">
-CAE Center
-College of Engineering and Applied Sciences
-Western Michigan University
-(269) 276-3283
-ceas_cae@wmich.edu
+CAE Center<br>
+College of Engineering and Applied Sciences<br>
+Western Michigan University<br>
+(269) 276-3283<br>
+ceas_cae@wmich.edu<br>
 </span>
 """
