@@ -1,17 +1,87 @@
 """
 Tests for CAE Home User app Models.
+
+Note: Below "GroupMembershipModelTests" should work in theory.
+    But the model signals don't seem to trigger in UnitTests, which is effectively what is being tested.
+    StackOverflow had some supposed solutions, but they're from old version of Django and no longer seem to work.
+    Fix test at a later date.
 """
 
 # System Imports.
+from django.conf import settings
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import Group
 from django.core.exceptions import ValidationError
 from django.db import transaction
+from django.utils import timezone
 from phonenumber_field.phonenumber import PhoneNumber
 
 # User Class Imports.
 from .. import models
+from cae_home.management.commands.fixtures.user import create_groups
 from cae_home.management.commands.fixtures.wmu import create_departments
 from cae_home.tests.utils import IntegrationTestCase
+
+
+# class GroupMembershipModelTests(IntegrationTestCase):
+#     """
+#     Tests to ensure valid GroupMembership model creation/logic.
+#     """
+#     @classmethod
+#     def setUpTestData(cls):
+#         # Get current date.
+#         cls.now = timezone.localdate()
+#
+#         # Create Auth Group models.
+#         create_groups()
+#
+#         # Set up User model instance.
+#         cls.username = 'test_user'
+#         cls.user = get_user_model().objects.create_user(
+#             cls.username,
+#             '{0}@wmich.edu'.format(cls.username),
+#             cls.username,
+#         )
+#
+#     def test_group_syncing(self, login_user_mock, user_intermediary_mock, wmu_user_mock):
+#         """
+#         Tests GroupMembership model automatically syncing as groups are added to and removed from user models.
+#         """
+#         # Verify we start with no models.
+#         self.assertEqual(0, len(models.GroupMembership.objects.all()))
+#
+#         # Add one group to user and save.
+#         cae_admin_group = Group.objects.get(name='CAE Admin')
+#         self.user.groups.add(cae_admin_group)
+#         self.user.save()
+#
+#         # Verify user group was added.
+#         self.assertIn(cae_admin_group, self.user.groups.all())
+#
+#         # Verify signals were called.
+#         self.assertTrue(login_user_mock.called)
+#         self.assertTrue(user_intermediary_mock.called)
+#         self.assertTrue(wmu_user_mock.called)
+#
+#         # Verify corresponding GroupMembership model was created.
+#         membership_models = models.GroupMembership.objects.all()
+#         print('membership_models: {0}'.format(membership_models))
+#         self.assertTrue(len(membership_models) == 1)
+#         self.assertEqual(membership_models[0].date_joined, self.now)
+#         self.assertEqual(membership_models[0].date_left, None)
+#
+#         # Remove group from user and save.
+#         self.user.groups.remove(cae_admin_group)
+#         self.user.save()
+#
+#         # Verify user group was removed.
+#         self.assertNotIn(cae_admin_group, self.user.groups.all())
+#
+#         # Verify corresponding GroupMembership model was updated.
+#         membership_models = models.GroupMembership.objects.all()
+#         self.assertTrue(len(membership_models) == 1)
+#         self.assertEqual(membership_models[0].date_joined, self.now)
+#         self.assertEqual(membership_models[0].date_left, self.now)
 
 
 class UserIntermediaryModelTests(IntegrationTestCase):
@@ -20,6 +90,9 @@ class UserIntermediaryModelTests(IntegrationTestCase):
     """
     @classmethod
     def setUpTestData(cls):
+        # Create Auth Group models.
+        create_groups()
+
         cls.major = models.Major.create_dummy_model()
         cls.user_type = models.WmuUser.PROFESSOR
 
@@ -173,20 +246,20 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             # Test updating values.
             self.user.first_name = 'Updated first name - User'
             self.user.save()
-            user = models.User.objects.get(username=self.user_bronco_net)
+            self.user = models.User.objects.get(username=self.user_bronco_net)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.user_bronco_net)
 
-            self.assertEqual(user.first_name, 'Updated first name - User')
-            self.assertEqual(user.first_name, user_intermediary.first_name)
+            self.assertEqual(self.user.first_name, 'Updated first name - User')
+            self.assertEqual(self.user.first_name, user_intermediary.first_name)
 
             # Revert back to original values for next tests. While we're at it, verify correctness.
             self.user.first_name = 'Test First'
             self.user.save()
-            user = models.User.objects.get(username=self.user_bronco_net)
+            self.user = models.User.objects.get(username=self.user_bronco_net)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.user_bronco_net)
 
-            self.assertEqual(user.first_name, 'Test First')
-            self.assertEqual(user.first_name, user_intermediary.first_name)
+            self.assertEqual(self.user.first_name, 'Test First')
+            self.assertEqual(self.user.first_name, user_intermediary.first_name)
 
         with self.subTest('Associated with WmuUser model only.'):
             # Verify original values.
@@ -197,20 +270,20 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             # Test updating values.
             self.wmu_user.first_name = 'Updated first name - WmuUser'
             self.wmu_user.save()
-            wmu_user = models.WmuUser.objects.get(bronco_net=self.wmu_user_bronco_net)
+            self.wmu_user = models.WmuUser.objects.get(bronco_net=self.wmu_user_bronco_net)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.wmu_user_bronco_net)
 
-            self.assertEqual(wmu_user.first_name, 'Updated first name - WmuUser')
-            self.assertEqual(wmu_user.first_name, user_intermediary.first_name)
+            self.assertEqual(self.wmu_user.first_name, 'Updated first name - WmuUser')
+            self.assertEqual(self.wmu_user.first_name, user_intermediary.first_name)
 
             # Revert back to original values for next tests. While we're at it, verify correctness.
             self.wmu_user.first_name = 'Test First'
             self.wmu_user.save()
-            wmu_user = models.WmuUser.objects.get(bronco_net=self.wmu_user_bronco_net)
+            self.wmu_user = models.WmuUser.objects.get(bronco_net=self.wmu_user_bronco_net)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.wmu_user_bronco_net)
 
-            self.assertEqual(wmu_user.first_name, 'Test First')
-            self.assertEqual(wmu_user.first_name, user_intermediary.first_name)
+            self.assertEqual(self.wmu_user.first_name, 'Test First')
+            self.assertEqual(self.wmu_user.first_name, user_intermediary.first_name)
 
         with self.subTest('Associated with both User and WmuUser models. Save on User model.'):
             # Verify original values.
@@ -223,13 +296,13 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             # This should fail and keep the same value, because WmuUser gets precedence.
             self.dual_user_1.first_name = 'Updated first name - dual, User'
             self.dual_user_1.save()
-            user = models.User.objects.get(username=self.dual_bronco_net_1)
-            wmu_user = models.WmuUser.objects.get(bronco_net=self.dual_bronco_net_1)
+            self.dual_user_1 = models.User.objects.get(username=self.dual_bronco_net_1)
+            self.dual_wmu_user_1 = models.WmuUser.objects.get(bronco_net=self.dual_bronco_net_1)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
 
-            self.assertEqual(user.first_name, 'Test First')
-            self.assertEqual(user.first_name, user_intermediary.first_name)
-            self.assertEqual(user.first_name, wmu_user.first_name)
+            self.assertEqual(self.dual_user_1.first_name, 'Test First')
+            self.assertEqual(self.dual_user_1.first_name, user_intermediary.first_name)
+            self.assertEqual(self.dual_user_1.first_name, self.dual_wmu_user_1.first_name)
 
         with self.subTest('Associated with both User and WmuUser models. Save on WmuUser model.'):
             # Verify original values.
@@ -241,24 +314,24 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             # Test updating values.
             self.dual_wmu_user_2.first_name = 'Updated first name - dual, WmuUser first'
             self.dual_wmu_user_2.save()
-            user = models.User.objects.get(username=self.dual_bronco_net_2)
-            wmu_user = models.WmuUser.objects.get(bronco_net=self.dual_bronco_net_2)
+            self.dual_user_2 = models.User.objects.get(username=self.dual_bronco_net_2)
+            self.dual_wmu_user_2 = models.WmuUser.objects.get(bronco_net=self.dual_bronco_net_2)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_2)
 
-            self.assertEqual(wmu_user.first_name, 'Updated first name - dual, WmuUser first')
-            self.assertEqual(wmu_user.first_name, user_intermediary.first_name)
-            self.assertEqual(wmu_user.first_name, user.first_name)
+            self.assertEqual(self.dual_wmu_user_2.first_name, 'Updated first name - dual, WmuUser first')
+            self.assertEqual(self.dual_wmu_user_2.first_name, user_intermediary.first_name)
+            self.assertEqual(self.dual_wmu_user_2.first_name, self.dual_user_2.first_name)
 
             # Revert back to original values for next tests. While we're at it, verify correctness.
             self.dual_wmu_user_2.first_name = 'Test First'
             self.dual_wmu_user_2.save()
-            user = models.User.objects.get(username=self.dual_bronco_net_2)
-            wmu_user = models.WmuUser.objects.get(bronco_net=self.dual_bronco_net_2)
+            self.dual_user_2 = models.User.objects.get(username=self.dual_bronco_net_2)
+            self.dual_wmu_user_2 = models.WmuUser.objects.get(bronco_net=self.dual_bronco_net_2)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_2)
 
-            self.assertEqual(wmu_user.first_name, 'Test First')
-            self.assertEqual(wmu_user.first_name, user_intermediary.first_name)
-            self.assertEqual(wmu_user.first_name, user.first_name)
+            self.assertEqual(self.dual_wmu_user_2.first_name, 'Test First')
+            self.assertEqual(self.dual_wmu_user_2.first_name, user_intermediary.first_name)
+            self.assertEqual(self.dual_wmu_user_2.first_name, self.dual_user_2.first_name)
 
     def test_shared_last_name_field(self):
         """
@@ -275,20 +348,20 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             # Test updating values.
             self.user.last_name = 'Updated last name - User'
             self.user.save()
-            user = models.User.objects.get(username=self.user_bronco_net)
+            self.user = models.User.objects.get(username=self.user_bronco_net)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.user_bronco_net)
 
-            self.assertEqual(user.last_name, 'Updated last name - User')
-            self.assertEqual(user.last_name, user_intermediary.last_name)
+            self.assertEqual(self.user.last_name, 'Updated last name - User')
+            self.assertEqual(self.user.last_name, user_intermediary.last_name)
 
             # Revert back to original values for next tests. While we're at it, verify correctness.
             self.user.last_name = 'Test Last'
             self.user.save()
-            user = models.User.objects.get(username=self.user_bronco_net)
+            self.user = models.User.objects.get(username=self.user_bronco_net)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.user_bronco_net)
 
-            self.assertEqual(user.last_name, 'Test Last')
-            self.assertEqual(user.last_name, user_intermediary.last_name)
+            self.assertEqual(self.user.last_name, 'Test Last')
+            self.assertEqual(self.user.last_name, user_intermediary.last_name)
 
         with self.subTest('Associated with WmuUser model only.'):
             # Verify original values.
@@ -299,20 +372,20 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             # Test updating values.
             self.wmu_user.last_name = 'Updated last name - WmuUser'
             self.wmu_user.save()
-            wmu_user = models.WmuUser.objects.get(bronco_net=self.wmu_user_bronco_net)
+            self.mu_user = models.WmuUser.objects.get(bronco_net=self.wmu_user_bronco_net)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.wmu_user_bronco_net)
 
-            self.assertEqual(wmu_user.last_name, 'Updated last name - WmuUser')
-            self.assertEqual(wmu_user.last_name, user_intermediary.last_name)
+            self.assertEqual(self.wmu_user.last_name, 'Updated last name - WmuUser')
+            self.assertEqual(self.wmu_user.last_name, user_intermediary.last_name)
 
             # Revert back to original values for next tests. While we're at it, verify correctness.
             self.wmu_user.last_name = 'Test Last'
             self.wmu_user.save()
-            wmu_user = models.WmuUser.objects.get(bronco_net=self.wmu_user_bronco_net)
+            self.wmu_user = models.WmuUser.objects.get(bronco_net=self.wmu_user_bronco_net)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.wmu_user_bronco_net)
 
-            self.assertEqual(wmu_user.last_name, 'Test Last')
-            self.assertEqual(wmu_user.last_name, user_intermediary.last_name)
+            self.assertEqual(self.wmu_user.last_name, 'Test Last')
+            self.assertEqual(self.wmu_user.last_name, user_intermediary.last_name)
 
         with self.subTest('Associated with both User and WmuUser models. Save on User model.'):
             # Verify original values.
@@ -325,13 +398,13 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             # This should fail and keep the same value, because WmuUser gets precedence.
             self.dual_user_1.last_name = 'Updated last name - dual, User'
             self.dual_user_1.save()
-            user = models.User.objects.get(username=self.dual_bronco_net_1)
-            wmu_user = models.WmuUser.objects.get(bronco_net=self.dual_bronco_net_1)
+            self.dual_user_1 = models.User.objects.get(username=self.dual_bronco_net_1)
+            self.dual_wmu_user_1 = models.WmuUser.objects.get(bronco_net=self.dual_bronco_net_1)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
 
-            self.assertEqual(user.last_name, 'Test Last')
-            self.assertEqual(user.last_name, user_intermediary.last_name)
-            self.assertEqual(user.last_name, wmu_user.last_name)
+            self.assertEqual(self.dual_user_1.last_name, 'Test Last')
+            self.assertEqual(self.dual_user_1.last_name, user_intermediary.last_name)
+            self.assertEqual(self.dual_user_1.last_name, self.dual_wmu_user_1.last_name)
 
         with self.subTest('Associated with both User and WmuUser models. Save on WmuUser model.'):
             # Verify original values.
@@ -343,24 +416,24 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             # Test updating values.
             self.dual_wmu_user_2.last_name = 'Updated last name - dual, WmuUser first'
             self.dual_wmu_user_2.save()
-            user = models.User.objects.get(username=self.dual_bronco_net_2)
-            wmu_user = models.WmuUser.objects.get(bronco_net=self.dual_bronco_net_2)
+            self.dual_user_2 = models.User.objects.get(username=self.dual_bronco_net_2)
+            self.dual_wmu_user_2 = models.WmuUser.objects.get(bronco_net=self.dual_bronco_net_2)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_2)
 
-            self.assertEqual(wmu_user.last_name, 'Updated last name - dual, WmuUser first')
-            self.assertEqual(wmu_user.last_name, user_intermediary.last_name)
-            self.assertEqual(wmu_user.last_name, user.last_name)
+            self.assertEqual(self.dual_wmu_user_2.last_name, 'Updated last name - dual, WmuUser first')
+            self.assertEqual(self.dual_wmu_user_2.last_name, user_intermediary.last_name)
+            self.assertEqual(self.dual_wmu_user_2.last_name, self.dual_user_2.last_name)
 
             # Revert back to original values for next tests. While we're at it, verify correctness.
             self.dual_wmu_user_2.last_name = 'Test Last'
             self.dual_wmu_user_2.save()
-            user = models.User.objects.get(username=self.dual_bronco_net_2)
-            wmu_user = models.WmuUser.objects.get(bronco_net=self.dual_bronco_net_2)
+            self.dual_user_2 = models.User.objects.get(username=self.dual_bronco_net_2)
+            self.dual_wmu_user_2 = models.WmuUser.objects.get(bronco_net=self.dual_bronco_net_2)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_2)
 
-            self.assertEqual(wmu_user.last_name, 'Test Last')
-            self.assertEqual(wmu_user.last_name, user_intermediary.last_name)
-            self.assertEqual(wmu_user.last_name, user.last_name)
+            self.assertEqual(self.dual_wmu_user_2.last_name, 'Test Last')
+            self.assertEqual(self.dual_wmu_user_2.last_name, user_intermediary.last_name)
+            self.assertEqual(self.dual_wmu_user_2.last_name, self.dual_user_2.last_name)
 
     def test_shared_email_field(self):
         """
@@ -755,6 +828,59 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             self.assertTrue(user_intermediary.cae_is_active)
             self.assertTrue(user_intermediary.wmu_is_active)
 
+    def test_user_auth_groups_field(self):
+        """
+        Tests that Group models are updated accordingly, based on is_active UserIntermediary values.
+        """
+        # Get all CAE groups to test.
+        cae_building_coordinator = Group.objects.get(name='CAE Building Coordinator')
+        cae_director = Group.objects.get(name='CAE Director')
+        cae_attendant_group = Group.objects.get(name='CAE Attendant')
+        cae_admin_group = Group.objects.get(name='CAE Admin GA')
+        cae_admin_ga_group = Group.objects.get(name='CAE Admin')
+        cae_programmer_ga_group = Group.objects.get(name='CAE Programmer GA')
+        cae_programmer_group = Group.objects.get(name='CAE Programmer')
+
+        # Get arbitrary non-CAE group to also test. In this case, it's a random STEP Center group.
+        step_group = Group.objects.get(name='STEP Admin')
+
+        # Add all above groups to user, so that we can test removing during is_active toggle.
+        self.user.groups.add(*[
+            cae_building_coordinator,
+            cae_director,
+            cae_attendant_group,
+            cae_admin_ga_group,
+            cae_admin_group,
+            cae_programmer_ga_group,
+            cae_programmer_group,
+            step_group,
+        ])
+        self.user.save()
+
+        # Refresh models from database, so we aren't using cached/memory data.
+        self.user = models.User.objects.get(username=self.user.username)
+
+        # Verify expected groups.
+        user_groups = self.user.groups.all().values_list('name', flat=True)
+        for group_name in settings.CAE_CENTER_GROUPS:
+            self.assertIn(group_name, user_groups)
+        # Also verify non-CAE group membership.
+        self.assertIn(step_group.name, user_groups)
+
+        # Now toggle "cae_is_active" to false. This should remove all CAE groups only.
+        self.user.userintermediary.cae_is_active = False
+        self.user.save()
+
+        # Refresh models from database, so we aren't using cached/memory data.
+        self.user = models.User.objects.get(username=self.user.username)
+
+        # Verify groups have automatically changed.
+        user_groups = self.user.groups.all().values_list('name', flat=True)
+        for group_name in settings.CAE_CENTER_GROUPS:
+            self.assertNotIn(group_name, user_groups)
+        # Also verify non-CAE group membership has remained unchanged.
+        self.assertIn(step_group.name, user_groups)
+
     def test_string_representation_with_user(self):
         self.assertEqual(str(self.test_intermediary_with_user), str(self.test_intermediary_with_user.bronco_net))
 
@@ -977,6 +1103,7 @@ class WmuUserMajorRelationModelTests(IntegrationTestCase):
         self.assertFalse(models.WmuUserMajorRelationship.check_if_user_has_major_active(self.wmu_user_2, self.major_1))
         self.assertFalse(models.WmuUserMajorRelationship.check_if_user_has_major_active(self.wmu_user_1, self.major_2))
         self.assertTrue(models.WmuUserMajorRelationship.check_if_user_has_major_active(self.wmu_user_2, self.major_2))
+
 
 class ProfileModelTests(IntegrationTestCase):
     """
