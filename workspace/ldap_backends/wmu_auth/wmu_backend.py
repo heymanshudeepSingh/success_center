@@ -543,7 +543,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
         # Not sure if raising a ValidationError is the best way to handle this. But it should rarely be an issue,
         # at least. Look into at a later date.
         else:
-            raise ValidationError('Ldap returned None for "{0}"'.format(uid))
+            raise ValidationError('Ldap returned None for "{0}". This is likely a network error.'.format(uid))
 
     def _verify_user_ldap_status(self, uid, ldap_info):
         """
