@@ -55,7 +55,7 @@ class CAEHomeViewTests(IntegrationTestCase):
 
                 # Quickly check template.
                 response = self.client.get(reverse('cae_home:login'), follow=True)
-                self.assertContains(response, 'CAE Center Contact Info')
+                self.assertContains(response, 'Employee Shift Stats')
 
             with self.subTest('Test Login View with CAE Building Coordinator user.'):
                 self.client.login(username='cae_building_coordinator', password='test')
@@ -64,7 +64,7 @@ class CAEHomeViewTests(IntegrationTestCase):
 
                 # Quickly check template.
                 response = self.client.get(reverse('cae_home:login'), follow=True)
-                self.assertContains(response, 'CAE Center Contact Info')
+                self.assertContains(response, 'Employee Shift Stats')
 
             with self.subTest('Test Login View with CAE Attendant user.'):
                 self.client.login(username='cae_attendant', password='test')
@@ -73,7 +73,7 @@ class CAEHomeViewTests(IntegrationTestCase):
 
                 # Quickly check template.
                 response = self.client.get(reverse('cae_home:login'), follow=True)
-                self.assertContains(response, 'CAE Center Contact Info')
+                self.assertContains(response, 'Employee Shift Stats')
 
             with self.subTest('Test Login View with CAE Admin user.'):
                 self.client.login(username='cae_admin', password='test')
@@ -82,7 +82,7 @@ class CAEHomeViewTests(IntegrationTestCase):
 
                 # Quickly check template.
                 response = self.client.get(reverse('cae_home:login'), follow=True)
-                self.assertContains(response, 'CAE Center Contact Info')
+                self.assertContains(response, 'Employee Shift Stats')
 
             if settings.DEV_URLS:
                 # Test in development mode.
@@ -103,7 +103,7 @@ class CAEHomeViewTests(IntegrationTestCase):
 
                     # Quickly check template.
                     response = self.client.get(reverse('cae_home:login'), follow=True)
-                    self.assertContains(response, 'CAE Center Contact Info')
+                    self.assertContains(response, 'Employee Shift Stats')
 
     def test_login_redirect(self):
         """
@@ -123,34 +123,34 @@ class CAEHomeViewTests(IntegrationTestCase):
             with self.subTest('Test Login_Redirect View with CAE Director user.'):
                 self.client.login(username='cae_director', password='test')
                 response = self.client.get(reverse('cae_home:login_redirect'), follow=True)
-                self.assertRedirects(response, reverse('cae_web_core:index'))
+                self.assertRedirects(response, reverse('cae_web_shifts:stats'))
 
                 # Quickly check template.
-                self.assertContains(response, 'CAE Center Contact Info')
+                self.assertContains(response, 'Employee Shift Stats')
 
             with self.subTest('Test Login_Redirect View with CAE Building Coordinator user.'):
                 self.client.login(username='cae_building_coordinator', password='test')
                 response = self.client.get(reverse('cae_home:login_redirect'), follow=True)
-                self.assertRedirects(response, reverse('cae_web_core:index'))
+                self.assertRedirects(response, reverse('cae_web_shifts:stats'))
 
                 # Quickly check template.
-                self.assertContains(response, 'CAE Center Contact Info')
+                self.assertContains(response, 'Employee Shift Stats')
 
             with self.subTest('Test Login_Redirect View with CAE Attendant user.'):
                 self.client.login(username='cae_attendant', password='test')
                 response = self.client.get(reverse('cae_home:login_redirect'), follow=True)
-                self.assertRedirects(response, reverse('cae_web_core:index'))
+                self.assertRedirects(response, reverse('cae_web_shifts:stats'))
 
                 # Quickly check template.
-                self.assertContains(response, 'CAE Center Contact Info')
+                self.assertContains(response, 'Employee Shift Stats')
 
             with self.subTest('Test Login_Redirect View with CAE Admin user.'):
                 self.client.login(username='cae_admin', password='test')
                 response = self.client.get(reverse('cae_home:login_redirect'), follow=True)
-                self.assertRedirects(response, reverse('cae_web_core:index'))
+                self.assertRedirects(response, reverse('cae_web_shifts:stats'))
 
                 # Quickly check template.
-                self.assertContains(response, 'CAE Center Contact Info')
+                self.assertContains(response, 'Employee Shift Stats')
 
             if settings.DEV_URLS:
                 # Test in development mode.
@@ -166,10 +166,10 @@ class CAEHomeViewTests(IntegrationTestCase):
                 with self.subTest('Test Login_Redirect View with CAE Programmer user.'):
                     self.client.login(username='cae_programmer', password='test')
                     response = self.client.get(reverse('cae_home:login_redirect'), follow=True)
-                    self.assertRedirects(response, reverse('cae_web_core:index'))
+                    self.assertRedirects(response, reverse('cae_web_shifts:stats'))
 
                     # Quickly check template.
-                    self.assertContains(response, 'CAE Center Contact Info')
+                    self.assertContains(response, 'Employee Shift Stats')
 
     def test_logout(self):
         """
