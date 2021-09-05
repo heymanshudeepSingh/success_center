@@ -40,6 +40,7 @@ function main () {
     watch="--update"
     compress="--style compressed"
     trace=""
+    hide=false
     css_directories=()
 
     # Determine command format from passed args.
@@ -55,62 +56,65 @@ function main () {
     then
         trace=" --trace"
     fi
-
+    if [[ ${args[@]} =~ "hide" ]]
+    then
+        hide=true
+    fi
 
     # Determine directories to compile.
     for dir in ../*/*/*/* ../*/*/*/*/*/*
     do
         # Check if actually a directory.
-        if [[ -d $dir ]]
+        if [[ -d ${dir} ]]
         then
             # Check if folder name ends in "css".
-            if [[ $dir == *"/css" ]]
+            if [[ ${dir} == *"/css" ]]
             then
                 # Check if watch command was set. Annoyingly, this changes sass syntax.
-                if [[ $watch == "--update" ]]
+                if [[ ${watch} == "--update" ]]
                 then
                     # Check that sass directory exists.
-                    if [[ -d $dir/sass ]]
+                    if [[ -d ${dir}/sass ]]
                     then
                         # Loop through all files in sass subfolder.
-                        for file in $dir/sass/*
+                        for file in ${dir}/sass/*
                         do
                             # Check if actually a file.
-                            if [[ -f $file ]]
+                            if [[ -f ${file} ]]
                             then
                                 # Check that file follows sass compilation file naming convention.
-                                if [[ $file != *"/css/sass/_"*".scss" ]]
+                                if [[ ${file} != *"/css/sass/_"*".scss" ]]
                                 then
                                     # Add file to list of compile locations.
                                     filename=$(basename "${file%.*}")
-                                    css_directories+=("$file:$dir/$filename.css")
+                                    css_directories+=("${file}:${dir}/${filename}.css")
 
                                     # Remove old file before compiling, if present.
-                                    rm -f "$dir/$filename.css" "$dir/$filename.css.map"
+                                    rm -f "${dir}/${filename}.css" "${dir}/${filename}.css.map"
                                 fi
                             fi
                         done
                     fi
                 else
                     # Check that sass directory exists.
-                    if [[ -d $dir/sass ]]
+                    if [[ -d ${dir}/sass ]]
                     then
                         # Add directory to list of compile locations.
-                        css_directories+=("$dir/sass:$dir")
+                        css_directories+=("${dir}/sass:${dir}")
 
                         # Loop through all files in sass subfolder.
-                        for file in $dir/sass/*
+                        for file in ${dir}/sass/*
                         do
                             # Check if actually a file.
-                            if [[ -f $file ]]
+                            if [[ -f ${file} ]]
                             then
                                 # Check that file follows sass compilation file naming convention.
-                                if [[ $file != *"/css/sass/_"*".scss" ]]
+                                if [[ ${file} != *"/css/sass/_"*".scss" ]]
                                 then
                                     filename=$(basename "${file%.*}")
 
                                     # Remove old file before compiling, if present.
-                                    rm -f "$dir/$filename.css" "$dir/$filename.css.map"
+                                    rm -f "${dir}/${filename}.css" "${dir}/${filename}.css.map"
                                 fi
                             fi
                         done
@@ -120,25 +124,25 @@ function main () {
         fi
     done
 
-    if [[ -z $watch ]]
+    if [[ -z ${watch} ]]
     then
         watch=
     fi
 
     # Combine variables to create command.
-    command="sass $watch ${css_directories[*]} $compress $trace"
+    command="sass ${watch} ${css_directories[*]} ${compress} ${trace}"
 
     # Handle based on if "hide" arg was passed or not.
-    if [[ ${args[@]} =~ "hide" ]]
+    if [[ ${hide} == true ]]
     then
-        # Hide arg passed.
+        # Hide arg passed. Do not show output.
         echo -e "${color_blue}Compiling CSS files...${color_reset}"
-        $command > /dev/null
+        ${command} > /dev/null
     else
         # Display full stdout.
         echo -e "${color_blue}Running command:${color_reset}"
-        echo $command
-        $command
+        echo ${command}
+        ${command}
         echo ""
     fi
 }
