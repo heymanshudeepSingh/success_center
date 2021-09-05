@@ -424,7 +424,7 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
     def assertResponse(
         self,
         url, expected_title, *args,
-        user=None, get=False, data=None, status=200, expected_redirect_url=None, expected_messages=None,
+        get=False, user=None, data=None, status=200, expected_redirect_url=None, expected_messages=None,
         expected_content=None, **kwargs,
     ):
         """
@@ -465,7 +465,7 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
             response = self.client.post(url, data=data, follow=True)
 
         # Get response content and context. We have both trimmed, to have contain whitespace data and no newlines.
-        response_content = self.get_response_content(response)
+        response_content = self.get_minimized_response_content(response)
 
         # Handle debug printing.
         if self._debug_print:
@@ -513,57 +513,10 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
             self.assertEqual(expected_title, actual_title, 'Incorrect Page Title')
 
         # Check expected messages for page.
-        if 'messages' not in response.context or len(response.context['messages']) == 0:
-            # No message data found in response.
-            if len(expected_messages) > 0:
-                # One or more messages were expected. Print out data and raise error.
-                print('Expected Messages:')
-                if isinstance(expected_messages, list) or isinstance(expected_messages, tuple):
-                    for expected_message in expected_messages:
-                        print('    {0}'.format(expected_message))
-                else:
-                    print('    {0}'.format(expected_messages))
-
-                err_msg = 'No messages found in response, yet messages were expected.'
-                print(err_msg)
-                raise ValueError(err_msg)
-
-        else:
-            # Message data found in response. Gather into easy to compare list format.
-            temp_msg_data = response.context['messages']
-            response_messages = []
-            for response_message in temp_msg_data:
-                response_messages.append(response_message.message)
-
-            if expected_messages is None or len(expected_messages) == 0:
-                # No messages were expected. Print out data and raise error.
-                print('Response Messages:')
-                for response_message in response_messages:
-                    print('    {0}'.format(response_message))
-
-                err_msg = 'No messages were expected, yet messages found in response.'
-                print(err_msg)
-                raise ValueError(err_msg)
-
-            else:
-                # Messages were expected and also found in response. Compare values.
-                if isinstance(expected_messages, list) or isinstance(expected_messages, tuple):
-                    # Is list of messages. Check all.
-                    for expected_message in expected_messages:
-                        self.assertIn(expected_message, response_messages)
-
-                elif expected_messages:
-                    # Is likely single message. Check if exists in response message data.
-                    self.assertIn(expected_messages, response_messages)
+        self.assertPageMessages(response, expected_messages)
 
         # Check expected context for page.
-        if isinstance(expected_content, list) or isinstance(expected_content, tuple):
-            # Is list of context items. Check all.
-            for expected_value in expected_content:
-                self.assertPageContent(response, expected_value)
-        elif expected_content is not None:
-            # Is likely single context item. Check if exists in response.
-            self.assertPageContent(response, str(expected_content))
+        self.assertPageContent(response, expected_content)
 
         # All assertions passed so far. Return found page response.
         return response
@@ -643,6 +596,59 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
             **kwargs,
         )
 
+    def assertPageMessages(self, response, expected_messages):
+        """
+        Asserts that the given expected_messages text is found in the response "messages" context variable.
+
+        Note that this function does not care if messages exist in response, but are not in the expected_messages value.
+        It only cares if we pass expected_messages values which do not show up in the response.
+        """
+        if 'messages' not in response.context or len(response.context['messages']) == 0:
+            # No message data found in response.
+
+            # Verify expected messages is empty.
+            if len(expected_messages) > 0:
+                # One or more messages were expected. Print out data and raise error.
+                print('Expected Messages:')
+                if isinstance(expected_messages, list) or isinstance(expected_messages, tuple):
+                    for expected_message in expected_messages:
+                        print('    {0}'.format(expected_message))
+                else:
+                    print('    {0}'.format(expected_messages))
+
+                err_msg = 'No messages found in response, yet messages were expected.'
+                print(err_msg)
+                raise ValueError(err_msg)
+
+        else:
+            # Message data found in response. Gather into easy to compare list format.
+            if expected_messages is not None and len(expected_messages) > 0:
+                # One or more values in expected_messages param. Compare data.
+
+                # First parse data from response context.
+                temp_msg_data = response.context['messages']
+                response_messages = []
+                for response_message in temp_msg_data:
+                    response_messages.append(response_message.message)
+
+                # Compare values.
+                if isinstance(expected_messages, list) or isinstance(expected_messages, tuple):
+                    # Is list of messages. Check all.
+                    for expected_message in expected_messages:
+                        self.assertIn(
+                            expected_message,
+                            response_messages,
+                            'Could not find message "{0}" in response.'.format(expected_message),
+                        )
+
+                elif expected_messages:
+                    # Is likely single message. Check if exists in response message data.
+                    self.assertIn(
+                        expected_messages,
+                        response_messages,
+                        'Could not find message "{0}" in response.'.format(expected_messages),
+                    )
+
     def assertPageContent(self, response, expected_content):
         """
         Behaves similar to default assertContains() function.
@@ -651,21 +657,53 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
 
         This custom assertion accounts for that, by taking the "expected_content" variable, and replaces all spaces with
         regex whitespace matches.
-        :param response:
+        :param response: Page response to compare against.
         :param expected_content: Expected value to find on page
         """
+        # Check if expected_content exists.
+        if expected_content is not None and len(expected_content) > 0:
+            # Value expected_content exists. Attempt to search for content.
+
+            # Replace page contents with minimized equivalent from get_minimized_response_content() function.
+            response_content = self.get_minimized_response_content(response)
+
+            if isinstance(expected_content, list) or isinstance(expected_content, tuple):
+                # Is list of context items. Check all.
+
+                # Loop through all items to verify.
+                for expected_value in expected_content:
+                    self._assertPageContent(response_content, expected_value)
+            else:
+                # Is likely single context item. Check if exists in response.
+                self._assertPageContent(response_content, str(expected_content))
+
+    def _assertPageContent(self, response, expected_content):
+        """
+        Inner call for assertPageContent function.
+
+        Guarantees that behavior is the same, regardless of single value comparison or array comparison.
+        """
+        # Save original value for error output, on failure.
         orig_expected_content = expected_content
 
-        # Replace html linebreak with actual newline character.
-        expected_content = re.sub('<br>|</br>', '\n', expected_content)
+        # Ensure expected value is a string.
+        expected_content = str(expected_content)
 
-        # Replace any special characters, to prevent unexpected errors in comparison.
-        # Not currently used, but left for debugging purposes. Uncomment to escape known special regex characters.
-        # expected_content = self.escape_special_regex_chars(expected_content)
+        # Format expected_content value for easier, more programmatic comparison.
+        # Replace html linebreak with newline character equivalent.
+        expected_content = re.sub(r'(<br>|</br>|<br/>|<br />)+', '\n', expected_content)
+
+        # Replace html non-break spaces with character equivalent.
+        expected_content = re.sub(r'&nbsp;', ' ', expected_content)
 
         # Reduce any whitespace (including repeated whitespace) down to a single space.
-        expected_content = re.sub(r'(\s)+', ' ', expected_content)
+        expected_content = re.sub(r'((\s)+)', ' ', expected_content)
 
+        # Escape dollar sign and up carrot. See get_minimized_response_content() description for more info.
+        expected_content = re.sub(r'\$', '&#36;', expected_content)
+        expected_content = re.sub(r'\^', '&#94;', expected_content)
+
+        # Convert expected_content value to regex, for more dynamic comparison.
         # Split on spaces, to convert to regex.
         expected_content_split = expected_content.split(' ')
 
@@ -679,7 +717,7 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
             expected_content += r'((\s)*)'
 
         # Get trimmed response content to compare against.
-        response_content = self.get_response_content(response)
+        response_content = self.get_minimized_response_content(response)
 
         # Escape any regex special characters, to prevent unexpected errors/mismatches.
         # Not currently used, but left for debugging purposes. Uncomment to escape known special regex characters.
@@ -704,7 +742,6 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
         :param title: Expected page title. This is what displays on the browser tab.
         :param whitelist_users: User(s) that should be able to access view. Should result in anything except login
                                 redirect, 403, or 404.
-        :param user: User to login with. If None, then tests response when not logged in.
         :param data: Optional POST data to sent to page. Should be in dictionary format.
         :param status: Expected status code for page, after redirections. Defaults to 200.
         :param expected_redirect_url: Optional url if page is expected to redirect. This should be what it redirects to.
@@ -810,7 +847,6 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
         :param title: Expected page title. This is what displays on the browser tab.
         :param blacklist_users: User(s) that should NOT be able to access view. Should result in either login redirect,
                                 403, or 404.
-        :param user: User to login with. If None, then tests response when not logged in.
         :param data: Optional POST data to sent to page. Should be in dictionary format.
         :param status: Expected status code for page, after redirections. Defaults to 200.
         :param expected_redirect_url: Optional url if page is expected to redirect. This should be what it redirects to.
@@ -902,9 +938,10 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
             if status:
                 self.assertEqual(response.status_code, status)
 
-    def get_response_content(self, response):
+    def get_minimized_response_content(self, response):
         """
-        Returns response content, but stripped to have no newline characters.
+        Returns response content, but stripped to be much more minimal, while otherwise equivalent.
+        For example, this trims all newline characters and repeating spaces.
 
         Note that the above, module-level debug_response_content() function has a similar purpose, but trims much less
         thoroughly. We use a more thorough version here, because it's less human-readable but better for matching direct
@@ -913,10 +950,18 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
         :return: Trimmed response content.
         """
         # Get base response content.
-        response_content = response.content.decode('utf-8')
+        if isinstance(response, str):
+            # Is str. Assume is already the decoded response content value.
+            response_content = response
+        else:
+            # Not a str. Assume we need to parse the decoded response content value.
+            response_content = response.content.decode('utf-8')
 
         # Replace html linebreak with actual newline character.
-        response_content = re.sub('<br>|</br>', '\n', response_content)
+        response_content = re.sub('<br>|</br>|<br/>|<br />', '\n', response_content)
+
+        # Replace html non-break spaces with actual space character.
+        response_content = re.sub('(&nbsp;)+', ' ', response_content)
 
         # Replace any whitespace trapped between newline characters.
         # This is empty/dead space, likely generated by how Django handles templating.
@@ -928,27 +973,47 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
         # Replace any repeating whitespace characters.
         response_content = re.sub(r'(\s)+', ' ', response_content)
 
+        # Convert any special characters back down to what we would expect.
+        # For example, Django form errors seem to auto-escape apostrophe (') characters to the html code.
+        # This is not very intuitive when testing and likely to lead to confusion/wasted time troubleshooting.
+        # For some reason, Django seems to convert to hex version, so we need to account for those too.
+        # Thus, search values are:  ( decimal_equivalent | hex_equivalent | english_equivalent ).
+        response_content = re.sub(r'(&#39;|&#x27;|&apos;)', "'", response_content)  # Apostrophe character.
+        response_content = re.sub(r'(&#34;|&#x22;|&quot;)', '"', response_content)  # Quotation character.
+        response_content = re.sub(r'(&#60;|&#x3c;|&lt;)', '<', response_content)  # Opening bracket character.
+        response_content = re.sub(r'(&#62;|&#x3e;|&gt;)', '>', response_content)  # Closing bracket character.
+        response_content = re.sub(r'(&#91;|&#x5b;|&lbrack;)', '[', response_content)  # Opening array bracket character.
+        response_content = re.sub(r'(&#93;|&#x5d;|&rbrack;)', ']', response_content)  # Closing array bracket character.
+        response_content = re.sub(r'(&#123;|&#x7b;|&lbrace;)', '{', response_content)  # Opening dict bracket character.
+        response_content = re.sub(r'(&#125;|&#x7d;|&rbrace;)', '}', response_content)  # Closing dict bracket character.
+
+        # Special handling for dollar. The standard dollar sign breaks our regex search so we have to escape it.
+        # Thus, we swap the "decimal_equivalent" and standard symbol values.
+        response_content = re.sub(r'(\$|&#x24;|&dollar;)', '&#36;', response_content)  # Closing dict bracket character.
+
+        # Similar handling for up-carrot as we do with dollar sign (above).
+        response_content = re.sub(r'(\^|&#x5e;|&Hat;)', '&#94;', response_content)  # Closing dict bracket character.
+
         # Remove any whitespace directly before an opening html bracket ( < ).
         response_content = re.sub(r'((\s)+)<', '<', response_content)
 
         # Remove any whitespace directly after a closing html bracket ( > ).
         response_content = re.sub(r'>((\s)+)', '>', response_content)
 
-        # Remove any whitespace around an opening array bracket ( [ ). Also accounts for possible html code version.
+        # Remove any whitespace around an opening array bracket ( [ ).
         response_content = re.sub(r'((\s)*)\[((\s)*)', '[', response_content)
-        response_content = re.sub(r'((\s)*)&#91;((\s)*)', '&#91;', response_content)
 
-        # Remove any whitespace around a closing array bracket ( ] ). Also accounts for possible html code version.
+        # Remove any whitespace around a closing array bracket ( ] ).
         response_content = re.sub(r'((\s)*)]((\s)*)', ']', response_content)
-        response_content = re.sub(r'((\s)*)&#93;((\s)*)', '&#93;', response_content)
 
-        # Remove any whitespace around an opening dict bracket ( { ). Also accounts for possible html code version.
+        # Remove any whitespace around an opening dict bracket ( { ).
         response_content = re.sub(r'((\s)*){((\s)*)', '{', response_content)
-        response_content = re.sub(r'((\s)*)&#123;((\s)*)', '&#123;', response_content)
 
-        # Remove any whitespace around a closing dict bracket ( } ). Also accounts for possible html code version.
+        # Remove any whitespace around a closing dict bracket ( } ).
         response_content = re.sub(r'((\s)*)}((\s)*)', '}', response_content)
-        return re.sub(r'((\s)*)&#125;((\s)*)', '&#125;', response_content)
+
+        # Return minimized content value.
+        return response_content
 
     def get_page_title(self, response_content):
         """
