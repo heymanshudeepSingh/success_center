@@ -50,6 +50,9 @@ pytest-django
 pytest-xdist
 # Testing with an actual browser, to test JavaScript.
 selenium
+# Allows running UnitTests with specific datetime values.
+# Otherwise some dynamic datetime content is a pain to test correctly.
+freezegun
 
 
 
