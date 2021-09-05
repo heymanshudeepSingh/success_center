@@ -445,6 +445,10 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
         expected_messages = expected_messages or []
         expected_content = expected_content or []
 
+        # Validate data types.
+        if not isinstance(data, dict):
+            raise TypeError('Provided "data" arg must be a dict, for passing into POST request.')
+
         # Handle user.
         if user is not None:
             # Get corresponding User model and login.
@@ -615,6 +619,15 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
         :param expected_content: Expected context to see on page. Can be text or html elements.
         :return: The page response object, generated from the request.
         """
+        # Handle mutable data defaults.
+        data = data or {}
+
+        # Forcibly add values to "data" dict, so that POST doesn't validate to empty in view.
+        # This guarantees that view serves as POST, like this specific assertion expects.
+        if data == {}:
+            # Has no values. Forcibly add a single key-value pair.
+            data = {'UnitTest': True}
+
         # Call base function to handle actual logic.
         return self.assertResponse(
             url,
