@@ -9,7 +9,6 @@ from django.shortcuts import redirect
 from django.template.response import TemplateResponse
 
 # User Imports.
-from . import cae_employee_groups, step_employee_groups
 from cae_home import forms
 from workspace import logging as init_logging
 
@@ -58,13 +57,13 @@ def login_redirect(request):
 
         # Check if CAE Center employee.
         if 'cae_web' in settings.INSTALLED_CAE_PROJECTS:
-            for cae_group in cae_employee_groups:
+            for cae_group in settings.CAE_CENTER_GROUPS:
                 if cae_group in user_groups:
                     return redirect('cae_web_shifts:stats')
 
         # Check if STEP (Success Center) employee.
         if 'success_center' in settings.INSTALLED_CAE_PROJECTS:
-            for step_group in step_employee_groups:
+            for step_group in settings.SUCCESS_CENTER_GROUPS:
                 if step_group in user_groups:
                     return redirect('success_center_core:index')
 
@@ -102,14 +101,14 @@ def logout(request):
 
         # Check if CAE Center employee.
         if not url_set and 'cae_web' in settings.INSTALLED_CAE_PROJECTS:
-            for cae_group in cae_employee_groups:
+            for cae_group in settings.CAE_CENTER_GROUPS:
                 if cae_group in user_groups:
                     logout_redirect_url = redirect('cae_web_core:index')
                     url_set = True
 
         # Check if STEP (Success Center) employee.
         if not url_set and 'success_center' in settings.INSTALLED_CAE_PROJECTS:
-            for step_group in step_employee_groups:
+            for step_group in settings.SUCCESS_CENTER_GROUPS:
                 if step_group in user_groups:
                     logout_redirect_url = redirect('success_center_core:index')
                     url_set = True

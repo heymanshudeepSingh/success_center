@@ -4,21 +4,6 @@ Views for CAE Home app.
 Split up into separate files for organization. Imported here.
 """
 
-# CAE Center specific User Group names.
-cae_employee_groups = [
-    'CAE Director',
-    'CAE Building Coordinator',
-    'CAE Attendant',
-    'CAE Admin',
-    'CAE Programmer',
-]
-
-# STEP specific User Group names.
-step_employee_groups = [
-    'STEP Admin',
-    'STEP Employee',
-]
-
 # Debug views.
 from .debug_views import index
 from .debug_views import internal_dev_index
