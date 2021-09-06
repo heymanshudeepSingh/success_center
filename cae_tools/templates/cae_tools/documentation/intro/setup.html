@@ -1,0 +1,65 @@
+{% extends 'cae_tools/documentation/intro/main.html' %}
+{% load static %}
+
+
+{% block title_page_name %}Setup | {{ block.super }}{% endblock title_page_name %}
+
+
+{% block content %}
+  {{ block.super }}
+
+  <h3>Setting up the "CAE Workspace"</h3>
+  <p>
+    As mentioned, the CAE Workspace project doesn't necessarily do a whole lot by itself. Instead, it's explicitly
+    designed to let other projects hook into it, often referred to as "subprojects".
+  </p>
+  <p>
+    These "subprojects" are Django projects housed within completely separate git repositories. They are put in the
+    <span class="highlight code">&#60;workspace_root&#62;/apps/</span> folder.
+  </p>
+
+  <h3>Example Subproject Setup</h3>
+  <article class="color">
+    <p>
+      Let's say, for example, we're creating a new subproject to hook into CAE Workspace. This new theoretical
+      subproject is called <span class="highlight primary">WMU_Web</span>.
+    </p>
+
+    <h4>Creating WMU_Web</h4>
+    <p>
+      To get started, we need to create our subproject.
+    </p>
+    <p>
+      CAE Workspace has a mostly-automated means of hooking into subprojects. However, one requirement is that each
+      found subproject has an app of the same name, plus "_core" appended to it. So in the case of our hypothetical
+      <span class="highlight primary">WMU_Web</span> subproject, we'd want a directory structure of
+      <span class="highlight code">&#60;workspace_root&#62;/apps/WMU_Web/wmu_web_core/</span>, where WMU_Web is our
+      subproject, and wmu_web_core is a Django app within our WMU_Web subproject.
+    </p>
+    <p>
+      So in this case, we use the
+      <a href="{% url 'cae_tools:documentation_intro_managepy' %}">Workspace manage.py</a> to run
+      <span class="highlight code">python manage.py startapp wmu_web_core</span>.
+    </p>
+    <p>
+      We then create a new folder called "WMU_Web" in our project apps/ folder. And then move the new wmu_web_core
+      folder, such that we have the directory structure of
+      <span class="highlight code">&#60;workspace_root&#62;/apps/WMU_Web/wmu_web_core/</span>.
+    </p>
+
+    <h4>Updating "Allowed Apps"</h4>
+    <p>
+      There's one more step that needs to be taken before Workspace will recognize this new subproject.
+    </p>
+    <p>
+      Open up <span class="highlight code">&#60;workspace_root&#62;/workspace/settings/allowed_apps.py</span>. Near the
+      top of this file should be an <span class="highlight primary">ALLOWED_CAE_PROJECTS</span> dictionary.
+    </p>
+    <p>
+      Following the provided examples, we'll want to add a new entry for the WMU_Web subproject we just created. If it's
+      done correctly, then running <span class="highlight code">python manage.py runserver</span> should now display
+      output about our new subproject.
+    </p>
+
+  </article>
+{% endblock content %}

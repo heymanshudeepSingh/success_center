@@ -1,0 +1,62 @@
+{% extends 'cae_tools/documentation/intro/main.html' %}
+{% load static %}
+
+
+{% block title_page_name %}Virtual Environments | {{ block.super }}{% endblock title_page_name %}
+
+
+{% block content %}
+  {{ block.super }}
+
+  <h3>Python Virtual Environments</h3>
+  <p>
+    A "Python Virtual Environment" (often called "virtual environment" or "venv") is basically a sandboxed instance of
+    Python, with its own dependencies and files.
+  </p>
+  <p>
+    The main point is to help manage when you work with multiple Python projects. It helps with dependency management,
+    to help when one project's dependencies conflict with another project. Instead of conflicting, a virtual environment
+    will keep the dependencies entirely separate, so conflicts are avoided entirely.
+  </p>
+  <p>
+    Depending on your personal preference, you can either have multiple projects for each venv, or more commonly,
+    just have a separate venv at the root of each project.
+  </p>
+
+  <h3>CAE Helper Script</h3>
+  <p>
+    The CAE Center creates separate virtual environments at the root of each project. Thus, we have a
+    <a href="https://git.ceas.wmich.edu/Python/ExampleProjects/virtual_environments">helper bash script</a> which will
+    automatically load and unload virtual environments as you navigate with your terminal.
+  </p>
+  <p>
+    The behavior is to search for any instances of folders called <span class="highlight code">.venv</span>. If such a
+    folder is found, and is also a valid Python virtual environment, then it will automatically be loaded. This venv
+    will stay loaded until the user either moves back up-and-out of the root folder, or until another venv is found
+    in a child folder. Note that means the environment will stay loaded so long as the terminal is within the
+    root folder where the venv was found, or within a subfolder thereof.
+  </p>
+  <p>
+    The script is called <span class="highlight code">helper_script.sh</span>. To use it, copy the contents into your
+    local user <span class="highlight code">.bashrc</span> file. Then restart your terminal.
+  </p>
+
+  <h3>Workspace and Virtual Environments</h3>
+  <p>
+    Similar to <a href="{% url 'cae_tools:documentation_intro_managepy' %}">manage.py files</a>, there is no benefit for
+    a single project to have multiple virtual environments.
+  </p>
+  <p>
+    Thus, in regards to the CAE Workspace project, there is no reason to have a venv within subprojects. If anything,
+    that will only complicate your local workflow and make project management more difficult.
+  </p>
+  <p>
+    Instead, if you're making a venv within the Workspace folders, then you should probably only have one that exists
+    in the root Workspace project directory.
+  </p>
+  <p>Note that if you run installation via provided
+    <a href="{% url 'cae_tools:documentation_intro_helper_scripts' %}">project helper scripts</a>, then project virtual
+    environment is taken care of for you.
+  </p>
+
+{% endblock content %}

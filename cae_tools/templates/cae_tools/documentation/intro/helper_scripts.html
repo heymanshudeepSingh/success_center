@@ -1,0 +1,94 @@
+{% extends 'cae_tools/documentation/intro/main.html' %}
+{% load static %}
+
+
+{% block title_page_name %}Helper Scripts | {{ block.super }}{% endblock title_page_name %}
+
+
+{% block content %}
+  {{ block.super }}
+
+  <h3>Helper Scripts</h3>
+  <p>
+    CAE Workspace comes with various Bash scripts, meant to help manage the project and take care of annoying, or
+    repetitive tasks. These scripts are all found in the
+    <span class="highlight code">&#60;workspace_root&#62;/scripts/</span> folder.
+  </p>
+  <p>
+    To make it easy to use these scripts, a "run.sh" file is provided at the root of this scripts folder. This file can
+    execute all subscripts contained within. Simply run
+    <span class="highlight code">&#60;workspace_root&#62;/scripts/run.sh</span> in a terminal, to see the list of
+    all possible scripts that the CAE Workspace project provides.
+  </p>
+  <p>Having said that, the more notable scripts are described below:</p>
+
+  <h3>Installation Script</h3>
+  <p>
+    Over time, CAE Workspace has become larger than was originally anticipated. As result of any larger project, it has
+    a myriad of dependencies and initial setup, before it can be used.
+  </p>
+  <p>
+    To simplify the process, an installation script is provided. It can be run with
+    <span class="highlight primary">&#60;workspace_root&#62;/scripts/run.sh install</span>.
+  </p>
+  <p>
+    This script will provide several prompts, to make sure installation is handled properly for your machine. Depending
+    on the speed of your machine, it may take between 2 and 20 minutes to run. Any longer than that, and it has likely
+    hung up.
+  </p>
+  <p>
+    Note: If you're reading this, then you likely already ran this script. If you have not, then your system might not
+    be 100% properly set up to run CAE Workspace and associated subprojects. It might be best to stop what you're doing
+    and go run the script now.
+  </p>
+
+  <h3>Reset Database Script</h3>
+  <p>
+    Due to the nature of web development, you're likely to run into an instance where you're creating or updating
+    models, and constantly need to refresh the database.
+  </p>
+  <p>
+    To help with this, a "reset database" script is provided. It can be run with
+    <span class="highlight code">&#60;workspace_root&#62;/scripts/run.sh reset_db</span>.
+  </p>
+  <p>
+    Assuming you're using SQLite (this is the project default), then this script will clear out the database, recreate
+    it from scratch (including project migrations), and populate all CAE Workspace project models (including models for
+    any found subprojects). The script also runs the custom
+    <a href="{% url 'cae_tools:documentation_intro_managepy' %}">manage.py</a>
+    <span class="highlight primary">seed</span> command, which will automatically populate test data for most models
+    in the project.
+  </p>
+  <div class="alert warn">
+    <p>
+      Warning: This script is not smart enough to "clear and reset" any database types other than SQLite. Beware that if
+      you're using any other database, your data will NOT be cleared out. Normally this isn't a problem, but may lead to
+      errors if you're actively editing a model, and wish to reset for rerunning new migrations.
+    </p>
+  </div>
+
+  <h3>Compile CSS/JS Scripts</h3>
+  <p>
+    If you're actively working on project CSS of JavaScript (particularly React), then you'll likely have to compile
+    your code, so that it's in a browser-friendly format. Note that you will also have to recompile your SASS/React code
+    every time you make any changes.
+  </p>
+  <p>
+    The <span class="highlight primary">compile_css</span> and <span class="highlight primary">compile_js</span>
+    commands will take care of this for you, including for all found subprojects. However, these scripts are not
+    all-knowing, and thus only check for css/js files in the expected locations.
+  </p>
+  <p>
+    Thus, for SASS (see the <a href="{% url 'cae_tools:documentation_css_general' %}">CSS docs</a> for why we use SASS),
+    the expected location is <span class="highlight code">&#60;app_name&#62;/static/&#60;app_name&#62;/css/sass/</span>
+  </p>
+  <p>
+    For JavaScript, the expected location is
+    <span class="highlight code">&#60;app_name&#62;/static/&#60;app_name&#62;/js/</span>.
+  </p>
+  <p>
+    For React, the expected location is
+    <span class="highlight code">&#60;app_name&#62;/static/&#60;app_name&#62;/js/react/</span>.
+  </p>
+
+{% endblock content %}

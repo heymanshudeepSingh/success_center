@@ -13,16 +13,29 @@
 {% block content %}
   <h1>Custom Project Logic Documentation</h1>
   <p>
+    We opted to put project documentation here to ensure that everyone who has access to CAE Workspace is able to access
+    this documentation.
+  </p>
+  <p>
     Here, we describe all the various ways in which the <span class="highlight primary">CAE Workspace</span> project is
     unique compared to a standard <span class="highlight primary">Django</span> project. This includes all the provided
     additional and custom functionality, as well as notes of related quirks.
   </p>
-  <p>
-    We opted to put project documentation here, rather than our internal wiki, to ensure that everyone who has access
-    to CAE Workspace is able to access this documentation.
-  </p>
 
   <br>
+
+  <p>
+    Note: Django does provide <a href="https://docs.djangoproject.com/en/dev/">DjangoDocs</a> as a reference for using
+    the Django framework in general. However, it can be a bit verbose and confusing for those new to the Django
+    framework.
+  </p>
+  <p>
+    For more simplified examples and logic that is standard to Django itself, see these
+    <a href="https://drive.google.com/drive/folders/1ZXxataXewDifJfUas_j7eZcklmpSrPt-?usp=sharing">GoogleDocs powerpoints</a>.
+  </p>
+
+  <hr>
+
   <p>
     Documentation links for custom CAE Workspace logic is as follows:
   </p>
@@ -30,6 +43,17 @@
     <li>
       <p>Setup and Project Core</p>
       <ul>
+        <li>
+          <p>Introduction</p>
+          <ul>
+            <li><a href="{% url 'cae_tools:documentation_intro_first_steps' %}">First Steps</a></li>
+            <li><a href="{% url 'cae_tools:documentation_introduction' %}">Introduction to "CAE Workspace"</a></li>
+            <li><a href="{% url 'cae_tools:documentation_intro_setup' %}">General Project Setup</a></li>
+            <li><a href="{% url 'cae_tools:documentation_intro_virtual_environments' %}">Python Virtual environments</a></li>
+            <li><a href="{% url 'cae_tools:documentation_intro_managepy' %}">The "manage.py" File</a></li>
+            <li><a href="{% url 'cae_tools:documentation_intro_helper_scripts' %}">Helper Scripts</a></li>
+          </ul>
+        </li>
         <li>
           <p>Project Settings</p>
           <ul>
@@ -59,6 +83,8 @@
       </ul>
     </li>
 
+    <br>
+
     <li>
       <p>Front End</p>
       <ul>
@@ -79,6 +105,8 @@
       </ul>
     </li>
 
+    <br>
+
     <li>
       <p>Back End</p>
       <ul>
@@ -91,7 +119,6 @@
   <br>
   <p>Todo:</p>
   <ul>
-    <li><a href="{% url 'cae_tools:documentation_general_setup' %}">General Setup</a></li>
     <li><a href="{% url 'cae_tools:documentation_middleware' %}">Middleware</a></li>
     <li><a href="{% url 'cae_tools:documentation_models' %}">Models</a></li>
     <li><a href="{% url 'cae_tools:documentation_seeds_and_fixtures' %}">Seeds and Fixture</a></li>

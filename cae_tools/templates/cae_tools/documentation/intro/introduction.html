@@ -1,0 +1,43 @@
+{% extends 'cae_tools/documentation/intro/main.html' %}
+{% load static %}
+
+
+{% block title_page_name %}Introduction | {% endblock title_page_name %}
+
+
+{% block content %}
+  <h2>Introduction to the "CAE Workspace"</h2>
+
+  <h3>Preface</h3>
+  <p>
+    The CAE Center is responsible for managing multiple, unrelated workflows and projects for Western Michigan
+    University.
+  </p>
+  <p>
+    Previously, this was done in the form of multiple websites. Each one had their own HTML, CSS, models, logins,
+    authentication, templating, etc. However, as responsibilities gradually increased, CAE Programmers found themselves
+    spending a large amount of time having to effectively rewrite the same code for more and more individual websites.
+  </p>
+  <p>
+    Eventually, the CAE Center decided to consolidate everything, so that only one set of "basic templating" needed
+    to be maintained for CSS, models, authentication, etc. Hence, the CAE Workspace was born.
+  </p>
+
+  <h3>Purpose of the "Workspace" Project</h3>
+  <p>
+    The goal of "CAE Workspace" is to effectively take care of all possible "universal logic", in one single location.
+  </p>
+  <p>
+    This includes anything that is not unique to any single project maintained by the CAE Center. Such as HTML and CSS,
+    login handling and user authentication, general WMU models such as "Majors" and "Departments", etc.
+  </p>
+  <p>
+    As result, Workspace itself doesn't exactly...do a whole lot, on its own. But it provides many, many hooks and
+    generalized logic, in hopes of making it simpler to develop various "subprojects". These "subproject" will also be
+    more uniform and consistent in how they handle.
+  </p>
+  <p>
+    For further information on subproject usage and setup, see
+    <a href="{% url 'cae_tools:documentation_intro_setup' %}">General Project Setup</a>.
+  </p>
+{% endblock content %}

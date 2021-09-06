@@ -1,0 +1,63 @@
+{% extends 'cae_tools/documentation/intro/main.html' %}
+{% load static %}
+
+
+{% block title_page_name %}Manage.py | {{ block.super }}{% endblock title_page_name %}
+
+
+{% block content %}
+  {{ block.super }}
+
+  <h3>The "manage.py" File</h3>
+  <p>
+    All Django projects come with a <span class="highlight primary">manage.py</span> file at project root. In short,
+    this file effectively acts as the "entrypoint" for any Django project.
+  </p>
+  <p>
+    For example, <span class="highlight primary">manage.py</span> can be used to:
+  </p>
+  <ul>
+    <li>Create new <a href="https://docs.djangoproject.com/en/dev/ref/applications/">project app</a>.</li>
+    <li>Update the database, based on project models.</li>
+    <li>Run a local instance of the project server.</li>
+    <li>Run any custom commands you write.</li>
+  </ul>
+
+  <h3>Using "manage.py"</h3>
+  <p>
+    The <span class="highlight primary">manage.py</span> file is technically just a "standard Python file". It is run
+    the same way as any other Python file.
+  </p>
+  <p>
+    So like any other Python file, first you'll need to
+    <a href="{% url 'cae_tools:documentation_intro_virtual_environments' %}">load your desired Virtual Environment</a>.
+  </p>
+  <p>
+    Once your virtual environment is loaded, you can simply run
+    <span class="highlight code">python &#60;project_root&#62;/manage.py</span>. This will give a list of all possible
+    commands that the given project manage.py file accepts.
+  </p>
+  <p>
+    From here, you can simply run the above command again, but with the desired command as the first argument. For
+    example, to run the project server, use
+    <span class="highlight code">python &#60;project_root&#62;/manage.py runserver</span>.
+  </p>
+
+  <h3>Workspace and "manage.py"</h3>
+  <p>
+    Since "manage.py" is simply an entrypoint file to execute project code, there's no benefit to having multiple
+    manage.py files in a given project. Furthermore, since CAE Workspace is meant to have
+    <a href="{% url 'cae_tools:documentation_intro_setup' %}">subprojects</a> hook into it, it makes sense to only have
+    a manage.py file in Workspace itself.
+  </p>
+  <p>
+    To rephrase, there is no benefit to having manage.py files exist within subprojects. In fact, it's likely
+    detrimental, as a subproject manage.py likely won't have access to the same "generalized logic" that Workspace
+    provides.
+  </p>
+  <p>
+    Thus, when working with Workspace or an associated subproject, you should always use the manage.py file found in
+    the Workspace root folder.
+  </p>
+
+{% endblock content %}

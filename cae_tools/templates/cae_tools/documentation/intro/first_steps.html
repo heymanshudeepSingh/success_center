@@ -1,0 +1,68 @@
+{% extends 'cae_tools/documentation/intro/main.html' %}
+{% load static %}
+
+
+{% block title_page_name %}First Steps | {{ block.super }}{% endblock title_page_name %}
+
+
+{% block content %}
+  {{ block.super }}
+
+  <h3>First Steps</h3>
+  <p>
+    This page lists the general recommended "first steps" in order to start using the CAE Workspace project.
+  </p>
+  <p>
+    To get started, you should, in order:
+  </p>
+  <article>
+    <ul>
+      <li>
+        <p>
+          Read the
+          <a href="{% url 'cae_tools:documentation' %}">CAE Workspace Introduction documentation</a>. Specifically, just
+          the points under the "introduction" section. This will give you an idea of what CAE Workspace even is, and why
+          we're using it. It will also give you a starting point to proceed with your own projects.
+        </p>
+      </li>
+      <li>
+        <p>
+          Run the <span class="highlight primary">installation script</span> as noted in the
+          <a href="{% url 'cae_tools:documentation_intro_helper_scripts' %}">helper scripts documentation</a>.
+        </p>
+        <p>
+          This script will run all the basic setup steps for your project. Presumably if you're reading this, then you
+          already ran this script. If not, then your system might not be 100% set up to run CAE Workspace, and you might
+          want to go run the script now.
+        </p>
+      </li>
+      <li>
+        <p>
+          Follow the <a href="{% url 'cae_tools:documentation_intro_setup' %}">subproject setup</a> documentation, to
+          either create a new subproject, or clone an existing one down. Subprojects are where a majority of useful work
+          is done.
+        </p>
+      </li>
+      <li>
+        <p>
+          Depending on what you want to work on, read the corresponding section of
+          <a href="{% url 'cae_tools:documentation' %}">CAE Workspace documentation</a>, which attempts to document all
+          logic that is unique to CAE Workspace.
+        </p>
+        <p>
+          If that doesn't seem helpful, also try our
+          <a href="https://drive.google.com/drive/folders/1ZXxataXewDifJfUas_j7eZcklmpSrPt-?usp=sharing">GoogleDocs powerpoints</a>,
+          which attempts to show step-by-step, beginner-friendly explanations of full stack development for a standard
+          Django project.
+        </p>
+        <p>
+          Finally, feel free to reference the <a href="https://docs.djangoproject.com/en/dev/">Official DjangoDocs</a>,
+          which are maintained by the Django developers themselves. They cover just about anything you could ever want
+          to know. But be warned that they sometimes can be very verbose, which can be intimidating to those unfamiliar
+          with the Django framework.
+        </p>
+      </li>
+    </ul>
+  </article>
+
+{% endblock content %}

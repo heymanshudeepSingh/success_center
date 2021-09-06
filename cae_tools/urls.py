@@ -29,8 +29,13 @@ urlpatterns = [
     path('documentation/css/general_logic/', views.docs_css_general_logic, name='documentation_css_general'),
     path('documentation/css/using_flexbox/', views.docs_css_using_flexbox, name='documentation_css_flexbox'),
 
-    # Custom Workspace Logic Documentation.
-    path('documentation/general_setup/', views.docs_general_setup, name='documentation_general_setup'),
+    # General/Introduction documentation urls.
+    path('documentation/intro/introduction', views.docs_intro, name='documentation_introduction'),
+    path('documentation/intro/first_steps', views.docs_intro_first_steps, name='documentation_intro_first_steps'),
+    path('documentation/intro/helper_scripts', views.docs_intro_helper_scripts, name='documentation_intro_helper_scripts'),
+    path('documentation/intro/setup', views.docs_intro_setup, name='documentation_intro_setup'),
+    path('documentation/intro/managepy', views.docs_intro_managepy, name='documentation_intro_managepy'),
+    path('documentation/intro/virtual_environments', views.docs_intro_virtual_environments, name='documentation_intro_virtual_environments'),
 
     # JavaScript documentation urls.
     path('documentation/javascript/passing_variables/', views.docs_javascript_passing_variables, name='documentation_javascript_passing_variables'),
