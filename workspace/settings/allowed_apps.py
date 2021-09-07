@@ -5,9 +5,11 @@ Manages and auto-installs apps for project.
 # User Class Imports.
 from workspace.settings.reusable_settings import *
 
+
 APP_DIR = os.path.join(BASE_DIR, 'apps')
 
 debug_print('')
+
 
 # Django base apps, any 3rd party add-on apps, and CAE_Home app.
 # All other CAE Apps should be defined under the "Allowed_CAE_Apps" setting.
@@ -30,6 +32,7 @@ INSTALLED_APPS = [
 
     'webpack_loader',
 ]
+
 
 # List of allowed apps to automatically install.
 # Formatted as a dictionary of sub-dictionary values.
@@ -114,6 +117,7 @@ ALLOWED_CAE_PROJECTS = {
     },
 }
 
+
 casefolded_project_dict = {}
 # Set all project keys to be case insensitive.
 for key in ALLOWED_CAE_PROJECTS.keys():
@@ -124,13 +128,12 @@ ALLOWED_CAE_PROJECTS = casefolded_project_dict
 
 # Automatically populated for automatic url generation on home page. Do not edit.
 INSTALLED_CAE_PROJECTS = {}
-
 # Automatically populated url-based dict for installed apps. Used in app main nav template generation.
 INSTALLED_APP_URL_DICT = {}
-
 # Logic to automatically install a given allowed app, if found.
 installed_app_count = 1
 excluded_project_list = []
+
 
 # First iterate through list of all project folders within the apps folder.
 debug_print('Automatically Installed Apps:')
@@ -236,11 +239,13 @@ for project_folder_name in project_folder_list:
 for project_name in excluded_project_list:
     debug_print('   {0}Excluded Project{1}: {2}'.format(ConsoleColors.bold_red, ConsoleColors.reset, project_name))
 
+
 # Create list of urls, formatted in way templating can understand (For some reason, above implementations resulted
 # in templates only recognizing project_name keys, but nothing further).
 INSTALLED_APP_DETAILS = []
 for project, project_settings in INSTALLED_CAE_PROJECTS.items():
     INSTALLED_APP_DETAILS.append(project_settings)
+
 
 # Define Admin_Reorder variable for third party "admin customization" app.
 ADMIN_REORDER = (
@@ -286,5 +291,6 @@ for project, project_settings in INSTALLED_CAE_PROJECTS.items():
     for app, app_name in project_settings['related_apps'].items():
         formatted_name = app.replace('_', ' ').title().replace('Cae', 'CAE')
         ADMIN_REORDER += ({'app': app, 'label': formatted_name},)
+
 
 debug_print('')
