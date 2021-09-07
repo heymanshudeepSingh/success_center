@@ -16,7 +16,7 @@ and SubApps, to be located in the **apps** folder.
 
 For more information, see the `documentation/readme.md` file.
 
-Otherwise, to get started, run `scripts/installers/first_time_setup.sh`.
+Otherwise, to get started, run `scripts/general/installers/first_time_setup.sh`.
 
 
 ## Tests

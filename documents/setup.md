@@ -4,7 +4,7 @@
 Instructions for setting up this project for first time use. This documentation is mostly intended for a
 local/development setup, not a server/production setup.
 
-**NOTE**: There is a "first_time_setup" script under the `scripts/installers/` folder. This script should automatically
+**NOTE**: There is a "first_time_setup" script under the `scripts/general/installers/` folder. This script should automatically
 walk you through all the below setup, taking care of most of it for you. This documentation is mostly provided in the
 event that the script errors out, or your OS of choice is not yet supported by said scripts.
 
@@ -41,12 +41,12 @@ Once your Python Virtual Environment is set up, are a few extra steps required b
 
 ### Importing Child Projects
 First, change to the `apps/` folder and git clone any additional projects you wish to incorporate. Note that these
-projects will have to have been whitelisted in `settings/allowed_apps.py` to run.
+projects will have to have been whitelisted in `workspace/settings/allowed_apps.py` to run.
 
 If you need to use any git branch other than the `master` branch, remember to change that now.
 
 ### Local env.py File
-First, go to the `settings/local_env` folder. Copy `env_example.py` as `env.py`, or else the project will not run.
+First, go to the `workspace/settings/local_env` folder. Copy `env_example.py` as `env.py`, or else the project will not run.
 
 If desired, you can also edit this new `env.py` file as you wish, but the default values should work fine for a
 standard development setting.
@@ -73,7 +73,7 @@ However, for production, or if you prefer to use MySQL, then you will have to do
 * Install MySQL for your machine (see below).
 * Install the required packages in your Python environment with the `pip install mysqlclient` command.
 * Create a new database in MySQL, for Django to use.
-* Open up your env file (found at `settings/local_env/env.py`) and locate the `DATABASES` section.
+* Open up your env file (found at `workspace/settings/local_env/env.py`) and locate the `DATABASES` section.
     * Set `'ENGINE': 'django.db.backends.mysql'`
     * Change the rest of the settings as appropriate for your local setup.
 

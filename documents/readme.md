@@ -34,7 +34,7 @@ through `git clone`) will dynamically import that project logic. Thus, putting m
 
 These SubProjects all follow standard Django conventions, and thus logic should be split into apps, when appropriate.
 The logic in `cae_workspace` will automatically handle and import appropriately, as long as whitelisted accordingly in
-the `settings/allowed_apps.py` file.
+the `workspace/settings/allowed_apps.py` file.
 
 ### Adding a New Project/App
 Logic is already in place to automatically import SubProjects and associated Apps. However, for security reasons, they
@@ -49,7 +49,7 @@ creating this SubProject and all related Apps.
         properly.
     * Because this "core" App is required, note that this is also a good location for the SubProject to contain logic
     that hooks into the workspace, for example, to use the "universal" css/templating/etc.
-* Open up `settings/allowed_apps.py`.
+* Open up `workspace/settings/allowed_apps.py`.
 * Scroll down to `ALLOWED_CAE_APPS` and follow the example provided.
 * Once the new SubProject or App is added, it should automatically be imported from that point on, as long as it is
 present inside the `apps` folder.
