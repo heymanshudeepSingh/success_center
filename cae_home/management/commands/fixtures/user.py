@@ -257,7 +257,7 @@ def get_step_permissions():
     :return: A list of all permission models for the STEP program.
     """
     # First find all content types with "cae" in the name.
-    app_content_types = ContentType.objects.filter(app_label__contains='success_center_core')
+    app_content_types = ContentType.objects.filter(app_label__contains='success_center')
 
     # Get all id's of found content types.
     app_content_ids = []
