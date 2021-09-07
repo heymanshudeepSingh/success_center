@@ -1,28 +1,33 @@
 # Django - CAE Workspace > Documents > setup.md
 
+
 ## Description
 Instructions for setting up this project for first time use. This documentation is mostly intended for a
 local/development setup, not a server/production setup.
 
-**NOTE**: There is a "first_time_setup" script under the `scripts/general/installers/` folder. This script should automatically
-walk you through all the below setup, taking care of most of it for you. This documentation is mostly provided in the
-event that the script errors out, or your OS of choice is not yet supported by said scripts.
+**NOTE**: There is a "first time setup" script accessible via `<workspace_root>/scripts/run.sh install`. This script
+should automatically walk you through all the below setup, taking care of most of it for you. This documentation is
+mostly provided in the event that the script errors out, or your OS of choice is not yet supported by said scripts.
+
 
 ## Setting Up Python
-This Project runs on Python and Django. Currently, it should be able to run on any Python version 3.6 or higher.
+This Project runs on Python and Django. Currently, it should be able to run on any Python version 3.8 or higher.
+
+It is strongly recommended to use a Python virtual environment for this project.
 
 ### Installing Python
-#### Installing Python for Ubuntu 16.04 or Earlier
-If using Ubuntu 16.04 or earlier, you will not have a new enough version of Python to run the project.<br>
-To get a newer version of Python, you will need to run:
-* ```sudo apt install python<version>-dev```
+#### Installing Python for Linux
+Depending on your OS, you may not have the desired version of Python available.<br>
+To install a specific version of Python, you will need to run:
+* ```sudo apt install python3-dev python<version> python<version>-dev python<version>-venv```
     * Where <version> is the version of Python used in your environment.
-    * Ex, Python3.6 would be:
-        * ```sudo apt install python3.6-dev```
+    * Ex, Python3.9 would be:
+        * ```sudo apt python3-dev python3.9 python3.9-dev python3.9-venv```
 
 #### Installing Python for Windows
 Currently, Windows does not ship with any version of Python.<br>
 Please visit <https://www.python.org/downloads/> to download the desired version of Python.
+
 
 ### Setting up a Virtual Environment
 It's highly recommended to create a virtual environment for this project. For details on Python Virtual Environments,
@@ -36,6 +41,7 @@ which are not essential to run the project in development, but may be added if d
 
 To add them, simply uncomment the desired lines and run the above command again.
 
+
 ## Project Setup
 Once your Python Virtual Environment is set up, are a few extra steps required before the project will run properly.
 
@@ -46,7 +52,8 @@ projects will have to have been whitelisted in `workspace/settings/allowed_apps.
 If you need to use any git branch other than the `master` branch, remember to change that now.
 
 ### Local env.py File
-First, go to the `workspace/settings/local_env` folder. Copy `env_example.py` as `env.py`, or else the project will not run.
+First, go to the `workspace/settings/local_env` folder. Copy `env_example.py` to project root as `env.py`, or else the
+project will not run.
 
 If desired, you can also edit this new `env.py` file as you wish, but the default values should work fine for a
 standard development setting.
@@ -65,60 +72,17 @@ Development mode is useful, as it provides things like additional output on erro
 purposes. However, it's also technically less secure, so the project should be run in production mode whenever being
 used live on a server.
 
-### Setup Database
+### Database Setup
 #### MySQL
 By default, Django will use SqLite for the database. This is fine for development purposes.
 
 However, for production, or if you prefer to use MySQL, then you will have to do the following:
-* Install MySQL for your machine (see below).
+* Install MySQL for your machine.
 * Install the required packages in your Python environment with the `pip install mysqlclient` command.
 * Create a new database in MySQL, for Django to use.
 * Open up your env file (found at `workspace/settings/local_env/env.py`) and locate the `DATABASES` section.
     * Set `'ENGINE': 'django.db.backends.mysql'`
     * Change the rest of the settings as appropriate for your local setup.
-
-##### Installing MySql on Arch Linux
-Unfortunately, Arch Linux has a few extra steps for installing MySql. As of summer 2019, these are the steps:
-* Install main MySQl package:
-    * ```pacman -S mysql```
-* Run initial MySQL config plus full secure installation:
-    * ```mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql```
-    * ```mysql_secure_installation```
-* Set proper permissions:
-    * ```chown mysql:root -R /var/lib/mysql```
-    * ```find /var/lib/mysql -type d -exec chmod g+rwx {} \;```
-    * ```chmod g+rw -R /var/lib/mysql```
-* Add the following lines to `/etc/mysql/my.cnf`:
-```
-#
-# Set default character set.
-#
-[client]
-default-character-set = utf8mb4
-
-[mysqld]
-collation_server = utf8mb4_unicode_ci
-character_set_server = utf8mb4
-
-[mysql]
-default-character-set = utf8mb4
-
-
-#
-# Allow auto-completion in MySQL client.
-#
-auto-rehash
-```
-* Restart database to read in modified config file:
-    * ```systemctl restart mariadb.service```
-* Install Python MySQL dependencies:
-    * ```pacman -S python-mysqlclient```
-
-##### Installing MySql on Ubuntu
-* ```sudo apt-get install python3-dev libmysqlclient-dev mysql-server```
-
-##### Installing MySql on Windows
-* ???
 
 #### Make Migrations
 Depending on what has or has not been put onto the production server, it's possible some of the database migrations
@@ -140,31 +104,18 @@ model is and which makes sense to give the model. But each model should get one 
 
 To seed data, run:
 * ```python manage.py seed```
-** Optionally, you can append a number to the end to change how many random records are created per model.
-*** Ex: ```python manage.py seed 10``` will only create 10 random records per model.
+  * Optionally, you can append a number to the end to change how many random records are created per model.
+    * Ex: ```python manage.py seed 10``` will only create 10 random records per model.
 
 ### Compiling CSS
-At this point, the project should be able to run, but we still don't have any css to load. To compile it, we need to
-install `ruby-sass`, as it's the only sass version that allows use of the "watch" command (at least as of writing this).
+At this point, the project should be able to run, but we still don't have any css to load. This is because most project
+CSS comes in the form of SASS, which needs to be compiled. To compile it, we need to install `npm-sass`.
 
-Once ruby-sass is installed (see below), simply open a terminal and run `scripts/compile_css.sh`. This should compile
-all sass files into css. This includes both files in the CAE_Workspace and files in subprojects under the `apps/`
-folder.
+This will require first installing `npm` for your machine, then running:
+* `npm install -g sass`
 
-#### Installing Ruby-SASS on Arch Linux
-Run the commands:
-* ```pacman -S ruby-sass```
-* ```pacman -S ruby-rb-fsevent```
-
-#### Installing Ruby-SASS on Ubuntu
-Run the command:
-* ```apt-get install ruby-sass```
-
-#### Installing Ruby-SASS on Windows
-First, you'll need to download ruby from <https://rubyinstaller.org/downloads/>.
-
-Once that completes, open a new terminal and run:
-* ```gem install sass```
+Once sass is installed, open a terminal and run `scripts/run.sh compile_css`. This should compile all project css files.
+This includes both files in the CAE_Workspace and files in subprojects under the `apps/` folder.
 
 ### Install Redis for Websocket Handling
 #### Installing Redis on Arch Linux

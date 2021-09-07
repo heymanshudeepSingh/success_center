@@ -1,8 +1,14 @@
 # Django - CAE Workspace > Documents > readme.md
 
+Project documentation is being moved to internal "DevDocs" views, accessible by running the project in development mode.
+Any documentation here is potentially dated, and in the process of being moved.
+
+---
+
 ## Description
 This folder contains the main documentation for the project. If nothing else, make sure to read this document before
 starting work on the project.
+
 
 ## Other Documentation
 For information on getting started with this project, see `setup.md`.
@@ -16,6 +22,7 @@ For information on middleware, see `middleware.md`.
 For information on using datetime recurrence rules, see `datetime_recurrence_rules.md`.
 
 For information on production deployment, see `deployment.md`.
+
 
 ## Workspace > SubProject > SubApp Structure
 ### CAE Workspace
