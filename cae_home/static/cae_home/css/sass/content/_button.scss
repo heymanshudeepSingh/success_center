@@ -7,6 +7,146 @@
 @import '../variables/_core';
 
 
+
+//====================================//
+//==== START Button Element Block ====//
+//====================================//
+
+.main-content {
+
+    button, .button {
+
+        // Positioning Styles.
+        display: inline-block;
+        padding-top: 6px;
+        padding-right: 12px;
+        padding-bottom: 6px;
+        padding-left: 12px;
+        margin: 2px;
+
+        // Text Styles.
+        text-decoration: none;
+
+        // Visual Styles.
+        border-radius: 5px;
+
+        // Other Styles.
+        cursor: pointer;
+        @include transition(color 0.5s, background-color 0.5s, border 0.5s);
+    }
+
+}
+//====================================//
+//===== END Button Element Block =====//
+//====================================//
+
+
+//==================================//
+//==== START Button Group Block ====//
+//==================================//
+
+.main-content {
+
+    // General div container for button group.
+    div.buttons {
+        @include display-flex;
+        @include flex-direction(row);
+        @include justify-content(center);
+        @include align-items(center);
+        @include flex-wrap(wrap);
+
+        // Button elements.
+        button, .button {
+            display: block;
+        }
+
+        // Special handling for all buttons that aren't first in the group.
+        button:not(:first-child), .button:not(:first-child) {
+            // Positioning Styles.
+            margin-left: 0;
+
+            // Visual Styles.
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        // Special handling for all buttons that aren't last in the group.
+        button:not(:last-child), .button:not(:last-child) {
+            // Positioning Styles.
+            margin-right: 0;
+
+            // Visual Styles.
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+    }
+}
+
+//==================================//
+//===== END Button Group Block =====//
+//==================================//
+
+
+//===================================================//
+//==== START "Button Element" Theme Colors Block ====//
+//===================================================//
+
+.main-content {
+
+    // Loop through all themes.
+    @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & {
+
+        // Button elements.
+        button, .button {
+            // Text Styles.
+            color: theme-text($theme, 'content-accent');
+
+            // Visual Styles.
+            background-color: theme-status($theme, 'default', 'primary');
+            border: 1px solid theme-status($theme, 'default', 'border');
+        }
+
+        // Button elements during hover events.
+        button:hover, .button:hover {
+            // Text Styles.
+            color: theme-text($theme, 'content');
+
+            // Visual Styles.
+            background-color: theme-status($theme, 'default', 'border');
+            border: 1px solid theme-status($theme, 'default', 'border-hover');
+        }
+
+        // Loop through all possible status types.
+        @each $status, $status-dict in theme-status-dict($theme) {
+
+            // Button elements with status classes.
+            button.#{$status}, .#{$status} button, .button.#{$status}, .#{$status} .button {
+                // Text Styles.
+                color: theme-status($theme, $status, 'text');
+
+                // Visual Styles.
+                background-color: theme-status($theme, $status, 'primary');
+                border: 1px solid theme-status($theme, $status, 'border');
+            }
+
+            // Button elements with status classes during hover events.
+            button.#{$status}:hover, .button.#{$status}:hover, .#{$status} button:hover, .#{$status} .button:hover {
+                background-color: theme-status($theme, $status, 'border');
+                border: 1px solid theme-status($theme, 'default', 'border-hover');
+            }
+
+        }
+
+    }}
+
+}
+
+//===================================================//
+//===== END "Button Element" Theme Colors Block =====//
+//===================================================//
+
+
 //================================================================================//
 //================================= Positioning ==================================//
 //================================== Includes: ===================================//
@@ -29,46 +169,6 @@
 // overflow, overflow-x, overflow-y, clip, clear                                  //
 //================================================================================//
 
-//===========================//
-//==== START ----- Block ====//
-//===========================//
-
-.main-content {
-
-    button, .button {
-        display: inline-block;
-        padding-top: 6px;
-        padding-right: 12px;
-        padding-bottom: 6px;
-        padding-left: 12px;
-        margin: 2px;
-    }
-
-    div.buttons {
-        @include display-flex;
-        @include flex-direction(row);
-        @include justify-content(center);
-        @include align-items(center);
-        @include flex-wrap(wrap);
-
-        button, .button {
-            display: block;
-        }
-
-        button:not(:first-child), .button:not(:first-child) {
-            margin-left: 0;
-        }
-
-        button:not(:last-child), .button:not(:last-child) {
-            margin-right: 0;
-        }
-    }
-}
-
-//===========================//
-//===== END ----- Block =====//
-//===========================//
-
 
 //================================================================================//
 //================================== Typography ==================================//
@@ -83,58 +183,6 @@
 //                                                                                //
 // word-break, word-wrap, white-space                                             //
 //================================================================================//
-
-//====================================//
-//==== START General Button Block ====//
-//====================================//
-
-.main-content {
-
-    button, .button {
-        text-decoration: none;
-
-    }
-
-}
-
-//====================================//
-//===== END General Button Block =====//
-//====================================//
-
-
-//===================================================//
-//==== START "General Button" Theme Colors Block ====//
-//===================================================//
-
-.main-content {
-
-    @each $theme, $theme-dict in $theme-colors {
-    .theme-#{$theme} & {
-
-        button, .button {
-            color: theme-text($theme, 'content-accent');
-        }
-
-        button:hover, .button:hover {
-            color: theme-text($theme, 'content');
-        }
-
-        // Loop through all possible status types.
-        @each $status, $status-dict in theme-status-dict($theme) {
-
-            button.#{$status}, .#{$status} button, .button.#{$status}, .#{$status} .button {
-                color: theme-status($theme, $status, 'text');
-            }
-
-        }
-
-    }}
-
-}
-
-//===================================================//
-//===== END "General Button" Theme Colors Block =====//
-//===================================================//
 
 
 //================================================================================//
@@ -165,77 +213,6 @@
 // zoom                                                                           //
 //================================================================================//
 
-//====================================//
-//==== START General Button Block ====//
-//====================================//
-
-.main-content {
-
-    button, .button {
-        border-radius: 5px;
-    }
-
-    div.buttons {
-
-        button:not(:first-child), .button:not(:first-child) {
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
-        }
-
-        button:not(:last-child), .button:not(:last-child) {
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0;
-        }
-    }
-}
-
-//====================================//
-//===== END General Button Block =====//
-//====================================//
-
-
-//===================================================//
-//==== START "General Button" Theme Colors Block ====//
-//===================================================//
-
-.main-content {
-
-    @each $theme, $theme-dict in $theme-colors {
-    .theme-#{$theme} & {
-
-        button, .button {
-            background-color: theme-status($theme, 'default', 'primary');
-            border: 1px solid theme-status($theme, 'default', 'border');
-        }
-
-        button:hover, .button:hover {
-            background-color: theme-status($theme, 'default', 'border');
-            border: 1px solid theme-status($theme, 'default', 'border-hover');
-        }
-
-        // Loop through all possible status types.
-        @each $status, $status-dict in theme-status-dict($theme) {
-
-            button.#{$status}, .button.#{$status}, .#{$status} button, .#{$status} .button {
-                background-color: theme-status($theme, $status, 'primary');
-                border: 1px solid theme-status($theme, $status, 'border');
-            }
-
-            button.#{$status}:hover, .button.#{$status}:hover, .#{$status} button:hover, .#{$status} .button:hover {
-                background-color: theme-status($theme, $status, 'border');
-                border: 1px solid theme-status($theme, 'default', 'border-hover');
-            }
-
-        }
-
-    }}
-
-}
-
-//===================================================//
-//===== END "General Button" Theme Colors Block =====//
-//===================================================//
-
 
 //================================================================================//
 //==================================== Other =====================================//
@@ -256,15 +233,3 @@
 // speak                                                                          //
 //================================================================================//
 
-//===========================//
-//==== START ----- Block ====//
-//===========================//
-
-button, .button {
-    cursor: pointer;
-    @include transition(color 0.5s, background-color 0.5s, border 0.5s);
-}
-
-//===========================//
-//===== END ----- Block =====//
-//===========================//

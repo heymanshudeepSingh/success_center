@@ -7,40 +7,29 @@
 @import '../variables/_core';
 
 
-//================================================================================//
-//================================= Positioning ==================================//
-//================================== Includes: ===================================//
-//================================================================================//
-// position, top, right, bottom, left, z-index, display, float                    //
-//                                                                                //
-// grid-template-columns, grid-template-rows, grid-template-areas, grid-template, //
-// grid-gap, place-items, grid, grid-column, grid-row, grid-area, place-self,     //
-//                                                                                //
-// flex-direction, flex-wrap, justify-content, align-items, align-content, order, //
-// flex-grow, flex-shrink, flex-basis, flex, align-self,                          //
-//                                                                                //
-// width, height, max-width, max-height, min-width, min-height,                   //
-// padding, padding-top, padding-right, padding-bottom, padding-left,             //
-// margin, margin-top, margin-right, margin-bottom, margin-left,                  //
-//                                                                                //
-// margin-collapse, margin-top-collapse, margin-right-collapse,                   //
-// margin-bottom-collapse, margin-left-collapse,                                  //
-//                                                                                //
-// overflow, overflow-x, overflow-y, clip, clear                                  //
-//================================================================================//
 
-//===========================//
-//==== START ----- Block ====//
-//===========================//
+//===================================//
+//==== START Table Element Block ====//
+//===================================//
 
 .main-content {
+
     table {
+
+        // Positioning Styles.
         margin-top: 10px;
         margin-right: auto;
         margin-bottom: 10px;
         margin-left: auto;
 
         width: 100%;
+
+        // Visual Styles.
+        border-collapse: collapse;
+
+        // Other Styles.
+        box-sizing: border-box;
+        @include transition(color 0.5s, background-color 0.5s, border 0.5s);
 
         th, td {
 
@@ -67,6 +56,50 @@
             @include align-items(center);
         }
 
+        th, th a {
+            font-weight: bold;
+
+            // Loop through all header elements.
+            @each $header_element in $header_element_list {
+            > #{$header_element} {
+
+                // Loop through all font size options.
+                @each $font-option, $font-option-value in $font-size-options {
+                .font-size-#{$font-option} & {
+
+                    font-size: font-option($font-option) * 1.15;
+
+                }}
+
+            }}
+        }
+
+        tr, th, td {
+            box-sizing: border-box;
+            @include transition(color 0.5s, background-color 0.5s, border 0.5s);
+
+            > * {
+                box-sizing: border-box;
+            }
+        }
+
+        tbody {
+
+            th, td {
+
+                > a, a:hover {
+                    text-decoration: none;
+                }
+
+            }
+
+        }
+
+        thead, tbody, tfoot {
+            box-sizing: border-box;
+            @include transition(color 0.5s, background-color 0.5s, border 0.5s);
+        }
+
         @media only screen and (min-width: $screen-tablet-mid) {
 
             th, td {
@@ -77,70 +110,18 @@
                 }
             }
         }
-    }
-}
-
-//===========================//
-//===== END ----- Block =====//
-//===========================//
-
-
-//================================================================================//
-//================================== Typography ==================================//
-//================================== Includes: ===================================//
-//================================================================================//
-// font, font-family, font-size, font-smoothing, osx-font-smoothing, font-style,  //
-// font-weight,                                                                   //
-//                                                                                //
-// hyphens, src, line-height, letter-spacing, word-spacing, color, text-align,    //
-// text-decoration, text-indent, text-overflow, text-rendering, text-size-adjust, //
-// text-shadow, text-transform,                                                   //
-//                                                                                //
-// word-break, word-wrap, white-space                                             //
-//================================================================================//
-
-//===================================//
-//==== START General Table Block ====//
-//===================================//
-
-.main-content table {
-
-    th, th a {
-        font-weight: bold;
-
-        @each $header_element in $header_element_list {
-        > #{$header_element} {
-
-            @each $font-option, $font-option-value in $font-size-options {
-            .font-size-#{$font-option} & {
-
-                font-size: font-option($font-option) * 1.15;
-
-            }}
-
-        }}
-    }
-
-    tbody {
-
-        th, td {
-
-            > a, a:hover {
-                text-decoration: none;
-            }
-        }
 
     }
 
 }
 
 //===================================//
-//===== END General Table Block =====//
+//===== END Table Element Block =====//
 //===================================//
 
 
 //==================================================//
-//==== START "General Table" Theme Colors Block ====//
+//==== START "Table Element" Theme Colors Block ====//
 //==================================================//
 
 .main-content table {
@@ -151,9 +132,17 @@
         thead, tfoot {
             // Stylings specific to wmu theme.
             @if $theme == "wmu" {
+                // Text Styles.
                 color: theme-status($theme, 'secondary', 'text');
+
+                // Visual Styles.
+                background-color: theme-status($theme, 'primary', 'border');
             } @else {
+                // Text Styles.
                 color: theme-status($theme, 'primary', 'text');
+
+                // Visual Styles.
+                background-color: theme-status($theme, 'primary', 'primary');
             }
 
             th a, th a:hover {
@@ -193,77 +182,7 @@
                     color: theme-status($theme, 'error', 'primary-hover') !important;
                 }
             }
-        }
 
-    }}
-
-}
-
-//==================================================//
-//===== END "General Table" Theme Colors Block =====//
-//==================================================//
-
-
-//================================================================================//
-//==================================== Visual ====================================//
-//================================== Includes: ===================================//
-//================================================================================//
-// vertical-align,                                                                //
-//                                                                                //
-// list-style, list-style-type, list-style-position, list-style-image,            //
-//                                                                                //
-// pointer-events, cursor,                                                        //
-//                                                                                //
-// background, background-attatchment, background-color, background-image,        //
-// background-position, background-repeat, background-size,                       //
-//                                                                                //
-// border, border-collapse, border-top, border-right, border-bottom, border-left, //
-// border-color, border-image, border-top-color, border-right-color,              //
-// border-bottom-color, border-left-color, border-spacing, border-style,          //
-// border-top-style, border-right-style, border-bottom-style, border-left-style,  //
-// border-width, border-top-width, border-right-width, border-bottom-width,       //
-// border-left-width,                                                             //
-//                                                                                //
-// border-radius, border-top-right-radius, border-bottom-right-radius,            //
-// border-bottom-left-radius, border-top-left-radius, border-radius-topright,     //
-// border-radius-bottomright, border-radius-bottomleft, border-radius-topleft,    //
-//                                                                                //
-// content, quotes, outline, outline-offset, opacity, filter, visibility, size,   //
-// zoom                                                                           //
-//================================================================================//
-
-//===================================//
-//==== START General Table Block ====//
-//===================================//
-
-.main-content table {
-    border-collapse: collapse;
-}
-
-//===================================//
-//===== END General Table Block =====//
-//===================================//
-
-
-//==================================================//
-//==== START "General Table" Theme Colors Block ====//
-//==================================================//
-
-.main-content table {
-
-    @each $theme, $theme-dict in $theme-colors {
-    .theme-#{$theme} & {
-
-        thead, tfoot {
-            // Stylings specific to wmu theme.
-            @if $theme == "wmu" {
-                background-color: theme-status($theme, 'primary', 'border');
-            } @else {
-                background-color: theme-status($theme, 'primary', 'primary');
-            }
-        }
-
-        tbody {
             tr:first-child {
                 // Stylings specific to wmu theme.
                 @if $theme == "wmu" {
@@ -320,8 +239,75 @@
 }
 
 //==================================================//
-//===== END "General Table" Theme Colors Block =====//
+//===== END "Table Element" Theme Colors Block =====//
 //==================================================//
+
+
+//================================================================================//
+//================================= Positioning ==================================//
+//================================== Includes: ===================================//
+//================================================================================//
+// position, top, right, bottom, left, z-index, display, float                    //
+//                                                                                //
+// grid-template-columns, grid-template-rows, grid-template-areas, grid-template, //
+// grid-gap, place-items, grid, grid-column, grid-row, grid-area, place-self,     //
+//                                                                                //
+// flex-direction, flex-wrap, justify-content, align-items, align-content, order, //
+// flex-grow, flex-shrink, flex-basis, flex, align-self,                          //
+//                                                                                //
+// width, height, max-width, max-height, min-width, min-height,                   //
+// padding, padding-top, padding-right, padding-bottom, padding-left,             //
+// margin, margin-top, margin-right, margin-bottom, margin-left,                  //
+//                                                                                //
+// margin-collapse, margin-top-collapse, margin-right-collapse,                   //
+// margin-bottom-collapse, margin-left-collapse,                                  //
+//                                                                                //
+// overflow, overflow-x, overflow-y, clip, clear                                  //
+//================================================================================//
+
+
+//================================================================================//
+//================================== Typography ==================================//
+//================================== Includes: ===================================//
+//================================================================================//
+// font, font-family, font-size, font-smoothing, osx-font-smoothing, font-style,  //
+// font-weight,                                                                   //
+//                                                                                //
+// hyphens, src, line-height, letter-spacing, word-spacing, color, text-align,    //
+// text-decoration, text-indent, text-overflow, text-rendering, text-size-adjust, //
+// text-shadow, text-transform,                                                   //
+//                                                                                //
+// word-break, word-wrap, white-space                                             //
+//================================================================================//
+
+
+//================================================================================//
+//==================================== Visual ====================================//
+//================================== Includes: ===================================//
+//================================================================================//
+// vertical-align,                                                                //
+//                                                                                //
+// list-style, list-style-type, list-style-position, list-style-image,            //
+//                                                                                //
+// pointer-events, cursor,                                                        //
+//                                                                                //
+// background, background-attatchment, background-color, background-image,        //
+// background-position, background-repeat, background-size,                       //
+//                                                                                //
+// border, border-collapse, border-top, border-right, border-bottom, border-left, //
+// border-color, border-image, border-top-color, border-right-color,              //
+// border-bottom-color, border-left-color, border-spacing, border-style,          //
+// border-top-style, border-right-style, border-bottom-style, border-left-style,  //
+// border-width, border-top-width, border-right-width, border-bottom-width,       //
+// border-left-width,                                                             //
+//                                                                                //
+// border-radius, border-top-right-radius, border-bottom-right-radius,            //
+// border-bottom-left-radius, border-top-left-radius, border-radius-topright,     //
+// border-radius-bottomright, border-radius-bottomleft, border-radius-topleft,    //
+//                                                                                //
+// content, quotes, outline, outline-offset, opacity, filter, visibility, size,   //
+// zoom                                                                           //
+//================================================================================//
 
 
 //================================================================================//
@@ -342,32 +328,3 @@
 // interpolation-mode, direction, marks, page, set-link-source, unicode-bidi,     //
 // speak                                                                          //
 //================================================================================//
-
-//===========================//
-//==== START ----- Block ====//
-//===========================//
-
-.main-content {
-    table {
-        box-sizing: border-box;
-        @include transition(color 0.5s, background-color 0.5s, border 0.5s);
-
-        thead, tbody, tfoot {
-            box-sizing: border-box;
-            @include transition(color 0.5s, background-color 0.5s, border 0.5s);
-        }
-
-        tr, th, td {
-            box-sizing: border-box;
-            @include transition(color 0.5s, background-color 0.5s, border 0.5s);
-
-            > * {
-                box-sizing: border-box;
-            }
-        }
-    }
-}
-
-//===========================//
-//===== END ----- Block =====//
-//===========================//

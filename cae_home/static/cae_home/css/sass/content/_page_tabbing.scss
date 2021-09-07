@@ -1,10 +1,103 @@
 
+
 //======================//
 //==== Page Tabbing ====//
 //======================//
 
 // Import statements
 @import '../variables/_core';
+
+
+
+//==========================================//
+//==== START Page Tabbing Element Block ====//
+//==========================================//
+
+#content .page-tabs {
+
+    .pagetabs-tab-container ul {
+
+        // Positioning Styles.
+        @include display-flex;
+        @include flex-direction(row);
+        @include justify-content(center);
+        @include flex-wrap(wrap);
+
+        margin-top: 10px;
+        margin-bottom: 5px;
+
+        // Visual Styles.
+        list-style-type: none;
+
+        li {
+            @include display-flex;
+            @include flex-direction(row);
+            @include justify-content(center);
+            @include flex(1);
+
+            padding: 10px;
+        }
+
+        li.selected {
+            font-weight: bolder;
+
+            // Loop through all font size options.
+            @each $font-option, $font-option-value in $font-size-options {
+
+                .font-size-#{$font-option} h1 {
+                    font-size: font-option($font-option) * 1.10;
+                }
+
+            }
+        }
+
+    }
+
+    .pagetabs-tab-container ul li {
+        // Transition on individual items for performance. Is better than "all".
+        @include transition(color 0.5s, background-color 0.5s, border 0.5s);
+
+        cursor: pointer;
+    }
+
+}
+
+//==========================================//
+//===== END Page Tabbing Element Block =====//
+//==========================================//
+
+
+//=========================================================//
+//==== START "Page Tabbing Element" Theme Colors Block ====//
+//=========================================================//
+
+#content {
+
+    @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & {
+
+        .pagetabs-tab-container ul {
+
+            li {
+                background-color: theme-status($theme, 'primary', 'primary');
+                border-top: 1px solid theme-status($theme, 'primary', 'border');
+                border-bottom: 1px solid theme-status($theme, 'primary', 'border');
+            }
+
+            li:hover {
+                background-color: theme-status($theme, 'primary', 'primary-hover');
+                border-top: 1px solid theme-status($theme, 'primary', 'border-hover');
+                border-bottom: 1px solid theme-status($theme, 'primary', 'border-hover');
+            }
+        }
+
+    }}
+
+}
+
+//=========================================================//
+//===== END "Page Tabbing Element" Theme Colors Block =====//
+//=========================================================//
 
 
 //================================================================================//
@@ -29,38 +122,6 @@
 // overflow, overflow-x, overflow-y, clip, clear                                  //
 //================================================================================//
 
-//===========================//
-//==== START ----- Block ====//
-//===========================//
-
-#content .page-tabs {
-
-    .pagetabs-tab-container ul {
-        @include display-flex;
-        @include flex-direction(row);
-        @include justify-content(center);
-        @include flex-wrap(wrap);
-
-        margin-top: 10px;
-        margin-bottom: 5px;
-
-        li {
-            @include display-flex;
-            @include flex-direction(row);
-            @include justify-content(center);
-            @include flex(1);
-
-            padding: 10px;
-        }
-
-    }
-
-}
-
-//===========================//
-//===== END ----- Block =====//
-//===========================//
-
 
 //================================================================================//
 //================================== Typography ==================================//
@@ -75,33 +136,6 @@
 //                                                                                //
 // word-break, word-wrap, white-space                                             //
 //================================================================================//
-
-//===========================//
-//==== START ----- Block ====//
-//===========================//
-
-#content .page-tabs {
-
-    .pagetabs-tab-container ul {
-
-        li.selected {
-            font-weight: bolder;
-
-            @each $font-option, $font-option-value in $font-size-options {
-
-                .font-size-#{$font-option} h1 {
-                    font-size: font-option($font-option) * 1.10;
-                }
-
-            }
-        }
-    }
-
-}
-
-//===========================//
-//===== END ----- Block =====//
-//===========================//
 
 
 //================================================================================//
@@ -132,56 +166,6 @@
 // zoom                                                                           //
 //================================================================================//
 
-//=============================//
-//==== START General Block ====//
-//=============================//
-
-#content .page-tabs {
-
-    .pagetabs-tab-container ul {
-        list-style-type: none;
-    }
-
-}
-
-//=============================//
-//===== END General Block =====//
-//=============================//
-
-//==================================//
-//==== START Theme Colors Block ====//
-//==================================//
-
-#content {
-
-    @each $theme, $theme-dict in $theme-colors {
-    .theme-#{$theme} & {
-
-        .pagetabs-tab-container ul {
-
-            li {
-                background-color: theme-status($theme, 'primary', 'primary');
-                border-top: 1px solid theme-status($theme, 'primary', 'border');
-                border-bottom: 1px solid theme-status($theme, 'primary', 'border');
-            }
-
-            li:hover {
-                background-color: theme-status($theme, 'primary', 'primary-hover');
-                border-top: 1px solid theme-status($theme, 'primary', 'border-hover');
-                border-bottom: 1px solid theme-status($theme, 'primary', 'border-hover');
-            }
-        }
-
-
-
-    }}
-
-}
-
-//==================================//
-//===== END Theme Colors Block =====//
-//==================================//
-
 
 //================================================================================//
 //==================================== Other =====================================//
@@ -201,22 +185,3 @@
 // interpolation-mode, direction, marks, page, set-link-source, unicode-bidi,     //
 // speak                                                                          //
 //================================================================================//
-
-//===========================//
-//==== START ----- Block ====//
-//===========================//
-
-#content .page-tabs {
-
-    .pagetabs-tab-container ul li {
-        // Transition on individual items for performance. Is better than "all".
-        @include transition(color 0.5s, background-color 0.5s, border 0.5s);
-
-        cursor: pointer;
-    }
-
-}
-
-//===========================//
-//===== END ----- Block =====//
-//===========================//

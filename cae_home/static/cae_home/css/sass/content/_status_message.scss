@@ -7,6 +7,225 @@
 @import '../variables/_core';
 
 
+
+//============================================//
+//==== START Status Message Element Block ====//
+//============================================//
+
+.main-content {
+
+    .cae-status-message-container {
+
+        position: relative;
+
+        @include display-flex;
+        @include flex-direction(column);
+        @include justify-content(center);
+        @include align-items(center);
+
+        padding: 0 !important;
+
+        a {
+            padding-top: 5px;
+            padding-right: 10px;
+            padding-bottom: 5px;
+            padding-left: 10px;
+        }
+
+        .message {
+
+            // Positioning Styles.
+            position: relative;
+
+            @include display-flex;
+            @include flex-direction(row);
+            @include justify-content(center);
+            @include align-items(center);
+
+            width: 100%;
+            padding: 10px;
+
+            // Other Styles.
+            box-sizing: border-box;
+
+            @include transition(
+                padding 0.7s, margin 0.7s, font-size 0.7s, color 0.5s, background-color 0.5s, border 0.5s, border-radius 0.5s, opacity 0.7s linear, visibility 0s 0.7s
+            );
+
+            > p:first-child {
+                @include display-flex;
+                @include flex-direction(row);
+                @include justify-content(space-between);
+                @include align-items(center);
+
+                @include flex(1);
+            }
+
+            a {
+                // Text Styles.
+                font-weight: bold;
+
+                // Visual Styles.
+                border-radius: 5em;
+
+                // Other Styles.
+                @include transition(color 0.5s, background-color 0.5s, border 0.5s);
+            }
+
+            li {
+                list-style-type: none;
+            }
+
+            .exit {
+
+                // Positioning Styles.
+                position: relative;
+                right: 0;
+
+                padding-top: 3px;
+                padding-right: 8px;
+                padding-bottom: 3px;
+                padding-left: 8px;
+                margin-right: 0.5%;
+                margin-left: 0.5%;
+
+                // Font Styles.
+                font-weight: bold;
+
+                // Visual Styles.
+                border-radius: 5em;
+
+                // Other Styles.
+                @include transition(color 0.5s, background-color 0.5s, border 0.5s);
+                cursor: pointer;
+            }
+
+            .exit:hover {
+                font-weight: bold;
+            }
+
+            .message:last-child {
+                border-bottom-right-radius: 5px;
+                border-bottom-left-radius: 5px;
+            }
+
+        }
+
+    }
+
+}
+
+//============================================//
+//===== END Status Message Element Block =====//
+//============================================//
+
+
+//===========================================================//
+//==== START "Status Message Element" Theme Colors Block ====//
+//===========================================================//
+
+.main-content {
+
+    // Loop through all themes.
+    @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & .cae-status-message-container {
+
+        .message {
+
+            background-color: theme-status($theme, 'default', 'primary');
+            border: 1px solid theme-status($theme, 'default', 'border');
+
+            a {
+                color: theme-status($theme, 'default', 'link');
+            }
+
+            a:hover {
+                // Text Styles.
+                color: theme-status($theme, 'default', 'link-hover');
+
+                // Visual Styles.
+                background-color: theme-status($theme, 'default', 'primary');
+            }
+
+            .exit {
+                color: theme-status($theme, 'default', 'link');
+            }
+
+            .exit:hover {
+                // Text Styles.
+                color: theme-status($theme, 'default', 'link-hover');
+
+                // Visual Styles.
+                background-color: theme-status($theme, 'default', 'primary');
+            }
+        }
+
+        .message:hover {
+            background-color: theme-status($theme, 'default', 'primary-hover');
+            border: 1px solid theme-status($theme, 'default', 'border-hover');
+        }
+
+        // Loop through all possible status types.
+        @each $status, $status-dict in theme-status-dict($theme) {
+
+            .message.#{$status} {
+                // Text Styles.
+                color: theme-status($theme, $status, 'text');
+
+                // Visual Styles.
+                background-color: theme-status($theme, $status, 'primary');
+                border: 1px solid theme-status($theme, $status, 'border');
+
+                a {
+                    color: theme-status($theme, $status, 'link');
+                }
+
+                a:hover {
+                    background-color: theme-status($theme, $status, 'primary');
+                }
+
+                .exit {
+                    color: theme-status($theme, $status, 'link');
+                }
+
+                .exit:hover {
+                    // Text Styles.
+                    color: theme-status($theme, $status, 'link-hover');
+
+                    // Visual Styles.
+                    background-color: theme-status($theme, $status, 'primary');
+                }
+            }
+
+            .message.#{$status}:hover {
+
+                background-color: theme-status($theme, $status, 'primary-hover');
+                border: 1px solid theme-status($theme, 'default', 'border-hover');
+
+                a {
+                    color: theme-status($theme, $status, 'link-hover');
+                }
+
+                .exit {
+                    color: theme-status($theme, $status, 'link-hover');
+                }
+
+                .exit:hover {
+                    color: theme-status($theme, $status, 'link-hover');
+                }
+            }
+
+        }
+
+    }}
+
+}
+
+//===========================================================//
+//===== END "Status Message Element" Theme Colors Block =====//
+//===========================================================//
+
+
 //================================================================================//
 //================================= Positioning ==================================//
 //================================== Includes: ===================================//
@@ -29,65 +248,6 @@
 // overflow, overflow-x, overflow-y, clip, clear                                  //
 //================================================================================//
 
-//===========================//
-//==== START ----- Block ====//
-//===========================//
-
-.cae-status-message-container {
-    position: relative;
-
-    @include display-flex;
-    @include flex-direction(column);
-    @include justify-content(center);
-    @include align-items(center);
-
-    padding: 0 !important;
-
-    a {
-        padding-top: 5px;
-        padding-right: 10px;
-        padding-bottom: 5px;
-        padding-left: 10px;
-    }
-
-    .message {
-        position: relative;
-
-        @include display-flex;
-        @include flex-direction(row);
-        @include justify-content(center);
-        @include align-items(center);
-
-        width: 100%;
-        padding: 10px;
-
-        > p:first-child {
-            @include display-flex;
-            @include flex-direction(row);
-            @include justify-content(space-between);
-            @include align-items(center);
-
-            @include flex(1);
-        }
-
-        .exit {
-            position: relative;
-            right: 0;
-
-            padding-top: 3px;
-            padding-right: 8px;
-            padding-bottom: 3px;
-            padding-left: 8px;
-            margin-right: 0.5%;
-            margin-left: 0.5%;
-        }
-    }
-}
-
-//===========================//
-//===== END ----- Block =====//
-//===========================//
-
 
 //================================================================================//
 //================================== Typography ==================================//
@@ -102,109 +262,6 @@
 //                                                                                //
 // word-break, word-wrap, white-space                                             //
 //================================================================================//
-
-//============================================//
-//==== START General Status Message Block ====//
-//============================================//
-
-.main-content {
-
-    @each $theme, $theme-dict in $theme-colors {
-    .theme-#{$theme} & .cae-status-message-container {
-
-        .message {
-            a {
-                font-weight: bold;
-            }
-
-            .exit {
-                font-weight: bold;
-            }
-
-            .exit:hover {
-                font-weight: bold;
-            }
-        }
-
-    }}
-
-}
-
-//============================================//
-//===== END General Status Message Block =====//
-//============================================//
-
-
-//===========================================================//
-//==== START "General Status Message" Theme Colors Block ====//
-//===========================================================//
-
-.main-content {
-
-    @each $theme, $theme-dict in $theme-colors {
-    .theme-#{$theme} & .cae-status-message-container {
-
-        .message {
-            a {
-                color: theme-status($theme, 'default', 'link');
-            }
-
-            a:hover {
-                color: theme-status($theme, 'default', 'link-hover');
-            }
-
-            .exit {
-                color: theme-status($theme, 'default', 'link');
-            }
-
-            .exit:hover {
-                color: theme-status($theme, 'default', 'link-hover');
-            }
-        }
-
-        // Loop through all possible status types.
-        @each $status, $status-dict in theme-status-dict($theme) {
-
-            .message.#{$status} {
-                color: theme-status($theme, $status, 'text');
-
-                a {
-                    color: theme-status($theme, $status, 'link');
-                }
-
-                .exit {
-                    color: theme-status($theme, $status, 'link');
-                }
-
-                .exit:hover {
-                    color: theme-status($theme, $status, 'link-hover');
-                }
-            }
-
-            .message.#{$status}:hover {
-
-                a {
-                    color: theme-status($theme, $status, 'link-hover');
-                }
-
-                .exit {
-                    color: theme-status($theme, $status, 'link-hover');
-                }
-
-                .exit:hover {
-                    color: theme-status($theme, $status, 'link-hover');
-                }
-            }
-
-        }
-
-    }}
-
-}
-
-//===========================================================//
-//===== END "General Status Message" Theme Colors Block =====//
-//===========================================================//
 
 
 //================================================================================//
@@ -235,83 +292,6 @@
 // zoom                                                                           //
 //================================================================================//
 
-//============================================//
-//==== START General Status Message Block ====//
-//============================================//
-
-.main-content {
-
-    .message {
-        li {
-            list-style-type: none;
-        }
-
-        a, .exit {
-            border-radius: 5em;
-        }
-    }
-
-    .message:last-child {
-        border-bottom-right-radius: 5px;
-        border-bottom-left-radius: 5px;
-    }
-}
-
-//============================================//
-//===== END General Status Message Block =====//
-//============================================//
-
-
-//===========================================================//
-//==== START "General Status Message" Theme Colors Block ====//
-//===========================================================//
-
-.main-content {
-
-    @each $theme, $theme-dict in $theme-colors {
-    .theme-#{$theme} & .cae-status-message-container {
-
-        .message {
-            background-color: theme-status($theme, 'default', 'primary');
-            border: 1px solid theme-status($theme, 'default', 'border');
-
-            a:hover, .exit:hover {
-                background-color: theme-status($theme, 'default', 'primary');
-            }
-        }
-
-        .message:hover {
-            background-color: theme-status($theme, 'default', 'primary-hover');
-            border: 1px solid theme-status($theme, 'default', 'border-hover');
-        }
-
-        // Loop through all possible status types.
-        @each $status, $status-dict in theme-status-dict($theme) {
-
-            .message.#{$status} {
-                background-color: theme-status($theme, $status, 'primary');
-                border: 1px solid theme-status($theme, $status, 'border');
-
-                a:hover, .exit:hover {
-                    background-color: theme-status($theme, $status, 'primary');
-                }
-            }
-
-            .message.#{$status}:hover {
-                background-color: theme-status($theme, $status, 'primary-hover');
-                border: 1px solid theme-status($theme, 'default', 'border-hover');
-            }
-
-        }
-
-    }}
-
-}
-
-//===========================================================//
-//===== END "General Status Message" Theme Colors Block =====//
-//===========================================================//
-
 
 //================================================================================//
 //==================================== Other =====================================//
@@ -331,29 +311,3 @@
 // interpolation-mode, direction, marks, page, set-link-source, unicode-bidi,     //
 // speak                                                                          //
 //================================================================================//
-
-//===========================//
-//==== START ----- Block ====//
-//===========================//
-
-.cae-status-message-container {
-
-    .message {
-        box-sizing: border-box;
-
-        @include transition(padding 0.7s, margin 0.7s, font-size 0.7s, color 0.5s, background-color 0.5s, border 0.5s, border-radius 0.5s, opacity 0.7s linear, visibility 0s 0.7s);
-
-        a {
-            @include transition(color 0.5s, background-color 0.5s, border 0.5s);
-        }
-
-        .exit {
-            @include transition(color 0.5s, background-color 0.5s, border 0.5s);
-            cursor: pointer;
-        }
-    }
-}
-
-//===========================//
-//===== END ----- Block =====//
-//===========================//

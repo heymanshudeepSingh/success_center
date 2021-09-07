@@ -7,54 +7,68 @@
 @import '../variables/_core';
 
 
-//================================================================================//
-//================================= Positioning ==================================//
-//================================== Includes: ===================================//
-//================================================================================//
-// position, top, right, bottom, left, z-index, display, float                    //
-//                                                                                //
-// grid-template-columns, grid-template-rows, grid-template-areas, grid-template, //
-// grid-gap, place-items, grid, grid-column, grid-row, grid-area, place-self,     //
-//                                                                                //
-// flex-direction, flex-wrap, justify-content, align-items, align-content, order, //
-// flex-grow, flex-shrink, flex-basis, flex, align-self,                          //
-//                                                                                //
-// width, height, max-width, max-height, min-width, min-height,                   //
-// padding, padding-top, padding-right, padding-bottom, padding-left,             //
-// margin, margin-top, margin-right, margin-bottom, margin-left,                  //
-//                                                                                //
-// margin-collapse, margin-top-collapse, margin-right-collapse,                   //
-// margin-bottom-collapse, margin-left-collapse,                                  //
-//                                                                                //
-// overflow, overflow-x, overflow-y, clip, clear                                  //
-//================================================================================//
+
+
+//===========================//
+//==== Panel Element CSS ====//
+//===========================//
+
+// Import statements
+@import '../variables/_core';
+
+
 
 //=================================//
 //==== START Basic Panel Block ====//
 //=================================//
 
 .main-content {
+
     div.panel {
+        // Positioning Styles.
         position: relative;
 
         margin-top: 20px;
         margin-bottom: 20px;
 
+        // Other Styles.
+        @include transition(color 0.5s, background-color 0.5s, border 0.5s);
+
+        > div {
+            @include transition(color 0.5s, background-color 0.5s, border 0.5s);
+        }
+
         > div.panel {
             margin: 15px;
         }
 
+        a {
+            @include transition(color 0.5s, background-color 0.5s, border 0.5s);
+        }
+
+        a.button, button {
+            font-weight: normal;
+        }
+
         a:not(.button) {
+            // Positioning Styles.
             padding-top: 5px;
             padding-right: 10px;
             padding-bottom: 5px;
             padding-left: 10px;
+
+            // Text Styles.
+            font-weight: bold;
+
+            // Visual Styles.
+            border-radius: 5em;
         }
 
         // Panel header formatting.
         @each $panel_header_element in $panel_header_element_list {
         > #{$panel_header_element} {
 
+            // Positioning Styles.
             @include display-flex;
             @include flex-direction(row);
             @include justify-content(space-between);
@@ -63,10 +77,30 @@
 
             padding: 10px;
 
+            // Text Styles.
+            font-weight: bold;
+
+            // Loop through all header elements.
             @each $header_element in $header_element_list {
             > #{$header_element} {
 
                 padding-top: 0;
+
+                // Loop through all font size options.
+                @each $font-option, $font-option-value in $font-size-options {
+                .font-size-#{$font-option} & {
+
+                    font-size: font-option($font-option) * 1.10;
+
+                }}
+
+            }}
+
+            // Loop through all font size options.
+            @each $font-option, $font-option-value in $font-size-options {
+            .font-size-#{$font-option} & {
+
+                font-size: font-option($font-option) * 1.10;
 
             }}
 
@@ -122,114 +156,7 @@
 
         }}
     }
-}
 
-//=================================//
-//===== END Basic Panel Block =====//
-//=================================//
-
-
-//==================================//
-//==== START Tabbed Panel Block ====//
-//==================================//
-
-.main-content div.panel.tabs {
-
-    @each $panel_content_element in $panel_content_element_list {
-    > #{$panel_content_element} {
-        padding: 0;
-    }}
-
-    .tab-nav {
-        @include display-flex;
-        @include flex-direction(row);
-        @include justify-content(space-around);
-        @include align-items(center);
-
-        padding-left: 0;
-
-        li {
-            @include flex(1);
-
-            min-width: 10%;
-        }
-
-        @each $header_element in $header_element_list {
-        #{$header_element} {
-
-            padding-top: 5px;
-            padding-bottom: 5px;
-
-        }}
-    }
-
-    .tab-content {
-        padding: 10px;
-    }
-}
-
-//==================================//
-//===== END Tabbed Panel Block =====//
-//==================================//
-
-
-//================================================================================//
-//================================== Typography ==================================//
-//================================== Includes: ===================================//
-//================================================================================//
-// font, font-family, font-size, font-smoothing, osx-font-smoothing, font-style,  //
-// font-weight,                                                                   //
-//                                                                                //
-// hyphens, src, line-height, letter-spacing, word-spacing, color, text-align,    //
-// text-decoration, text-indent, text-overflow, text-rendering, text-size-adjust, //
-// text-shadow, text-transform,                                                   //
-//                                                                                //
-// word-break, word-wrap, white-space                                             //
-//================================================================================//
-
-//=================================//
-//==== START Basic Panel Block ====//
-//=================================//
-
-.main-content {
-
-    div.panel {
-
-        a.button, button {
-            font-weight: normal;
-        }
-
-        a:not(.button) {
-            font-weight: bold;
-        }
-
-        @each $panel_header_element in $panel_header_element_list {
-        > #{$panel_header_element} {
-
-                font-weight: bold;
-
-                @each $font-option, $font-option-value in $font-size-options {
-                .font-size-#{$font-option} & {
-
-                    font-size: font-option($font-option) * 1.10;
-
-                }}
-
-                @each $header_element in $header_element_list {
-                > #{$header_element} {
-
-                    @each $font-option, $font-option-value in $font-size-options {
-                    .font-size-#{$font-option} & {
-
-                        font-size: font-option($font-option) * 1.10;
-
-                    }}
-
-                }}
-
-        }}
-
-    }
 }
 
 //=================================//
@@ -248,6 +175,9 @@
 
         div.panel {
 
+            background-color: theme-status($theme, 'default', 'primary');
+            border: 1px solid theme-status($theme, 'default', 'border');
+
             a:not(.button) {
                 color: theme-status($theme, 'default', 'link');
             }
@@ -256,15 +186,27 @@
                 color: theme-status($theme, 'default', 'link-hover');
             }
 
+            a:hover:not(.button) {
+                background-color: theme-status($theme, 'default', 'primary');
+            }
+
+            // Loop through all panel header elements.
             @each $panel_header_element in $panel_header_element_list {
             > #{$panel_header_element} {
 
-                    color: theme-text($theme, 'content');
+                // Text Styles.
+                color: theme-text($theme, 'content');
+
+                // Visual Styles.
+                border-bottom: 1px solid theme-status($theme, 'default', 'border');
 
             }}
 
+            // Loop through all panel content elements.
             @each $panel_content_element in $panel_content_element_list {
             > #{$panel_content_element} {
+
+                background-color: theme-status($theme, 'default', 'secondary');
 
                 a:not(.button) {
                     color: theme-text($theme, 'link');
@@ -276,10 +218,15 @@
 
             }}
 
+            // Loop through all panel footer elements.
             @each $panel_footer_element in $panel_footer_element_list {
             > #{$panel_footer_element} {
 
+                // Text Styles.
                 color: theme-text($theme, 'content');
+
+                // Visual Styles.
+                border-top: 1px solid theme-status($theme, 'default', 'border');
 
             }}
 
@@ -287,6 +234,10 @@
 
         div.panel:hover {
 
+            background-color: theme-status($theme, 'default', 'primary-hover');
+            border: 1px solid theme-status($theme, 'default', 'border-hover');
+
+            // Loop through all panel header elements.
             @each $panel_header_element in $panel_header_element_list {
             > #{$panel_header_element} {
 
@@ -294,6 +245,15 @@
 
             }}
 
+            // Loop through all panel content elements.
+            @each $panel_content_element in $panel_content_element_list {
+            > #{$panel_content_element} {
+
+                background-color: theme-status($theme, 'default', 'secondary-hover');
+
+            }}
+
+            // Loop thorugh all panel footer elements.
             @each $panel_footer_element in $panel_footer_element_list {
             > #{$panel_footer_element} {
 
@@ -344,10 +304,22 @@
 
             div.panel.#{$status} {
 
+                background-color: theme-status($theme, $status, 'primary');
+                border: 1px solid theme-status($theme, $status, 'border');
+
+                a:hover:not(.button) {
+                    background-color: theme-status($theme, $status, 'primary');
+                }
+
+                // Loop through all panel header elements.
                 @each $panel_header_element in $panel_header_element_list {
                 > #{$panel_header_element} {
 
+                    // Text Styles.
                     color: theme-status($theme, $status, 'text');
+
+                    // Visual Styles.
+                    border-bottom: 1px solid theme-status($theme, $status, 'border');
 
                     a:not(.button) {
                         color: theme-status($theme, $status, 'link');
@@ -359,6 +331,7 @@
 
                 }}
 
+                // Loop through all panel content elements.
                 @each $panel_content_element in $panel_content_element_list {
                 > #{$panel_content_element} {
 
@@ -367,10 +340,15 @@
                     }
                 }}
 
+                // Loop through all panel footer elements.
                 @each $panel_footer_element in $panel_footer_element_list {
                 > #{$panel_footer_element} {
 
+                    // Text Styles.
                     color: theme-status($theme, $status, 'text');
+
+                    // Visual Styles.
+                    border-top: 1px solid theme-status($theme, $status, 'border');
 
                     a:not(.button) {
                         color: theme-status($theme, $status, 'link');
@@ -381,205 +359,6 @@
                     }
 
                 }}
-            }
-        }
-
-    }}
-
-}
-
-//================================================//
-//===== END "Basic Panel" Theme Colors Block =====//
-//================================================//
-
-
-//==================================//
-//==== START Tabbed Panel Block ====//
-//==================================//
-
-.main-content {
-
-    div.panel.tabs {
-
-        .tab-nav {
-
-            @each $header_element in $header_element_list {
-            #{$header_element} {
-
-                @each $font-option, $font-option-value in $font-size-options {
-                .font-size-#{$font-option} & {
-
-                    font-size: font-option($font-option);
-
-                }}
-
-            }}
-        }
-
-        .tab-content > *:not(.selected) {
-            display: none;
-        }
-
-    }
-}
-
-//==================================//
-//===== END Tabbed Panel Block =====//
-//==================================//
-
-
-//=================================================//
-//==== START "Tabbed Panel" Theme Colors Block ====//
-//=================================================//
-
-.main-content {
-
-    @each $theme, $theme-dict in $theme-colors {
-    .theme-#{$theme} & {
-
-        // Loop through all possible status types.
-        @each $status, $status-dict in theme-status-dict($theme) {
-
-            div.panel.tabs.#{$status} .tab-nav li {
-                color: theme-status($theme, $status, 'text');
-            }
-
-        }
-
-    }}
-
-}
-
-//=================================================//
-//===== END "Tabbed Panel" Theme Colors Block =====//
-//=================================================//
-
-
-//================================================================================//
-//==================================== Visual ====================================//
-//================================== Includes: ===================================//
-//================================================================================//
-// vertical-align,                                                                //
-//                                                                                //
-// list-style, list-style-type, list-style-position, list-style-image,            //
-//                                                                                //
-// pointer-events, cursor,                                                        //
-//                                                                                //
-// background, background-attatchment, background-color, background-image,        //
-// background-position, background-repeat, background-size,                       //
-//                                                                                //
-// border, border-collapse, border-top, border-right, border-bottom, border-left, //
-// border-color, border-image, border-top-color, border-right-color,              //
-// border-bottom-color, border-left-color, border-spacing, border-style,          //
-// border-top-style, border-right-style, border-bottom-style, border-left-style,  //
-// border-width, border-top-width, border-right-width, border-bottom-width,       //
-// border-left-width,                                                             //
-//                                                                                //
-// border-radius, border-top-right-radius, border-bottom-right-radius,            //
-// border-bottom-left-radius, border-top-left-radius, border-radius-topright,     //
-// border-radius-bottomright, border-radius-bottomleft, border-radius-topleft,    //
-//                                                                                //
-// content, quotes, outline, outline-offset, opacity, filter, visibility, size,   //
-// zoom                                                                           //
-//================================================================================//
-
-//=================================//
-//==== START Basic Panel Block ====//
-//=================================//
-
-.main-content {
-
-    div.panel {
-
-        a:not(.button) {
-            border-radius: 5em;
-        }
-    }
-}
-
-//=================================//
-//===== END Basic Panel Block =====//
-//=================================//
-
-
-//================================================//
-//==== START "Basic Panel" Theme Colors Block ====//
-//================================================//
-
-.main-content {
-
-    @each $theme, $theme-dict in $theme-colors {
-    .theme-#{$theme} & {
-
-        div.panel {
-            background-color: theme-status($theme, 'default', 'primary');
-            border: 1px solid theme-status($theme, 'default', 'border');
-
-            a:hover:not(.button) {
-                background-color: theme-status($theme, 'default', 'primary');
-            }
-
-            @each $panel_header_element in $panel_header_element_list {
-            > #{$panel_header_element} {
-
-                border-bottom: 1px solid theme-status($theme, 'default', 'border');
-
-            }}
-
-            @each $panel_content_element in $panel_content_element_list {
-            > #{$panel_content_element} {
-
-                background-color: theme-status($theme, 'default', 'secondary');
-
-            }}
-
-            @each $panel_footer_element in $panel_footer_element_list {
-            > #{$panel_footer_element} {
-
-                border-top: 1px solid theme-status($theme, 'default', 'border');
-
-            }}
-
-        }
-
-        div.panel:hover {
-            background-color: theme-status($theme, 'default', 'primary-hover');
-            border: 1px solid theme-status($theme, 'default', 'border-hover');
-
-            @each $panel_content_element in $panel_content_element_list {
-            > #{$panel_content_element} {
-
-                background-color: theme-status($theme, 'default', 'secondary-hover');
-
-            }}
-
-        }
-
-        // Loop through all possible status types.
-        @each $status, $status-dict in theme-status-dict($theme) {
-
-            div.panel.#{$status} {
-                background-color: theme-status($theme, $status, 'primary');
-                border: 1px solid theme-status($theme, $status, 'border');
-
-                a:hover:not(.button) {
-                    background-color: theme-status($theme, $status, 'primary');
-                }
-
-                @each $panel_header_element in $panel_header_element_list {
-                > #{$panel_header_element} {
-
-                    border-bottom: 1px solid theme-status($theme, $status, 'border');
-
-                }}
-
-                @each $panel_footer_element in $panel_footer_element_list {
-                > #{$panel_footer_element} {
-
-                    border-top: 1px solid theme-status($theme, $status, 'border');
-
-                }}
-
             }
 
             div.panel.#{$status}:hover {
@@ -607,19 +386,68 @@
 
     div.panel.tabs {
 
+        // Loop through all panel content elements.
+        @each $panel_content_element in $panel_content_element_list {
+        > #{$panel_content_element} {
+            padding: 0;
+        }}
+
         .tab-nav {
+            @include display-flex;
+            @include flex-direction(row);
+            @include justify-content(space-around);
+            @include align-items(center);
+
+            padding-left: 0;
+
             overflow-x: hidden;
 
             li {
+                // Positioning Styles.
+                @include flex(1);
+
+                min-width: 10%;
+
+                // Visual Styles.
                 list-style: none;
 
                 border-bottom-right-radius: 25px;
                 border-bottom-left-radius: 25px;
 
                 cursor: pointer;
+
+                // Other Styles.
+                @include transition(color 0.5s, background-color 0.5s, border 0.5s);
             }
+
+            // Loop through all header elements.
+            @each $header_element in $header_element_list {
+            #{$header_element} {
+
+                padding-top: 5px;
+                padding-bottom: 5px;
+
+                // Loop through all font size options.
+                @each $font-option, $font-option-value in $font-size-options {
+                .font-size-#{$font-option} & {
+
+                    font-size: font-option($font-option);
+
+                }}
+
+            }}
         }
+
+        .tab-content {
+            padding: 10px;
+        }
+
+        .tab-content > *:not(.selected) {
+            display: none;
+        }
+
     }
+
 }
 
 //==================================//
@@ -666,11 +494,22 @@
         // Loop through all possible status types.
         @each $status, $status-dict in theme-status-dict($theme) {
 
+
+
+        }
+
+        // Loop through all possible status types.
+        @each $status, $status-dict in theme-status-dict($theme) {
+
             div.panel.tabs.#{$status} {
 
                 .tab-nav {
 
                     li {
+                        // Text Styles.
+                        color: theme-status($theme, $status, 'text');
+
+                        // Visual Styles.
                         border-right: 1px solid theme-status($theme, $status, 'border');
                         border-bottom: 1px solid theme-status($theme, $status, 'border');
                         border-left: 1px solid theme-status($theme, $status, 'border');
@@ -706,6 +545,73 @@
 
 
 //================================================================================//
+//================================= Positioning ==================================//
+//================================== Includes: ===================================//
+//================================================================================//
+// position, top, right, bottom, left, z-index, display, float                    //
+//                                                                                //
+// grid-template-columns, grid-template-rows, grid-template-areas, grid-template, //
+// grid-gap, place-items, grid, grid-column, grid-row, grid-area, place-self,     //
+//                                                                                //
+// flex-direction, flex-wrap, justify-content, align-items, align-content, order, //
+// flex-grow, flex-shrink, flex-basis, flex, align-self,                          //
+//                                                                                //
+// width, height, max-width, max-height, min-width, min-height,                   //
+// padding, padding-top, padding-right, padding-bottom, padding-left,             //
+// margin, margin-top, margin-right, margin-bottom, margin-left,                  //
+//                                                                                //
+// margin-collapse, margin-top-collapse, margin-right-collapse,                   //
+// margin-bottom-collapse, margin-left-collapse,                                  //
+//                                                                                //
+// overflow, overflow-x, overflow-y, clip, clear                                  //
+//================================================================================//
+
+
+//================================================================================//
+//================================== Typography ==================================//
+//================================== Includes: ===================================//
+//================================================================================//
+// font, font-family, font-size, font-smoothing, osx-font-smoothing, font-style,  //
+// font-weight,                                                                   //
+//                                                                                //
+// hyphens, src, line-height, letter-spacing, word-spacing, color, text-align,    //
+// text-decoration, text-indent, text-overflow, text-rendering, text-size-adjust, //
+// text-shadow, text-transform,                                                   //
+//                                                                                //
+// word-break, word-wrap, white-space                                             //
+//================================================================================//
+
+
+//================================================================================//
+//==================================== Visual ====================================//
+//================================== Includes: ===================================//
+//================================================================================//
+// vertical-align,                                                                //
+//                                                                                //
+// list-style, list-style-type, list-style-position, list-style-image,            //
+//                                                                                //
+// pointer-events, cursor,                                                        //
+//                                                                                //
+// background, background-attatchment, background-color, background-image,        //
+// background-position, background-repeat, background-size,                       //
+//                                                                                //
+// border, border-collapse, border-top, border-right, border-bottom, border-left, //
+// border-color, border-image, border-top-color, border-right-color,              //
+// border-bottom-color, border-left-color, border-spacing, border-style,          //
+// border-top-style, border-right-style, border-bottom-style, border-left-style,  //
+// border-width, border-top-width, border-right-width, border-bottom-width,       //
+// border-left-width,                                                             //
+//                                                                                //
+// border-radius, border-top-right-radius, border-bottom-right-radius,            //
+// border-bottom-left-radius, border-top-left-radius, border-radius-topright,     //
+// border-radius-bottomright, border-radius-bottomleft, border-radius-topleft,    //
+//                                                                                //
+// content, quotes, outline, outline-offset, opacity, filter, visibility, size,   //
+// zoom                                                                           //
+//================================================================================//
+
+
+//================================================================================//
 //==================================== Other =====================================//
 //================================== Includes: ===================================//
 //================================================================================//
@@ -723,38 +629,3 @@
 // interpolation-mode, direction, marks, page, set-link-source, unicode-bidi,     //
 // speak                                                                          //
 //================================================================================//
-
-//=================================//
-//==== START Basic Panel Block ====//
-//=================================//
-
-div.panel {
-    @include transition(color 0.5s, background-color 0.5s, border 0.5s);
-
-    > div {
-        @include transition(color 0.5s, background-color 0.5s, border 0.5s);
-    }
-
-    a {
-        @include transition(color 0.5s, background-color 0.5s, border 0.5s);
-    }
-}
-
-//=================================//
-//===== END Basic Panel Block =====//
-//=================================//
-
-
-//==================================//
-//==== START Tabbed Panel Block ====//
-//==================================//
-
-.main-content div.panel.tabs {
-    .tab-nav li {
-        @include transition(color 0.5s, background-color 0.5s, border 0.5s);
-    }
-}
-
-//==================================//
-//===== END Tabbed Panel Block =====//
-//==================================//

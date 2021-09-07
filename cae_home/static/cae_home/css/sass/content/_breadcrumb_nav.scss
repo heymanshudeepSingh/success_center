@@ -7,6 +7,84 @@
 @import '../variables/_core';
 
 
+
+//============================================//
+//==== START Breadcrumb Nav Element Block ====//
+//============================================//
+
+main #breadcrumb-nav {
+
+    display: none;
+    @include flex-direction(row);
+    @include justify-content(center);
+    @include align-items(center);
+
+    ul {
+        // Positioning Styles.
+        @include display-flex;
+        @include flex-direction(row);
+        @include justify-content(center);
+        @include align-items(center);
+
+        padding-right: 10px;
+        padding-left: 10px;
+
+        // Visual Styles.
+        border-bottom-right-radius: 5px;
+        border-bottom-left-radius: 5px;
+    }
+
+    li, a {
+        padding-top: 5px;
+        padding-right: 10px;
+        padding-bottom: 5px;
+        padding-left: 10px;
+
+        text-decoration: none;
+        list-style-type: none;
+    }
+}
+
+//============================================//
+//===== END Breadcrumb Nav Element Block =====//
+//============================================//
+
+
+//===========================================================//
+//==== START "Breadcrumb Nav Element" Theme Colors Block ====//
+//===========================================================//
+
+main #breadcrumb-nav {
+
+    @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & {
+
+        ul {
+            background-color: theme-background($theme, 'primary');
+            border: 1px solid theme-background($theme, 'border');
+        }
+
+        li, a {
+            color: theme-text($theme, 'primary');
+        }
+
+        a:hover {
+            // Text Styles.
+            color: theme-text($theme, 'primary-hover');
+
+            // Visual Styles.
+            background-color: theme-background($theme, 'highlight');
+        }
+
+    }}
+
+}
+
+//===========================================================//
+//===== END "Breadcrumb Nav Element" Theme Colors Block =====//
+//===========================================================//
+
+
 //================================================================================//
 //================================= Positioning ==================================//
 //================================== Includes: ===================================//
@@ -29,41 +107,6 @@
 // overflow, overflow-x, overflow-y, clip, clear                                  //
 //================================================================================//
 
-//===========================//
-//==== START ----- Block ====//
-//===========================//
-
-main #breadcrumb-nav {
-    display: none;
-    @include flex-direction(row);
-    @include justify-content(center);
-    @include align-items(center);
-
-    ul {
-        @include display-flex;
-        @include flex-direction(row);
-        @include justify-content(center);
-        @include align-items(center);
-
-        padding-right: 10px;
-        padding-left: 10px;
-    }
-
-    li, a {
-        padding-top: 5px;
-        padding-right: 10px;
-        padding-bottom: 5px;
-        padding-left: 10px;
-
-        text-decoration: none;
-        list-style-type: none;
-    }
-}
-
-//===========================//
-//===== END ----- Block =====//
-//===========================//
-
 
 //================================================================================//
 //================================== Typography ==================================//
@@ -78,31 +121,6 @@ main #breadcrumb-nav {
 //                                                                                //
 // word-break, word-wrap, white-space                                             //
 //================================================================================//
-
-//==================================//
-//==== START Theme Colors Block ====//
-//==================================//
-
-main #breadcrumb-nav {
-
-    @each $theme, $theme-dict in $theme-colors {
-    .theme-#{$theme} & {
-
-        li, a {
-            color: theme-text($theme, 'primary');
-        }
-
-        a:hover {
-            color: theme-text($theme, 'primary-hover');
-        }
-
-    }}
-
-}
-
-//==================================//
-//===== END Theme Colors Block =====//
-//==================================//
 
 
 //================================================================================//
@@ -133,51 +151,6 @@ main #breadcrumb-nav {
 // zoom                                                                           //
 //================================================================================//
 
-//===========================//
-//==== START ----- Block ====//
-//===========================//
-
-main #breadcrumb-nav {
-
-    ul {
-        border-bottom-right-radius: 5px;
-        border-bottom-left-radius: 5px;
-    }
-
-}
-
-//===========================//
-//===== END ----- Block =====//
-//===========================//
-
-
-//==================================//
-//==== START Theme Colors Block ====//
-//==================================//
-
-main #breadcrumb-nav {
-
-    @each $theme, $theme-dict in $theme-colors {
-    .theme-#{$theme} & {
-
-        ul {
-            background-color: theme-background($theme, 'primary');
-
-            border: 1px solid theme-background($theme, 'border');
-        }
-
-        a:hover {
-            background-color: theme-background($theme, 'highlight');
-        }
-
-    }}
-
-}
-
-//==================================//
-//===== END Theme Colors Block =====//
-//==================================//
-
 
 //================================================================================//
 //==================================== Other =====================================//
@@ -197,13 +170,3 @@ main #breadcrumb-nav {
 // interpolation-mode, direction, marks, page, set-link-source, unicode-bidi,     //
 // speak                                                                          //
 //================================================================================//
-
-//===========================//
-//==== START ----- Block ====//
-//===========================//
-
-
-
-//===========================//
-//===== END ----- Block =====//
-//===========================//

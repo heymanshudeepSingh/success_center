@@ -7,6 +7,66 @@
 @import '../variables/_core';
 
 
+
+//===========================================//
+//==== START Overlay Modal Element Block ====//
+//===========================================//
+
+#overlay-modal-container {
+
+    // Positioning Styles.
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+
+    @include display-flex;
+    @include flex-direction(column);
+    @include justify-content(center);
+    @include align-items(center);
+
+    // Visual Styles.
+    background-color: $color-trans-grey-75;
+}
+
+#overlay-modal {
+    min-width: 50px;
+    min-height: 50px;
+
+    > .panel {
+        // Remove redundant Panel margin in popup
+        margin: 0;
+    }
+}
+
+//===========================================//
+//===== END Overlay Modal Element Block =====//
+//===========================================//
+
+//==========================================================//
+//==== START "Overlay Modal Element" Theme Colors Block ====//
+//==========================================================//
+
+#overlay-modal-container {
+
+    // Loop through all themes.
+    @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & #overlay-modal {
+
+        background-color: theme-background($theme, 'content');
+        border: 1px solid theme-background($theme, 'border');
+
+    }}
+
+}
+
+//==========================================================//
+//===== END "Overlay Modal Element" Theme Colors Block =====//
+//==========================================================//
+
+
 //================================================================================//
 //================================= Positioning ==================================//
 //================================== Includes: ===================================//
@@ -29,38 +89,6 @@
 // overflow, overflow-x, overflow-y, clip, clear                                  //
 //================================================================================//
 
-//===========================//
-//==== START ----- Block ====//
-//===========================//
-
-#overlay-modal-container {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 100;
-
-    @include display-flex;
-    @include flex-direction(column);
-    @include justify-content(center);
-    @include align-items(center);
-}
-
-#overlay-modal {
-    min-width: 50px;
-    min-height: 50px;
-
-    > .panel {
-        // Remove redundant Panel margin in popup
-        margin: 0;
-    }
-}
-
-//===========================//
-//===== END ----- Block =====//
-//===========================//
-
 
 //================================================================================//
 //================================== Typography ==================================//
@@ -75,16 +103,6 @@
 //                                                                                //
 // word-break, word-wrap, white-space                                             //
 //================================================================================//
-
-//===========================//
-//==== START ----- Block ====//
-//===========================//
-
-
-
-//===========================//
-//===== END ----- Block =====//
-//===========================//
 
 
 //================================================================================//
@@ -115,27 +133,6 @@
 // zoom                                                                           //
 //================================================================================//
 
-//===========================//
-//==== START ----- Block ====//
-//===========================//
-
-#overlay-modal-container {
-    background-color: $color-trans-grey-75;
-
-    @each $theme, $theme-dict in $theme-colors {
-    .theme-#{$theme} & #overlay-modal {
-
-        background-color: theme-background($theme, 'content');
-        border: 1px solid theme-background($theme, 'border');
-
-    }}
-
-}
-
-//===========================//
-//===== END ----- Block =====//
-//===========================//
-
 
 //================================================================================//
 //==================================== Other =====================================//
@@ -155,13 +152,3 @@
 // interpolation-mode, direction, marks, page, set-link-source, unicode-bidi,     //
 // speak                                                                          //
 //================================================================================//
-
-//===========================//
-//==== START ----- Block ====//
-//===========================//
-
-
-
-//===========================//
-//===== END ----- Block =====//
-//===========================//

@@ -7,34 +7,15 @@
 @import '../variables/_core';
 
 
-//================================================================================//
-//================================= Positioning ==================================//
-//================================== Includes: ===================================//
-//================================================================================//
-// position, top, right, bottom, left, z-index, display, float                    //
-//                                                                                //
-// grid-template-columns, grid-template-rows, grid-template-areas, grid-template, //
-// grid-gap, place-items, grid, grid-column, grid-row, grid-area, place-self,     //
-//                                                                                //
-// flex-direction, flex-wrap, justify-content, align-items, align-content, order, //
-// flex-grow, flex-shrink, flex-basis, flex, align-self,                          //
-//                                                                                //
-// width, height, max-width, max-height, min-width, min-height,                   //
-// padding, padding-top, padding-right, padding-bottom, padding-left,             //
-// margin, margin-top, margin-right, margin-bottom, margin-left,                  //
-//                                                                                //
-// margin-collapse, margin-top-collapse, margin-right-collapse,                   //
-// margin-bottom-collapse, margin-left-collapse,                                  //
-//                                                                                //
-// overflow, overflow-x, overflow-y, clip, clear                                  //
-//================================================================================//
 
 //==================================//
-//==== START General Form Block ====//
+//==== START Form Element Block ====//
 //==================================//
 
+// Logic for general/base form display.
 .main-content form {
 
+    // Text Styles.
     text-align: center;
 
     // Parent container for all of a form's fields.
@@ -56,9 +37,11 @@
             width: 100%;
 
             > label {
+                // Positioning Styles.
                 width: 30%;
                 margin: 5px;
 
+                // Text Styles.
                 text-align: right;
 
                 @media only screen and (min-width: $screen-tablet-mid) {
@@ -68,9 +51,11 @@
 
             // Field value div.
             > div {
+                // Positioning Styles.
                 margin: 5px;
                 width: 70%;
 
+                // Test Styles.
                 text-align: left;
 
                 @media only screen and (min-width: $screen-tablet-mid) {
@@ -90,7 +75,21 @@
         margin-right: auto;
         margin-left: auto;
     }
+
+    // Optional form name display. Mostly used for pages with multiple forms.
+    .form-display-name {
+        color: $color-grey-50;
+        text-align: left;
+
+        @each $font-option, $font-option-value in $font-size-options {
+        .font-size-#{$font-option} & {
+
+            font-size: font-option($font-option);
+
+        }}
+    }
 }
+
 
 .main-content form.as-row {
     @include display-flex();
@@ -129,7 +128,7 @@
 }
 
 //==================================//
-//===== END General Form Block =====//
+//===== END Form Element Block =====//
 //==================================//
 
 
@@ -139,6 +138,7 @@
 
 .main-content form {
 
+    // Handling for custom "select buttons" form elements.
     .select-buttons {
         @include display-flex;
         @include flex-direction(row);
@@ -147,8 +147,16 @@
         @include align-items(center);
 
         .select-item {
+            // Positioning Styles.
             padding: 10px;
             margin: 5px;
+
+            // Test Styles.
+            text-align: center;
+
+            // Visual Styles.
+            cursor: pointer;
+            border-radius: 5px;
         }
 
         & {
@@ -158,6 +166,7 @@
         }
     }
 
+    // Handling for custom signature form elements.
     .signature-widget {
         width: 90%;
     }
@@ -165,11 +174,93 @@
     .signature-pad {
         margin-top: 5px;
     }
+
 }
 
 //===================================//
 //===== END Custom Widget Block =====//
 //===================================//
+
+
+//==================================================//
+//==== START "Custom Widget" Theme Colors Block ====//
+//==================================================//
+
+.main-content form {
+
+    // Handling for custom "select buttons" form elements.
+    .select-buttons {
+
+        // Loop through all themes.
+        @each $theme, $theme-dict in $theme-colors {
+        .theme-#{$theme} & {
+
+            .select-item {
+                // Text Styles.
+                color: theme-text($theme, 'content');
+
+                // Visual Styles.
+                border: 3px solid theme-status($theme, 'primary', 'primary');
+            }
+
+            .select-item.selected {
+                // Text Styles.
+                color: theme-status($theme, 'primary', 'text');
+
+                // Visual Styles.
+                background: theme-status($theme, 'primary', 'primary');
+                border: 3px solid theme-status($theme, 'primary', 'border');
+            }
+
+        }}
+
+    }
+
+    // Handling for custom signature form elements.
+    .signature-pad {
+
+        // Loop through all themes.
+        @each $theme, $theme-dict in $theme-colors {
+        .theme-#{$theme} & {
+
+            // Text Styles.
+            penColor: theme-text($theme, 'text');
+
+            // Visual Styles.
+            background-color: theme-background($theme, 'background');
+            border: 1px solid theme-background($theme, 'border');
+
+        }}
+
+    }
+}
+
+//==================================================//
+//===== END "Custom Widget" Theme Colors Block =====//
+//==================================================//
+
+
+//================================================================================//
+//================================= Positioning ==================================//
+//================================== Includes: ===================================//
+//================================================================================//
+// position, top, right, bottom, left, z-index, display, float                    //
+//                                                                                //
+// grid-template-columns, grid-template-rows, grid-template-areas, grid-template, //
+// grid-gap, place-items, grid, grid-column, grid-row, grid-area, place-self,     //
+//                                                                                //
+// flex-direction, flex-wrap, justify-content, align-items, align-content, order, //
+// flex-grow, flex-shrink, flex-basis, flex, align-self,                          //
+//                                                                                //
+// width, height, max-width, max-height, min-width, min-height,                   //
+// padding, padding-top, padding-right, padding-bottom, padding-left,             //
+// margin, margin-top, margin-right, margin-bottom, margin-left,                  //
+//                                                                                //
+// margin-collapse, margin-top-collapse, margin-right-collapse,                   //
+// margin-bottom-collapse, margin-left-collapse,                                  //
+//                                                                                //
+// overflow, overflow-x, overflow-y, clip, clear                                  //
+//================================================================================//
 
 
 //================================================================================//
@@ -185,100 +276,6 @@
 //                                                                                //
 // word-break, word-wrap, white-space                                             //
 //================================================================================//
-
-//==================================//
-//==== START General Form Block ====//
-//==================================//
-
-.main-content form {
-
-    .form-display-name {
-        color: $color-grey-50;
-        text-align: left;
-
-        @each $font-option, $font-option-value in $font-size-options {
-        .font-size-#{$font-option} & {
-
-            font-size: font-option($font-option);
-
-        }}
-    }
-}
-
-//==================================//
-//===== END General Form Block =====//
-//==================================//
-
-
-//===================================//
-//==== START Custom Widget Block ====//
-//===================================//
-
-.main-content form {
-
-    .select-buttons {
-
-        .select-item {
-            text-align: center;
-        }
-    }
-
-    .signature-pad {
-
-        @each $theme, $theme-dict in $theme-colors {
-        .theme-#{$theme} & {
-
-            penColor: theme-text($theme, 'text');
-
-        }}
-
-    }
-}
-
-//===================================//
-//===== END Custom Widget Block =====//
-//===================================//
-
-
-//==================================================//
-//==== START "Custom Widget" Theme Colors Block ====//
-//==================================================//
-
-.main-content form {
-
-    .select-buttons {
-
-        @each $theme, $theme-dict in $theme-colors {
-        .theme-#{$theme} & {
-
-            .select-item {
-                color: theme-text($theme, 'content');
-            }
-
-            .select-item.selected {
-                color: theme-status($theme, 'primary', 'text');
-            }
-
-        }}
-
-    }
-
-    .signature-pad {
-
-        @each $theme, $theme-dict in $theme-colors {
-        .theme-#{$theme} & {
-
-            background-color: theme-background($theme, 'background');
-            border: 1px solid theme-background($theme, 'border');
-
-        }}
-
-    }
-}
-
-//==================================================//
-//===== END "Custom Widget" Theme Colors Block =====//
-//==================================================//
 
 
 //================================================================================//
@@ -309,55 +306,6 @@
 // zoom                                                                           //
 //================================================================================//
 
-//===================================//
-//==== START Custom Widget Block ====//
-//===================================//
-
-.main-content form {
-
-    .select-buttons {
-
-        .select-item {
-            cursor: pointer;
-            border-radius: 5px;
-        }
-    }
-}
-
-//===================================//
-//===== END Custom Widget Block =====//
-//===================================//
-
-
-//==================================================//
-//==== START "Custom Widget" Theme Colors Block ====//
-//==================================================//
-
-.main-content form {
-
-    .select-buttons {
-
-        @each $theme, $theme-dict in $theme-colors {
-        .theme-#{$theme} & {
-
-            .select-item {
-                border: 3px solid theme-status($theme, 'primary', 'primary');
-            }
-
-            .select-item.selected {
-                background: theme-status($theme, 'primary', 'primary');
-                border: 3px solid theme-status($theme, 'primary', 'border');
-            }
-
-        }}
-
-    }
-}
-
-//==================================================//
-//===== END "Custom Widget" Theme Colors Block =====//
-//==================================================//
-
 
 //================================================================================//
 //==================================== Other =====================================//
@@ -377,13 +325,3 @@
 // interpolation-mode, direction, marks, page, set-link-source, unicode-bidi,     //
 // speak                                                                          //
 //================================================================================//
-
-//===========================//
-//==== START ----- Block ====//
-//===========================//
-
-
-
-//===========================//
-//===== END ----- Block =====//
-//===========================//

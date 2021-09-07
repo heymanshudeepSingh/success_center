@@ -7,33 +7,13 @@
 @import '../variables/_core';
 
 
-//================================================================================//
-//================================= Positioning ==================================//
-//================================== Includes: ===================================//
-//================================================================================//
-// position, top, right, bottom, left, z-index, display, float                    //
-//                                                                                //
-// grid-template-columns, grid-template-rows, grid-template-areas, grid-template, //
-// grid-gap, place-items, grid, grid-column, grid-row, grid-area, place-self,     //
-//                                                                                //
-// flex-direction, flex-wrap, justify-content, align-items, align-content, order, //
-// flex-grow, flex-shrink, flex-basis, flex, align-self,                          //
-//                                                                                //
-// width, height, max-width, max-height, min-width, min-height,                   //
-// padding, padding-top, padding-right, padding-bottom, padding-left,             //
-// margin, margin-top, margin-right, margin-bottom, margin-left,                  //
-//                                                                                //
-// margin-collapse, margin-top-collapse, margin-right-collapse,                   //
-// margin-bottom-collapse, margin-left-collapse,                                  //
-//                                                                                //
-// overflow, overflow-x, overflow-y, clip, clear                                  //
-//================================================================================//
 
-//===========================//
-//==== START ----- Block ====//
-//===========================//
+//=========================================//
+//==== START Content Bar Element Block ====//
+//=========================================//
 
 .content-bar-left, .content-bar-right {
+
     position: absolute;
     z-index: 5;
 
@@ -49,8 +29,42 @@
         padding-left: 0 !important;
     }
 
+    li {
+        list-style: none;
+    }
+
+    // Loop through all header elements.
+    @each $header_element in $header_element_list {
+    #{$header_element} {
+
+        // Loop through all font size options.
+        @each $font-option, $font-option-value in $font-size-options {
+        .font-size-#{$font-option} & {
+
+            font-size: font-option($font-option) * 1.10;
+
+        }}
+
+    }}
+
     > .bar-nav {
         padding-top: 15px;
+    }
+
+    > .bar-nav p {
+
+        // Loop through all font size options.
+        @each $font-option, $font-option-value in $font-size-options {
+        .font-size-#{$font-option} & {
+
+            font-size: font-option($font-option) * 1.50;
+
+        }}
+
+        // Other Styles.
+        @include transition(color 0.5s, background-color 0.5s, border 0.5s);
+        cursor: pointer;
+
     }
 
     > .bar-content {
@@ -88,19 +102,54 @@
         }
     }
 
+    > .bar-content p, > .bar-content a {
+
+        // Loop through all font size options.
+        @each $font-option, $font-option-value in $font-size-options {
+        .font-size-#{$font-option} & {
+
+            font-size: font-option($font-option) * 0.90;
+
+        }}
+
+    }
+
+    > .bar-content a:hover {
+
+        // Loop through all font size options.
+        @each $font-option, $font-option-value in $font-size-options {
+        .font-size-#{$font-option} & {
+
+            font-size: font-option($font-option) * 0.90;
+
+        }}
+
+    }
+
     .arrow-right, .arrow-left {
+
+        // Positioning Styles.
         position: sticky;
         top: 0;
 
-        /*padding-right: 2px;
-        padding-bottom: 2px;
-        padding-left: 2px;
-        margin
-        margin-right: 2px;
-        margin-left: 2px;*/
         padding: 3px;
         margin: 2px;
+
+        // Loop through all font size options.
+        @each $font-option, $font-option-value in $font-size-options {
+        .font-size-#{$font-option} & {
+
+            font-size: font-option($font-option) !important;
+
+        }}
+
+        // Visual Styles.
+        border-radius: 25px;
+
+        // Other Styles.
+        @include transition(all 0.3s ease-out);
     }
+
 }
 
 .content-bar-left {
@@ -122,108 +171,22 @@
     }
 }
 
-//===========================//
-//===== END ----- Block =====//
-//===========================//
-
-
-//================================================================================//
-//================================== Typography ==================================//
-//================================== Includes: ===================================//
-//================================================================================//
-// font, font-family, font-size, font-smoothing, osx-font-smoothing, font-style,  //
-// font-weight,                                                                   //
-//                                                                                //
-// hyphens, src, line-height, letter-spacing, word-spacing, color, text-align,    //
-// text-decoration, text-indent, text-overflow, text-rendering, text-size-adjust, //
-// text-shadow, text-transform,                                                   //
-//                                                                                //
-// word-break, word-wrap, white-space                                             //
-//================================================================================//
-
 //=========================================//
-//==== START General Content Bar Block ====//
-//=========================================//
-
-.content-bar-left, .content-bar-right {
-
-    @each $theme, $theme-dict in $theme-colors {
-    .theme-#{$theme} & {
-
-        @each $header_element in $header_element_list {
-        #{$header_element} {
-
-            @each $font-option, $font-option-value in $font-size-options {
-            .font-size-#{$font-option} & {
-
-                font-size: font-option($font-option) * 1.10;
-
-            }}
-
-        }}
-
-        > .bar-nav p {
-
-            @each $font-option, $font-option-value in $font-size-options {
-            .font-size-#{$font-option} & {
-
-                font-size: font-option($font-option) * 1.50;
-
-            }}
-
-        }
-
-        > .bar-content p, > .bar-content a {
-
-            @each $font-option, $font-option-value in $font-size-options {
-            .font-size-#{$font-option} & {
-
-                font-size: font-option($font-option) * 0.90;
-
-            }}
-
-        }
-
-        > .bar-content a:hover {
-
-            @each $font-option, $font-option-value in $font-size-options {
-            .font-size-#{$font-option} & {
-
-                font-size: font-option($font-option) * 0.90;
-
-            }}
-
-        }
-
-    }}
-
-    .arrow-right, .arrow-left {
-
-        @each $font-option, $font-option-value in $font-size-options {
-        .font-size-#{$font-option} & {
-
-            font-size: font-option($font-option) !important;
-
-        }}
-
-    }
-
-}
-
-//=========================================//
-//===== END General Content Bar Block =====//
+//===== END Content Bar Element Block =====//
 //=========================================//
 
 
 //========================================================//
-//==== START "General Content Bar" Theme Colors Block ====//
+//==== START "Content Bar Element" Theme Colors Block ====//
 //========================================================//
 
 .content-bar-left, .content-bar-right {
 
+    // Loop through all themes.
     @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
+        // Loop through all header elements.
         @each $header_element in $header_element_list {
         #{$header_element} {
 
@@ -238,12 +201,22 @@
             color: theme-text($theme, 'content');
         }
 
+        > .bar-content {
+            background-color: theme-background($theme, 'primary');
+            border-right: 1px solid theme-background($theme, 'border');
+            border-left: 1px solid theme-background($theme, 'border');
+        }
+
         > .bar-content p, > .bar-content a {
             color: theme-text($theme, 'primary');
         }
 
         > .bar-content a:hover {
+            // Text Styles.
             color: theme-text($theme, 'primary-hover');
+
+            // Visual Styles.
+            background-color: $color-trans-grey-25;
         }
 
         .arrow-right, .arrow-left {
@@ -254,85 +227,9 @@
             color: theme-stats($theme, 'primary', 'text');
         }
 
-    }}
-
-}
-
-//========================================================//
-//===== END "General Content Bar" Theme Colors Block =====//
-//========================================================//
-
-
-//================================================================================//
-//==================================== Visual ====================================//
-//================================== Includes: ===================================//
-//================================================================================//
-// vertical-align,                                                                //
-//                                                                                //
-// list-style, list-style-type, list-style-position, list-style-image,            //
-//                                                                                //
-// pointer-events, cursor,                                                        //
-//                                                                                //
-// background, background-attatchment, background-color, background-image,        //
-// background-position, background-repeat, background-size,                       //
-//                                                                                //
-// border, border-collapse, border-top, border-right, border-bottom, border-left, //
-// border-color, border-image, border-top-color, border-right-color,              //
-// border-bottom-color, border-left-color, border-spacing, border-style,          //
-// border-top-style, border-right-style, border-bottom-style, border-left-style,  //
-// border-width, border-top-width, border-right-width, border-bottom-width,       //
-// border-left-width,                                                             //
-//                                                                                //
-// border-radius, border-top-right-radius, border-bottom-right-radius,            //
-// border-bottom-left-radius, border-top-left-radius, border-radius-topright,     //
-// border-radius-bottomright, border-radius-bottomleft, border-radius-topleft,    //
-//                                                                                //
-// content, quotes, outline, outline-offset, opacity, filter, visibility, size,   //
-// zoom                                                                           //
-//================================================================================//
-
-//=========================================//
-//==== START General Content Bar Block ====//
-//=========================================//
-
-.content-bar-left, .content-bar-right {
-
-    li {
-        list-style: none;
-    }
-
-    .arrow-right, .arrow-left {
-        border-radius: 25px;
-    }
-
-}
-
-//=========================================//
-//===== END General Content Bar Block =====//
-//=========================================//
-
-
-//========================================================//
-//==== START "General Content Bar" Theme Colors Block ====//
-//========================================================//
-
-.content-bar-left, .content-bar-right {
-
-    @each $theme, $theme-dict in $theme-colors {
-    .theme-#{$theme} & {
-
-        > .bar-content {
-            background-color: theme-background($theme, 'primary');
-            border-right: 1px solid theme-background($theme, 'border');
-            border-left: 1px solid theme-background($theme, 'border');
-        }
-
-        .arrow-right, .arrow-left {
-            background-color: $color-trans-grey-25;
-        }
-
         // Font Awesome icons are weird in that their fill is sometimes the "font color" style.
-        // Since we're using this for background fill, putting the style here instead of the "Typography" block.
+        // Since we're using this for background fill, putting the style here instead of the
+        // "Typography" block.
         .arrow-right:hover, .arrow-left:hover {
             color: theme-status($theme, 'primary', 'primary');
             background-color: theme-background($theme, 'primary');
@@ -367,8 +264,75 @@
 }
 
 //========================================================//
-//===== END "General Content Bar" Theme Colors Block =====//
+//===== END "Content Bar Element" Theme Colors Block =====//
 //========================================================//
+
+
+//================================================================================//
+//================================= Positioning ==================================//
+//================================== Includes: ===================================//
+//================================================================================//
+// position, top, right, bottom, left, z-index, display, float                    //
+//                                                                                //
+// grid-template-columns, grid-template-rows, grid-template-areas, grid-template, //
+// grid-gap, place-items, grid, grid-column, grid-row, grid-area, place-self,     //
+//                                                                                //
+// flex-direction, flex-wrap, justify-content, align-items, align-content, order, //
+// flex-grow, flex-shrink, flex-basis, flex, align-self,                          //
+//                                                                                //
+// width, height, max-width, max-height, min-width, min-height,                   //
+// padding, padding-top, padding-right, padding-bottom, padding-left,             //
+// margin, margin-top, margin-right, margin-bottom, margin-left,                  //
+//                                                                                //
+// margin-collapse, margin-top-collapse, margin-right-collapse,                   //
+// margin-bottom-collapse, margin-left-collapse,                                  //
+//                                                                                //
+// overflow, overflow-x, overflow-y, clip, clear                                  //
+//================================================================================//
+
+
+//================================================================================//
+//================================== Typography ==================================//
+//================================== Includes: ===================================//
+//================================================================================//
+// font, font-family, font-size, font-smoothing, osx-font-smoothing, font-style,  //
+// font-weight,                                                                   //
+//                                                                                //
+// hyphens, src, line-height, letter-spacing, word-spacing, color, text-align,    //
+// text-decoration, text-indent, text-overflow, text-rendering, text-size-adjust, //
+// text-shadow, text-transform,                                                   //
+//                                                                                //
+// word-break, word-wrap, white-space                                             //
+//================================================================================//
+
+
+//================================================================================//
+//==================================== Visual ====================================//
+//================================== Includes: ===================================//
+//================================================================================//
+// vertical-align,                                                                //
+//                                                                                //
+// list-style, list-style-type, list-style-position, list-style-image,            //
+//                                                                                //
+// pointer-events, cursor,                                                        //
+//                                                                                //
+// background, background-attatchment, background-color, background-image,        //
+// background-position, background-repeat, background-size,                       //
+//                                                                                //
+// border, border-collapse, border-top, border-right, border-bottom, border-left, //
+// border-color, border-image, border-top-color, border-right-color,              //
+// border-bottom-color, border-left-color, border-spacing, border-style,          //
+// border-top-style, border-right-style, border-bottom-style, border-left-style,  //
+// border-width, border-top-width, border-right-width, border-bottom-width,       //
+// border-left-width,                                                             //
+//                                                                                //
+// border-radius, border-top-right-radius, border-bottom-right-radius,            //
+// border-bottom-left-radius, border-top-left-radius, border-radius-topright,     //
+// border-radius-bottomright, border-radius-bottomleft, border-radius-topleft,    //
+//                                                                                //
+// content, quotes, outline, outline-offset, opacity, filter, visibility, size,   //
+// zoom                                                                           //
+//================================================================================//
 
 
 //================================================================================//
@@ -389,23 +353,3 @@
 // interpolation-mode, direction, marks, page, set-link-source, unicode-bidi,     //
 // speak                                                                          //
 //================================================================================//
-
-//===========================//
-//==== START ----- Block ====//
-//===========================//
-
-.content-bar-left, .content-bar-right {
-
-    > .bar-nav p {
-        @include transition(color 0.5s, background-color 0.5s, border 0.5s);
-        cursor: pointer;
-    }
-
-    .arrow-left, .arrow-right {
-        @include transition(all 0.3s ease-out);
-    }
-}
-
-//===========================//
-//===== END ----- Block =====//
-//===========================//
