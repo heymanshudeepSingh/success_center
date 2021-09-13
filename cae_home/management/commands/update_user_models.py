@@ -226,6 +226,7 @@ class Command(BaseCommand):
 
         # First attempt to update User model, if one is associated with provided value.
         # Note that updating a User model also updates associated WmuUser models.
+        user_intermediary_model = None
         try:
             # First search by BroncoNet.
             user_intermediary_model = models.UserIntermediary.objects.get(bronco_net=user_value)
@@ -238,6 +239,28 @@ class Command(BaseCommand):
             except models.UserIntermediary.DoesNotExist:
                 # Failed to find by BroncoNet or Winno. User/Wmu model does not exist for provided value.
                 print('Could not find UserIntermediary model.')
+
+        # Handle if new user. This is indicated by no UserIntermediary model existing.
+        if user_intermediary_model is None:
+            # Attempt to create associated (login) User model.
+            wmu_auth.create_or_update_user_model(user_value)
+
+            # Attempt to create associated WmuUser model.
+            wmu_auth.create_or_update_wmu_user_model(user_value)
+
+            # Attempt again to get user_intermediary.
+            try:
+                # First search by BroncoNet.
+                user_intermediary_model = models.UserIntermediary.objects.get(bronco_net=user_value)
+                print('Found UserIntermediary model.')
+            except models.UserIntermediary.DoesNotExist:
+                # Failed to find by BroncoNet. Try by Winno.
+                try:
+                    user_intermediary_model = models.UserIntermediary.objects.get(winno=user_value)
+                    print('Found UserIntermediary model.')
+                except models.UserIntermediary.DoesNotExist:
+                    # Failed to find by BroncoNet or Winno. User/Wmu model does not exist for provided value.
+                    print('Could not find UserIntermediary model.')
 
         # Run update logic on user.
         if user_intermediary_model.user is not None:
