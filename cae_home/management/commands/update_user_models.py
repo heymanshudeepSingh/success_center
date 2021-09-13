@@ -68,6 +68,7 @@ class Command(BaseCommand):
         For similar handling of WmuUser models, see handle_wmu_user_models().
         :param update_all_bool: Boolean to override RNG logic, and force updating of all models.
         """
+        cae_auth = cae_backend.CaeAuthBackend()
         wmu_auth = wmu_backend.WmuAuthBackend()
 
         # Get list of all active user models.
@@ -102,21 +103,22 @@ class Command(BaseCommand):
                 # Assumes one call per night.
                 if random.randint(1, 30) == 1:
                     # RNG has dictated we check this user's ldap info.
-                    handled_list = self.login_user_update(wmu_auth, user_model, handled_list)
+                    handled_list = self.login_user_update(cae_auth, wmu_auth, user_model, handled_list)
                 else:
                     # RNG didn't dictate we check user.
                     # However, run anyways if it's been more than a full month since last LDAP check.
                     month_ago = timezone.now().date() - timezone.timedelta(days=30)
                     if last_user_ldap_check < month_ago:
                         # Check user's Ldap info.
-                        handled_list = self.login_user_update(wmu_auth, user_model, handled_list)
+                        handled_list = self.login_user_update(cae_auth, wmu_auth, user_model, handled_list)
 
         return handled_list
 
-    def login_user_update(self, wmu_auth, user_model, handled_list):
+    def login_user_update(self, cae_auth, wmu_auth, user_model, handled_list):
         """
         Logic to actually update a given (login) User model.
-        :param wmu_auth: Initialized Wmu Auth backend.
+        :param cae_auth: Initialized CAE Auth backend.
+        :param wmu_auth: Initialized WMU Auth backend.
         :param user_model: (Login) User model to update.
         :param handled_list: List to hold all (login) User models that have been updated so far.
         :return: Updated handled_list variable.
@@ -127,7 +129,10 @@ class Command(BaseCommand):
         # Usually not needed, but occasionally required such as when adding new database fields.
         compare_user_and_wmuuser_models(user_model.username)
 
-        # Update user data using LDAP.
+        # Update user data using CAE LDAP.
+        cae_auth.create_or_update_user_model(user_model.username)
+
+        # Update user data using WMU LDAP.
         wmu_auth.create_or_update_user_model(user_model.username)
 
         # Add user to handled list, to avoid potentially re-running update logic in WmuUser update function.
@@ -222,6 +227,7 @@ class Command(BaseCommand):
         :param user_value: BroncoNet or Winno of user to update.
         """
         print('Running single user logic for "{0}".'.format(user_value))
+        cae_auth = cae_backend.CaeAuthBackend()
         wmu_auth = wmu_backend.WmuAuthBackend()
 
         # First attempt to update User model, if one is associated with provided value.
@@ -243,6 +249,7 @@ class Command(BaseCommand):
         # Handle if new user. This is indicated by no UserIntermediary model existing.
         if user_intermediary_model is None:
             # Attempt to create associated (login) User model.
+            cae_auth.create_or_update_user_model(user_value)
             wmu_auth.create_or_update_user_model(user_value)
 
             # Attempt to create associated WmuUser model.
@@ -265,7 +272,7 @@ class Command(BaseCommand):
         # Run update logic on user.
         if user_intermediary_model.user is not None:
             # (Login) User model exists for associated UserIntermediary. Run updates with that.
-            self.login_user_update(wmu_auth, user_intermediary_model.user, [])
+            self.login_user_update(cae_auth, wmu_auth, user_intermediary_model.user, [])
 
         elif user_intermediary_model.wmu_user is not None:
             # WmuUser model exists for UserIntermediary. Run updates with that.
@@ -273,7 +280,7 @@ class Command(BaseCommand):
 
         else:
             # Neither (login) User or WmuUser models exist for UserIntermediary. This shouldn't ever happen.
-            raise ValueError(
+            raise RuntimeError(
                 'UserIntermediary of "{0}" does not seem to have associated User or WmuUser models.'.format(
                     user_intermediary_model,
                 )
