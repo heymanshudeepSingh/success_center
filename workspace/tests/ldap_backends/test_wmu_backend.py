@@ -132,6 +132,7 @@ class WmuAuthBackendTests(IntegrationTestCase):
             self.assertTrue(user_in_retention)
 
     @unittest.skipUnless(run_ldap_tests(), 'Missing criteria for LDAP. Skipping Ldap tests.')
+    @unittest.skipUnless(prog_or_student_test_account_is_populated(), 'No Ldap User specified. Skipping Ldap tests.')
     def test___verify_user_ldap_status_wmu_enrolled(self):
         with self.subTest('With wmuEnrolled field True.'):
             ldap_info = {
