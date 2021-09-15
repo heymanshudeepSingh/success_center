@@ -425,7 +425,7 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
         self,
         url, expected_title, *args,
         get=False, user=None, data=None, status=200, expected_redirect_url=None, expected_messages=None,
-        expected_content=None, **kwargs,
+        allow_partial_messages=True, expected_content=None, **kwargs,
     ):
         """
         Assert for expected view Title, StatusCode, and UrlRedirect.
@@ -437,6 +437,7 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
         :param status: Expected status code for page, after redirections. Defaults to 200.
         :param expected_redirect_url: Optional url if page is expected to redirect. This should be what it redirects to.
         :param expected_messages: Expected message(s) to see on page. Aka, notifications that appear near top of page.
+        :param allow_partial_messages: Bool indicating if partial message matching is allowed. Defaults to True.
         :param expected_content: Expected context to see on page. Can be text or html elements.
         :return: The page response object, generated from the request.
         """
@@ -513,7 +514,7 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
             self.assertEqual(expected_title, actual_title, 'Incorrect Page Title')
 
         # Check expected messages for page.
-        self.assertPageMessages(response, expected_messages)
+        self.assertPageMessages(response, expected_messages, allow_partial_messages=allow_partial_messages)
 
         # Check expected context for page.
         self.assertPageContent(response, expected_content)
@@ -524,8 +525,8 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
     def assertGetResponse(
         self,
         url, title, *args,
-        user=None, data=None, status=200, expected_redirect_url=None, expected_messages=None, expected_content=None,
-        **kwargs,
+        user=None, data=None, status=200, expected_redirect_url=None, expected_messages=None,
+        allow_partial_messages=True, expected_content=None, **kwargs,
     ):
         """
         Assert for expected view Title, StatusCode, and UrlRedirect, when page is a GET request.
@@ -536,6 +537,7 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
         :param status: Expected status code for page, after redirections. Defaults to 200.
         :param expected_redirect_url: Optional url if page is expected to redirect. This should be what it redirects to.
         :param expected_messages: Expected message(s) to see on page. Aka, notifications that appear near top of page.
+        :param allow_partial_messages: Bool indicating if partial message matching is allowed. Defaults to True.
         :param expected_content: Expected context to see on page. Can be text or html elements.
         :return: The page response object, generated from the request.
         """
@@ -550,6 +552,7 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
             status=status,
             expected_redirect_url=expected_redirect_url,
             expected_messages=expected_messages,
+            allow_partial_messages=allow_partial_messages,
             expected_content=expected_content,
             **kwargs,
         )
@@ -557,8 +560,8 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
     def assertPostResponse(
         self,
         url, title, *args,
-        user=None, data=None, status=200, expected_redirect_url=None, expected_messages=None, expected_content=None,
-        **kwargs,
+        user=None, data=None, status=200, expected_redirect_url=None, expected_messages=None,
+        allow_partial_messages=True, expected_content=None, **kwargs,
     ):
         """
         Assert for expected view Title, StatusCode, and UrlRedirect, when page is a POST request.
@@ -569,6 +572,7 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
         :param status: Expected status code for page, after redirections. Defaults to 200.
         :param expected_redirect_url: Optional url if page is expected to redirect. This should be what it redirects to.
         :param expected_messages: Expected message(s) to see on page. Aka, notifications that appear near top of page.
+        :param allow_partial_messages: Bool indicating if partial message matching is allowed. Defaults to True.
         :param expected_content: Expected context to see on page. Can be text or html elements.
         :return: The page response object, generated from the request.
         """
@@ -592,16 +596,20 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
             status=status,
             expected_redirect_url=expected_redirect_url,
             expected_messages=expected_messages,
+            allow_partial_messages=allow_partial_messages,
             expected_content=expected_content,
             **kwargs,
         )
 
-    def assertPageMessages(self, response, expected_messages):
+    def assertPageMessages(self, response, expected_messages, allow_partial_messages=True):
         """
         Asserts that the given expected_messages text is found in the response "messages" context variable.
 
         Note that this function does not care if messages exist in response, but are not in the expected_messages value.
         It only cares if we pass expected_messages values which do not show up in the response.
+        :param response: Response to parse actual served messages from.
+        :param expected_messages: One or more messages to check for.
+        :param allow_partial_messages: Bool indicating if partial message matching is allowed. Defaults to True.
         """
         if 'messages' not in response.context or len(response.context['messages']) == 0:
             # No message data found in response.
@@ -635,19 +643,51 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
                 if isinstance(expected_messages, list) or isinstance(expected_messages, tuple):
                     # Is list of messages. Check all.
                     for expected_message in expected_messages:
-                        self.assertIn(
-                            expected_message,
-                            response_messages,
-                            'Could not find message "{0}" in response.'.format(expected_message),
-                        )
+
+                        # Try to find current expected_message.
+                        self._assertPageMessages(str(expected_message), response_messages, allow_partial_messages)
 
                 elif expected_messages:
                     # Is likely single message. Check if exists in response message data.
-                    self.assertIn(
-                        expected_messages,
-                        response_messages,
-                        'Could not find message "{0}" in response.'.format(expected_messages),
-                    )
+                    self._assertPageMessages(str(expected_messages), response_messages, allow_partial_messages)
+
+    def _assertPageMessages(self, expected_message, response_messages, allow_partial_messages):
+        """
+        Inner call for assertPageMessage function.
+
+        Guarantees that behavior is the same, regardless of one message/multiple, and regardless of allowing partial
+        matches or not.
+        :param expected_message: One or more messages to check for.
+        :param response_messages: Full set of actual messages served by response.
+        :param allow_partial_messages: Bool indicating if partial message matching is allowed. Defaults to True.
+        """
+        # Check if allowing partial matches (allowed by default).
+        if allow_partial_messages:
+
+            # Partial message matches allowed.
+            # To allow partial matches, we have to loop through each response_message value and check contains.
+            # If all checks fail for all response_messages, then expected_message was not found.
+            found_message = False
+            for response_message in response_messages:
+                try:
+                    self.assertIn(expected_message, response_message)
+                    found_message = True
+                except AssertionError:
+                    # Did not find partial match in current response_message. Attempt next one.
+                    pass
+
+            self.assertTrue(
+                found_message,
+                'Could not find message "{0}" in response.'.format(expected_message),
+            )
+
+        else:
+            # Partial message matches not allowed. Check for direct match.
+            self.assertIn(
+                expected_message,
+                response_messages,
+                'Could not find message "{0}" in response.'.format(expected_message),
+            )
 
     def assertPageContent(self, response, expected_content):
         """
