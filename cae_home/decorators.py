@@ -9,6 +9,7 @@ To pass args, see https://stackoverflow.com/a/27864969
 from channels.db import close_old_connections as _term_conns
 from django.contrib import messages
 from django.contrib.auth.views import redirect_to_login
+from django.contrib.auth.models import Group
 from django.core.exceptions import PermissionDenied
 from functools import wraps
 
@@ -42,6 +43,7 @@ def group_required(*required_groups):
     def check_group(view_func):
         @wraps(view_func)
         def wrapper(request, *args, **kwargs):
+            # Get current User.
             user = request.user
 
             # Check that user is authenticated.
@@ -49,10 +51,40 @@ def group_required(*required_groups):
                 messages.warning(request, 'Please log in to view the page.')
                 return redirect_to_login(request.path)
 
-            # Check that user is part of provided groups.
-            if bool(user.groups.filter(name__in=required_groups)):
+            # Check that provided values are Group models. If not, convert to such.
+            required_group_set = []
+            for passed_group in required_groups:
+                if isinstance(passed_group, list) or isinstance(passed_group, tuple):
+                    # Is list of groups. Handle accordingly.
+                    for inner_passed_group in passed_group:
+                        required_group_set.append(_validate_group(inner_passed_group))
+                else:
+                    # Is single value. Handle accordingly.
+                    required_group_set.append(_validate_group(passed_group))
+
+            # Check that user is either superuser, or part of provided groups.
+            if user.is_superuser or bool(user.groups.filter(name__in=required_group_set).exists()):
                 return view_func(request, *args, **kwargs)
             else:
                 raise PermissionDenied
         return wrapper
     return check_group
+
+
+def _validate_group(group):
+    """
+    Validates if provided value is auth Group model or not.
+    If not, then assumes is str representation of desired Group name.
+    """
+    # Check if Group model instance.
+    if isinstance(group, Group):
+        # Is Group model. Add to directly list.
+        return group
+    else:
+        # Not Group model. Assume is str of desired Group's name.
+        try:
+            return Group.objects.get(name=str(group).strip())
+        except Group.DoesNotExist:
+            raise Group.DoesNotExist(
+                'Invalid Group name of "{0}" provided. Could not find corresponding group.'.format(group),
+            )
