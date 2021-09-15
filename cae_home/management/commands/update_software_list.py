@@ -51,7 +51,7 @@ class Command(BaseCommand):
         homePath = '/alva/Software/'  # Remote location for scanning the folders for readmes
         # homePath = '/home/cae/projects/update-software/'
 
-        softwarelist = []  # List to store software details from readme.json
+        softwaredetails = []  # List to store software details from readme.json
         softwarenames = []  # List to store software names taken from path that the readmes are found in
         # fileList = glob.glob(homePath, recursive=True)
         # currentPath = pathlib.Path('.').absolute()
@@ -72,48 +72,51 @@ class Command(BaseCommand):
 
                 jsonfile = json.load(softFile)  # Parse json file
                 softwarenames.append(softName)  # Add software names to the list
-                softwarelist.append(jsonfile)  # Add the software details to the list
+                softwaredetails.append(jsonfile)  # Add the software details to the list
                 softFile.close()  # Close the opened json file
 
-        print('    Software names list: {0}'.format(softwarenames))
-        print('       Software details list: {0}'.format(softwarelist))
+        # print('    Software names list: {0}'.format(softwarenames))
+        # print('       Software details list: {0}'.format(softwarelist))
+        softwarelist = zip(softwarenames, softwaredetails)
+        print(list(softwarelist))
+        for names, details in softwarelist:  # Loop to add the software names and details to the database
 
-        # for softwareEntry in softwarelist:  # Loop to add the software names and details to the database
-        #
-        #     # Next section is taken almost verbatim from the create_dummy_model from cae_home.models.cae.py
-        #
-        #     name = softwarenames[softwareEntry]
-        #     slug = slugify(name)
-        #     version = softwarelist[softwareEntry]['version']
-        #     expiration = softwarelist[softwareEntry]['expiration']
-        #     rooms = softwarelist[softwareEntry]['rooms']
-        #
-        #     try:
-        #         currentModel = Software.objects.get(
-        #             name=name,
-        #             slug=slug,
-        #         )
-        #     except ObjectDoesNotExist:
-        #         currentModel = Software.objects.create(
-        #             name=name,
-        #             slug=slug,
-        #         )
-        #     # print
-        #     try:
-        #         SoftwareDetail.objects.get(
-        #             software=name,
-        #             version=version,
-        #             expiration=expiration,
-        #             # room detail ?
-        #         )
-        #         SoftwareDetail.save()
-        #     except ObjectDoesNotExist:
-        #         return SoftwareDetail.objects.create(
-        #             software=name,
-        #             version=version,
-        #             expiration=expiration,
-        #             rooms=rooms
-        #         )
+            # Next section is taken almost verbatim from the create_dummy_model from cae_home.models.cae.py
+            name = names
+            slug = slugify(name)
+            version = details['version']
+            expiration = details['expiration']
+            rooms = details['rooms']
+
+            try:
+                currentModel = Software.objects.get(
+                    name=name,
+                    slug=slug,
+                )
+                Software.save(currentModel)
+            except ObjectDoesNotExist:
+                currentModel = Software.objects.create(
+                    name=name,
+                    slug=slug,
+                )
+                Software.save(currentModel)
+            # print
+            try:
+                currentModel = SoftwareDetail.objects.get(
+                    software=name,
+                    version=version,
+                    expiration=expiration,
+                    # room detail ?
+                )
+                SoftwareDetail.save(currentModel)
+            except ObjectDoesNotExist:
+                return SoftwareDetail.objects.create(
+                    software=name,
+                    version=version,
+                    expiration=expiration,
+                    rooms=rooms
+                )
+                SoftwareDetail.save(self)
 
     def checkLastModified(self, readmefile):  # Function to check if the file was modified in the past two weeks
         # twoweeks = 1209600.00  # Value of two weeks in seconds
