@@ -253,6 +253,7 @@ ADMIN_REORDER = (
         'label': 'Core User Models',
         'models': (
             'auth.Group',
+            'auth.Permission',
             'cae_home.User',
             'cae_home.GroupMembership',
             'cae_home.UserIntermediary',

@@ -6,8 +6,9 @@ Admin view for CAE Home app.
 from django.conf import settings
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from django.contrib.auth.models import Permission
 from django.urls import reverse
-from django.utils.html import escape, mark_safe
+from django.utils.html import mark_safe
 
 # User Class Imports.
 from . import models
@@ -1283,6 +1284,7 @@ class SoftwareDetailAdmin(admin.ModelAdmin):
 
 # User Model Registration.
 admin.site.register(models.User, UserAdmin)
+admin.site.register(Permission)
 admin.site.register(models.GroupMembership, GroupMembershipAdmin)
 admin.site.register(models.UserIntermediary, UserIntermediaryAdmin)
 admin.site.register(models.Profile, ProfileAdmin)
