@@ -771,7 +771,7 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
     def assertWhitelistUserAccess(
         self,
         url, title, whitelist_users, *args,
-        get=False, data=None, status=200, expected_redirect_url=None, expected_messages=None, expected_content=None,
+        data=None, status=200, expected_redirect_url=None, expected_messages=None, expected_content=None,
         **kwargs
     ):
         """
@@ -835,7 +835,7 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
                 title,
                 *args,
                 user=whitelist_user,
-                get=get,
+                get=False if data else True,
                 data=data,
                 status=None,
                 expected_redirect_url=expected_redirect_url,
@@ -847,13 +847,13 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
             # Check status code. Should be anything except login redirect, 403, or 404.
             if response.status_code == 403:
                 # Got 403. Raise error.
-                raise ValueError(
+                raise AssertionError(
                     'Whitelist user "{0}" unable to access url at "{1}". Got 403.'.format(whitelist_user, url),
                 )
 
             elif response.status_code == 404:
                 # Got 404. Raise error.
-                raise ValueError(
+                raise AssertionError(
                     'Whitelist user "{0}" unable to access url at "{1}". Got 404.'.format(whitelist_user, url),
                 )
 
@@ -861,7 +861,7 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
                 # Got redirect. Check if login url.
                 if response.redirect_chain[-1][0] == self.login_url:
                     # Redirected to login page. Raise error.
-                    raise ValueError(
+                    raise AssertionError(
                         'Whitelist user "{0}" unable to access url at "{1}". Got redirect to login page.'.format(
                             whitelist_user,
                             url,
@@ -877,7 +877,7 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
     def assertBlacklistUserAccess(
         self,
         url, title, blacklist_users, *args,
-        get=False, data=None, status=None, expected_redirect_url=None, expected_messages=None, expected_content=None,
+        data=None, status=None, expected_redirect_url=None, expected_messages=None, expected_content=None,
         **kwargs
     ):
         """
@@ -940,7 +940,7 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
                 title,
                 *args,
                 user=blacklist_user,
-                get=get,
+                get=False if data else True,
                 data=data,
                 status=None,
                 expected_redirect_url=expected_redirect_url,
@@ -962,7 +962,7 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
 
                 else:
                     # Redirected to non-login page. Raise error.
-                    raise ValueError(
+                    raise AssertionError(
                         'Blacklist user "{0}" is able to access url at "{1}". Got redirect but otherwise accessed '
                         'fine.'.format(
                             blacklist_user,
