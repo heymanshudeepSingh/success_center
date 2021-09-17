@@ -177,6 +177,100 @@ def create_permission_group_users(password=default_password, with_names=True, as
     # Set all GroupMembership models for users.
     check_all_group_memberships()
 
+    # Also set inactive user GroupMembership. For these, we just set from "two years ago" up through to today.
+    today = timezone.localdate()
+    two_years_ago = today - timezone.timedelta(days=730)
+
+    # Set inactive GroupMembership for CAE Center users.
+    models.GroupMembership.objects.create(
+        user=cae_director_inactive,
+        group=Group.objects.get(name='CAE Director'),
+        date_joined=today,
+        date_left=two_years_ago,
+    )
+    models.GroupMembership.objects.create(
+        user=cae_building_coordinator_inactive,
+        group=Group.objects.get(name='CAE Building Coordinator'),
+        date_joined=today,
+        date_left=two_years_ago,
+    )
+    models.GroupMembership.objects.create(
+        user=cae_admin_ga_inactive,
+        group=Group.objects.get(name='CAE Admin GA'),
+        date_joined=today,
+        date_left=two_years_ago,
+    )
+    models.GroupMembership.objects.create(
+        user=cae_admin_ga_inactive,
+        group=Group.objects.get(name='CAE Admin'),
+        date_joined=today,
+        date_left=two_years_ago,
+    )
+    models.GroupMembership.objects.create(
+        user=cae_programmer_ga_inactive,
+        group=Group.objects.get(name='CAE Programmer GA'),
+        date_joined=today,
+        date_left=two_years_ago,
+    )
+    models.GroupMembership.objects.create(
+        user=cae_programmer_ga_inactive,
+        group=Group.objects.get(name='CAE Programmer'),
+        date_joined=today,
+        date_left=two_years_ago,
+    )
+    models.GroupMembership.objects.create(
+        user=cae_admin_inactive,
+        group=Group.objects.get(name='CAE Admin'),
+        date_joined=today,
+        date_left=two_years_ago,
+    )
+    models.GroupMembership.objects.create(
+        user=cae_programmer_inactive,
+        group=Group.objects.get(name='CAE Programmer'),
+        date_joined=today,
+        date_left=two_years_ago,
+    )
+    models.GroupMembership.objects.create(
+        user=cae_attendant_inactive,
+        group=Group.objects.get(name='CAE Attendant'),
+        date_joined=today,
+        date_left=two_years_ago,
+    )
+
+    # Set inactive GroupMembership for general WMU users.
+    models.GroupMembership.objects.create(
+        user=wmu_faculty_inactive,
+        group=Group.objects.get(name='WMU Faculty'),
+        date_joined=today,
+        date_left=two_years_ago,
+    )
+    models.GroupMembership.objects.create(
+        user=wmu_teacher_inactive,
+        group=Group.objects.get(name='WMU Teacher'),
+        date_joined=today,
+        date_left=two_years_ago,
+    )
+    models.GroupMembership.objects.create(
+        user=wmu_student_inactive,
+        group=Group.objects.get(name='WMU Student'),
+        date_joined=today,
+        date_left=two_years_ago,
+    )
+
+    # Set inactive GroupMembership for STEP (Success Center) users.
+    models.GroupMembership.objects.create(
+        user=step_admin_inactive,
+        group=Group.objects.get(name='STEP Admin'),
+        date_joined=today,
+        date_left=two_years_ago,
+    )
+    models.GroupMembership.objects.create(
+        user=step_employee_inactive,
+        group=Group.objects.get(name='STEP Employee'),
+        date_joined=today,
+        date_left=two_years_ago,
+    )
+
     if as_dict:
         # Populate dictionaries in case calling logic wants easy access to users.
         active_user_dict = {

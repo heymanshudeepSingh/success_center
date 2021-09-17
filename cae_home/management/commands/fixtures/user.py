@@ -8,6 +8,9 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.management import call_command
 from sys import stdout
 
+# User Imports.
+from cae_home.models import WmuUser
+
 
 def import_model_fixtures(style):
     """
@@ -287,6 +290,20 @@ def create_wmu_users(style, display_output=False):
 
     if display_output and style is not None:
         stdout.write('Imported fixtures for ' + style.SQL_FIELD('Wmu User') + ' models.\n')
+
+    # Set cae account active.
+    cae_account = WmuUser.objects.get(bronco_net='ceas_cae')
+    cae_account.userintermediary.cae_is_active = False
+    cae_account.userintermediary.wmu_is_active = False
+    cae_account.is_active = False
+    cae_account.save()
+
+    # Save prog account active.
+    prog_account = WmuUser.objects.get(bronco_net='ceas_prog')
+    prog_account.userintermediary.cae_is_active = False
+    prog_account.userintermediary.wmu_is_active = False
+    prog_account.is_active = False
+    prog_account.save()
 
 
 def create_addresses(style, display_output=False):
