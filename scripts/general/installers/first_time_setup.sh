@@ -93,7 +93,7 @@ function main() {
         # Ubuntu.
         elif [[ "$user_input" == "2" ]]
         then
-            echo -e "NOTE: This script has been tested on ${color_blue}Ubuntu Desktop 18.04 and 20.04.${color_reset}."
+            echo -e "NOTE: This script has been tested on ${color_blue}Ubuntu Desktop 18.04 and 20.04${color_reset}."
             echo "This script will ask for your password in a second..."
             echo ""
             echo -e "${color_blue}Installing Ubuntu package dependencies...${color_reset}"
