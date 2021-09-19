@@ -58,8 +58,13 @@ function main() {
         fi
     done
 
+    # Copy fresh instance of env.py file.
     cp ../workspace/local_env/env_example.py ../env.py
 
+    # Check all subprojects in the <project_root>/apps/ folder. Setup each found.
+    setup_subprojects
+
+    # Further handling, based on provided OS type.
     loop=true
     windows=false
     while [[ "$loop" == true ]]
@@ -80,6 +85,7 @@ function main() {
             echo "The script will ask for your password in a second..."
             echo ""
             echo -e "${color_blue}Installing ArchLinux package dependencies...${color_reset}"
+            echo -e "${color_blue}Depending on your machine, this may take up to 20 minutes...${color_reset}"
             sudo ./general/installers/arch_install.sh
             echo ""
             loop=false
@@ -87,10 +93,11 @@ function main() {
         # Ubuntu.
         elif [[ "$user_input" == "2" ]]
         then
-            echo -e "NOTE: This script has been tested on ${color_blue}Ubuntu Desktop 16.04 and 18.04${color_reset}."
+            echo -e "NOTE: This script has been tested on ${color_blue}Ubuntu Desktop 18.04 and 20.04.${color_reset}."
             echo "This script will ask for your password in a second..."
             echo ""
             echo -e "${color_blue}Installing Ubuntu package dependencies...${color_reset}"
+            echo -e "${color_blue}Depending on your machine, this may take up to 20 minutes...${color_reset}"
             sudo ./general/installers/ubuntu_install.sh "python_version" $python_version -f $env_mode
             echo ""
             loop=false
@@ -233,5 +240,72 @@ function main() {
     echo -e "${color_blue}Exiting script.${color_reset}"
     exit 0
 }
+
+
+###
+ # Checks all subprojects found in the local <project_root>/apps/ folder.
+ # For each one:
+ #  * Changes subproject to develpment branch, if currently on master.
+ #      Note: Any other branch name will not change. This is because it is assumed that this "first time setup" script
+ #      Will never be run on production. And the master branch is effectively only for production.
+ #  * Renames subproject from the default GitLab name scheme, to the proper naming scheme as desired by Django.
+ #      Note: Yes, annoyingly, capitalizations matter.
+ #
+ # If additional new projects are created, they will have to be manually defined here as well.
+ ##
+function setup_subprojects {
+    orig_location=$(pwd)
+
+    # Loop through all directories in <project_root>/apps/ folder.
+    cd ../apps
+    for dir in ./*
+    do
+        # Verify value is actually a directory.
+        if [[ -d "${dir}" ]]
+        then
+            # Open up project directory.
+            cd "${dir}"
+
+            # Verify project is not on master branch.
+            curr_branch="$(git rev-parse --abbrev-ref HEAD)"
+            if [[ "${curr_branch}" == "master" ]]
+            then
+                git checkout development
+            fi
+
+            # Leave project directory.
+            cd ../
+
+            # Check directory name and if recognized, rename to format Django expects.
+            string_to_lower "${dir}"
+            normalized_dir=${return_value}
+            if [[ "${normalized_dir}" == "./cae_web" && "${dir}" != "./CAE_Web" ]]
+            then
+                # Handle for CAE Web subproject.
+                mv "${dir}" "CAE_Web"
+
+            elif [[ "${normalized_dir}" == "./cico" && "${dir}" != "./CICO" ]]
+            then
+                # Handle for CICO subproject.
+                mv "${dir}" "CICO"
+
+            elif [[ "${normalized_dir}" == "./drop_off" && "${dir}" != "./Drop_Off" ]]
+            then
+                # Handle for Drop Off subproject.
+                mv "${dir}" "Drop_Off"
+
+            elif [[ "${normalized_dir}" == "./success_center" && "${dir}" != "./Success_Center" ]]
+            then
+                # Handle for Success Ctr subproject.
+                mv "${dir}" "Success_Center"
+            fi
+
+        fi
+    done
+
+    # Return to original location, so the rest of script logic functions the same.
+    cd "${orig_location}"
+}
+
 
 main
