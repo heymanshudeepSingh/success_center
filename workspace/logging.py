@@ -321,6 +321,18 @@ def _create_logging_dict(log_directory):
                 'level': 'NOTSET',
                 'propagate': False,
             },
+            # Catch-all for all subprojects in "apps" folder.
+            'apps': {
+                'handlers': [
+                    'console', 'file_debug',
+                    'file_info', 'file_channels', 'file_auth_info',
+                    'file_warn', 'file_auth_warn',
+                    'file_error', 'file_auth_error',
+                    'mail_error',
+                ],
+                'level': 'NOTSET',
+                'propagate': False,
+            },
 
             # Various debug logging, mostly associated with Daphne (Channels) or Redis.
             'asyncio': {
