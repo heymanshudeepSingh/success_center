@@ -3,7 +3,7 @@ CAE Home app testing Utility Functions and Classes.
 """
 
 # System Imports.
-import logging, re, sys
+import re, sys
 from channels.testing import ChannelsLiveServerTestCase
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -381,7 +381,7 @@ class AbstractTestHelper():
         """
         # Only handle if a child function has not already done so.
         if not self._error_displayed:
-            print(logging.traceback.format_exc())
+            print('{0}\n'.format(repr(err)))
             self._error_displayed = True
 
 
@@ -406,7 +406,7 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
         """
         # Call parent logic.
         super().setUpClass()
-        
+
         # Initialize default user and site theme models.
         create_site_themes(None)
 
