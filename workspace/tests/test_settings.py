@@ -13,12 +13,6 @@ class DropOffCoreViewTests(TestCase, TransactionTestCase):
     """
     Tests to ensure valid settings values.
     """
-    @classmethod
-    def setUpTestData(cls):
-        # Load all relevant fixtures.
-        with open(devnull, 'a') as null:
-            call_command('loaddata', 'production_models/site_themes', stdout=null)
-
     def test_debug_aliases(self):
         """
         Tests settings alias for DEBUG mode.

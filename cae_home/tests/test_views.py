@@ -19,21 +19,21 @@ class CAEHomeViewTests(IntegrationTestCase):
     """
     @classmethod
     def setUpTestData(cls):
-        # Call parent setup logic.
+        """
+        Logic to initialize model/testing variable data.
+        This is run exactly once, before any class tests are run.
+        """
+        # Call parent logic.
         super().setUpTestData()
 
         # Get list of all installed apps.
         cls.installed_app_list = [app.label for app in apps.get_app_configs()]
 
-        # Load all relevant fixtures.
-        with open(devnull, 'a') as null:
-            call_command('loaddata', 'production_models/site_themes', stdout=null)
-
     def setUp(self):
         """
         Logic to reset state before each individual test.
         """
-        # Call parent setup logic.
+        # Call parent logic.
         super().setUp()
 
         # Initialize password for login.

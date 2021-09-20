@@ -17,6 +17,12 @@ class DepartmentModelTests(IntegrationTestCase):
     Tests to ensure valid Department model creation/logic.
     """
     def setUp(self):
+        """
+        Logic to reset state before each individual test.
+        """
+        # Call parent logic.
+        super().setUp()
+
         self.test_department = models.Department.objects.create(name='Test Department', slug='test-department')
 
     def test_model_creation(self):
@@ -49,6 +55,12 @@ class RoomTypeModelTests(IntegrationTestCase):
     Tests to ensure valid Room Type model creation/logic.
     """
     def setUp(self):
+        """
+        Logic to reset state before each individual test.
+        """
+        # Call parent logic.
+        super().setUp()
+
         self.test_room_type = models.RoomType.objects.create(name="Test Room Type", slug='test-room-type')
 
     def test_model_creation(self):
@@ -82,10 +94,23 @@ class RoomModelTests(IntegrationTestCase):
     """
     @classmethod
     def setUpTestData(cls):
+        """
+        Logic to initialize model/testing variable data.
+        This is run exactly once, before any class tests are run.
+        """
+        # Call parent logic.
+        super().setUpTestData()
+
         cls.room_type = models.RoomType.create_dummy_model()
         cls.department = models.Department.create_dummy_model()
 
     def setUp(self):
+        """
+        Logic to reset state before each individual test.
+        """
+        # Call parent logic.
+        super().setUp()
+
         self.test_room = models.Room.objects.create(
             name='Test Room',
             room_type=self.room_type,
@@ -172,9 +197,22 @@ class MajorTests(IntegrationTestCase):
     """
     @classmethod
     def setUpTestData(cls):
+        """
+        Logic to initialize model/testing variable data.
+        This is run exactly once, before any class tests are run.
+        """
+        # Call parent logic.
+        super().setUpTestData()
+
         cls.department = models.Department.create_dummy_model()
 
     def setUp(self):
+        """
+        Logic to reset state before each individual test.
+        """
+        # Call parent logic.
+        super().setUp()
+
         self.test_major = models.Major.objects.create(
             department=self.department,
             student_code='Test Student Code',
@@ -235,10 +273,23 @@ class SemesterDateModelTests(IntegrationTestCase):
     """
     @classmethod
     def setUpTestData(cls):
+        """
+        Logic to initialize model/testing variable data.
+        This is run exactly once, before any class tests are run.
+        """
+        # Call parent logic.
+        super().setUpTestData()
+
         cls.end_date = timezone.localdate()
         cls.start_date = cls.end_date - timezone.timedelta(days=90)
 
     def setUp(self):
+        """
+        Logic to reset state before each individual test.
+        """
+        # Call parent logic.
+        super().setUp()
+
         self.test_semester_date = models.SemesterDate.objects.create(
             start_date=self.start_date,
             end_date=self.end_date,

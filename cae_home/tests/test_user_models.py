@@ -90,8 +90,12 @@ class UserIntermediaryModelTests(IntegrationTestCase):
     """
     @classmethod
     def setUpTestData(cls):
-        # Create Auth Group models.
-        create_groups()
+        """
+        Logic to initialize model/testing variable data.
+        This is run exactly once, before any class tests are run.
+        """
+        # Call parent logic.
+        super().setUpTestData()
 
         cls.major = models.Major.create_dummy_model()
         cls.user_type = models.WmuUser.PROFESSOR
@@ -170,6 +174,12 @@ class UserIntermediaryModelTests(IntegrationTestCase):
         cls.dual_wmu_user_2 = models.WmuUser.objects.get(bronco_net=cls.dual_bronco_net_2)
 
     def setUp(self):
+        """
+        Logic to reset state before each individual test.
+        """
+        # Call parent logic.
+        super().setUp()
+
         # Set up for User model instance.
         self.test_intermediary_with_user = models.UserIntermediary.objects.get(user=self.user)
         self.profile_with_user = self.test_intermediary_with_user.profile
@@ -925,6 +935,13 @@ class WmuUserTests(IntegrationTestCase):
     """
     @classmethod
     def setUpTestData(cls):
+        """
+        Logic to initialize model/testing variable data.
+        This is run exactly once, before any class tests are run.
+        """
+        # Call parent logic.
+        super().setUpTestData()
+
         # Import Department model fixtures.
         create_departments(None)
 
@@ -932,7 +949,13 @@ class WmuUserTests(IntegrationTestCase):
         cls.user_type = models.WmuUser.PROFESSOR
 
     def setUp(self):
-        self.bronco_net='abc1234'
+        """
+        Logic to reset state before each individual test.
+        """
+        # Call parent logic.
+        super().setUp()
+
+        self.bronco_net = 'abc1234'
         self.test_wmu_user = models.WmuUser.objects.create(
             bronco_net=self.bronco_net,
             winno='123456789',
@@ -1013,6 +1036,13 @@ class WmuUserMajorRelationModelTests(IntegrationTestCase):
     """
     @classmethod
     def setUpTestData(cls):
+        """
+        Logic to initialize model/testing variable data.
+        This is run exactly once, before any class tests are run.
+        """
+        # Call parent logic.
+        super().setUpTestData()
+
         cls.user_type = models.WmuUser.STUDENT
         cls.department = models.Department.create_dummy_model()
         cls.wmu_user_1 = models.WmuUser.objects.create(
@@ -1111,6 +1141,13 @@ class ProfileModelTests(IntegrationTestCase):
     """
     @classmethod
     def setUpTestData(cls):
+        """
+        Logic to initialize model/testing variable data.
+        This is run exactly once, before any class tests are run.
+        """
+        # Call parent logic.
+        super().setUpTestData()
+
         cls.bronco_net = 'temporary'
         cls.user = cls.create_user(cls, cls.bronco_net)
         cls.user_intermediary = models.UserIntermediary.objects.get(user=cls.user)
@@ -1121,6 +1158,12 @@ class ProfileModelTests(IntegrationTestCase):
         cls.font_size = models.Profile.FONT_BASE
 
     def setUp(self):
+        """
+        Logic to reset state before each individual test.
+        """
+        # Call parent logic.
+        super().setUp()
+
         self.test_profile = self.user_intermediary.profile
         self.test_profile.address = self.address
         self.test_profile.phone_number = PhoneNumber.from_string(self.phone_number)
@@ -1154,6 +1197,12 @@ class AddressModelTests(IntegrationTestCase):
     Tests to ensure valid Address model creation/logic.
     """
     def setUp(self):
+        """
+        Logic to reset state before each individual test.
+        """
+        # Call parent logic.
+        super().setUp()
+
         self.test_address = models.Address.objects.create(
             street="1234 TestStreet",
             optional_street="Test Apt",
@@ -1211,6 +1260,12 @@ class SiteThemeModelTests(IntegrationTestCase):
     Tests to ensure valid Site Theme model creation/logic.
     """
     def setUp(self):
+        """
+        Logic to reset state before each individual test.
+        """
+        # Call parent logic.
+        super().setUp()
+
         self.test_theme = models.SiteTheme.objects.create(
             display_name='Test Theme',
             file_name='test-theme',

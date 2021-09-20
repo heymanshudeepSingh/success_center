@@ -35,14 +35,6 @@ class CAEHomeUtilsTests(IntegrationTestCase):
     Tests to ensure util logic functions as expected.
     Tested logic is from "cae_home/tests/utils.py - IntegrationTestCase" class.
     """
-    @classmethod
-    def setUpTestData(cls):
-        # Run parent setup logic.
-        super().setUpTestData()
-
-        # Create general user groups.
-        create_groups()
-
     def test_create_user(self):
         """
         Tests create_user() utility function.
@@ -289,21 +281,18 @@ class CAEHomeViewTests(IntegrationTestCase):
     """
     @classmethod
     def setUpTestData(cls):
-        # Run parent setup logic.
+        """
+        Logic to initialize model/testing variable data.
+        This is run exactly once, before any class tests are run.
+        """
+        # Call parent logic.
         super().setUpTestData()
-
-        # Create general user groups.
-        create_groups()
 
         # Get an arbitrary request.
         cls.client = Client()
         cls.request = cls.client.get('info/servers/')
         if student_test_account_is_populated():
             cls.test_student_account = str(settings.BACKEND_LDAP_TEST_STUDENT_ID)
-
-        # Load all relevant fixtures.
-        with open(devnull, 'a') as null:
-            call_command('loaddata', 'production_models/site_themes', stdout=null)
 
         # Disable logging for tests.
         logging.disable(logging.CRITICAL)

@@ -400,25 +400,18 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
         self.login_url = reverse('cae_home:login')
 
     @classmethod
-    def setUpClass(cls):
+    def setUpTestData(cls):
         """
         Logic to run once, before any tests.
         """
         # Call parent logic.
-        super().setUpClass()
+        super().setUpTestData()
 
         # Initialize default user and site theme models.
         create_site_themes(None)
 
         # Initialize user models.
         cls.create_default_users_and_groups(cls)
-
-    def setUp(self):
-        """
-        Logic to reset state before each individual test.
-        """
-        # Run parent setup logic.
-        super().setUp()
 
     def assertURLEqual(self, url, expected, parse_qs=False):
         """
@@ -1244,7 +1237,24 @@ class LiveServerTestCase(AbstractTestHelper, ChannelsLiveServerTestCase):
         # Call parent logic.
         super().setUpClass()
 
+        # Initialize dict to hold driver window objects.
         cls._drivers = {}
+
+    def setUp(self):
+        """
+        Logic to reset state before each individual test.
+
+        Note that the default LiveServerTestCase class does not seem to have a setUpTestData() function.
+        Thus we initialize all models here, instead.
+        """
+        # Call parent logic.
+        super().setUp()
+
+        # Initialize default user and site theme models.
+        create_site_themes(None)
+
+        # Initialize user models.
+        self.create_default_users_and_groups()
 
     @classmethod
     def create_driver(cls):
@@ -1311,13 +1321,6 @@ class LiveServerTestCase(AbstractTestHelper, ChannelsLiveServerTestCase):
 
         # Call parent logic.
         super().tearDownClass()
-
-    def setUp(self):
-        """
-        Logic to reset state before each individual test.
-        """
-        # Call parent logic.
-        super().setUp()
 
     def tearDown(self):
         """

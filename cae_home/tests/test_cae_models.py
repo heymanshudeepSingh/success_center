@@ -16,6 +16,12 @@ class SoftwareModelTests(IntegrationTestCase):
     Tests to ensure valid Software model creation/logic.
     """
     def setUp(self):
+        """
+        Logic to reset state before each individual test.
+        """
+        # Call parent logic.
+        super().setUp()
+
         self.software_name = 'Test Software'
         self.test_software = models.Software.objects.create(
             name=self.software_name,
@@ -40,10 +46,23 @@ class SoftwareDetailModelTests(IntegrationTestCase):
     """
     @classmethod
     def setUpTestData(cls):
+        """
+        Logic to initialize model/testing variable data.
+        This is run exactly once, before any class tests are run.
+        """
+        # Call parent logic.
+        super().setUpTestData()
+
         cls.software = models.Software.create_dummy_model()
         cls.expiration=timezone.datetime.strptime('2020-01-01', '%Y-%m-%d').date()
 
     def setUp(self):
+        """
+        Logic to reset state before each individual test.
+        """
+        # Call parent logic.
+        super().setUp()
+
         self.software_version = 5
         self.test_software_detail = models.SoftwareDetail.objects.create(
             software=self.software,

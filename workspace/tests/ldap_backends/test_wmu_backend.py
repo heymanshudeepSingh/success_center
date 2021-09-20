@@ -26,6 +26,13 @@ class WmuAuthBackendTests(IntegrationTestCase):
     """
     @classmethod
     def setUpTestData(cls):
+        """
+        Logic to initialize model/testing variable data.
+        This is run exactly once, before any class tests are run.
+        """
+        # Call parent logic.
+        super().setUpTestData()
+
         if run_ldap_tests():
             cls.wmu_backend = WmuAuthBackend()
             cls.current_time = timezone.now()

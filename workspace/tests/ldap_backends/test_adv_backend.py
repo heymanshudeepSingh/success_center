@@ -20,6 +20,13 @@ class AdvisingAuthBackendTests(IntegrationTestCase):
     """
     @classmethod
     def setUpTestData(cls):
+        """
+        Logic to initialize model/testing variable data.
+        This is run exactly once, before any class tests are run.
+        """
+        # Call parent logic.
+        super().setUpTestData()
+
         if run_ldap_tests():
             cls.adv_backend = AdvisingAuthBackend()
 
