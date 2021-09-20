@@ -186,6 +186,17 @@ class AbstractTestHelper():
         # Save class variables.
         self._debug_print = debug_print
 
+    @classmethod
+    def setUpClass(cls):
+        """
+        Logic to run once, before any tests.
+        """
+        # Initialize default user and site theme models.
+        create_site_themes(None)
+
+        # Initialize user models.
+        cls.create_default_users_and_groups(cls)
+
     # region Debug Util Functions
 
     def debug_print(self, response):
@@ -1193,9 +1204,6 @@ class LiveServerTestCase(AbstractTestHelper, ChannelsLiveServerTestCase):
         super().setUpClass()
 
         cls._drivers = {}
-
-        # Initialize default user and site theme models.
-        create_site_themes(None)
 
     @classmethod
     def create_driver(cls):
