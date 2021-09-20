@@ -19,6 +19,9 @@ class CAEHomeViewTests(IntegrationTestCase):
     """
     @classmethod
     def setUpTestData(cls):
+        # Call parent setup logic.
+        super().setUpTestData()
+
         # Get list of all installed apps.
         cls.installed_app_list = [app.label for app in apps.get_app_configs()]
 
@@ -30,8 +33,11 @@ class CAEHomeViewTests(IntegrationTestCase):
         """
         Logic to reset state before each individual test.
         """
-        self.create_default_users_and_groups(password='test')
+        # Call parent setup logic.
         super().setUp()
+
+        # Initialize password for login.
+        self.create_default_users_and_groups(password='test')
 
     def test_login(self):
         """
