@@ -55,7 +55,11 @@ def login_redirect(request):
             if 'CAE Programmer' in user_groups:
                 return redirect('cae_home:index')
 
-        # Check if CAE Center employee.
+        # Check if CAE Attendant.
+        if 'CAE Attendant' in user_groups:
+            return redirect('cae_web_core:index')
+
+        # Check if any other CAE Center employee.
         if 'cae_web' in settings.INSTALLED_CAE_PROJECTS:
             for cae_group in settings.CAE_CENTER_GROUPS:
                 if cae_group in user_groups:

@@ -79,7 +79,7 @@ class CAEHomeViewTests(IntegrationTestCase):
 
                 # Quickly check template.
                 response = self.client.get(reverse('cae_home:login'), follow=True)
-                self.assertContains(response, 'Employee Shift Stats')
+                self.assertContains(response, 'CAE Center Contact Info')
 
             with self.subTest('Test Login View with CAE Admin user.'):
                 self.client.login(username='cae_admin', password='test')
@@ -145,10 +145,10 @@ class CAEHomeViewTests(IntegrationTestCase):
             with self.subTest('Test Login_Redirect View with CAE Attendant user.'):
                 self.client.login(username='cae_attendant', password='test')
                 response = self.client.get(reverse('cae_home:login_redirect'), follow=True)
-                self.assertRedirects(response, reverse('cae_web_shifts:stats'))
+                self.assertRedirects(response, reverse('cae_web_core:index'))
 
                 # Quickly check template.
-                self.assertContains(response, 'Employee Shift Stats')
+                self.assertContains(response, 'CAE Center Contact Info')
 
             with self.subTest('Test Login_Redirect View with CAE Admin user.'):
                 self.client.login(username='cae_admin', password='test')
