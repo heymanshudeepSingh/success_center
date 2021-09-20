@@ -3,7 +3,7 @@ CAE Home app testing Utility Functions and Classes.
 """
 
 # System Imports.
-import re, sys
+import logging, re, sys
 from channels.testing import ChannelsLiveServerTestCase
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -185,17 +185,7 @@ class AbstractTestHelper():
 
         # Save class variables.
         self._debug_print = debug_print
-
-    @classmethod
-    def setUpClass(cls):
-        """
-        Logic to run once, before any tests.
-        """
-        # Initialize default user and site theme models.
-        create_site_themes(None)
-
-        # Initialize user models.
-        cls.create_default_users_and_groups(cls)
+        self._error_displayed = False
 
     # region Debug Util Functions
 
@@ -385,6 +375,15 @@ class AbstractTestHelper():
         # If we made it this far, then valid Group acquired. Add to User.
         self.get_user(user).groups.add(group)
 
+    def _handle_test_error(self, err):
+        """
+        Handling for graceful exit upon test error.
+        """
+        # Only handle if a child function has not already done so.
+        if not self._error_displayed:
+            print(logging.traceback.format_exc())
+            self._error_displayed = True
+
 
 class IntegrationTestCase(AbstractTestHelper, TestCase):
     """
@@ -399,6 +398,20 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
 
         # Get home url.
         self.login_url = reverse('cae_home:login')
+
+    @classmethod
+    def setUpClass(cls):
+        """
+        Logic to run once, before any tests.
+        """
+        # Call parent logic.
+        super().setUpClass()
+        
+        # Initialize default user and site theme models.
+        create_site_themes(None)
+
+        # Initialize user models.
+        cls.create_default_users_and_groups(cls)
 
     def setUp(self):
         """
@@ -452,86 +465,97 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
         :param expected_content: Expected context to see on page. Can be text or html elements.
         :return: The page response object, generated from the request.
         """
-        # Either get value or an empty list/dict, to prevent mutability errors.
-        data = data or {}
-        expected_messages = expected_messages or []
-        expected_content = expected_content or []
+        # Surround everything in TryCatch, and display error at end.
+        # This ensures that the actual error will always display at bottom of test, instead of having to scroll up.
+        try:
+            # Either get value or an empty list/dict, to prevent mutability errors.
+            data = data or {}
+            expected_messages = expected_messages or []
+            expected_content = expected_content or []
 
-        # Validate data types.
-        if not isinstance(data, dict):
-            raise TypeError('Provided "data" arg must be a dict, for passing into POST request.')
+            # Validate data types.
+            if not isinstance(data, dict):
+                raise TypeError('Provided "data" arg must be a dict, for passing into POST request.')
 
-        # Handle user.
-        if user is not None:
-            # Get corresponding User model and login.
-            user = self.get_user(user)
-            self.client.force_login(user)
-        else:
-            # No user value provided. Ensure no user is currently logged in.
-            self.client.logout()
+            # Handle user.
+            if user is not None:
+                # Get corresponding User model and login.
+                user = self.get_user(user)
+                self.client.force_login(user)
+            else:
+                # No user value provided. Ensure no user is currently logged in.
+                self.client.logout()
 
-        # Get page response.
-        if get:
-            response = self.client.get(url, data=data, follow=True)
-        else:
-            response = self.client.post(url, data=data, follow=True)
+            # Get page response.
+            if get:
+                response = self.client.get(url, data=data, follow=True)
+            else:
+                response = self.client.post(url, data=data, follow=True)
 
-        # Get response content and context. We have both trimmed, to have contain whitespace data and no newlines.
-        response_content = self.get_minimized_response_content(response)
+            # Get response content and context. We have both trimmed, to have contain whitespace data and no newlines.
+            response_content = self.get_minimized_response_content(response)
 
-        # Handle debug printing.
-        if self._debug_print:
-            self.debug_print(response)
+            # Handle debug printing.
+            if self._debug_print:
+                self.debug_print(response)
 
-        # Verify request status code against expected value (after potential redirects).
-        if status is not None:
-            self.assertEqual(status, response.status_code)
+            # Verify request status code against expected value (after potential redirects).
+            if status is not None:
+                self.assertEqual(status, response.status_code)
 
-        # Check redirects.
-        if response.redirect_chain:
+            # Check redirects.
+            if response.redirect_chain:
 
-            # Redirect occurred. Check if it was expected.
-            if expected_redirect_url is not None:
-                # Redirect was expected. Ensure is at correct url.
-                self.assertURLEqual(response.redirect_chain[-1][0], expected_redirect_url, parse_qs=True)
+                # Redirect occurred. Check if it was expected.
+                if expected_redirect_url is not None:
+                    # Redirect was expected. Ensure is at correct url.
+                    self.assertURLEqual(response.redirect_chain[-1][0], expected_redirect_url, parse_qs=True)
 
-                # Cut off any url args, if present, to compare url directly.
-                trimmed_url = response.redirect_chain[-1][0]
-                trimmed_url = trimmed_url.split('?')[0] if '?' in trimmed_url else trimmed_url
+                    # Cut off any url args, if present, to compare url directly.
+                    trimmed_url = response.redirect_chain[-1][0]
+                    trimmed_url = trimmed_url.split('?')[0] if '?' in trimmed_url else trimmed_url
 
-                # Check if redirecting to login page.
-                if trimmed_url == self.login_url:
+                    # Check if redirecting to login page.
+                    if trimmed_url == self.login_url:
 
-                    # If no page context provided, check for basic login page values.
-                    if len(expected_content) == 0:
-                        expected_content = ['Login', 'Username', 'Password', 'Keep Me Logged In', 'Submit']
+                        # If no page context provided, check for basic login page values.
+                        if len(expected_content) == 0:
+                            expected_content = ['Login', 'Username', 'Password', 'Keep Me Logged In', 'Submit']
+
+                else:
+                    # Redirect was not expected.
+                    raise AssertionError('Got unexpected redirects: {0}'.format(response.redirect_chain))
 
             else:
-                # Redirect was not expected.
-                raise ValueError('Got unexpected redirects: {0}'.format(response.redirect_chain))
+                # Redirect did not occur.
+                if expected_redirect_url is not None:
+                    # Redirect was expected.
+                    raise AssertionError(
+                        'Expected redirect to "{0}". No redirect occurred.'.format(expected_redirect_url),
+                    )
 
-        else:
-            # Redirect did not occur.
-            if expected_redirect_url is not None:
-                # Redirect was expected.
-                raise ValueError('Expected redirect to "{0}". No redirect occurred.'.format(expected_redirect_url))
+            # Check page title.
+            if expected_title is not None:
+                # Get actual title and trim any extra whitespace characters.
+                actual_title = self.get_page_title(response_content)
 
-        # Check page title.
-        if expected_title is not None:
-            # Get actual title and trim any extra whitespace characters.
-            actual_title = self.get_page_title(response_content)
+                # Check value against expected.
+                self.assertEqual(expected_title, actual_title, 'Incorrect Page Title')
 
-            # Check value against expected.
-            self.assertEqual(expected_title, actual_title, 'Incorrect Page Title')
+            # Check expected messages for page.
+            self.assertPageMessages(response, expected_messages, allow_partial_messages=allow_partial_messages)
 
-        # Check expected messages for page.
-        self.assertPageMessages(response, expected_messages, allow_partial_messages=allow_partial_messages)
+            # Check expected context for page.
+            self.assertPageContent(response, expected_content)
 
-        # Check expected context for page.
-        self.assertPageContent(response, expected_content)
+            # All assertions passed so far. Return found page response.
+            return response
 
-        # All assertions passed so far. Return found page response.
-        return response
+        except Exception as err:
+            # If we get any error at all, stop and display trace to console. Then raise error as normal.
+            # This ensures actual error is always displayed at bottom, underneath all other output this Assertion gives.
+            self._handle_test_error(err)
+            raise err
 
     def assertGetResponse(
         self,
@@ -637,7 +661,7 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
 
                 err_msg = 'No messages found in response, yet messages were expected.'
                 print(err_msg)
-                raise ValueError(err_msg)
+                raise AssertionError(err_msg)
 
         else:
             # Message data found in response. Gather into easy to compare list format.
@@ -777,7 +801,7 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
         # Compare expected (and formatted) regex string against actual page content.
         if not re.search(expected_content, response_content):
             # Failed to find match. Raise validation error.
-            raise ValueError('Failed to find "{0}" in page content.'.format(orig_expected_content))
+            raise AssertionError('Failed to find "{0}" in page content.'.format(orig_expected_content))
 
     def assertWhitelistUserAccess(
         self,
@@ -800,90 +824,99 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
         :param expected_content: Expected context to see on page. Can be text or html elements.
         :return: The page response object, generated from the request.
         """
-        valid_users_provided = False
-        whitelist_user_list = []
+        # Surround everything in TryCatch, and display error at end.
+        # This ensures that the actual error will always display at bottom of test, instead of having to scroll up.
+        try:
+            valid_users_provided = False
+            whitelist_user_list = []
 
-        # Validate provided whitelist user(s).
-        if (
-            isinstance(whitelist_users, list) or
-            isinstance(whitelist_users, tuple) or
-            isinstance(whitelist_users, QuerySet)
-        ):
-            # Is array of Users. Check that at least one is an actual valid user.
-            for whitelist_user in whitelist_users:
+            # Validate provided whitelist user(s).
+            if (
+                isinstance(whitelist_users, list) or
+                isinstance(whitelist_users, tuple) or
+                isinstance(whitelist_users, QuerySet)
+            ):
+                # Is array of Users. Check that at least one is an actual valid user.
+                for whitelist_user in whitelist_users:
+                    try:
+                        whitelist_user_list.append(self.get_user(whitelist_user))
+                        valid_users_provided = True
+                    except get_user_model().DoesNotExist:
+                        # Not a valid (login) User. Provide warning but otherwise skip.
+                        err_msg = 'Invalid "whitelist user" of "{0}" provided.'.format(whitelist_user)
+                        print(err_msg)
+                        logger.warning(err_msg)
+
+            else:
+                # Likely a single User. Validate.
                 try:
-                    whitelist_user_list.append(self.get_user(whitelist_user))
+                    whitelist_user_list.append(self.get_user(whitelist_users))
                     valid_users_provided = True
                 except get_user_model().DoesNotExist:
                     # Not a valid (login) User. Provide warning but otherwise skip.
-                    err_msg = 'Invalid "whitelist user" of "{0}" provided.'.format(whitelist_user)
+                    err_msg = 'Invalid "whitelist user" of "{0}" provided.'.format(whitelist_users)
                     print(err_msg)
                     logger.warning(err_msg)
 
-        else:
-            # Likely a single User. Validate.
-            try:
-                whitelist_user_list.append(self.get_user(whitelist_users))
-                valid_users_provided = True
-            except get_user_model().DoesNotExist:
-                # Not a valid (login) User. Provide warning but otherwise skip.
-                err_msg = 'Invalid "whitelist user" of "{0}" provided.'.format(whitelist_users)
-                print(err_msg)
-                logger.warning(err_msg)
+            # Check that at least one valid user was provided to test view on.
+            if not valid_users_provided:
+                print('Provided whitelist_users: {0}'.format(whitelist_users))
+                raise ValidationError('No valid users provided.')
 
-        # Check that at least one valid user was provided to test view on.
-        if not valid_users_provided:
-            print('Provided whitelist_users: {0}'.format(whitelist_users))
-            raise ValidationError('No valid users provided.')
+            # Loop through all validated users in list.
+            for whitelist_user in whitelist_user_list:
+                print('Checking whitelist user: "{0}" at "{1}"'.format(whitelist_user, url))
 
-        # Loop through all validated users in list.
-        for whitelist_user in whitelist_user_list:
-            print('Checking whitelist user: "{0}" at "{1}"'.format(whitelist_user, url))
-
-            # Call base function to handle actual logic.
-            response = self.assertResponse(
-                url,
-                title,
-                *args,
-                user=whitelist_user,
-                get=False if data else True,
-                data=data,
-                status=None,
-                expected_redirect_url=expected_redirect_url,
-                expected_messages=expected_messages,
-                expected_content=expected_content,
-                **kwargs,
-            )
-
-            # Check status code. Should be anything except login redirect, 403, or 404.
-            if response.status_code == 403:
-                # Got 403. Raise error.
-                raise AssertionError(
-                    'Whitelist user "{0}" unable to access url at "{1}". Got 403.'.format(whitelist_user, url),
+                # Call base function to handle actual logic.
+                response = self.assertResponse(
+                    url,
+                    title,
+                    *args,
+                    user=whitelist_user,
+                    get=False if data else True,
+                    data=data,
+                    status=None,
+                    expected_redirect_url=expected_redirect_url,
+                    expected_messages=expected_messages,
+                    expected_content=expected_content,
+                    **kwargs,
                 )
 
-            elif response.status_code == 404:
-                # Got 404. Raise error.
-                raise AssertionError(
-                    'Whitelist user "{0}" unable to access url at "{1}". Got 404.'.format(whitelist_user, url),
-                )
-
-            elif response.redirect_chain:
-                # Got redirect. Check if login url.
-                if response.redirect_chain[-1][0] == self.login_url:
-                    # Redirected to login page. Raise error.
+                # Check status code. Should be anything except login redirect, 403, or 404.
+                if response.status_code == 403:
+                    # Got 403. Raise error.
                     raise AssertionError(
-                        'Whitelist user "{0}" unable to access url at "{1}". Got redirect to login page.'.format(
-                            whitelist_user,
-                            url,
-                        )
+                        'Whitelist user "{0}" unable to access url at "{1}". Got 403.'.format(whitelist_user, url),
                     )
 
-            # Any other response values should be fine.
+                elif response.status_code == 404:
+                    # Got 404. Raise error.
+                    raise AssertionError(
+                        'Whitelist user "{0}" unable to access url at "{1}". Got 404.'.format(whitelist_user, url),
+                    )
 
-            # Check exact status match, if provided.
-            if status:
-                self.assertEqual(response.status_code, status)
+                elif response.redirect_chain:
+                    # Got redirect. Check if login url.
+                    if response.redirect_chain[-1][0] == self.login_url:
+                        # Redirected to login page. Raise error.
+                        raise AssertionError(
+                            'Whitelist user "{0}" unable to access url at "{1}". Got redirect to login page.'.format(
+                                whitelist_user,
+                                url,
+                            )
+                        )
+
+                # Any other response values should be fine.
+
+                # Check exact status match, if provided.
+                if status:
+                    self.assertEqual(response.status_code, status)
+
+        except Exception as err:
+            # If we get any error at all, stop and display trace to console. Then raise error as normal.
+            # This ensures actual error is always displayed at bottom, underneath all other output this Assertion gives.
+            self._handle_test_error(err)
+            raise err
 
     def assertBlacklistUserAccess(
         self,
@@ -905,89 +938,97 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
         :param expected_content: Expected context to see on page. Can be text or html elements.
         :return: The page response object, generated from the request.
         """
-        valid_users_provided = False
-        blacklist_user_list = []
+        # Surround everything in TryCatch, and display error at end.
+        # This ensures that the actual error will always display at bottom of test, instead of having to scroll up.
+        try:
+            valid_users_provided = False
+            blacklist_user_list = []
 
-        # Validate provided blacklist user(s).
-        if (
-            isinstance(blacklist_users, list) or
-            isinstance(blacklist_users, tuple) or
-            isinstance(blacklist_users, QuerySet)
-        ):
-            # Is array of Users. Check that at least one is an actual valid user.
-            for blacklist_user in blacklist_users:
+            # Validate provided blacklist user(s).
+            if (
+                isinstance(blacklist_users, list) or
+                isinstance(blacklist_users, tuple) or
+                isinstance(blacklist_users, QuerySet)
+            ):
+                # Is array of Users. Check that at least one is an actual valid user.
+                for blacklist_user in blacklist_users:
+                    try:
+                        blacklist_user_list.append(self.get_user(blacklist_user))
+                        valid_users_provided = True
+                    except get_user_model().DoesNotExist:
+                        # Not a valid (login) User. Provide warning but otherwise skip.
+                        err_msg = 'Invalid "blacklist user" of "{0}" provided.'.format(blacklist_user)
+                        print(err_msg)
+                        logger.warning(err_msg)
+
+            else:
+                # Likely a single User. Validate.
                 try:
-                    blacklist_user_list.append(self.get_user(blacklist_user))
+                    blacklist_user_list.append(self.get_user(blacklist_users))
                     valid_users_provided = True
                 except get_user_model().DoesNotExist:
                     # Not a valid (login) User. Provide warning but otherwise skip.
-                    err_msg = 'Invalid "blacklist user" of "{0}" provided.'.format(blacklist_user)
+                    err_msg = 'Invalid "blacklist user" of "{0}" provided.'.format(blacklist_users)
                     print(err_msg)
                     logger.warning(err_msg)
 
-        else:
-            # Likely a single User. Validate.
-            try:
-                blacklist_user_list.append(self.get_user(blacklist_users))
-                valid_users_provided = True
-            except get_user_model().DoesNotExist:
-                # Not a valid (login) User. Provide warning but otherwise skip.
-                err_msg = 'Invalid "blacklist user" of "{0}" provided.'.format(blacklist_users)
-                print(err_msg)
-                logger.warning(err_msg)
+            # Check that at least one valid user was provided to test view on.
+            if not valid_users_provided:
+                print('Provided blacklist_users: {0}'.format(blacklist_users))
+                raise ValidationError('No valid users provided.')
 
-        # Check that at least one valid user was provided to test view on.
-        if not valid_users_provided:
-            print('Provided blacklist_users: {0}'.format(blacklist_users))
-            raise ValidationError('No valid users provided.')
+            # Loop through all validated users in list.
+            for blacklist_user in blacklist_user_list:
+                print('Checking blacklist user: "{0}" at "{1}"'.format(blacklist_user, url))
 
-        # Loop through all validated users in list.
-        for blacklist_user in blacklist_user_list:
-            print('Checking blacklist user: "{0}" at "{1}"'.format(blacklist_user, url))
+                # Call base function to handle actual logic.
+                response = self.assertResponse(
+                    url,
+                    title,
+                    *args,
+                    user=blacklist_user,
+                    get=False if data else True,
+                    data=data,
+                    status=None,
+                    expected_redirect_url=expected_redirect_url,
+                    expected_messages=expected_messages,
+                    expected_content=expected_content,
+                    **kwargs,
+                )
 
-            # Call base function to handle actual logic.
-            response = self.assertResponse(
-                url,
-                title,
-                *args,
-                user=blacklist_user,
-                get=False if data else True,
-                data=data,
-                status=None,
-                expected_redirect_url=expected_redirect_url,
-                expected_messages=expected_messages,
-                expected_content=expected_content,
-                **kwargs,
-            )
-
-            # Check status code. Should be anything except login redirect or 404.
-            if response.status_code == 403 or response.status_code == 404:
-                # Got 403/404. This is fine.
-                pass
-
-            elif response.redirect_chain:
-                # Got redirect. Check if login url.
-                if response.redirect_chain[-1][0] == self.login_url:
-                    # Redirected to login page. This is fine.
+                # Check status code. Should be anything except login redirect or 404.
+                if response.status_code == 403 or response.status_code == 404:
+                    # Got 403/404. This is fine.
                     pass
 
-                else:
-                    # Redirected to non-login page. Raise error.
-                    raise AssertionError(
-                        'Blacklist user "{0}" is able to access url at "{1}". Got redirect but otherwise accessed '
-                        'fine.'.format(
-                            blacklist_user,
-                            url,
+                elif response.redirect_chain:
+                    # Got redirect. Check if login url.
+                    if response.redirect_chain[-1][0] == self.login_url:
+                        # Redirected to login page. This is fine.
+                        pass
+
+                    else:
+                        # Redirected to non-login page. Raise error.
+                        raise AssertionError(
+                            'Blacklist user "{0}" is able to access url at "{1}". Got redirect but otherwise accessed '
+                            'fine.'.format(
+                                blacklist_user,
+                                url,
+                            )
                         )
-                    )
 
-            else:
-                # Any other values should raise error.
-                raise ValueError('Blacklist user "{0}" is able to access url at "{1}".'.format(blacklist_user, url))
+                else:
+                    # Any other values should raise error.
+                    raise AssertionError('Blacklist user "{0}" is able to access url at "{1}".'.format(blacklist_user, url))
 
-            # Check exact status match, if provided.
-            if status:
-                self.assertEqual(response.status_code, status)
+                # Check exact status match, if provided.
+                if status:
+                    self.assertEqual(response.status_code, status)
+        except Exception as err:
+            # If we get any error at all, stop and display trace to console. Then raise error as normal.
+            # This ensures actual error is always displayed at bottom, underneath all other output this Assertion gives.
+            self._handle_test_error(err)
+            raise err
 
     def get_minimized_response_content(self, response):
         """
