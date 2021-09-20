@@ -330,6 +330,9 @@ class User(AbstractUser):
                 new_user.userintermediary.cae_is_active = False
                 new_user.userintermediary.wmu_is_active = False
             new_user.save()
+        else:
+            new_user.set_password(password)
+            new_user.save()
 
         return new_user
 
