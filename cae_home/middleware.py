@@ -6,9 +6,10 @@ Middleware for CAE Home app.
 import pytz, re
 from django.conf import settings
 from django.contrib.sites.shortcuts import get_current_site
+from django.core.exceptions import PermissionDenied
+from django.core.handlers.exception import response_for_exception
 from django.db.models import ObjectDoesNotExist
 from django.utils import timezone
-from django.core.handlers.exception import response_for_exception
 
 # User Class Imports.
 from cae_home import models
@@ -168,7 +169,21 @@ class HandleExceptionsMiddleware(object):
         return response
 
     def process_exception(self, request, exception):
-        logger.error('{0}'.format(exception), exc_info=True)
+        """
+        Handles when any view raises an uncaught exception.
+        """
+        # Log error, except for some specific types (such as user Permission 403 error).
+        if isinstance(exception, PermissionDenied):
+            # Is 403 Permission error. User does not have permission to access page.
+            # Do not log as error message, so we don't get spammed with emails.
+            # However, log to warning message, in case we need to troubleshoot.
+            logger.auth_warning('User "{0}" tried to access url "{1}".'.format(
+                request.user,
+                request.get_full_path_info(),
+            ))
+        else:
+            # Unhandled error type. Log and send error email.
+            logger.error('{0}'.format(exception), exc_info=True)
 
         # Call standard Django response handling for given exception.
         response_for_exception(request, exception)
