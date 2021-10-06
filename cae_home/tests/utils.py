@@ -3,7 +3,7 @@ CAE Home app testing Utility Functions and Classes.
 """
 
 # System Imports.
-import re, sys
+import re, sys, time
 from channels.testing import ChannelsLiveServerTestCase
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -1424,7 +1424,13 @@ class LiveServerTestCase(AbstractTestHelper, ChannelsLiveServerTestCase):
 
     #region Wait Helper Functions
 
-    # @contextmanager
+    def wait_seconds(self, seconds):
+        """
+        Waits a number of seconds.
+        Useful for examining page output, when debugging tests.
+        """
+        time.sleep(seconds)
+
     def _wait_for_page_load(self, driver, timeout=5):
         """
         Waits for a new page to load.
