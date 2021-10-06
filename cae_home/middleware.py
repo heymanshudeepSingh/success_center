@@ -9,6 +9,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.core.exceptions import PermissionDenied
 from django.core.handlers.exception import response_for_exception
 from django.db.models import ObjectDoesNotExist
+from django.http import Http404
 from django.utils import timezone
 
 # User Class Imports.
@@ -173,11 +174,19 @@ class HandleExceptionsMiddleware(object):
         Handles when any view raises an uncaught exception.
         """
         # Log error, except for some specific types (such as user Permission 403 error).
+        # For all of these "specific types", do not log as error message, so we don't get spammed with emails.
+        # However, log to warning message, in case we need to troubleshoot.
         if isinstance(exception, PermissionDenied):
             # Is 403 Permission error. User does not have permission to access page.
-            # Do not log as error message, so we don't get spammed with emails.
-            # However, log to warning message, in case we need to troubleshoot.
-            logger.auth_warning('User "{0}" tried to access url "{1}".'.format(
+            logger.auth_warning('403: User "{0}" tried to access url "{1}".'.format(
+                request.user,
+                request.get_full_path_info(),
+            ))
+
+        elif isinstance(exception, Http404):
+            # Is 404 "not found" error.
+            # User likely entered a url that doesn't actually have a corresponding model.
+            logger.auth_warning('404: User "{0}" tried to access url "{1}".'.format(
                 request.user,
                 request.get_full_path_info(),
             ))
