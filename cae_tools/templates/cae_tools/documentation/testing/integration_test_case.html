@@ -10,16 +10,93 @@
 
   <h2>IntegrationTestCase Utility Class</h2>
   <p>
-    The Workspace IntegrationTestCase utility class is designed to use for a majority of UnitTests. A majority of custom
-    functionality in this class provides additional <span class="highlight code">assert()</span> statements, on top of
-    what already comes in the standard default Django TestCase class.
+    The Workspace IntegrationTestCase utility class provides an easy way to get a view, and then run various assertions
+    against said view's text output.
   </p>
+  <p>
+    This class is designed to use for a majority of UnitTests. A majority of custom functionality in this class provides
+    additional <span class="highlight code">assert()</span> statements, on top of what already comes in the standard
+    default Django TestCase class.
+  </p>
+  <br>
   <p>
     This utility class has all the functionality provided in the BaseTestCase utility class, as well as:
   </p>
 
   <article class="color">
-    <h3>Assert Url Equal</h3>
+    <h3>Response Assertion Functions</h3>
+    <div class="alert info">
+      <p>Note: These will automatically call the below functions in the "Utility Assertions" section. So if you use any
+        of these response assertions, then calling the utility assertions is redundant and unnecessary.</p>
+    </div>
+
+    <h4>Assert Response</h4>
+    <p>
+      The <span class="highlight code">self.assertResponse()</span> function takes in a few parameters and attempts to
+      create a corresponding Django Response page object for the provided URL.
+    </p>
+    <p>
+      This function then tests for some common values on the acquired Django Response page object, such as verifying
+      url, page Title, and checking if the page had redirected or not during request processing.
+    </p>
+    <p>
+      For full list of everything this can check, see below "Utility Assertions" section.
+    </p>
+
+    <h4>Assert GET Response</h4>
+    <p>
+      The <span class="highlight code">self.assertGetResponse()</span> function is effectively a wrapper for the above
+      <span class="highlight code">self.assertResponse()</span> function. It handles the same, except that it will
+      handle some args for you, to set for a GET response.
+    </p>
+
+    <h4>Assert POST Response</h4>
+    <p>
+      The <span class="highlight code">self.assertPostResponse()</span> function is effectively a wrapper for the above
+      <span class="highlight code">self.assertResponse()</span> function. It handles the same, except that it will
+      handle some args for you, to set for a POST response.
+    </p>
+    <p>
+      To pass POST data, set the <span class="highlight code">data</span> arg to a dictionary with values of your
+      choice.
+    </p>
+
+    <h4>Assert Whitelist User Access</h4>
+    <p>
+      The <span class="highlight code">self.assertWhitelistUserAccess()</span> function is effectively a wrapper-loop
+      for above "Assert Response" function.
+    </p>
+    <p>
+      This takes in either one (login) User model, or a list of (login) User models. Can be in format of literal model,
+      or strings of desired model usernames.
+    </p>
+    <p>
+      Assuming valid user values are passed in, then this function checks each provided user, and verifies that they
+      are able to access the page with no errors. Aka, the page DOES NOT show a 403 error, 404 error, login redirect,
+      or some other error.
+    </p>
+    <p>
+      This is very useful for using minimal code to check that multiple different user types can all access a given
+      page, and that all their user permissions are allowing access as tended.
+    </p>
+
+    <h4>Assert Blacklist User Access</h4>
+    <p>
+      The <span class="highlight code">self.assertBlacklistUserAccess()</span> function is similar to the above
+      "Assert Whitelist User Access" function, except it checks for the opposite.
+    </p>
+    <p>
+      Aka, for each passed in (login) User model value, it verifies that they CANNOT see the page. Either due to a 403
+      error, 404 error, or login redirect.
+    </p>
+    <p>
+      Any other page error is treated as a literal error, and will also cause this assertion to fail.
+    </p>
+  </article>
+
+  <article class="color">
+    <h3>Utility Assertions</h3>
+    <h4>Assert Url Equal</h4>
     <p>
       The <span class="highlight code">self.assertURLEqual()</span> function takes in two URLs and compares them.
     </p>
@@ -28,44 +105,60 @@
       response object, after doing a page query.
     </p>
     <p>
-      This function compares the two, urls to assert they match. This includes url parameters, if it's a GET request.
-      Set the <span class="highlight code">parse_qs</span> arg to True in order to ignore parameter ordering, but
-      otherwise still verify that urls and associated parameters match.
+      Note: This function compares the two urls to assert they match. This includes url parameters, if it's a GET
+      request.
+    </p>
+    <p>
+      To ignore url parameter ordering, but otherwise still verify that urls and associated parameters match, set the
+      <span class="highlight code">parse_qs</span> arg to True. This is set to False by default, because it's
+      technically a more expensive operation, and a majority of site urls do not use GET url parameters.
+    </p>
+
+    <h4>Assert Page Messages</h4>
+    <p>
+      The <span class="highlight code">self.assertPageMessages()</span> function verifies that the expected
+      response-messages actually show up in the template response data.
+    </p>
+    <p>
+      Note: This function does not care when messages are in response that we DO NOT check for. It only cares if we
+      pass a message value into this assertion, and no corresponding value is found in the response.
+    </p>
+    <p>
+      For ease of use, this allows partial message matching by default, as opposed to failing if there is not an exact,
+      full match.
+    </p>
+
+    <h4>Assert Page Content</h4>
+    <p>
+      The <span class="highlight code">self.assertPageContent()</span> function is similar to the built-in Django
+      <span class="highlight code">self.assertContains()</span> function.
+    </p>
+    <p>
+      The main difference is that Django templating may (and often does) create large amounts of whitespace, often in
+      places that we programmers wouldn't expect it. The default Django
+      <span class="highlight code">self.assertContains()</span> function does not account for this whitespace, and will
+      fail if whitespace doesn't match exactly.
+    </p>
+    <p>
+      To account for that, we have this custom <span class="highlight code">self.assertPageContent()</span> function,
+      which uses regex to condense whitespace down, or even outright remove it, in instances where the whitespace makes
+      no sense. It also simplifies/escapes certain common characters/sequences, to be more uniformly handled, and thus
+      easier to test against.
+    </p>
+    <p>
+      This custom function then further uses regex to actually check this updated page content against the expected
+      value. The regex is such that the assertion will pass if whitespace does not exactly match, as long as both the
+      original page output and expected value agree on where the whitespace should exist.
+    </p>
+
+    <h4>Assert Page Title</h4>
+    <p>
+      The <span class="highlight code">self.assertPage()</span> function uses similar logic as the above
+      "Assert Page Content" function, but for the page title.
+    </p>
+    <p>
+      Reminder that the page title is the value found at the top of the browser tab when the corresponding page is open.
     </p>
   </article>
 
-  <article class="color">
-    <h3>Assert Response</h3>
-    <p>
-      The <span class="highlight code">self.assertResponse()</span> function takes in a few parameters and attempts to
-      create a corresponding Django Response page object.
-    </p>
-    <p>
-      This function then tests for some common values on the acquired Django Response page object, such as verifying
-      url, page Title, and checking if the page had redirected or not during request processing.
-    </p>
-    <p>
-      Note: This will automatically call the above <span class="highlight code">self.assertURLEqual()</span> function,
-      so calling it again to verify the page url is unnecessary.
-    </p>
-  </article>
-
-  <article class="color">
-    <h3>Assert GET Response</h3>
-    <p>
-      The <span class="highlight code">self.assertGetResponse()</span> function is effectively a wrapper for the above
-      <span class="highlight code">self.assertResponse()</span> function. It handles the same, except that it will
-      handle some args for you, to set for a GET response.
-    </p>
-
-  </article>
-
-  <article class="color">
-    <h3>Assert POST Response</h3>
-    <p>
-      The <span class="highlight code">self.assertPostResponse()</span> function is effectively a wrapper for the above
-      <span class="highlight code">self.assertResponse()</span> function. It handles the same, except that it will
-      handle some args for you, to set for a POST response.
-    </p>
-  </article>
 {% endblock content %}

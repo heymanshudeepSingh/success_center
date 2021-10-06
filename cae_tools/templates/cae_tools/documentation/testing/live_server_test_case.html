@@ -24,15 +24,16 @@
 
   <h2>LiveServerTestCase Utility Class</h2>
   <p>
-    The Workspace LiveServerTestCase utility class is designed to use for specifically in Selenium tests. Aka, it's
-    meant for use when running tests that require a live mock-browser instance. A majority of custom functionality this
-    class provides is specifically to make use of Selenium easier and more streamlined.
+    The Workspace LiveServerTestCase utility class is tailored for testing mock-server instances, using Selenium tests.
+    A majority of custom functionality this class provides is specifically to make use of Selenium easier and more
+    streamlined, in a Python environment.
   </p>
   <p>
     Reminder that Selenium tests tend to be a lot more expensive to run, as they take longer than all other test types.
     So they should only be used sparingly when needed, such as to verify Session data logic, Javascript/React logic,
     Django Channels logic, or similar logic that's impossible to verify without a browser instance.
   </p>
+  <br>
   <p>
     This utility class has all the functionality provided in the BaseTestCase utility class, as well as:
   </p>
@@ -45,12 +46,8 @@
       successfully.
     </p>
     <p>
-      In other words, it's a easy helper function to quickly log in with a given User.
-    </p>
-    <p>
-      If provided, it also verifies that login action redirected to a specific page, calling
-      <span class="highlight code">self.assertPageTitle()</span> and
-      <span class="highlight code">self.assertPageHeader()</span>.
+      In other words, it's a easy helper function to quickly log in with a given User, using selenium to use the literal
+      site login page.
     </p>
   </article>
 
@@ -156,6 +153,19 @@
 
   <article class="color">
     <h3>Driver Wait Functions</h3>
+
+    <article class="color">
+      <h4>Wait Seconds</h4>
+      <p>
+        The <span class="highlight code">self.wait_seconds()</span> function will stall all further page logic for the
+        indicated number of seconds. This is basically an alternative to using
+        <span class="highlight code">time.sleep()</span>, in case someone forgets or is unaware it exists.
+      </p>
+      <p>
+        Note: This function should not be used directly in testing. Instead, it should only be used as a temporary
+        helper for debugging test issues.
+      </p>
+    </article>
 
     <article class="color">
       <h4>Wait for Page Load</h4>
