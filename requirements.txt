@@ -46,6 +46,7 @@ python-redmine==2.3.0
 tblib
 # Packages for Django + Pytest. Note xdist is required for running tests parallel.
 pytest
+pytest-subtests
 pytest-django
 pytest-xdist
 # Testing with an actual browser, to test JavaScript.
