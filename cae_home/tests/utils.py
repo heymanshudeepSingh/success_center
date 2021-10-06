@@ -434,30 +434,7 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
         # Initialize user models.
         cls.create_default_users_and_groups(cls)
 
-    def assertURLEqual(self, url, expected, parse_qs=False):
-        """
-        Given two URLs, make sure all their components (the ones given by
-        urlparse) are equal, only comparing components that are present in both
-        URLs.
-
-        If `parse_qs` is True, then the querystrings are parsed with QueryDict.
-        This is useful if you don't want the order of parameters to matter.
-        Otherwise, the query strings are compared as-is.
-
-        Adapted from django.tests.auth_tests.test_views.AuthViewsTestCase
-        """
-        fields = ParseResult._fields
-
-        for attr, x, y in zip(fields, urlparse(url), urlparse(expected)):
-            if attr == 'path':
-                if x != y:
-                    self.fail('{0!r} != {1!r} Path\'s don\'t match'.format(url, expected))
-
-            if parse_qs and attr == 'query':
-                x, y = QueryDict(x), QueryDict(y)
-
-            if x and y and x != y:
-                self.fail('%r != %r (%s doesn\'t match)' % (url, expected, attr))
+    # region Response Assertions
 
     def assertResponse(
         self,
@@ -649,173 +626,6 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
             expected_content=expected_content,
             **kwargs,
         )
-
-    def assertPageMessages(self, response, expected_messages, allow_partial_messages=True):
-        """
-        Asserts that the given expected_messages text is found in the response "messages" context variable.
-
-        Note that this function does not care if messages exist in response, but are not in the expected_messages value.
-        It only cares if we pass expected_messages values which do not show up in the response.
-        :param response: Response to parse actual served messages from.
-        :param expected_messages: One or more messages to check for.
-        :param allow_partial_messages: Bool indicating if partial message matching is allowed. Defaults to True.
-        """
-        if 'messages' not in response.context or len(response.context['messages']) == 0:
-            # No message data found in response.
-
-            # Verify expected messages is empty.
-            if len(expected_messages) > 0:
-                # One or more messages were expected. Print out data and raise error.
-                print('Expected Messages:')
-                if isinstance(expected_messages, list) or isinstance(expected_messages, tuple):
-                    for expected_message in expected_messages:
-                        print('    {0}'.format(expected_message))
-                else:
-                    print('    {0}'.format(expected_messages))
-
-                err_msg = 'No messages found in response, yet messages were expected.'
-                print(err_msg)
-                raise AssertionError(err_msg)
-
-        else:
-            # Message data found in response. Gather into easy to compare list format.
-            if expected_messages is not None and len(expected_messages) > 0:
-                # One or more values in expected_messages param. Compare data.
-
-                # First parse data from response context.
-                temp_msg_data = response.context['messages']
-                response_messages = []
-                for response_message in temp_msg_data:
-                    response_messages.append(response_message.message)
-
-                # Compare values.
-                if isinstance(expected_messages, list) or isinstance(expected_messages, tuple):
-                    # Is list of messages. Check all.
-                    for expected_message in expected_messages:
-
-                        # Try to find current expected_message.
-                        self._assertPageMessages(str(expected_message), response_messages, allow_partial_messages)
-
-                elif expected_messages:
-                    # Is likely single message. Check if exists in response message data.
-                    self._assertPageMessages(str(expected_messages), response_messages, allow_partial_messages)
-
-    def _assertPageMessages(self, expected_message, response_messages, allow_partial_messages):
-        """
-        Inner call for assertPageMessage function.
-
-        Guarantees that behavior is the same, regardless of one message/multiple, and regardless of allowing partial
-        matches or not.
-        :param expected_message: One or more messages to check for.
-        :param response_messages: Full set of actual messages served by response.
-        :param allow_partial_messages: Bool indicating if partial message matching is allowed. Defaults to True.
-        """
-        # Check if allowing partial matches (allowed by default).
-        if allow_partial_messages:
-
-            # Partial message matches allowed.
-            # To allow partial matches, we have to loop through each response_message value and check contains.
-            # If all checks fail for all response_messages, then expected_message was not found.
-            found_message = False
-            for response_message in response_messages:
-                try:
-                    self.assertIn(expected_message, response_message)
-                    found_message = True
-                except AssertionError:
-                    # Did not find partial match in current response_message. Attempt next one.
-                    pass
-
-            self.assertTrue(
-                found_message,
-                'Could not find message "{0}" in response.'.format(expected_message),
-            )
-
-        else:
-            # Partial message matches not allowed. Check for direct match.
-            self.assertIn(
-                expected_message,
-                response_messages,
-                'Could not find message "{0}" in response.'.format(expected_message),
-            )
-
-    def assertPageContent(self, response, expected_content):
-        """
-        Behaves similar to default assertContains() function.
-        The main difference is that Django templating may create large amounts of whitespace in the literal html value.
-        Sometimes in places where we don't expected it.
-
-        This custom assertion accounts for that, by taking the "expected_content" variable, and replaces all spaces with
-        regex whitespace matches.
-        :param response: Page response to compare against.
-        :param expected_content: Expected value to find on page
-        """
-        # Check if expected_content exists.
-        if expected_content is not None and len(expected_content) > 0:
-            # Value expected_content exists. Attempt to search for content.
-
-            # Replace page contents with minimized equivalent from get_minimized_response_content() function.
-            response_content = self.get_minimized_response_content(response)
-
-            if isinstance(expected_content, list) or isinstance(expected_content, tuple):
-                # Is list of context items. Check all.
-
-                # Loop through all items to verify.
-                for expected_value in expected_content:
-                    self._assertPageContent(response_content, expected_value)
-            else:
-                # Is likely single context item. Check if exists in response.
-                self._assertPageContent(response_content, str(expected_content))
-
-    def _assertPageContent(self, response, expected_content):
-        """
-        Inner call for assertPageContent function.
-
-        Guarantees that behavior is the same, regardless of single value comparison or array comparison.
-        """
-        # Save original value for error output, on failure.
-        orig_expected_content = expected_content
-
-        # Ensure expected value is a string.
-        expected_content = str(expected_content)
-
-        # Format expected_content value for easier, more programmatic comparison.
-        # Replace html linebreak with newline character equivalent.
-        expected_content = re.sub(r'(<br>|</br>|<br/>|<br />)+', '\n', expected_content)
-
-        # Replace html non-break spaces with character equivalent.
-        expected_content = re.sub(r'&nbsp;', ' ', expected_content)
-
-        # Reduce any whitespace (including repeated whitespace) down to a single space.
-        expected_content = re.sub(r'((\s)+)', ' ', expected_content)
-
-        # Escape dollar sign and up carrot. See get_minimized_response_content() description for more info.
-        expected_content = re.sub(r'\$', '&#36;', expected_content)
-        expected_content = re.sub(r'\^', '&#94;', expected_content)
-
-        # Convert expected_content value to regex, for more dynamic comparison.
-        # Split on spaces, to convert to regex.
-        expected_content_split = expected_content.split(' ')
-
-        # Convert to regex, such that anything previously a space will match any amount of whitespace in the response.
-        expected_content = r'((\s)*)'
-        for value in expected_content_split:
-            # Add section to string.
-            expected_content += value
-
-            # Add check for 0 or more whitespace.
-            expected_content += r'((\s)*)'
-
-        # Get trimmed response content to compare against.
-        response_content = self.get_minimized_response_content(response)
-
-        # Escape any regex special characters, to prevent unexpected errors/mismatches.
-        # Not currently used, but left for debugging purposes. Uncomment to escape known special regex characters.
-        # response_content = self.escape_special_regex_chars(response_content)
-
-        # Compare expected (and formatted) regex string against actual page content.
-        if not re.search(expected_content, response_content):
-            # Failed to find match. Raise validation error.
-            raise AssertionError('Failed to find "{0}" in page content.'.format(orig_expected_content))
 
     def assertWhitelistUserAccess(
         self,
@@ -1044,6 +854,202 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
             self._handle_test_error(err)
             raise err
 
+    # endregion Response Assertions
+
+    # region Utility Assertions
+
+    def assertURLEqual(self, url, expected, parse_qs=False):
+        """
+        Given two URLs, make sure all their components (the ones given by
+        urlparse) are equal, only comparing components that are present in both
+        URLs.
+
+        If `parse_qs` is True, then the querystrings are parsed with QueryDict.
+        This is useful if you don't want the order of parameters to matter.
+        Otherwise, the query strings are compared as-is.
+
+        Adapted from django.tests.auth_tests.test_views.AuthViewsTestCase
+        """
+        fields = ParseResult._fields
+
+        for attr, x, y in zip(fields, urlparse(url), urlparse(expected)):
+            if attr == 'path':
+                if x != y:
+                    self.fail('{0!r} != {1!r} Path\'s don\'t match'.format(url, expected))
+
+            if parse_qs and attr == 'query':
+                x, y = QueryDict(x), QueryDict(y)
+
+            if x and y and x != y:
+                self.fail('%r != %r (%s doesn\'t match)' % (url, expected, attr))
+
+    def assertPageMessages(self, response, expected_messages, allow_partial_messages=True):
+        """
+        Asserts that the given expected_messages text is found in the response "messages" context variable.
+
+        Note that this function does not care if messages exist in response, but are not in the expected_messages value.
+        It only cares if we pass expected_messages values which do not show up in the response.
+        :param response: Response to parse actual served messages from.
+        :param expected_messages: One or more messages to check for.
+        :param allow_partial_messages: Bool indicating if partial message matching is allowed. Defaults to True.
+        """
+        if 'messages' not in response.context or len(response.context['messages']) == 0:
+            # No message data found in response.
+
+            # Verify expected messages is empty.
+            if len(expected_messages) > 0:
+                # One or more messages were expected. Print out data and raise error.
+                print('Expected Messages:')
+                if isinstance(expected_messages, list) or isinstance(expected_messages, tuple):
+                    for expected_message in expected_messages:
+                        print('    {0}'.format(expected_message))
+                else:
+                    print('    {0}'.format(expected_messages))
+
+                err_msg = 'No messages found in response, yet messages were expected.'
+                print(err_msg)
+                raise AssertionError(err_msg)
+
+        else:
+            # Message data found in response. Gather into easy to compare list format.
+            if expected_messages is not None and len(expected_messages) > 0:
+                # One or more values in expected_messages param. Compare data.
+
+                # First parse data from response context.
+                temp_msg_data = response.context['messages']
+                response_messages = []
+                for response_message in temp_msg_data:
+                    response_messages.append(response_message.message)
+
+                # Compare values.
+                if isinstance(expected_messages, list) or isinstance(expected_messages, tuple):
+                    # Is list of messages. Check all.
+                    for expected_message in expected_messages:
+
+                        # Try to find current expected_message.
+                        self._assertPageMessages(str(expected_message), response_messages, allow_partial_messages)
+
+                elif expected_messages:
+                    # Is likely single message. Check if exists in response message data.
+                    self._assertPageMessages(str(expected_messages), response_messages, allow_partial_messages)
+
+    def _assertPageMessages(self, expected_message, response_messages, allow_partial_messages):
+        """
+        Inner call for assertPageMessage function.
+
+        Guarantees that behavior is the same, regardless of one message/multiple, and regardless of allowing partial
+        matches or not.
+        :param expected_message: One or more messages to check for.
+        :param response_messages: Full set of actual messages served by response.
+        :param allow_partial_messages: Bool indicating if partial message matching is allowed. Defaults to True.
+        """
+        # Check if allowing partial matches (allowed by default).
+        if allow_partial_messages:
+
+            # Partial message matches allowed.
+            # To allow partial matches, we have to loop through each response_message value and check contains.
+            # If all checks fail for all response_messages, then expected_message was not found.
+            found_message = False
+            for response_message in response_messages:
+                try:
+                    self.assertIn(expected_message, response_message)
+                    found_message = True
+                except AssertionError:
+                    # Did not find partial match in current response_message. Attempt next one.
+                    pass
+
+            self.assertTrue(
+                found_message,
+                'Could not find message "{0}" in response.'.format(expected_message),
+            )
+
+        else:
+            # Partial message matches not allowed. Check for direct match.
+            self.assertIn(
+                expected_message,
+                response_messages,
+                'Could not find message "{0}" in response.'.format(expected_message),
+            )
+
+    def assertPageContent(self, response, expected_content):
+        """
+        Behaves similar to default assertContains() function.
+        The main difference is that Django templating may create large amounts of whitespace in the literal html value.
+        Sometimes in places where we don't expected it.
+
+        This custom assertion accounts for that, by taking the "expected_content" variable, and replaces all spaces with
+        regex whitespace matches.
+        :param response: Page response to compare against.
+        :param expected_content: Expected value to find on page
+        """
+        # Check if expected_content exists.
+        if expected_content is not None and len(expected_content) > 0:
+            # Value expected_content exists. Attempt to search for content.
+
+            # Replace page contents with minimized equivalent from get_minimized_response_content() function.
+            response_content = self.get_minimized_response_content(response)
+
+            if isinstance(expected_content, list) or isinstance(expected_content, tuple):
+                # Is list of context items. Check all.
+
+                # Loop through all items to verify.
+                for expected_value in expected_content:
+                    self._assertPageContent(response_content, expected_value)
+            else:
+                # Is likely single context item. Check if exists in response.
+                self._assertPageContent(response_content, str(expected_content))
+
+    def _assertPageContent(self, response, expected_content):
+        """
+        Inner call for assertPageContent function.
+
+        Guarantees that behavior is the same, regardless of single value comparison or array comparison.
+        """
+        # Save original value for error output, on failure.
+        orig_expected_content = expected_content
+
+        # Ensure expected value is a string.
+        expected_content = str(expected_content)
+
+        # Format expected_content value for easier, more programmatic comparison.
+        # Replace html linebreak with newline character equivalent.
+        expected_content = re.sub(r'(<br>|</br>|<br/>|<br />)+', '\n', expected_content)
+
+        # Replace html non-break spaces with character equivalent.
+        expected_content = re.sub(r'&nbsp;', ' ', expected_content)
+
+        # Reduce any whitespace (including repeated whitespace) down to a single space.
+        expected_content = re.sub(r'((\s)+)', ' ', expected_content)
+
+        # Escape dollar sign and up carrot. See get_minimized_response_content() description for more info.
+        expected_content = re.sub(r'\$', '&#36;', expected_content)
+        expected_content = re.sub(r'\^', '&#94;', expected_content)
+
+        # Convert expected_content value to regex, for more dynamic comparison.
+        # Split on spaces, to convert to regex.
+        expected_content_split = expected_content.split(' ')
+
+        # Convert to regex, such that anything previously a space will match any amount of whitespace in the response.
+        expected_content = r'((\s)*)'
+        for value in expected_content_split:
+            # Add section to string.
+            expected_content += value
+
+            # Add check for 0 or more whitespace.
+            expected_content += r'((\s)*)'
+
+        # Get trimmed response content to compare against.
+        response_content = self.get_minimized_response_content(response)
+
+        # Escape any regex special characters, to prevent unexpected errors/mismatches.
+        # Not currently used, but left for debugging purposes. Uncomment to escape known special regex characters.
+        # response_content = self.escape_special_regex_chars(response_content)
+
+        # Compare expected (and formatted) regex string against actual page content.
+        if not re.search(expected_content, response_content):
+            # Failed to find match. Raise validation error.
+            raise AssertionError('Failed to find "{0}" in page content.'.format(orig_expected_content))
+
     def get_minimized_response_content(self, response):
         """
         Returns response content, but stripped to be much more minimal, while otherwise equivalent.
@@ -1189,6 +1195,7 @@ class IntegrationTestCase(AbstractTestHelper, TestCase):
 
         return str_value
 
+    # endregion Utility Assertions
 
 class LiveServerTestCase(AbstractTestHelper, ChannelsLiveServerTestCase):
     """
