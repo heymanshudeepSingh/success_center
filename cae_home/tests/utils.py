@@ -228,18 +228,39 @@ class AbstractTestHelper():
         print('')
 
     def debug_print_content(self, response):
+        """
+        Displays the direct page content to console.
+
+        This "page content" is the direct html that is rendered to browser, with "extra whitespace" trimmed, some
+        special characters/codes escaped to prevent errors, and other characters/codes formatted to make console output
+        more human-legible. For the most part though, it's a direct one-to-one match of the literal HTML sent to the
+        browser for page rendering.
+        """
         debug_response_content(response.content.decode('utf-8'))
 
     def debug_print_context(self, response):
+        """
+        Displays all view and middleware variables passed to the template.
+        """
         debug_response_context(response.context)
 
     def debug_print_forms(self, response):
+        """
+        Displays some template form data, particularly anything about form errors.
+        """
         debug_forms(response.context)
 
     def debug_print_messages(self, response):
+        """
+        Displays request-messages, if any are present on page.
+        """
         debug_messages(response.context)
 
     def debug_print_permissions(self, response):
+        """
+        Displays all auth-groups the current user is part of,
+        as well as all individual permissions assigned to current user.
+        """
         debug_permissions(response.context['user'])
 
     # endregion Debug Util Functions
@@ -1428,6 +1449,9 @@ class LiveServerTestCase(AbstractTestHelper, ChannelsLiveServerTestCase):
         """
         Waits a number of seconds.
         Useful for examining page output, when debugging tests.
+
+        Note: This function should not be used directly in testing.
+            Instead, it should only be used as a temporary helper for debugging test issues.
         """
         time.sleep(seconds)
 
