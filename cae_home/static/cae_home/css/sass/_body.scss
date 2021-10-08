@@ -51,6 +51,7 @@ body.grid {
         @include display-flex;
         @include flex-direction(column);
     }
+
 }
 
 body.no-grid {
@@ -59,7 +60,8 @@ body.no-grid {
 
 body {
     position: relative;
-
+    overflow: scroll;
+    overflow-x: hidden;
     min-height:100vh;
     height: auto;
 
@@ -166,7 +168,7 @@ div.page-break {
 //====================================//
 
 body, header, main, footer, article {
-    @meda only print {
+    @media only print {
         display: block !important;
     }
 }
