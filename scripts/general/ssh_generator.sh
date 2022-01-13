@@ -3,10 +3,11 @@
 source $(dirname $0)/../utils.sh
 
 function main(){
-    echo -e "${color_cyan}Enter your email:${color_reset}"
-    read email
+#    echo -e "${color_cyan}Enter your email:${color_reset}"
+#    read email
     echo -e "${color_cyan}Enter your BroncoNet ID:${color_reset}"
     read wmu_ID
+    email="${wmu_ID}@wmich.edu"
 
     if [[ -d ~/.ssh ]]
         then
@@ -24,7 +25,8 @@ while [[ "$loop" == true ]]
       echo "Enter OS type:"
           echo -e "   ${color_cyan}1${color_reset}) Ubuntu 16.04"
           echo -e "   ${color_cyan}2${color_reset}) Ubunutu 18.04"
-          echo -e "   ${color_cyan}3${color_reset}) Other"
+          echo -e "   ${color_cyan}3${color_reset}) Ubunutu 20.04"
+          echo -e "   ${color_cyan}4${color_reset}) Other"
           read user_input
           echo ""
           echo ""
@@ -35,14 +37,21 @@ while [[ "$loop" == true ]]
               generate_rsa
               loop=false
 
-          # Ubuntu.
+          # Ubuntu 18
           elif [[ "$user_input" == "2" ]]
           then
               generate_ed255
               loop=false
 
-          # any other OS types
+          # Ubuntu 20.04
           elif [[ "$user_input" == "3" ]]
+          then
+              ssh-keygen -f "~/.ssh/known_hosts" -R "git.ceas.wmich.edu"
+              generate_ed255
+              loop=false
+
+          # any other OS types
+          elif [[ "$user_input" == "4" ]]
           then
 
               echo -e "${color_red}Sorry, this script does not currently support any other OS types.${color_reset}"
@@ -88,7 +97,7 @@ function generate_rsa () {
     cat cae_gitlab_rsa.pub
     echo ""
 }
-
+# For ubuntu 20.04 and 18.04
 function generate_ed255() {
 
     if [[ -f cae_gitlab_ed255 ]]
