@@ -108,9 +108,13 @@
 //==== START Generic Class Block ====//
 //===================================//
 
+// Hide scroll bar on some pages because it breaks at least for chrome.
+body.hide-vertical-scroll-bar {
+    overflow-x: hidden;
+}
+
 @each $content_element in $content_element_list {
 #{$content_element} {
-
     // Hide on print viewing.
     .display-only-web {
         @media only print {
