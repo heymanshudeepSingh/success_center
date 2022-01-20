@@ -22,10 +22,19 @@ This installation script should take care of all initial setup, at least enough 
 
 
 ## Tests
+### Pytest Testing
+This is the current way to run unit test, to run tests `pytest -n auto`
+### Legacy Testing
 Run tests with `python manage.py test`.
 
 To skip Selenium (browser page tests, which can run slow/take a while), use the command
 `python manage.py test --exclude-tag=functional`.
+
+Note: To run in parallel (multi-threading): `python manage.py test --parallel`
+
+### Chrome driver install
+We found this `https://stackoverflow.com/a/62023168` which seems promising and will be added to script
+in the future.
 
 
 ## Deployment and Hosting
