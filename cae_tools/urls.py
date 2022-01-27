@@ -74,6 +74,9 @@ urlpatterns = [
     # Color Tool urls.
     path('color/', views.color_tool, name='color_tool'),
 
+    # LDAP Utility Pages
+    path('ldap_utility/', views.ldap_utility, name='ldap_utility'),
+
     # Home url.
     path('', views.index, name='index'),
 ]
