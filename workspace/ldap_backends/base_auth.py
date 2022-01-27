@@ -373,11 +373,11 @@ class AbstractLDAPBackend(ABC):
 
     #region User LDAP Attribute Methods
 
-    def get_ldap_user_info(self, uid, attributes=None):
+    def get_ldap_user_info(self, search_value, attributes=None, search_by=None):
         """
         Gets attribute(s) info for given user. Can get multiple attributes at once (or all of them).
         WARNING: Returns None if any if any given attribute(s) does not exist.
-        :param uid: User id to search for.
+        :param search_value: value to search for.
         :param attributes: Attributes to search for. If not provided, then gets all attributes for user.
         :return: None if bad user_id or attribute | Dict of user's attributes.
         """
@@ -387,15 +387,19 @@ class AbstractLDAPBackend(ABC):
         elif not isinstance(attributes, list) and attributes != 'ALL_ATTRIBUTES':
             raise ValidationError('Attributes var must be a of type [list | None].')
 
+        # Validate search by value
+        if search_by is None:
+            search_by = "uid"
+
         # Get value from server.
         self.ldap_lib.bind_server(get_info=self.get_info)
-        user_attributes = self.ldap_lib.search(search_filter='(uid={0})'.format(uid), attributes=attributes)
+        user_attributes = self.ldap_lib.search(search_filter='({0}={1})'.format(search_by, search_value), attributes=attributes)
         self.ldap_lib.unbind_server()
 
         # Check server response.
         if user_attributes is None:
             warn_message = '{0}: Search returned no results. Double check that the uid was correct.Otherwise, '\
-                'attribute did not exist for entry.'.format(uid)
+                'attribute did not exist for entry.'.format(search_value)
             logger.auth_warning(warn_message)
         return user_attributes
 
