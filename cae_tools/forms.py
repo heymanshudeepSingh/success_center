@@ -8,7 +8,6 @@ from django import forms
 # User Imports.
 from cae_home import forms as cae_home_forms
 
-
 # Create choices tuple. Used for select/choice fields down below.
 CHOICES = (
     (1, 'Choice 1'),
@@ -207,3 +206,19 @@ class CustomFieldExampleForm_Signature(forms.Form):
     reference_char_field = forms.CharField()
     reference_text_field = forms.CharField(widget=forms.Textarea)
     signature = forms.CharField(widget=cae_home_forms.SignatureWidget)
+
+
+class LdapUtilityForm(forms.Form):
+    """
+    Ldap form to search for user info
+    """
+    search_choices = [
+        ("wmuUID", "Bronco Net"),
+        ("mail", "Email"),
+        ("wmuFirstName", "First Name"),
+        ("wmuLastName", "Last Name"),
+        ("cn", "Full Name"),
+        ("wmuBannerID", "Win Number"),
+    ]
+    search_choice_field = forms.CharField(label='Search By', widget=forms.Select(choices=search_choices))
+    search_input = forms.CharField(label="Value", max_length=60)

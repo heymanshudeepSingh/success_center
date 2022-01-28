@@ -1,0 +1,36 @@
+{% extends 'cae_tools/main.html' %}
+{% load static %}
+
+{% block title_page_name %}LDAP | Search{% endblock title_page_name %}
+
+
+{% block content %}
+
+  <div class="panel primary">
+
+    <div class="header">
+      <h1>CAE LDAP User Info</h1>
+    </div>
+
+    <div class="body">
+      {% include 'cae_home/include/form.html' %}
+    </div>
+
+    <div class="content">
+      {% if cae_ldap_user_info != None %}
+        <p> {{ cae_ldap_user_info }}</p>
+      {% endif %}
+
+      {% if advising_ldap_user_info != None %}
+        {% for key, value in advising_ldap_user_info.items %}
+          <p> {{  key }} : {{ value }}</p>
+        {% endfor %}
+      {% endif %}
+
+      {% if wmu_ldap_user_info != None %}
+        <p> {{ wmu_ldap_user_info }}</p>
+      {% endif %}
+    </div>
+
+  </div>
+{% endblock content %}

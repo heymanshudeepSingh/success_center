@@ -8,6 +8,7 @@ from workspace.ldap_backends.simple_ldap_lib.resources import ldap_lib
 from workspace.ldap_backends.wmu_auth.cae_backend import CaeAuthBackend
 from workspace.ldap_backends.wmu_auth.adv_backend import AdvisingAuthBackend
 from workspace.ldap_backends.wmu_auth.wmu_backend import WmuAuthBackend
+from cae_tools import forms
 
 
 def ldap_utility(request):
@@ -29,48 +30,66 @@ def ldap_utility(request):
     advising_auth_backend = AdvisingAuthBackend()
     wmu_auth_backend = WmuAuthBackend()
 
+    # initialize variables
     uid = None
-    # Connect to LDAP server and pull user's full info.
-    cae_ldap_user_info = cae_auth_backend.get_ldap_user_info("Brandon", search_by="wmuFirstName", attributes=['uid'])
-    if cae_ldap_user_info:
-        uid = cae_ldap_user_info["uid"][0]
+    cae_ldap_user_info = None
+    advising_ldap_user_info = None
+    wmu_ldap_user_info = None
+    if request.method == 'POST':
+        for key, value in request.POST.items():
+            print(f'Key: {key}')
+            print(f'Value: {value}')
+        form = forms.LdapUtilityForm(request.POST)
+        if form.is_valid():
+            # get user input
+            search_by = form.cleaned_data['search_choice_field']
+            search_for_value = form.cleaned_data['search_input']
 
-    wmu_ldap_user_info = wmu_auth_backend.get_ldap_user_info("Brandon", search_by="wmuFirstName", attributes=['uid'])
-    if uid is None and wmu_ldap_user_info:
-        uid = wmu_ldap_user_info["uid"][0]
+            # Connect to LDAP server and pull user's full info.
+            cae_ldap_user_info = cae_auth_backend.get_ldap_user_info(search_for_value, search_by=search_by, attributes=['uid'])
+            if cae_ldap_user_info:
+                uid = cae_ldap_user_info["uid"][0]
 
-    advising_ldap_user_info = advising_auth_backend.get_ldap_user_info("Brandon", search_by="wmuFirstName", attributes=['uid'])
-    if uid is None and advising_ldap_user_info:
-        uid = advising_ldap_user_info["uid"][0]
+            wmu_ldap_user_info = wmu_auth_backend.get_ldap_user_info(search_for_value, search_by=search_by, attributes=['uid'])
+            if uid is None and wmu_ldap_user_info:
+                uid = wmu_ldap_user_info["uid"][0]
 
-    if uid is None:
-        print("Error Unknown Value!")
+            advising_ldap_user_info = advising_auth_backend.get_ldap_user_info(search_for_value, search_by=search_by, attributes=['uid'])
+            if uid is None and advising_ldap_user_info:
+                uid = advising_ldap_user_info["uid"][0]
 
-    print(f"cae_ldap_user_info:{cae_ldap_user_info} \n wmu_ldap_user_info{wmu_ldap_user_info} \n advising_ldap_user_info{advising_ldap_user_info}\n")
-    print("************** UID *******************")
-    print(uid)
-    # By this point we know we have UID for sure. Now fetch information using UID from all 3 ldap s
-    cae_ldap_user_info = cae_auth_backend.get_ldap_user_info(f'{uid}')
-    wmu_ldap_user_info = wmu_auth_backend.get_ldap_user_info(f'{uid}')
-    advising_ldap_user_info = advising_auth_backend.get_ldap_user_info(f'{uid}')
+            if uid is None:
+                print("Error Unknown Value!")
 
-    # Check if we got LDAP response. If not, user does not exist in CAE LDAP.
-    if cae_ldap_user_info is not None:
-        print(f'user info : {cae_ldap_user_info}')
-    else:
-        print("Failed to connect to CAE LDAP!!!!!!!!!")
+            # By this point we know we have UID for sure. Now fetch information using UID from all 3 ldap s
+            cae_ldap_user_info = cae_auth_backend.get_ldap_user_info(f'{uid}')
+            wmu_ldap_user_info = wmu_auth_backend.get_ldap_user_info(f'{uid}')
+            advising_ldap_user_info = advising_auth_backend.get_ldap_user_info(f'{uid}')
 
-    print("-" * 80)
-    # Check if we got LDAP response. If not, user does not exist in Advising LDAP.
-    if advising_ldap_user_info is not None:
-        print(f'user info : {advising_ldap_user_info}')
-    else:
-        print("Failed to connect to Advising LDAP!!!!!!!!!")
-    print("-" * 80)
+            # Check if we got LDAP response. If not, user does not exist in CAE LDAP.
+            if cae_ldap_user_info is not None:
+                print(f'user info : {cae_ldap_user_info}')
+            else:
+                print("Failed to connect to CAE LDAP!")
 
-    # Check if we got LDAP response. If not, user does not exist in WMU LDAP.
-    if wmu_ldap_user_info is not None:
-        print(f'user info : {wmu_ldap_user_info}')
-    else:
-        print("Failed to connect to WMU LDAP!!!!!!!!!")
-    print("-" * 80)
+            print("-" * 80)
+            # Check if we got LDAP response. If not, user does not exist in Advising LDAP.
+            if advising_ldap_user_info is not None:
+                print(f'user info : {advising_ldap_user_info}')
+            else:
+                print("Failed to connect to Advising LDAP!")
+            print("-" * 80)
+
+            # Check if we got LDAP response. If not, user does not exist in WMU LDAP.
+            if wmu_ldap_user_info is not None:
+                print(f'user info : {wmu_ldap_user_info}')
+            else:
+                print("Failed to connect to WMU LDAP!")
+            print("-" * 80)
+    form = forms.LdapUtilityForm()
+    return TemplateResponse(request, 'cae_tools/ldap_utility.html', {
+        'cae_ldap_user_info': cae_ldap_user_info,
+        'advising_ldap_user_info': advising_ldap_user_info,
+        'wmu_ldap_user_info': wmu_ldap_user_info,
+        'form': form,
+    })
