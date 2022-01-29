@@ -215,8 +215,6 @@ class LdapUtilityForm(forms.Form):
     search_choices = [
         ("wmuUID", "Bronco Net"),
         ("mail", "Email"),
-        ("wmuFirstName", "First Name"),
-        ("wmuLastName", "Last Name"),
         ("cn", "Full Name"),
         ("wmuBannerID", "Win Number"),
     ]

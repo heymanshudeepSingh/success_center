@@ -16,21 +16,39 @@
       {% include 'cae_home/include/form.html' %}
     </div>
 
-    <div class="content">
-      {% if cae_ldap_user_info != None %}
-        <p> {{ cae_ldap_user_info }}</p>
-      {% endif %}
-
-      {% if advising_ldap_user_info != None %}
-        {% for key, value in advising_ldap_user_info.items %}
-          <p> {{  key }} : {{ value }}</p>
-        {% endfor %}
-      {% endif %}
-
-      {% if wmu_ldap_user_info != None %}
-        <p> {{ wmu_ldap_user_info }}</p>
-      {% endif %}
-    </div>
-
   </div>
+
+  {% if cn %}
+      <h1>{{ cn }}</h1>
+      <div class="page-tabs">
+        {% if cae_ldap_user_info != None %}
+          <h2>CAE LDAP</h2>
+          <hr>
+          {% for key, value in cae_ldap_user_info.items %}
+              <p> {{  key }} : {{ value|truncatechars:90  }}</p>
+          {% endfor %}
+          <br>
+        {% endif %}
+
+        {% if advising_ldap_user_info != None %}
+          <h2>Advising LDAP</h2>
+          <hr>
+          {% for key, value in advising_ldap_user_info.items %}
+            <p> {{  key }} : {{ value }}</p>
+          {% endfor %}
+          <br>
+        {% endif %}
+
+        {% if wmu_ldap_user_info != None %}
+          <h2>WMU LDAP</h2>
+          <hr>
+          {% for key, value in wmu_ldap_user_info.items %}
+            <p> {{  key }} : {{ value }}</p>
+          {% endfor %}
+          <br>
+        {% endif %}
+      </div>
+
+    {% endif %}
+
 {% endblock content %}

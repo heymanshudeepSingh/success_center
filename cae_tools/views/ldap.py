@@ -35,6 +35,9 @@ def ldap_utility(request):
     cae_ldap_user_info = None
     advising_ldap_user_info = None
     wmu_ldap_user_info = None
+    # cn holds user name and will be used as page header
+    cn = None
+
     if request.method == 'POST':
         for key, value in request.POST.items():
             print(f'Key: {key}')
@@ -69,6 +72,7 @@ def ldap_utility(request):
             # Check if we got LDAP response. If not, user does not exist in CAE LDAP.
             if cae_ldap_user_info is not None:
                 print(f'user info : {cae_ldap_user_info}')
+                cn = cae_ldap_user_info['cn'][0]
             else:
                 print("Failed to connect to CAE LDAP!")
 
@@ -76,6 +80,8 @@ def ldap_utility(request):
             # Check if we got LDAP response. If not, user does not exist in Advising LDAP.
             if advising_ldap_user_info is not None:
                 print(f'user info : {advising_ldap_user_info}')
+                cn = advising_ldap_user_info['cn'][0]
+
             else:
                 print("Failed to connect to Advising LDAP!")
             print("-" * 80)
@@ -83,6 +89,8 @@ def ldap_utility(request):
             # Check if we got LDAP response. If not, user does not exist in WMU LDAP.
             if wmu_ldap_user_info is not None:
                 print(f'user info : {wmu_ldap_user_info}')
+                cn = wmu_ldap_user_info['cn'][0]
+
             else:
                 print("Failed to connect to WMU LDAP!")
             print("-" * 80)
@@ -92,4 +100,5 @@ def ldap_utility(request):
         'advising_ldap_user_info': advising_ldap_user_info,
         'wmu_ldap_user_info': wmu_ldap_user_info,
         'form': form,
+        'cn': cn
     })
