@@ -217,6 +217,7 @@ class LdapUtilityForm(forms.Form):
         ("mail", "Email"),
         ("cn", "Full Name"),
         ("wmuBannerID", "Win Number"),
+        ("homePhone", "Phone Number"),
     ]
     search_choice_field = forms.CharField(label='Search By', widget=forms.Select(choices=search_choices))
     search_input = forms.CharField(label="Value", max_length=60)
