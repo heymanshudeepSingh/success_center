@@ -1,16 +1,21 @@
 # System imports
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 from django.template.response import TemplateResponse
 from django.contrib import messages
 
 # utility imports
+from cae_home.decorators import group_required
 from workspace.ldap_backends import simple_ldap_lib
 from workspace.ldap_backends.wmu_auth.cae_backend import CaeAuthBackend
 from workspace.ldap_backends.wmu_auth.adv_backend import AdvisingAuthBackend
 from workspace.ldap_backends.wmu_auth.wmu_backend import WmuAuthBackend
 from cae_tools import forms
+from workspace.settings.reusable_settings import CAE_CENTER_GROUPS
 
 
+@login_required
+@group_required('CAE Director', 'CAE Admin GA', 'CAE Programmer GA', 'CAE Admin', 'CAE Programmer')
 def ldap_utility(request):
     """
     ldap utility function that searches user based on Bronco net, Email, Fullname, Win Number
@@ -85,8 +90,12 @@ def ldap_utility(request):
 
             # Check if we got LDAP response. If not, user does not exist in Advising LDAP.
             if advising_ldap_user_info is not None:
-                cn = advising_ldap_user_info['cn'][0]
-
+                # If user doesnt exist, their cn (name) doesnt exist in Advising ldap.
+                # this error only exists for Advising ldap.
+                if advising_ldap_user_info['wmuKerberosUserStatus'][0] == "removed":
+                    messages.warning(request, "User doesn't exist anymore!")
+                else:
+                    cn = advising_ldap_user_info['cn'][0]
             else:
                 messages.error(request, "Failed to connect to Advising LDAP!")
 
