@@ -46,7 +46,7 @@ def ldap_utility(request):
     cae_ldap_user_info = None
     advising_ldap_user_info = None
     wmu_ldap_user_info = None
-    # cn holds user name and will be used as page header
+    # cn holds username and will be used as page header
     cn = None
 
     if request.method == 'POST':
