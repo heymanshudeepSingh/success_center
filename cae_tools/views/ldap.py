@@ -6,21 +6,16 @@ from django.contrib import messages
 
 # utility imports
 from cae_home.decorators import group_required
-from workspace.ldap_backends import simple_ldap_lib
 from workspace.ldap_backends.wmu_auth.cae_backend import CaeAuthBackend
 from workspace.ldap_backends.wmu_auth.adv_backend import AdvisingAuthBackend
 from workspace.ldap_backends.wmu_auth.wmu_backend import WmuAuthBackend
 from cae_tools import forms
-from workspace.settings.reusable_settings import CAE_CENTER_GROUPS
+from workspace.ldap_backends import simple_ldap_lib
 
 
-@login_required
-@group_required('CAE Director', 'CAE Admin GA', 'CAE Programmer GA', 'CAE Admin', 'CAE Programmer')
-def ldap_utility(request):
+def sync_ldap():
     """
-    ldap utility function that searches user based on Bronco net, Email, Fullname, Win Number
-    or Phone number and return results from CAE, Advising, and main Campus WMU Ldap
-
+    handle syncing with ldap using settings in env.py
     """
     # initialize ldap library and syncing with settings in env
     ldap_lib = simple_ldap_lib.SimpleLdap()
@@ -35,6 +30,15 @@ def ldap_utility(request):
     ldap_lib.set_search_base(settings.CAE_LDAP['user_search_base'])
     ldap_lib.set_uid_attribute(settings.CAE_LDAP['default_uid'])
 
+
+def ldap_utility(request):
+    """
+    ldap utility function that searches user based on Bronco net, Email, Fullname, Win Number
+    or Phone number and return results from CAE, Advising, and main Campus WMU Ldap
+
+    """
+
+    sync_ldap()
     # initialize ldap backend for all 3 ldap s - main campus, advising and CAE
     cae_auth_backend = CaeAuthBackend()
     advising_auth_backend = AdvisingAuthBackend()
@@ -112,3 +116,16 @@ def ldap_utility(request):
         'form': form,
         'cn': cn
     })
+
+
+@login_required
+@group_required('CAE Director', 'CAE Admin GA', 'CAE Programmer GA', 'CAE Admin', 'CAE Programmer')
+def cae_ldap_password_reset(request):
+    """
+    Resets password for Cae center employees
+    """
+    sync_ldap()
+
+    # initialize ldap backend for CAE Ldap
+    cae_auth_backend = CaeAuthBackend()
+
