@@ -74,6 +74,7 @@ function main () {
     user_confirmation "Install MySQL dependency requirements?"
     mysql=$return_value
     if [[ "$return_value" = true ]]
+    then
     # remove "#" comment from #mysqlclient in requirements.txt so we can install it
         if grep -q "#mysqlclient" "../requirements.txt";
         then
@@ -86,6 +87,7 @@ function main () {
     user_confirmation "Install Ldap dependency requirements?"
     ldap=$return_value
     if [[ "$return_value" = true ]]
+    then
     # remove "#" comment from #mysqlclient in requirements.txt so we can install it
         if grep -q "#ldap3" "../requirements.txt";
         then
