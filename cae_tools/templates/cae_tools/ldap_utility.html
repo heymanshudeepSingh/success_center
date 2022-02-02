@@ -1,4 +1,5 @@
 {% extends 'cae_tools/main.html' %}
+{% load cae_home_tags %}
 {% load static %}
 
 {% block title_page_name %}LDAP | Search{% endblock title_page_name %}
@@ -19,36 +20,31 @@
   </div>
 
   {% if cn %}
-      <h1>{{ cn }}</h1>
-      <div class="page-tabs">
-        {% if cae_ldap_user_info != None %}
-          <h2>CAE LDAP</h2>
-          <hr>
-          {% for key, value in cae_ldap_user_info.items %}
-              <p> {{  key }} : {{ value|truncatechars:90  }}</p>
-          {% endfor %}
-          <br>
-        {% endif %}
+    <h1>{{ cn }}</h1>
+    <div class="page-tabs">
+      {% if cae_ldap_user_info != None %}
+        <h2>CAE LDAP</h2>
+        <hr>
+        {% include 'cae_tools/include/ldap_utility_item_display.html' with ldap_user_info=cae_ldap_user_info %}
+        <br>
+      {% endif %}
 
-        {% if advising_ldap_user_info != None %}
-          <h2>Advising LDAP</h2>
-          <hr>
-          {% for key, value in advising_ldap_user_info.items %}
-            <p> {{  key }} : {{ value }}</p>
-          {% endfor %}
-          <br>
-        {% endif %}
+      {% if wmu_ldap_user_info != None %}
+        <h2>WMU LDAP</h2>
+        <hr>
+        {% include 'cae_tools/include/ldap_utility_item_display.html' with ldap_user_info=wmu_ldap_user_info %}
+        <br>
+      {% endif %}
 
-        {% if wmu_ldap_user_info != None %}
-          <h2>WMU LDAP</h2>
-          <hr>
-          {% for key, value in wmu_ldap_user_info.items %}
-            <p> {{  key }} : {{ value }}</p>
-          {% endfor %}
-          <br>
-        {% endif %}
-      </div>
+      {% if advising_ldap_user_info != None %}
+        <h2>Advising LDAP</h2>
+        <hr>
+        {% include 'cae_tools/include/ldap_utility_item_display.html' with ldap_user_info=advising_ldap_user_info %}
+        <br>
+      {% endif %}
+    </div>
 
-    {% endif %}
+  {% endif %}
+
 
 {% endblock content %}

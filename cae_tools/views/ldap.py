@@ -105,7 +105,6 @@ def ldap_utility(request):
 
             else:
                 messages.error(request, "Failed to connect to WMU LDAP!")
-
     return TemplateResponse(request, 'cae_tools/ldap_utility.html', {
         'cae_ldap_user_info': cae_ldap_user_info,
         'advising_ldap_user_info': advising_ldap_user_info,

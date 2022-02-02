@@ -1,0 +1,24 @@
+{% load cae_home_tags %}
+
+<ul>
+  {% for key, value in ldap_user_info.items %}
+    {% if value|is_string %}
+      <li><p><b>{{ key }}</b> : {{ value|truncatechars:90 }}</p></li>
+    {% elif value|is_list %}
+      {% if value|length > 1 %}
+        <li>
+          <p><b>{{ key }}</b> : </p>
+          <ul>
+            {% for inner_value in value %}
+              <li><p>{{ inner_value }}</p></li>
+            {% endfor %}
+          </ul>
+        </li>
+      {% else %}
+        <li><p><b>{{ key }}</b> : {{ value.0|truncatechars:90 }}</p></li>
+      {% endif %}
+    {% else %}
+      <li><p><b>{{ key }}</b> : {{ value|truncatechars:90 }}</p></li>
+    {% endif %}
+  {% endfor %}
+</ul>

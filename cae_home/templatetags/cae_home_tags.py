@@ -114,3 +114,19 @@ def dict_key(dictionary, key):
                 type(dictionary),
             )
         )
+
+
+@register.filter
+def is_string(val):
+    """
+    Allows user to check if the value in template is a string
+    """
+    return isinstance(val, str)
+
+
+@register.filter
+def is_list(val):
+    """
+    Allows user to check if the value in template is a list
+    """
+    return isinstance(val, list) or isinstance(val,tuple)
