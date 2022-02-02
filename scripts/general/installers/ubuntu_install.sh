@@ -161,6 +161,11 @@ function main () {
         # Google Chrome "chromium" driver for running selenium with chrome.
         if [[ ! -f "/usr/local/bin/chromedriver" ]]
         then
+        # check what chrome version is installed and download chrome driver accordingly
+        # unfortunately chromedriver only has generalized packages ex 97.xx.xx for all chromes with version 97
+        # maybe in future this will work
+#            chrome_version=$(google-chrome --product-version)
+#            wget https://chromedriver.storage.googleapis.com/$chrome_version/chromedriver_linux64.zip
             wget https://chromedriver.storage.googleapis.com/97.0.4692.71/chromedriver_linux64.zip
             unzip chromedriver_linux64.zip -d /usr/local/bin/ > /dev/null
             chmod +x /usr/local/bin/chromedriver > /dev/null
