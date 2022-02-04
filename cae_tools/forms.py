@@ -232,9 +232,14 @@ class CaePasswordResetForm(forms.Form):
     new_password = forms.CharField(label="New Password", widget=forms.PasswordInput(), required=True)
     repeat_new_password = forms.CharField(label="Repeat New Password", widget=forms.PasswordInput(), required=True)
 
+    def __init__(self, *args, **kwargs):
+        # Run parent setup logic.
+        super().__init__(*args, **kwargs)
+
     def clean(self):
-        self.full_clean()
+        # Get cleaned form data.
+        cleaned_data = super().clean()
 
         # check if the passwords match
-        if self.new_password != self.repeat_new_password:
+        if cleaned_data["new_password"] != cleaned_data["repeat_new_password"]:
             self.add_error(self, "Passwords don't match!")

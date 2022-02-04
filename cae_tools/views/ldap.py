@@ -134,17 +134,30 @@ def cae_password_reset(request):
 
     # initialize ldap backend for CAE Ldap
     cae_auth_backend = CaeAuthBackend()
+
+    # initialize form
+    form = forms.CaePasswordResetForm()
+
     if request.method == 'POST':
         form = forms.CaePasswordResetForm(request.POST)
+
         if form.is_valid():
             user_id = form.cleaned_data['user_id']
+            # initialize uid for ldap
+            uid = None
+
             # Connect to LDAP server and pull user's full info.
             cae_ldap_user_info = cae_auth_backend.get_ldap_user_info(user_id, search_by="uid",
                                                                      attributes=['uid'])
             if cae_ldap_user_info:
                 uid = cae_ldap_user_info["uid"][0]
 
-    form = forms.CaePasswordResetForm()
+            if uid is None:
+                messages.error(request, "User Not Found!")
+            else:
+                # By this point we know we have UID for sure. Now fetch information using UID from CAE Ldap
+                cae_ldap_user_info = cae_auth_backend.get_ldap_user_info(f'{uid}')
+
     return TemplateResponse(request, 'cae_tools/password_reset.html', {
         'form': form,
     })
