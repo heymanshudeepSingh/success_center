@@ -241,5 +241,6 @@ class CaePasswordResetForm(forms.Form):
         cleaned_data = super().clean()
 
         # check if the passwords match
-        if cleaned_data["new_password"] != cleaned_data["repeat_new_password"]:
-            self.add_error(self, "Passwords don't match!")
+        if cleaned_data.get("new_password") != cleaned_data.get("repeat_new_password"):
+            self.add_error('repeat_new_password', error="Passwords don't match!")
+
