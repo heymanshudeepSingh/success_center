@@ -158,6 +158,16 @@ def cae_password_reset(request):
                 # By this point we know we have UID for sure. Now fetch information using UID from CAE Ldap
                 cae_ldap_user_info = cae_auth_backend.get_ldap_user_info(f'{uid}')
 
+                # Check if user is associated with any group - programmers, director, admins, etc.
+                get_user_group = cae_auth_backend.get_ldap_user_groups(uid)
+                valid_group = any(user_group is True for user_group in get_user_group.values())
+
+                if valid_group:
+                    print(get_user_group)
+
+                else:
+                    messages.error(request, "Invalid user group!")
+
     return TemplateResponse(request, 'cae_tools/password_reset.html', {
         'form': form,
     })
