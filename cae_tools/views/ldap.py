@@ -37,8 +37,11 @@ def ldap_utility(request):
     or Phone number and return results from CAE, Advising, and main Campus WMU Ldap
 
     """
-
-    sync_ldap()
+    # check if ldap is setup
+    if settings.CAE_LDAP['login_dn'] == "":
+        messages.error(request, "Can't connect to Ldap server. :(")
+    else:
+        sync_ldap()
     # initialize ldap backend for all 3 ldap s - main campus, advising and CAE
     cae_auth_backend = CaeAuthBackend()
     advising_auth_backend = AdvisingAuthBackend()
@@ -61,8 +64,6 @@ def ldap_utility(request):
             search_for_value = form.cleaned_data['search_input']
 
             # Connect to LDAP server and pull user's full info.
-            # This prevents user not found in other Ldap if attribute not found ex. home phone is only in Advising but
-            # with this we can use it to pull info from other ldap s
             cae_ldap_user_info = cae_auth_backend.get_ldap_user_info(search_for_value, search_by=search_by,
                                                                      attributes=['uid'])
             if cae_ldap_user_info:
@@ -90,7 +91,7 @@ def ldap_utility(request):
             if cae_ldap_user_info is not None:
                 cn = cae_ldap_user_info['cn'][0]
             else:
-                messages.error(request, "Failed to connect to CAE LDAP!")
+                messages.warning(request, "Failed to connect to CAE LDAP!")
 
             # Check if we got LDAP response. If not, user does not exist in Advising LDAP.
             if advising_ldap_user_info is not None:
@@ -101,14 +102,14 @@ def ldap_utility(request):
                 else:
                     cn = advising_ldap_user_info['cn'][0]
             else:
-                messages.error(request, "Failed to connect to Advising LDAP!")
+                messages.warning(request, "Failed to connect to Advising LDAP!")
 
             # Check if we got LDAP response. If not, user does not exist in WMU LDAP.
             if wmu_ldap_user_info is not None:
                 cn = wmu_ldap_user_info['cn'][0]
 
             else:
-                messages.error(request, "Failed to connect to WMU LDAP!")
+                messages.warning(request, "Failed to connect to WMU LDAP!")
     return TemplateResponse(request, 'cae_tools/ldap_utility.html', {
         'cae_ldap_user_info': cae_ldap_user_info,
         'advising_ldap_user_info': advising_ldap_user_info,
@@ -120,12 +121,30 @@ def ldap_utility(request):
 
 @login_required
 @group_required('CAE Director', 'CAE Admin GA', 'CAE Programmer GA', 'CAE Admin', 'CAE Programmer')
-def cae_ldap_password_reset(request):
+def cae_password_reset(request):
     """
     Resets password for Cae center employees
     """
-    sync_ldap()
+
+    # check if ldap is setup in env
+    if settings.CAE_LDAP['login_dn'] == "":
+        messages.error(request, "Can't connect to Ldap server. :(")
+    else:
+        sync_ldap()
 
     # initialize ldap backend for CAE Ldap
     cae_auth_backend = CaeAuthBackend()
+    if request.method == 'POST':
+        form = forms.CaePasswordResetForm(request.POST)
+        if form.is_valid():
+            user_id = form.cleaned_data['user_id']
+            # Connect to LDAP server and pull user's full info.
+            cae_ldap_user_info = cae_auth_backend.get_ldap_user_info(user_id, search_by="uid",
+                                                                     attributes=['uid'])
+            if cae_ldap_user_info:
+                uid = cae_ldap_user_info["uid"][0]
 
+    form = forms.CaePasswordResetForm()
+    return TemplateResponse(request, 'cae_tools/password_reset.html', {
+        'form': form,
+    })

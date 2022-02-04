@@ -76,6 +76,7 @@ urlpatterns = [
 
     # LDAP Utility Pages
     path('ldap_utility/', views.ldap_utility, name='ldap_utility'),
+    path('password_reset/', views.cae_password_reset, name='password_reset'),
 
     # Home url.
     path('', views.index, name='index'),

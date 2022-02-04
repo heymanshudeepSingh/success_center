@@ -14,3 +14,4 @@ from .tools import color_tool
 from .misc import index
 from .misc import documentation
 from .ldap import ldap_utility
+from .ldap import cae_password_reset

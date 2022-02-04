@@ -221,3 +221,20 @@ class LdapUtilityForm(forms.Form):
     ]
     search_choice_field = forms.CharField(label='Search By', widget=forms.Select(choices=search_choices))
     search_input = forms.CharField(label="Value", max_length=60)
+
+
+class CaePasswordResetForm(forms.Form):
+    """
+    form to reset password for CAE center users
+    """
+    user_id = forms.CharField(label="User ID", max_length=60, required=True)
+    current_password = forms.CharField(label="Current Password", widget=forms.PasswordInput(), required=True)
+    new_password = forms.CharField(label="New Password", widget=forms.PasswordInput(), required=True)
+    repeat_new_password = forms.CharField(label="Repeat New Password", widget=forms.PasswordInput(), required=True)
+
+    def clean(self):
+        self.full_clean()
+
+        # check if the passwords match
+        if self.new_password != self.repeat_new_password:
+            self.add_error(self, "Passwords don't match!")
