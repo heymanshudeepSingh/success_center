@@ -163,7 +163,21 @@ def cae_password_reset(request):
                 valid_group = any(user_group is True for user_group in get_user_group.values())
 
                 if valid_group:
-                    print(get_user_group)
+                    host = settings.CAE_LDAP['host']
+                    login_dn = settings.CAE_LDAP['login_dn']
+                    master_pass = settings.CAE_LDAP['login_password']
+                    # user dn required!
+                    cmd = "ldappasswd -H {0} -x -D '{1}' -w '{2}' -s '{3}' '{4}'".\
+                        format(host,login_dn,master_pass,form.cleaned_data['new_password'],cae_ldap_user_info)
+                    print(cmd)
+                #     http://manpages.ubuntu.com/manpages/bionic/man1/ldappasswd.1.html
+                #      ldappasswd  [-V[V]]  [-d debuglevel] [-n] [-v] [-A] [-a oldPasswd] [-t oldpasswdfile] [-S]
+                #      [-s newPasswd]  [-T newpasswdfile]  [-x]  [-D binddn]  [-W]  [-w passwd]   [-y passwdfile]
+                #      [-H ldapuri]  [-h ldaphost]  [-p ldapport]  [-e [!]ext[=extparam]]  [-E [!]ext[=extparam]]
+                #      [-o opt[=optparam]]  [-O security-properties]  [-I]  [-Q]  [-N]  [-U authcid]   [-R realm]
+                #      [-X authzid] [-Y mech] [-Z[Z]] [user]
+
+                # sudo apt install ldap-utils
 
                 else:
                     messages.error(request, "Invalid user group!")

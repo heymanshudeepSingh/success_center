@@ -379,6 +379,7 @@ class AbstractLDAPBackend(ABC):
         WARNING: Returns None if any if any given attribute(s) does not exist.
         :param search_value: value to search for.
         :param attributes: Attributes to search for. If not provided, then gets all attributes for user.
+        :param search_by: Search value by - fullname, bronco net, phone number, etc.
         :return: None if bad user_id or attribute | Dict of user's attributes.
         """
         # Validate vars.
