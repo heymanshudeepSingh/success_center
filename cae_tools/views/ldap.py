@@ -148,7 +148,7 @@ def cae_password_reset(request):
 
             # Connect to LDAP server and pull user's full info.
             cae_ldap_user_info = cae_auth_backend.get_ldap_user_info(user_id, search_by="uid",
-                                                                     attributes=['uid'])
+                                                                     attributes=['uid','cn'])
             if cae_ldap_user_info:
                 uid = cae_ldap_user_info["uid"][0]
 
@@ -163,12 +163,16 @@ def cae_password_reset(request):
                 valid_group = any(user_group is True for user_group in get_user_group.values())
 
                 if valid_group:
+                    user_cn = cae_ldap_user_info["cn"][0]
+                    if not user_cn:
+                        raise ValueError("User does not have cn!")
                     host = settings.CAE_LDAP['host']
+                    user_dn = "cn={},dc=users,dc=ceas,dc=wmich,dc=edu".format(user_cn)
                     login_dn = settings.CAE_LDAP['login_dn']
                     master_pass = settings.CAE_LDAP['login_password']
                     # user dn required!
                     cmd = "ldappasswd -H {0} -x -D '{1}' -w '{2}' -s '{3}' '{4}'".\
-                        format(host,login_dn,master_pass,form.cleaned_data['new_password'],cae_ldap_user_info)
+                        format(host,login_dn,master_pass,form.cleaned_data['new_password'],user_dn)
                     print(cmd)
                 #     http://manpages.ubuntu.com/manpages/bionic/man1/ldappasswd.1.html
                 #      ldappasswd  [-V[V]]  [-d debuglevel] [-n] [-v] [-A] [-a oldPasswd] [-t oldpasswdfile] [-S]
