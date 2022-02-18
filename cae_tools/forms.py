@@ -228,19 +228,19 @@ class CaePasswordResetForm(forms.Form):
     form to reset password for CAE center users
     """
     user_id = forms.CharField(label="User ID", max_length=60, required=True)
-    current_password = forms.CharField(label="Current Password", widget=forms.PasswordInput(), required=True)
-    new_password = forms.CharField(label="New Password", widget=forms.PasswordInput(), required=True)
-    repeat_new_password = forms.CharField(label="Repeat New Password", widget=forms.PasswordInput(), required=True)
+    # current_password = forms.CharField(label="Current Password", widget=forms.PasswordInput(), required=True)
+    # new_password = forms.CharField(label="New Password", widget=forms.PasswordInput(), required=True)
+    # repeat_new_password = forms.CharField(label="Repeat New Password", widget=forms.PasswordInput(), required=True)
 
     def __init__(self, *args, **kwargs):
         # Run parent setup logic.
         super().__init__(*args, **kwargs)
 
-    def clean(self):
-        # Get cleaned form data.
-        cleaned_data = super().clean()
-
-        # check if the passwords match
-        if cleaned_data.get("new_password") != cleaned_data.get("repeat_new_password"):
-            self.add_error('repeat_new_password', error="Passwords don't match!")
+    # def clean(self):
+    #     # Get cleaned form data.
+    #     cleaned_data = super().clean()
+    #
+    #     # check if the passwords match
+    #     if cleaned_data.get("new_password") != cleaned_data.get("repeat_new_password"):
+    #         self.add_error('repeat_new_password', error="Passwords don't match!")
 

@@ -1,4 +1,6 @@
 # System imports
+import os
+
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.template.response import TemplateResponse
@@ -166,14 +168,22 @@ def cae_password_reset(request):
                     user_cn = cae_ldap_user_info["cn"][0]
                     if not user_cn:
                         raise ValueError("User does not have cn!")
-                    host = settings.CAE_LDAP['host']
-                    user_dn = "cn={},dc=users,dc=ceas,dc=wmich,dc=edu".format(user_cn)
-                    login_dn = settings.CAE_LDAP['login_dn']
-                    master_pass = settings.CAE_LDAP['login_password']
-                    # user dn required!
-                    cmd = "ldappasswd -H {0} -x -D '{1}' -w '{2}' -s '{3}' '{4}'".\
-                        format(host,login_dn,master_pass,form.cleaned_data['new_password'],user_dn)
+                    host = "ldap://padl.ceas.wmich.edu"
+                    user_dn = "cn={0},{1}".format(user_cn,settings.CAE_LDAP['user_search_base'])
+                    admin_dn = settings.CAE_LDAP['admin_dn']
+                    admin_password = settings.CAE_LDAP['admin_password']
+                    user_password = settings.USER_SEED_PASSWORD
+                    cmd = "ldappasswd -H {} -x -D '{}' -w '{}' -s '{}' '{}'".format(
+                        host,
+                        admin_dn,
+                        admin_password,
+                        user_password,
+                        user_dn,
+                    )
                     print(cmd)
+                    os.system(cmd)
+                    print("*"*80)
+
                 #     http://manpages.ubuntu.com/manpages/bionic/man1/ldappasswd.1.html
                 #      ldappasswd  [-V[V]]  [-d debuglevel] [-n] [-v] [-A] [-a oldPasswd] [-t oldpasswdfile] [-S]
                 #      [-s newPasswd]  [-T newpasswdfile]  [-x]  [-D binddn]  [-W]  [-w passwd]   [-y passwdfile]
