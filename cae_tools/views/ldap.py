@@ -5,8 +5,10 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.template.response import TemplateResponse
 from django.contrib import messages
+from django.core.mail import send_mail
 
 # utility imports
+import cae_home.models
 from cae_home.decorators import group_required
 from workspace.ldap_backends.wmu_auth.cae_backend import CaeAuthBackend
 from workspace.ldap_backends.wmu_auth.adv_backend import AdvisingAuthBackend
@@ -123,7 +125,7 @@ def ldap_utility(request):
 
 @login_required
 @group_required('CAE Director', 'CAE Admin GA', 'CAE Programmer GA', 'CAE Admin', 'CAE Programmer')
-def cae_password_reset(request):
+def cae_password_reset(request, password = None):
     """
     Resets password for Cae center employees
     """
@@ -145,6 +147,7 @@ def cae_password_reset(request):
 
         if form.is_valid():
             user_id = form.cleaned_data['user_id']
+
             # initialize uid for ldap
             uid = None
 
@@ -168,11 +171,26 @@ def cae_password_reset(request):
                     user_cn = cae_ldap_user_info["cn"][0]
                     if not user_cn:
                         raise ValueError("User does not have cn!")
+
+                    # Initialize connection elements
                     host = "ldap://padl.ceas.wmich.edu"
+
+                    # Get user from form and convert it into LDAP search format
                     user_dn = "cn={0},{1}".format(user_cn,settings.CAE_LDAP['user_search_base'])
+
+                    # Get admin DN and Password as we need admin privileges to reset passwords
                     admin_dn = settings.CAE_LDAP['admin_dn']
                     admin_password = settings.CAE_LDAP['admin_password']
-                    user_password = settings.USER_SEED_PASSWORD
+
+                    # Check if password is provided in the function call
+                    if password:
+                        user_password = password
+
+                    # Else default to env password
+                    else:
+                        user_password = settings.USER_SEED_PASSWORD
+
+                    # Command that resets the password - for reference try http://manpages.ubuntu.com/manpages/bionic/man1/ldappasswd.1.html
                     cmd = "ldappasswd -H {} -x -D '{}' -w '{}' -s '{}' '{}'".format(
                         host,
                         admin_dn,
@@ -180,22 +198,42 @@ def cae_password_reset(request):
                         user_password,
                         user_dn,
                     )
-                    print(cmd)
-                    os.system(cmd)
-                    print("*"*80)
+                    try:
+                        # Run command in terminal.
+                        os.system(cmd)
+                        messages.success(request, "Password Changed!")
+                        # initialize programmers email .
+                        programmers_email = cae_home.models.WmuUser.objects.get(bronco_net="ceas_prog").official_email
 
-                #     http://manpages.ubuntu.com/manpages/bionic/man1/ldappasswd.1.html
-                #      ldappasswd  [-V[V]]  [-d debuglevel] [-n] [-v] [-A] [-a oldPasswd] [-t oldpasswdfile] [-S]
-                #      [-s newPasswd]  [-T newpasswdfile]  [-x]  [-D binddn]  [-W]  [-w passwd]   [-y passwdfile]
-                #      [-H ldapuri]  [-h ldaphost]  [-p ldapport]  [-e [!]ext[=extparam]]  [-E [!]ext[=extparam]]
-                #      [-o opt[=optparam]]  [-O security-properties]  [-I]  [-Q]  [-N]  [-U authcid]   [-R realm]
-                #      [-X authzid] [-Y mech] [-Z[Z]] [user]
+                        # convert recipient_email to list as that is the format accepted by send email function
+                        recipient_email = [cae_home.models.WmuUser.objects.get(bronco_net=uid).shorthand_email()]
 
-                # sudo apt install ldap-utils
+                        # Get IP of the user changing password.
+                        # Reference - https://stackoverflow.com/a/4581997
+                        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+                        if x_forwarded_for:
+                            ip = x_forwarded_for.split(',')[0]
+                        else:
+                            ip = request.META.get('REMOTE_ADDR')
+
+                        try:
+                            # Try Sending Email
+                            send_mail("CAE Password Changed!",
+                                      f"Your CAE Center Password has been reset! \n by {request.user} \n IP: {ip}",
+                                      programmers_email,
+                                      recipient_email)
+                            messages.success(request, "Email Send!")
+                        except ConnectionError:
+                            messages.error(request,"Unable to send Email!")
+
+                    except ConnectionError:
+                        messages.error(request,"Unable to reset password!")
 
                 else:
                     messages.error(request, "Invalid user group!")
 
     return TemplateResponse(request, 'cae_tools/password_reset.html', {
         'form': form,
+        'button_text':"Reset!",
+
     })
