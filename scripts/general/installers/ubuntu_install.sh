@@ -101,9 +101,9 @@ function main () {
 
     # Install Node/Npm packages.
     echo -e "${color_blue}Installing npm dependencies...${color_reset}"
-    curl -sL https://deb.nodesource.com/setup_14.x > /dev/null 2>&1 | sudo -E bash -
+    curl -fsSL https://deb.nodesource.com/setup_lts.x > /dev/null 2>&1 | sudo -E bash -
     apt-get install nodejs -y > /dev/null 2>&1
-    apt-get install npm -y > /dev/null 2>&1
+    #apt-get install npm -y > /dev/null 2>&1
     sudo ./general/installers/misc/npm_install.sh > /dev/null 2>&1
 
     # Install Sass packages.
