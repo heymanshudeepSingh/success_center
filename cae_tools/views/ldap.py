@@ -179,7 +179,10 @@ def cae_password_reset(request):
                 # This will error out in development because the users that exist in LDAP are not included in
                 # seeded users and therefore don't have associated email.
                 # convert recipient_email to list as that is the format accepted by send email function
-                recipient_email = [cae_home.models.WmuUser.objects.get(bronco_net=user_id).shorthand_email()]
+                email_to = True if user_id in cae_home.models.WmuUser.objects.all().values_list("bronco_net") else False
+
+                recipient_email = [cae_home.models.WmuUser.objects.get(bronco_net=user_id).shorthand_email()] if \
+                    email_to else [""]
 
                 # Get IP of the user changing password.
                 # Reference - https://stackoverflow.com/a/4581997
