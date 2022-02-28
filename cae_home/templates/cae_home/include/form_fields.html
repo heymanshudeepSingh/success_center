@@ -46,5 +46,15 @@
     {% endif %}
 
   {% endfor %}
-
+  {% if form.additional_link %}
+    {% if form.slug %}
+      {% if form.additional_link_text %}
+        <a href='{% url form.additional_link slug=form.slug %}'>{{ form.additional_link_text }}</a>
+      {% else %}
+         <a href='{% url form.additional_link slug=user.username %}'></a>
+      {% endif %}
+    {% else %}
+      <a href='{% url form.additional_link %}'></a>
+    {% endif %}
+  {% endif %}
 </div>
