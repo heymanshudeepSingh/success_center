@@ -18,6 +18,7 @@ from .django_rest_views import DepartmentViewSet
 
 # Form views.
 from .form_views import user_edit
+from .form_views import change_password
 
 # Login views.
 from .auth_views import login

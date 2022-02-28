@@ -10,12 +10,13 @@ from django.contrib.auth.forms import AuthenticationForm as auth_form
 from . import models
 
 
-#region Custom Widgets
+# region Custom Widgets
 
 class DatePickerWidget(forms.DateInput):
     """
     Generic widget for Date fields.
     """
+
     def build_attrs(self, base_attrs, extra_attrs=None):
         """
         Set html attribute values.
@@ -29,6 +30,7 @@ class TimePickerWidget(forms.TimeInput):
     """
     Generic widget for Time fields.
     """
+
     def build_attrs(self, base_attrs, extra_attrs=None):
         """
         Set html attribute values.
@@ -47,6 +49,7 @@ class DateTimePickerWidget(forms.SplitDateTimeWidget):
             '<datetime field>': forms.SplitDateTimeField,
         }
     """
+
     def __init__(self, attrs=None, date_attrs=None, time_attrs=None):
         if date_attrs is None:
             date_attrs = {'class': 'form-widget-date-picker'}
@@ -60,6 +63,7 @@ class SelectButtonsWidget(forms.Select):
     """
     Widget for select input as clickable buttons.
     """
+
     def build_attrs(self, base_attrs, extra_attrs=None):
         """
         Set html attribute values.
@@ -74,6 +78,7 @@ class SelectButtonsSideWidget(forms.Select):
     Widget for select input as clickable buttons.
     Displays on side of form.
     """
+
     def build_attrs(self, base_attrs, extra_attrs=None):
         """
         Set html attribute values.
@@ -87,6 +92,7 @@ class Select2Widget(forms.Select):
     """
     Widget for select2 "single selection" input.
     """
+
     def build_attrs(self, base_attrs, extra_attrs=None):
         """
         Set html attribute values.
@@ -100,6 +106,7 @@ class Select2MultipleWidget(forms.SelectMultiple):
     """
     Widget for select2 "multiple selection" input.
     """
+
     def build_attrs(self, base_attrs, extra_attrs=None):
         """
         Set html attribute values.
@@ -118,6 +125,7 @@ class SignatureWidget(forms.TextInput):
         * This element should be a "TextField" when used in a model.
         * This element should be a "CharField" when used in a form.
     """
+
     def build_attrs(self, base_attrs, extra_attrs=None):
         """
         Set html attribute values.
@@ -126,11 +134,11 @@ class SignatureWidget(forms.TextInput):
         attrs.setdefault('class', 'form-widget-signature-field')
         return attrs
 
-#endregion Custom Widgets
+
+# endregion Custom Widgets
 
 
-
-#region Standard View Forms
+# region Standard View Forms
 
 class AuthenticationForm(auth_form):
     """
@@ -152,6 +160,7 @@ class UserModelForm(forms.ModelForm):
     """
     (Login) User model form for standard views.
     """
+
     def __init__(self, *args, **kwargs):
         super(UserModelForm, self).__init__(*args, **kwargs)
         self.fields['username'].widget.attrs['disabled'] = True
@@ -163,11 +172,33 @@ class UserModelForm(forms.ModelForm):
         )
 
 
+class ChangePasswordCustomForm(forms.Form):
+    """
+    form to reset password for CAE center users
+    """
+    current_password = forms.CharField(label="Current Password", widget=forms.PasswordInput(), required=True)
+    new_password = forms.CharField(label="New Password", widget=forms.PasswordInput(), required=True)
+    repeat_new_password = forms.CharField(label="Repeat New Password", widget=forms.PasswordInput(), required=True)
+
+    def __init__(self, *args, **kwargs):
+        # Run parent setup logic.
+        super().__init__(*args, **kwargs)
+
+    def clean(self):
+        # Get cleaned form data.
+        cleaned_data = super().clean()
+
+        # check if the passwords match
+        if cleaned_data.get("new_password") != cleaned_data.get("repeat_new_password"):
+            self.add_error('repeat_new_password', error="Passwords don't match!")
+
+
 class ProfileModelForm(forms.ModelForm):
     """
     User Profile model form for standard views.
     Displays all possible profile fields.
     """
+
     class Meta:
         model = models.Profile
         fields = (
@@ -190,6 +221,7 @@ class ProfileModelForm_OnlyPhone(forms.ModelForm):
     User Profile model form for standard views.
     Only displays phone number field.
     """
+
     class Meta:
         model = models.Profile
         fields = (
@@ -202,6 +234,7 @@ class ProfileModelForm_OnlySiteOptions(forms.ModelForm):
     User Profile model form for standard views.
     Only displays site option fields.
     """
+
     class Meta:
         model = models.Profile
         fields = (
@@ -217,6 +250,7 @@ class ProfileModelForm_OnlySiteOptionsGA(forms.ModelForm):
     GA User Profile model form for standard views.
     Only displays site option fields.
     """
+
     class Meta:
         model = models.Profile
         fields = (
@@ -237,6 +271,7 @@ class AddressModelForm(forms.ModelForm):
     """
     Address model form for standard views.
     """
+
     class Meta:
         model = models.Address
         fields = (
@@ -248,6 +283,7 @@ class RoomModelForm(forms.ModelForm):
     """
     Room model form for standard views.
     """
+
     class Meta:
         model = models.Room
         fields = (
@@ -257,4 +293,4 @@ class RoomModelForm(forms.ModelForm):
             'department': Select2MultipleWidget,
         }
 
-#endregion Standard View Forms
+# endregion Standard View Forms

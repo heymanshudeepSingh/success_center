@@ -7,16 +7,18 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import ObjectDoesNotExist
 from django.http.response import HttpResponseRedirect
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.template.response import TemplateResponse
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 
 # User Imports.
 from cae_home import forms, models
+from cae_home.decorators import group_required
 from workspace import logging as init_logging
 
-
 # Import logger.
+from workspace.settings import settings
+
 logger = init_logging.get_logger(__name__)
 
 
@@ -45,6 +47,9 @@ def user_edit(request, slug):
     form_list = []
     form = forms.UserModelForm(instance=user)
     form.display_name = 'General Info'
+    form.additional_link = 'cae_home:user_change_password'
+    form.additional_link_text = "Change Password?"
+    form.slug = user.username
     form_list.append(form)
 
     form = forms.ProfileModelForm_OnlyPhone(instance=user_profile)
@@ -144,4 +149,75 @@ def user_edit(request, slug):
         'user_model': user,
         'profile': user_profile,
         'address': address,
+
+    })
+
+
+@login_required
+@group_required('CAE Director', 'CAE Admin GA', 'CAE Programmer GA', 'CAE Admin', 'CAE Programmer')
+def change_password(request, slug):
+    """
+    Change password for Cae center employees
+    """
+    # required imports for the function
+    from workspace.ldap_backends import simple_ldap_lib
+    from workspace.ldap_backends.wmu_auth.cae_backend import CaeAuthBackend
+    import cae_home
+    from django.core.mail import send_mail
+
+    # check if ldap is setup in env
+    if settings.CAE_LDAP['login_dn'] == "":
+        messages.error(request, "Can't connect to Ldap server. :(")
+
+    # Initialize simple ldap liberary
+    ldap_lib = simple_ldap_lib.SimpleLdap()
+
+    # initialize ldap backend for CAE Ldap
+    cae_auth_backend = CaeAuthBackend()
+
+    # initialize form
+    form = forms.ChangePasswordCustomForm()
+
+    if request.method == 'POST':
+        form = forms.ChangePasswordCustomForm(request.POST)
+
+        if form.is_valid():
+            user_id = slug
+
+            # Initialize connection elements
+            host = "ldap://padl.ceas.wmich.edu"
+
+            # Get admin DN and Password as we need admin privileges to reset passwords
+            admin_dn = settings.CAE_LDAP['admin_dn']
+            admin_password = settings.CAE_LDAP['admin_password']
+            new_password = form.cleaned_data["new_password"]
+            user_search_base = settings.CAE_LDAP['user_search_base']
+            current_password = form.cleaned_data["current_password"]
+
+            """
+            Note: ssh 1: ldap password not found error will be thrown if Ldap-utils is not installed
+            """
+            try:
+                ldap_lib.cae_password_reset(password=new_password,
+                                            host=host,
+                                            user_id=user_id,
+                                            user_search_base=user_search_base,
+                                            admin_dn=admin_dn,
+                                            admin_password=admin_password,
+                                            cae_auth_backend=cae_auth_backend,
+                                            current_password=current_password
+                                            )
+                messages.success(request, "Password Changed Successfully!")
+                return redirect(reverse_lazy('cae_home:user_edit', args=[slug]))
+
+            except ConnectionError:
+                messages.error(request, "Unable to reset password!")
+
+        else:
+            messages.error(request, "Invalid user group!")
+
+    return TemplateResponse(request, 'cae_home/change_password.html', {
+        'form': form,
+        'button_text': "Reset!",
+
     })
