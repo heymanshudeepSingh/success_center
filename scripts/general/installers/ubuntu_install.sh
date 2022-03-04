@@ -5,7 +5,7 @@
 
 
 # Set "kwarg" values for script.
-key_value_args=("python_version")
+key_value_args=("python_version", "ldap", "mysql")
 
 
 # Import utility script.
@@ -20,8 +20,17 @@ function main () {
     # Make sure we are root.
     check_user "root"
 
-    mysql=""
-    ldap=""
+    if [[ ${!kwargs[@]} =~ "ldap" ]]
+    then
+        # Kwarg provided.
+        ldap=${kwargs["ldap"]}
+    fi
+    if [[ ${!kwargs[@]} =~ "mysql" ]]
+    then
+        # Kwarg provided.
+        mysql=${kwargs["mysql"]}
+    fi
+
     dev_setup=""
     python_version=""
 
@@ -70,10 +79,7 @@ function main () {
             fi
         done
     fi
-
-    user_confirmation "Install MySQL dependency requirements?"
-    mysql=$return_value
-    if [[ "$return_value" = true ]]
+    if [[ "$mysql" == true ]]
     then
     # remove "#" comment from #mysqlclient in requirements.txt so we can install it
         if grep -q "#mysqlclient" "../requirements.txt";
@@ -82,11 +88,7 @@ function main () {
         fi
     fi
     echo ""
-    echo ""
-
-    user_confirmation "Install Ldap dependency requirements?"
-    ldap=$return_value
-    if [[ "$return_value" = true ]]
+    if [[ "$ldap" == true ]]
     then
     # remove "#" comment from #mysqlclient in requirements.txt so we can install it
         if grep -q "#ldap3" "../requirements.txt";

@@ -58,6 +58,12 @@ function main() {
         fi
     done
 
+    user_confirmation "Install Ldap dependency requirements?"
+    ldap=$return_value
+
+    user_confirmation "Install MySQL dependency requirements?"
+    mysql=$return_value
+
     # Copy fresh instance of env.py file.
     cp ../workspace/local_env/env_example.py ../env.py
 
@@ -98,7 +104,7 @@ function main() {
             echo ""
             echo -e "${color_blue}Installing Ubuntu package dependencies...${color_reset}"
             echo -e "${color_blue}Depending on your machine, this may take up to 20 minutes...${color_reset}"
-            sudo ./general/installers/ubuntu_install.sh "python_version" $python_version -f $env_mode
+            sudo ./general/installers/ubuntu_install.sh "python_version" $python_version -f $env_mode "ldap" $ldap "mysql" $mysql
             echo ""
             loop=false
 
@@ -185,8 +191,24 @@ function main() {
             pip install wheel
             pip install -r requirements.txt
         fi
-        echo ""
-        echo -e "${color_blue}If you wanted MySQL or LDAP, please uncomment the appropriate lines in requirements.txt and rerun \"pip install -r requirements.txt\".${color_reset}"
+
+        if [[ "$ldap" == true ]]
+        then
+        # add back "#" comment from #ldap in requirements.txt so we can install it
+            if grep -q "ldap3" "./requirements.txt";
+            then
+                sed -i 's/ldap3/#ldap3/' "./requirements.txt"
+            fi
+        fi
+
+        if [[ "$mysql" == true ]]
+        then
+            # add back "#" comment from #ldap in requirements.txt so we can install it
+            if grep -q "mysqlclient" "./requirements.txt";
+            then
+                sed -i 's/mysqlclient/#mysqlclient/' "./requirements.txt"
+            fi
+        fi
         echo ""
 
         # Create initial database.
