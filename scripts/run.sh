@@ -465,6 +465,7 @@ function set_file_permissions_help () {
     set_file_permissions_help "${@}"
  }
 
+
  ###
  # Runs the script for generating ssh keys .
  ##
@@ -510,7 +511,7 @@ function ssh_help () {
 function keys_help () {
     ssh_generate_help "${@}"
 }
-function ssh_generate_help () {
+function generate_key_help () {
     ssh_generate_help "${@}"
 }
 
