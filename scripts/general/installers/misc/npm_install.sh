@@ -38,6 +38,11 @@ function main () {
 
     # Install update checker for npm.
     npm install -g npm-check-updates > /dev/null 2>&1
+
+    echo -e "${color_blue}NodeJs, Npm, and React dependencies installed.${color_reset}"
+    echo "    NodeJs Version:  $(node -v)"
+    echo "    Npm Version:     $(npm -v)"
+    echo "    React Version:   $(npm view react version)"
 }
 
 
