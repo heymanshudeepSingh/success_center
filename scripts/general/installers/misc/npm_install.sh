@@ -21,11 +21,23 @@ function main () {
     # Make sure we are root.
     check_user "root"
 
+    # Install base node/npm packages.
+    curl -fsSL https://deb.nodesource.com/setup_lts.x -y > /dev/null 2>&1 | sudo -E bash -
+    apt-get upgrade -y > /dev/null 2>&1
+    apt-get install nodejs -y > /dev/null 2>&1
+    apt-get install npm -y > /dev/null 2>&1
+
+    # Install NodeJs "version manager".
+    npm install -g n > /dev/null 2>&1
+
+    # Verify we have the latest stable version of npm.
+    n stable > /dev/null 2>&1
+
     # Update to latest version of npm.
-    npm install npm@latest -g
+    npm install -g npm@latest > /dev/null 2>&1
 
     # Install update checker for npm.
-    npm install -g npm-check-updates
+    npm install -g npm-check-updates > /dev/null 2>&1
 }
 
 
