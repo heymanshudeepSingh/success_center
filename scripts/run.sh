@@ -210,7 +210,7 @@ function compile_js () {
 ###
  # Aliases for "compile_js".
  ##
- function compile_react () {
+function compile_react () {
     compile_js "${@}"
 }
 function react () {
@@ -253,7 +253,7 @@ function compile_js_help () {
 ###
  # Aliases for "compile_js_help".
  ##
- function compile_react_help () {
+function compile_react_help () {
     compile_js_help "${@}"
 }
 function react_help () {
@@ -271,43 +271,85 @@ function compile_javascript_help () {
 
 
 ###
- # Runs the script for updating npm.
+ # Runs the script for installing NodeJs/Npm/React.
  ##
-function update_npm () {
-    ./general/update_npm.sh "${@}"
+function install_npm () {
+    ./general/installers/misc/npm_install.sh "${@}"
 }
 ###
- # Aliases for "update_npm".
+ # Aliases for "compile_js".
  ##
-function npm () {
-    update_npm "${@}"
+function npm_install () {
+    install_npm "${@}"
 }
-function npm_update () {
-    update_npm "${@}"
+function install_nodejs () {
+    install_npm "${@}"
+}
+function nodejs_install () {
+    install_npm "${@}"
+}
+function install_react () {
+    install_npm "${@}"
+}
+function react_install () {
+    install_npm "${@}"
 }
 
 
 ###
  # Displays helper text for script.
  ##
-function update_npm_help () {
-    echo -e "${color_blue}Script${color_reset}: update_npm.sh"
-    echo "    Attempts to update all npm dependencies."
+function install_npm_help () {
+    echo -e "${color_blue}Script${color_reset}: install_npm.sh"
+    echo "    Installs NodeJs/Npm/React dependencies."
+    echo "    NOTE: Currently only works for Ubuntu systems."
     echo ""
-    echo -e "${color_blue}Permissions${color_reset}: Run as non root/admin user."
+    echo -e "${color_blue}Permissions${color_reset}: Run as root/admin user."
     echo ""
     echo -e "${color_blue}Aliases${color_reset}:"
-    echo "    * npm"
-    echo "    * npm_update"
+    echo "    * npm_install"
+    echo "    * install_nodejs"
+    echo "    * nodejs_install"
+    echo "    * install_react"
+    echo "    * react_install"
 }
 ###
- # Aliases for "update_npm_help".
+ # Aliases for "install_npm_help".
  ##
-function npm_help () {
-    update_npm_help "${@}"
+function npm_install_help () {
+    install_npm_help "${@}"
 }
-function npm_update_help () {
-    update_npm_help "${@}"
+function install_nodejs_help () {
+    install_npm_help "${@}"
+}
+function nodejs_install_help () {
+    install_npm_help "${@}"
+}
+function install_react_help () {
+    install_npm_help "${@}"
+}
+function react_install_help () {
+    install_npm_help "${@}"
+}
+
+
+
+###
+ # Runs the script for updating npm.
+ ##
+function update_npm_packages () {
+    ./general/update_npm.sh "${@}"
+}
+
+
+###
+ # Displays helper text for script.
+ ##
+function update_npm_packages_help () {
+    echo -e "${color_blue}Script${color_reset}: update_npm.sh"
+    echo "    Attempts to update all installed npm package dependencies in project root."
+    echo ""
+    echo -e "${color_blue}Permissions${color_reset}: Run as non root/admin user."
 }
 
 
