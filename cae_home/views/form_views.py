@@ -162,8 +162,6 @@ def change_password(request, slug):
     # required imports for the function
     from workspace.ldap_backends import simple_ldap_lib
     from workspace.ldap_backends.wmu_auth.cae_backend import CaeAuthBackend
-    import cae_home
-    from django.core.mail import send_mail
 
     # check if ldap is setup in env
     if settings.CAE_LDAP['login_dn'] == "":

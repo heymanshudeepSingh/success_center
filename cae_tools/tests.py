@@ -11,7 +11,6 @@ from django.utils import timezone
 # User Class Imports.
 from cae_home.tests.utils import IntegrationTestCase
 
-
 # Module-level Variables.
 from workspace.ldap_backends import simple_ldap_lib
 
@@ -19,13 +18,14 @@ cae_center_ldap_test_users = ['cae_director',
                               'cae_admin',
                               'cae_programmer',
                               'cae_admin_ga',
-                              'cae_programmer_ga',]
+                              'cae_programmer_ga', ]
 
 
 class LdapUtilityTests(IntegrationTestCase):
     """
     Tests to ensure valid CAEWeb Shifts manager views.
     """
+
     @classmethod
     def setUpTestData(cls):
         """
@@ -34,7 +34,6 @@ class LdapUtilityTests(IntegrationTestCase):
         """
         # Call parent logic.
         super().setUpTestData()
-
 
     def test__ldap_utility_redirect(self):
         """
@@ -72,4 +71,3 @@ class LdapUtilityTests(IntegrationTestCase):
             blacklist_users,
             status=403,
         )
-

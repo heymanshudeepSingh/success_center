@@ -15,6 +15,7 @@ from workspace.ldap_backends.wmu_auth.adv_backend import AdvisingAuthBackend
 from workspace.ldap_backends.wmu_auth.wmu_backend import WmuAuthBackend
 from cae_tools import forms
 from workspace.ldap_backends import simple_ldap_lib
+from workspace.settings.reusable_settings import CAE_CENTER_GROUPS
 
 
 def sync_ldap():
@@ -35,6 +36,8 @@ def sync_ldap():
     ldap_lib.set_uid_attribute(settings.CAE_LDAP['default_uid'])
 
 
+@login_required()
+@group_required('CAE Director', 'CAE Admin GA', 'CAE Programmer GA', 'CAE Admin', 'CAE Programmer')
 def ldap_utility(request):
     """
     ldap utility function that searches user based on Bronco net, Email, Fullname, Win Number
@@ -123,9 +126,6 @@ def ldap_utility(request):
     })
 
 
-
-@login_required
-@group_required('CAE Director', 'CAE Admin GA', 'CAE Programmer GA', 'CAE Admin', 'CAE Programmer')
 def cae_password_reset(request):
     """
     Resets password for Cae center employees
@@ -213,4 +213,3 @@ def cae_password_reset(request):
         'button_text': "Reset!",
 
     })
-
