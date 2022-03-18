@@ -102,7 +102,7 @@ def ldap_utility(request):
 
             # Check if we got LDAP response. If not, user does not exist in Advising LDAP.
             if advising_ldap_user_info is not None:
-                # If user doesnt exist, their cn (name) doesnt exist in Advising ldap.
+                # If user doesn't exist, their cn (name) doesn't exist in Advising ldap.
                 # this error only exists for Advising ldap.
                 if advising_ldap_user_info['wmuKerberosUserStatus'][0] == "removed":
                     messages.warning(request, "User doesn't exist anymore!")
@@ -135,7 +135,7 @@ def cae_password_reset(request):
     if settings.CAE_LDAP['login_dn'] == "":
         messages.error(request, "Can't connect to Ldap server. :(")
 
-    # Initialize simple ldap liberary
+    # Initialize simple ldap library
     ldap_lib = simple_ldap_lib.SimpleLdap()
 
     # initialize ldap backend for CAE Ldap
