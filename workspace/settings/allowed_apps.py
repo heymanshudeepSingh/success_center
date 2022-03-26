@@ -114,6 +114,16 @@ ALLOWED_CAE_PROJECTS = {
         },
         'third_party_apps': [],
     },
+
+    'Automate_Flows': {
+        'name': 'Automate Flows',
+        'index': 'automate_flows_core:index',
+        'url-prefix': 'automate_flows',
+        'related_apps': {
+            'automate_flows_core': {},
+        },
+        'third_party_apps': [],
+    },
 }
 
 
