@@ -13,30 +13,31 @@ wheel
  # Core Python Packages
  ##
 # Core Django framework.
-Django==4.0.1
+Django==4.0.4
 # Support for websocket connections.
 channels==3.0.4
-channels-redis==3.3.1
+channels-redis==3.4.0
 # Third party app for admin view customization.
 django-modeladmin-reorder==0.3.1
 # Third party apps for phone number fields and phone number seeding.
-django-phonenumber-field==6.0.0
-phonenumbers==8.12.41
+django-phonenumber-field==6.1.0
+phonenumbers==8.12.48
 faker-e164==0.1.0
 # Support for easy model API access.
 djangorestframework==3.13.1
 # DjangoRest model filtering support.
 django-filter==21.1
 # Faker library for automatic model seeding.
-Faker==11.3.0
+Faker==13.11.0
 # Read .xls and .xlsx Excel files (Deprecated, but required for .xls)
 xlrd==2.0.1
 # Pdf creation.
-fpdf2==2.4.6
+fpdf2==2.5.4
 # Printer connection.
 pycups==2.0.1
 # Redmine communication.
 python-redmine==2.3.0
+
 
 
 ###
@@ -73,9 +74,9 @@ freezegun
  # Remove at a later date.
  ##
 # CICO requirement? Look into.
-django-webpack-loader
+django-webpack-loader==1.5.0
 # Dropoff requirement. Should be replaced by settings env.py file.
-python-decouple
+python-decouple==3.6
 
 
 ###
@@ -83,19 +84,20 @@ python-decouple
  #      pip freeze -r requirements.txt
  ##
 aioredis==1.3.1
-asgiref==3.4.1
+asgiref==3.5.1
 async-generator==1.10
 async-timeout==4.0.2
 attrs==21.4.0
-autobahn==21.11.1
+autobahn==22.4.2
 Automat==20.2.0
 backports.zoneinfo==0.2.1
 certifi==2021.10.8
 cffi==1.15.0
-charset-normalizer==2.0.10
+charset-normalizer==2.0.12
 constantly==15.1.0
-cryptography==36.0.1
+cryptography==37.0.2
 daphne==3.0.2
+defusedxml==0.7.1
 execnet==1.9.0
 h11==0.13.0
 hiredis==2.0.0
@@ -106,32 +108,31 @@ iniconfig==1.1.1
 msgpack==1.0.3
 outcome==1.1.0
 packaging==21.3
-phonenumberslite==8.12.41
-Pillow==9.0.0
+phonenumberslite==8.12.48
+Pillow==9.1.0
 pluggy==1.0.0
 py==1.11.0
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
 pycparser==2.21
-pyOpenSSL==21.0.0
-pyparsing==3.0.6
+pyOpenSSL==22.0.0
+pyparsing==3.0.9
+PySocks==1.7.1
 pytest-forked==1.4.0
 python-dateutil==2.8.2
-pytz==2021.3
+pytz==2022.1
 requests==2.27.1
 service-identity==21.1.0
 six==1.16.0
 sniffio==1.2.0
 sortedcontainers==2.4.0
 sqlparse==0.4.2
-text-unidecode==1.3
-toml==0.10.2
-trio==0.19.0
+tomli==2.0.1
+trio==0.20.0
 trio-websocket==0.9.2
-Twisted==21.7.0
-txaio==21.2.1
-typing-extensions==4.0.1
-urllib3==1.26.8
-wsproto==1.0.0
+Twisted==22.4.0
+txaio==22.2.1
+typing-extensions==4.2.0
+urllib3==1.26.9
+wsproto==1.1.0
 zope.interface==5.4.0
-
