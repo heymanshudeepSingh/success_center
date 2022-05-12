@@ -53,6 +53,7 @@ ALLOWED_CAE_PROJECTS = {
     #     ],
     # },
 
+    # "Main" project for internal CAE Center employee use.
     'CAE_Web': {
         'name': 'CAE Web',
         'index': 'cae_web_core:index',
@@ -72,16 +73,10 @@ ALLOWED_CAE_PROJECTS = {
         'third_party_apps': [],
     },
 
-    'CICO': {
-        'name': 'Check In Check Out',
-        'index': 'cico_core:index',
-        'url-prefix': 'cico',
-        'related_apps': {
-            'cico_core': {},
-        },
-        'third_party_apps': [],
-    },
-
+    # Communicates with and tracks logging/errors that occur in the CAEMon desktop app.
+    # (Not yet created in Python as of summer 2022.
+    # Exists in Laravel but Laravel version is currently unused since CAEMon switched to Python.
+    # In theory, we should recreate it eventually, but it's low priority.)
     'CAEMon_Web': {
         'name': 'CAEMon Web',
         'index': '',
@@ -92,6 +87,19 @@ ALLOWED_CAE_PROJECTS = {
         'third_party_apps': [],
     },
 
+    # Pairs with the CAEMon desktop app to track computer usage in labs.
+    'CICO': {
+        'name': 'Check In Check Out',
+        'index': 'cico_core:index',
+        'url-prefix': 'cico',
+        'related_apps': {
+            'cico_core': {},
+        },
+        'third_party_apps': [],
+    },
+
+    # For CAE Center admins to check in computers and create work tickets for students/professors.
+    # Interfaces with Redmine, which then does most of the work. This just handles initial generation.
     'Drop_Off': {
         'name': 'Drop Off',
         'index': 'drop_off_core:index',
@@ -104,6 +112,7 @@ ALLOWED_CAE_PROJECTS = {
         'third_party_apps': [],
     },
 
+    # Helps the Dean's Office manage incoming graduate student applications for processing.
     'Grad_Applications': {
         'name': 'Graduate Applications',
         'index': 'grad_applications_core:index',
@@ -114,6 +123,7 @@ ALLOWED_CAE_PROJECTS = {
         'third_party_apps': [],
     },
 
+    # Used by main campus to track tutoring information.
     'Success_Center': {
         'name': 'Success Center',
         'index': 'success_center_core:index',
