@@ -104,6 +104,16 @@ ALLOWED_CAE_PROJECTS = {
         'third_party_apps': [],
     },
 
+    'Grad_Applications': {
+        'name': 'Graduate Applications',
+        'index': 'grad_applications_core:index',
+        'url-prefix': 'grad_apps',
+        'related_apps': {
+            'grad_applications_core': {},
+        },
+        'third_party_apps': [],
+    },
+
     'Success_Center': {
         'name': 'Success Center',
         'index': 'success_center_core:index',
@@ -111,16 +121,6 @@ ALLOWED_CAE_PROJECTS = {
         'related_apps': {
             'success_center_core': {},
             'success_center_timesheets': {},
-        },
-        'third_party_apps': [],
-    },
-
-    'Automate_Flows': {
-        'name': 'Automate Flows',
-        'index': 'automate_flows_core:index',
-        'url-prefix': 'automate_flows',
-        'related_apps': {
-            'automate_flows_core': {},
         },
         'third_party_apps': [],
     },
