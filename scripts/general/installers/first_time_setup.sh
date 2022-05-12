@@ -316,6 +316,11 @@ function setup_subprojects {
                 # Handle for Drop Off subproject.
                 mv "${dir}" "Drop_Off"
 
+            elif [[ "${normalized_dir}" == "./grad_applications" && "${dir}" != "./Grad_Applications" ]]
+            then
+                # Handle for Drop Off subproject.
+                mv "${dir}" "Grad_Applications"
+
             elif [[ "${normalized_dir}" == "./success_center" && "${dir}" != "./Success_Center" ]]
             then
                 # Handle for Success Ctr subproject.
