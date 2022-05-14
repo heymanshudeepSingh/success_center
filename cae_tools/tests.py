@@ -3,6 +3,8 @@ Tests for CAE Tools app.
 """
 
 # System Imports.
+import unittest
+
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.urls import reverse
@@ -13,6 +15,7 @@ from cae_home.tests.utils import IntegrationTestCase
 
 # Module-level Variables.
 from workspace.ldap_backends import simple_ldap_lib
+from workspace.tests.utils import run_ldap_tests
 
 cae_center_ldap_test_users = ['cae_director',
                               'cae_admin',
@@ -21,6 +24,7 @@ cae_center_ldap_test_users = ['cae_director',
                               'cae_programmer_ga', ]
 
 
+@unittest.skipUnless(run_ldap_tests(), 'Missing criteria for LDAP. Skipping Ldap tests.')
 class LdapUtilityTests(IntegrationTestCase):
     """
     Tests to ensure valid CAEWeb Shifts manager views.
