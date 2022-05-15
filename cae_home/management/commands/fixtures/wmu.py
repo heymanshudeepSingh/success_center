@@ -68,7 +68,7 @@ def create_semester_dates(style, display_output=False):
     Imports fixtures for Semester Date models.
     """
     # Load preset fixtures.
-    call_command('loaddata', 'production_models/semester_dates')
+    call_command('loaddata', 'production_models/semesters')
 
     if display_output and style is not None:
-        stdout.write('Imported fixtures for ' + style.SQL_FIELD('Semester Date') + ' models.\n')
+        stdout.write('Imported fixtures for ' + style.SQL_FIELD('Semester') + ' models.\n')

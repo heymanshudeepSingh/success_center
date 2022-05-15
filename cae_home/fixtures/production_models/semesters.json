@@ -1,6 +1,6 @@
 [
 {
-    "model": "cae_home.semesterdate",
+    "model": "cae_home.semester",
     "pk": 1,
     "fields": {
         "name": "Spring_2013",
@@ -11,7 +11,7 @@
     }
 },
 {
-    "model": "cae_home.semesterdate",
+    "model": "cae_home.semester",
     "pk": 2,
     "fields": {
         "name": "Summer_I_2013",
@@ -22,7 +22,7 @@
     }
 },
 {
-    "model": "cae_home.semesterdate",
+    "model": "cae_home.semester",
     "pk": 3,
     "fields": {
         "name": "Summer_II_2013",
@@ -33,7 +33,7 @@
     }
 },
 {
-    "model": "cae_home.semesterdate",
+    "model": "cae_home.semester",
     "pk": 4,
     "fields": {
         "name": "Fall_2013",
@@ -44,7 +44,7 @@
     }
 },
 {
-    "model": "cae_home.semesterdate",
+    "model": "cae_home.semester",
     "pk": 5,
     "fields": {
         "name": "Spring_2014",
@@ -55,7 +55,7 @@
     }
 },
 {
-    "model": "cae_home.semesterdate",
+    "model": "cae_home.semester",
     "pk": 6,
     "fields": {
         "name": "Summer_I_2014",
@@ -66,7 +66,7 @@
     }
 },
 {
-    "model": "cae_home.semesterdate",
+    "model": "cae_home.semester",
     "pk": 7,
     "fields": {
         "name": "Summer_II_2014",
@@ -77,7 +77,7 @@
     }
 },
 {
-    "model": "cae_home.semesterdate",
+    "model": "cae_home.semester",
     "pk": 8,
     "fields": {
         "name": "Fall_2014",
@@ -88,7 +88,7 @@
     }
 },
 {
-    "model": "cae_home.semesterdate",
+    "model": "cae_home.semester",
     "pk": 9,
     "fields": {
         "name": "Spring_2015",
@@ -99,7 +99,7 @@
     }
 },
 {
-    "model": "cae_home.semesterdate",
+    "model": "cae_home.semester",
     "pk": 10,
     "fields": {
         "name": "Summer_I_2015",
@@ -110,7 +110,7 @@
     }
 },
 {
-    "model": "cae_home.semesterdate",
+    "model": "cae_home.semester",
     "pk": 11,
     "fields": {
         "name": "Summer_II_2015",
@@ -121,7 +121,7 @@
     }
 },
 {
-    "model": "cae_home.semesterdate",
+    "model": "cae_home.semester",
     "pk": 12,
     "fields": {
         "name": "Fall_2015",
@@ -132,7 +132,7 @@
     }
 },
 {
-    "model": "cae_home.semesterdate",
+    "model": "cae_home.semester",
     "pk": 13,
     "fields": {
         "name": "Spring_2016",
@@ -143,7 +143,7 @@
     }
 },
 {
-    "model": "cae_home.semesterdate",
+    "model": "cae_home.semester",
     "pk": 14,
     "fields": {
         "name": "Summer_I_2016",
@@ -154,7 +154,7 @@
     }
 },
 {
-    "model": "cae_home.semesterdate",
+    "model": "cae_home.semester",
     "pk": 15,
     "fields": {
         "name": "Summer_II_2016",
@@ -165,7 +165,7 @@
     }
 },
 {
-    "model": "cae_home.semesterdate",
+    "model": "cae_home.semester",
     "pk": 16,
     "fields": {
         "name": "Fall_2016",
@@ -176,7 +176,7 @@
     }
 },
 {
-    "model": "cae_home.semesterdate",
+    "model": "cae_home.semester",
     "pk": 17,
     "fields": {
         "name": "Spring_2017",
@@ -187,7 +187,7 @@
     }
 },
 {
-    "model": "cae_home.semesterdate",
+    "model": "cae_home.semester",
     "pk": 18,
     "fields": {
         "name": "Summer_I_2017",
@@ -198,7 +198,7 @@
     }
 },
 {
-    "model": "cae_home.semesterdate",
+    "model": "cae_home.semester",
     "pk": 19,
     "fields": {
         "name": "Summer_II_2017",
@@ -209,7 +209,7 @@
     }
 },
 {
-    "model": "cae_home.semesterdate",
+    "model": "cae_home.semester",
     "pk": 20,
     "fields": {
         "name": "Fall_2017",
@@ -220,7 +220,7 @@
     }
 },
 {
-    "model": "cae_home.semesterdate",
+    "model": "cae_home.semester",
     "pk": 21,
     "fields": {
         "name": "Spring_2018",
@@ -231,7 +231,7 @@
     }
 },
 {
-    "model": "cae_home.semesterdate",
+    "model": "cae_home.semester",
     "pk": 22,
     "fields": {
         "name": "Summer_I_2018",
@@ -242,7 +242,7 @@
     }
 },
 {
-    "model": "cae_home.semesterdate",
+    "model": "cae_home.semester",
     "pk": 23,
     "fields": {
         "name": "Summer_II_2018",
@@ -253,7 +253,7 @@
     }
 },
 {
-    "model": "cae_home.semesterdate",
+    "model": "cae_home.semester",
     "pk": 24,
     "fields": {
         "name": "Fall_2018",
@@ -264,7 +264,7 @@
     }
 },
 {
-    "model": "cae_home.semesterdate",
+    "model": "cae_home.semester",
     "pk": 25,
     "fields": {
         "name": "Spring_2019",
@@ -275,7 +275,7 @@
     }
 },
 {
-    "model": "cae_home.semesterdate",
+    "model": "cae_home.semester",
     "pk": 26,
     "fields": {
         "name": "Summer_I_2019",
@@ -286,7 +286,7 @@
     }
 },
 {
-    "model": "cae_home.semesterdate",
+    "model": "cae_home.semester",
     "pk": 27,
     "fields": {
         "name": "Summer_II_2019",

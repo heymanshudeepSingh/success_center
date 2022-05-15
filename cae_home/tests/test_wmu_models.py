@@ -290,7 +290,7 @@ class SemesterDateModelTests(IntegrationTestCase):
         # Call parent logic.
         super().setUp()
 
-        self.test_semester_date = models.SemesterDate.objects.create(
+        self.test_semester_date = models.Semester.objects.create(
             start_date=self.start_date,
             end_date=self.end_date,
         )
@@ -310,55 +310,55 @@ class SemesterDateModelTests(IntegrationTestCase):
 
     def test_dummy_creation(self):
         # Test create.
-        dummy_model_1 = models.SemesterDate.create_dummy_model()
+        dummy_model_1 = models.Semester.create_dummy_model()
         self.assertIsNotNone(dummy_model_1)
-        self.assertTrue(isinstance(dummy_model_1, models.SemesterDate))
+        self.assertTrue(isinstance(dummy_model_1, models.Semester))
 
         # Test get.
-        dummy_model_2 = models.SemesterDate.create_dummy_model()
+        dummy_model_2 = models.Semester.create_dummy_model()
         self.assertIsNotNone(dummy_model_2)
-        self.assertTrue(isinstance(dummy_model_2, models.SemesterDate))
+        self.assertTrue(isinstance(dummy_model_2, models.Semester))
 
         # Test both are the same model instance.
         self.assertEqual(dummy_model_1, dummy_model_2)
 
     def test_name_generation(self):
         # Test Spring.
-        semester_date = models.SemesterDate.objects.create(
+        semester = models.Semester.objects.create(
             start_date=timezone.datetime(2018, 1, 1),
             end_date=timezone.datetime(2018, 1, 2)
         )
-        self.assertEqual(semester_date.name, 'Spring_2018')
+        self.assertEqual(semester.name, 'Spring_2018')
 
         # Test Summer 1.
-        semester_date = models.SemesterDate.objects.create(
+        semester = models.Semester.objects.create(
             start_date=timezone.datetime(2018, 4, 1),
             end_date=timezone.datetime(2018, 4, 2)
         )
-        self.assertEqual(semester_date.name, 'Summer_I_2018')
+        self.assertEqual(semester.name, 'Summer_I_2018')
 
         # Test Summer 2.
-        semester_date = models.SemesterDate.objects.create(
+        semester = models.Semester.objects.create(
             start_date=timezone.datetime(2018, 6, 1),
             end_date=timezone.datetime(2018, 6, 2)
         )
-        self.assertEqual(semester_date.name, 'Summer_II_2018')
+        self.assertEqual(semester.name, 'Summer_II_2018')
 
         # Test Fall.
-        semester_date = models.SemesterDate.objects.create(
+        semester = models.Semester.objects.create(
             start_date=timezone.datetime(2018, 8, 1),
             end_date=timezone.datetime(2018, 8, 2)
         )
-        self.assertEqual(semester_date.name, 'Fall_2018')
+        self.assertEqual(semester.name, 'Fall_2018')
 
     def test_start_date_before_end_date(self):
         with self.assertRaises(ValidationError):
             with transaction.atomic():
-                models.SemesterDate.objects.create(start_date=self.start_date, end_date=self.start_date)
+                models.Semester.objects.create(start_date=self.start_date, end_date=self.start_date)
 
         with self.assertRaises(ValidationError):
             with transaction.atomic():
-                models.SemesterDate.objects.create(
+                models.Semester.objects.create(
                     start_date=self.start_date,
                     end_date=self.start_date - timezone.timedelta(days=1)
                 )

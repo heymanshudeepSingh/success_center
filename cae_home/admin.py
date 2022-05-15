@@ -376,7 +376,7 @@ class SemesterDateToYearListFilter(admin.SimpleListFilter):
         """
         This defines the filter options.
         """
-        semester_dates = models.SemesterDate.objects.all()
+        semester_dates = models.Semester.objects.all()
         year_list = []
         for semester_date in semester_dates:
             year = semester_date.start_date.year
@@ -1296,7 +1296,7 @@ admin.site.register(models.Department, DepartmentAdmin)
 admin.site.register(models.RoomType, RoomTypeAdmin)
 admin.site.register(models.Room, RoomAdmin)
 admin.site.register(models.Major, MajorAdmin)
-admin.site.register(models.SemesterDate, SemesterDateAdmin)
+admin.site.register(models.Semester, SemesterDateAdmin)
 admin.site.register(models.WmuUser, WmuUserAdmin)
 
 # CAE Model Registration.

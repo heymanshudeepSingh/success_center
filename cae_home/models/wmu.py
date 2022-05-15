@@ -366,9 +366,9 @@ class Major(models.Model):
         return major
 
 
-class SemesterDate(models.Model):
+class Semester(models.Model):
     """
-    The start and end dates for a semester.
+    An instance of a semester for Wmu.
     """
     # Model fields.
     name = models.CharField(max_length=MAX_LENGTH, blank=True, null=True, unique=True)
@@ -418,7 +418,7 @@ class SemesterDate(models.Model):
         """
         # Save model.
         self.full_clean()
-        super(SemesterDate, self).save(*args, **kwargs)
+        super(Semester, self).save(*args, **kwargs)
 
     @staticmethod
     def create_dummy_model():
@@ -434,16 +434,16 @@ class SemesterDate(models.Model):
 
         # Attempt to get corresponding model instance, if there is one.
         try:
-            semester_date = SemesterDate.objects.get(
+            semester = Semester.objects.get(
                 start_date=start_date,
                 end_date=end_date,
             )
-        except SemesterDate.DoesNotExist:
+        except Semester.DoesNotExist:
             # Instance not found. Create new model.
-            semester_date = SemesterDate.objects.create(
+            semester = Semester.objects.create(
                 start_date=start_date,
                 end_date=end_date,
             )
 
         # Return "dummy model" instance.
-        return semester_date
+        return semester

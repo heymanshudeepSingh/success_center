@@ -10,7 +10,7 @@ from .wmu import Department
 from .wmu import RoomType
 from .wmu import Room
 from .wmu import Major
-from .wmu import SemesterDate
+from .wmu import Semester
 
 # Models related to user-login accounts.
 from .user import User
