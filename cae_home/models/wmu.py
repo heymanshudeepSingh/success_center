@@ -3,7 +3,7 @@ Definitions of "WMU" related Core Models.
 """
 
 # System Imports.
-import datetime
+import datetime, decimal
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import Q
@@ -72,6 +72,7 @@ class Department(models.Model):
 
         # Return "dummy model" instance.
         return department
+
 
 class RoomType(models.Model):
     """
@@ -366,6 +367,72 @@ class Major(models.Model):
         return major
 
 
+class WmuClass(models.Model):
+    """
+    A class to take at WMU.
+
+    Note: We intentionally preface this with "Wmu" to prevent potential confusion with Python "class" namespacing.
+    """
+    # Relationship keys.
+    department = models.ForeignKey('Department', on_delete=models.CASCADE)
+
+    # Model fields.
+    code = models.CharField(max_length=MAX_LENGTH, unique=True)
+    description = models.CharField(max_length=MAX_LENGTH)
+
+    # Self-setting/Non-user-editable fields.
+    slug = models.SlugField(
+        max_length=MAX_LENGTH,
+        unique=True,
+        help_text="Used for urls referencing this Class.",
+    )
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'Class'
+        verbose_name_plural = 'Classes'
+        ordering = ('pk',)
+
+    def __str__(self):
+        return '{0}'.format(self.code)
+
+    def save(self, *args, **kwargs):
+        """
+        Modify model save behavior.
+        """
+        # Save model.
+        self.full_clean()
+        super().save(*args, **kwargs)
+
+    @staticmethod
+    def create_dummy_model():
+        """
+        Attempts to get or create a dummy model.
+
+        Useful for when UnitTesting requires an instance of this model,
+        but test does not care what values the model actually has.
+        """
+        # Define "dummy model" values.
+        department = Department.create_dummy_model()
+        code = 'D123'
+        description = 'Dummy Description'
+
+        # Attempt to get corresponding model instance, if there is one.
+        try:
+            wmu_class = WmuClass.objects.get(code=code)
+        except StudentHistory.DoesNotExist:
+            # Instance not found. Create new model.
+            wmu_class = WmuClass.objects.create(
+                department=department,
+                code=code,
+                description=description,
+            )
+
+        # Return "dummy model" instance.
+        return wmu_class
+
+
 class Semester(models.Model):
     """
     An instance of a semester for Wmu.
@@ -447,3 +514,70 @@ class Semester(models.Model):
 
         # Return "dummy model" instance.
         return semester
+
+
+class StudentHistory(models.Model):
+    """
+    A class to take at WMU.
+    """
+    # Relationship keys.
+    wmu_user = models.ForeignKey('WmuUser', on_delete=models.CASCADE)
+
+    # Model fields.
+    bachelors_institution = models.CharField(max_length=MAX_LENGTH, blank=True, null=True)
+    bachelors_gpa = models.DecimalField(max_digits=3, decimal_places=2, default=0)
+    masters_institution = models.CharField(max_length=MAX_LENGTH, blank=True, null=True)
+    masters_gpa = models.DecimalField(max_digits=3, decimal_places=2, default=0)
+
+    # Self-setting/Non-user-editable fields.
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'Class'
+        verbose_name_plural = 'Classes'
+        ordering = ('pk',)
+
+    def __str__(self):
+        return '{0}'.format(self.code)
+
+    def save(self, *args, **kwargs):
+        """
+        Modify model save behavior.
+        """
+        # Save model.
+        self.full_clean()
+        super().save(*args, **kwargs)
+
+    @staticmethod
+    def create_dummy_model():
+        """
+        Attempts to get or create a dummy model.
+
+        Useful for when UnitTesting requires an instance of this model,
+        but test does not care what values the model actually has.
+        """
+        from cae_home.models import WmuUser
+
+        # Define "dummy model" values.
+        wmu_user = WmuUser.create_dummy_model()
+        bachelors_institution = 'Dummy Bachelors Institution'
+        masters_institution = 'Masters Bachelors Institution'
+        bachelors_gpa = decimal.Decimal('3.33')
+        masters_gpa = decimal.Decimal('0.00')
+
+        # Attempt to get corresponding model instance, if there is one.
+        try:
+            student_history = StudentHistory.objects.get(wmu_user=wmu_user)
+        except StudentHistory.DoesNotExist:
+            # Instance not found. Create new model.
+            student_history = StudentHistory.objects.create(
+                wmu_user=wmu_user,
+                bachelors_institution=bachelors_institution,
+                masters_institution=masters_institution,
+                bachelors_gpa=bachelors_gpa,
+                masters_gpa=masters_gpa,
+            )
+
+        # Return "dummy model" instance.
+        return student_history
