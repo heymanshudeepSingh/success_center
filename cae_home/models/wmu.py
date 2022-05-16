@@ -421,12 +421,13 @@ class WmuClass(models.Model):
         # Attempt to get corresponding model instance, if there is one.
         try:
             wmu_class = WmuClass.objects.get(code=code)
-        except StudentHistory.DoesNotExist:
+        except WmuClass.DoesNotExist:
             # Instance not found. Create new model.
             wmu_class = WmuClass.objects.create(
                 department=department,
                 code=code,
                 description=description,
+                slug=slugify(code)
             )
 
         # Return "dummy model" instance.
