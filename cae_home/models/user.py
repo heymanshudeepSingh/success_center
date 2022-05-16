@@ -451,7 +451,7 @@ class UserIntermediary(models.Model):
         # Save model.
         self.clean()    # Seems to error on validation without this line.
         self.full_clean()
-        super(UserIntermediary, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
 
 class WmuUser(models.Model):
@@ -510,7 +510,7 @@ class WmuUser(models.Model):
         """
         # Save model.
         self.full_clean()
-        super(WmuUser, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     def shorthand_email(self):
         """
@@ -589,19 +589,19 @@ class Profile(models.Model):
     # Model fields.
     phone_number = PhoneNumberField(blank=True, null=True)
     user_timezone = models.CharField(
-        choices=[(x, x) for x in pytz.common_timezones], blank=True, default="America/Detroit",
+        choices=[(x, x) for x in pytz.common_timezones], blank=True, default='America/Detroit',
         max_length=255
     )
     desktop_font_size = models.PositiveSmallIntegerField(choices=FONT_SIZE_CHOICES, blank=True, default=2)
     mobile_font_size = models.PositiveSmallIntegerField(choices=FONT_SIZE_CHOICES, blank=True, default=2)
     fg_color = models.CharField(
         blank=True,
-        help_text="Foreground css color for schedule. E.g. 'red' or '#FF0000'",
+        help_text='Foreground css color for schedule. E.g. "red" or "#FF0000"',
         max_length=30,
     )
     bg_color = models.CharField(
         blank=True,
-        help_text="Foreground css color for schedule. E.g. 'red' or '#FF0000'",
+        help_text='Foreground css color for schedule. E.g. "red" or "#FF0000"',
         max_length=30,
     )
     employee_shift_display_default = models.BooleanField(default=True)
@@ -627,7 +627,7 @@ class Profile(models.Model):
         Modify model save behavior.
         """
         self.full_clean()
-        super(Profile, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     def get_font_size(self, value):
         """
@@ -777,7 +777,7 @@ class Address(models.Model):
         """
         # Save model.
         self.full_clean()
-        super(Address, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     def get_state_as_string(self, value=None):
         """
@@ -872,7 +872,7 @@ class SiteTheme(models.Model):
         """
         # Save model.
         self.full_clean()
-        super(SiteTheme, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     @staticmethod
     def create_dummy_model():

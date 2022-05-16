@@ -32,7 +32,7 @@ class Asset(models.Model):
     date_modified = models.DateTimeField(auto_now=True)
 
     class Meta:
-        verbose_name_plural = "Assets"
+        verbose_name_plural = 'Assets'
         ordering = ('asset_tag',)
 
     def natural_key(self):
@@ -114,8 +114,8 @@ class Software(models.Model):
     date_modified = models.DateTimeField(auto_now=True)
 
     class Meta:
-        verbose_name = "Software"
-        verbose_name_plural = "Software"
+        verbose_name = 'Software'
+        verbose_name_plural = 'Software'
         ordering = ('name',)
 
     def natural_key(self):
@@ -192,8 +192,8 @@ class SoftwareDetail(models.Model):
     date_modified = models.DateTimeField(auto_now=True)
 
     class Meta:
-        verbose_name = "Software Detail"
-        verbose_name_plural = "Software Details"
+        verbose_name = 'Software Detail'
+        verbose_name_plural = 'Software Details'
         ordering = ('software__name', 'expiration', 'version')
 
     def __str__(self):

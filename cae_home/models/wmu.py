@@ -43,7 +43,7 @@ class Department(models.Model):
         """
         # Save model.
         self.full_clean()
-        super(Department, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     @staticmethod
     def create_dummy_model():
@@ -104,7 +104,7 @@ class RoomType(models.Model):
         """
         # Save model.
         self.full_clean()
-        super(RoomType, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     @staticmethod
     def create_dummy_model():
@@ -133,15 +133,6 @@ class RoomType(models.Model):
 
         # Return "dummy model" instance.
         return room_type
-
-
-# class RoomManager(models.Manager):
-#     """
-#     Room Model Manager used by models that have a room foreign key and need
-#     to serialize the data to show foreign keys.
-#     """
-#     def get_by_natural_key(self, name):
-#         return self.get(name=name)
 
 
 class Room(models.Model):
@@ -186,7 +177,7 @@ class Room(models.Model):
         """
         # Save model.
         self.full_clean()
-        super(Room, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     @staticmethod
     def create_dummy_model():
@@ -235,8 +226,9 @@ class Room(models.Model):
         """
         cae_lab_query = (
             (
-                Q(room_type__slug='classroom') | Q(room_type__slug='computer-classroom') |
-                Q(room_type__slug='department-office')
+                Q(room_type__slug='classroom')
+                | Q(room_type__slug='computer-classroom')
+                | Q(room_type__slug='department-office')
             )
             & Q(department__slug='cae-center')
         )
@@ -275,7 +267,7 @@ class Major(models.Model):
     slug = models.SlugField(
         max_length=MAX_LENGTH,
         unique=True,
-        help_text="Used for urls referencing this Major.",
+        help_text='Used for urls referencing this Major.',
     )
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
@@ -294,7 +286,7 @@ class Major(models.Model):
         """
         # Save model.
         self.full_clean()
-        super(Major, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     @staticmethod
     def get_degree_level_as_string(value):
@@ -384,7 +376,7 @@ class WmuClass(models.Model):
     slug = models.SlugField(
         max_length=MAX_LENGTH,
         unique=True,
-        help_text="Used for urls referencing this Class.",
+        help_text='Used for urls referencing this Class.',
     )
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
@@ -486,7 +478,7 @@ class Semester(models.Model):
         """
         # Save model.
         self.full_clean()
-        super(Semester, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     @staticmethod
     def create_dummy_model():
