@@ -533,7 +533,7 @@ class StudentHistory(models.Model):
         ordering = ('pk',)
 
     def __str__(self):
-        return '{0}'.format(self.code)
+        return '{0} Student History'.format(self.wmu_user)
 
     def save(self, *args, **kwargs):
         """
