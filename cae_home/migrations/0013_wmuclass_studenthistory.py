@@ -16,6 +16,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('code', models.CharField(max_length=255, unique=True)),
+                ('title', models.CharField(max_length=255)),
                 ('description', models.CharField(max_length=255)),
                 ('slug', models.SlugField(help_text='Used for urls referencing this Class.', max_length=255, unique=True)),
                 ('date_created', models.DateTimeField(auto_now_add=True)),

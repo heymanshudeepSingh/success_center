@@ -1292,12 +1292,14 @@ admin.site.register(models.Address, AddressAdmin)
 admin.site.register(models.SiteTheme, SiteThemeAdmin)
 
 # WMU Model Registration.
+admin.site.register(models.WmuUser, WmuUserAdmin)
+admin.site.register(models.StudentHistory)
 admin.site.register(models.Department, DepartmentAdmin)
+admin.site.register(models.WmuClass)
 admin.site.register(models.RoomType, RoomTypeAdmin)
 admin.site.register(models.Room, RoomAdmin)
 admin.site.register(models.Major, MajorAdmin)
 admin.site.register(models.Semester, SemesterDateAdmin)
-admin.site.register(models.WmuUser, WmuUserAdmin)
 
 # CAE Model Registration.
 admin.site.register(models.Asset, AssetAdmin)

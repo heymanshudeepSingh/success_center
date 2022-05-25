@@ -370,6 +370,7 @@ class WmuClass(models.Model):
 
     # Model fields.
     code = models.CharField(max_length=MAX_LENGTH, unique=True)
+    title = models.CharField(max_length=MAX_LENGTH)
     description = models.CharField(max_length=MAX_LENGTH)
 
     # Self-setting/Non-user-editable fields.
@@ -527,8 +528,8 @@ class StudentHistory(models.Model):
     date_modified = models.DateTimeField(auto_now=True)
 
     class Meta:
-        verbose_name = 'Class'
-        verbose_name_plural = 'Classes'
+        verbose_name = 'Student History'
+        verbose_name_plural = 'Student History'
         ordering = ('pk',)
 
     def __str__(self):
