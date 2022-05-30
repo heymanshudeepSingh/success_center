@@ -119,6 +119,8 @@ ALLOWED_CAE_PROJECTS = {
         'url-prefix': 'grad_apps',
         'related_apps': {
             'grad_applications_core': {},
+            'grad_applications_committees': {},
+            'grad_applications_processing': {},
         },
         'third_party_apps': [],
     },
