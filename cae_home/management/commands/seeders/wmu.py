@@ -21,6 +21,16 @@ def generate_model_seeds(style, model_count):
     create_rooms(style)
     create_majors(style)
     create_semester_dates(style)
+    create_wmu_classes(style)
+
+
+def create_wmu_classes(style):
+    """
+    Create WMU Class models.
+    """
+    wmu_fixtures.create_wmu_classes(style)
+
+    stdout.write('Populated ' + style.SQL_FIELD('WmuClass') + ' models.\n')
 
 
 def create_room_types(style):

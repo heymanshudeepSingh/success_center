@@ -1,0 +1,74 @@
+[
+{
+    "model": "cae_home.wmuclass",
+    "pk": 1,
+    "fields": {
+        "code": "CS5310",
+        "title": "Algorithms",
+        "department": 6,
+        "slug": "cs5310",
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.wmuclass",
+    "pk": 2,
+    "fields": {
+        "code": "CS5800",
+        "title": "Theory Foundations",
+        "department": 6,
+        "slug": "cs5800",
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.wmuclass",
+    "pk": 3,
+    "fields": {
+        "code": "CS6530",
+        "title": "Data Mining",
+        "department": 6,
+        "slug": "cs6530",
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.wmuclass",
+    "pk": 4,
+    "fields": {
+        "code": "ECE4550",
+        "title": "Digital Signals Proc",
+        "department": 8,
+        "slug": "ece4550",
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.wmuclass",
+    "pk": 5,
+    "fields": {
+        "code": "ECE 3300",
+        "title": "Electrical Machinery",
+        "department": 8,
+        "slug": "ece3300",
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.wmuclass",
+    "pk": 6,
+    "fields": {
+        "code": "ECE2990",
+        "title": "Cooperative Education",
+        "department": 8,
+        "slug": "ece2990",
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+}
+]

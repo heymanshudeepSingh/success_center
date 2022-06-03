@@ -19,6 +19,17 @@ def import_model_fixtures(style):
     create_semester_dates(style, display_output=True)
 
 
+def create_wmu_classes(style, display_output=False):
+    """
+    Imports fixtures for Wmu Class models.
+    """
+    # Load preset fixtures.
+    call_command('loaddata', 'production_models/wmu_classes')
+
+    if display_output and style is not None:
+        stdout.write('Imported fixtures for ' + style.SQL_FIELD('Wmu class') + ' models.\n')
+
+
 def create_room_types(style, display_output=False):
     """
     Imports fixtures for Room Type models.
