@@ -13,14 +13,12 @@ from django.utils.html import mark_safe
 # User Class Imports.
 from . import models
 
-
 # Attempt to import RoomEvent Inline.
 try:
     from apps.CAE_Web.cae_web_core.admin import RoomEventInline
 except ImportError:
     # Assume that CAE_Web project isn't present.
     RoomEventInline = None
-
 
 CAE_CENTER_GROUPS = [
     'CAE Director', 'CAE Building Coordinator',
@@ -35,7 +33,7 @@ CAE_CENTER_GROUPS = [
 ]
 
 
-#region Model Inlines
+# region Model Inlines
 
 class MajorInline(admin.TabularInline):
     model = models.WmuUser.major.through
@@ -46,10 +44,11 @@ class GroupMembershipInline(admin.TabularInline):
     model = models.GroupMembership
     extra = 0
 
-#endregion Model Inlines
+
+# endregion Model Inlines
 
 
-#region Custom Filters
+# region Custom Filters
 
 class UserToCAECenterEmployeeListFilter(admin.SimpleListFilter):
     """
@@ -462,10 +461,11 @@ class SoftwareExpiryToYearListFilter(admin.SimpleListFilter):
             else:
                 return queryset.filter(expiration__year=year_filter)
 
-#endregion Custom Filters
+
+# endregion Custom Filters
 
 
-#region User Model Admin
+# region User Model Admin
 
 class UserAdmin(BaseUserAdmin):
     inlines = (GroupMembershipInline,)
@@ -528,6 +528,7 @@ class UserAdmin(BaseUserAdmin):
             return '{0}'.format(obj.userintermediary.wmu_user.winno)
         except AttributeError:
             return ''
+
     get_winno.short_description = 'Winno'
     get_winno.admin_order_field = 'userintermediary__wmu_user__winno'
 
@@ -539,6 +540,7 @@ class UserAdmin(BaseUserAdmin):
         for group in obj.groups.all():
             groups.append(group.name)
         return ', '.join(groups)
+
     get_user_groups.short_description = 'User Groups'
 
     def related_models(self, obj):
@@ -580,6 +582,7 @@ class UserAdmin(BaseUserAdmin):
 
         # Return formatted string.
         return mark_safe(related_model_str)
+
     related_models.short_description = 'Related Models'
 
 
@@ -624,6 +627,7 @@ class GroupMembershipAdmin(admin.ModelAdmin):
 
         # Return formatted string.
         return mark_safe(related_model_str)
+
     related_models.short_description = 'Related Models'
 
 
@@ -683,6 +687,7 @@ class UserIntermediaryAdmin(admin.ModelAdmin):
             return '{0}'.format(obj.wmu_user.winno)
         except AttributeError:
             return ''
+
     get_winno.short_description = 'Winno'
     get_winno.admin_order_field = 'wmu_user__winno'
 
@@ -724,6 +729,7 @@ class UserIntermediaryAdmin(admin.ModelAdmin):
 
         # Return formatted string.
         return mark_safe(related_model_str)
+
     related_models.short_description = 'Related Models'
 
 
@@ -769,6 +775,7 @@ class WmuUserAdmin(admin.ModelAdmin):
         Return list of user's majors.
         """
         return ' | '.join([major.student_code for major in obj.major.all()])
+
     get_majors.short_description = 'Majors'
 
     def get_user_groups(self, obj):
@@ -782,6 +789,7 @@ class WmuUserAdmin(admin.ModelAdmin):
             return ', '.join(groups)
         except AttributeError:
             return ''
+
     get_user_groups.short_description = 'User Groups'
 
     def related_models(self, obj):
@@ -821,6 +829,7 @@ class WmuUserAdmin(admin.ModelAdmin):
 
         # Return formatted string.
         return mark_safe(related_model_str)
+
     related_models.short_description = 'Related Models'
 
 
@@ -831,7 +840,7 @@ class ProfileAdmin(admin.ModelAdmin):
         list_display = ('id',) + list_display
 
     # Default field ordering in admin list view.
-    ordering = ('-userintermediary__cae_is_active', '-userintermediary__wmu_is_active',  'userintermediary__bronco_net')
+    ordering = ('-userintermediary__cae_is_active', '-userintermediary__wmu_is_active', 'userintermediary__bronco_net')
 
     # Fields to filter by in admin list view.
     list_filter = (ProfileToUserListFilter, ProfileToWmuUserListFilter)
@@ -872,6 +881,7 @@ class ProfileAdmin(admin.ModelAdmin):
         Return associated BroncoNet.
         """
         return '{0}'.format(obj.userintermediary.bronco_net)
+
     get_bronco_net.short_description = 'Bronco Net'
     get_bronco_net.admin_order_field = 'userintermediary__bronco_net'
 
@@ -883,6 +893,7 @@ class ProfileAdmin(admin.ModelAdmin):
             return '{0}'.format(obj.userintermediary.wmu_user.winno)
         except AttributeError:
             return ''
+
     get_winno.short_description = 'Winno'
     get_winno.admin_order_field = 'userintermediary__wmu_user__winno'
 
@@ -891,6 +902,7 @@ class ProfileAdmin(admin.ModelAdmin):
         Return associated First Name.
         """
         return '{0}'.format(obj.userintermediary.first_name)
+
     get_first_name.short_description = 'First Name'
     get_first_name.admin_order_field = 'userintermediary__first_name'
 
@@ -899,6 +911,7 @@ class ProfileAdmin(admin.ModelAdmin):
         Return associated Last Name.
         """
         return '{0}'.format(obj.userintermediary.last_name)
+
     get_last_name.short_description = 'Last Name'
     get_last_name.admin_order_field = 'userintermediary__last_name'
 
@@ -940,6 +953,7 @@ class ProfileAdmin(admin.ModelAdmin):
 
         # Return formatted string.
         return mark_safe(related_model_str)
+
     related_models.short_description = 'Related Models'
 
 
@@ -1005,10 +1019,66 @@ class SiteThemeAdmin(admin.ModelAdmin):
     # New object's slugs will be automatically set by name.
     prepopulated_fields = {'slug': ('file_name',)}
 
-#endregion User Model Admin
+
+# endregion User Model Admin
 
 
-#region WMU Model Admin
+# region WMU Model Admin
+class StudentHistoryAdmin(admin.ModelAdmin):
+    list_display = (
+        'get_first_name', 'get_last_name', 'get_winno', "check_has_bachelors", "check_has_masters",)
+
+    def get_first_name(self, obj):
+        """
+        Return associated first name.
+        """
+        return '{0}'.format(obj.wmu_user.first_name)
+
+    get_first_name.short_description = 'First Name'
+    get_first_name.admin_order_field = 'wmu_user__first_name'
+
+    def get_last_name(self, obj):
+        """
+        Return associated last name.
+        """
+        return '{0}'.format(obj.wmu_user.last_name)
+
+    get_last_name.short_description = 'Last Name'
+    get_last_name.admin_order_field = 'wmu_user__last_name'
+
+    def get_winno(self, obj):
+        """
+        Return associated last name.
+        """
+        return '{0}'.format(obj.wmu_user.winno)
+
+    get_winno.short_description = 'Win Number'
+    get_winno.admin_order_field = 'wmu_user__winno'
+
+    def check_has_bachelors(self, obj):
+        """
+        check  if the student has bachelors
+        """
+        if obj.bachelors_gpa == 0:
+            return False
+        else:
+            return True
+
+    check_has_bachelors.short_description = 'Has Bachelors'
+    check_has_bachelors.boolean = True
+
+    def check_has_masters(self, obj):
+        """
+        check  if the student has masters
+        """
+        if obj.masters_gpa == 0:
+            return False
+        else:
+            return True
+
+    check_has_masters.short_description = 'Has Masters'
+    check_has_masters.boolean = True
+
 
 class DepartmentAdmin(admin.ModelAdmin):
     # Fields to display in admin list view.
@@ -1041,6 +1111,34 @@ class DepartmentAdmin(admin.ModelAdmin):
 
     # New object's slugs will be automatically set by name.
     prepopulated_fields = {'slug': ('name',)}
+
+
+class WmuClassAdmin(admin.ModelAdmin):
+    """"""
+    list_display = ('code', 'title', 'department')
+    if settings.DEBUG:
+        list_display = ('id',) + list_display
+
+    # Default field ordering in admin list view.
+    ordering = ('code', 'title', 'department')
+
+    # Fields to search in admin list view.
+    search_fields = ('code',)
+
+    readonly_fields = ('id', 'date_created', 'date_modified')
+
+    fieldsets = (
+        (None, {
+            'fields': ('code', 'title', 'description',),
+        }),
+        ('Advanced', {
+            'classes': ('collapse',),
+            'fields': ('id', 'slug', 'date_created', 'date_modified'),
+        }),
+    )
+
+    # New object's slugs will be automatically set by department.
+    prepopulated_fields = {'slug': ('code',)}
 
 
 class RoomTypeAdmin(admin.ModelAdmin):
@@ -1120,6 +1218,7 @@ class RoomAdmin(admin.ModelAdmin):
         for department in obj.department.all():
             dept_list += '{0} | '.format(department.name)
         return dept_list[:-3]
+
     get_departments.short_description = 'Departments'
 
 
@@ -1188,10 +1287,11 @@ class SemesterDateAdmin(admin.ModelAdmin):
         }),
     )
 
-#endregion WMU Model Admin
+
+# endregion WMU Model Admin
 
 
-#region CAE Model Admin
+# region CAE Model Admin
 
 class AssetAdmin(admin.ModelAdmin):
     # Fields to display in admin list view.
@@ -1229,7 +1329,7 @@ class SoftwareAdmin(admin.ModelAdmin):
         list_display = ('id',) + list_display
 
     # Fields to search in admin list view.
-    search_fields = ['name',]
+    search_fields = ['name', ]
 
     # Read only fields for admin detail view.
     readonly_fields = ('id', 'date_created', 'date_modified')
@@ -1279,7 +1379,7 @@ class SoftwareDetailAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('software', 'version')}
 
 
-#endregion CAE Model Admin
+# endregion CAE Model Admin
 
 
 # User Model Registration.
@@ -1293,9 +1393,9 @@ admin.site.register(models.SiteTheme, SiteThemeAdmin)
 
 # WMU Model Registration.
 admin.site.register(models.WmuUser, WmuUserAdmin)
-admin.site.register(models.StudentHistory)
+admin.site.register(models.StudentHistory, StudentHistoryAdmin)
 admin.site.register(models.Department, DepartmentAdmin)
-admin.site.register(models.WmuClass)
+admin.site.register(models.WmuClass, WmuClassAdmin)
 admin.site.register(models.RoomType, RoomTypeAdmin)
 admin.site.register(models.Room, RoomAdmin)
 admin.site.register(models.Major, MajorAdmin)
