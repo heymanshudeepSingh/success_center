@@ -18,11 +18,11 @@
     However, the workspace also includes:
   </p>
   <ul>
-    <li><a href="{% url 'cae_tools:documentation_settings_local_environment' %}">Local Environment Settings</a></li>
-    <li><a href="{% url 'cae_tools:documentation_settings_organization' %}#extra-settings">Extra Settings</a></li>
-    <li><a href="{% url 'cae_tools:documentation_settings_organization' %}#allowed-apps">Allowed Apps</a></li>
-    <li><a href="{% url 'cae_tools:documentation_settings_organization' %}#git-submodules">Git Submodules</a></li>
-    <li><a href="{% url 'cae_tools:documentation_settings_logging' %}">Logging</a></li>
+    <li><a href="{% url 'dev:documentation_settings_local_environment' %}">Local Environment Settings</a></li>
+    <li><a href="{% url 'dev:documentation_settings_organization' %}#extra-settings">Extra Settings</a></li>
+    <li><a href="{% url 'dev:documentation_settings_organization' %}#allowed-apps">Allowed Apps</a></li>
+    <li><a href="{% url 'dev:documentation_settings_organization' %}#git-submodules">Git Submodules</a></li>
+    <li><a href="{% url 'dev:documentation_settings_logging' %}">Logging</a></li>
   </ul>
 
   <article id="allowed-apps" class="color">
@@ -31,7 +31,7 @@
     <p>
       The "allowed apps" file is located at
       <span class="highlight primary">&lt;project_root&gt;/settings/allowed_apps.py</span>. This file acts as a
-      "whitelist" for <a href="{% url 'cae_tools:documentation_subprojects' %}">sub-projects</a> put into the
+      "whitelist" for <a href="{% url 'dev:documentation_subprojects' %}">sub-projects</a> put into the
       <span class="highlight primary">&lt;project_root&gt;/apps/</span> folder.
     </p>
     <br>
@@ -42,7 +42,7 @@
     <br>
     <p>
       Directly beneath is the <span class="highlight primary">ALLOWED_CAE_PROJECTS</span> variable, which acts as a
-      dictionary of whitelisted <a href="{% url 'cae_tools:documentation_subprojects' %}">sub-projects</a>. For each,
+      dictionary of whitelisted <a href="{% url 'dev:documentation_subprojects' %}">sub-projects</a>. For each,
       there is:
     </p>
     <ul>
@@ -55,7 +55,7 @@
       <ul>
         <li><p>
           At minimum, each project should have an
-          <a href="{% url 'cae_tools:documentation_subprojects' %}">&lt;subproject_name&gt;_core</a> app.
+          <a href="{% url 'dev:documentation_subprojects' %}">&lt;subproject_name&gt;_core</a> app.
         </p></li>
       </ul>
       <li><p>
@@ -84,7 +84,7 @@
       </p></li>
       <li><p>
         <b>/settings/allowed_apps.py</b> - See the
-        <a href="{% url 'cae_tools:documentation_settings_organization' %}#allowed-apps">allowed apps</a> documentation.
+        <a href="{% url 'dev:documentation_settings_organization' %}#allowed-apps">allowed apps</a> documentation.
       </p></li>
       <li>
         <p>
@@ -104,7 +104,7 @@
       </p></li>
       <li><p>
         <b>/settings/local_env/env.py</b> - See the
-        <a href="{% url 'cae_tools:documentation_settings_local_environment' %}">Local Environment Settings</a>
+        <a href="{% url 'dev:documentation_settings_local_environment' %}">Local Environment Settings</a>
         documentation.
       </p></li>
     </ul>
@@ -129,7 +129,7 @@
     <p>
       Currently, this project only uses one git submodule. It's a custom project on the CAE Center GitLab, called
       <a href="https://git.ceas.wmich.edu/Python/simple_ldap_lib">SimpleLdapLib</a> (See
-      <a href="{% url 'cae_tools:documentation_ldap_setup' %}">LDAP setup</a> for more on using this project within
+      <a href="{% url 'dev:documentation_ldap_setup' %}">LDAP setup</a> for more on using this project within
       workspace).
     </p>
     <p>

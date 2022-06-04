@@ -6,7 +6,7 @@
 
 
 {% block breadcrumb_nav %}
-  <li><a href="{% url 'cae_tools:index' %}">Dev Tools & Docs</a></li>
+  <li><a href="{% url 'dev:index' %}">Dev Tools & Docs</a></li>
 {% endblock breadcrumb_nav %}
 
 
@@ -46,38 +46,38 @@
         <li>
           <p>Introduction</p>
           <ul>
-            <li><a href="{% url 'cae_tools:documentation_intro_first_steps' %}">First Steps</a></li>
-            <li><a href="{% url 'cae_tools:documentation_introduction' %}">Introduction to "CAE Workspace"</a></li>
-            <li><a href="{% url 'cae_tools:documentation_intro_setup' %}">General Project Setup</a></li>
-            <li><a href="{% url 'cae_tools:documentation_intro_virtual_environments' %}">Python Virtual environments</a></li>
-            <li><a href="{% url 'cae_tools:documentation_intro_managepy' %}">The "manage.py" File</a></li>
-            <li><a href="{% url 'cae_tools:documentation_intro_helper_scripts' %}">Helper Scripts</a></li>
+            <li><a href="{% url 'dev:documentation_intro_first_steps' %}">First Steps</a></li>
+            <li><a href="{% url 'dev:documentation_introduction' %}">Introduction to "CAE Workspace"</a></li>
+            <li><a href="{% url 'dev:documentation_intro_setup' %}">General Project Setup</a></li>
+            <li><a href="{% url 'dev:documentation_intro_virtual_environments' %}">Python Virtual environments</a></li>
+            <li><a href="{% url 'dev:documentation_intro_managepy' %}">The "manage.py" File</a></li>
+            <li><a href="{% url 'dev:documentation_intro_helper_scripts' %}">Helper Scripts</a></li>
           </ul>
         </li>
         <li>
           <p>Project Settings</p>
           <ul>
-            <li><a href="{% url 'cae_tools:documentation_settings_organization' %}">Settings Organization</a></li>
-            <li><a href="{% url 'cae_tools:documentation_settings_local_environment' %}">Local Environment Settings</a></li>
-            <li><a href="{% url 'cae_tools:documentation_settings_dev_password' %}">Dev Password Logic</a></li>
-            <li><a href="{% url 'cae_tools:documentation_settings_logging' %}">Logging</a></li>
+            <li><a href="{% url 'dev:documentation_settings_organization' %}">Settings Organization</a></li>
+            <li><a href="{% url 'dev:documentation_settings_local_environment' %}">Local Environment Settings</a></li>
+            <li><a href="{% url 'dev:documentation_settings_dev_password' %}">Dev Password Logic</a></li>
+            <li><a href="{% url 'dev:documentation_settings_logging' %}">Logging</a></li>
           </ul>
         </li>
         <li>
           <p>LDAP</p>
           <ul>
-            <li><a href="{% url 'cae_tools:documentation_ldap_setup' %}">Setup</a></li>
-            <li><a href="{% url 'cae_tools:documentation_ldap_auth_backends' %}">Auth Backends</a></li>
-            <li><a href="{% url 'cae_tools:documentation_ldap_utility_connectors' %}">Utility Connectors</a></li>
+            <li><a href="{% url 'dev:documentation_ldap_setup' %}">Setup</a></li>
+            <li><a href="{% url 'dev:documentation_ldap_auth_backends' %}">Auth Backends</a></li>
+            <li><a href="{% url 'dev:documentation_ldap_utility_connectors' %}">Utility Connectors</a></li>
           </ul>
         </li>
         <li>
           <p>Testing</p>
           <ul>
-              <li><a href="{% url 'cae_tools:documentation_testing_running_tests' %}">Running Tests</a></li>
-              <li><a href="{% url 'cae_tools:documentation_testing_base_test_case' %}">BaseTestCase Utility Class</a></li>
-              <li><a href="{% url 'cae_tools:documentation_testing_integration_test_case' %}">IntegrationTestCase Utility Class</a></li>
-              <li><a href="{% url 'cae_tools:documentation_testing_live_server_test_case' %}">LiveServerTestCase Utility Class</a></li>
+              <li><a href="{% url 'dev:documentation_testing_running_tests' %}">Running Tests</a></li>
+              <li><a href="{% url 'dev:documentation_testing_base_test_case' %}">BaseTestCase Utility Class</a></li>
+              <li><a href="{% url 'dev:documentation_testing_integration_test_case' %}">IntegrationTestCase Utility Class</a></li>
+              <li><a href="{% url 'dev:documentation_testing_live_server_test_case' %}">LiveServerTestCase Utility Class</a></li>
           </ul>
         </li>
       </ul>
@@ -91,15 +91,15 @@
         <li>
           <p>CSS</p>
           <ul>
-            <li><a href="{% url 'cae_tools:documentation_css_general' %}">General CSS Logic</a></li>
-            <li><a href="{% url 'cae_tools:documentation_css_flexbox' %}">Using Flexbox</a></li>
+            <li><a href="{% url 'dev:documentation_css_general' %}">General CSS Logic</a></li>
+            <li><a href="{% url 'dev:documentation_css_flexbox' %}">Using Flexbox</a></li>
           </ul>
         </li>
         <li>
           <p>JavaScript</p>
           <ul>
-            <li><a href="{% url 'cae_tools:documentation_javascript_passing_variables' %}">Passing JavaScript Variables</a></li>
-            <li><a href="{% url 'cae_tools:documentation_javascript_libraries' %}">Provided Libraries & Logic</a></li>
+            <li><a href="{% url 'dev:documentation_javascript_passing_variables' %}">Passing JavaScript Variables</a></li>
+            <li><a href="{% url 'dev:documentation_javascript_libraries' %}">Provided Libraries & Logic</a></li>
           </ul>
         </li>
       </ul>
@@ -119,11 +119,11 @@
   <br>
   <p>Todo:</p>
   <ul>
-    <li><a href="{% url 'cae_tools:documentation_middleware' %}">Middleware</a></li>
-    <li><a href="{% url 'cae_tools:documentation_models' %}">Models</a></li>
-    <li><a href="{% url 'cae_tools:documentation_seeds_and_fixtures' %}">Seeds and Fixture</a></li>
-    <li><a href="{% url 'cae_tools:documentation_subprojects' %}">Sub Projects</a></li>
-    <li><a href="{% url 'cae_tools:documentation_templates' %}">Templates</a></li>
-    <li><a href="{% url 'cae_tools:documentation_views' %}">Views</a></li>
+    <li><a href="{% url 'dev:documentation_middleware' %}">Middleware</a></li>
+    <li><a href="{% url 'dev:documentation_models' %}">Models</a></li>
+    <li><a href="{% url 'dev:documentation_seeds_and_fixtures' %}">Seeds and Fixture</a></li>
+    <li><a href="{% url 'dev:documentation_subprojects' %}">Sub Projects</a></li>
+    <li><a href="{% url 'dev:documentation_templates' %}">Templates</a></li>
+    <li><a href="{% url 'dev:documentation_views' %}">Views</a></li>
   </ul>
 {% endblock content %}

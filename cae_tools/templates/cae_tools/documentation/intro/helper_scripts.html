@@ -55,7 +55,7 @@
     Assuming you're using SQLite (this is the project default), then this script will clear out the database, recreate
     it from scratch (including project migrations), and populate all CAE Workspace project models (including models for
     any found subprojects). The script also runs the custom
-    <a href="{% url 'cae_tools:documentation_intro_managepy' %}">manage.py</a>
+    <a href="{% url 'dev:documentation_intro_managepy' %}">manage.py</a>
     <span class="highlight primary">seed</span> command, which will automatically populate test data for most models
     in the project.
   </p>
@@ -79,7 +79,7 @@
     all-knowing, and thus only check for css/js files in the expected locations.
   </p>
   <p>
-    Thus, for SASS (see the <a href="{% url 'cae_tools:documentation_css_general' %}">CSS docs</a> for why we use SASS),
+    Thus, for SASS (see the <a href="{% url 'dev:documentation_css_general' %}">CSS docs</a> for why we use SASS),
     the expected location is <span class="highlight code">&#60;app_name&#62;/static/&#60;app_name&#62;/css/sass/</span>
   </p>
   <p>

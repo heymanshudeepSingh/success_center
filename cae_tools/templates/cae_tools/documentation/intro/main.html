@@ -6,12 +6,12 @@
 
 
 {% block sub_nav %}
-  <li><a href="{% url 'cae_tools:documentation_intro_first_steps' %}">First Steps</a></li>
-  <li><a href="{% url 'cae_tools:documentation_introduction' %}">Introduction to "CAE Workspace"</a></li>
-  <li><a href="{% url 'cae_tools:documentation_intro_setup' %}">General Project Setup</a></li>
-  <li><a href="{% url 'cae_tools:documentation_intro_virtual_environments' %}">Python Virtual environments</a></li>
-  <li><a href="{% url 'cae_tools:documentation_intro_managepy' %}">The "manage.py" File</a></li>
-  <li><a href="{% url 'cae_tools:documentation_intro_helper_scripts' %}">Helper Scripts</a></li>
+  <li><a href="{% url 'dev:documentation_intro_first_steps' %}">First Steps</a></li>
+  <li><a href="{% url 'dev:documentation_introduction' %}">Introduction to "CAE Workspace"</a></li>
+  <li><a href="{% url 'dev:documentation_intro_setup' %}">General Project Setup</a></li>
+  <li><a href="{% url 'dev:documentation_intro_virtual_environments' %}">Python Virtual environments</a></li>
+  <li><a href="{% url 'dev:documentation_intro_managepy' %}">The "manage.py" File</a></li>
+  <li><a href="{% url 'dev:documentation_intro_helper_scripts' %}">Helper Scripts</a></li>
 {% endblock sub_nav %}
 
 
@@ -19,6 +19,6 @@
   <h1>Documentation - Introduction</h1>
   <p>
     If you haven't yet read it, please start at
-    <a href="{% url 'cae_tools:documentation_introduction' %}">Introduction to "CAE Workspace"</a>.
+    <a href="{% url 'dev:documentation_introduction' %}">Introduction to "CAE Workspace"</a>.
   </p>
 {% endblock content %}

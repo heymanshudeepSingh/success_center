@@ -6,10 +6,10 @@
 
 {% block sub_nav %}
   <ul>
-    <li><a href="{% url 'cae_tools:css_forms_base' %}">Form Home</a></li>
-    <li><a href="{% url 'cae_tools:css_forms_default_fields' %}">Default Form Fields</a></li>
-    <li><a href="{% url 'cae_tools:css_forms_custom_fields' %}">Custom Form Fields</a></li>
-    <li><a href="{% url 'cae_tools:css_forms_misc' %}">Form Misc</a></li>
+    <li><a href="{% url 'dev:css_forms_base' %}">Form Home</a></li>
+    <li><a href="{% url 'dev:css_forms_default_fields' %}">Default Form Fields</a></li>
+    <li><a href="{% url 'dev:css_forms_custom_fields' %}">Custom Form Fields</a></li>
+    <li><a href="{% url 'dev:css_forms_misc' %}">Form Misc</a></li>
   </ul>
 {% endblock %}
 
@@ -117,7 +117,7 @@
       involving the TimeField input.
     </p>
     <p>
-      See <a href="{% url 'cae_tools:css_forms_custom_fields' %}#custom-datetime-form-fields">Custom Form Fields</a>
+      See <a href="{% url 'dev:css_forms_custom_fields' %}#custom-datetime-form-fields">Custom Form Fields</a>
       for the Workspace's solution to these pitfalls.
     </p>
     <p>
@@ -157,7 +157,7 @@
       click to select/deselect values.
     </p>
     <p>
-      Once again, see <a href="{% url 'cae_tools:css_forms_custom_fields' %}">Custom Form Fields</a> for the Workspace's
+      Once again, see <a href="{% url 'dev:css_forms_custom_fields' %}">Custom Form Fields</a> for the Workspace's
       solution to these pitfalls.
     </p>
 
