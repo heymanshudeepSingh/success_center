@@ -1,10 +1,12 @@
-# System imports
-import os
+""""""
 
+# System imports
+import random
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.template.response import TemplateResponse
 from django.contrib import messages
+from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
 
 # utility imports
@@ -130,61 +132,68 @@ def ldap_utility(request):
 @group_required('CAE Director', 'CAE Admin GA', 'CAE Programmer GA', 'CAE Admin', 'CAE Programmer')
 def cae_password_reset(request):
     """
-    Resets password for Cae center employees
+    Allows a logged-in CAE Center employee to reset other's passwords, such as in
+    event of the other user forgetting their password.
     """
+    ldap_not_set_up = False
 
-    # check if ldap is setup in env
-    if settings.CAE_LDAP['login_dn'] == "":
-        messages.error(request, "Can't connect to Ldap server. :(")
+    # Check if ldap settings are defined.
+    if settings.CAE_LDAP['login_dn'] == '':
+        messages.error(request, 'Can\'t connect to Ldap server. :( \n Are project LDAP settings setup?')
+        ldap_not_set_up = True
 
-    # Initialize simple ldap library
-    ldap_lib = simple_ldap_lib.SimpleLdap()
+    # Initialize SimpleLdapLibrary + CAE Ldap backend.
+    try:
+        ldap_lib = simple_ldap_lib.SimpleLdap()
+        cae_auth_backend = CaeAuthBackend()
+    except AttributeError:
+        messages.error(request, 'Can\'t connect to Ldap server. :( \n Is the SimpleLdapLib installed?')
+        ldap_not_set_up = True
 
-    # initialize ldap backend for CAE Ldap
-    cae_auth_backend = CaeAuthBackend()
-
-    # initialize form
+    # Initialize form.
     form = forms.CaePasswordResetForm()
 
-    if request.method == 'POST':
+    # Handle for form submission.
+    if not ldap_not_set_up and request.method == 'POST':
         form = forms.CaePasswordResetForm(request.POST)
 
+        # Validate form.
         if form.is_valid():
             user_id = form.cleaned_data['user_id']
 
-            # Initialize connection elements
-            host = "ldap://padl.ceas.wmich.edu"
+            # Generate temporary password for user.
+            user_password = str(settings.USER_SEED_PASSWORD) + str(random.randint(0, 999))
 
-            # Get admin DN and Password as we need admin privileges to reset passwords
+            # Pull ldap values from settings.
+            host = settings.CAE_LDAP['host']
             admin_dn = settings.CAE_LDAP['admin_dn']
             admin_password = settings.CAE_LDAP['admin_password']
-            user_password = settings.USER_SEED_PASSWORD
             user_search_base = settings.CAE_LDAP['user_search_base']
+            from_email = settings.DEFAULT_FROM_EMAIL
 
-            """
-            Note: ssh 1: ldap password not found error will be thrown if Ldap-utils is not installed
-            """
+            # Note: "ldap password not found error" will be thrown if Ldap-utils is not installed.
             try:
-                ldap_lib.cae_password_reset(password=user_password,
-                                            host=host,
-                                            user_id=user_id,
-                                            user_search_base=user_search_base,
-                                            admin_dn=admin_dn,
-                                            admin_password=admin_password,
-                                            cae_auth_backend=cae_auth_backend,
-                                            )
-                messages.success(request, "Password Changed Successfully!")
+                # Validate provided user_id value.
+                user = get_user_model().objects.get(username=user_id)
 
-                # initialize programmers email .
-                programmers_email = cae_home.models.WmuUser.objects.get(bronco_net="ceas_prog").official_email
+                ldap_lib.cae_password_reset(
+                    password=user_password,
+                    host=host,
+                    user_id=user_id,
+                    user_search_base=user_search_base,
+                    admin_dn=admin_dn,
+                    admin_password=admin_password,
+                    cae_auth_backend=cae_auth_backend,
+                )
+                messages.success(request, 'Password successfully changed.')
 
-                # This will error out in development because the users that exist in LDAP are not included in
-                # seeded users and therefore don't have associated email.
-                # convert recipient_email to list as that is the format accepted by send email function
-                email_to = True if user_id in cae_home.models.WmuUser.objects.all().values_list("bronco_net") else False
+                # Get email for user who's password is being reset.
+                user_email = user.email
 
-                recipient_email = [cae_home.models.WmuUser.objects.get(bronco_net=user_id).shorthand_email()] if \
-                    email_to else [""]
+                # Get list of emails to send to.
+                # Includes user that had password reset, as well as all active GA's (so they can check against
+                # potentially malicious password-resetting actions).
+                recipient_email = [user_email] + list(get_user_model().get_cae_ga().values_list('email', flat=True))
 
                 # Get IP of the user changing password.
                 # Reference - https://stackoverflow.com/a/4581997
@@ -194,24 +203,30 @@ def cae_password_reset(request):
                 else:
                     ip = request.META.get('REMOTE_ADDR')
 
-                try:
-                    # Try Sending Email
-                    send_mail("CAE Password Changed!",
-                              f"Your CAE Center Password has been reset! \n by {request.user} \n IP: {ip}",
-                              programmers_email,
-                              recipient_email)
-                    messages.success(request, "Email Send!")
-                except ConnectionError:
-                    messages.error(request, "Unable to send Email!")
+                # Send notification email.
+                send_mail(
+                    'CAE Password Changed',
+                    (
+                        '{0}\'s CAE Center Password has been reset by {1}\n'
+                        'Reset occurred from Ip Address: "{2}"'
+                        '\n\n'
+                        'Your new password is "{3}".'
+                    ).format(user_id, request.user, ip, user_password),
+                    from_email,
+                    recipient_email,
+                )
+                messages.success(request, 'Password set to temporary value. Please check your email.')
+
+            except get_user_model().DoesNotExist:
+                # Handle for invalid username provided.
+                messages.error(request, 'Failed to find username of "{0}".'.format(user_id))
 
             except ConnectionError:
-                messages.error(request, "Unable to reset password!")
+                # Handle for failing to connect to LDAP.
+                messages.error(request, 'LDAP connection error. Unable to reset password.')
 
-        else:
-            messages.error(request, "Invalid user group!")
-
+    # Render response.
     return TemplateResponse(request, 'cae_tools/password_reset.html', {
         'form': form,
-        'button_text': "Reset!",
-
+        'button_text': 'Reset',
     })

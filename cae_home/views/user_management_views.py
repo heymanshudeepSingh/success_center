@@ -183,65 +183,59 @@ def user_edit(request):
 @group_required('CAE Director', 'CAE Admin GA', 'CAE Programmer GA', 'CAE Admin', 'CAE Programmer')
 def change_password(request):
     """
-    Change password for Cae center employees
+    Allows a user to update their own password to a new value.
     """
-    # required imports for the function
+    # Required imports for the function.
     from workspace.ldap_backends import simple_ldap_lib
     from workspace.ldap_backends.wmu_auth.cae_backend import CaeAuthBackend
 
-    # check if ldap is setup in env
-    if settings.CAE_LDAP['login_dn'] == "":
-        messages.error(request, "Can't connect to Ldap server. :(")
+    # Check if ldap is setup in env.
+    if settings.CAE_LDAP['login_dn'] == '':
+        messages.error(request, 'Can\'t connect to Ldap server. :(')
 
-    # Initialize simple ldap liberary
+    # Initialize SimpleLdapLibrary + CAE Ldap backend.
     ldap_lib = simple_ldap_lib.SimpleLdap()
-
-    # initialize ldap backend for CAE Ldap
     cae_auth_backend = CaeAuthBackend()
 
-    # initialize form
+    # Initialize form.
     form = forms.ChangePasswordCustomForm()
 
+    # Handle for submission.
     if request.method == 'POST':
         form = forms.ChangePasswordCustomForm(request.POST)
 
+        # Validate form.
         if form.is_valid():
             user_id = request.user
 
-            # Initialize connection elements
-            host = "ldap://padl.ceas.wmich.edu"
-
-            # Get admin DN and Password as we need admin privileges to reset passwords
+            # Pull ldap values from settings.
+            host = settings.CAE_LDAP['host']
             admin_dn = settings.CAE_LDAP['admin_dn']
             admin_password = settings.CAE_LDAP['admin_password']
-            new_password = form.cleaned_data["new_password"]
+            new_password = form.cleaned_data['new_password']
             user_search_base = settings.CAE_LDAP['user_search_base']
-            current_password = form.cleaned_data["current_password"]
+            current_password = form.cleaned_data['current_password']
 
-            """
-            Note: ssh 1: ldap password not found error will be thrown if Ldap-utils is not installed
-            """
+            # Note: "ldap password not found" error will be thrown if Ldap-utils is not installed.
             try:
-                ldap_lib.cae_password_reset(password=new_password,
-                                            host=host,
-                                            user_id=user_id,
-                                            user_search_base=user_search_base,
-                                            admin_dn=admin_dn,
-                                            admin_password=admin_password,
-                                            cae_auth_backend=cae_auth_backend,
-                                            current_password=current_password
-                                            )
-                messages.success(request, "Password Changed Successfully!")
+                ldap_lib.cae_password_reset(
+                    password=new_password,
+                    host=host,
+                    user_id=user_id,
+                    user_search_base=user_search_base,
+                    admin_dn=admin_dn,
+                    admin_password=admin_password,
+                    cae_auth_backend=cae_auth_backend,
+                    current_password=current_password
+                )
+                messages.success(request, 'Password successfully changed.')
                 return redirect(reverse_lazy('cae_home:user_edit'))
 
             except ConnectionError:
-                messages.error(request, "Unable to reset password!")
+                messages.error(request, 'Error connecting. Unable to reset password.')
 
-        else:
-            messages.error(request, "Invalid user group!")
-
+    # Render response.
     return TemplateResponse(request, 'cae_home/change_password.html', {
         'form': form,
-        'button_text': "Reset!",
-
+        'button_text': 'Reset',
     })
