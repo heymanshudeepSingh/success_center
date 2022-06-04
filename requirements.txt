@@ -64,7 +64,7 @@ freezegun
 # For connecting to mysql. Not necessary if using sqlite during development.
 # mysqlclient==2.1.0
 # For ldap connection. Only necessary when CaeAuthBackend is turned on.
-# ldap3==2.9.1
+ldap3==2.9.1
 # For putting on a production server. Required for Apache/Daphne to use a Python virtual environment.
 # uWSGI==2.0.20
 

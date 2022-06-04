@@ -10,7 +10,7 @@ from django.http.response import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect
 from django.template.response import TemplateResponse
 from django.urls import reverse, reverse_lazy
-
+from django.views.generic.base import TemplateView
 # User Imports.
 from cae_home import forms, models
 from cae_home.decorators import group_required
@@ -21,6 +21,7 @@ from workspace.settings import settings
 
 logger = init_logging.get_logger(__name__)
 
+
 @login_required
 def user_details(request):
     current_user = request.user
@@ -29,6 +30,22 @@ def user_details(request):
         "current_user": current_user,
         "user_profile": user_profile
     })
+
+
+class UserDetails(TemplateView):
+    template_name = 'cae_home/user_details.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        current_user = self.request.user
+        user_profile = current_user.profile
+
+        context.update({
+            'current_user': current_user,
+            'user_profile': user_profile,
+        })
+        return context
+
 
 @login_required
 def user_edit(request):
