@@ -17,8 +17,8 @@ from .debug_views import test_single_email
 from .django_rest_views import DepartmentViewSet
 
 # Form views.
-from .form_views import user_edit
-from .form_views import change_password
+from .user_management_views import user_edit
+from .user_management_views import change_password
 
 # Login views.
 from .auth_views import login
