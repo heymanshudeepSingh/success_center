@@ -11,9 +11,8 @@
         <h2 class="accessibility-element">User Sub Menu</h2>
         <p>{{ user.get_username }}</p>
         <ul>
-          <li><a href="{% url 'cae_home:user_edit' %}">User Settings</a></li>
+          <li><a href="{% url 'cae_home:user_details' %}">User Management</a></li>
           <li><a href="{% url 'cae_home:helpful_resources' %}">Helpful Resources</a></li>
-          <li><a href="{% url 'cae_tools:password_reset' %}">Password Reset</a></li>
           {% if user.is_staff %}
             <li><a href="{% url 'admin:index' %}">Django Admin</a></li>
           {% endif %}

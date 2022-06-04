@@ -21,6 +21,14 @@ from workspace.settings import settings
 
 logger = init_logging.get_logger(__name__)
 
+@login_required
+def user_details(request):
+    current_user = request.user
+    user_profile = current_user.profile
+    return TemplateResponse(request, "cae_home/user_details.html", {
+        "current_user": current_user,
+        "user_profile": user_profile
+    })
 
 @login_required
 def user_edit(request):

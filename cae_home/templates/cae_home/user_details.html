@@ -1,0 +1,29 @@
+{% extends 'cae_home/main.html' %}
+
+
+{% block title_page_name %}User Details | {% endblock title_page_name %}
+
+
+{% block content %}
+<div class="panel">
+  <div class="header">
+    <h1>Details for {{ current_user.first_name }} {{ current_user.last_name }}</h1>
+    <p>
+      <a href="{% url 'cae_home:user_edit' %}" > Edit</a>
+    </p>
+  </div>
+  <div class="content">
+    <p>Bronco Net: {{ current_user.username }}</p>
+    <p>Phone Number: {{ user_profile.phone_number }}</p>
+    <P>Time zone: {{ user_profile.user_timezone }}</P>
+    <br>
+    <p>
+      <a href="{% url 'cae_home:user_change_password' %}" >Change Password</a>
+    </p>
+    <hr>
+    <p>
+      <a href="{% url 'cae_tools:reset_password' %}"> Don't know your current password?</a>
+    </p>
+  </div>
+</div>
+{% endblock content %}

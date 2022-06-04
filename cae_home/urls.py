@@ -24,6 +24,7 @@ urlpatterns = [
     path('info/software/', views.info_software, name='info_software'),
 
     # User pages.
+    path('user-details/', views.user_details, name='user_details'),
     path('user/edit/', views.user_edit, name='user_edit'),
     path('user/edit/change_password/', views.change_password, name='user_change_password'),
     path('user/helpful_resources/', views.helpful_resources, name='helpful_resources'),
