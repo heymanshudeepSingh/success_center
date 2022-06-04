@@ -24,8 +24,8 @@ urlpatterns = [
     path('info/software/', views.info_software, name='info_software'),
 
     # User pages.
-    path('user/edit/<slug>/', views.user_edit, name='user_edit'),
-    path('user/edit/<slug>/change_password', views.change_password, name='user_change_password'),
+    path('user/edit/', views.user_edit, name='user_edit'),
+    path('user/edit/change_password/', views.change_password, name='user_change_password'),
     path('user/helpful_resources/', views.helpful_resources, name='helpful_resources'),
 
     # Error page test views.

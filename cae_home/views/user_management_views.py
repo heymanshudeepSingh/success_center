@@ -23,7 +23,7 @@ logger = init_logging.get_logger(__name__)
 
 
 @login_required
-def user_edit(request, slug):
+def user_edit(request):
     """
     Edit view for a single user.
 
@@ -38,7 +38,8 @@ def user_edit(request, slug):
     shared model.
     """
     # Pull models from database.
-    user_intermediary = get_object_or_404(models.UserIntermediary, slug=slug)
+    user = request.user
+    user_intermediary = get_object_or_404(models.UserIntermediary, slug=user.username)
     user = user_intermediary.user
     user_profile = user_intermediary.profile
     address = user_profile.address
@@ -49,7 +50,7 @@ def user_edit(request, slug):
     form.display_name = 'General Info'
     form.additional_link = 'cae_home:user_change_password'
     form.additional_link_text = "Change Password?"
-    form.slug = user.username
+    # form.slug = user.username
     form_list.append(form)
 
     form = forms.ProfileModelForm_OnlyPhone(instance=user_profile)
@@ -155,7 +156,7 @@ def user_edit(request, slug):
 
 @login_required
 @group_required('CAE Director', 'CAE Admin GA', 'CAE Programmer GA', 'CAE Admin', 'CAE Programmer')
-def change_password(request, slug):
+def change_password(request):
     """
     Change password for Cae center employees
     """
@@ -180,7 +181,7 @@ def change_password(request, slug):
         form = forms.ChangePasswordCustomForm(request.POST)
 
         if form.is_valid():
-            user_id = slug
+            user_id = request.user
 
             # Initialize connection elements
             host = "ldap://padl.ceas.wmich.edu"
@@ -206,7 +207,7 @@ def change_password(request, slug):
                                             current_password=current_password
                                             )
                 messages.success(request, "Password Changed Successfully!")
-                return redirect(reverse_lazy('cae_home:user_edit', args=[slug]))
+                return redirect(reverse_lazy('cae_home:user_edit'))
 
             except ConnectionError:
                 messages.error(request, "Unable to reset password!")
