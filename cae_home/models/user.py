@@ -8,6 +8,7 @@ from django.contrib.auth.models import AbstractUser, Group
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.conf import settings
 from django.db import models
+from django.db.models import Q
 from django.utils import timezone
 from django.utils.text import slugify
 from phonenumber_field.modelfields import PhoneNumberField
@@ -335,6 +336,53 @@ class User(AbstractUser):
             new_user.save()
 
         return new_user
+
+    @staticmethod
+    def get_cae_users():
+        """
+        Returns set of all active attendants, admins, and programmers for the CAE Center.
+        """
+        return User.objects.filter(
+            is_active=True
+        ).filter(
+            Q(groups__name='CAE Attendant') |
+            Q(groups__name='CAE Admin') | Q(groups__name='CAE Admin GA') |
+            Q(groups__name='CAE Programmer') | Q(groups__name='CAE Programmer GA')
+        )
+
+    @staticmethod
+    def get_cae_admins():
+        """
+        Returns set of all active admins for the CAE Center.
+        """
+        return User.objects.filter(
+            is_active=True
+        ).filter(
+            Q(groups__name='CAE Admin') | Q(groups__name='CAE Admin GA')
+        )
+
+    @staticmethod
+    def get_cae_programmers():
+        """
+        Returns set of all active programmers for the CAE Center.
+        """
+        return User.objects.filter(
+            is_active=True
+        ).filter(
+            Q(groups__name='CAE Programmer') | Q(groups__name='CAE Programmer GA')
+        )
+
+    @staticmethod
+    def get_cae_ga():
+        """
+        Returns set of all active GA users for the CAE Center.
+        """
+        return User.objects.filter(
+            is_active=True
+        ).filter(
+            Q(groups__name='CAE Admin GA') | Q(groups__name='CAE Programmer GA')
+        )
+
 
     @staticmethod
     def create_dummy_model():
