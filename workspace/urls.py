@@ -36,6 +36,9 @@ urlpatterns = [
     path('api/', include(router.urls)),
     # url(r'api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
+    # CAE_Tools app production views.
+    path('cae_tools/', include('cae_tools.urls', namespace='cae_tools')),
+
     # CAE_Home app views.
     path('', include('cae_home.urls')),
 ]
@@ -44,9 +47,8 @@ urlpatterns = [
 # Debug only urls.
 if settings.DEV_URLS:
     urlpatterns += [
-        # CAE Tools app views.
-        path('dev/', include('cae_tools.urls', namespace='dev')),
-        path('cae_tools/', include('cae_tools.urls', namespace='cae_tools')),
+        # CAE_Tools app develoment views.
+        path('dev/', include('cae_tools.dev_urls', namespace='dev')),
     ]
 
 
