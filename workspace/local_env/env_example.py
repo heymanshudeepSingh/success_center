@@ -107,6 +107,8 @@ CAE_LDAP = {
     'host': '',
     'login_dn': '',
     'login_password': '',
+    'admin_dn': '',
+    'admin_password': '',
     'default_uid': '',
     'user_search_base': '',
     'group_dn': '',
