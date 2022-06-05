@@ -126,5 +126,15 @@ USE_TZ = True
 from workspace.settings.extra_settings import *
 
 
+# Handle extra admin model views if in debug.
+if DEV_MODE:
+    ADMIN_REORDER += ({
+        'app': 'cae_tools',
+        'label': 'CAE Tools/Example Models',
+        'models': (
+            'cae_tools.ExampleDocsSignatureModel',
+        ),
+    },)
+
 # Force additional blank line for debug printing.
 debug_print('')

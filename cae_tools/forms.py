@@ -6,6 +6,7 @@ Forms for CAE Tools app.
 from django import forms
 
 # User Imports.
+from . import models
 from cae_home import forms as cae_home_forms
 
 # Create choices tuple. Used for select/choice fields down below.
@@ -208,6 +209,16 @@ class CustomFieldExampleForm_Signature(forms.Form):
     signature = forms.CharField(widget=cae_home_forms.SignatureWidget)
 
 
+class ModelExampleForm_Signature(forms.ModelForm):
+    """
+    Example model form for a full implementation of Signature handling.
+    """
+    class Meta:
+        model = models.ExampleDocsSignatureModel
+        fields = ['signature']
+        widgets = {'signature': cae_home_forms.SignatureWidget}
+
+
 class LdapUtilityForm(forms.Form):
     """
     Ldap form to search for user info
@@ -243,4 +254,3 @@ class CaePasswordResetForm(forms.Form):
     #     # check if the passwords match
     #     if cleaned_data.get("new_password") != cleaned_data.get("repeat_new_password"):
     #         self.add_error('repeat_new_password', error="Passwords don't match!")
-

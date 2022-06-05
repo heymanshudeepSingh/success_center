@@ -59,7 +59,10 @@ from .ldap import (
 from .middleware import docs_middlware
 
 # Custom "Models" Logic Documentation.
-from .models import docs_models
+from .models import (
+    docs_models,
+    docs_models_signature,
+)
 
 # Custom "Seeds and Fixtures" Logic Documentation.
 from .seeds_and_fixtures import docs_seeds_and_fixtures

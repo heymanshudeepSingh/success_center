@@ -1,0 +1,38 @@
+{% extends 'cae_tools/documentation/css/main.html' %}
+{% load static %}
+
+
+{% block title_page_name %}General CSS Logic |  {{ block.super }}{% endblock title_page_name %}
+
+
+{% block content %}
+  {{ block.super }}
+
+  <h2>Handling Signature Forms & Signature Models</h2>
+  <p>
+    See also generic form implementation at
+    <a href="{% url 'cae_tools:css_forms_custom_fields' %}">Custom Form Field Examples</a>.
+  </p>
+
+  <br>
+
+  <p>
+    CAE Workspace provides a generic implementation of signature handling, for such as when a user uses a tablet or
+    touch pad to physically write their signature.
+  </p>
+  <p>
+    When logic supports it, we recommend not storing the signature to the database (for security). And instead, simply
+    using the generic SignatureWidget form field (from <span class="code">cae_home/forms.py</span>) to get a signature
+    and then process it directly in the view, without saving it long-term.
+  </p>
+  <p>
+    However, this is not necessarily universally applicable and some logic requires saving long-term, in which case
+    you should inherit signature logic from <span class="code">cae_tools/models.py</span>. Example below.
+  </p>
+
+  <br>
+
+  <h3>Example of Using Generic Signature Form + Model</h3>
+  {% include 'cae_home/include/form.html' %}
+
+{% endblock content %}
