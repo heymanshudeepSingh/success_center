@@ -11,6 +11,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.template.response import TemplateResponse
 from django.urls import reverse, reverse_lazy
 from django.views.generic.base import TemplateView
+
 # User Imports.
 from cae_home import forms, models
 from cae_home.decorators import group_required
@@ -185,23 +186,26 @@ def change_password(request):
     """
     Allows a user to update their own password to a new value.
     """
-    # Required imports for the function.
-    from workspace.ldap_backends import simple_ldap_lib
-    from workspace.ldap_backends.wmu_auth.cae_backend import CaeAuthBackend
+    ldap_not_set_up = False
 
-    # Check if ldap is setup in env.
+    # Check if ldap settings are defined.
     if settings.CAE_LDAP['login_dn'] == '':
-        messages.error(request, 'Can\'t connect to Ldap server. :(')
+        messages.error(request, 'Can\'t connect to Ldap server. :( \n Are project LDAP settings setup?')
+        ldap_not_set_up = True
 
-    # Initialize SimpleLdapLibrary + CAE Ldap backend.
-    ldap_lib = simple_ldap_lib.SimpleLdap()
-    cae_auth_backend = CaeAuthBackend()
+    # Initialize SimpleLdapLibrary.
+    try:
+        from workspace.ldap_backends import simple_ldap_lib
+        ldap_lib = simple_ldap_lib.SimpleLdap()
+    except (AttributeError, ModuleNotFoundError):
+        messages.error(request, 'Can\'t connect to Ldap server. :( \n Is the SimpleLdapLib installed?')
+        ldap_not_set_up = True
 
     # Initialize form.
     form = forms.ChangePasswordCustomForm()
 
     # Handle for submission.
-    if request.method == 'POST':
+    if not ldap_not_set_up and request.method == 'POST':
         form = forms.ChangePasswordCustomForm(request.POST)
 
         # Validate form.
@@ -213,23 +217,26 @@ def change_password(request):
             admin_dn = settings.CAE_LDAP['admin_dn']
             admin_password = settings.CAE_LDAP['admin_password']
             new_password = form.cleaned_data['new_password']
-            user_search_base = settings.CAE_LDAP['user_search_base']
+            search_base = settings.CAE_LDAP['user_search_base']
             current_password = form.cleaned_data['current_password']
 
             # Note: "ldap password not found" error will be thrown if Ldap-utils is not installed.
             try:
-                ldap_lib.cae_password_reset(
-                    password=new_password,
+                results = ldap_lib.password_reset(
+                    user_id,
+                    current_password,
+                    new_password,
                     host=host,
-                    user_id=user_id,
-                    user_search_base=user_search_base,
-                    admin_dn=admin_dn,
-                    admin_password=admin_password,
-                    cae_auth_backend=cae_auth_backend,
-                    current_password=current_password
+                    dn=admin_dn,
+                    password=admin_password,
+                    search_base=search_base,
                 )
-                messages.success(request, 'Password successfully changed.')
-                return redirect(reverse_lazy('cae_home:user_edit'))
+                # Check status.
+                if results[0] is True:
+                    messages.success(request, 'Password successfully changed.')
+                    return redirect(reverse_lazy('cae_home:user_details'))
+                else:
+                    messages.error(request, results[1])
 
             except ConnectionError:
                 messages.error(request, 'Error connecting. Unable to reset password.')

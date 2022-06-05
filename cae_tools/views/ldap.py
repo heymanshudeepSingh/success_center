@@ -8,6 +8,8 @@ from django.template.response import TemplateResponse
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
 
 # utility imports
 import cae_home.models
@@ -145,7 +147,6 @@ def cae_password_reset(request):
     # Initialize SimpleLdapLibrary + CAE Ldap backend.
     try:
         ldap_lib = simple_ldap_lib.SimpleLdap()
-        cae_auth_backend = CaeAuthBackend()
     except AttributeError:
         messages.error(request, 'Can\'t connect to Ldap server. :( \n Is the SimpleLdapLib installed?')
         ldap_not_set_up = True
@@ -160,62 +161,78 @@ def cae_password_reset(request):
         # Validate form.
         if form.is_valid():
             user_id = form.cleaned_data['user_id']
+            from_email = settings.DEFAULT_FROM_EMAIL
 
             # Generate temporary password for user.
-            user_password = str(settings.USER_SEED_PASSWORD) + str(random.randint(0, 999))
+            generated_password = str(settings.USER_SEED_PASSWORD) + str(random.randint(0, 999))
 
             # Pull ldap values from settings.
             host = settings.CAE_LDAP['host']
             admin_dn = settings.CAE_LDAP['admin_dn']
             admin_password = settings.CAE_LDAP['admin_password']
-            user_search_base = settings.CAE_LDAP['user_search_base']
-            from_email = settings.DEFAULT_FROM_EMAIL
+            search_base = settings.CAE_LDAP['user_search_base']
 
             # Note: "ldap password not found error" will be thrown if Ldap-utils is not installed.
             try:
                 # Validate provided user_id value.
                 user = get_user_model().objects.get(username=user_id)
 
-                ldap_lib.cae_password_reset(
-                    password=user_password,
+                results = ldap_lib.password_reset(
+                    user_id,
+                    'invalid',
+                    generated_password,
                     host=host,
-                    user_id=user_id,
-                    user_search_base=user_search_base,
-                    admin_dn=admin_dn,
-                    admin_password=admin_password,
-                    cae_auth_backend=cae_auth_backend,
+                    dn=admin_dn,
+                    password=admin_password,
+                    search_base=search_base,
+                    skip_password_auth=True,
                 )
-                messages.success(request, 'Password successfully changed.')
-
-                # Get email for user who's password is being reset.
-                user_email = user.email
-
-                # Get list of emails to send to.
-                # Includes user that had password reset, as well as all active GA's (so they can check against
-                # potentially malicious password-resetting actions).
-                recipient_email = [user_email] + list(get_user_model().get_cae_ga().values_list('email', flat=True))
-
-                # Get IP of the user changing password.
-                # Reference - https://stackoverflow.com/a/4581997
-                x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-                if x_forwarded_for:
-                    ip = x_forwarded_for.split(',')[0]
+                # Check status.
+                if results[0] is False:
+                    messages.error(request, results[1])
                 else:
-                    ip = request.META.get('REMOTE_ADDR')
+                    messages.success(request, 'Password successfully changed.')
 
-                # Send notification email.
-                send_mail(
-                    'CAE Password Changed',
-                    (
-                        '{0}\'s CAE Center Password has been reset by {1}\n'
-                        'Reset occurred from Ip Address: "{2}"'
-                        '\n\n'
-                        'Your new password is "{3}".'
-                    ).format(user_id, request.user, ip, user_password),
-                    from_email,
-                    recipient_email,
-                )
-                messages.success(request, 'Password set to temporary value. Please check your email.')
+                    # Get email for user who's password is being reset.
+                    user_email = user.email
+
+                    # Get list of emails to send to.
+                    # Includes user that had password reset, as well as all active GA's (so they can check against
+                    # potentially malicious password-resetting actions).
+                    recipient_email = [user_email] + list(get_user_model().get_cae_ga().values_list('email', flat=True))
+
+                    # Get IP of the user changing password.
+                    # Reference - https://stackoverflow.com/a/4581997
+                    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+                    if x_forwarded_for:
+                        ip = x_forwarded_for.split(',')[0]
+                    else:
+                        ip = request.META.get('REMOTE_ADDR')
+
+                    # Send notification email.
+                    send_mail(
+                        'CAE Password Changed',
+                        (
+                            '{0}\'s ({1} {2}) CAE Center Password has been reset by {3} ({4} {5})\n'
+                            'Reset occurred from Ip Address: "{6}"\n'
+                            '\n'
+                            '\n'
+                            'Your new password is "{7}".\n'
+                        ).format(
+                            user_id,
+                            user.first_name,
+                            user.last_name,
+                            request.user,
+                            request.user.first_name,
+                            request.user.last_name,
+                            ip,
+                            generated_password,
+                        ),
+                        from_email,
+                        recipient_email,
+                    )
+                    messages.success(request, 'Password set to temporary value. Please check your email.')
+                    return redirect(reverse_lazy('cae_home:user_details'))
 
             except get_user_model().DoesNotExist:
                 # Handle for invalid username provided.
