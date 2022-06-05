@@ -54,14 +54,16 @@ function main_help() {
     echo "    clear_pycache - Clears all auto-generated Pycache files from project folders."
     echo "    compile_css - Compiles all SASS files to CSS."
     echo "    compile_js - Compiles all React files to JS."
-    echo "    update_npm - Attempts to update all npm dependencies."
+    echo "    install_npm - Attempts to install latest Npm/NodeJs system package."
+    echo "    update_npm - Attempts to update all Npm/NodeJs system packages. Technically an alias for install_npm."
+    echo "    update_npm_dependencies - Attempts to update all Npm/NodeJs project dependencies."
     echo ""
     echo -e "${color_blue}Development${color_reset}:"
     echo "    reset_db - Resets the local project database. Only works for SqLite."
-    echo "    reset_migrations - Removes all uncommited migration files."
+    echo "    reset_migrations - Removes all uncommitted migration files."
     echo ""
     echo -e "${color_blue}Production${color_reset}:"
-    echo "    restart_server - Restarts all major processes for the Django project in a production environment."
+    echo "    restart_web_server - Restarts all major processes for the Django project in a production environment."
     echo "    set_file_permissions - Sets all project file permissions for serving in a production environment."
 }
 
@@ -271,13 +273,13 @@ function compile_javascript_help () {
 
 
 ###
- # Runs the script for installing NodeJs/Npm/React.
+ # Runs the script for installing/updating NodeJs/Npm/React.
  ##
 function install_npm () {
     ./general/installers/misc/npm_install.sh "${@}"
 }
 ###
- # Aliases for "compile_js".
+ # Aliases for "install_npm".
  ##
 function npm_install () {
     install_npm "${@}"
@@ -294,6 +296,19 @@ function install_react () {
 function react_install () {
     install_npm "${@}"
 }
+function update_npm () {
+    install_npm "${@}"
+}
+function npm_update () {
+    install_npm "${@}"
+}
+function update_nodejs () {
+    install_npm "${@}"
+}
+function nodejs_update () {
+    install_npm "${@}"
+}
+
 
 
 ###
@@ -301,8 +316,8 @@ function react_install () {
  ##
 function install_npm_help () {
     echo -e "${color_blue}Script${color_reset}: install_npm.sh"
-    echo "    Installs NodeJs/Npm/React dependencies."
-    echo "    NOTE: Currently only works for Ubuntu systems."
+    echo "    Installs & updates NodeJs/Npm/React dependencies."
+    echo "    Preferable to run this over the standard Npm/NodeJs install commands."
     echo ""
     echo -e "${color_blue}Permissions${color_reset}: Run as root/admin user."
     echo ""
@@ -312,6 +327,10 @@ function install_npm_help () {
     echo "    * nodejs_install"
     echo "    * install_react"
     echo "    * react_install"
+    echo "    * update_npm"
+    echo "    * npm_update"
+    echo "    * update_nodejs"
+    echo "    * nodejs_update"
 }
 ###
  # Aliases for "install_npm_help".
@@ -329,6 +348,18 @@ function install_react_help () {
     install_npm_help "${@}"
 }
 function react_install_help () {
+    install_npm_help "${@}"
+}
+function update_npm_help () {
+    install_npm_help "${@}"
+}
+function npm_update_help () {
+    install_npm_help "${@}"
+}
+function update_nodejs_help () {
+    install_npm_help "${@}"
+}
+function nodejs_update_help () {
     install_npm_help "${@}"
 }
 
@@ -442,34 +473,48 @@ function migrations_reset_help () {
 ###
  # Runs the script for restarting major Django processes in production environments.
  ##
-function restart_server() {
-    sudo ./production/restart_server.sh "${@}"
+function restart_web_server() {
+    sudo ./production/restart_web_server.sh "${@}"
 }
 ###
  # Aliases for "restart_server".
  ##
-function server_restart () {
-    restart_server "${@}"
+ function web_server_restart () {
+    restart_web_server "${@}"
+}
+function restart_webserver () {
+    restart_web_server "${@}"
+}
+function webserver_restart () {
+    restart_web_server "${@}"
 }
 
 
 ###
  # Displays helper text for script.
  ##
-function restart_server_help () {
+function restart_web_server_help () {
     echo -e "${color_blue}Script${color_reset}: restart_server.sh"
     echo "    Restarts all major processes for the Django project in a production environment."
     echo ""
     echo -e "${color_blue}Permissions${color_reset}: Run as root/admin user."
     echo ""
     echo -e "${color_blue}Aliases${color_reset}:"
-    echo "    * server_restart"
+    echo "    * web_server_restart"
+    echo "    * restart_webserver"
+    echo "    * webserver_restart"
 }
 ###
  # Aliases for "restart_server_help".
  ##
-function server_restart_help () {
-    restart_server_help "${@}"
+function web_server_restart_help () {
+    restart_web_server_help "${@}"
+}
+function restart_webserver_help () {
+    restart_web_server_help "${@}"
+}
+function webserver_restart_help () {
+    restart_web_server_help "${@}"
 }
 
 
