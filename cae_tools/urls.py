@@ -18,6 +18,7 @@ urlpatterns = [
     path('documentation/css_examples/alerts', views.css_alerts, name='css_alerts'),
     path('documentation/css_examples/articles', views.css_articles, name='css_articles'),
     path('documentation/css_examples/buttons', views.css_buttons, name='css_buttons'),
+    path('documentation/css_examples/card', views.css_card, name='css_card'),
     path('documentation/css_examples/forms', views.css_forms, name='css_forms_base'),
     path('documentation/css_examples/forms/default_fields', views.css_forms_default_fields, name='css_forms_default_fields'),
     path('documentation/css_examples/forms/custom_fields', views.css_forms_custom_fields, name='css_forms_custom_fields'),

@@ -62,7 +62,11 @@ freezegun
  # Optional Imports
  ##
 # For connecting to mysql. Not necessary if using sqlite during development.
+<<<<<<< HEAD
 # mysqlclient==2.1.0
+=======
+mysqlclient==2.1.0
+>>>>>>> 9d85f96 (Added card to cae_home, ready to use for grad_app.)
 # For ldap connection. Only necessary when CaeAuthBackend is turned on.
 ldap3==2.9.1
 # For putting on a production server. Required for Apache/Daphne to use a Python virtual environment.

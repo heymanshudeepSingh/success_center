@@ -1,0 +1,134 @@
+{% extends 'cae_tools/main.html' %}
+
+
+{% block title_page_name %}Card | CSS Examples | {% endblock title_page_name %}
+
+
+{% block content %}
+
+<h1>CSS Examples - Card</h1>
+<p>
+  Standard Card.
+</p>
+
+<div class="card">
+  <div class="content">
+    <div class="parent">
+      <h2>
+        Win no:{{wmu_user.winno}}
+      </h2>
+      <h2>
+        Name : {{wmu_user.first_name}} {{wmu_user.last_name}}
+      </h2>
+    </div>
+    <ul class="nav">
+      <li>
+        <h2> Win no : {{wmu_user.winno}} </h2><br/>
+      </li>
+      <li>
+        <h2> Name : {{wmu_user.first_name}} {{wmu_user.last_name}} </h2><br/>
+      </li>
+      <li>
+        <h2> Major: {% for Major in wmu_user_major %}
+          {{Major}}
+          {% endfor %}<br/></h2>
+      </li>
+    </ul>
+    <div class="toggle">
+      <ion-icon name="arrow-down-circle-outline"></ion-icon>
+    </div>
+  </div>
+</div>
+
+
+<div class="card">
+  <div class="content">
+    <div class="parent">
+      <h2>
+        Win no : 123456
+      </h2>
+      <h2>
+        Name : John Doe
+      </h2>
+    </div>
+    <ul class="nav">
+      <li>
+        <h2> Win no : 987654 </h2><br/>
+      </li>
+      <li>
+        <h2> Name : Jane Doe </h2><br/>
+      </li>
+      <li>
+        <h2> Major : SuperCoolMajor <br/></h2>
+      </li> <li>
+        <h2> Win no : 987654 </h2><br/>
+      </li>
+      <li>
+        <h2> Name : Jane Doe </h2><br/>
+      </li>
+      <li>
+        <h2> Major : SuperCoolMajor<br/></h2>
+      </li>
+       <li>
+        <h2> Win no : 987654 </h2><br/>
+      </li>
+      <li>
+        <h2> Name : Jane Doe </h2><br/>
+      </li>
+      <li>
+        <h2> Major : SuperCoolMajor<br/></h2>
+      </li>
+
+    </ul>
+    <div class="toggle">
+      <ion-icon name="arrow-down-circle-outline"></ion-icon>
+    </div>
+  </div>
+</div>
+
+<!--<div class="card">-->
+<!--  <div class="content">-->
+<!--    <div class="profile"></div>-->
+<!--    <ul class="nav">-->
+<!--      <li>-->
+<!--        <h2> Win no:{{wmu_user.winno}} </h2><br/>-->
+<!--      </li>-->
+<!--      <li>-->
+<!--        <h2> Name:{{wmu_user.first_name}} {{wmu_user.last_name}} </h2><br/>-->
+<!--      </li>-->
+<!--      <li>-->
+<!--        <h2> Major: {% for Major in wmu_user_major %}-->
+<!--          {{Major}}-->
+<!--          {% endfor %}<br/></h2>-->
+<!--      </li>-->
+<!--    </ul>-->
+<!--    <div class="toggle">-->
+<!--      <ion-icon name="arrow-down-circle-outline"></ion-icon>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+{% endblock content %}
+
+
+{% block extra_scripts_body %}
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+<script>
+  let card = $('.card');
+  console.log('card');
+  console.log(card);
+
+   $(card).each(function() {
+    let toggle = $(this).children('.content').children('.toggle');
+      console.log(toggle);
+      let card = $(this);
+      $(toggle).on("click", function() {
+      console.log("clicked");
+      $(card).toggleClass("active");
+      });
+   });
+
+</script>
+
+{% endblock extra_scripts_body %}
