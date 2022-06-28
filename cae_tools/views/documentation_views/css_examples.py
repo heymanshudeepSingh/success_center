@@ -44,16 +44,7 @@ def css_card(request):
     """
     Displays examples of custom HTML/CSS layout for "card" elements.
     """
-    from cae_home import models as cae_home_models
-    wmu_user = cae_home_models.WmuUser.objects.get(bronco_net="fgn1003")
-    # wmu_user_major = cae_home_models.Major.objects.filter(wmuuser=wmu_user, is_active=True)
-    wmu_user_major = wmu_user.major.filter(is_active=True)
-    # grad_app = grad_app_model.objects.filter(wmuuser = wmuuser)
-    return TemplateResponse(request, 'cae_tools/css_examples/card.html', {
-        "wmu_user": wmu_user,
-        'wmu_user_major': wmu_user_major,
-        # "grad_app": grad_app,
-    })
+    return TemplateResponse(request, 'cae_tools/css_examples/card.html', {})
 
 
 # region Form Example Views

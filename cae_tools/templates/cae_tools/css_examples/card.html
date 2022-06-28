@@ -15,23 +15,22 @@
   <div class="content">
     <div class="parent">
       <h2>
-        Win no : {{wmu_user.winno}}
+        Win no : 11223344
       </h2>
       <h2>
-        Name : {{wmu_user.first_name}} {{wmu_user.last_name}}
+        Name : Joe Doe
       </h2>
     </div>
     <ul class="nav">
       <li>
-        <h2> Win no : {{wmu_user.winno}} </h2><br/>
+        <h2> Win no : 11228899 </h2><br/>
       </li>
       <li>
-        <h2> Name : {{wmu_user.first_name}} {{wmu_user.last_name}} </h2><br/>
+        <h2> Name : John Doe </h2><br/>
       </li>
       <li>
-        <h2> Major: {% for Major in wmu_user_major %}
-          {{Major}}
-          {% endfor %}<br/></h2>
+        <h2> Major: Engineering
+          <br/></h2>
       </li>
     </ul>
     <div class="toggle">
@@ -48,7 +47,7 @@
         Win no : 123456
       </h2>
       <h2>
-        Name : John Doe
+        Name : Jane Doe
       </h2>
     </div>
     <ul class="nav">
@@ -81,54 +80,9 @@
 
     </ul>
     <div class="toggle">
-      <i class="fa-regular fa-circle-arrow-down"></i>
+      <ion-icon name="arrow-down-circle-outline"></ion-icon>
     </div>
   </div>
 </div>
 
-<!--<div class="card">-->
-<!--  <div class="content">-->
-<!--    <div class="profile"></div>-->
-<!--    <ul class="nav">-->
-<!--      <li>-->
-<!--        <h2> Win no:{{wmu_user.winno}} </h2><br/>-->
-<!--      </li>-->
-<!--      <li>-->
-<!--        <h2> Name:{{wmu_user.first_name}} {{wmu_user.last_name}} </h2><br/>-->
-<!--      </li>-->
-<!--      <li>-->
-<!--        <h2> Major: {% for Major in wmu_user_major %}-->
-<!--          {{Major}}-->
-<!--          {% endfor %}<br/></h2>-->
-<!--      </li>-->
-<!--    </ul>-->
-<!--    <div class="toggle">-->
-<!--      <ion-icon name="arrow-down-circle-outline"></ion-icon>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
 {% endblock content %}
-
-
-{% block extra_scripts_body %}
-<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
-<script>
-  let card = $('.card');
-  console.log('card');
-  console.log(card);
-
-   $(card).each(function() {
-    let toggle = $(this).children('.content').children('.toggle');
-      console.log(toggle);
-      let card = $(this);
-      $(toggle).on("click", function() {
-      console.log("clicked");
-      $(card).toggleClass("active");
-      });
-   });
-
-</script>
-
-{% endblock extra_scripts_body %}
