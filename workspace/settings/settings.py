@@ -126,8 +126,9 @@ USE_TZ = True
 from workspace.settings.extra_settings import *
 
 
-# Handle extra admin model views if in debug.
+# Extra configuration when in debug mode.
 if DEV_MODE:
+    # Handle extra admin model views if in debug.
     ADMIN_REORDER += ({
         'app': 'cae_tools',
         'label': 'CAE Tools/Example Models',
@@ -135,6 +136,10 @@ if DEV_MODE:
             'cae_tools.ExampleDocsSignatureModel',
         ),
     },)
+
+    # Enable DumpDie (dd) package.
+    INSTALLED_APPS.append('django_dump_die')
+    MIDDLEWARE.append('django_dump_die.middleware.DumpAndDieMiddleware')
 
 # Force additional blank line for debug printing.
 debug_print('')

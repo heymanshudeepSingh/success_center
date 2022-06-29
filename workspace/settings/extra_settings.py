@@ -126,4 +126,18 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 # django-phonenumber-field settings
 PHONENUMBER_DEFAULT_REGION = 'US'   # Don't require users to prefix with +1
 
+# django-dump-die settings
+# Override these in env.py to change them.
+if DEV_MODE:
+    DJANGO_DD_INCLUDE_FILENAME_LINENUMBER = True
+    DJANGO_DD_MULTILINE_FUNCTION_DOCS = True
+    DJANGO_DD_INCLUDE_UTILITY_TOOLBAR = True
+
+# django-test-cases settings
+# Override these in env.py to change them.
+if DEV_MODE:
+    DJANGO_EXPANDED_TESTCASES_DEBUG_PRINT = True
+    DJANGO_EXPANDED_TESTCASES_ALLOW_MESSAGE_PARTIALS = True
+    SELENIUM_TEST_BROWSER = 'chrome'
+
 #endregion Third Party Library Settings
