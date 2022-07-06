@@ -4,6 +4,7 @@ Form views for CAE Home app.
 
 # System Imports.
 from django.contrib import messages
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.db.models import ObjectDoesNotExist
 from django.http.response import HttpResponseRedirect
@@ -17,9 +18,8 @@ from cae_home import forms, models
 from cae_home.decorators import group_required
 from workspace import logging as init_logging
 
-# Import logger.
-from workspace.settings import settings
 
+# Initialize logging.
 logger = init_logging.get_logger(__name__)
 
 
@@ -52,7 +52,6 @@ class UserDetails(TemplateView):
 def user_edit(request):
     """
     Edit view for a single user.
-
 
     Note that multiple users may have the same address. Or after years pass, a new user may use a previous user's
     address. Thus, on update, first try to get an address with equivalent values. Only on failure do we validate and
