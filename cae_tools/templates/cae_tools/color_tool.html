@@ -5,6 +5,40 @@
 {% block title_page_name %}Color Tool | {% endblock title_page_name %}
 
 
+{% block content_bar_right %}
+  <h2>Color Tool Current State</h2>
+  <p>
+    Originally (back when Workspace was in development, around 2019 or so), this page was thrown together to help
+    quickly and dynamically compare and select colors, when working with front-end css.
+  </p>
+  <p>
+    Currently, this page has been mostly-ignored, and some functionality/styling has broken. It still somewhat-works,
+    but there are professionally-made pages that do much more.
+  </p>
+
+  <hr>
+
+  <h2>Functionality</h2>
+  <p>
+    This page shows various colors, all in clean little easily-selectable boxes. Each box displays the same color value
+    in formats of HEX, RGB, and HSL.
+  </p>
+  <p>Clicking any of these colors will "select" it, allowing for further examination and manipulation.</p>
+
+  <h3>Rows:</h3>
+  <p>
+    Top Row - WMU's "official" colors.
+  </p>
+  <p>
+    Second Row - We decided that some of WMU's colors were a bit of an eyesore on an actual website, so we have
+    toned-down (but similar) colors on the second row.
+  </p>
+  <p>
+    The bottom two rows allow quickly selecting a change in saturation and lightness, for the currently selected color.
+  </p>
+{% endblock content_bar_right %}
+
+
 {% block content %}
   <h1>Color Tool</h1>
   <div id="react-root">
