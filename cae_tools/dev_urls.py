@@ -14,6 +14,7 @@ urlpatterns = [
     path('documentation/css_examples/alerts', views.css_alerts, name='css_alerts'),
     path('documentation/css_examples/articles', views.css_articles, name='css_articles'),
     path('documentation/css_examples/buttons', views.css_buttons, name='css_buttons'),
+    path('documentation/css_examples/cards', views.css_cards, name='css_cards'),
     path('documentation/css_examples/forms', views.css_forms, name='css_forms_base'),
     path('documentation/css_examples/forms/default_fields', views.css_forms_default_fields, name='css_forms_default_fields'),
     path('documentation/css_examples/forms/custom_fields', views.css_forms_custom_fields, name='css_forms_custom_fields'),
@@ -71,9 +72,6 @@ urlpatterns = [
     # Custom Workspace Logic Documentation.
     path('documentation/views/', views.docs_views, name='documentation_views'),
     path('documentation/', views.documentation, name='documentation'),
-
-    # Color Tool urls.
-    path('color/', views.color_tool, name='color_tool'),
 
     # Home url.
     path('', views.index, name='index'),

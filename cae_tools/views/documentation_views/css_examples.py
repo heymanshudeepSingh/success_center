@@ -40,7 +40,7 @@ def css_buttons(request):
     return TemplateResponse(request, 'cae_tools/css_examples/buttons.html', {})
 
 
-def css_card(request):
+def css_cards(request):
     """
     Displays examples of custom HTML/CSS layout for "card" elements.
     """

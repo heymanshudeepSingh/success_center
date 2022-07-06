@@ -16,7 +16,7 @@ from .css_examples import (
     css_alerts,
     css_articles,
     css_buttons,
-    css_card,
+    css_cards,
     css_forms,
     css_forms_default_fields,
     css_forms_custom_fields,
