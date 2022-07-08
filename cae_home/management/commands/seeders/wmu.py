@@ -27,7 +27,7 @@ def generate_model_seeds(style, model_count):
     create_departments(style)
     create_rooms(style)
     create_majors(style)
-    create_semester_dates(style)
+    create_semesters(style)
     create_wmu_classes(style, model_count)
 
 
@@ -132,7 +132,7 @@ def create_majors(style):
     stdout.write('Populated ' + style.SQL_FIELD('Major') + ' models.\n')
 
 
-def create_semester_dates(style):
+def create_semesters(style):
     """
     Create Semester Date models.
     """

@@ -12,7 +12,6 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 
 # utility imports
-import cae_home.models
 from cae_home.decorators import group_required
 from workspace.ldap_backends.wmu_auth.cae_backend import CaeAuthBackend
 from workspace.ldap_backends.wmu_auth.adv_backend import AdvisingAuthBackend

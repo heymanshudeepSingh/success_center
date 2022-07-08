@@ -371,7 +371,7 @@ class WmuClass(models.Model):
     # Model fields.
     code = models.CharField(max_length=MAX_LENGTH, unique=True)
     title = models.CharField(max_length=MAX_LENGTH)
-    description = models.CharField(max_length=MAX_LENGTH, blank = True, null = True)
+    description = models.CharField(max_length=MAX_LENGTH, blank=True, null=True)
 
     # Self-setting/Non-user-editable fields.
     slug = models.SlugField(
