@@ -7,7 +7,7 @@ from django.conf import settings
 from django.core.management import call_command
 from django.core.management.base import BaseCommand, CommandError
 
-# User Class Imports.
+# User Imports.
 from cae_home.models.user import check_all_group_memberships
 
 

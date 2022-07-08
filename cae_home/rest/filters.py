@@ -6,7 +6,7 @@ Used in DjangoRest views.
 # System Imports.
 import django_filters
 
-# User Class Imports.
+# User Imports.
 from cae_home import models
 
 

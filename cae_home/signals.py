@@ -11,7 +11,7 @@ from django.dispatch import receiver
 from django.utils import timezone
 from os import devnull
 
-# User Class Imports.
+# User Imports.
 from . import models
 from .models.user import compare_user_and_wmuuser_models, check_user_group_membership
 

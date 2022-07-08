@@ -10,7 +10,7 @@ from django.contrib.auth.models import Permission
 from django.urls import reverse
 from django.utils.html import mark_safe
 
-# User Class Imports.
+# User Imports.
 from . import models
 
 # Attempt to import RoomEvent Inline.
@@ -19,6 +19,7 @@ try:
 except ImportError:
     # Assume that CAE_Web project isn't present.
     RoomEventInline = None
+
 
 CAE_CENTER_GROUPS = [
     'CAE Director', 'CAE Building Coordinator',

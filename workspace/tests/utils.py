@@ -5,7 +5,7 @@ Site Settings testing Utility Functions and Classes.
 # System Imports.
 import os
 
-# User Class Imports.
+# User Imports.
 from django.conf import settings
 from workspace.settings.reusable_settings import BASE_DIR
 

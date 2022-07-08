@@ -11,7 +11,7 @@ For settings that are likely to change based on Project installation, see "setti
 import string
 from django.utils.crypto import get_random_string
 
-# User Class Imports.
+# User Imports.
 from workspace import logging as init_logging
 from workspace.settings.reusable_settings import *
 
@@ -25,7 +25,7 @@ except Exception:
     sys.exit(1)
 
 
-#region Secret Key Settings
+# region Secret Key Settings
 
 # Check for secret key.
 path_to_key = os.path.join(BASE_DIR, './workspace/local_env/secret_key.txt')
@@ -54,7 +54,7 @@ except FileNotFoundError:
         debug_print('Error generating secret key.')
         exit(1)
 
-#endregion Secret Key Settings
+# endregion Secret Key Settings
 
 
 # Setup logging.
@@ -62,16 +62,16 @@ init_logging.get_logger(__name__, LOGGING_DIRECTORY)
 LOGGING = init_logging.LOGGING
 
 
-#region Url Redirection Settings
+# region Url Redirection Settings
 
 LOGIN_URL = '/user/login/'
 LOGIN_REDIRECT_URL = '/user/login_redirect/'
 LOGOUT_REDIRECT_URL = LOGIN_URL
 
-#endregion Url Redirection Settings
+# endregion Url Redirection Settings
 
 
-#region Environment Values
+# region Environment Values
 
 # Local environment setup.
 if DEBUG:
@@ -118,10 +118,10 @@ else:
 # As of Django3.2, model PK's can be set to various different values. This line ensures we keep the original behavior.
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
-#endregion Environment Values
+# endregion Environment Values
 
 
-#region Third Party Library Settings
+# region Third Party Library Settings
 
 # django-phonenumber-field settings
 PHONENUMBER_DEFAULT_REGION = 'US'   # Don't require users to prefix with +1
@@ -140,4 +140,4 @@ if DEV_MODE:
     DJANGO_EXPANDED_TESTCASES_ALLOW_MESSAGE_PARTIALS = True
     SELENIUM_TEST_BROWSER = 'chrome'
 
-#endregion Third Party Library Settings
+# endregion Third Party Library Settings

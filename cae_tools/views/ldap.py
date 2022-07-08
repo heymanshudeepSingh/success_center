@@ -1,6 +1,6 @@
 """"""
 
-# System imports
+# System Imports.
 import random
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
@@ -11,12 +11,12 @@ from django.core.mail import send_mail
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 
-# utility imports
+# User Import.
 from cae_home.decorators import group_required
+from cae_tools import forms
 from workspace.ldap_backends.wmu_auth.cae_backend import CaeAuthBackend
 from workspace.ldap_backends.wmu_auth.adv_backend import AdvisingAuthBackend
 from workspace.ldap_backends.wmu_auth.wmu_backend import WmuAuthBackend
-from cae_tools import forms
 from workspace.ldap_backends import simple_ldap_lib
 from workspace.settings.reusable_settings import CAE_CENTER_GROUPS
 

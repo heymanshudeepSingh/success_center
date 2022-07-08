@@ -9,7 +9,7 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.core.management.base import BaseCommand
 
-# User Class Imports.
+# User Imports.
 from cae_home.models import WmuUser
 from workspace.ldap_backends.wmu_auth import wmu_backend
 from workspace.settings import extra_settings

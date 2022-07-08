@@ -10,7 +10,7 @@ from faker import Faker
 from random import randint
 from sys import stdout
 
-# User Class Imports.
+# User Imports.
 from cae_home import models
 from cae_home.management.commands.fixtures import cae as cae_fixtures
 

@@ -5,17 +5,16 @@ Note that seeder methods will always call fixture methods first. Then attempt se
 """
 
 # System Imports.
-from sys import stdout
-
-import faker
 from faker import Faker
 from django.utils.text import slugify
 from django.core.exceptions import ValidationError
 from django.db import IntegrityError
 from random import randint
-from cae_home.models.wmu import Department, WmuClass
-# User Class Imports.
+from sys import stdout
+
+# User Imports.
 from cae_home.management.commands.fixtures import wmu as wmu_fixtures
+from cae_home.models.wmu import Department, WmuClass
 
 
 def generate_model_seeds(style, model_count):

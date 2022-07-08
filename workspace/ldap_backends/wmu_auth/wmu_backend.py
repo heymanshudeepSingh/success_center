@@ -11,7 +11,7 @@ from django.core.exceptions import ValidationError
 from django.utils import timezone
 from phonenumber_field.phonenumber import PhoneNumber
 
-# User Class Imports.
+# User Imports.
 from cae_home import models
 from cae_home.models.user import compare_user_and_wmuuser_models
 from workspace import logging as init_logging
@@ -53,7 +53,7 @@ class WmuAuthBackend(AbstractLDAPBackend):
         self.ldap_lib.set_search_base(settings.WMU_LDAP['user_search_base'])
         self.ldap_lib.set_uid_attribute(settings.WMU_LDAP['default_uid'])
 
-    #region User Create/Update Functions
+    # region User Create/Update Functions
 
     def create_or_update_user_model(self, uid, password=None):
         """
@@ -478,9 +478,9 @@ class WmuAuthBackend(AbstractLDAPBackend):
 
         return phone_number
 
-    #endregion User Create/Update Functions
+    # endregion User Create/Update Functions
 
-    #region User Ldap Status Functions
+    # region User Ldap Status Functions
 
     def verify_user_ldap_status(self, uid, set_model_active_fields=True):
         """
@@ -665,9 +665,9 @@ class WmuAuthBackend(AbstractLDAPBackend):
             logger.auth_error('{0}: Failed to find LDAP key for user during enrollment check. {1}'.format(uid, err))
             return (False, False)
 
-    #endregion User Ldap Status Functions
+    # endregion User Ldap Status Functions
 
-    #region Ldap Get Attr Functions
+    # region Ldap Get Attr Functions
 
     def _get_all_user_info_from_bronconet(self, bronco_net):
         """
@@ -850,4 +850,4 @@ class WmuAuthBackend(AbstractLDAPBackend):
 
         return backup_name
 
-    #endregion Ldap Get Attr Functions
+    # endregion Ldap Get Attr Functions

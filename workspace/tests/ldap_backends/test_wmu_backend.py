@@ -7,7 +7,7 @@ import logging, unittest
 from django.conf import settings
 from django.utils import timezone
 
-# User Class Imports.
+# User Imports.
 from cae_home import models
 from cae_home.tests.utils import IntegrationTestCase
 from workspace.tests.utils import (
@@ -47,7 +47,7 @@ class WmuAuthBackendTests(IntegrationTestCase):
             # Disable logging for tests.
             logging.disable(logging.CRITICAL)
 
-    #region User Create/Update Functions
+    # region User Create/Update Functions
 
     @unittest.skipUnless(run_ldap_tests(), 'Missing criteria for LDAP. Skipping Ldap tests.')
     @unittest.skipUnless(prog_or_student_test_account_is_populated(), 'No Ldap User specified. Skipping Ldap tests.')
@@ -111,9 +111,9 @@ class WmuAuthBackendTests(IntegrationTestCase):
         # we're accessing).
         self.assertEqual(updated_wmu_user, wmu_user)
 
-    #endregion User Create/Update Functions
+    # endregion User Create/Update Functions
 
-    #region User Ldap Status Functions
+    # region User Ldap Status Functions
 
     @unittest.skipUnless(run_ldap_tests(), 'Missing criteria for LDAP. Skipping Ldap tests.')
     @unittest.skipUnless(prog_or_student_test_account_is_populated(), 'No Ldap User specified. Skipping Ldap tests.')
@@ -245,9 +245,9 @@ class WmuAuthBackendTests(IntegrationTestCase):
                 (False, False),
             )
 
-    #endregion User Ldap Status Functions
+    # endregion User Ldap Status Functions
 
-    #region Ldap Get Attr Functions
+    # region Ldap Get Attr Functions
 
     @unittest.skipUnless(run_ldap_tests(), 'Missing criteria for LDAP. Skipping Ldap tests.')
     @unittest.skipUnless(prog_or_student_test_account_is_populated(), 'No Ldap User specified. Skipping Ldap tests.')
@@ -354,4 +354,4 @@ class WmuAuthBackendTests(IntegrationTestCase):
             # Verify match.
             self.assertEqual(bronco_net, self.test_student_account)
 
-    #endregion Ldap Get Attr Functions
+    # endregion Ldap Get Attr Functions

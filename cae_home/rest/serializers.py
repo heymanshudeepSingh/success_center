@@ -6,7 +6,7 @@ Used in DjangoRest views.
 # System Imports.
 from rest_framework import serializers
 
-# User Class Imports.
+# User Imports.
 from cae_home import models
 
 

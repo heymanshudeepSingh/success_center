@@ -11,7 +11,7 @@ from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
 from django.utils import timezone
 
-# User Class Imports.
+# User Imports.
 from cae_home import models
 from cae_home.models.user import compare_user_and_wmuuser_models
 from workspace.ldap_backends.wmu_auth import cae_backend, wmu_backend

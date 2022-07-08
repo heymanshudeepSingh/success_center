@@ -34,7 +34,7 @@ def create_site_themes(style, display_output=False):
         stdout.write('Imported fixtures for ' + style.SQL_FIELD('Site Theme') + ' models.\n')
 
 
-#region Group and Permission Fixtures
+# region Group and Permission Fixtures
 # Technically these aren't fixtures, but they're pretty integral to the site running, and not randomized.
 
 def create_groups(style=None, display_output=False):
@@ -117,7 +117,7 @@ def create_permission_groups(as_dict=False):
         return group_array
 
 
-#region Set Permission Functions
+# region Set Permission Functions
 
 def set_cae_group_permissions(group_dict, general_permissions):
     """
@@ -192,10 +192,10 @@ def set_step_group_permissions(group_dict, general_permissions):
     # Set STEP Employee permissions.
     group_dict['step_employee'].permissions.set(success_center_permissions)
 
-#endregion Set Permission Functions
+# endregion Set Permission Functions
 
 
-#region Get Permission Functions
+# region Get Permission Functions
 
 def get_general_wmu_permissions():
     """
@@ -276,9 +276,9 @@ def get_step_permissions():
 
     return app_permisson_list
 
-#endregion Get Permission Functions
+# endregion Get Permission Functions
 
-#endregion Group and Permission Fixtures
+# endregion Group and Permission Fixtures
 
 
 def create_wmu_users(style, display_output=False):

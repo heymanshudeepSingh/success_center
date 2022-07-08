@@ -13,12 +13,10 @@ import logging, unittest
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group, Permission
-from django.core.management import call_command
 from django.template.response import TemplateResponse
 from django.test.client import Client
-from os import devnull
 
-# User Class Imports.
+# User Imports.
 from cae_home import models
 from cae_home.management.commands.fixtures.user import create_groups
 from cae_home.utils import get_or_create_login_user_model, get_or_create_wmu_user_model

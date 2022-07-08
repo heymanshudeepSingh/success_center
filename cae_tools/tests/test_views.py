@@ -4,24 +4,13 @@ Tests for CAE Tools app.
 
 # System Imports.
 import unittest
-
-from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.urls import reverse
-from django.utils import timezone
 
-# User Class Imports.
+# User Imports.
 from cae_home.tests.utils import IntegrationTestCase
-
-# Module-level Variables.
-from workspace.ldap_backends import simple_ldap_lib
 from workspace.tests.utils import run_ldap_tests
-
-cae_center_ldap_test_users = ['cae_director',
-                              'cae_admin',
-                              'cae_programmer',
-                              'cae_admin_ga',
-                              'cae_programmer_ga', ]
+from workspace.settings.reusable_settings import CAE_CENTER_GROUPS
 
 
 @unittest.skipUnless(run_ldap_tests(), 'Missing criteria for LDAP. Skipping Ldap tests.')
@@ -29,7 +18,6 @@ class LdapUtilityTests(IntegrationTestCase):
     """
     Tests to ensure valid CAEWeb Shifts manager views.
     """
-
     @classmethod
     def setUpTestData(cls):
         """
@@ -43,20 +31,19 @@ class LdapUtilityTests(IntegrationTestCase):
         """
         Tests user cannot access ldap page without login.
         """
-
         # Test unauthenticated. Should lead to login page.
         self.assertGetResponse(
-            reverse('cae_tools:ldap_utility'),
+            reverse('cae_tools:padl_utility'),
             'Login | CAE Center',
             expected_redirect_url=(
-                reverse('cae_home:login') + '?next=' + reverse('cae_tools:ldap_utility')
+                reverse('cae_home:login') + '?next=' + reverse('cae_tools:padl_utility')
             ),
         )
 
         # Test authenticated as whitelist user groups.
-        whitelist_users = cae_center_ldap_test_users
+        whitelist_users = CAE_CENTER_GROUPS
         self.assertWhitelistUserAccess(
-            reverse('cae_tools:ldap_utility'),
+            reverse('cae_tools:padl_utility'),
             'LDAP | Search CAE Dev & Tools',
             whitelist_users,
             expected_content=[
@@ -70,7 +57,7 @@ class LdapUtilityTests(IntegrationTestCase):
         # Test authenticated as blacklist user groups.
         blacklist_users = get_user_model().objects.filter(is_active=True).exclude(username__in=whitelist_users)
         self.assertBlacklistUserAccess(
-            reverse('cae_tools:ldap_utility'),
+            reverse('cae_tools:padl_utility'),
             None,
             blacklist_users,
             status=403,

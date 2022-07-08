@@ -10,11 +10,9 @@ from django.shortcuts import redirect
 from django.template.response import TemplateResponse
 from django.views.generic.edit import FormView
 from django.urls import reverse_lazy
-from django.utils.decorators import method_decorator
 
 # User Imports.
-from cae_home import forms, models
-from cae_home.decorators import group_required
+from cae_home import forms
 from cae_home.utils import get_or_create_login_user_model, get_or_create_wmu_user_model
 from workspace import logging as init_logging
 
@@ -23,8 +21,7 @@ from workspace import logging as init_logging
 logger = init_logging.get_logger(__name__)
 
 
-
-#region Error-Handling Views
+# region Error-Handling Views
 
 def handler400(request, exception=None):
     return TemplateResponse(request, 'cae_home/errors/400.html', status=400)
@@ -41,10 +38,10 @@ def handler404(request, exception=None):
 def handler500(request, exception=None):
     return TemplateResponse(request, 'cae_home/errors/500.html', status=500)
 
-#endregion Error-Handling Views
+# endregion Error-Handling Views
 
 
-#region Public Info Views
+# region Public Info Views
 
 def info_schedules(request):
     """
@@ -77,7 +74,7 @@ def info_software(request):
         'contact_singh': 'Simar Singh<br>hfv6838@wmich.edu'
     })
 
-#endregion Public Info Views
+# endregion Public Info Views
 
 
 @login_required

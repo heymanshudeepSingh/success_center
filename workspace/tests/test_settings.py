@@ -5,8 +5,6 @@ Tests for Settings app.
 # System Imports.
 from django.conf import settings
 from django.test import TestCase,TransactionTestCase
-from django.core.management import call_command
-from os import devnull
 
 
 class DropOffCoreViewTests(TestCase, TransactionTestCase):

@@ -15,7 +15,7 @@ from workspace import logging as init_logging
 logger = init_logging.get_logger(__name__)
 
 
-#region Ldap Simplification Functions
+# region Ldap Simplification Functions
 
 def get_or_create_login_user_model(request, user_id):
     """
@@ -150,4 +150,4 @@ def get_or_create_wmu_user_model(request, user_id):
 
     return user_model
 
-#endregion Ldap Simplification Functions
+# endregion Ldap Simplification Functions

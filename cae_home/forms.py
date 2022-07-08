@@ -6,7 +6,7 @@ Forms for CAE Home app.
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm as auth_form
 
-# User Class Imports.
+# User Imports.
 from . import models
 
 

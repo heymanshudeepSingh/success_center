@@ -10,7 +10,7 @@ from django.conf import settings
 from django.core.management import call_command
 from django.core.management.base import BaseCommand, CommandError
 
-# User Class Imports.
+# User Imports.
 from .fixtures import cae as cae_fixtures
 from .fixtures import user as user_fixtures
 from .fixtures import wmu as wmu_fixtures

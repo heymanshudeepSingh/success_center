@@ -14,7 +14,6 @@ from cae_home.management.commands.seeders import wmu as wmu_seeds
 
 class ApiViewTests(IntegrationTestCase):
     """"""
-
     def test__get_wmu_user(self):
         """Tests API view for getting WmuUser models."""
         # Generate model seeds.

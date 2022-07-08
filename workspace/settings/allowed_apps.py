@@ -2,7 +2,7 @@
 Manages and auto-installs apps for project.
 """
 
-# User Class Imports.
+# User Imports.
 from workspace.settings.reusable_settings import *
 
 

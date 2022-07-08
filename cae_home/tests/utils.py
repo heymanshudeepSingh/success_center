@@ -20,7 +20,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support.expected_conditions import staleness_of
 from urllib.parse import ParseResult, urlparse
 
-# User Class Imports.
+# User Imports.
 from cae_home.management.commands.fixtures.user import create_site_themes
 from cae_home.management.commands.seeders.user import create_groups, create_permission_group_users
 from workspace import logging as init_logging
@@ -1251,7 +1251,7 @@ class LiveServerTestCase(AbstractTestHelper, ChannelsLiveServerTestCase):
     _drivers = None
     serve_static = True
 
-    #region Class Setup and Teardown
+    # region Class Setup and Teardown
 
     def __init__(self, *args, **kwargs):
         # Run parent setup logic.
@@ -1361,7 +1361,7 @@ class LiveServerTestCase(AbstractTestHelper, ChannelsLiveServerTestCase):
         for driver in self._drivers.values():
             self._close_all_new_windows(driver)
 
-    #endregion Class Setup and Teardown
+    # endregion Class Setup and Teardown
 
     def assertPageTitle(self, driver, expected_title, err_msg=None):
         """
@@ -1403,7 +1403,7 @@ class LiveServerTestCase(AbstractTestHelper, ChannelsLiveServerTestCase):
         """
         self.assertFalse(expected_page_content in driver.page_source)
 
-    #region Helper Functions
+    # region Helper Functions
 
     def _login(self, driver, username, password, redirect_page_title=None, redirect_page_header=None):
         """
@@ -1450,7 +1450,7 @@ class LiveServerTestCase(AbstractTestHelper, ChannelsLiveServerTestCase):
             )
             self.assertPageHeader(driver, redirect_page_header, err_msg)
 
-    #region Wait Helper Functions
+    # region Wait Helper Functions
 
     def wait_seconds(self, seconds):
         """
@@ -1532,9 +1532,9 @@ class LiveServerTestCase(AbstractTestHelper, ChannelsLiveServerTestCase):
         except TimeoutException:
             self.fail(msg or 'Element not found within time limit.')
 
-    #endregion Wait Helper Functions
+    # endregion Wait Helper Functions
 
-    #region Window Manipulation Helper functions
+    # region Window Manipulation Helper functions
 
     def _open_new_window(self, driver):
         """
@@ -1563,8 +1563,8 @@ class LiveServerTestCase(AbstractTestHelper, ChannelsLiveServerTestCase):
         """
         driver.switch_to.window(driver.window_handles[window_index])
 
-    #endregion Window Manipulation Helper Functions
+    # endregion Window Manipulation Helper Functions
 
-    #endregion Helper Functions
+    # endregion Helper Functions
 
 # endregion Util Classes

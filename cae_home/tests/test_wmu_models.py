@@ -7,7 +7,7 @@ from django.core.exceptions import ValidationError
 from django.db import transaction
 from django.utils import timezone
 
-# User Class Imports.
+# User Imports.
 from .. import models
 from cae_home.tests.utils import IntegrationTestCase
 

@@ -16,7 +16,7 @@ from django.db import transaction
 from django.utils import timezone
 from phonenumber_field.phonenumber import PhoneNumber
 
-# User Class Imports.
+# User Imports.
 from .. import models
 from cae_home.management.commands.fixtures.user import create_groups
 from cae_home.management.commands.fixtures.wmu import create_departments

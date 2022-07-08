@@ -16,7 +16,7 @@ from phonenumber_field.phonenumber import PhoneNumber
 from random import randint
 from sys import stdout
 
-# User Class Imports.
+# User Imports.
 from cae_home import models
 from cae_home.models.user import check_all_group_memberships
 from cae_home.management.commands.fixtures import user as user_fixtures

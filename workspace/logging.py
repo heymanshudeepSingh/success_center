@@ -12,7 +12,7 @@ import time
 import logging.config
 from logging.handlers import RotatingFileHandler, TimedRotatingFileHandler
 
-# User Class Imports.
+# User Imports.
 from workspace.settings.reusable_settings import *
 
 
@@ -484,7 +484,7 @@ def add_logging_level(levelName, levelNum, methodName=None):
     setattr(logging, methodName, logToRoot)
 
 
-#region Logging Filters
+# region Logging Filters
 
 class _ExcludeInfoPlusFilter(logging.Filter):
     """
@@ -568,10 +568,10 @@ class _ExcludeAuthFilter(logging.Filter):
         """
         return (record.levelno != 25 and record.levelno != 35 and record.levelno != 45)
 
-#endregion Logging Filters
+# endregion Logging Filters
 
 
-#region File Handlers
+# region File Handlers
 
 class EnhancedRotatingFileHandler(RotatingFileHandler, TimedRotatingFileHandler):
     """
@@ -623,4 +623,4 @@ class EnhancedRotatingFileHandler(RotatingFileHandler, TimedRotatingFileHandler)
         # No rollover requirements met.
         return 0
 
-#endregion File Handlers
+# endregion File Handlers

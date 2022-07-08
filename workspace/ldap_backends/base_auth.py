@@ -19,7 +19,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from importlib import import_module
 
-# User Class Imports.
+# User Imports.
 from cae_home import models
 from workspace import logging as init_logging
 from workspace.ldap_backends import simple_ldap_lib
@@ -49,7 +49,7 @@ class AbstractLDAPBackend(ABC):
 
         self.setup_abstract_class()
 
-    #region Abstract Methods
+    # region Abstract Methods
 
     @abstractmethod
     def setup_abstract_class(self):
@@ -73,10 +73,10 @@ class AbstractLDAPBackend(ABC):
         """
         pass
 
-    #endregion Abstract Methods
+    # endregion Abstract Methods
 
 
-    #region User Auth
+    # region User Auth
 
     def authenticate(self, request, username=None, password=None):
         """
@@ -276,10 +276,10 @@ class AbstractLDAPBackend(ABC):
                     # User login hooks do not exist for app. Skip.
                     pass
 
-    #endregion User Auth
+    # endregion User Auth
 
 
-    #region User Permissions
+    # region User Permissions
 
     def _get_user_permissions(self, user_obj):
         """
@@ -368,10 +368,10 @@ class AbstractLDAPBackend(ABC):
             for perm in self.get_all_permissions(user_obj)
         )
 
-    #endregion User Permissions
+    # endregion User Permissions
 
 
-    #region User LDAP Attribute Methods
+    # region User LDAP Attribute Methods
 
     def get_ldap_user_info(self, search_value, attributes=None, search_by=None):
         """
@@ -451,4 +451,4 @@ class AbstractLDAPBackend(ABC):
 
         return user_attribute
 
-    #endregion User LDAP Attribute Methods
+    # endregion User LDAP Attribute Methods

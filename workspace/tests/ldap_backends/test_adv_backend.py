@@ -5,7 +5,7 @@ Tests for Advising Authentication Backend.
 # System Imports.
 import logging, unittest
 
-# User Class Imports.
+# User Imports.
 from cae_home import models
 from cae_home.tests.utils import IntegrationTestCase
 from workspace.tests.utils import run_ldap_tests
@@ -70,7 +70,7 @@ class AdvisingAuthBackendTests(IntegrationTestCase):
         with self.assertRaises(NotImplementedError):
             self.adv_backend.get_user()
 
-    #endregion User Auth
+    # endregion User Auth
 
     # region User Permissions
 

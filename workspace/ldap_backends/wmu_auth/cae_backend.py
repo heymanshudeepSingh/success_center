@@ -9,7 +9,7 @@ from django.conf import settings
 from django.contrib.auth.models import Group
 from django.core.exceptions import ValidationError
 
-# User Class Imports.
+# User Imports.
 from cae_home import models
 from workspace import logging as init_logging
 from workspace.ldap_backends.base_auth import AbstractLDAPBackend

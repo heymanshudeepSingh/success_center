@@ -7,7 +7,7 @@ import unittest
 from django.conf import settings
 from django.utils import timezone
 
-# User Class Imports.
+# User Imports.
 from cae_home import models
 from cae_home.tests.utils import IntegrationTestCase
 from workspace.tests.utils import run_ldap_tests

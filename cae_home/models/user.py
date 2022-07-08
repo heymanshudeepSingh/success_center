@@ -13,14 +13,14 @@ from django.utils import timezone
 from django.utils.text import slugify
 from phonenumber_field.modelfields import PhoneNumberField
 
-# User Class Imports.
+# User Imports.
 from ..models import Major
 
 
 MAX_LENGTH = 255
 
 
-#region Model Functions
+# region Model Functions
 
 def compare_user_and_wmuuser_models(uid):
     """
@@ -230,10 +230,10 @@ def check_all_group_memberships():
         inactive_group_membership.date_left = timezone.datetime.today()
         inactive_group_membership.save()
 
-#endregion Model Functions
+# endregion Model Functions
 
 
-#region Model Intermediaries
+# region Model Intermediaries
 
 class WmuUserMajorRelationship(models.Model):
     """
@@ -293,10 +293,10 @@ class WmuUserMajorRelationship(models.Model):
             # Relation does not exist where active is True. User is not actively pursuing major.
             return False
 
-#endregion Model Intermediaries
+# endregion Model Intermediaries
 
 
-#region Models
+# region Models
 
 class User(AbstractUser):
     """
@@ -950,4 +950,4 @@ class SiteTheme(models.Model):
         # Return "dummy model" instance.
         return site_theme
 
-#endregion Models
+# endregion Models

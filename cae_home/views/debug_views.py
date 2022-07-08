@@ -52,7 +52,7 @@ def external_dev_index(request):
         raise Http404()
 
 
-#region Test Error Views
+# region Test Error Views
 
 def test_400_error(request):
     raise SuspiciousOperation('Test 400 Error.')
@@ -65,10 +65,10 @@ def test_403_error(request):
 def test_500_error(request):
     raise Exception('Test 500 Error.')
 
-#endregion Test Error Views
+# endregion Test Error Views
 
 
-#region Email Test Views
+# region Email Test Views
 
 def test_single_email(request):
     """
@@ -84,4 +84,4 @@ def test_single_email(request):
     else:
         raise Http404()
 
-#endregion Email Test Views
+# endregion Email Test Views

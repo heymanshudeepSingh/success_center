@@ -13,7 +13,7 @@ from django.core.asgi import get_asgi_application
 from django.urls import re_path
 from importlib import import_module
 
-# User Class Imports.
+# User Imports.
 from cae_home import routing as cae_home_routing
 from workspace.settings.reusable_settings import debug_print
 

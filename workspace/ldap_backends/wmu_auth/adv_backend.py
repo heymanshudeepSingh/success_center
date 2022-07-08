@@ -9,7 +9,7 @@ from django.conf import settings
 from django.utils import timezone
 from django.utils.text import slugify
 
-# User Class Imports.
+# User Imports.
 from cae_home import models
 from workspace import logging as init_logging
 from workspace.ldap_backends.base_auth import AbstractLDAPBackend
@@ -64,7 +64,7 @@ class AdvisingAuthBackend(AbstractLDAPBackend):
     def get_user(self, *args, **kwargs):
         raise NotImplementedError(self._not_implemented_string)
 
-    #endregion User Auth
+    # endregion User Auth
 
     # region User Permissions
 

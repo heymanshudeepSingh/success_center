@@ -12,7 +12,7 @@ from django.db.models import ObjectDoesNotExist
 from django.http import Http404
 from django.utils import timezone
 
-# User Class Imports.
+# User Imports.
 from cae_home import models
 from workspace import logging as init_logging
 

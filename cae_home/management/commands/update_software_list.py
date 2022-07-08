@@ -15,7 +15,7 @@ from django.contrib.auth.models import Group
 from django.core.exceptions import ValidationError
 from django.core.management.base import BaseCommand
 
-# User Class Imports.
+# User Imports.
 from cae_home.models import User
 from django.db.models import ObjectDoesNotExist
 from django.utils.text import slugify

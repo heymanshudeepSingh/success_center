@@ -5,11 +5,9 @@ Tests for CAE Home app Views.
 # System Imports.
 from django.apps import apps
 from django.conf import settings
-from django.core.management import call_command
 from django.urls import reverse
-from os import devnull
 
-# User Class Imports.
+# User Imports.
 from cae_home.tests.utils import IntegrationTestCase
 
 
@@ -266,7 +264,7 @@ class CAEHomeViewTests(IntegrationTestCase):
         self.assertContains(response, 'Edit User {0}'.format(user.username))
 
 
-    #region Dev View Tests
+    # region Dev View Tests
 
     def test_index(self):
         """
@@ -305,4 +303,4 @@ class CAEHomeViewTests(IntegrationTestCase):
             # Quickly check template.
             self.assertContains(response, 'WMU Index Page')
 
-    #endregion Dev View Tests
+    # endregion Dev View Tests

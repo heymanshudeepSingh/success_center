@@ -11,11 +11,11 @@ Note that this is just an example file. Any values committed to this file should
 To use in project, please copy file and save at "settings/local_env/env.py".
 """
 
-# User Class Imports.
+# User Imports.
 from workspace.settings.reusable_settings import *
 
 
-#region User Seed Settings
+# region User Seed Settings
 
 # Username list for user model seeds.
 # These are used as username values for User seed models used in development.
@@ -27,10 +27,10 @@ SEED_USERS = [
 # This is the password used for all the seeded dev accounts (both in normal serving and tests).
 USER_SEED_PASSWORD = 'temppass2'
 
-#endregion User Seed Settings
+# endregion User Seed Settings
 
 
-#region Database Setup
+# region Database Setup
 
 # Database connection information.
 DATABASES = {
@@ -61,10 +61,10 @@ DATABASES = {
     # }
 }
 
-#endregion Database Setup
+# endregion Database Setup
 
 
-#region Site Serve Settings
+# region Site Serve Settings
 
 # Allowed server hosts.
 ALLOWED_HOSTS = [
@@ -88,10 +88,10 @@ STATICFILES_DIRS = (
 # Uncomment in production. Leave commented out in development.
 # STATICFILES_STORAGE = 'workspace.settings.static_storage.ForgivingManifestStaticFilesStorage'
 
-#endregion Site Serve Settings
+# endregion Site Serve Settings
 
 
-#region Authentication
+# region Authentication
 
 # Set desired authentication backend. Defaults to standard Django auth.
 AUTHENTICATION_BACKENDS = (
@@ -135,10 +135,10 @@ ADV_LDAP = {
     'login_password': '',
 }
 
-#endregion Authentication
+# endregion Authentication
 
 
-#region Email Settings
+# region Email Settings
 
 # Email settings.
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'    # For SMTP, use 'backends.smtp.EmailBackend'.
@@ -155,10 +155,10 @@ SERVER_EMAIL = 'root@localhost'             # Default email address for admin er
 # Should be a list of tuples, one tuple for each admin, where each tuple is format (<user_name>, <user_email>).
 ADMINS = []
 
-#endregion Email Settings
+# endregion Email Settings
 
 
-#region General Site Settings
+# region General Site Settings
 
 # Log folder location
 LOGGING_DIRECTORY = os.path.join(BASE_DIR, 'workspace/local_env/logs/')
@@ -175,10 +175,10 @@ LOGGING_DIRECTORY = os.path.join(BASE_DIR, 'workspace/local_env/logs/')
 # X_FRAME_OPTIONS = "DENY"
 # SECURE_BROWSER_XSS_FILTER = True
 
-#endregion General Site Settings
+# endregion General Site Settings
 
 
-#region Testing Settings
+# region Testing Settings
 
 # UnitTesting Settings.
 #   * Provided Prog account should be active for WMU Ldap system.
@@ -193,7 +193,7 @@ SELENIUM_TESTS_HEADLESS = False     # Set to True to run selenium in headless mo
 #enregion Testing Settings
 
 
-#region Third Party Library Settings
+# region Third Party Library Settings
 
 # DjangoRest settings.
 REST_FRAMEWORK = {
@@ -202,10 +202,10 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 20,
 }
 
-#endregion Third Party Library Settings
+# endregion Third Party Library Settings
 
 
-#region Project Specific Settings
+# region Project Specific Settings
 
 # Values used in DropOff project.
 # Can be left blank if DropOff is not installed locally.
@@ -214,4 +214,4 @@ REDMINE_USER = ''
 REDMINE_PASSWORD = ''
 CUPS_SERVER = ''
 
-#endregion Project Specific Settings
+# endregion Project Specific Settings

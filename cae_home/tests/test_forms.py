@@ -2,7 +2,7 @@
 Tests for CAE Home app Forms.
 """
 
-# User Class Imports.
+# User Imports.
 from .. import forms
 from cae_home import models
 from cae_home.tests.utils import IntegrationTestCase

@@ -6,7 +6,7 @@ Urls for CAE Home app.
 from django.conf import settings
 from django.urls import path
 
-# User Class Imports.
+# User Imports.
 from . import views
 
 

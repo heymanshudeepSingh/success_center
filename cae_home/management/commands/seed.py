@@ -9,7 +9,7 @@ from django.conf import settings
 from django.core.management import call_command
 from django.core.management.base import BaseCommand, CommandError
 
-# User Class Imports.
+# User Imports.
 from .seeders import cae as cae_seeder
 from .seeders import user as user_seeder
 from .seeders import wmu as wmu_seeder

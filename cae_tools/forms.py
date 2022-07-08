@@ -9,6 +9,7 @@ from django import forms
 from . import models
 from cae_home import forms as cae_home_forms
 
+
 # Create choices tuple. Used for select/choice fields down below.
 CHOICES = (
     (1, 'Choice 1'),
