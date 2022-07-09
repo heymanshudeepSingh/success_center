@@ -35,7 +35,7 @@ def internal_dev_index(request):
     This should only be accessible in development environments.
     """
     if settings.DEV_URLS:
-        return redirect('cae_tools:css_examples')
+        return redirect('cae_home:index')
     else:
         raise Http404()
 

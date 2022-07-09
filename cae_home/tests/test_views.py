@@ -244,25 +244,24 @@ class CAEHomeViewTests(IntegrationTestCase):
         # Test unauthenticated.
         user = self.get_user('cae_admin', password='test')
         slug = user.userintermediary.slug
-        response = self.client.get(reverse('cae_home:user_edit', kwargs={'slug': slug}))
+        response = self.client.get(reverse('cae_home:user_edit'))
         self.assertRedirects(
             response,
-            reverse('cae_home:login') + '?next=' + reverse('cae_home:user_edit', kwargs={'slug': slug})
+            reverse('cae_home:login') + '?next=' + reverse('cae_home:user_edit')
         )
 
         # Quickly check template.
-        response = self.client.get(reverse('cae_home:user_edit', kwargs={'slug': slug}), follow=True)
+        response = self.client.get(reverse('cae_home:user_edit'), follow=True)
         self.assertContains(response, 'Login')
         self.assertContains(response, 'Username:')
 
         # Test authenticated.
         self.client.login(username=user.username, password=user.password_string)
-        response = self.client.get(reverse('cae_home:user_edit', kwargs={'slug': slug}))
+        response = self.client.get(reverse('cae_home:user_edit'))
         self.assertTrue(response.status_code, 200)
 
         # Quickly check template.
         self.assertContains(response, 'Edit User {0}'.format(user.username))
-
 
     # region Dev View Tests
 

@@ -10,7 +10,15 @@ from django.urls import reverse
 # User Imports.
 from cae_home.tests.utils import IntegrationTestCase
 from workspace.tests.utils import run_ldap_tests
-from workspace.settings.reusable_settings import CAE_CENTER_GROUPS
+
+
+CAE_CENTER_PADL_USERS = [
+    'cae_director',
+    'cae_admin',
+    'cae_programmer',
+    'cae_admin_ga',
+    'cae_programmer_ga',
+]
 
 
 @unittest.skipUnless(run_ldap_tests(), 'Missing criteria for LDAP. Skipping Ldap tests.')
@@ -41,7 +49,7 @@ class LdapUtilityTests(IntegrationTestCase):
         )
 
         # Test authenticated as whitelist user groups.
-        whitelist_users = CAE_CENTER_GROUPS
+        whitelist_users = CAE_CENTER_PADL_USERS
         self.assertWhitelistUserAccess(
             reverse('cae_tools:padl_utility'),
             'LDAP | Search CAE Dev & Tools',
