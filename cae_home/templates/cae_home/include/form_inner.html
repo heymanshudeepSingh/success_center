@@ -1,4 +1,5 @@
 
+{# Handle for standard forms. #}
 {% if forms %}
   {% for form in forms %}
     {% if form.display_name %}
@@ -17,6 +18,8 @@
   {% include 'cae_home/include/form_fields.html' %}
 {% endif %}
 
+
+{# Handle for formsets. #}
 {% if formset %}
   <hr>
   {{ formset.management_form }}
@@ -31,3 +34,7 @@
     <hr>
   {% endfor %}
 {% endif %}
+
+
+{# Include any additional CSS/JS associated with the form, if any. #}
+{{ form.media }}

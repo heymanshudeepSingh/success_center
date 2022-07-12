@@ -154,6 +154,12 @@ class UserLookupForm(forms.Form):
         super().__init__(*args, **kwargs)
 
         self.fields['user_id'].label = 'Student Winno or Bronconet:'
+        # Set datalist value, for auto-completion.
+        self.fields['user_id'].widget.attrs['list'] = 'user_id_datalist'
+
+    class Media:
+        # Additional JS file definitions.
+        js = ('cae_home/js/lookups.js',)
 
 
 class UserModelForm(forms.ModelForm):

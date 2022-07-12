@@ -29,6 +29,15 @@ def get_wmu_user(request):
         'official_email': None,
     }
 
+    print('identifier: "{0}"'.format(identifier))
+
+    # Handle for empty values.
+    if identifier is None:
+        return JsonResponse(data)
+    identifier = str(identifier).strip()
+    if identifier == '':
+        return JsonResponse(data)
+
     # Attempt to grab WmuUser with corresponding value.
     # Note we OR, to check BroncoNet/Winno separately.
     # We also use iexact, so that the field can match regardless of passed letter capitalization.
@@ -51,6 +60,10 @@ def get_wmu_user(request):
     if wmu_user:
         # Match found. Override values with actual model data.
         data.update(wmu_user)
+
+        print('found user: "{0}"'.format(wmu_user))
+    else:
+        print('did not find user')
 
     # Return as JSON object.
     return JsonResponse(data)

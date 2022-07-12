@@ -5,6 +5,7 @@
   <div class="form-inputs">
 {% endif %}
 
+  {# Render form fields that are hidden (such as auto-provided CSRF fields). #}
   {% for field in form.hidden_fields %}
     <div class="hidden">
 
@@ -21,6 +22,7 @@
     </div>
   {% endfor %}
 
+  {# Render form fields that aren't hidden (aka, standard fields). #}
   {% for field in form.visible_fields %}
 
     {% if form_cols %}
@@ -39,6 +41,12 @@
           <br><small>{{ field.help_text}}</small>
         {% endif %}
       </div>
+
+      {# Handling for if field has a "datalist" HTML5 attribute. This gives an auto-complete drop-down. #}
+      {% if field.field.widget.attrs.list %}
+        <datalist id="{{ field.field.widget.attrs.list }}"></datalist>
+      {% endif %}
+
     </div>
 
     {% if form_cols %}
@@ -46,6 +54,8 @@
     {% endif %}
 
   {% endfor %}
+
+  {# Render additional links provided as suplementary data to the field. #}
   {% if form.additional_link %}
     {% if form.slug %}
       {% if form.additional_link_text %}
