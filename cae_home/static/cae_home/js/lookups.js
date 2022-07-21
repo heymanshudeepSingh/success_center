@@ -19,7 +19,9 @@ window.cae_functions['api_lookup__wmu_user'] = function(identifier) {
         success: function(result) {
 
             // Parse desired value from returned menu options.
-            result_id = result['bronco_net'];
+            result_id = result['id'];
+            result_bronco = result['bronco_net'];
+            result_winno = result['winno'];
             result_first = result['first_name'];
             result_last = result['last_name'];
 
@@ -31,7 +33,9 @@ window.cae_functions['api_lookup__wmu_user'] = function(identifier) {
 
             // Proceed if result had 1 or more values.
             if (result_id != null) {
-                datalist_options = '<option value="' + result_id + '">' + result_id + ' - ' + result_first + ' ' + result_last + '</option>';
+                datalist_options = '<option value="' + result_bronco + '">'
+                + result_bronco + ' / ' + result_winno + ' - ' + result_first + ' ' + result_last
+                + '</option>';
             }
 
             // Set html datalist to parsed options.
@@ -65,4 +69,5 @@ $(document).ready(function() {
         console.log(event.target.value);
         window.cae_functions['api_lookup__wmu_user'](event.target.value);
     });
+
 });

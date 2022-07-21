@@ -46,6 +46,7 @@ def get_wmu_user(request):
         Q(bronco_net__iexact=identifier)
         | Q(winno__iexact=identifier)
     ).values(
+        'id',
         'bronco_net',
         'winno',
         'first_name',
