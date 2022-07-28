@@ -521,6 +521,9 @@ class UserAdmin(BaseUserAdmin):
     # Update hidden fields.
     BaseUserAdmin.readonly_fields += ('related_models',)
 
+    class Media:
+        js = ['admin/js/list_filter_collapse.js']
+
     def get_winno(self, obj):
         """
         Return associated winno from WmuUser model, if present.
@@ -613,6 +616,9 @@ class GroupMembershipAdmin(admin.ModelAdmin):
         }),
     )
 
+    class Media:
+        js = ['admin/js/list_filter_collapse.js']
+
     def related_models(self, obj):
         """
         Creates string of related models, for ease of Admin navigation.
@@ -679,6 +685,9 @@ class UserIntermediaryAdmin(admin.ModelAdmin):
 
     # New object's slugs will be automatically set by bronco_net.
     prepopulated_fields = {'slug': ('bronco_net',)}
+
+    class Media:
+        js = ['admin/js/list_filter_collapse.js']
 
     def get_winno(self, obj):
         """
@@ -770,6 +779,9 @@ class WmuUserAdmin(admin.ModelAdmin):
             'fields': ('id', 'is_active', 'date_created', 'date_modified'),
         }),
     )
+
+    class Media:
+        js = ['admin/js/list_filter_collapse.js']
 
     def get_majors(self, obj):
         """
@@ -876,6 +888,9 @@ class ProfileAdmin(admin.ModelAdmin):
             'fields': ('id', 'date_created', 'date_modified'),
         }),
     )
+
+    class Media:
+        js = ['admin/js/list_filter_collapse.js']
 
     def get_bronco_net(self, obj):
         """
@@ -987,6 +1002,9 @@ class AddressAdmin(admin.ModelAdmin):
         }),
     )
 
+    class Media:
+        js = ['admin/js/list_filter_collapse.js']
+
 
 class SiteThemeAdmin(admin.ModelAdmin):
     # Fields to display in admin list view.
@@ -1019,7 +1037,6 @@ class SiteThemeAdmin(admin.ModelAdmin):
 
     # New object's slugs will be automatically set by name.
     prepopulated_fields = {'slug': ('file_name',)}
-
 
 # endregion User Model Admin
 
@@ -1211,6 +1228,9 @@ class RoomAdmin(admin.ModelAdmin):
     # New object's slugs will be automatically set by name.
     prepopulated_fields = {'slug': ('name',)}
 
+    class Media:
+        js = ['admin/js/list_filter_collapse.js']
+
     def get_departments(self, obj):
         """
         Return associated Department.
@@ -1258,6 +1278,9 @@ class MajorAdmin(admin.ModelAdmin):
     # New object's slugs will be automatically set by code.
     prepopulated_fields = {'slug': ('student_code',)}
 
+    class Media:
+        js = ['admin/js/list_filter_collapse.js']
+
 
 class SemesterDateAdmin(admin.ModelAdmin):
     # Fields to display in admin list view.
@@ -1287,6 +1310,9 @@ class SemesterDateAdmin(admin.ModelAdmin):
             'fields': ('id', 'date_created', 'date_modified'),
         }),
     )
+
+    class Media:
+        js = ['admin/js/list_filter_collapse.js']
 
 
 # endregion WMU Model Admin
@@ -1321,6 +1347,9 @@ class AssetAdmin(admin.ModelAdmin):
             'fields': ('id', 'date_created', 'date_modified',),
         }),
     )
+
+    class Media:
+        js = ['admin/js/list_filter_collapse.js']
 
 
 class SoftwareAdmin(admin.ModelAdmin):
@@ -1378,6 +1407,9 @@ class SoftwareDetailAdmin(admin.ModelAdmin):
 
     # New object's slugs will be automatically set by code.
     prepopulated_fields = {'slug': ('software', 'version')}
+
+    class Media:
+        js = ['admin/js/list_filter_collapse.js']
 
 
 # endregion CAE Model Admin
