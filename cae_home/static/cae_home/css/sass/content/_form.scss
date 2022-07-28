@@ -136,6 +136,16 @@
 //==== START Custom Widget Block ====//
 //===================================//
 
+// Custom CSS for Select2 elements.
+// Note: Because of how the elements are rendered, some of these are actually outside of the .main-content block.
+.select2-selection, .select2-dropdown {
+    position: relative;
+    min-width: 140px;
+}
+.select2-search, .select2-search__field {
+    min-width: 120px;
+}
+
 .main-content form {
 
     // Handling for custom "select buttons" form elements.

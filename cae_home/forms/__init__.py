@@ -7,6 +7,7 @@ from .form_widgets import (
     SelectButtonsWidget,
     SelectButtonsSideWidget,
     Select2Widget,
+    Select2WidgetWithTagging,
     Select2MultipleWidget,
     SignatureWidget,
 )

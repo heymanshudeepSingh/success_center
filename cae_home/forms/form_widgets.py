@@ -99,6 +99,19 @@ class Select2Widget(forms.Select):
         return attrs
 
 
+class Select2WidgetWithTagging(forms.Select):
+    """
+    Widget for select2 "single selection" input, but with ability for user to create new entries in real time.
+    """
+    def build_attrs(self, base_attrs, extra_attrs=None):
+        """
+        Set html attribute values.
+        """
+        attrs = super().build_attrs(base_attrs, extra_attrs=extra_attrs)
+        attrs.setdefault('class', 'form-widget-select2-with-tagging')
+        return attrs
+
+
 class Select2MultipleWidget(forms.SelectMultiple):
     """
     Widget for select2 "multiple selection" input.
