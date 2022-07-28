@@ -3,12 +3,14 @@ Forms for CAE Home app.
 """
 
 # System Imports.
+import copy
+
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm as auth_form
 
 # User Imports.
 from cae_home import models
-from cae_home.forms.form_widgets import Select2Widget, Select2MultipleWidget
+from cae_home.forms.form_widgets import Select2Widget, Select2WidgetWithTagging, Select2MultipleWidget
 
 
 class AuthenticationForm(auth_form):
@@ -19,18 +21,25 @@ class AuthenticationForm(auth_form):
 
 
 class UserLookupForm(forms.Form):
-    user_id = forms.CharField()
+    user_id = forms.ChoiceField(widget=Select2WidgetWithTagging)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         self.fields['user_id'].label = 'Student Winno or Bronconet:'
-        # Set datalist value, for auto-completion.
-        self.fields['user_id'].widget.attrs['list'] = 'user_id_datalist'
 
-    class Media:
-        # Additional JS file definitions.
-        js = ('cae_home/js/lookups.js',)
+        # Handle if form data was submitted.
+        data = kwargs.pop('data', None)
+        if data:
+            # Data was submitted. Get the field value.
+            form_data = copy.deepcopy(data)
+            user_id = form_data.pop('user_id', None)
+            if (isinstance(user_id, list) or isinstance(user_id, tuple)) and len(user_id) > 0:
+                user_id = user_id[0]
+
+            # If field value is non-empty, then modify our select2 "allowed choices" to include this field.
+            if user_id is not None:
+                self.fields['user_id'].choices.append((user_id, user_id))
 
 
 class UserModelForm(forms.ModelForm):

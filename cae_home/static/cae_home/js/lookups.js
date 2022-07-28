@@ -61,13 +61,59 @@ window.cae_functions['api_lookup__wmu_user'] = function(identifier) {
 
 // Wait for full page load.
 $(document).ready(function() {
+    /**
+     * Written in end of summer 2022.
+     *
+     * This was the initial attempt at the "allow users to enter any arbitrary BroncoNet/Winno into a form field,
+     * and then dynamically grow the field choices in real time, if the value corresponded to a real user".
+     * However, Chris said that would potentially ping main campus LDAP too frequently so we can't use it.
+     * We found a work-around. But for now, this original logic is kept for reference, in case it's somehow helpful
+     * in the future.
+     *
+     *
+     *
+     * To explain the logic, basically the this idea was that the form:
+     *  * Would use a standard text field.
+     *  * This text field would have a datalist associated with it. In this case, we gave it the HTML id of
+     *    "#user_id_datalist". A datalist simulates a ChoiceField by showing options the user can select from.
+     *  * On any keypress into this field, it would send the current input as an api call. That's what this section
+     *    of code is doing.
+     *  * The API would do the "heavy lifting" of actually querying the Django database for a corresponding model. If
+     *    not found, then it would query LDAP using the cae_home/utils helper functions. If a corresponding user was
+     *    located, then the api would return data about that user, to parse with JavaScript and add as a new value in
+     *    the original form field datalist.
+     *  * A problem is that this resulted in very ugly front-end visual display. But it technically worked.
+     *  * We started experimenting with using a select2 field instead of a standard text field, because select2 is
+     *    more dynamic and could potentially make the front-end display better. But that's when Chris gave the news
+     *    that we can't use this logic at all, rip.
+     *
+     *
+     *
+     * To test adding this logic back in, create a form with the following values:
+     * In form __init__()
+     *      # Set datalist value, for auto-completion.
+     *      self.fields['user_id'].widget.attrs['list'] = 'user_id_datalist'
+     *
+     * At form root
+     *      class Media:
+     *          # Additional JS file definitions.
+     *          js = ('cae_home/js/lookups.js',)
+     *
+     * Note that the form should also have a field of "user_id".
+     * Once the above is added to a form, uncomment out the below JS code, and it should hopefully work.
+     */
 
-    // Call lookup logic on keyboard input into form field.
-    $('#id_user_id').on('input', function(event) {
-        console.log('event:');
-        console.log(event);
-        console.log(event.target.value);
-        window.cae_functions['api_lookup__wmu_user'](event.target.value);
-    });
+//    console.log('doc is ready!');
+//
+//    var ele = $('#id_user_id');
+//    console.log(ele);
+//
+//    // Call lookup logic on keyboard input into form field.
+//    $('#id_user_id').on('input', function(event) {
+//        console.log('event:');
+//        console.log(event);
+//        console.log(event.target.value);
+//        window.cae_functions['api_lookup__wmu_user'](event.target.value);
+//    });
 
 });

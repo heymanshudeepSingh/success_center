@@ -20,11 +20,15 @@ urlpatterns = [
     path('color/', views.color_tool, name='color_tool'),
 
     # Api urls.
-    path('api/wmu_user/', views.get_wmu_user, name='api_wmu_user'),
     path('api/department/', views.get_department, name='api_department'),
     path('api/room_type/', views.get_room_type, name='api_room_type'),
     path('api/room/', views.get_room, name='api_room'),
     path('api/major/', views.get_major, name='api_major'),
     path('api/class/', views.get_class, name='api_class'),
     path('api/semester/', views.get_semester, name='api_semester'),
+
+    # Commented out because it's not actively being used.
+    # Also, we probably ideally don't want an API call that can display potentially sensitive user information.
+    # But here for reference and development testing.
+    # path('api/wmu_user/', views.get_wmu_user, name='api_wmu_user'),
 ]
