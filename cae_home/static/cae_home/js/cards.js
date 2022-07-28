@@ -2,21 +2,21 @@
  *  Handles cards HTML elements and toggles it.
  */
 
+
 // Wait for full page load.
 $(document).ready(function() {
-    // console.log("Loaded status_messages.js file.");
+    // console.log("Loaded cards.js file.");
 
+    // Find all "card" element instances.
     let card = $('.card');
-    console.log('card');
-    console.log(card);
 
+    // Loop through each card element on page.
     $(card).each(function() {
+        // Add toggle to dropdown element click.
         let toggle = $(this).children('.content').children('.toggle');
-        console.log(toggle);
         let card = $(this);
-        $(toggle).on("click", function() {
-            console.log("clicked");
-            $(card).toggleClass("active");
+        $(toggle).on('click', function() {
+            $(card).toggleClass('active');
         });
     });
 });
