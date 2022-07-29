@@ -55,12 +55,13 @@ def login_redirect(request):
             if 'CAE Programmer' in user_groups:
                 return redirect('cae_home:index')
 
-        # Check if CAE Attendant.
-        if 'CAE Attendant' in user_groups:
-            return redirect('cae_web_core:index')
-
-        # Check if any other CAE Center employee.
+        # Check if CAE Center employee.
         if 'cae_web' in settings.INSTALLED_CAE_PROJECTS:
+            # Check if CAE Attendant.
+            if 'CAE Attendant' in user_groups:
+                return redirect('cae_web_core:index')
+
+            # Check if any other CAE Center employee.
             for cae_group in settings.CAE_CENTER_GROUPS:
                 if cae_group in user_groups:
                     return redirect('cae_web_shifts:stats')
@@ -70,6 +71,17 @@ def login_redirect(request):
             for step_group in settings.SUCCESS_CENTER_GROUPS:
                 if step_group in user_groups:
                     return redirect('success_center_core:index')
+
+        # Check if Grad Apps user.
+        if 'grad_applications' in settings.INSTALLED_CAE_PROJECTS:
+            for grad_apps_group in settings.GRAD_APPS_USERS:
+                # Check if GradApps admin.
+                if 'Grad Apps Admin' in user_groups:
+                    return redirect('grad_applications_core:manage')
+
+                # Check if any other GradApps user.
+                if grad_apps_group in user_groups:
+                    return redirect('grad_applications_core:index')
 
         # Unknown user group.
         exception = 'Server did not recognize login user\'s ({0}) group. Please contact the CAE Center.'.format(
