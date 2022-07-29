@@ -392,6 +392,60 @@ def create_wmu_users(style, model_count):
     faker_factory = Faker()
     faker_factory.add_provider(E164Provider)
 
+    # Create a WmuUser model for each test user we created.
+    # Note we intentionally use an "invalid" winno here,
+    # so we can easily tell which are our seeded/testing users and which might be "real" users.
+    winno = 100
+    user_list = models.User.objects.all()
+    for user in user_list:
+
+        # Initialize seed data.
+        first_name = user.first_name or faker_factory.first_name()
+        last_name = user.last_name or faker_factory.last_name()
+        winno += 1
+        # Set user type based on group.
+        user_groups = user.groups.values_list('name', flat=True)
+        if (
+            'CAE Admin GA' in user_groups
+            or 'CAE Admin' in user_groups
+            or 'CAE Programmer' in user_groups
+            or 'CAE Programmer GA' in user_groups
+            or 'CAE Attendant' in user_groups
+            or 'WMU Student' in user_groups
+            or 'STEP Employee' in user_groups
+        ):
+            user_type = 0
+        elif (
+            'WMU Teacher' in user_groups
+            or 'Grad Apps Committee Member' in user_groups
+        ):
+            user_type = 1
+        elif (
+            'CAE Director' in user_groups
+            or 'CAE Building Coordinator' in user_groups
+            or 'WMU Faculty' in user_groups
+            or 'STEP Admin' in user_groups
+            or 'Grad Apps Admin' in user_groups
+        ):
+            user_type = 2
+        else:
+            # Assume student for all others.
+            user_type = 0
+
+        # Attempt to generate models.
+        try:
+            with transaction.atomic():
+                models.WmuUser.objects.create(
+                    bronco_net=user.username,
+                    winno=winno,
+                    first_name=first_name,
+                    last_name=last_name,
+                    user_type=user_type,
+                    is_active=user.is_active,
+                )
+        except (ValidationError, IntegrityError):
+            print('ERROR generating WmuUser model seed for {0}'.format(user))
+
     # Count number of models already created.
     pre_initialized_count = len(models.WmuUser.objects.all())
 
