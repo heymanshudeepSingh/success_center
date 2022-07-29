@@ -399,12 +399,17 @@ def create_wmu_users(style, model_count):
     user_list = models.User.objects.all()
     for user in user_list:
 
+        # Skip for generated users that have no groups.
+        user_groups = user.groups.values_list('name', flat=True)
+        if user_groups.count() == 0:
+            continue
+
         # Initialize seed data.
         first_name = user.first_name or faker_factory.first_name()
         last_name = user.last_name or faker_factory.last_name()
         winno += 1
+
         # Set user type based on group.
-        user_groups = user.groups.values_list('name', flat=True)
         if (
             'CAE Admin GA' in user_groups
             or 'CAE Admin' in user_groups
