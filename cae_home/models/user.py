@@ -348,7 +348,7 @@ class User(AbstractUser):
             Q(groups__name='CAE Attendant') |
             Q(groups__name='CAE Admin') | Q(groups__name='CAE Admin GA') |
             Q(groups__name='CAE Programmer') | Q(groups__name='CAE Programmer GA')
-        )
+        ).distinct()
 
     @staticmethod
     def get_cae_admins():
@@ -370,7 +370,7 @@ class User(AbstractUser):
             is_active=True
         ).filter(
             Q(groups__name='CAE Programmer') | Q(groups__name='CAE Programmer GA')
-        )
+        ).distinct()
 
     @staticmethod
     def get_cae_ga():
@@ -381,8 +381,7 @@ class User(AbstractUser):
             is_active=True
         ).filter(
             Q(groups__name='CAE Admin GA') | Q(groups__name='CAE Programmer GA')
-        )
-
+        ).distinct()
 
     @staticmethod
     def create_dummy_model():
