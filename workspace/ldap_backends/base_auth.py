@@ -205,7 +205,24 @@ class AbstractLDAPBackend(ABC):
             uid = user_id['email'].split('@')[0]
         else:
             uid = user_id['username']
+        uid = str(uid).strip()
 
+        # Special handling for seeded/test users.
+        # Attempt to get a corresponding WmuUser model.
+        # If it matches, we skip any LDAP logic, because it won't exist.
+        try:
+            user = models.WmuUser.objects.get(bronco_net=uid)
+        except models.WmuUser.DoesNotExist:
+            user = None
+
+        # Found match. Verify winno is our intentional "invalid winno format" for test users.
+        # This is generated during seeding, and should be any number less than 6 digits.
+        # (Real winno's technically should be 9 digits or more, as far as we can tell as of 2022).
+        if user and int(user.winno) <= 99999:
+            # Appears to be a test user. These will never succeed via LDAP auth anyways, so force fail.
+            return None
+
+        # Not a test user, at least as far as we can tell. Proceed with LDAP auth attempt.
         auth_search_return = self.ldap_lib.authenticate_with_unknown_uid(
             uid,
             password,
