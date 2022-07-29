@@ -38,7 +38,7 @@ pycups==2.0.1
 # Redmine communication.
 python-redmine==2.3.0
 # Debug tool.
-django-dump-die==0.1.2
+django-dump-die
 
 
 
