@@ -50,6 +50,7 @@ def create_groups(style=None, display_output=False):
     set_cae_group_permissions(group_dict, general_permissions)
     set_wmu_group_permissions(group_dict, general_permissions)
     set_step_group_permissions(group_dict, general_permissions)
+    set_grad_apps_group_permissions(group_dict, general_permissions)
 
     if display_output and style is not None:
         stdout.write('Populated ' + style.SQL_FIELD('Group') + ' models.\n')
@@ -80,6 +81,10 @@ def create_permission_groups(as_dict=False):
     step_admin_group = Group.objects.get_or_create(name='STEP Admin')[0]
     step_employee_group = Group.objects.get_or_create(name='STEP Employee')[0]
 
+    # Create Grad Apps permission groups.
+    grad_apps_admin_group = Group.objects.get_or_create(name='Grad Apps Admin')[0]
+    grad_apps_committee_member_group = Group.objects.get_or_create(name='Grad Apps Committee Member')[0]
+
     # Check if return value should be list or dict format.
     if as_dict:
         # Populate dictionaries in case calling logic wants easy access to users.
@@ -96,23 +101,27 @@ def create_permission_groups(as_dict=False):
             'wmu_student': wmu_student_group,
             'step_admin': step_admin_group,
             'step_employee': step_employee_group,
+            'grad_apps_admin': grad_apps_admin_group,
+            'grad_apps_committee_member': grad_apps_committee_member_group,
         }
         return group_dict
     else:
         # Populate arrays in case calling logic wants easy access to users.
-        group_array = [                     # Index Num:
-            director_group,                 # 0
-            building_coordinator_group,     # 1
-            admin_ga_group,                 # 2
-            programmer_ga_group,            # 3
-            admin_group,                    # 4
-            programmer_group,               # 5
-            attendant_group,                # 6
-            wmu_faculty_group,              # 7
-            wmu_teacher_group,              # 8
-            wmu_student_group,              # 9
-            step_admin_group,               # 10
-            step_employee_group,            # 11
+        group_array = [                         # Index Num:
+            director_group,                     # 0
+            building_coordinator_group,         # 1
+            admin_ga_group,                     # 2
+            programmer_ga_group,                # 3
+            admin_group,                        # 4
+            programmer_group,                   # 5
+            attendant_group,                    # 6
+            wmu_faculty_group,                  # 7
+            wmu_teacher_group,                  # 8
+            wmu_student_group,                  # 9
+            step_admin_group,                   # 10
+            step_employee_group,                # 11
+            grad_apps_admin_group,              # 12
+            grad_apps_committee_member_group,   # 13
         ]
         return group_array
 
@@ -192,6 +201,21 @@ def set_step_group_permissions(group_dict, general_permissions):
     # Set STEP Employee permissions.
     group_dict['step_employee'].permissions.set(success_center_permissions)
 
+
+def set_grad_apps_group_permissions(group_dict, general_permissions):
+    """
+    Sets all permissions related to the Grad Apps groups.
+
+    Technically not a fixture, but still pretty integral to site running, and has no random data.
+    """
+    grad_apps_permissions = get_grad_apps_permissions() + general_permissions
+
+    # Set Grad Apps Admin permissions.
+    group_dict['grad_apps_admin'].permissions.set(grad_apps_permissions)
+
+    # Set Grad Committee Member permissions.
+    group_dict['grad_apps_committee_member'].permissions.set(grad_apps_permissions)
+
 # endregion Set Permission Functions
 
 
@@ -259,8 +283,32 @@ def get_step_permissions():
     Technically not a fixture, but still pretty integral to site running, and has no random data.
     :return: A list of all permission models for the STEP program.
     """
-    # First find all content types with "cae" in the name.
+    # First find all content types with "success_center" in the name.
     app_content_types = ContentType.objects.filter(app_label__contains='success_center')
+
+    # Get all id's of found content types.
+    app_content_ids = []
+    for content_type in app_content_types:
+        app_content_ids.append(content_type.id)
+
+    # Use id's to filter permissions objects.
+    app_permisson_list = []
+    for content_id in app_content_ids:
+        query_set = Permission.objects.filter(content_type_id=content_id)
+        for item in query_set:
+            app_permisson_list.append(item)
+
+    return app_permisson_list
+
+
+def get_grad_apps_permissions():
+    """
+    Finds all permission models specific to the Grad Apps program.
+    Technically not a fixture, but still pretty integral to site running, and has no random data.
+    :return: A list of all permission models for the Grad Apps program.
+    """
+    # First find all content types with "grad_applications" in the name.
+    app_content_types = ContentType.objects.filter(app_label__contains='grad_applications')
 
     # Get all id's of found content types.
     app_content_ids = []

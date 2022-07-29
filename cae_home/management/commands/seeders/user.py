@@ -112,7 +112,7 @@ def create_permission_group_users(password=default_password, with_names=True, as
     cae_attendant = models.User.get_or_create_user('cae_attendant', '', password)
     cae_attendant_inactive = models.User.get_or_create_user('cae_attendant_inactive', '', password, inactive=True)
 
-    # Create normal users for every general WMU permission group.
+    # Create normal users for every general basic WMU permission group.
     wmu_faculty = models.User.get_or_create_user('wmu_faculty', '', password)
     wmu_faculty_inactive = models.User.get_or_create_user('wmu_faculty_inactive', '', password, inactive=True)
     wmu_teacher = models.User.get_or_create_user('wmu_teacher', '', password)
@@ -125,6 +125,17 @@ def create_permission_group_users(password=default_password, with_names=True, as
     step_admin_inactive = models.User.get_or_create_user('step_admin_inactive', '', password, inactive=True)
     step_employee = models.User.get_or_create_user('step_employee', '', password)
     step_employee_inactive = models.User.get_or_create_user('step_employee_inactive', '', password, inactive=True)
+
+    # Create normal users for every GradApps permission group.
+    grad_apps_admin = models.User.get_or_create_user('grad_apps_admin', '', password)
+    grad_apps_admin_inactive = models.User.get_or_create_user('grad_apps_admin_inactive', '', password, inactive=True)
+    grad_apps_committee_member = models.User.get_or_create_user('grad_apps_committee_member', '', password)
+    grad_apps_committee_member_inactive = models.User.get_or_create_user(
+        'grad_apps_committee_member_inactive',
+        '',
+        password,
+        inactive=True,
+    )
 
     # Set their names.
     if with_names:
@@ -174,6 +185,12 @@ def create_permission_group_users(password=default_password, with_names=True, as
     step_employee.groups.add(Group.objects.get(name='STEP Employee'))
     step_employee_inactive.groups.add(Group.objects.get(name='STEP Employee'))
 
+    # Add permission groups to GradApps users.
+    grad_apps_admin.groups.add(Group.objects.get(name='Grad Apps Admin'))
+    grad_apps_admin_inactive.groups.add(Group.objects.get(name='Grad Apps Admin'))
+    grad_apps_committee_member.groups.add(Group.objects.get(name='Grad Apps Committee Member'))
+    grad_apps_committee_member_inactive.groups.add(Group.objects.get(name='Grad Apps Committee Member'))
+
     # Set all GroupMembership models for users.
     check_all_group_memberships()
 
@@ -185,90 +202,104 @@ def create_permission_group_users(password=default_password, with_names=True, as
     models.GroupMembership.objects.create(
         user=cae_director_inactive,
         group=Group.objects.get(name='CAE Director'),
-        date_joined=today,
-        date_left=two_years_ago,
+        date_joined=two_years_ago,
+        date_left=today,
     )
     models.GroupMembership.objects.create(
         user=cae_building_coordinator_inactive,
         group=Group.objects.get(name='CAE Building Coordinator'),
-        date_joined=today,
-        date_left=two_years_ago,
+        date_joined=two_years_ago,
+        date_left=today,
     )
     models.GroupMembership.objects.create(
         user=cae_admin_ga_inactive,
         group=Group.objects.get(name='CAE Admin GA'),
-        date_joined=today,
-        date_left=two_years_ago,
+        date_joined=two_years_ago,
+        date_left=today,
     )
     models.GroupMembership.objects.create(
         user=cae_admin_ga_inactive,
         group=Group.objects.get(name='CAE Admin'),
-        date_joined=today,
-        date_left=two_years_ago,
+        date_joined=two_years_ago,
+        date_left=today,
     )
     models.GroupMembership.objects.create(
         user=cae_programmer_ga_inactive,
         group=Group.objects.get(name='CAE Programmer GA'),
-        date_joined=today,
-        date_left=two_years_ago,
+        date_joined=two_years_ago,
+        date_left=today,
     )
     models.GroupMembership.objects.create(
         user=cae_programmer_ga_inactive,
         group=Group.objects.get(name='CAE Programmer'),
-        date_joined=today,
-        date_left=two_years_ago,
+        date_joined=two_years_ago,
+        date_left=today,
     )
     models.GroupMembership.objects.create(
         user=cae_admin_inactive,
         group=Group.objects.get(name='CAE Admin'),
-        date_joined=today,
-        date_left=two_years_ago,
+        date_joined=two_years_ago,
+        date_left=today,
     )
     models.GroupMembership.objects.create(
         user=cae_programmer_inactive,
         group=Group.objects.get(name='CAE Programmer'),
-        date_joined=today,
-        date_left=two_years_ago,
+        date_joined=two_years_ago,
+        date_left=today,
     )
     models.GroupMembership.objects.create(
         user=cae_attendant_inactive,
         group=Group.objects.get(name='CAE Attendant'),
-        date_joined=today,
-        date_left=two_years_ago,
+        date_joined=two_years_ago,
+        date_left=today,
     )
 
     # Set inactive GroupMembership for general WMU users.
     models.GroupMembership.objects.create(
         user=wmu_faculty_inactive,
         group=Group.objects.get(name='WMU Faculty'),
-        date_joined=today,
-        date_left=two_years_ago,
+        date_joined=two_years_ago,
+        date_left=today,
     )
     models.GroupMembership.objects.create(
         user=wmu_teacher_inactive,
         group=Group.objects.get(name='WMU Teacher'),
-        date_joined=today,
-        date_left=two_years_ago,
+        date_joined=two_years_ago,
+        date_left=today,
     )
     models.GroupMembership.objects.create(
         user=wmu_student_inactive,
         group=Group.objects.get(name='WMU Student'),
-        date_joined=today,
-        date_left=two_years_ago,
+        date_joined=two_years_ago,
+        date_left=today,
     )
 
     # Set inactive GroupMembership for STEP (Success Center) users.
     models.GroupMembership.objects.create(
         user=step_admin_inactive,
         group=Group.objects.get(name='STEP Admin'),
-        date_joined=today,
-        date_left=two_years_ago,
+        date_joined=two_years_ago,
+        date_left=today,
     )
     models.GroupMembership.objects.create(
         user=step_employee_inactive,
         group=Group.objects.get(name='STEP Employee'),
-        date_joined=today,
-        date_left=two_years_ago,
+        date_joined=two_years_ago,
+        date_left=today,
+    )
+
+    # Set inactive GroupMembership for GradApps users.
+    models.GroupMembership.objects.create(
+        user=grad_apps_admin_inactive,
+        group=Group.objects.get(name='Grad Apps Admin'),
+        date_joined=two_years_ago,
+        date_left=today,
+    )
+    models.GroupMembership.objects.create(
+        user=grad_apps_committee_member_inactive,
+        group=Group.objects.get(name='Grad Apps Committee Member'),
+        date_joined=two_years_ago,
+        date_left=today,
     )
 
     if as_dict:
@@ -286,6 +317,8 @@ def create_permission_group_users(password=default_password, with_names=True, as
             'wmu_student': wmu_student,
             'step_admin': step_admin,
             'step_employee': step_employee,
+            'grad_apps_admin': grad_apps_admin,
+            'grad_apps_committee_member': grad_apps_committee_member,
         }
         inactive_user_dict = {
             'cae_director': cae_director_inactive,
@@ -300,6 +333,8 @@ def create_permission_group_users(password=default_password, with_names=True, as
             'wmu_student': wmu_student_inactive,
             'step_admin': step_admin_inactive,
             'step_employee': step_employee_inactive,
+            'grad_apps_admin': grad_apps_admin_inactive,
+            'grad_apps_committee_member': grad_apps_committee_member_inactive,
         }
         return (active_user_dict, inactive_user_dict)
     else:
@@ -317,6 +352,8 @@ def create_permission_group_users(password=default_password, with_names=True, as
             wmu_student,                    # 9
             step_admin,                     # 10
             step_employee,                  # 11
+            grad_apps_admin,                # 12
+            grad_apps_committee_member,     # 13
         ]
         inactive_user_array = [                     # Index Num:
             cae_director_inactive,                  # 0
@@ -331,6 +368,8 @@ def create_permission_group_users(password=default_password, with_names=True, as
             wmu_student_inactive,                   # 9
             step_admin_inactive,                    # 10
             step_employee_inactive,                 # 11
+            grad_apps_admin_inactive,               # 12
+            grad_apps_committee_member_inactive,    # 13
         ]
         return (active_user_array, inactive_user_array)
 
