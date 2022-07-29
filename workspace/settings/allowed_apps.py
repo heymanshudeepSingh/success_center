@@ -279,6 +279,7 @@ ADMIN_REORDER = (
             'cae_home.User',
             'cae_home.GroupMembership',
             'cae_home.UserIntermediary',
+            'cae_home.WmuUser',
 
             'cae_home.Profile',
             'cae_home.Address',
@@ -290,7 +291,6 @@ ADMIN_REORDER = (
         'app': 'cae_home',
         'label': 'Core WMU Models',
         'models': (
-            'cae_home.WmuUser',
             'cae_home.StudentHistory',
             'cae_home.Department',
             'cae_home.Major',
