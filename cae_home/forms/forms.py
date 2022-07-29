@@ -4,7 +4,6 @@ Forms for CAE Home app.
 
 # System Imports.
 import copy
-
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm as auth_form
 
@@ -27,6 +26,18 @@ class UserLookupForm(forms.Form):
         super().__init__(*args, **kwargs)
 
         self.fields['user_id'].label = 'Student Winno or Bronconet:'
+
+        # Get initial choices. Since this is an example, we get CaeCenter users.
+        cae_users = models.User.get_cae_users()
+        choices = [('', '')]
+        for user in cae_users:
+            new_choice = (
+                '{0}, {1}'.format(user.userintermediary.bronco_net, user.userintermediary.winno),
+                '{0} {1}'.format(user.first_name, user.last_name),
+            )
+            choices.append(new_choice)
+
+        self.fields['user_id'].choices = choices
 
         # Handle if form data was submitted.
         data = kwargs.pop('data', None)

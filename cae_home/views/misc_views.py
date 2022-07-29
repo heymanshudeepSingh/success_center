@@ -199,7 +199,10 @@ class GetWmuUser(LoginRequiredMixin, FormView):
         """
         Logic to run on valid form data return.
         """
-        user_id = form.cleaned_data['user_id']
+        # Get and validate submitted form value.
+        user_id = form.cleaned_data['user_id'].strip()
+        if ',' in user_id:
+            user_id = user_id.split(',')[0]
 
         # Attempt to get model.
         user_model = get_or_create_wmu_user_model(self.request, user_id)
