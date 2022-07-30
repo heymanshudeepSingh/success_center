@@ -7,7 +7,7 @@ website login logic.
 """
 
 # System Imports.
-import re
+import logging, re
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
@@ -20,7 +20,7 @@ from workspace.ldap_backends.wmu_auth import cae_backend, wmu_backend
 from workspace.settings import extra_settings
 
 
-logger = extra_settings.logging.getLogger(__name__)
+logger = logging.getLogger(__name__)
 
 
 class Command(BaseCommand):
