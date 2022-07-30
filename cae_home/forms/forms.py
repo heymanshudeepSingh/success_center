@@ -28,7 +28,7 @@ class UserLookupForm(forms.Form):
         self.fields['user_id'].label = 'Student Winno or Bronconet:'
 
         # Get initial choices. Since this is an example, we get CaeCenter users.
-        cae_users = models.User.get_cae_users()
+        cae_users = models.User.get_cae_users().order_by('first_name', 'last_name')
         choices = [('', '')]
         for user in cae_users:
             new_choice = (
