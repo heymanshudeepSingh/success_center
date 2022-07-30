@@ -64,16 +64,16 @@ function main () {
         valid_python=""
         while [[ ! $valid_python ]]
         do
-            echo -e "Enter Python version for Project ${color_cyan}[ 3.7, 3.8, 3.9 ]${color_reset}:"
+            echo -e "Enter Python version for Project ${color_cyan}[ 3.8, 3.9, 3.10 ]${color_reset}:"
             read user_input
-            if [[ $user_input = "3.7" ]] || [[ $user_input = "3.8" ]] || [[ $user_input = "3.9" ]]
+            if [[ $user_input = "3.8" || $user_input = "3.9" || $user_input = "3.10" ]]
             then
                 echo ""
                 valid_python=true
                 python_version=$user_input
                 echo ""
             else
-                echo "Invalid input. Please enter version, such as \"3.8\" or \"3.9\"."
+                echo "Invalid input. Please enter version, such as \"3.9\" or \"3.10\"."
                 echo ""
                 echo ""
             fi
