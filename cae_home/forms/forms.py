@@ -6,6 +6,7 @@ Forms for CAE Home app.
 import copy
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm as auth_form
+from django.http import QueryDict
 
 # User Imports.
 from cae_home import models
@@ -41,6 +42,13 @@ class UserLookupForm(forms.Form):
 
         # Handle if form data was submitted.
         data = kwargs.pop('data', None)
+        # For some reason as of summer 2022, request.POST seems to be occasionally submitting as a tuple (via args)
+        # instead of the expected dict (via kwargs). This is a workaround for being able to get data in either case.
+        if data is None and len(args) > 0:
+            for arg in args:
+                if isinstance(arg, QueryDict):
+                    data = arg
+
         if data:
             # Data was submitted. Get the field value.
             form_data = copy.deepcopy(data)
