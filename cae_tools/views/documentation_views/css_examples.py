@@ -44,7 +44,7 @@ def css_cards(request):
     """
     Displays examples of custom HTML/CSS layout for "card" elements.
     """
-    return TemplateResponse(request, 'cae_tools/css_examples/card.html', {})
+    return TemplateResponse(request, 'cae_tools/css_examples/cards.html', {})
 
 
 # region Form Example Views
