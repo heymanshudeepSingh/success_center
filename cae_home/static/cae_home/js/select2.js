@@ -52,4 +52,20 @@ $(document).ready(function() {
     $('.form-widget-select2-multiple').select2({
         matcher: window.cae_functions['select2__match_custom'],
     });
+
+    /**
+     * General logic to allow proper tabbing/focus behavior, when a user tries to tab to "next form field" on a form.
+     * See https://stackoverflow.com/a/49261426 for source + explanation.
+     */
+    // On first focus (bubbles up to document), open the menu.
+    $(document).on('focus', '.select2-selection.select2-selection--single', function (e) {
+      $(this).closest(".select2-container").siblings('select:enabled').select2('open');
+    });
+
+    // Steal focus during close - only capture once and stop propogation.
+    $('select.select2').on('select2:closing', function (e) {
+      $(e.target).data("select2").$selection.one('focus focusin', function (e) {
+        e.stopPropagation();
+      });
+    });
 });
