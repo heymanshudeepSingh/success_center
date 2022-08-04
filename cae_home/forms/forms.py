@@ -17,10 +17,12 @@ class AuthenticationForm(auth_form):
     """
     Modified login page form.
     """
+    # Define form fields.
     remember_me = forms.BooleanField(required=False, label='Keep Me Logged In:')
 
 
 class UserLookupForm(forms.Form):
+    # Define form fields.
     user_id = forms.ChoiceField(widget=Select2WidgetWithTagging)
 
     def __init__(self, *args, **kwargs):
@@ -65,7 +67,6 @@ class UserModelForm(forms.ModelForm):
     """
     (Login) User model form for standard views.
     """
-
     def __init__(self, *args, **kwargs):
         super(UserModelForm, self).__init__(*args, **kwargs)
         self.fields['username'].widget.attrs['disabled'] = True
@@ -81,6 +82,7 @@ class ChangePasswordCustomForm(forms.Form):
     """
     form to reset password for CAE center users
     """
+    # Define form fields.
     current_password = forms.CharField(label="Current Password", widget=forms.PasswordInput(), required=True)
     new_password = forms.CharField(label="New Password", widget=forms.PasswordInput(), required=True)
     repeat_new_password = forms.CharField(label="Repeat New Password", widget=forms.PasswordInput(), required=True)
@@ -105,7 +107,6 @@ class ProfileModelForm(forms.ModelForm):
     User Profile model form for standard views.
     Displays all possible profile fields.
     """
-
     class Meta:
         model = models.Profile
         fields = (
@@ -128,7 +129,6 @@ class ProfileModelForm_OnlyPhone(forms.ModelForm):
     User Profile model form for standard views.
     Only displays phone number field.
     """
-
     class Meta:
         model = models.Profile
         fields = (
@@ -141,7 +141,6 @@ class ProfileModelForm_OnlySiteOptions(forms.ModelForm):
     User Profile model form for standard views.
     Only displays site option fields.
     """
-
     class Meta:
         model = models.Profile
         fields = (
@@ -157,7 +156,6 @@ class ProfileModelForm_OnlySiteOptionsGA(forms.ModelForm):
     GA User Profile model form for standard views.
     Only displays site option fields.
     """
-
     class Meta:
         model = models.Profile
         fields = (
@@ -180,7 +178,6 @@ class AddressModelForm(forms.ModelForm):
     """
     Address model form for standard views.
     """
-
     class Meta:
         model = models.Address
         fields = (
@@ -192,7 +189,6 @@ class RoomModelForm(forms.ModelForm):
     """
     Room model form for standard views.
     """
-
     class Meta:
         model = models.Room
         fields = (
