@@ -432,7 +432,7 @@ class Semester(models.Model):
     An instance of a semester for Wmu.
     """
     # Model fields.
-    name = models.CharField(max_length=MAX_LENGTH, blank=True, null=True, unique=True)
+    name = models.CharField(max_length=MAX_LENGTH, blank=True, null=True)
     start_date = models.DateField(unique=True)
     end_date = models.DateField(unique=True)
 
@@ -443,9 +443,11 @@ class Semester(models.Model):
     class Meta:
         verbose_name = 'Semester Date'
         verbose_name_plural = 'Semester Dates'
+        ordering = ('-start_date',)
+        unique_together = ('name', 'start_date')
 
     def __str__(self):
-        return '{0}: {1} - {2}'.format(self.name, self.start_date, self.end_date)
+        return '{0} {1}'.format(self.start_date.year, self.name)
 
     def clean(self, *args, **kwargs):
         """
