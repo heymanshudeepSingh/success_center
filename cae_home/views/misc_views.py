@@ -86,7 +86,7 @@ def helpful_resources(request):
 
 
 # @method_decorator(group_required(cae_employee_groups), name='dispatch')
-class GetLoginUser(LoginRequiredMixin, FormView):
+class GetLoginUserExample(LoginRequiredMixin, FormView):
     """
     An example of using a FormView class to check for a (Login) User model.
     If value does not exist in the Django database, then it makes a query to LDAP to search for an associated user.
@@ -157,9 +157,9 @@ class GetLoginUser(LoginRequiredMixin, FormView):
 
 
 # @method_decorator(group_required(cae_employee_groups), name='dispatch')
-class GetWmuUser(LoginRequiredMixin, FormView):
+class GetWmuUserExample(LoginRequiredMixin, FormView):
     """
-    An example of using a FormView class to check for a (Login) User model.
+    An example of using a FormView class to check for a WmuUser model.
     If value does not exist in the Django database, then it makes a query to LDAP to search for an associated user.
     Catches errors if LDAP is not properly configured on local machine.
     """

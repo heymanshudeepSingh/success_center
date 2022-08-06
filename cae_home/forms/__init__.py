@@ -15,6 +15,7 @@ from .form_widgets import (
 
 from .forms import (
     AuthenticationForm,
+    CaeCenterUserForm,
     UserLookupForm,
     UserModelForm,
     ChangePasswordCustomForm,

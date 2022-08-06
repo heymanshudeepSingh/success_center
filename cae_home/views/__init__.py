@@ -5,36 +5,45 @@ Split up into separate files for organization. Imported here.
 """
 
 # Debug views.
-from .debug_views import index
-from .debug_views import internal_dev_index
-from .debug_views import external_dev_index
-from .debug_views import test_400_error
-from .debug_views import test_403_error
-from .debug_views import test_500_error
-from .debug_views import test_single_email
+from .debug_views import (
+    index,
+    internal_dev_index,
+    external_dev_index,
+    test_400_error,
+    test_403_error,
+    test_500_error,
+    test_single_email,
+)
 
 # DjangoRest views.
 from .django_rest_views import DepartmentViewSet
 
 # Form views.
-from .user_management_views import user_details
-from .user_management_views import UserDetails
-from .user_management_views import user_edit
-from .user_management_views import change_password
+from .user_management_views import (
+    user_details,
+    UserDetails,
+    user_edit,
+    change_password,
+    manage_cae_users,
+)
 
 # Login views.
-from .auth_views import login
-from .auth_views import login_redirect
-from .auth_views import logout
+from .auth_views import (
+    login,
+    login_redirect,
+    logout,
+)
 
 # Misc views.
-from .misc_views import handler400
-from .misc_views import handler403
-from .misc_views import handler404
-from .misc_views import handler500
-from .misc_views import info_schedules
-from .misc_views import info_servers
-from .misc_views import info_software
-from .misc_views import helpful_resources
-from .misc_views import GetLoginUser
-from .misc_views import GetWmuUser
+from .misc_views import (
+    handler400,
+    handler403,
+    handler404,
+    handler500,
+    info_schedules,
+    info_servers,
+    info_software,
+    helpful_resources,
+    GetLoginUserExample,
+    GetWmuUserExample,
+)

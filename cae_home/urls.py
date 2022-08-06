@@ -28,6 +28,7 @@ urlpatterns = [
     path('user/edit/', views.user_edit, name='user_edit'),
     path('user/edit/change_password/', views.change_password, name='user_change_password'),
     path('user/helpful_resources/', views.helpful_resources, name='helpful_resources'),
+    path('user/edit/cae_users/', views.manage_cae_users, name='manage_cae_users'),
 
     # Error page test views.
     path('error/400/', views.test_400_error, name='error_400'),
@@ -36,8 +37,8 @@ urlpatterns = [
     path('error/500/', views.test_500_error, name='error_500'),
 
     # Other views.
-    path('user/get_user/login/', views.GetLoginUser.as_view(), name='get_login_user'),
-    path('user/get_user/wmu/', views.GetWmuUser.as_view(), name='get_wmu_user'),
+    path('user/get_user/login/', views.GetLoginUserExample.as_view(), name='get_login_user'),
+    path('user/get_user/wmu/', views.GetWmuUserExample.as_view(), name='get_wmu_user'),
 
     # CAE Home/Index page.
     path('', views.index, name='index'),

@@ -6,6 +6,7 @@ Form views for CAE Home app.
 from django.contrib import messages
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group
 from django.db.models import ObjectDoesNotExist
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect
@@ -16,6 +17,7 @@ from django.views.generic.base import TemplateView
 # User Imports.
 from cae_home import forms, models
 from cae_home.decorators import group_required
+from cae_home.utils import get_or_create_login_user_model
 from workspace import logging as init_logging
 
 
@@ -46,6 +48,70 @@ class UserDetails(TemplateView):
             'user_profile': user_profile,
         })
         return context
+
+
+@login_required
+@group_required('CAE Director', 'CAE Admin GA', 'CAE Programmer GA')
+def manage_cae_users(request):
+    """
+    For adding/managing new CAE Center users.
+    """
+    # Initialize form.
+    form = forms.CaeCenterUserForm()
+
+    # Handle for user-submitted data.
+    if request.POST:
+
+        # Update form.
+        form = forms.CaeCenterUserForm(request.POST)
+
+        # Validate form.
+        if form.is_valid():
+            # Form is valid. Proceed.
+            user_id = form.cleaned_data['user_id']
+            group_set = form.cleaned_data['groups']
+
+            user_id = str(user_id).split(', ')[0]
+
+            # Get user data from provided value.
+            # Note that this acts as a second level of validation, against LDAP.
+            # We get None if LDAP connection is present and user data was invalid.
+            # We get TemplateResponse if LDAP connection is not present, and Django database could not find user.
+            # We get a user model if user was found.
+            user = get_or_create_login_user_model(request, user_id)
+            failed_to_find_user_msg = 'Failed to find user with BroncoNet/Winno of "{0}".'.format(user_id)
+            if user is None:
+                # LDAP connection works but invalid value.
+                messages.warning(request, failed_to_find_user_msg)
+            elif isinstance(user, TemplateResponse):
+                # User does not found in Django database and LDAP not set up.
+                messages.warning(request, failed_to_find_user_msg)
+                messages.error(request, 'LDAP connection does not appear to be set up. Could not check against LDAP.')
+            else:
+                # User found.
+                orig_user_groups = user.groups.all()
+
+                # Add all corresponding groups provided in form.
+                group_set = Group.objects.filter(name__in=group_set)
+                for group in group_set:
+                    user.groups.add(group)
+                messages.success(request, 'Updated CAE user groups for {0} {1}.'.format(
+                    user.first_name,
+                    user.last_name,
+                ))
+
+                # Remove groups not in form.
+                for group in orig_user_groups:
+                    if group not in group_set:
+                        user.groups.remove(group)
+
+            # Redirect to committee management page.
+            return redirect(reverse('cae_home:manage_cae_users'))
+
+    # Render response.
+    return TemplateResponse(request, 'cae_home/manage_cae_users.html', {
+        'form': form,
+    })
 
 
 @login_required
@@ -180,7 +246,7 @@ def user_edit(request):
 
 
 @login_required
-@group_required('CAE Director', 'CAE Admin GA', 'CAE Programmer GA', 'CAE Admin', 'CAE Programmer')
+@group_required(settings.CAE_CENTER_GROUPS)
 def change_password(request):
     """
     Allows a user to update their own password to a new value.
