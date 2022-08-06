@@ -40,18 +40,31 @@ class UserDetails(TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
+
+        # Grab variables.
         current_user = self.request.user
         user_profile = current_user.profile
+        user_groups = current_user.groups.all().values_list('name', flat=True)
+        # Check if user has one or more of "CAE admin groups". If so, display additional links.
+        is_cae_admin = False
+        for group in settings.CAE_ADMIN_GROUPS:
+            if group in user_groups:
+                is_cae_admin = True
+        # Also display if is superuser.
+        if current_user.is_superuser:
+            is_cae_admin = True
 
+        # Pass values to template.
         context.update({
             'current_user': current_user,
             'user_profile': user_profile,
+            'is_cae_admin': is_cae_admin,
         })
         return context
 
 
 @login_required
-@group_required('CAE Director', 'CAE Admin GA', 'CAE Programmer GA')
+@group_required(settings.CAE_ADMIN_GROUPS)
 def manage_cae_users(request):
     """
     For adding/managing new CAE Center users.

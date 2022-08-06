@@ -88,6 +88,11 @@ CAE_CENTER_GROUPS = [
     'CAE Attendant',
     'CAE Programmer',
 ]
+CAE_ADMIN_GROUPS = [
+    'CAE Director',
+    'CAE Admin GA',
+    'CAE Programmer GA',
+]
 SUCCESS_CENTER_TEST_USERS = ['step_admin', 'step_employee']
 SUCCESS_CENTER_GROUPS = ['STEP Admin', 'STEP Employee']
 GRAD_APPS_TEST_USERS = ['grad_apps_admin', 'grad_apps_committee_member']

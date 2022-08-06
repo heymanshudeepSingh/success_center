@@ -17,13 +17,22 @@
     <p>Phone Number: {{ user_profile.phone_number }}</p>
     <P>Time zone: {{ user_profile.user_timezone }}</P>
     <br>
-    <p>
-      <a href="{% url 'cae_home:user_change_password' %}" >Change Password</a>
-    </p>
+
+    <p><a href="{% url 'cae_home:user_change_password' %}">Change Password</a></p>
+
     <hr>
-    <p>
-      <a href="{% url 'cae_tools:reset_password' %}"> Don't know your current password?</a>
-    </p>
+
+    {% if is_cae_admin %}
+      <div class="panel">
+        <div class="head">
+          <p><a href="{% url 'cae_tools:reset_password' %}">Someone forget their password?</a></p>
+          <p><a href="{% url 'cae_home:manage_cae_users' %}">Manage Cae Center Users</a></p>
+        </div>
+      </div>
+    {% else %}
+      <p><a href="{% url 'cae_tools:reset_password' %}">Someone forget their password?</a></p>
+    {% endif %}
+
   </div>
 </div>
 {% endblock content %}
