@@ -138,6 +138,21 @@ body.hide-vertical-scroll-bar {
         text-align: center !important;
     }
 
+    .bold {
+        font-weight: bold;
+    }
+
+    .key {
+        font-weight: bold;
+
+        @each $font-option, $font-option-value in $font-size-options {
+        .font-size-#{$font-option} & {
+
+            font-size: font-option($font-option) * 0.80;
+
+        }}
+    }
+
     // Warning for javascript requirement.
     .javascript-warn {
         margin-right: auto;

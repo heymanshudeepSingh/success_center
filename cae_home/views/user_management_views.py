@@ -47,18 +47,27 @@ class UserDetails(TemplateView):
         user_groups = current_user.groups.all().values_list('name', flat=True)
         # Check if user has one or more of "CAE admin groups". If so, display additional links.
         is_cae_admin = False
+        is_cae_user = False
         for group in settings.CAE_ADMIN_GROUPS:
             if group in user_groups:
                 is_cae_admin = True
         # Also display if is superuser.
         if current_user.is_superuser:
             is_cae_admin = True
+        is_cae_user = is_cae_admin
+        # Also check if cae user.
+        if not is_cae_user:
+            for group in settings.CAE_CENTER_GROUPS:
+                if group in user_groups:
+                    is_cae_user = True
 
         # Pass values to template.
         context.update({
             'current_user': current_user,
             'user_profile': user_profile,
+            'user_groups': user_groups,
             'is_cae_admin': is_cae_admin,
+            'is_cae_user': is_cae_user,
         })
         return context
 

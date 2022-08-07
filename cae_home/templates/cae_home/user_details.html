@@ -13,25 +13,42 @@
     </p>
   </div>
   <div class="content">
-    <p>Bronco Net: {{ current_user.username }}</p>
-    <p>Phone Number: {{ user_profile.phone_number }}</p>
-    <P>Time zone: {{ user_profile.user_timezone }}</P>
-    <br>
 
-    <p><a href="{% url 'cae_home:user_change_password' %}">Change Password</a></p>
+    {% if is_cae_user %}
+      <div class="panel">
+        <div class="head">
+          <p><a href="{% url 'cae_tools:reset_password' %}">Someone forgot their password?</a></p>
+          {% if is_cae_admin %}
+            <p><a href="{% url 'cae_home:manage_cae_users' %}">Manage Cae Center Users</a></p>
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
 
     <hr>
 
-    {% if is_cae_admin %}
-      <div class="panel">
-        <div class="head">
-          <p><a href="{% url 'cae_tools:reset_password' %}">Someone forget their password?</a></p>
-          <p><a href="{% url 'cae_home:manage_cae_users' %}">Manage Cae Center Users</a></p>
-        </div>
-      </div>
-    {% else %}
-      <p><a href="{% url 'cae_tools:reset_password' %}">Someone forget their password?</a></p>
-    {% endif %}
+    <p><a href="{% url 'cae_home:user_change_password' %}">Change Password</a></p>
+
+    <br>
+
+    <h2>{{ current_user }} - {{ current_user.first_name }} {{ current_user.last_name }}</h2>
+    <ul>
+      <li><p><span class="key">Username:</span> &nbsp; {{ current_user.username }}</p></li>
+      <li><p><span class="key">Phone Number:</span> &nbsp; {{ user_profile.phone_number }}</p></li>
+      <li><p><span class="key">Timezone:</span> &nbsp; {{ user_profile.user_timezone }}</p></li>
+      <li><div>
+        <p><span class="key">Groups:</span> &nbsp; </p>
+        {% if user_groups %}
+          <ul>
+            {% for group in user_groups %}
+              <li><p>{{ group }}</p></li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p>None</p>
+        {% endif %}
+      </div></li>
+    </ul>
 
   </div>
 </div>
