@@ -96,7 +96,7 @@ CAE_ADMIN_GROUPS = [
 SUCCESS_CENTER_TEST_USERS = ['step_admin', 'step_employee']
 SUCCESS_CENTER_GROUPS = ['STEP Admin', 'STEP Employee']
 GRAD_APPS_TEST_USERS = ['grad_apps_admin', 'grad_apps_committee_member']
-GRAD_APPS_USERS = ['Grad Apps Admin', 'Grad Apps Committee Member']
+GRAD_APPS_GROUPS = ['Grad Apps Admin', 'Grad Apps Committee Member']
 
 
 # Predefined Email Sections.

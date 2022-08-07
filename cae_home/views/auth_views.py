@@ -74,7 +74,7 @@ def login_redirect(request):
 
         # Check if Grad Apps user.
         if 'grad_applications' in settings.INSTALLED_CAE_PROJECTS:
-            for grad_apps_group in settings.GRAD_APPS_USERS:
+            for grad_apps_group in settings.GRAD_APPS_GROUPS:
                 # Check if GradApps admin.
                 if 'Grad Apps Admin' in user_groups:
                     return redirect('grad_applications_core:manage')

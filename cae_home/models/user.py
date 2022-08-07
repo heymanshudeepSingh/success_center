@@ -123,17 +123,37 @@ def compare_user_and_wmuuser_models(uid):
     # Sync is_active values.
     if user_model:
         # (Login) User model exists.
-        if user_intermediary.cae_is_active or user_intermediary.wmu_is_active:
-            # At least one of the LDAP auths came back as "active". Set (login) User model accordingly.
-            if not user_model.is_active:
+
+        # if user_intermediary.cae_is_active or user_intermediary.wmu_is_active:
+        #     # At least one of the LDAP auths came back as "active". Set (login) User model accordingly.
+        #     if not user_model.is_active:
+        #         user_model.is_active = True
+        #         model_updated = True
+        # else:
+        #     # Neither LDAP auth came back as "active". Set (login) User model accordingly.
+        #     if user_model.is_active:
+        #         user_model.is_active = False
+        #         user_model.is_staff = False
+        #         model_updated = True
+
+        # Previously (above), we tried to set (Login)User is_active value based on the return values of LDAP.
+        # However, that had occasional syncing issues, due to main campus LDAP being an unorganized nightmare.
+        # Instead, as of summer 2022, we now have manual "set user group" pages for each project.
+        # If the user has a valid group in one or more of the expected projects, we set them as active.
+        # No valid group means they're set to inactive.
+        user_groups = user_model.groups.all()
+        orig_active = user_model.is_active
+        user_model.is_active = False
+        for group in user_groups:
+            if group in settings.CAE_CENTER_GROUPS:
                 user_model.is_active = True
-                model_updated = True
-        else:
-            # Neither LDAP auth came back as "active". Set (login) User model accordingly.
-            if user_model.is_active:
-                user_model.is_active = False
-                user_model.is_staff = False
-                model_updated = True
+            if group in settings.SUCCESS_CENTER_GROUPS:
+                user_model.is_active = True
+            if group in settings.GRAD_APPS_GROUPS:
+                user_model.is_active = True
+        if user_model.is_active != orig_active:
+            model_updated = True
+
     if wmu_user_model:
         # WmuUser model exists.
         if user_intermediary.cae_is_active or user_intermediary.wmu_is_active:
