@@ -168,6 +168,8 @@ def compare_user_and_wmuuser_models(uid):
                 model_updated = True
 
     # Handle group membership based on is_active status.
+    # Note that above, we already iterated over groups and set is_active accordingly.
+    # so this is effectively a "safe fallback" for any edge-case scenarios/new logic that we might not have handled for.
     if user_model:
         # (Login) User model exists.
         if user_model.is_active is False:
@@ -176,17 +178,6 @@ def compare_user_and_wmuuser_models(uid):
                 # However, model has one or more Auth Group relations. Remove all.
                 user_model.groups.clear()
                 model_updated = True
-        else:
-            # (Login) User model is active. Verify individual Auth Group values.
-            if not user_model.userintermediary.cae_is_active:
-                # User is not active according to CAE LDAP. Verify user has no CAE Auth Groups.
-                user_groups = user_model.groups.all()
-
-                # Loop through all of user's groups and remove any pertaining to CAE.
-                for user_group in user_groups:
-                    if user_group.name in settings.CAE_CENTER_GROUPS:
-                        user_model.groups.remove(user_group)
-                        model_updated = True
 
     # If any model values were updated, then save all three corresponding models.
     if model_updated:
