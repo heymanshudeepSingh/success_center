@@ -602,14 +602,18 @@ class WmuAuthBackend(AbstractLDAPBackend):
                     # It just seems really really unreliable.
                     # Thus, experimentally use the below logic first. If this chunk of logic leads to User "active"
                     # check issues, then remove.
+
+                    # IDK. As of summer 2022, this KerberosUser check doesn't seem to fully work either anymore.
+                    # Some users that should be "inactive" (and even previously were set to such) now come back as
+                    # active. Wtf. How the fuck does main campus LDAP work. It seems so inconsistent.
+                    # Keeping this here for now. Because at least it shouldn't hurt anything. But we still have users
+                    # that should set to inactive that aren't, ugh.
+
                     kerberos_status = ldap_info['wmuKerberosUserStatus'][0].strip()
                     if kerberos_status != 'active':
                         # Kerberos field returns non-active value. User is probably no longer student/working here?
                         logger.auth_info('{0}: is_active LDAP check - Verified wmuKerberosUserStatus.'.format(uid))
                         return (False, False)
-
-                    # If we got this far, then above experimental logic kerberos returned fine.
-                    # That means user is (probably) still enrolled/employeed somehow. But run below checks to be safe.
 
                     # Get wmuEmployeeExpiration.
                     try:
