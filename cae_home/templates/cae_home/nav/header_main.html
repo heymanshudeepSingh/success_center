@@ -12,7 +12,9 @@
         <p>{{ user.get_username }}</p>
         <ul>
           <li><a href="{% url 'cae_home:user_details' %}">User Management</a></li>
-          <li><a href="{% url 'cae_home:helpful_resources' %}">Helpful Resources</a></li>
+          {% if user.is_cae_user %}
+            <li><a href="{% url 'cae_home:helpful_resources' %}">Helpful Resources</a></li>
+          {% endif %}
           {% if user.is_staff %}
             <li><a href="{% url 'admin:index' %}">Django Admin</a></li>
           {% endif %}

@@ -29,9 +29,18 @@ class GetUserProfileMiddleware(object):
         self.get_response = get_response
 
     def __call__(self, request, *args, **kwargs):
-        # If user is logged in, get profile info.
+        # Add extra values if user is logged in.
         if request.user.is_authenticated:
+            # Get user profile info.
             request.user.profile = request.user.userintermediary.profile
+
+            # Determine if user is CAE Center user.
+            user_groups = request.user.groups.all().values_list('name', flat=True)
+            is_cae_user = False
+            for group in user_groups:
+                if group in settings.CAE_CENTER_GROUPS:
+                    is_cae_user = True
+            request.user.is_cae_user = is_cae_user
 
         # Resume view call as normal.
         response = self.get_response(request)

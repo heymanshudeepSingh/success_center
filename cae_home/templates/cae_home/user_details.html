@@ -14,7 +14,7 @@
   </div>
   <div class="content">
 
-    {% if is_cae_user %}
+    {% if user.is_cae_user %}
       <div class="panel">
         <div class="head">
           <p><a href="{% url 'cae_tools:reset_password' %}">Someone forgot their password?</a></p>

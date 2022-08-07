@@ -3,6 +3,7 @@ Misc views for CAE Home app.
 """
 
 # System Imports.
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -13,6 +14,7 @@ from django.urls import reverse_lazy
 
 # User Imports.
 from cae_home import forms
+from cae_home.decorators import group_required
 from cae_home.utils import get_or_create_login_user_model, get_or_create_wmu_user_model
 from workspace import logging as init_logging
 
@@ -78,6 +80,7 @@ def info_software(request):
 
 
 @login_required
+@group_required(settings.CAE_CENTER_GROUPS)
 def helpful_resources(request):
     """
     "Useful links" page for CAE Center employees.
