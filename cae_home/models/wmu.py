@@ -461,15 +461,15 @@ class Semester(models.Model):
             if self.pk is None:
                 start_month = self.start_date.month
                 if start_month < 4:
-                    season = 'Spring_'
+                    season = 'Spring'
                 elif start_month < 6:
-                    season = 'Summer_I_'
+                    season = 'Summer I'
                 elif start_month < 8:
-                    season = 'Summer_II_'
+                    season = 'Summer II'
                 else:
-                    season = 'Fall_'
+                    season = 'Fall'
 
-                self.name = '{0}{1}'.format(season, self.end_date.year)
+                self.name = season
 
             # Ensure that start date is not after end date.
             if self.start_date >= self.end_date:
