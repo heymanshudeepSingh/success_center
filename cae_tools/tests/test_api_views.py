@@ -13,171 +13,174 @@ from cae_home.management.commands.seeders import wmu as wmu_seeds
 
 
 class ApiViewTests(IntegrationTestCase):
-    """"""
-    def test__get_wmu_user(self):
-        """Tests API view for getting WmuUser models."""
-        # Generate model seeds.
-        wmu_seeds.create_departments(color_style())
-        wmu_seeds.create_majors(color_style())
-        user_seeds.create_addresses(color_style(), 10)
-        user_seeds.create_wmu_users(color_style(), 10)
-
-        with self.subTest('With empty value'):
-            self.assertGetResponse(
-                'cae_tools:api_wmu_user',
-                expected_content="""
-                    {
-                        "bronco_net": null,
-                        "winno": null,
-                        "first_name": null,
-                        "middle_name": null,
-                        "last_name": null,
-                        "user_type": null,
-                        "is_active": null,
-                        "official_email": null
-                    }
-                """
-            )
-
-        with self.subTest('With bad value'):
-            self.assertGetResponse(
-                'cae_tools:api_wmu_user',
-                data={'identifier': 'BadValue'},
-                expected_content="""
-                    {
-                        "bronco_net": null,
-                        "winno": null,
-                        "first_name": null,
-                        "middle_name": null,
-                        "last_name": null,
-                        "user_type": null,
-                        "is_active": null,
-                        "official_email": null
-                    }
-                """
-            )
-
-        with self.subTest('With partial values'):
-            wmu_user = models.WmuUser.objects.first()
-            self.assertGetResponse(
-                'cae_tools:api_wmu_user',
-                data={'identifier': '{0}'.format(str(wmu_user.bronco_net)[3:])},
-                expected_content="""
-                    {
-                        "bronco_net": null,
-                        "winno": null,
-                        "first_name": null,
-                        "middle_name": null,
-                        "last_name": null,
-                        "user_type": null,
-                        "is_active": null,
-                        "official_email": null
-                    }
-                """
-            )
-            self.assertGetResponse(
-                'cae_tools:api_wmu_user',
-                data={'identifier': '{0}'.format(str(wmu_user.winno)[:3])},
-                expected_content="""
-                    {
-                        "bronco_net": null,
-                        "winno": null,
-                        "first_name": null,
-                        "middle_name": null,
-                        "last_name": null,
-                        "user_type": null,
-                        "is_active": null,
-                        "official_email": null
-                    }
-                """
-            )
-
-        # Get list of all WmuUser models.
-        wmu_user_list = models.WmuUser.objects.all()
-
-        # For each model, make an API call and verify expected values come back.
-        for index in range(len(wmu_user_list)):
-            # Only test first 10 models in list. If those pass, then all probably will.
-            if index > 10:
-                continue
-
-            wmu_user = wmu_user_list[index]
-
-            # Check each individual WmuUser as a subtest.
-            with self.subTest('With "{0}" wmu_user'.format(wmu_user)):
-
-                # Determine expected values from each field of current model.
-                bronco_net = wmu_user.bronco_net
-                bronco_net = '"{0}"'.format(bronco_net) if bronco_net else 'null'
-                winno = wmu_user.winno
-                winno = '"{0}"'.format(winno) if winno else 'null'
-                first_name = wmu_user.first_name
-                first_name = '"{0}"'.format(first_name) if first_name else 'null'
-                middle_name = wmu_user.middle_name
-                middle_name = '"{0}"'.format(middle_name) if middle_name else 'null'
-                last_name = wmu_user.last_name
-                last_name = '"{0}"'.format(last_name) if last_name else 'null'
-                is_active = wmu_user.is_active
-                is_active = 'true' if is_active else 'false'
-
-                # Check querying by bronco_net.
-                self.assertGetResponse(
-                    'cae_tools:api_wmu_user',
-                    data={'identifier': str(wmu_user.bronco_net).upper()},
-                    expected_content=[
-                        '"bronco_net": {0},'.format(bronco_net),
-                        '"winno": {0},'.format(winno),
-                        '"first_name": {0},'.format(first_name),
-                        '"middle_name": {0},'.format(middle_name),
-                        '"last_name": {0},'.format(last_name),
-                        '"user_type": {0},'.format(wmu_user.user_type),
-                        '"is_active": {0},'.format(is_active),
-                        '"official_email": "{0}"'.format(wmu_user.official_email),
-                    ]
-                )
-                self.assertGetResponse(
-                    'cae_tools:api_wmu_user',
-                    data={'identifier': str(wmu_user.bronco_net).lower()},
-                    expected_content=[
-                        '"bronco_net": {0},'.format(bronco_net),
-                        '"winno": {0},'.format(winno),
-                        '"first_name": {0},'.format(first_name),
-                        '"middle_name": {0},'.format(middle_name),
-                        '"last_name": {0},'.format(last_name),
-                        '"user_type": {0},'.format(wmu_user.user_type),
-                        '"is_active": {0},'.format(is_active),
-                        '"official_email": "{0}"'.format(wmu_user.official_email),
-                    ]
-                )
-                # Check querying by winno.
-                self.assertGetResponse(
-                    'cae_tools:api_wmu_user',
-                    data={'identifier': str(wmu_user.winno).upper()},
-                    expected_content=[
-                        '"bronco_net": {0},'.format(bronco_net),
-                        '"winno": {0},'.format(winno),
-                        '"first_name": {0},'.format(first_name),
-                        '"middle_name": {0},'.format(middle_name),
-                        '"last_name": {0},'.format(last_name),
-                        '"user_type": {0},'.format(wmu_user.user_type),
-                        '"is_active": {0},'.format(is_active),
-                        '"official_email": "{0}"'.format(wmu_user.official_email),
-                    ]
-                )
-                self.assertGetResponse(
-                    'cae_tools:api_wmu_user',
-                    data={'identifier': str(wmu_user.winno).lower()},
-                    expected_content=[
-                        '"bronco_net": {0},'.format(bronco_net),
-                        '"winno": {0},'.format(winno),
-                        '"first_name": {0},'.format(first_name),
-                        '"middle_name": {0},'.format(middle_name),
-                        '"last_name": {0},'.format(last_name),
-                        '"user_type": {0},'.format(wmu_user.user_type),
-                        '"is_active": {0},'.format(is_active),
-                        '"official_email": "{0}"'.format(wmu_user.official_email),
-                    ]
-                )
+    """
+    Tests for various API views.
+    """
+    # Currently not needed. So url was commented out for security.
+    # def test__get_wmu_user(self):
+    #     """Tests API view for getting WmuUser models."""
+    #     # Generate model seeds.
+    #     wmu_seeds.create_departments(color_style())
+    #     wmu_seeds.create_majors(color_style())
+    #     user_seeds.create_addresses(color_style(), 10)
+    #     user_seeds.create_wmu_users(color_style(), 10)
+    #
+    #     with self.subTest('With empty value'):
+    #         self.assertGetResponse(
+    #             'cae_tools:api_wmu_user',
+    #             expected_content="""
+    #                 {
+    #                     "bronco_net": null,
+    #                     "winno": null,
+    #                     "first_name": null,
+    #                     "middle_name": null,
+    #                     "last_name": null,
+    #                     "user_type": null,
+    #                     "is_active": null,
+    #                     "official_email": null
+    #                 }
+    #             """
+    #         )
+    #
+    #     with self.subTest('With bad value'):
+    #         self.assertGetResponse(
+    #             'cae_tools:api_wmu_user',
+    #             data={'identifier': 'BadValue'},
+    #             expected_content="""
+    #                 {
+    #                     "bronco_net": null,
+    #                     "winno": null,
+    #                     "first_name": null,
+    #                     "middle_name": null,
+    #                     "last_name": null,
+    #                     "user_type": null,
+    #                     "is_active": null,
+    #                     "official_email": null
+    #                 }
+    #             """
+    #         )
+    #
+    #     with self.subTest('With partial values'):
+    #         wmu_user = models.WmuUser.objects.first()
+    #         self.assertGetResponse(
+    #             'cae_tools:api_wmu_user',
+    #             data={'identifier': '{0}'.format(str(wmu_user.bronco_net)[3:])},
+    #             expected_content="""
+    #                 {
+    #                     "bronco_net": null,
+    #                     "winno": null,
+    #                     "first_name": null,
+    #                     "middle_name": null,
+    #                     "last_name": null,
+    #                     "user_type": null,
+    #                     "is_active": null,
+    #                     "official_email": null
+    #                 }
+    #             """
+    #         )
+    #         self.assertGetResponse(
+    #             'cae_tools:api_wmu_user',
+    #             data={'identifier': '{0}'.format(str(wmu_user.winno)[:3])},
+    #             expected_content="""
+    #                 {
+    #                     "bronco_net": null,
+    #                     "winno": null,
+    #                     "first_name": null,
+    #                     "middle_name": null,
+    #                     "last_name": null,
+    #                     "user_type": null,
+    #                     "is_active": null,
+    #                     "official_email": null
+    #                 }
+    #             """
+    #         )
+    #
+    #     # Get list of all WmuUser models.
+    #     wmu_user_list = models.WmuUser.objects.all()
+    #
+    #     # For each model, make an API call and verify expected values come back.
+    #     for index in range(len(wmu_user_list)):
+    #         # Only test first 10 models in list. If those pass, then all probably will.
+    #         if index > 10:
+    #             continue
+    #
+    #         wmu_user = wmu_user_list[index]
+    #
+    #         # Check each individual WmuUser as a subtest.
+    #         with self.subTest('With "{0}" wmu_user'.format(wmu_user)):
+    #
+    #             # Determine expected values from each field of current model.
+    #             bronco_net = wmu_user.bronco_net
+    #             bronco_net = '"{0}"'.format(bronco_net) if bronco_net else 'null'
+    #             winno = wmu_user.winno
+    #             winno = '"{0}"'.format(winno) if winno else 'null'
+    #             first_name = wmu_user.first_name
+    #             first_name = '"{0}"'.format(first_name) if first_name else 'null'
+    #             middle_name = wmu_user.middle_name
+    #             middle_name = '"{0}"'.format(middle_name) if middle_name else 'null'
+    #             last_name = wmu_user.last_name
+    #             last_name = '"{0}"'.format(last_name) if last_name else 'null'
+    #             is_active = wmu_user.is_active
+    #             is_active = 'true' if is_active else 'false'
+    #
+    #             # Check querying by bronco_net.
+    #             self.assertGetResponse(
+    #                 'cae_tools:api_wmu_user',
+    #                 data={'identifier': str(wmu_user.bronco_net).upper()},
+    #                 expected_content=[
+    #                     '"bronco_net": {0},'.format(bronco_net),
+    #                     '"winno": {0},'.format(winno),
+    #                     '"first_name": {0},'.format(first_name),
+    #                     '"middle_name": {0},'.format(middle_name),
+    #                     '"last_name": {0},'.format(last_name),
+    #                     '"user_type": {0},'.format(wmu_user.user_type),
+    #                     '"is_active": {0},'.format(is_active),
+    #                     '"official_email": "{0}"'.format(wmu_user.official_email),
+    #                 ]
+    #             )
+    #             self.assertGetResponse(
+    #                 'cae_tools:api_wmu_user',
+    #                 data={'identifier': str(wmu_user.bronco_net).lower()},
+    #                 expected_content=[
+    #                     '"bronco_net": {0},'.format(bronco_net),
+    #                     '"winno": {0},'.format(winno),
+    #                     '"first_name": {0},'.format(first_name),
+    #                     '"middle_name": {0},'.format(middle_name),
+    #                     '"last_name": {0},'.format(last_name),
+    #                     '"user_type": {0},'.format(wmu_user.user_type),
+    #                     '"is_active": {0},'.format(is_active),
+    #                     '"official_email": "{0}"'.format(wmu_user.official_email),
+    #                 ]
+    #             )
+    #             # Check querying by winno.
+    #             self.assertGetResponse(
+    #                 'cae_tools:api_wmu_user',
+    #                 data={'identifier': str(wmu_user.winno).upper()},
+    #                 expected_content=[
+    #                     '"bronco_net": {0},'.format(bronco_net),
+    #                     '"winno": {0},'.format(winno),
+    #                     '"first_name": {0},'.format(first_name),
+    #                     '"middle_name": {0},'.format(middle_name),
+    #                     '"last_name": {0},'.format(last_name),
+    #                     '"user_type": {0},'.format(wmu_user.user_type),
+    #                     '"is_active": {0},'.format(is_active),
+    #                     '"official_email": "{0}"'.format(wmu_user.official_email),
+    #                 ]
+    #             )
+    #             self.assertGetResponse(
+    #                 'cae_tools:api_wmu_user',
+    #                 data={'identifier': str(wmu_user.winno).lower()},
+    #                 expected_content=[
+    #                     '"bronco_net": {0},'.format(bronco_net),
+    #                     '"winno": {0},'.format(winno),
+    #                     '"first_name": {0},'.format(first_name),
+    #                     '"middle_name": {0},'.format(middle_name),
+    #                     '"last_name": {0},'.format(last_name),
+    #                     '"user_type": {0},'.format(wmu_user.user_type),
+    #                     '"is_active": {0},'.format(is_active),
+    #                     '"official_email": "{0}"'.format(wmu_user.official_email),
+    #                 ]
+    #             )
 
     def test__get_department(self):
         """Tests API view for getting Department models."""
