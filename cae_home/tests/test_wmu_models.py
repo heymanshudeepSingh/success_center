@@ -302,7 +302,8 @@ class SemesterDateModelTests(IntegrationTestCase):
     def test_string_representation(self):
         self.assertEqual(
             str(self.test_semester_date),
-            '{0}: {1} - {2}'.format(self.test_semester_date.name, self.start_date, self.end_date))
+            '{0} {1}'.format(self.test_semester_date.start_date.year, self.test_semester_date.name),
+        )
 
     def test_plural_representation(self):
         self.assertEqual(str(self.test_semester_date._meta.verbose_name), 'Semester Date')
@@ -328,28 +329,32 @@ class SemesterDateModelTests(IntegrationTestCase):
             start_date=timezone.datetime(2018, 1, 1),
             end_date=timezone.datetime(2018, 1, 2)
         )
-        self.assertEqual(semester.name, 'Spring_2018')
+        self.assertEqual(semester.name, 'Spring')
+        self.assertEqual(str(semester), '2018 Spring')
 
         # Test Summer 1.
         semester = models.Semester.objects.create(
             start_date=timezone.datetime(2018, 4, 1),
             end_date=timezone.datetime(2018, 4, 2)
         )
-        self.assertEqual(semester.name, 'Summer_I_2018')
+        self.assertEqual(semester.name, 'Summer I')
+        self.assertEqual(str(semester), '2018 Summer I')
 
         # Test Summer 2.
         semester = models.Semester.objects.create(
             start_date=timezone.datetime(2018, 6, 1),
             end_date=timezone.datetime(2018, 6, 2)
         )
-        self.assertEqual(semester.name, 'Summer_II_2018')
+        self.assertEqual(semester.name, 'Summer II')
+        self.assertEqual(str(semester), '2018 Summer II')
 
         # Test Fall.
         semester = models.Semester.objects.create(
             start_date=timezone.datetime(2018, 8, 1),
             end_date=timezone.datetime(2018, 8, 2)
         )
-        self.assertEqual(semester.name, 'Fall_2018')
+        self.assertEqual(semester.name, 'Fall')
+        self.assertEqual(str(semester), '2018 Fall')
 
     def test_start_date_before_end_date(self):
         with self.assertRaises(ValidationError):
