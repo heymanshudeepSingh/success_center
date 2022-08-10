@@ -15,6 +15,7 @@ from django.core.exceptions import ValidationError
 from django.db import transaction
 from django.utils import timezone
 from phonenumber_field.phonenumber import PhoneNumber
+from unittest.mock import patch
 
 # User Imports.
 from .. import models
@@ -495,17 +496,67 @@ class UserIntermediaryModelTests(IntegrationTestCase):
 
     def test_shared_is_active_field(self):
         """
-        Note that User, WmuUser, and UserIntermediary models essentially share an is_active field.
-        Most users will have both a User and WmuUser account active at the same time.
-        If either model is_active is true, then UserIntermediary is_active should be true.
-        If User and WmuUser models are missing or inactive, then UserIntermediary is_active should be false.
+        Previously, we used to try to set is_active based on LDAP values.
+        However, main campus LDAP seems increasingly inconsistent, and values that we used to be able to rely on
+        no longer seem valid for properly checking is_active.
+
+        As of summer 2022, we switched to a more manual process. For this:
+            * The (Login)User model is_active is set based on group membership. If the user belongs to one of
+              the CaeCenter/SuccessCtr(Step)/GradApps groups, then they will be active. Otherwise they will not be.
+            * The UserIntermediary model is_active is set based on the literal LDAP returns. One for each LDAP.
+              But in theory, in the future, we want CAE to sync from Django, so one of these will no longer be needed.
+            * The WmuUser model is_active is still based on either ldap value returning true.
+              Aka, either main campus says the user is active. Or Cae says they're active (even if main campus doesn't).
         """
         with self.subTest('Associated with (login) User model only.'):
             # Verify when only (login) User exists.
+            # Since (Login)User is_active is now based on group membership, basically all of these should return false.
 
-            # Test with neither LDAP returning as active.
+            with self.subTest('With neither LDAP returning as active.'):
+                self.user.userintermediary.cae_is_active = False
+                self.user.userintermediary.wmu_is_active = False
+                self.user.save()
+                # Refresh models from database, so we aren't using cached/memory data.
+                self.user = models.User.objects.get(username=self.user.username)
+                user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.user_bronco_net)
+
+                # Check updated values.
+                self.assertFalse(self.user.is_active)
+                self.assertFalse(user_intermediary.cae_is_active)
+                self.assertFalse(user_intermediary.wmu_is_active)
+
+            # Reset to "inactive" for next test.
             self.user.userintermediary.cae_is_active = False
             self.user.userintermediary.wmu_is_active = False
+            self.user.save()
+            # Refresh models from database, so we aren't using cached/memory data.
+            self.user = models.User.objects.get(username=self.user.username)
+            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.user_bronco_net)
+
+            with self.subTest('With only CAE LDAP returning as active.'):
+                self.user.userintermediary.cae_is_active = True
+                self.user.userintermediary.wmu_is_active = False
+                self.user.save()
+                # Refresh models from database, so we aren't using cached/memory data.
+                self.user = models.User.objects.get(username=self.user.username)
+                user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.user_bronco_net)
+
+                # Check updated values.
+                self.assertFalse(self.user.is_active)
+                self.assertTrue(user_intermediary.cae_is_active)
+                self.assertFalse(user_intermediary.wmu_is_active)
+
+            # Reset to "inactive" for next test.
+            self.user.userintermediary.cae_is_active = False
+            self.user.userintermediary.wmu_is_active = False
+            self.user.save()
+            # Refresh models from database, so we aren't using cached/memory data.
+            self.user = models.User.objects.get(username=self.user.username)
+            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.user_bronco_net)
+
+        with self.subTest('With only WMU LDAP returning as active.'):
+            self.user.userintermediary.cae_is_active = False
+            self.user.userintermediary.wmu_is_active = True
             self.user.save()
             # Refresh models from database, so we aren't using cached/memory data.
             self.user = models.User.objects.get(username=self.user.username)
@@ -514,51 +565,9 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             # Check updated values.
             self.assertFalse(self.user.is_active)
             self.assertFalse(user_intermediary.cae_is_active)
-            self.assertFalse(user_intermediary.wmu_is_active)
-
-            # Reset to "inactive" to verify full "set to active" logic.
-            self.user.userintermediary.cae_is_active = False
-            self.user.userintermediary.wmu_is_active = False
-            self.user.save()
-            # Refresh models from database, so we aren't using cached/memory data.
-            self.user = models.User.objects.get(username=self.user.username)
-            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.user_bronco_net)
-
-            # Test with only CAE LDAP returning as active.
-            self.user.userintermediary.cae_is_active = True
-            self.user.userintermediary.wmu_is_active = False
-            self.user.save()
-            # Refresh models from database, so we aren't using cached/memory data.
-            self.user = models.User.objects.get(username=self.user.username)
-            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.user_bronco_net)
-
-            # Check updated values.
-            self.assertTrue(self.user.is_active)
-            self.assertTrue(user_intermediary.cae_is_active)
-            self.assertFalse(user_intermediary.wmu_is_active)
-
-            # Reset to "inactive" to verify full "set to active" logic.
-            self.user.userintermediary.cae_is_active = False
-            self.user.userintermediary.wmu_is_active = False
-            self.user.save()
-            # Refresh models from database, so we aren't using cached/memory data.
-            self.user = models.User.objects.get(username=self.user.username)
-            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.user_bronco_net)
-
-            # Test with only WMU LDAP returning as active.
-            self.user.userintermediary.cae_is_active = False
-            self.user.userintermediary.wmu_is_active = True
-            self.user.save()
-            # Refresh models from database, so we aren't using cached/memory data.
-            self.user = models.User.objects.get(username=self.user.username)
-            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.user_bronco_net)
-
-            # Check updated values.
-            self.assertTrue(self.user.is_active)
-            self.assertFalse(user_intermediary.cae_is_active)
             self.assertTrue(user_intermediary.wmu_is_active)
 
-            # Reset to "inactive" to verify full "set to active" logic.
+            # Reset to "inactive" for next test.
             self.user.userintermediary.cae_is_active = False
             self.user.userintermediary.wmu_is_active = False
             self.user.save()
@@ -566,23 +575,45 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             self.user = models.User.objects.get(username=self.user.username)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.user_bronco_net)
 
-            # Test with both LDAPs returning as active.
-            self.user.userintermediary.cae_is_active = True
-            self.user.userintermediary.wmu_is_active = True
+            with self.subTest('With both LDAPs returning as active.'):
+                self.user.userintermediary.cae_is_active = True
+                self.user.userintermediary.wmu_is_active = True
+                self.user.save()
+                # Refresh models from database, so we aren't using cached/memory data.
+                self.user = models.User.objects.get(username=self.user.username)
+                user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.user_bronco_net)
+
+                # Check updated values.
+                self.assertFalse(self.user.is_active)
+                self.assertTrue(user_intermediary.cae_is_active)
+                self.assertTrue(user_intermediary.wmu_is_active)
+
+            # Reset to "inactive" for next test.
+            self.user.userintermediary.cae_is_active = False
+            self.user.userintermediary.wmu_is_active = False
             self.user.save()
             # Refresh models from database, so we aren't using cached/memory data.
             self.user = models.User.objects.get(username=self.user.username)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.user_bronco_net)
-
-            # Check updated values.
-            self.assertTrue(self.user.is_active)
-            self.assertTrue(user_intermediary.cae_is_active)
-            self.assertTrue(user_intermediary.wmu_is_active)
 
         with self.subTest('Associated with WmuUser model only.'):
             # Verify for when only WmuUser exists.
+            # WmuUser is_active should return true if EITHER Ldap returns true.
 
-            # Test with neither LDAP returning as active.
+            with self.subTest('With neither LDAP returning as active.'):
+                self.wmu_user.userintermediary.cae_is_active = False
+                self.wmu_user.userintermediary.wmu_is_active = False
+                self.wmu_user.save()
+                # Refresh models from database, so we aren't using cached/memory data.
+                self.wmu_user = models.WmuUser.objects.get(bronco_net=self.wmu_user.bronco_net)
+                user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.wmu_user_bronco_net)
+
+                # Check updated values.
+                self.assertFalse(self.wmu_user.is_active)
+                self.assertFalse(user_intermediary.cae_is_active)
+                self.assertFalse(user_intermediary.wmu_is_active)
+
+            # Reset to "inactive" for next test.
             self.wmu_user.userintermediary.cae_is_active = False
             self.wmu_user.userintermediary.wmu_is_active = False
             self.wmu_user.save()
@@ -590,12 +621,20 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             self.wmu_user = models.WmuUser.objects.get(bronco_net=self.wmu_user.bronco_net)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.wmu_user_bronco_net)
 
-            # Check updated values.
-            self.assertFalse(self.wmu_user.is_active)
-            self.assertFalse(user_intermediary.cae_is_active)
-            self.assertFalse(user_intermediary.wmu_is_active)
+            with self.subTest('With only CAE LDAP returning as active.'):
+                self.wmu_user.userintermediary.cae_is_active = True
+                self.wmu_user.userintermediary.wmu_is_active = False
+                self.wmu_user.save()
+                # Refresh models from database, so we aren't using cached/memory data.
+                self.wmu_user = models.WmuUser.objects.get(bronco_net=self.wmu_user.bronco_net)
+                user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.wmu_user_bronco_net)
 
-            # Reset to "inactive" to verify full "set to active" logic.
+                # Check updated values.
+                self.assertTrue(self.wmu_user.is_active)
+                self.assertTrue(user_intermediary.cae_is_active)
+                self.assertFalse(user_intermediary.wmu_is_active)
+
+            # Reset to "inactive" for next test.
             self.wmu_user.userintermediary.cae_is_active = False
             self.wmu_user.userintermediary.wmu_is_active = False
             self.wmu_user.save()
@@ -603,20 +642,20 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             self.wmu_user = models.WmuUser.objects.get(bronco_net=self.wmu_user.bronco_net)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.wmu_user_bronco_net)
 
-            # Test with only CAE LDAP returning as active.
-            self.wmu_user.userintermediary.cae_is_active = True
-            self.wmu_user.userintermediary.wmu_is_active = False
-            self.wmu_user.save()
-            # Refresh models from database, so we aren't using cached/memory data.
-            self.wmu_user = models.WmuUser.objects.get(bronco_net=self.wmu_user.bronco_net)
-            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.wmu_user_bronco_net)
+            with self.subTest('With only WMU LDAP returning as active.'):
+                self.wmu_user.userintermediary.cae_is_active = False
+                self.wmu_user.userintermediary.wmu_is_active = True
+                self.wmu_user.save()
+                # Refresh models from database, so we aren't using cached/memory data.
+                self.wmu_user = models.WmuUser.objects.get(bronco_net=self.wmu_user.bronco_net)
+                user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.wmu_user_bronco_net)
 
-            # Check updated values.
-            self.assertTrue(self.wmu_user.is_active)
-            self.assertTrue(user_intermediary.cae_is_active)
-            self.assertFalse(user_intermediary.wmu_is_active)
+                # Check updated values.
+                self.assertTrue(self.wmu_user.is_active)
+                self.assertFalse(user_intermediary.cae_is_active)
+                self.assertTrue(user_intermediary.wmu_is_active)
 
-            # Reset to "inactive" to verify full "set to active" logic.
+            # Reset to "inactive" for next test.
             self.wmu_user.userintermediary.cae_is_active = False
             self.wmu_user.userintermediary.wmu_is_active = False
             self.wmu_user.save()
@@ -624,44 +663,47 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             self.wmu_user = models.WmuUser.objects.get(bronco_net=self.wmu_user.bronco_net)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.wmu_user_bronco_net)
 
-            # Test with only WMU LDAP returning as active.
-            self.wmu_user.userintermediary.cae_is_active = False
-            self.wmu_user.userintermediary.wmu_is_active = True
-            self.wmu_user.save()
-            # Refresh models from database, so we aren't using cached/memory data.
-            self.wmu_user = models.WmuUser.objects.get(bronco_net=self.wmu_user.bronco_net)
-            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.wmu_user_bronco_net)
+            with self.subTest('With both LDAPs returning as active.'):
+                self.wmu_user.userintermediary.cae_is_active = True
+                self.wmu_user.userintermediary.wmu_is_active = True
+                self.wmu_user.save()
+                # Refresh models from database, so we aren't using cached/memory data.
+                self.wmu_user = models.WmuUser.objects.get(bronco_net=self.wmu_user.bronco_net)
+                user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.wmu_user_bronco_net)
 
-            # Check updated values.
-            self.assertTrue(self.wmu_user.is_active)
-            self.assertFalse(user_intermediary.cae_is_active)
-            self.assertTrue(user_intermediary.wmu_is_active)
+                # Check updated values.
+                self.assertTrue(self.wmu_user.is_active)
+                self.assertTrue(user_intermediary.cae_is_active)
+                self.assertTrue(user_intermediary.wmu_is_active)
 
-            # Reset to "inactive" to verify full "set to active" logic.
+            # Reset to "inactive" for next test.
             self.wmu_user.userintermediary.cae_is_active = False
             self.wmu_user.userintermediary.wmu_is_active = False
             self.wmu_user.save()
             # Refresh models from database, so we aren't using cached/memory data.
             self.wmu_user = models.WmuUser.objects.get(bronco_net=self.wmu_user.bronco_net)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.wmu_user_bronco_net)
-
-            # Test with both LDAPs returning as active.
-            self.wmu_user.userintermediary.cae_is_active = True
-            self.wmu_user.userintermediary.wmu_is_active = True
-            self.wmu_user.save()
-            # Refresh models from database, so we aren't using cached/memory data.
-            self.wmu_user = models.WmuUser.objects.get(bronco_net=self.wmu_user.bronco_net)
-            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.wmu_user_bronco_net)
-
-            # Check updated values.
-            self.assertTrue(self.wmu_user.is_active)
-            self.assertTrue(user_intermediary.cae_is_active)
-            self.assertTrue(user_intermediary.wmu_is_active)
 
         with self.subTest('Associated with both User and WmuUser models. Save on (login) User model.'):
-            # Verify for when both (login) User and WmuUser exists. With User updated only.
+            # Verify for when both (login) User and WmuUser exists. With (Login)User saved/updated only.
+            # Aka, we're verifying that when we save a (Login)User model, the expected is_active logic triggers.
 
-            # Test with neither LDAP returning as active.
+            with self.subTest('With neither LDAP returning as active.'):
+                self.dual_user_1.userintermediary.cae_is_active = False
+                self.dual_user_1.userintermediary.wmu_is_active = False
+                self.dual_user_1.save()
+                # Refresh models from database, so we aren't using cached/memory data.
+                self.dual_user_1 = models.User.objects.get(username=self.dual_user_1.username)
+                self.dual_wmu_user_1 = models.WmuUser.objects.get(bronco_net=self.dual_wmu_user_1.bronco_net)
+                user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
+
+                # Check updated values.
+                self.assertFalse(self.dual_user_1.is_active)
+                self.assertFalse(self.dual_wmu_user_1.is_active)
+                self.assertFalse(user_intermediary.cae_is_active)
+                self.assertFalse(user_intermediary.wmu_is_active)
+
+            # Reset to "inactive" for next test.
             self.dual_user_1.userintermediary.cae_is_active = False
             self.dual_user_1.userintermediary.wmu_is_active = False
             self.dual_user_1.save()
@@ -670,13 +712,22 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             self.dual_wmu_user_1 = models.WmuUser.objects.get(bronco_net=self.dual_wmu_user_1.bronco_net)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
 
-            # Check updated values.
-            self.assertFalse(self.dual_user_1.is_active)
-            self.assertFalse(self.dual_wmu_user_1.is_active)
-            self.assertFalse(user_intermediary.cae_is_active)
-            self.assertFalse(user_intermediary.wmu_is_active)
+            with self.subTest('With only CAE LDAP returning as active.'):
+                self.dual_user_1.userintermediary.cae_is_active = True
+                self.dual_user_1.userintermediary.wmu_is_active = False
+                self.dual_user_1.save()
+                # Refresh models from database, so we aren't using cached/memory data.
+                self.dual_user_1 = models.User.objects.get(username=self.dual_user_1.username)
+                self.dual_wmu_user_1 = models.WmuUser.objects.get(bronco_net=self.dual_wmu_user_1.bronco_net)
+                user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
 
-            # Reset to "inactive" to verify full "set to active" logic.
+                # Check updated values.
+                self.assertFalse(self.dual_user_1.is_active)
+                self.assertTrue(self.dual_wmu_user_1.is_active)
+                self.assertTrue(user_intermediary.cae_is_active)
+                self.assertFalse(user_intermediary.wmu_is_active)
+
+            # Reset to "inactive" for next test.
             self.dual_user_1.userintermediary.cae_is_active = False
             self.dual_user_1.userintermediary.wmu_is_active = False
             self.dual_user_1.save()
@@ -685,22 +736,22 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             self.dual_wmu_user_1 = models.WmuUser.objects.get(bronco_net=self.dual_wmu_user_1.bronco_net)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
 
-            # Test with only CAE LDAP returning as active.
-            self.dual_user_1.userintermediary.cae_is_active = True
-            self.dual_user_1.userintermediary.wmu_is_active = False
-            self.dual_user_1.save()
-            # Refresh models from database, so we aren't using cached/memory data.
-            self.dual_user_1 = models.User.objects.get(username=self.dual_user_1.username)
-            self.dual_wmu_user_1 = models.WmuUser.objects.get(bronco_net=self.dual_wmu_user_1.bronco_net)
-            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
+            with self.subTest('With only WMU LDAP returning as active.'):
+                self.dual_user_1.userintermediary.cae_is_active = False
+                self.dual_user_1.userintermediary.wmu_is_active = True
+                self.dual_user_1.save()
+                # Refresh models from database, so we aren't using cached/memory data.
+                self.dual_user_1 = models.User.objects.get(username=self.dual_user_1.username)
+                self.dual_wmu_user_1 = models.WmuUser.objects.get(bronco_net=self.dual_wmu_user_1.bronco_net)
+                user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
 
-            # Check updated values.
-            self.assertTrue(self.dual_user_1.is_active)
-            self.assertTrue(self.dual_wmu_user_1.is_active)
-            self.assertTrue(user_intermediary.cae_is_active)
-            self.assertFalse(user_intermediary.wmu_is_active)
+                # Check updated values.
+                self.assertFalse(self.dual_user_1.is_active)
+                self.assertTrue(self.dual_wmu_user_1.is_active)
+                self.assertFalse(user_intermediary.cae_is_active)
+                self.assertTrue(user_intermediary.wmu_is_active)
 
-            # Reset to "inactive" to verify full "set to active" logic.
+            # Reset to "inactive" for next test.
             self.dual_user_1.userintermediary.cae_is_active = False
             self.dual_user_1.userintermediary.wmu_is_active = False
             self.dual_user_1.save()
@@ -709,22 +760,22 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             self.dual_wmu_user_1 = models.WmuUser.objects.get(bronco_net=self.dual_wmu_user_1.bronco_net)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
 
-            # Test with only WMU LDAP returning as active.
-            self.dual_user_1.userintermediary.cae_is_active = False
-            self.dual_user_1.userintermediary.wmu_is_active = True
-            self.dual_user_1.save()
-            # Refresh models from database, so we aren't using cached/memory data.
-            self.dual_user_1 = models.User.objects.get(username=self.dual_user_1.username)
-            self.dual_wmu_user_1 = models.WmuUser.objects.get(bronco_net=self.dual_wmu_user_1.bronco_net)
-            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
+            with self.subTest('With both LDAPs returning as active.'):
+                self.dual_user_1.userintermediary.cae_is_active = True
+                self.dual_user_1.userintermediary.wmu_is_active = True
+                self.dual_user_1.save()
+                # Refresh models from database, so we aren't using cached/memory data.
+                self.dual_user_1 = models.User.objects.get(username=self.dual_user_1.username)
+                self.dual_wmu_user_1 = models.WmuUser.objects.get(bronco_net=self.dual_wmu_user_1.bronco_net)
+                user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
 
-            # Check updated values.
-            self.assertTrue(self.dual_user_1.is_active)
-            self.assertTrue(self.dual_wmu_user_1.is_active)
-            self.assertFalse(user_intermediary.cae_is_active)
-            self.assertTrue(user_intermediary.wmu_is_active)
+                # Check updated values.
+                self.assertFalse(self.dual_user_1.is_active)
+                self.assertTrue(self.dual_wmu_user_1.is_active)
+                self.assertTrue(user_intermediary.cae_is_active)
+                self.assertTrue(user_intermediary.wmu_is_active)
 
-            # Reset to "inactive" to verify full "set to active" logic.
+            # Reset to "inactive" for next test.
             self.dual_user_1.userintermediary.cae_is_active = False
             self.dual_user_1.userintermediary.wmu_is_active = False
             self.dual_user_1.save()
@@ -732,26 +783,27 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             self.dual_user_1 = models.User.objects.get(username=self.dual_user_1.username)
             self.dual_wmu_user_1 = models.WmuUser.objects.get(bronco_net=self.dual_wmu_user_1.bronco_net)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
-
-            # Test with both LDAPs returning as active.
-            self.dual_user_1.userintermediary.cae_is_active = True
-            self.dual_user_1.userintermediary.wmu_is_active = True
-            self.dual_user_1.save()
-            # Refresh models from database, so we aren't using cached/memory data.
-            self.dual_user_1 = models.User.objects.get(username=self.dual_user_1.username)
-            self.dual_wmu_user_1 = models.WmuUser.objects.get(bronco_net=self.dual_wmu_user_1.bronco_net)
-            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
-
-            # Check updated values.
-            self.assertTrue(self.dual_user_1.is_active)
-            self.assertTrue(self.dual_wmu_user_1.is_active)
-            self.assertTrue(user_intermediary.cae_is_active)
-            self.assertTrue(user_intermediary.wmu_is_active)
 
         with self.subTest('Associated with both User and WmuUser models. Save on WmuUser model.'):
             # Verify for when both (login) User and WmuUser exists. With WmuUser updated.
+            # Aka, we're verifying that when we save a WmuUser model, the expected is_active logic triggers.
 
-            # Test with neither LDAP returning as active.
+            with self.subTest('With neither LDAP returning as active.'):
+                self.dual_wmu_user_2.userintermediary.cae_is_active = False
+                self.dual_wmu_user_2.userintermediary.wmu_is_active = False
+                self.dual_wmu_user_2.save()
+                # Refresh models from database, so we aren't using cached/memory data.
+                self.dual_user_2 = models.User.objects.get(username=self.dual_user_2.username)
+                self.dual_wmu_user_2 = models.WmuUser.objects.get(bronco_net=self.dual_wmu_user_2.bronco_net)
+                user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_2)
+
+                # Check updated values.
+                self.assertFalse(self.dual_user_2.is_active)
+                self.assertFalse(self.dual_wmu_user_2.is_active)
+                self.assertFalse(user_intermediary.cae_is_active)
+                self.assertFalse(user_intermediary.wmu_is_active)
+
+            # Reset to "inactive" for next test.
             self.dual_wmu_user_2.userintermediary.cae_is_active = False
             self.dual_wmu_user_2.userintermediary.wmu_is_active = False
             self.dual_wmu_user_2.save()
@@ -760,13 +812,22 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             self.dual_wmu_user_2 = models.WmuUser.objects.get(bronco_net=self.dual_wmu_user_2.bronco_net)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_2)
 
-            # Check updated values.
-            self.assertFalse(self.dual_user_2.is_active)
-            self.assertFalse(self.dual_wmu_user_2.is_active)
-            self.assertFalse(user_intermediary.cae_is_active)
-            self.assertFalse(user_intermediary.wmu_is_active)
+            with self.subTest('With only CAE LDAP returning as active.'):
+                self.dual_wmu_user_2.userintermediary.cae_is_active = True
+                self.dual_wmu_user_2.userintermediary.wmu_is_active = False
+                self.dual_wmu_user_2.save()
+                # Refresh models from database, so we aren't using cached/memory data.
+                self.dual_user_2 = models.User.objects.get(username=self.dual_user_2.username)
+                self.dual_wmu_user_2 = models.WmuUser.objects.get(bronco_net=self.dual_wmu_user_2.bronco_net)
+                user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_2)
 
-            # Reset to "inactive" to verify full "set to active" logic.
+                # Check updated values.
+                self.assertFalse(self.dual_user_2.is_active)
+                self.assertTrue(self.dual_wmu_user_2.is_active)
+                self.assertTrue(user_intermediary.cae_is_active)
+                self.assertFalse(user_intermediary.wmu_is_active)
+
+            # Reset to "inactive" for next test.
             self.dual_wmu_user_2.userintermediary.cae_is_active = False
             self.dual_wmu_user_2.userintermediary.wmu_is_active = False
             self.dual_wmu_user_2.save()
@@ -775,22 +836,22 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             self.dual_wmu_user_2 = models.WmuUser.objects.get(bronco_net=self.dual_wmu_user_2.bronco_net)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_2)
 
-            # Test with only CAE LDAP returning as active.
-            self.dual_wmu_user_2.userintermediary.cae_is_active = True
-            self.dual_wmu_user_2.userintermediary.wmu_is_active = False
-            self.dual_wmu_user_2.save()
-            # Refresh models from database, so we aren't using cached/memory data.
-            self.dual_user_2 = models.User.objects.get(username=self.dual_user_2.username)
-            self.dual_wmu_user_2 = models.WmuUser.objects.get(bronco_net=self.dual_wmu_user_2.bronco_net)
-            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_2)
+            with self.subTest('With only WMU LDAP returning as active.'):
+                self.dual_wmu_user_2.userintermediary.cae_is_active = False
+                self.dual_wmu_user_2.userintermediary.wmu_is_active = True
+                self.dual_wmu_user_2.save()
+                # Refresh models from database, so we aren't using cached/memory data.
+                self.dual_user_2 = models.User.objects.get(username=self.dual_user_2.username)
+                self.dual_wmu_user_2 = models.WmuUser.objects.get(bronco_net=self.dual_wmu_user_2.bronco_net)
+                user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_2)
 
-            # Check updated values.
-            self.assertTrue(self.dual_user_2.is_active)
-            self.assertTrue(self.dual_wmu_user_2.is_active)
-            self.assertTrue(user_intermediary.cae_is_active)
-            self.assertFalse(user_intermediary.wmu_is_active)
+                # Check updated values.
+                self.assertFalse(self.dual_user_2.is_active)
+                self.assertTrue(self.dual_wmu_user_2.is_active)
+                self.assertFalse(user_intermediary.cae_is_active)
+                self.assertTrue(user_intermediary.wmu_is_active)
 
-            # Reset to "inactive" to verify full "set to active" logic.
+            # Reset to "inactive" for next test.
             self.dual_wmu_user_2.userintermediary.cae_is_active = False
             self.dual_wmu_user_2.userintermediary.wmu_is_active = False
             self.dual_wmu_user_2.save()
@@ -799,22 +860,22 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             self.dual_wmu_user_2 = models.WmuUser.objects.get(bronco_net=self.dual_wmu_user_2.bronco_net)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_2)
 
-            # Test with only WMU LDAP returning as active.
-            self.dual_wmu_user_2.userintermediary.cae_is_active = False
-            self.dual_wmu_user_2.userintermediary.wmu_is_active = True
-            self.dual_wmu_user_2.save()
-            # Refresh models from database, so we aren't using cached/memory data.
-            self.dual_user_2 = models.User.objects.get(username=self.dual_user_2.username)
-            self.dual_wmu_user_2 = models.WmuUser.objects.get(bronco_net=self.dual_wmu_user_2.bronco_net)
-            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_2)
+            with self.subTest('With both LDAPs returning as active.'):
+                self.dual_wmu_user_2.userintermediary.cae_is_active = True
+                self.dual_wmu_user_2.userintermediary.wmu_is_active = True
+                self.dual_wmu_user_2.save()
+                # Refresh models from database, so we aren't using cached/memory data.
+                self.dual_user_2 = models.User.objects.get(username=self.dual_user_2.username)
+                self.dual_wmu_user_2 = models.WmuUser.objects.get(bronco_net=self.dual_wmu_user_2.bronco_net)
+                user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_2)
 
-            # Check updated values.
-            self.assertTrue(self.dual_user_2.is_active)
-            self.assertTrue(self.dual_wmu_user_2.is_active)
-            self.assertFalse(user_intermediary.cae_is_active)
-            self.assertTrue(user_intermediary.wmu_is_active)
+                # Check updated values.
+                self.assertFalse(self.dual_user_2.is_active)
+                self.assertTrue(self.dual_wmu_user_2.is_active)
+                self.assertTrue(user_intermediary.cae_is_active)
+                self.assertTrue(user_intermediary.wmu_is_active)
 
-            # Reset to "inactive" to verify full "set to active" logic.
+            # Reset to "inactive" for next test.
             self.dual_wmu_user_2.userintermediary.cae_is_active = False
             self.dual_wmu_user_2.userintermediary.wmu_is_active = False
             self.dual_wmu_user_2.save()
@@ -823,73 +884,58 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             self.dual_wmu_user_2 = models.WmuUser.objects.get(bronco_net=self.dual_wmu_user_2.bronco_net)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_2)
 
-            # Test with both LDAPs returning as active.
-            self.dual_wmu_user_2.userintermediary.cae_is_active = True
-            self.dual_wmu_user_2.userintermediary.wmu_is_active = True
-            self.dual_wmu_user_2.save()
-            # Refresh models from database, so we aren't using cached/memory data.
-            self.dual_user_2 = models.User.objects.get(username=self.dual_user_2.username)
-            self.dual_wmu_user_2 = models.WmuUser.objects.get(bronco_net=self.dual_wmu_user_2.bronco_net)
-            user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_2)
-
-            # Check updated values.
-            self.assertTrue(self.dual_user_2.is_active)
-            self.assertTrue(self.dual_wmu_user_2.is_active)
-            self.assertTrue(user_intermediary.cae_is_active)
-            self.assertTrue(user_intermediary.wmu_is_active)
-
-    def test_user_auth_groups_field(self):
-        """
-        Tests that Group models are updated accordingly, based on is_active UserIntermediary values.
-        """
-        # Get all CAE groups to test.
-        cae_building_coordinator = Group.objects.get(name='CAE Building Coordinator')
-        cae_director = Group.objects.get(name='CAE Director')
-        cae_attendant_group = Group.objects.get(name='CAE Attendant')
-        cae_admin_group = Group.objects.get(name='CAE Admin GA')
-        cae_admin_ga_group = Group.objects.get(name='CAE Admin')
-        cae_programmer_ga_group = Group.objects.get(name='CAE Programmer GA')
-        cae_programmer_group = Group.objects.get(name='CAE Programmer')
-
-        # Get arbitrary non-CAE group to also test. In this case, it's a random STEP Center group.
-        step_group = Group.objects.get(name='STEP Admin')
-
-        # Add all above groups to user, so that we can test removing during is_active toggle.
-        self.user.groups.add(*[
-            cae_building_coordinator,
-            cae_director,
-            cae_attendant_group,
-            cae_admin_ga_group,
-            cae_admin_group,
-            cae_programmer_ga_group,
-            cae_programmer_group,
-            step_group,
-        ])
-        self.user.save()
-
-        # Refresh models from database, so we aren't using cached/memory data.
-        self.user = models.User.objects.get(username=self.user.username)
-
-        # Verify expected groups.
-        user_groups = self.user.groups.all().values_list('name', flat=True)
-        for group_name in settings.CAE_CENTER_GROUPS:
-            self.assertIn(group_name, user_groups)
-        # Also verify non-CAE group membership.
-        self.assertIn(step_group.name, user_groups)
-
-        # Now toggle "cae_is_active" to false. This should remove all CAE groups only.
-        self.user.userintermediary.cae_is_active = False
-        self.user.save()
-
-        # Refresh models from database, so we aren't using cached/memory data.
-        self.user = models.User.objects.get(username=self.user.username)
-
-        # Verify groups have automatically changed.
-        user_groups = self.user.groups.all().values_list('name', flat=True)
-        for group_name in settings.CAE_CENTER_GROUPS:
-            self.assertNotIn(group_name, user_groups)
-        # Also verify non-CAE group membership has remained unchanged.
-        self.assertIn(step_group.name, user_groups)
+    # def test_user_auth_groups_field(self):
+    #     """
+    #     Tests that Group models are updated accordingly, based on is_active UserIntermediary values.
+    #     """
+    #     # Get all CAE groups to test.
+    #     cae_building_coordinator = Group.objects.get(name='CAE Building Coordinator')
+    #     cae_director = Group.objects.get(name='CAE Director')
+    #     cae_attendant_group = Group.objects.get(name='CAE Attendant')
+    #     cae_admin_group = Group.objects.get(name='CAE Admin GA')
+    #     cae_admin_ga_group = Group.objects.get(name='CAE Admin')
+    #     cae_programmer_ga_group = Group.objects.get(name='CAE Programmer GA')
+    #     cae_programmer_group = Group.objects.get(name='CAE Programmer')
+    #
+    #     # Get arbitrary non-CAE group to also test. In this case, it's a random STEP Center group.
+    #     step_group = Group.objects.get(name='STEP Admin')
+    #
+    #     # Add all above groups to user, so that we can test removing during is_active toggle.
+    #     self.user.groups.add(*[
+    #         cae_building_coordinator,
+    #         cae_director,
+    #         cae_attendant_group,
+    #         cae_admin_ga_group,
+    #         cae_admin_group,
+    #         cae_programmer_ga_group,
+    #         cae_programmer_group,
+    #         step_group,
+    #     ])
+    #     self.user.save()
+    #
+    #     # Refresh models from database, so we aren't using cached/memory data.
+    #     self.user = models.User.objects.get(username=self.user.username)
+    #
+    #     # Verify expected groups.
+    #     user_groups = self.user.groups.all().values_list('name', flat=True)
+    #     for group_name in settings.CAE_CENTER_GROUPS:
+    #         self.assertIn(group_name, user_groups)
+    #     # Also verify non-CAE group membership.
+    #     self.assertIn(step_group.name, user_groups)
+    #
+    #     # Now toggle "cae_is_active" to false. This should remove all CAE groups only.
+    #     self.user.userintermediary.cae_is_active = False
+    #     self.user.save()
+    #
+    #     # Refresh models from database, so we aren't using cached/memory data.
+    #     self.user = models.User.objects.get(username=self.user.username)
+    #
+    #     # Verify groups have automatically changed.
+    #     user_groups = self.user.groups.all().values_list('name', flat=True)
+    #     for group_name in settings.CAE_CENTER_GROUPS:
+    #         self.assertNotIn(group_name, user_groups)
+    #     # Also verify non-CAE group membership has remained unchanged.
+    #     self.assertIn(step_group.name, user_groups)
 
     def test_string_representation_with_user(self):
         self.assertEqual(str(self.test_intermediary_with_user), str(self.test_intermediary_with_user.bronco_net))

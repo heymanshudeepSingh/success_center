@@ -139,8 +139,10 @@ def compare_user_and_wmuuser_models(uid):
         # Previously (above), we tried to set (Login)User is_active value based on the return values of LDAP.
         # However, that had occasional syncing issues, due to main campus LDAP being an unorganized nightmare.
         # Instead, as of summer 2022, we now have manual "set user group" pages for each project.
-        # If the user has a valid group in one or more of the expected projects, we set them as active.
+        # If the user has a valid group in one or more of the expected projects, we set the (Login)User model as active.
         # No valid group means they're set to inactive.
+        # Meanwhile, the WmuUser model is_active is set based on either of the LDAP values (CAE or main campus)
+        # returning that the user is active.
         user_groups = user_model.groups.all()
         orig_active = user_model.is_active
         user_model.is_active = False
