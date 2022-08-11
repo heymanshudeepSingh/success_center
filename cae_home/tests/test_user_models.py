@@ -20,7 +20,6 @@ from phonenumber_field.phonenumber import PhoneNumber
 from .. import models
 from cae_home.management.commands.fixtures.wmu import create_departments
 from cae_home.management.commands.seeders.user import create_groups as seed_groups, create_users as seed_users
-from cae_home.tests.utils import IntegrationTestCase
 
 
 class UserModelTests(BaseTestCase):
@@ -245,7 +244,7 @@ class UserModelTests(BaseTestCase):
 #         self.assertEqual(membership_models[0].date_left, self.now)
 
 
-class UserIntermediaryModelTests(IntegrationTestCase):
+class UserIntermediaryModelTests(BaseTestCase):
     """
     Tests to ensure valid UserIntermediary model creation/logic.
     """
@@ -327,11 +326,11 @@ class UserIntermediaryModelTests(IntegrationTestCase):
         # Refresh all models.
         # Because the relations are stored in memory, and are not updated when model.save() is called.
         # Thus if a relation is edited and then a related model (held in memory) is saved, the relation edit will revert.
-        cls.user = get_user_model().objects.get(username=cls.user_bronco_net)
+        cls.user = cls.get_user(cls, cls.user_bronco_net)
         cls.wmu_user = models.WmuUser.objects.get(bronco_net=cls.wmu_user_bronco_net)
-        cls.dual_user_1 = models.User.objects.get(username=cls.dual_bronco_net_1)
+        cls.dual_user_1 = cls.get_user(cls, cls.dual_bronco_net_1)
         cls.dual_wmu_user_1 = models.WmuUser.objects.get(bronco_net=cls.dual_bronco_net_1)
-        cls.dual_user_2 = models.User.objects.get(username=cls.dual_bronco_net_2)
+        cls.dual_user_2 = cls.get_user(cls, cls.dual_bronco_net_2)
         cls.dual_wmu_user_2 = models.WmuUser.objects.get(bronco_net=cls.dual_bronco_net_2)
 
     def setUp(self):
@@ -417,7 +416,7 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             # Test updating values.
             self.user.first_name = 'Updated first name - User'
             self.user.save()
-            self.user = models.User.objects.get(username=self.user_bronco_net)
+            self.user = self.get_user(self.user_bronco_net)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.user_bronco_net)
 
             self.assertEqual(self.user.first_name, 'Updated first name - User')
@@ -426,7 +425,7 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             # Revert back to original values for next tests. While we're at it, verify correctness.
             self.user.first_name = 'Test First'
             self.user.save()
-            self.user = models.User.objects.get(username=self.user_bronco_net)
+            self.user = self.get_user(self.user_bronco_net)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.user_bronco_net)
 
             self.assertEqual(self.user.first_name, 'Test First')
@@ -467,7 +466,7 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             # This should fail and keep the same value, because WmuUser gets precedence.
             self.dual_user_1.first_name = 'Updated first name - dual, User'
             self.dual_user_1.save()
-            self.dual_user_1 = models.User.objects.get(username=self.dual_bronco_net_1)
+            self.dual_user_1 = self.get_user(self.dual_bronco_net_1)
             self.dual_wmu_user_1 = models.WmuUser.objects.get(bronco_net=self.dual_bronco_net_1)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
 
@@ -485,7 +484,7 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             # Test updating values.
             self.dual_wmu_user_2.first_name = 'Updated first name - dual, WmuUser first'
             self.dual_wmu_user_2.save()
-            self.dual_user_2 = models.User.objects.get(username=self.dual_bronco_net_2)
+            self.dual_user_2 = self.get_user(self.dual_bronco_net_2)
             self.dual_wmu_user_2 = models.WmuUser.objects.get(bronco_net=self.dual_bronco_net_2)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_2)
 
@@ -496,7 +495,7 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             # Revert back to original values for next tests. While we're at it, verify correctness.
             self.dual_wmu_user_2.first_name = 'Test First'
             self.dual_wmu_user_2.save()
-            self.dual_user_2 = models.User.objects.get(username=self.dual_bronco_net_2)
+            self.dual_user_2 = self.get_user(self.dual_bronco_net_2)
             self.dual_wmu_user_2 = models.WmuUser.objects.get(bronco_net=self.dual_bronco_net_2)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_2)
 
@@ -519,7 +518,7 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             # Test updating values.
             self.user.last_name = 'Updated last name - User'
             self.user.save()
-            self.user = models.User.objects.get(username=self.user_bronco_net)
+            self.user = self.get_user(self.user_bronco_net)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.user_bronco_net)
 
             self.assertEqual(self.user.last_name, 'Updated last name - User')
@@ -528,7 +527,7 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             # Revert back to original values for next tests. While we're at it, verify correctness.
             self.user.last_name = 'Test Last'
             self.user.save()
-            self.user = models.User.objects.get(username=self.user_bronco_net)
+            self.user = self.get_user(self.user_bronco_net)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.user_bronco_net)
 
             self.assertEqual(self.user.last_name, 'Test Last')
@@ -569,7 +568,7 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             # This should fail and keep the same value, because WmuUser gets precedence.
             self.dual_user_1.last_name = 'Updated last name - dual, User'
             self.dual_user_1.save()
-            self.dual_user_1 = models.User.objects.get(username=self.dual_bronco_net_1)
+            self.dual_user_1 = self.get_user(self.dual_bronco_net_1)
             self.dual_wmu_user_1 = models.WmuUser.objects.get(bronco_net=self.dual_bronco_net_1)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
 
@@ -587,7 +586,7 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             # Test updating values.
             self.dual_wmu_user_2.last_name = 'Updated last name - dual, WmuUser first'
             self.dual_wmu_user_2.save()
-            self.dual_user_2 = models.User.objects.get(username=self.dual_bronco_net_2)
+            self.dual_user_2 = self.get_user(self.dual_bronco_net_2)
             self.dual_wmu_user_2 = models.WmuUser.objects.get(bronco_net=self.dual_bronco_net_2)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_2)
 
@@ -598,7 +597,7 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             # Revert back to original values for next tests. While we're at it, verify correctness.
             self.dual_wmu_user_2.last_name = 'Test Last'
             self.dual_wmu_user_2.save()
-            self.dual_user_2 = models.User.objects.get(username=self.dual_bronco_net_2)
+            self.dual_user_2 = self.get_user(self.dual_bronco_net_2)
             self.dual_wmu_user_2 = models.WmuUser.objects.get(bronco_net=self.dual_bronco_net_2)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_2)
 
@@ -677,7 +676,7 @@ class UserIntermediaryModelTests(IntegrationTestCase):
                 self.user.userintermediary.wmu_is_active = False
                 self.user.save()
                 # Refresh models from database, so we aren't using cached/memory data.
-                self.user = models.User.objects.get(username=self.user.username)
+                self.user = self.get_user(self.user.username)
                 user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.user_bronco_net)
 
                 # Check updated values.
@@ -690,7 +689,7 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             self.user.userintermediary.wmu_is_active = False
             self.user.save()
             # Refresh models from database, so we aren't using cached/memory data.
-            self.user = models.User.objects.get(username=self.user.username)
+            self.user = self.get_user(self.user.username)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.user_bronco_net)
 
             with self.subTest('With only CAE LDAP returning as active.'):
@@ -698,7 +697,7 @@ class UserIntermediaryModelTests(IntegrationTestCase):
                 self.user.userintermediary.wmu_is_active = False
                 self.user.save()
                 # Refresh models from database, so we aren't using cached/memory data.
-                self.user = models.User.objects.get(username=self.user.username)
+                self.user = self.get_user(self.user.username)
                 user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.user_bronco_net)
 
                 # Check updated values.
@@ -711,7 +710,7 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             self.user.userintermediary.wmu_is_active = False
             self.user.save()
             # Refresh models from database, so we aren't using cached/memory data.
-            self.user = models.User.objects.get(username=self.user.username)
+            self.user = self.get_user(self.user.username)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.user_bronco_net)
 
         with self.subTest('With only WMU LDAP returning as active.'):
@@ -719,7 +718,7 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             self.user.userintermediary.wmu_is_active = True
             self.user.save()
             # Refresh models from database, so we aren't using cached/memory data.
-            self.user = models.User.objects.get(username=self.user.username)
+            self.user = self.get_user(self.user.username)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.user_bronco_net)
 
             # Check updated values.
@@ -732,7 +731,7 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             self.user.userintermediary.wmu_is_active = False
             self.user.save()
             # Refresh models from database, so we aren't using cached/memory data.
-            self.user = models.User.objects.get(username=self.user.username)
+            self.user = self.get_user(self.user.username)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.user_bronco_net)
 
             with self.subTest('With both LDAPs returning as active.'):
@@ -740,7 +739,7 @@ class UserIntermediaryModelTests(IntegrationTestCase):
                 self.user.userintermediary.wmu_is_active = True
                 self.user.save()
                 # Refresh models from database, so we aren't using cached/memory data.
-                self.user = models.User.objects.get(username=self.user.username)
+                self.user = self.get_user(self.user.username)
                 user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.user_bronco_net)
 
                 # Check updated values.
@@ -753,7 +752,7 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             self.user.userintermediary.wmu_is_active = False
             self.user.save()
             # Refresh models from database, so we aren't using cached/memory data.
-            self.user = models.User.objects.get(username=self.user.username)
+            self.user = self.get_user(self.user.username)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.user_bronco_net)
 
         with self.subTest('Associated with WmuUser model only.'):
@@ -853,7 +852,7 @@ class UserIntermediaryModelTests(IntegrationTestCase):
                 self.dual_user_1.userintermediary.wmu_is_active = False
                 self.dual_user_1.save()
                 # Refresh models from database, so we aren't using cached/memory data.
-                self.dual_user_1 = models.User.objects.get(username=self.dual_user_1.username)
+                self.dual_user_1 = self.get_user(self.dual_user_1.username)
                 self.dual_wmu_user_1 = models.WmuUser.objects.get(bronco_net=self.dual_wmu_user_1.bronco_net)
                 user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
 
@@ -868,7 +867,7 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             self.dual_user_1.userintermediary.wmu_is_active = False
             self.dual_user_1.save()
             # Refresh models from database, so we aren't using cached/memory data.
-            self.dual_user_1 = models.User.objects.get(username=self.dual_user_1.username)
+            self.dual_user_1 = self.get_user(self.dual_user_1.username)
             self.dual_wmu_user_1 = models.WmuUser.objects.get(bronco_net=self.dual_wmu_user_1.bronco_net)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
 
@@ -877,7 +876,7 @@ class UserIntermediaryModelTests(IntegrationTestCase):
                 self.dual_user_1.userintermediary.wmu_is_active = False
                 self.dual_user_1.save()
                 # Refresh models from database, so we aren't using cached/memory data.
-                self.dual_user_1 = models.User.objects.get(username=self.dual_user_1.username)
+                self.dual_user_1 = self.get_user(self.dual_user_1.username)
                 self.dual_wmu_user_1 = models.WmuUser.objects.get(bronco_net=self.dual_wmu_user_1.bronco_net)
                 user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
 
@@ -892,7 +891,7 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             self.dual_user_1.userintermediary.wmu_is_active = False
             self.dual_user_1.save()
             # Refresh models from database, so we aren't using cached/memory data.
-            self.dual_user_1 = models.User.objects.get(username=self.dual_user_1.username)
+            self.dual_user_1 = self.get_user(self.dual_user_1.username)
             self.dual_wmu_user_1 = models.WmuUser.objects.get(bronco_net=self.dual_wmu_user_1.bronco_net)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
 
@@ -901,7 +900,7 @@ class UserIntermediaryModelTests(IntegrationTestCase):
                 self.dual_user_1.userintermediary.wmu_is_active = True
                 self.dual_user_1.save()
                 # Refresh models from database, so we aren't using cached/memory data.
-                self.dual_user_1 = models.User.objects.get(username=self.dual_user_1.username)
+                self.dual_user_1 = self.get_user(self.dual_user_1.username)
                 self.dual_wmu_user_1 = models.WmuUser.objects.get(bronco_net=self.dual_wmu_user_1.bronco_net)
                 user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
 
@@ -916,7 +915,7 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             self.dual_user_1.userintermediary.wmu_is_active = False
             self.dual_user_1.save()
             # Refresh models from database, so we aren't using cached/memory data.
-            self.dual_user_1 = models.User.objects.get(username=self.dual_user_1.username)
+            self.dual_user_1 = self.get_user(self.dual_user_1.username)
             self.dual_wmu_user_1 = models.WmuUser.objects.get(bronco_net=self.dual_wmu_user_1.bronco_net)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
 
@@ -925,7 +924,7 @@ class UserIntermediaryModelTests(IntegrationTestCase):
                 self.dual_user_1.userintermediary.wmu_is_active = True
                 self.dual_user_1.save()
                 # Refresh models from database, so we aren't using cached/memory data.
-                self.dual_user_1 = models.User.objects.get(username=self.dual_user_1.username)
+                self.dual_user_1 = self.get_user(self.dual_user_1.username)
                 self.dual_wmu_user_1 = models.WmuUser.objects.get(bronco_net=self.dual_wmu_user_1.bronco_net)
                 user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
 
@@ -940,7 +939,7 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             self.dual_user_1.userintermediary.wmu_is_active = False
             self.dual_user_1.save()
             # Refresh models from database, so we aren't using cached/memory data.
-            self.dual_user_1 = models.User.objects.get(username=self.dual_user_1.username)
+            self.dual_user_1 = self.get_user(self.dual_user_1.username)
             self.dual_wmu_user_1 = models.WmuUser.objects.get(bronco_net=self.dual_wmu_user_1.bronco_net)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_1)
 
@@ -953,7 +952,7 @@ class UserIntermediaryModelTests(IntegrationTestCase):
                 self.dual_wmu_user_2.userintermediary.wmu_is_active = False
                 self.dual_wmu_user_2.save()
                 # Refresh models from database, so we aren't using cached/memory data.
-                self.dual_user_2 = models.User.objects.get(username=self.dual_user_2.username)
+                self.dual_user_2 = self.get_user(self.dual_user_2.username)
                 self.dual_wmu_user_2 = models.WmuUser.objects.get(bronco_net=self.dual_wmu_user_2.bronco_net)
                 user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_2)
 
@@ -968,7 +967,7 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             self.dual_wmu_user_2.userintermediary.wmu_is_active = False
             self.dual_wmu_user_2.save()
             # Refresh models from database, so we aren't using cached/memory data.
-            self.dual_user_2 = models.User.objects.get(username=self.dual_user_2.username)
+            self.dual_user_2 = self.get_user(self.dual_user_2.username)
             self.dual_wmu_user_2 = models.WmuUser.objects.get(bronco_net=self.dual_wmu_user_2.bronco_net)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_2)
 
@@ -977,7 +976,7 @@ class UserIntermediaryModelTests(IntegrationTestCase):
                 self.dual_wmu_user_2.userintermediary.wmu_is_active = False
                 self.dual_wmu_user_2.save()
                 # Refresh models from database, so we aren't using cached/memory data.
-                self.dual_user_2 = models.User.objects.get(username=self.dual_user_2.username)
+                self.dual_user_2 = self.get_user(self.dual_user_2.username)
                 self.dual_wmu_user_2 = models.WmuUser.objects.get(bronco_net=self.dual_wmu_user_2.bronco_net)
                 user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_2)
 
@@ -992,7 +991,7 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             self.dual_wmu_user_2.userintermediary.wmu_is_active = False
             self.dual_wmu_user_2.save()
             # Refresh models from database, so we aren't using cached/memory data.
-            self.dual_user_2 = models.User.objects.get(username=self.dual_user_2.username)
+            self.dual_user_2 = self.get_user(self.dual_user_2.username)
             self.dual_wmu_user_2 = models.WmuUser.objects.get(bronco_net=self.dual_wmu_user_2.bronco_net)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_2)
 
@@ -1001,7 +1000,7 @@ class UserIntermediaryModelTests(IntegrationTestCase):
                 self.dual_wmu_user_2.userintermediary.wmu_is_active = True
                 self.dual_wmu_user_2.save()
                 # Refresh models from database, so we aren't using cached/memory data.
-                self.dual_user_2 = models.User.objects.get(username=self.dual_user_2.username)
+                self.dual_user_2 = self.get_user(self.dual_user_2.username)
                 self.dual_wmu_user_2 = models.WmuUser.objects.get(bronco_net=self.dual_wmu_user_2.bronco_net)
                 user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_2)
 
@@ -1016,7 +1015,7 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             self.dual_wmu_user_2.userintermediary.wmu_is_active = False
             self.dual_wmu_user_2.save()
             # Refresh models from database, so we aren't using cached/memory data.
-            self.dual_user_2 = models.User.objects.get(username=self.dual_user_2.username)
+            self.dual_user_2 = self.get_user(self.dual_user_2.username)
             self.dual_wmu_user_2 = models.WmuUser.objects.get(bronco_net=self.dual_wmu_user_2.bronco_net)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_2)
 
@@ -1025,7 +1024,7 @@ class UserIntermediaryModelTests(IntegrationTestCase):
                 self.dual_wmu_user_2.userintermediary.wmu_is_active = True
                 self.dual_wmu_user_2.save()
                 # Refresh models from database, so we aren't using cached/memory data.
-                self.dual_user_2 = models.User.objects.get(username=self.dual_user_2.username)
+                self.dual_user_2 = self.get_user(self.dual_user_2.username)
                 self.dual_wmu_user_2 = models.WmuUser.objects.get(bronco_net=self.dual_wmu_user_2.bronco_net)
                 user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_2)
 
@@ -1040,7 +1039,7 @@ class UserIntermediaryModelTests(IntegrationTestCase):
             self.dual_wmu_user_2.userintermediary.wmu_is_active = False
             self.dual_wmu_user_2.save()
             # Refresh models from database, so we aren't using cached/memory data.
-            self.dual_user_2 = models.User.objects.get(username=self.dual_user_2.username)
+            self.dual_user_2 = self.get_user(self.dual_user_2.username)
             self.dual_wmu_user_2 = models.WmuUser.objects.get(bronco_net=self.dual_wmu_user_2.bronco_net)
             user_intermediary = models.UserIntermediary.objects.get(bronco_net=self.dual_bronco_net_2)
 
@@ -1074,7 +1073,7 @@ class UserIntermediaryModelTests(IntegrationTestCase):
     #     self.user.save()
     #
     #     # Refresh models from database, so we aren't using cached/memory data.
-    #     self.user = models.User.objects.get(username=self.user.username)
+    #     self.user = self.get_user(self.user.username)
     #
     #     # Verify expected groups.
     #     user_groups = self.user.groups.all().values_list('name', flat=True)
@@ -1088,7 +1087,7 @@ class UserIntermediaryModelTests(IntegrationTestCase):
     #     self.user.save()
     #
     #     # Refresh models from database, so we aren't using cached/memory data.
-    #     self.user = models.User.objects.get(username=self.user.username)
+    #     self.user = self.get_user(self.user.username)
     #
     #     # Verify groups have automatically changed.
     #     user_groups = self.user.groups.all().values_list('name', flat=True)
@@ -1135,7 +1134,7 @@ class UserIntermediaryModelTests(IntegrationTestCase):
                 self.test_intermediary_with_wmuuser.save()
 
 
-class WmuUserTests(IntegrationTestCase):
+class WmuUserTests(BaseTestCase):
     """
     Tests to ensure valid WMU User model creation/logic.
     """
@@ -1236,7 +1235,7 @@ class WmuUserTests(IntegrationTestCase):
         self.assertEqual(dummy_model_1, dummy_model_2)
 
 
-class WmuUserMajorRelationModelTests(IntegrationTestCase):
+class WmuUserMajorRelationModelTests(BaseTestCase):
     """
     Tests to ensure valid WmuUserMajorRelation model creation/logic.
     """
@@ -1341,7 +1340,7 @@ class WmuUserMajorRelationModelTests(IntegrationTestCase):
         self.assertTrue(models.WmuUserMajorRelationship.check_if_user_has_major_active(self.wmu_user_2, self.major_2))
 
 
-class ProfileModelTests(IntegrationTestCase):
+class ProfileModelTests(BaseTestCase):
     """
     Tests to ensure valid Profile model creation/logic.
     """
@@ -1355,7 +1354,7 @@ class ProfileModelTests(IntegrationTestCase):
         super().setUpTestData()
 
         cls.bronco_net = 'temporary'
-        cls.user = cls.create_user(cls, cls.bronco_net)
+        cls.user = cls.get_user(cls, cls.bronco_net)
         cls.user_intermediary = models.UserIntermediary.objects.get(user=cls.user)
         cls.address = models.Address.create_dummy_model()
         cls.phone_number = '+12693211234'
@@ -1398,7 +1397,7 @@ class ProfileModelTests(IntegrationTestCase):
         self.assertEqual(str(self.test_profile._meta.verbose_name_plural), 'Profiles')
 
 
-class AddressModelTests(IntegrationTestCase):
+class AddressModelTests(BaseTestCase):
     """
     Tests to ensure valid Address model creation/logic.
     """
@@ -1461,7 +1460,7 @@ class AddressModelTests(IntegrationTestCase):
         self.assertEqual(dummy_model_1, dummy_model_2)
 
 
-class SiteThemeModelTests(IntegrationTestCase):
+class SiteThemeModelTests(BaseTestCase):
     """
     Tests to ensure valid Site Theme model creation/logic.
     """
