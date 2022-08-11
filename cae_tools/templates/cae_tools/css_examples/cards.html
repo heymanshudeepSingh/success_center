@@ -6,11 +6,23 @@
 
 {% block content %}
   <h1>CSS Examples - Card</h1>
-  <p>Standard Card.</p>
+  <p>
+    Cards are meant to be used similarly to panels, but generally more to describe a single entity, such as how we use
+    them to display Applications in the GradApps project.
+  </p>
+  <p>Unlike panels, cards are less customizable. A card is meant to have three direct children:</p>
+  <ul>
+    <li><p>"header" or "head"</p></li>
+    <li><p>"body"</p></li>
+    <li><p>"toggle"</p></li>
+  </ul>
+
+  <h2>Basic Card Examples</h2>
 
   <div class="card">
+
     <div class="header">
-      <h2>Winno: 11223344</h2>
+      <h3>Winno: 11223344</h3>
       <h3>Name: John Doe</h3>
       <h3>Date Due: Fri, May 4th</h3>
     </div>
@@ -25,20 +37,22 @@
         <p>Date Updated: April 19th, 2022</p>
       </div>
       <p>Student Processing URL: <a href="">django-url-here</a></p>
-
     </div>
 
     <div class="toggle">
       <ion-icon name="arrow-down-circle-outline"></ion-icon>
     </div>
+
   </div>
 
 
   <div class="card">
+
     <div class="header">
-      <h2>Winno: 123456</h2>
+      <h3>Winno: 123456</h3>
       <h3>Name: Jane Doe</h3>
     </div>
+
     <div class="body">
       <p>Winno: 987654</p>
       <p>Name: Jane Doe</p>
@@ -54,13 +68,17 @@
     <div class="toggle">
       <ion-icon name="arrow-down-circle-outline"></ion-icon>
     </div>
+
   </div>
 
+
   <div class="card">
+
     <div class="header">
-      <h2>Winno: 123</h2>
+      <h3>Winno: 123</h3>
       <h3>Name: Some Guy</h3>
     </div>
+
     <div class="body">
       <p>Details: Idk bro</p>
     </div>
@@ -68,6 +86,134 @@
     <div class="toggle">
       <ion-icon name="arrow-down-circle-outline"></ion-icon>
     </div>
+
+  </div>
+
+
+  <h2>Themed Card Examples</h2>
+
+  <div class="card">
+
+    <div class="header">
+      <h3>Default Card Example</h3>
+      <h3>Default Header Example</h3>
+    </div>
+
+    <div class="body">
+      <p>Default Body Example</p>
+    </div>
+
+    <div class="toggle">
+      <ion-icon name="arrow-down-circle-outline"></ion-icon>
+    </div>
+
+  </div>
+
+
+  <div class="card primary">
+
+    <div class="header">
+      <h3>Primary Card Example</h3>
+      <h3>Primary Header Example</h3>
+    </div>
+
+    <div class="body">
+      <p>Primary Body Example</p>
+    </div>
+
+    <div class="toggle">
+      <ion-icon name="arrow-down-circle-outline"></ion-icon>
+    </div>
+
+  </div>
+
+
+  <div class="card secondary">
+
+    <div class="header">
+      <h3>Secondary Card Example</h3>
+      <h3>Secondary Header Example</h3>
+    </div>
+
+    <div class="body">
+      <p>Secondary Body Example</p>
+    </div>
+
+    <div class="toggle">
+      <ion-icon name="arrow-down-circle-outline"></ion-icon>
+    </div>
+
+  </div>
+
+  <div class="card info">
+
+    <div class="header">
+      <h3>Info Card Example</h3>
+      <h3>Info Header Example</h3>
+    </div>
+
+    <div class="body">
+      <p>Info Body Example</p>
+    </div>
+
+    <div class="toggle">
+      <ion-icon name="arrow-down-circle-outline"></ion-icon>
+    </div>
+
+  </div>
+
+
+  <div class="card success">
+
+    <div class="header">
+      <h3>Success Card Example</h3>
+      <h3>Success Header Example</h3>
+    </div>
+
+    <div class="body">
+      <p>Success Body Example</p>
+    </div>
+
+    <div class="toggle">
+      <ion-icon name="arrow-down-circle-outline"></ion-icon>
+    </div>
+
+  </div>
+
+
+  <div class="card warning">
+
+    <div class="header">
+      <h3>Warning Card Example</h3>
+      <h3>Warning Header Example</h3>
+    </div>
+
+    <div class="body">
+      <p>Warning Body Example</p>
+    </div>
+
+    <div class="toggle">
+      <ion-icon name="arrow-down-circle-outline"></ion-icon>
+    </div>
+
+  </div>
+
+
+  <div class="card error">
+
+    <div class="header">
+      <h3>Error Card Example</h3>
+      <h3>Error Header Example</h3>
+    </div>
+
+    <div class="body">
+      <p>Error Body Example</p>
+    </div>
+
+    <div class="toggle">
+      <ion-icon name="arrow-down-circle-outline"></ion-icon>
+    </div>
+
   </div>
 
 {% endblock content %}
