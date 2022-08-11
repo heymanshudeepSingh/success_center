@@ -13,15 +13,171 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 from django.core.exceptions import ValidationError
 from django.db import transaction
-from django.utils import timezone
+from django_expanded_test_cases import BaseTestCase
 from phonenumber_field.phonenumber import PhoneNumber
-from unittest.mock import patch
 
 # User Imports.
 from .. import models
-from cae_home.management.commands.fixtures.user import create_groups
 from cae_home.management.commands.fixtures.wmu import create_departments
+from cae_home.management.commands.seeders.user import create_groups as seed_groups, create_users as seed_users
 from cae_home.tests.utils import IntegrationTestCase
+
+
+class UserModelTests(BaseTestCase):
+    """
+    Tests to ensure expected User model creation/logic.
+    """
+    @classmethod
+    def setUpTestData(cls):
+        # Run parent logic.
+        super().setUpTestData()
+
+        # Generate user data.
+        seed_groups()
+        seed_users()
+
+    def test__user_active(self):
+        """
+        Tests to ensure user is_active sets as expected.
+        """
+        with self.subTest('Local env seed users'):
+            # Loop through all users defined in env settings seed (if any) and verify expected values.
+            for username in settings.SEED_USERS:
+                test_user = self.get_user(username)
+
+                # Verify user state. All of these should be active + staff.
+                self.assertTrue(test_user.is_active)
+                self.assertTrue(test_user.is_staff)
+
+        with self.subTest('Cae seed users'):
+            # Get relevant user models.
+            cae_director = self.get_user('cae_director')
+            cae_director_inactive = self.get_user('cae_director_inactive')
+            cae_building_coordinator = self.get_user('cae_building_coordinator')
+            cae_building_coordinator_inactive = self.get_user('cae_building_coordinator_inactive')
+            cae_attendant = self.get_user('cae_attendant')
+            cae_attendant_inactive = self.get_user('cae_attendant_inactive')
+            cae_admin = self.get_user('cae_admin')
+            cae_admin_inactive = self.get_user('cae_admin_inactive')
+            cae_programmer = self.get_user('cae_programmer')
+            cae_programmer_inactive = self.get_user('cae_programmer_inactive')
+
+            # Verify active user state.
+            self.assertTrue(cae_director.is_active)
+            self.assertTrue(cae_director.is_staff)
+            self.assertTrue(cae_building_coordinator.is_active)
+            self.assertFalse(cae_building_coordinator.is_staff)
+            self.assertTrue(cae_attendant.is_active)
+            self.assertFalse(cae_attendant.is_staff)
+            self.assertTrue(cae_admin.is_active)
+            self.assertFalse(cae_admin.is_staff)
+            self.assertTrue(cae_programmer.is_active)
+            self.assertTrue(cae_programmer.is_staff)
+
+            # Verify inactive user state.
+            self.assertFalse(cae_director_inactive.is_active)
+            self.assertFalse(cae_director_inactive.is_staff)
+            self.assertFalse(cae_building_coordinator_inactive.is_active)
+            self.assertFalse(cae_building_coordinator_inactive.is_staff)
+            self.assertFalse(cae_attendant_inactive.is_active)
+            self.assertFalse(cae_attendant_inactive.is_staff)
+            self.assertFalse(cae_admin_inactive.is_active)
+            self.assertFalse(cae_admin_inactive.is_staff)
+            self.assertFalse(cae_programmer_inactive.is_active)
+            self.assertFalse(cae_programmer_inactive.is_staff)
+
+        with self.subTest('SuccessCtr seed users'):
+            # Get relevant user models.
+            step_admin = self.get_user('step_admin')
+            step_admin_inactive = self.get_user('step_admin_inactive')
+            step_employee = self.get_user('step_employee')
+            step_employee_inactive = self.get_user('step_employee_inactive')
+
+            # Verify active user state.
+            self.assertTrue(step_admin.is_active)
+            self.assertFalse(step_admin.is_staff)
+            self.assertTrue(step_employee.is_active)
+            self.assertFalse(step_employee.is_staff)
+
+            # Verify inactive user state.
+            self.assertFalse(step_admin_inactive.is_active)
+            self.assertFalse(step_admin_inactive.is_staff)
+            self.assertFalse(step_employee_inactive.is_active)
+            self.assertFalse(step_employee_inactive.is_staff)
+
+        with self.subTest('GradApps seed users'):
+            # Get relevant user models.
+            grad_apps_admin = self.get_user('grad_apps_admin')
+            grad_apps_admin_inactive = self.get_user('grad_apps_admin_inactive')
+            grad_apps_committee_member = self.get_user('grad_apps_committee_member')
+            grad_apps_committee_member_inactive = self.get_user('grad_apps_committee_member_inactive')
+
+            # Verify active user state.
+            self.assertTrue(grad_apps_admin.is_active)
+            self.assertFalse(grad_apps_admin.is_staff)
+            self.assertTrue(grad_apps_committee_member.is_active)
+            self.assertFalse(grad_apps_committee_member.is_staff)
+
+            # Verify inactive user state.
+            self.assertFalse(grad_apps_admin_inactive.is_active)
+            self.assertFalse(grad_apps_admin_inactive.is_staff)
+            self.assertFalse(grad_apps_committee_member_inactive.is_active)
+            self.assertFalse(grad_apps_committee_member_inactive.is_staff)
+
+        with self.subTest('Test add/remove group, starting as active'):
+
+            # Double check starting state.
+            self.assertTrue(step_admin.is_active)
+            self.assertFalse(step_admin.is_staff)
+
+            # Remove all groups.
+            step_admin.groups.clear()
+            step_admin.save()
+
+            # Refresh model to clear cached data.
+            step_admin = self.get_user('step_admin')
+
+            # Check updated state.
+            self.assertFalse(step_admin.is_active)
+            self.assertFalse(step_admin.is_staff)
+
+            # Readd groups.
+            step_admin.groups.add(Group.objects.get(name='CAE Attendant'))
+            step_admin.save()
+
+            # Refresh model to clear cached data.
+            step_admin = self.get_user('step_admin')
+
+            # Check updated state.
+            self.assertTrue(step_admin.is_active)
+            self.assertFalse(step_admin.is_staff)
+
+        with self.subTest('Test add/remove group, starting as inactive'):
+            # Double check starting state.
+            self.assertFalse(grad_apps_admin_inactive.is_active)
+            self.assertFalse(grad_apps_admin_inactive.is_staff)
+
+            # Add groups.
+            grad_apps_admin_inactive.groups.add(Group.objects.get(name='Grad Apps Admin'))
+            grad_apps_admin_inactive.save()
+
+            # Refresh model to clear cached data.
+            grad_apps_admin_inactive = self.get_user('grad_apps_admin_inactive')
+
+            # Check updated state.
+            self.assertTrue(grad_apps_admin_inactive.is_active)
+            self.assertFalse(grad_apps_admin_inactive.is_staff)
+
+            # Remove all groups.
+            grad_apps_admin_inactive.groups.clear()
+            grad_apps_admin_inactive.save()
+
+            # Refresh model to clear cached data.
+            grad_apps_admin_inactive = self.get_user('grad_apps_admin_inactive')
+
+            # Check updated state.
+            self.assertFalse(grad_apps_admin_inactive.is_active)
+            self.assertFalse(grad_apps_admin_inactive.is_staff)
 
 
 # class GroupMembershipModelTests(IntegrationTestCase):
@@ -44,9 +200,13 @@ from cae_home.tests.utils import IntegrationTestCase
 #             cls.username,
 #         )
 #
-#     def test_group_syncing(self, login_user_mock, user_intermediary_mock, wmu_user_mock):
+#     # def test_group_syncing(self, login_user_mock, user_intermediary_mock, wmu_user_mock):
+#     def test_group_syncing(self):
 #         """
 #         Tests GroupMembership model automatically syncing as groups are added to and removed from user models.
+#         TODO: Would like to create tests for these, but GroupMembership seems to physically not generate in testing.
+#         Possibly due to how it seems to handle in the model signals?
+#         Really should figure out how to test this.
 #         """
 #         # Verify we start with no models.
 #         self.assertEqual(0, len(models.GroupMembership.objects.all()))
@@ -59,10 +219,10 @@ from cae_home.tests.utils import IntegrationTestCase
 #         # Verify user group was added.
 #         self.assertIn(cae_admin_group, self.user.groups.all())
 #
-#         # Verify signals were called.
-#         self.assertTrue(login_user_mock.called)
-#         self.assertTrue(user_intermediary_mock.called)
-#         self.assertTrue(wmu_user_mock.called)
+#         # # Verify signals were called.
+#         # self.assertTrue(login_user_mock.called)
+#         # self.assertTrue(user_intermediary_mock.called)
+#         # self.assertTrue(wmu_user_mock.called)
 #
 #         # Verify corresponding GroupMembership model was created.
 #         membership_models = models.GroupMembership.objects.all()

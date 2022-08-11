@@ -72,7 +72,7 @@ def get_cae_center_permissions():
     return user_fixtures.get_cae_center_permissions()
 
 
-def create_users(style):
+def create_users(style=None, display_output=False):
     """
     Creates base user models.
     """
@@ -80,12 +80,13 @@ def create_users(style):
     # Use the "SEED_USERS" list for usernames.
     for username in settings.SEED_USERS:
         # Create user account with given username and env password.
-        models.User.get_or_create_superuser(username, '', default_password)
+        user = models.User.get_or_create_superuser(username, '', default_password)
 
     # Create all default users for testing group logic.
     create_permission_group_users(password=default_password)
 
-    stdout.write('Populated ' + style.SQL_FIELD('User') + ' models.\n')
+    if display_output and style is not None:
+        stdout.write('Populated ' + style.SQL_FIELD('User') + ' models.\n')
 
 
 def create_permission_group_users(password=default_password, with_names=True, as_dict=False):
@@ -157,39 +158,39 @@ def create_permission_group_users(password=default_password, with_names=True, as
 
     # Add permission groups to CAE Center users.
     cae_director.groups.add(Group.objects.get(name='CAE Director'))
-    cae_director_inactive.groups.add(Group.objects.get(name='CAE Director'))
+    cae_director.save()
     cae_building_coordinator.groups.add(Group.objects.get(name='CAE Building Coordinator'))
-    cae_building_coordinator_inactive.groups.add(Group.objects.get(name='CAE Building Coordinator'))
+    cae_building_coordinator.save()
     cae_admin_ga.groups.add(Group.objects.get(name='CAE Admin GA'), Group.objects.get(name='CAE Admin'))
-    cae_admin_ga_inactive.groups.add(Group.objects.get(name='CAE Admin GA'), Group.objects.get(name='CAE Admin'))
+    cae_admin_ga.save()
     cae_programmer_ga.groups.add(Group.objects.get(name='CAE Programmer GA'), Group.objects.get(name='CAE Programmer'))
-    cae_programmer_ga_inactive.groups.add(Group.objects.get(name='CAE Programmer GA'), Group.objects.get(name='CAE Programmer'))
+    cae_programmer_ga.save()
     cae_admin.groups.add(Group.objects.get(name='CAE Admin'))
-    cae_admin_inactive.groups.add(Group.objects.get(name='CAE Admin'))
+    cae_admin.save()
     cae_programmer.groups.add(Group.objects.get(name='CAE Programmer'))
-    cae_programmer_inactive.groups.add(Group.objects.get(name='CAE Programmer'))
+    cae_programmer.save()
     cae_attendant.groups.add(Group.objects.get(name='CAE Attendant'))
-    cae_attendant_inactive.groups.add(Group.objects.get(name='CAE Attendant'))
+    cae_attendant.save()
 
     # Add permission groups to general WMU users.
     wmu_faculty.groups.add(Group.objects.get(name='WMU Faculty'))
-    wmu_faculty_inactive.groups.add(Group.objects.get(name='WMU Faculty'))
+    wmu_faculty.save()
     wmu_teacher.groups.add(Group.objects.get(name='WMU Teacher'))
-    wmu_teacher_inactive.groups.add(Group.objects.get(name='WMU Teacher'))
+    wmu_teacher.save()
     wmu_student.groups.add(Group.objects.get(name='WMU Student'))
-    wmu_student_inactive.groups.add(Group.objects.get(name='WMU Student'))
+    wmu_student.save()
 
     # Add permission groups to STEP (Success Center) users.
     step_admin.groups.add(Group.objects.get(name='STEP Admin'))
-    step_admin_inactive.groups.add(Group.objects.get(name='STEP Admin'))
+    step_admin.save()
     step_employee.groups.add(Group.objects.get(name='STEP Employee'))
-    step_employee_inactive.groups.add(Group.objects.get(name='STEP Employee'))
+    step_employee.save()
 
     # Add permission groups to GradApps users.
     grad_apps_admin.groups.add(Group.objects.get(name='Grad Apps Admin'))
-    grad_apps_admin_inactive.groups.add(Group.objects.get(name='Grad Apps Admin'))
+    grad_apps_admin.save()
     grad_apps_committee_member.groups.add(Group.objects.get(name='Grad Apps Committee Member'))
-    grad_apps_committee_member_inactive.groups.add(Group.objects.get(name='Grad Apps Committee Member'))
+    grad_apps_committee_member.save()
 
     # Set all GroupMembership models for users.
     check_all_group_memberships()
@@ -198,7 +199,8 @@ def create_permission_group_users(password=default_password, with_names=True, as
     today = timezone.localdate()
     two_years_ago = today - timezone.timedelta(days=730)
 
-    # Set inactive GroupMembership for CAE Center users.
+    # Set inactive GroupMembership for disabled users.
+    # Required because the is_active bool is based on group membership, so we can't add directly.
     models.GroupMembership.objects.create(
         user=cae_director_inactive,
         group=Group.objects.get(name='CAE Director'),

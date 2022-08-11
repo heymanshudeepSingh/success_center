@@ -145,15 +145,24 @@ def compare_user_and_wmuuser_models(uid):
         # returning that the user is active.
         user_groups = user_model.groups.all()
         orig_active = user_model.is_active
+        orig_staff = user_model.is_staff
         user_model.is_active = False
         for group in user_groups:
-            if group in settings.CAE_CENTER_GROUPS:
+            if group.name in (settings.CAE_ADMIN_GROUPS + ['CAE Programmer']):
+                user_model.is_staff = True
+            else:
+                user_model.is_staff = False
+            if group.name in settings.CAE_CENTER_GROUPS:
                 user_model.is_active = True
-            if group in settings.SUCCESS_CENTER_GROUPS:
+            if group.name in settings.SUCCESS_CENTER_GROUPS:
                 user_model.is_active = True
-            if group in settings.GRAD_APPS_GROUPS:
+            if group.name in settings.GRAD_APPS_GROUPS:
                 user_model.is_active = True
-        if user_model.is_active != orig_active:
+        # Extra handling for development. Seed users are set to active + staff.
+        if user_model.username in settings.SEED_USERS:
+            user_model.is_active = True
+            user_model.is_staff = True
+        if user_model.is_active != orig_active or user_model.is_staff != orig_staff:
             model_updated = True
 
     if wmu_user_model:
@@ -171,7 +180,7 @@ def compare_user_and_wmuuser_models(uid):
 
     # Handle group membership based on is_active status.
     # Note that above, we already iterated over groups and set is_active accordingly.
-    # so this is effectively a "safe fallback" for any edge-case scenarios/new logic that we might not have handled for.
+    # So this is effectively a "safe fallback" for any edge-case scenarios/new logic that we might not have handled for.
     if user_model:
         # (Login) User model exists.
         if user_model.is_active is False:
