@@ -13,7 +13,7 @@ $(document).ready(function() {
     // Loop through each card element on page.
     $(card).each(function() {
         // Add toggle to dropdown element click.
-        let toggle = $(this).children('.content').children('.toggle');
+        let toggle = $(this).children('.toggle');
         let card = $(this);
         $(toggle).on('click', function() {
             $(card).toggleClass('active');
