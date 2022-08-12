@@ -5,26 +5,37 @@ Models here should be "core" models which have overlap in various subprojects.
 If a model only applies to a single project, then it should be defined within that project.
 """
 
+# Custom model fields.
+from .fields import (
+    CodeField,
+)
+
 # Models related to WMU in general.
-from .wmu import Department
-from .wmu import RoomType
-from .wmu import Room
-from .wmu import Major
-from .wmu import WmuClass
-from .wmu import Semester
-from .wmu import StudentHistory
+from .wmu import (
+    Department,
+    RoomType,
+    Room,
+    Major,
+    WmuClass,
+    Semester,
+    StudentHistory,
+)
 
 # Models related to user-login accounts.
-from .user import User
-from .user import GroupMembership
-from .user import UserIntermediary
-from .user import WmuUser
-from .user import Profile
-from .user import Address
-from .user import SiteTheme
-from .user import WmuUserMajorRelationship
+from .user import (
+    User,
+    GroupMembership,
+    UserIntermediary,
+    WmuUser,
+    Profile,
+    Address,
+    SiteTheme,
+    WmuUserMajorRelationship,
+)
 
 # Models related to the CAE Center.
-from .cae import Asset
-from .cae import Software
-from .cae import SoftwareDetail
+from .cae import (
+    Asset,
+    Software,
+    SoftwareDetail,
+)

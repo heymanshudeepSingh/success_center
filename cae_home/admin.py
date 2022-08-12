@@ -1100,12 +1100,12 @@ class StudentHistoryAdmin(admin.ModelAdmin):
 
 class DepartmentAdmin(admin.ModelAdmin):
     # Fields to display in admin list view.
-    list_display = ('name',)
+    list_display = ('code', 'name',)
     if settings.DEBUG:
         list_display = ('id',) + list_display
 
     # Default field ordering in admin list view.
-    ordering = ('name',)
+    ordering = ('code',)
 
     # Fields to filter by in admin list view.
     list_filter = ()
@@ -1119,7 +1119,7 @@ class DepartmentAdmin(admin.ModelAdmin):
     # Organize fieldsets for admin detail view.
     fieldsets = (
         (None, {
-            'fields': ('name',),
+            'fields': ('code', 'name',),
         }),
         ('Advanced', {
             'classes': ('collapse',),
@@ -1128,7 +1128,7 @@ class DepartmentAdmin(admin.ModelAdmin):
     )
 
     # New object's slugs will be automatically set by name.
-    prepopulated_fields = {'slug': ('name',)}
+    prepopulated_fields = {'slug': ('code',)}
 
 
 class WmuClassAdmin(admin.ModelAdmin):

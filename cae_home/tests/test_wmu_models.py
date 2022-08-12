@@ -23,13 +23,17 @@ class DepartmentModelTests(IntegrationTestCase):
         # Call parent logic.
         super().setUp()
 
-        self.test_department = models.Department.objects.create(name='Test Department', slug='test-department')
+        self.test_department = models.Department.objects.create(
+            code='TD',
+            name='Test Department',
+            slug='test-department',
+        )
 
     def test_model_creation(self):
         self.assertEqual(self.test_department.name, 'Test Department')
 
     def test_string_representation(self):
-        self.assertEqual(str(self.test_department), self.test_department.name)
+        self.assertEqual(str(self.test_department), '(TD) Test Department')
 
     def test_plural_representation(self):
         self.assertEqual(str(self.test_department._meta.verbose_name), 'Department')
@@ -162,11 +166,12 @@ class RoomModelTests(IntegrationTestCase):
 
         # Create relation models.
         cae_department = models.Department.objects.create(
-            name='cae-center',
+            code='CAE',
+            name='CAE Center',
             slug='cae-center',
         )
         department_office = models.RoomType.objects.create(
-            name='department-office',
+            name='Department Office',
             slug='department-office',
         )
 

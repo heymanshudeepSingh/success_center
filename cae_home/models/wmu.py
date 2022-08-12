@@ -9,6 +9,9 @@ from django.db import models
 from django.db.models import Q
 from django.utils.text import slugify
 
+# User Imports.
+from .fields import CodeField
+
 
 MAX_LENGTH = 255
 
@@ -18,6 +21,8 @@ class Department(models.Model):
     A university department.
     """
     # Model fields.
+    # TODO: Make code require unique. First we must implement the field and populate it in production.
+    code = CodeField(max_length=MAX_LENGTH, default='')
     name = models.CharField(max_length=MAX_LENGTH, unique=True)
 
     # Self-setting/Non-user-editable fields.
@@ -32,10 +37,10 @@ class Department(models.Model):
     class Meta:
         verbose_name = 'Department'
         verbose_name_plural = 'Departments'
-        ordering = ('pk',)
+        ordering = ('code',)
 
     def __str__(self):
-        return '{0}'.format(self.name)
+        return '({0}) {1}'.format(self.code, self.name)
 
     def save(self, *args, **kwargs):
         """
@@ -54,18 +59,21 @@ class Department(models.Model):
         but test does not care what values the model actually has.
         """
         # Define "dummy model" values.
+        code = 'DD'
         name = 'Dummy Department'
         slug = slugify(name)
 
         # Attempt to get corresponding model instance, if there is one.
         try:
             department = Department.objects.get(
+                code=code,
                 name=name,
                 slug=slug,
             )
         except Department.DoesNotExist:
             # Instance not found. Create new model.
             department = Department.objects.create(
+                code=code,
                 name=name,
                 slug=slug,
             )
