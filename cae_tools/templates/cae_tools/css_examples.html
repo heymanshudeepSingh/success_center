@@ -1,7 +1,12 @@
-{% extends 'cae_tools/main.html' %}
+{% extends 'cae_tools/css_examples/main.html' %}
 
 
 {% block title_page_name %}CSS Examples | {% endblock title_page_name %}
+
+
+{% block breadcrumb_nav %}
+  <li><a href="{% url 'dev:index' %}">Dev Tools & Docs</a></li>
+{% endblock breadcrumb_nav %}
 
 
 {% block content_bar_left %}
@@ -46,7 +51,6 @@
 
   <h1>CAE Home CSS Examples</h1>
   <article>
-    <a href="{% url 'cae_home:index' %}">Return to Index</a>
     <h2>Welcome to the CAE Workspace CSS Example Page.</h2>
     <p>You should only be seeing this page if serving in development mode.</p>
     <br>

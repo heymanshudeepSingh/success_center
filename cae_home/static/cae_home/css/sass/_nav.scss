@@ -38,6 +38,7 @@ header nav {
     @include flex-direction(row);
     @include justify-content(flex-end);
     @include flex(1);
+    @include flex-wrap(wrap);
 
     // Change alignment on larger screens.
     @media only screen and (min-width: $screen-tablet-mid) {
@@ -52,6 +53,7 @@ header nav {
         @include flex-direction(row);
         @include justify-content(flex-end);
         @include flex(1);
+        @include flex-wrap(wrap);
 
         // Show on larger screens.
         @media only screen and (min-width: $screen-tablet-mid) {

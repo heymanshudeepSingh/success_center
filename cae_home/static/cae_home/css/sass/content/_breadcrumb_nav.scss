@@ -14,34 +14,47 @@
 
 main #breadcrumb-nav {
 
+    // Positioning Styles.
     display: none;
     @include flex-direction(row);
-    @include justify-content(center);
-    @include align-items(center);
+    @include flex(1);
+    position: relative;
+
+    top: -10px;
+    left: -10px;
 
     ul {
         // Positioning Styles.
         @include display-flex;
         @include flex-direction(row);
-        @include justify-content(center);
-        @include align-items(center);
+        @include flex(1);
 
-        padding-right: 10px;
-        padding-left: 10px;
-
-        // Visual Styles.
-        border-bottom-right-radius: 5px;
-        border-bottom-left-radius: 5px;
+        padding-left: 0;
     }
 
     li, a {
+        // Positioning Styles.
         padding-top: 5px;
-        padding-right: 10px;
+        padding-right: 5px;
         padding-bottom: 5px;
-        padding-left: 10px;
+        padding-left: 5px;
 
+        // Font Styles.
+        @each $font-option, $font-option-value in $font-size-options {
+        .font-size-#{$font-option} & {
+
+            font-size: font-option($font-option) * 0.80;
+
+        }}
+
+        // Visual Styles.
         text-decoration: none;
         list-style-type: none;
+    }
+
+    li.separator {
+        padding-right: 0px;
+        padding-left: 0px;
     }
 }
 
@@ -59,10 +72,6 @@ main #breadcrumb-nav {
     @each $theme, $theme-dict in $theme-colors {
     .theme-#{$theme} & {
 
-        ul {
-            background-color: theme-background($theme, 'primary');
-            border: 1px solid theme-background($theme, 'border');
-        }
 
         li, a {
             color: theme-text($theme, 'primary');

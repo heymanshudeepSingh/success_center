@@ -1,22 +1,21 @@
-{% extends 'cae_tools/main.html' %}
+{% extends 'cae_tools/css_examples/main.html' %}
 
 
 {% block title_page_name %}Nav | CSS Examples | {% endblock title_page_name %}
 
 
 {% block sub_nav %}
-  <ul>
-    <li><a href="">SubNav Element 1</a></li>
-    <li><a href="">SubNav Element 2</a></li>
-    <li><a href="">SubNav Element 3</a></li>
-  </ul>
+  <li><a href="">SubNav Element 1</a></li>
+  <li><a href="">SubNav Element 2</a></li>
+  <li><a href="">SubNav Element 3</a></li>
 {% endblock sub_nav %}
 
 
 {% block breadcrumb_nav %}
-  <li><a href="">Breadcrumb Nav Item 1</a></li>
-  <li><a href="">Breadcrumb Nav Item 2</a></li>
+  {{ block.super }}
   <li><a href="">Breadcrumb Nav Item 3</a></li>
+  <li><a href="">Breadcrumb Nav Item 4</a></li>
+  <li><a href="">Breadcrumb Nav Item 5</a></li>
 {% endblock breadcrumb_nav %}
 
 
@@ -55,8 +54,13 @@
   <article id="breadcrumb-nav-explanation">
     <h2>Breadcrumb Nav</h2>
     <p>
-      The "breadcrumb nav" displays beneath other nav elements. This element is mostly used to show ordering between
-      related pages. It allows the user to quickly and easily go back to previous pages, if desired.
+      The "breadcrumb nav" element is meant to show ordering between related paged. It gives the user a means to quickly
+      and easily go back to previous pages.
+    </p>
+    <p>
+      This element attempts to display directly underneath the page <span class="highlight code">h1</span> header tag,
+      if present. If there is no <span class="code">h1</span> header tag present, then it will instead display directly
+      underneath other page nav elements.
     </p>
     <p>
       To define breadcrumb nav on a page, use the <span class="highlight info">breadcrum_nav</span> block within the
