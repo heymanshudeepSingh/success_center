@@ -1,230 +1,217 @@
 
-//==========================//
-//==== Card Element CSS ====//
-//==========================//
+//============================//
+//==== Button Element CSS ====//
+//============================//
 
 // Import statements
 @import '../variables/_core';
 
 
-
-
-//==================================//
-//==== START Card Element Block ====//
-//==================================//
+//==========================================//
+//==== START SelectScroll Element Block ====//
+//==========================================//
 
 .main-content {
 
-    div.card {
+    .select-scroll {
 
         // Positioning Styles.
-        position: relative;
-        margin: 20px;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        height: 90px;
+        @include display-flex;
+        @include flex-direction(column);
+        @include flex(1);
+
+        max-width: 100%;
         overflow: hidden;
-
-        // Text Styles.
-        background: silver;
-        border-radius: 10px;
-
-        // Visual Styles.
-        box-shadow: 0 5px 5px 2px rgba(0, 0, 0, 0.1);
-
-        // Other Styles.
-        box-sizing: border-box;
-        /*@include transition(height 0.5s, color 0.5s, background-color 0.5s, border 0.5s);*/
     }
 
+    .select-scroll {
 
-    div.card {
-
-        // Display full content when toggled to show.
-        &.active {
-            // Positioning Styles.
-            height: auto;
-
-            ion-icon {
-                transform:rotate(-180deg);
-            }
-        }
-
-        div.head, div.header {
+        ul.selectscroll-nav {
 
             // Positioning Styles.
             @include display-flex;
             @include flex-direction(row);
-            @include justify-content(space-between);
-            @include align-items(center);
+            @include flex(1);
+            padding: 15px 10px;
 
-            padding-right: 50px;
-            padding-left: 50px;
-
-            // Other Styles.
-            box-sizing: border-box;
         }
 
-        div.body {
+        ul.selectscroll-nav li {
+
             // Positioning Styles.
             @include display-flex;
             @include flex-direction(column);
+            @include justify-content(center);
             @include flex(1);
-            position: relative;
 
-            padding-top: 30px;
-            padding-right: 50px;
-            padding-bottom: 20px;
-            padding-left: 50px;
+            min-width: 10%;
+
+            // Text Styles.
+            text-align: center;
 
             // Visual Styles.
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            background-color: #facc15;
+            border-top: 1px solid #331900;
+            border-right: 2px solid #331900;
+            border-bottom: 1px solid #331900;
+            border-left: 2px solid #331900;
+            list-style-type: none;
 
             // Other Styles.
-            box-sizing: border-box;
-            /*@include transition(height 0.5s, color 0.5s, background-color 0.5s, border 0.5s);*/
+            cursor: pointer;
         }
 
-        div.body {
+        div.selectscroll-content {
 
-            div {
-                // Positioning Styles.
-                @include display-flex;
-                @include flex-direction(row);
-                @include justify-content(space-between);
-                @include align-items(center);
-                @include flex(1);
-
-                // Other Styles.
-                box-sizing: border-box;
-            }
-        }
-
-        div.toggle {
-            // Positioning Styles.
-            position: absolute;
             @include display-flex;
+            @include flex-direction(column);
             @include justify-content(center);
-            @include align-items(center);
             @include flex(1);
 
-            bottom: 0;
-            right: 0;
-            width: 50px;
-            height: 50px;
+            width: 100%;
 
-            // Visual Styles.
-            border-end-end-radius: 10px;
-
-            ion-icon {
-                // Positioning Styles.
-                @include display-flex;
-                @include justify-content(center);
-                @include align-items(center);
-                @include flex(1);
-
-                padding-top: 10px;
-                width: 60%;
-                height: 60%;
-
-                // Other Styles.
+            // Hide content values by default.
+            > div {
+                display: none;
             }
 
+            // Except the selected one, which we show.
+            > div.selected {
+                @include display-flex;
+                @include flex-direction(column);
+                @include flex(1);
+            }
         }
-
     }
+
 }
 
-//================================//
-//==== END Card Element Block ====//
-//================================//
+//==========================================//
+//===== END SelectScroll Element Block =====//
+//==========================================//
 
 
-//=================================================//
-//==== START "Card Element" Theme Colors Block ====//
-//=================================================//
+//==========================================//
+//==== START SelectSquare Element Block ====//
+//==========================================//
 
 .main-content {
 
-    // Loop through all themes.
-    @each $theme, $theme-dict in $theme-colors {
-    .theme-#{$theme} & {
-        div.card {
-            background-color: theme-status($theme, 'default', 'primary');
-            border: 1px solid theme-status($theme, 'default', 'border');
+    .select-square {
+        @include display-flex;
+        @include flex-direction(column);
+        @include justify-content(center);
+        @include align-items(center);
+        @include flex-wrap(wrap);
+        @include flex(1);
 
-            .body{
-                background-color: theme-status($theme, 'default', 'primary');
-                border: 1px solid theme-status($theme, 'default', 'border');
+        max-width: 1100px;
+        margin: 0px auto;
+        padding: 25px;
+    }
+
+    .select-square {
+
+        // Styles for selection boxes.
+        ul.selectsquare-nav {
+            // Positioning Styles.
+            @include display-flex;
+            @include flex-direction(row);
+            @include justify-content(center);
+            @include align-items(center);
+            @include flex-wrap(wrap);
+            @include flex(1);
+
+            max-width: 1100px;
+            margin: 0px auto;
+            padding: 25px;
+        }
+
+        ul.selectsquare-nav > li {
+            // Positioning Styles.
+            width: 100px;
+            padding: 25px;
+
+            // Text Styles.
+            color: #fff;
+            font-size: 14px !important;
+            font-weight: bold;
+            text-align: center;
+
+            // Visual Styles.
+            background: #331900;
+            list-style-type: none;
+
+            // Other Styles.
+            cursor: pointer;
+        }
+
+        div.selectsquare-content {
+
+            @include display-flex;
+            @include flex-direction(column);
+            @include justify-content(center);
+            @include flex(1);
+
+            width: 100%;
+
+            // Hide content values by default.
+            > div {
+                display: none;
             }
 
-            a:not(.button) {
-                color: theme-status($theme, 'default', 'link');
+            // Except the selected one, which we show.
+            > div.selected {
+                @include display-flex;
+                @include flex-direction(column);
+                @include flex(1);
             }
+        }
 
-            a:not(.button):hover {
-                color: theme-status($theme, 'default', 'link-hover');
-            }
+        // Styles for selected content.
+        input[type='radio']:checked + label + .tab {
+            display: block;
+        }
 
-            a:hover:not(.button) {
-                background-color: theme-status($theme, 'default', 'primary');
-            }
+        input[type="radio"] {
+            display: none;
+        }
 
-            ion-icon {
-                color: theme-status($theme, 'default', 'content');
-            }
+        input[type="radio"]:checked + label {
+            // Text Styles.
+            color: black;
+
+            // Visual Styles.
+            background: #fcc30f;
 
         }
 
-        div.card:hover {
-            background-color: theme-status($theme, 'default', 'primary-hover');
-            border: 1px solid theme-status($theme, 'default', 'border-hover');
+        .tab {
+            // Positioning Styles.
+            display: none;
+            order: 1;
+
+            width: 100%;
+            padding: 20px;
+
+            // Visual Styles.
+            background: #fff;
+
         }
 
-        // Loop through all possible status types.
-        @each $status, $status-dict in theme-status-dict($theme) {
+        .tab p {
+            text-align: center;
+            padding: 20px;
 
-            div.card.#{$status} {
-
-                background-color: theme-status($theme, $status, 'primary');
-                border: 1px solid theme-status($theme, $status, 'border');
-
-                a:hover:not(.button) {
-                    background-color: theme-status($theme, $status, 'primary');
-                }
-
-                > .header, .head {
-                    // Text Styles.
-                    color: theme-status($theme, $status, 'text');
-
-                    // Visual Styles.
-                    border-bottom: 1px solid theme-status($theme, $status, 'border');
-
-                    a:not(.button) {
-                        color: theme-status($theme, $status, 'link');
-                    }
-
-                    a:not(.button):hover {
-                        color: theme-status($theme, $status, 'primary');
-                    }
-                }
-
-            }
-
-            div.card.#{$status}:hover {
-                background-color: theme-status($theme, $status, 'primary-hover');
-                border: 1px solid theme-status($theme, 'default', 'border-hover');
-            }
         }
-
-    }}
+    }
 
 }
 
+//==========================================//
+//===== END SelectSquare Element Block =====//
+//==========================================//
 
-//===============================================//
-//==== END "Card Element" Theme Colors Block ====//
-//===============================================//
 
 
 //================================================================================//
@@ -312,3 +299,4 @@
 // interpolation-mode, direction, marks, page, set-link-source, unicode-bidi,     //
 // speak                                                                          //
 //================================================================================//
+

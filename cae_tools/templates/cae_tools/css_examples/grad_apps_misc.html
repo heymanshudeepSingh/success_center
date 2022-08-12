@@ -1,0 +1,577 @@
+{% extends 'cae_tools/css_examples/main.html' %}
+
+
+{% block title_page_name %}GradApps Misc | CSS Examples | {% endblock title_page_name %}
+
+
+{% block content %}
+  <h1>CSS Examples - Grad Apps Misc</h1>
+  <p>
+    Various css elements used in GradApps project. Used to backwards-engineer them to figure out how they're rendering.
+  </p>
+  <p>Idk if they're useful to have as "generic elements in CaeHome, but they're here now.</p>
+
+  <article id="select-squares-example" class="color">
+    <h2>Select-Square Elements</h2>
+
+    <p>Clickable selection boxes to show/hide content.</p>
+    <p>
+      These are somewhat similar to our
+      <a href="{% url 'dev:css_panels' %}#tabbed-panel-examples">Tabbed Panels Element</a> as well as our
+      <a href="{% url 'dev:css_grad_apps_misc' %}#select-scroll-example">Select Scroll Element</a>.
+    </p>
+    <br>
+    <p>
+      Each div directly in the class root will be considered a separate square. The first child in each div will be set
+      as the value displayed in the select square. All other content will be hidden until the given square is clicked by the
+      user.
+    </p>
+
+    <br>
+
+    <h3>Select Square with Uniform Content</h3>
+    <div class="select-square">
+      <div>
+        <p>Square 1</p>
+        <p>This is test content for square 1.</p>
+        <p>More test content for square 1.</p>
+        <p>And more.</p>
+      </div>
+      <div>
+        <p>Square 2</p>
+        <p>This is test content for square 2.</p>
+        <p>More test content for square 2.</p>
+        <p>And more.</p>
+      </div>
+      <div>
+        <p>Square 3</p>
+        <p>This is test content for square 3.</p>
+        <p>More test content for square 3.</p>
+        <p>And more.</p>
+      </div>
+      <div>
+        <p>Square 4</p>
+        <p>This is test content for square 4.</p>
+        <p>More test content for square 4.</p>
+        <p>And more.</p>
+      </div>
+      <div>
+        <p>Square 5</p>
+        <p>This is test content for square 5.</p>
+        <p>More test content for square 5.</p>
+        <p>And more.</p>
+      </div>
+      <div>
+        <p>Square 6</p>
+        <p>This is test content for square 6.</p>
+        <p>More test content for square 6.</p>
+        <p>And more.</p>
+      </div>
+    </div>
+
+    <h3>Select Square with varied content</h3>
+    <div class="select-square">
+      <div>
+        <h2>Square 1</h2>
+        <div class="panel">
+          <div class="header">
+            <h3>This is test content for square 1.</h3>
+          </div>
+          <div class="body">
+            <p>More test content for square 1.</p>
+            <ul>
+              <li><p>One</p></li>
+            </ul>
+          </div>
+        </div>
+
+        <p>{% lorem random %}</p>
+      </div>
+      <div>
+        <h2>Square 2</h2>
+
+        <div class="panel">
+          <div class="header">
+            <h3>This is test content for square 2.</h3>
+          </div>
+          <div class="body">
+            <p>More test content for square 2.</p>
+            <ul>
+              <li><p>One</p></li>
+              <li><p>Two</p></li>
+            </ul>
+          </div>
+        </div>
+
+        <p>{% lorem random %}</p>
+      </div>
+      <div>
+        <h2>Square 3</h2>
+        <div class="panel">
+          <div class="header">
+            <h3>This is test content for square 3.</h3>
+          </div>
+          <div class="body">
+            <p>More test content for square 3.</p>
+            <ul>
+              <li><p>One</p></li>
+              <li><p>Two</p></li>
+              <li><p>Three</p></li>
+            </ul>
+          </div>
+        </div>
+
+        <p>{% lorem random %}</p>
+      </div>
+      <div>
+        <h2>Square 4</h2>
+        <div class="panel">
+          <div class="header">
+            <h3>This is test content for square 4.</h3>
+          </div>
+          <div class="body">
+            <p>More test content for square 4.</p>
+            <ul>
+              <li><p>One</p></li>
+              <li><p>Two</p></li>
+              <li><p>Three</p></li>
+              <li><p>Four</p></li>
+            </ul>
+          </div>
+        </div>
+
+        <p>{% lorem random %}</p>
+      </div>
+      <div>
+        <h2>Square 5</h2>
+        <div class="panel">
+          <div class="header">
+            <h3>This is test content for square 5.</h3>
+          </div>
+          <div class="body">
+            <p>More test content for square 5.</p>
+            <ul>
+              <li><p>One</p></li>
+              <li><p>Two</p></li>
+              <li><p>Three</p></li>
+              <li><p>Four</p></li>
+              <li><p>Five</p></li>
+            </ul>
+          </div>
+        </div>
+
+        <p>{% lorem random %}</p>
+      </div>
+      <div>
+        <h2>Square 6</h2>
+        <div class="panel">
+          <div class="header">
+            <h3>This is test content for square 6.</h3>
+          </div>
+          <div class="body">
+            <p>More test content for square 6.</p>
+        <ul>
+          <li><p>One</p></li>
+          <li><p>Two</p></li>
+          <li><p>Three</p></li>
+          <li><p>Four</p></li>
+          <li><p>Five</p></li>
+          <li><p>Six</p></li>
+        </ul>
+          </div>
+        </div>
+
+        <p>{% lorem random %}</p>
+      </div>
+    </div>
+
+  </article>
+
+  <article id="select-scroll-example" class="color">
+    <h2>Select-Scroll Elements</h2>
+
+    <p>Clickable selection scrolls to show/hide content.</p>
+    <p>
+      These are somewhat similar to our
+      <a href="{% url 'dev:css_panels' %}#tabbed-panel-examples">Tabbed Panels Element</a> as well as our
+      <a href="{% url 'dev:css_grad_apps_misc' %}#select-squares-example">Select Squares Element</a>.
+    </p>
+    <br>
+    <p>
+      Each div directly in the class root will be considered a separate scroll-box. The first p child in each div will
+      be set as the value displayed in the scroll-box. All other content will be hidden until the given scroll is
+      clicked by the user.
+    </p>
+
+    <br>
+
+    <h3>Select Scroll with Uniform Content</h3>
+    <div class="select-scroll">
+      <div>
+        <p>Box 1</p>
+        <p>This is test content for scroll-box 1.</p>
+        <p>More test content for scroll-box 1.</p>
+        <p>And more.</p>
+      </div>
+      <div>
+        <p>Box 2</p>
+        <p>This is test content for scroll-box 2.</p>
+        <p>More test content for scroll-box 2.</p>
+        <p>And more.</p>
+      </div>
+      <div>
+        <p>Box 3</p>
+        <p>This is test content for scroll-box 3.</p>
+        <p>More test content for scroll-box 3.</p>
+        <p>And more.</p>
+      </div>
+      <div>
+        <p>Box 4</p>
+        <p>This is test content for scroll-box 4.</p>
+        <p>More test content for scroll-box 4.</p>
+        <p>And more.</p>
+      </div>
+      <div>
+        <p>Box 5</p>
+        <p>This is test content for scroll-box 5.</p>
+        <p>More test content for scroll-box 5.</p>
+        <p>And more.</p>
+      </div>
+      <div>
+        <p>Box 6</p>
+        <p>This is test content for scroll-box 6.</p>
+        <p>More test content for scroll-box 6.</p>
+        <p>And more.</p>
+      </div>
+    </div>
+
+    <h3>Select Square with Panel Content</h3>
+    <div class="select-scroll">
+      <div>
+        <p>Box 1</p>
+
+        <div class="panel">
+          <div class="header">
+            <p>This is test header content for scroll-box 1.</p>
+          </div>
+          <div class="body">
+            <p>This is test body content for scroll-box 1.</p>
+          </div>
+          <div class="footer">
+            <p>This is test footer content for scroll-box 1.</p>
+          </div>
+
+        </div>
+      </div>
+      <div>
+        <p>Box 2</p>
+
+        <div class="panel">
+          <div class="header">
+            <p>This is test header content for scroll-box 2.</p>
+          </div>
+          <div class="body">
+            <p>This is test body content for scroll-box 2.</p>
+          </div>
+          <div class="footer">
+            <p>This is test footer content for scroll-box 2.</p>
+          </div>
+        </div>
+
+      </div>
+      <div>
+        <p>Box 3</p>
+
+        <div class="panel">
+          <div class="header">
+            <p>This is test header content for scroll-box 3.</p>
+          </div>
+          <div class="body">
+            <p>This is test body content for scroll-box 3.</p>
+          </div>
+          <div class="footer">
+            <p>This is test footer content for scroll-box 3.</p>
+          </div>
+        </div>
+
+      </div>
+      <div>
+        <p>Box 4</p>
+
+        <div class="panel">
+          <div class="header">
+            <p>This is test header content for scroll-box 4.</p>
+          </div>
+          <div class="body">
+            <p>This is test body content for scroll-box 4.</p>
+          </div>
+          <div class="footer">
+            <p>This is test footer content for scroll-box 4.</p>
+          </div>
+        </div>
+
+      </div>
+      <div>
+        <p>Box 5</p>
+
+        <div class="panel">
+          <div class="header">
+            <p>This is test header content for scroll-box 5.</p>
+          </div>
+          <div class="body">
+            <p>This is test body content for scroll-box 5.</p>
+          </div>
+          <div class="footer">
+            <p>This is test footer content for scroll-box 5.</p>
+          </div>
+        </div>
+
+      </div>
+      <div>
+        <p>Box 6</p>
+
+        <div class="panel">
+          <div class="header">
+            <p>This is test header content for scroll-box 6.</p>
+          </div>
+          <div class="body">
+            <p>This is test body content for scroll-box 6.</p>
+          </div>
+          <div class="footer">
+            <p>This is test footer content for scroll-box 6.</p>
+          </div>
+        </div>
+
+      </div>
+      <div>
+        <p>Box 7</p>
+
+        <div class="panel">
+          <div class="header">
+            <p>This is test header content for scroll-box 7.</p>
+          </div>
+          <div class="body">
+            <p>This is test body content for scroll-box 7.</p>
+          </div>
+          <div class="footer">
+            <p>This is test footer content for scroll-box 7.</p>
+          </div>
+        </div>
+
+      </div>
+      <div>
+        <p>Box 8</p>
+
+        <div class="panel">
+          <div class="header">
+            <p>This is test header content for scroll-box 8.</p>
+          </div>
+          <div class="body">
+            <p>This is test body content for scroll-box 8.</p>
+          </div>
+          <div class="footer">
+            <p>This is test footer content for scroll-box 8.</p>
+          </div>
+        </div>
+
+      </div>
+      <div>
+        <p>Box 9</p>
+
+        <div class="panel">
+          <div class="header">
+            <p>This is test header content for scroll-box 9.</p>
+          </div>
+          <div class="body">
+            <p>This is test body content for scroll-box 9.</p>
+          </div>
+          <div class="footer">
+            <p>This is test footer content for scroll-box 9.</p>
+          </div>
+        </div>
+
+      </div>
+      <div>
+        <p>Box 10</p>
+
+        <div class="panel">
+          <div class="header">
+            <p>This is test header content for scroll-box 10.</p>
+          </div>
+          <div class="body">
+            <p>This is test body content for scroll-box 10.</p>
+          </div>
+          <div class="footer">
+            <p>This is test footer content for scroll-box 10.</p>
+          </div>
+        </div>
+
+      </div>
+      <div>
+        <p>Box 11</p>
+
+        <div class="panel">
+          <div class="header">
+            <p>This is test header content for scroll-box 11.</p>
+          </div>
+          <div class="body">
+            <p>This is test body content for scroll-box 11.</p>
+          </div>
+          <div class="footer">
+            <p>This is test footer content for scroll-box 11.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <h3>Select Square with Card Content</h3>
+    <div class="select-scroll">
+      <div>
+        <p>Box 1</p>
+
+        <div class="card">
+          <div class="head">
+            <p>This is test header content for scroll-box 1.</p>
+          </div>
+          <div class="body">
+            <p>This is test body content for scroll-box 1.</p>
+          </div>
+        </div>
+
+      </div>
+      <div>
+        <p>Box 2</p>
+
+        <div class="card">
+          <div class="head">
+            <p>This is test header content for scroll-box 2.</p>
+          </div>
+          <div class="body">
+            <p>This is test body content for scroll-box 2.</p>
+          </div>
+        </div>
+
+      </div>
+      <div>
+        <p>Box 3</p>
+
+        <div class="card">
+          <div class="head">
+            <p>This is test header content for scroll-box 3.</p>
+          </div>
+          <div class="body">
+            <p>This is test body content for scroll-box 3.</p>
+          </div>
+        </div>
+
+      </div>
+      <div>
+        <p>Box 4</p>
+
+        <div class="card">
+          <div class="head">
+            <p>This is test header content for scroll-box 4.</p>
+          </div>
+          <div class="body">
+            <p>This is test body content for scroll-box 4.</p>
+          </div>
+        </div>
+
+      </div>
+      <div>
+        <p>Box 5</p>
+
+        <div class="card">
+          <div class="head">
+            <p>This is test header content for scroll-box 5.</p>
+          </div>
+          <div class="body">
+            <p>This is test body content for scroll-box 5.</p>
+          </div>
+        </div>
+
+      </div>
+      <div>
+        <p>Box 6</p>
+
+        <div class="card">
+          <div class="head">
+            <p>This is test header content for scroll-box 6.</p>
+          </div>
+          <div class="body">
+            <p>This is test body content for scroll-box 6.</p>
+          </div>
+        </div>
+
+      </div>
+      <div>
+        <p>Box 7</p>
+
+        <div class="card">
+          <div class="head">
+            <p>This is test header content for scroll-box 7.</p>
+          </div>
+          <div class="body">
+            <p>This is test body content for scroll-box 7.</p>
+          </div>
+        </div>
+
+      </div>
+      <div>
+        <p>Box 8</p>
+
+        <div class="card">
+          <div class="head">
+            <p>This is test header content for scroll-box 8.</p>
+          </div>
+          <div class="body">
+            <p>This is test body content for scroll-box 8.</p>
+          </div>
+        </div>
+
+      </div>
+      <div>
+        <p>Box 9</p>
+
+        <div class="card">
+          <div class="head">
+            <p>This is test header content for scroll-box 9.</p>
+          </div>
+          <div class="body">
+            <p>This is test body content for scroll-box 9.</p>
+          </div>
+        </div>
+
+      </div>
+      <div>
+        <p>Box 10</p>
+
+        <div class="card">
+          <div class="head">
+            <p>This is test header content for scroll-box 10.</p>
+          </div>
+          <div class="body">
+            <p>This is test body content for scroll-box 10.</p>
+          </div>
+        </div>
+
+      </div>
+      <div>
+        <p>Box 11</p>
+
+        <div class="card">
+          <div class="head">
+            <p>This is test header content for scroll-box 11.</p>
+          </div>
+          <div class="body">
+            <p>This is test body content for scroll-box 11.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </article>
+
+{% endblock content %}

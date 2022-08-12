@@ -1,5 +1,6 @@
 /**
- * Detects and initializes tabbed panel elements.
+ * Logic for TabbedPanels custom CSS element.
+ * Behaves somewhat similarly to SelectBoxes element.
  */
 
 // console.log('Loaded tabbed_panel.js');

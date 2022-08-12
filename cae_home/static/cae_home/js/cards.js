@@ -12,9 +12,12 @@ $(document).ready(function() {
 
     // Loop through each card element on page.
     $(card).each(function() {
-        // Add toggle to dropdown element click.
-        let toggle = $(this).children('.toggle');
+        // Add toggle elemenet to card.
         let card = $(this);
+        let toggle = $('<div class="toggle"><ion-icon name="arrow-down-circle-outline"></ion-icon></div>');
+        $(card).append(toggle);
+
+        // Add dropdown element click.
         $(toggle).on('click', function() {
             $(card).toggleClass('active');
         });

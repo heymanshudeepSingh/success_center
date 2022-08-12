@@ -173,3 +173,12 @@ def css_text_highlighting(request):
     """
     # Render template to user.
     return TemplateResponse(request, 'cae_tools/css_examples/text_highlighting.html', {})
+
+
+def css_grad_apps_misc(request):
+    """
+    Displays various css elements used in GradApps project.
+    Used to backwards-engineer them to figure out how they're rendering.
+    """
+    # Render template to user.
+    return TemplateResponse(request, 'cae_tools/css_examples/grad_apps_misc.html', {})

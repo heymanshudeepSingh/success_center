@@ -27,6 +27,7 @@ urlpatterns = [
     path('documentation/css_examples/status_messages', views.css_status_messages, name='css_status_messages'),
     path('documentation/css_examples/tables', views.css_tables, name='css_tables'),
     path('documentation/css_examples/text_highlighting', views.css_text_highlighting, name='css_text_highlighting'),
+    path('documentation/css_examples/grad_apps_misc', views.css_grad_apps_misc, name='css_grad_apps_misc'),
     path('documentation/css_examples/', views.css_examples, name='css_examples'),
 
     # CSS documentation urls.
