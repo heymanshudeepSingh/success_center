@@ -281,6 +281,10 @@ body.hide-vertical-scroll-bar {
             color: theme-text($theme, 'primary');
         }
 
+        .key {
+            color: theme-text($theme, 'content-subtle');
+        }
+
     }}
 
 }}
