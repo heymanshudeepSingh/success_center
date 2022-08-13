@@ -272,9 +272,9 @@ class MajorTests(IntegrationTestCase):
         self.assertEqual(dummy_model_1, dummy_model_2)
 
 
-class SemesterDateModelTests(IntegrationTestCase):
+class SemesterModelTests(IntegrationTestCase):
     """
-    Tests to ensure valid Semester Date model creation/logic.
+    Tests to ensure valid Semester model creation/logic.
     """
     @classmethod
     def setUpTestData(cls):
@@ -295,24 +295,24 @@ class SemesterDateModelTests(IntegrationTestCase):
         # Call parent logic.
         super().setUp()
 
-        self.test_semester_date = models.Semester.objects.create(
+        self.test_semester = models.Semester.objects.create(
             start_date=self.start_date,
             end_date=self.end_date,
         )
 
     def test_model_creation(self):
-        self.assertEqual(self.test_semester_date.start_date, self.start_date)
-        self.assertEqual(self.test_semester_date.end_date, self.end_date)
+        self.assertEqual(self.test_semester.start_date, self.start_date)
+        self.assertEqual(self.test_semester.end_date, self.end_date)
 
     def test_string_representation(self):
         self.assertEqual(
-            str(self.test_semester_date),
-            '{0} {1}'.format(self.test_semester_date.start_date.year, self.test_semester_date.name),
+            str(self.test_semester),
+            '{0} {1}'.format(self.test_semester.start_date.year, self.test_semester.name),
         )
 
     def test_plural_representation(self):
-        self.assertEqual(str(self.test_semester_date._meta.verbose_name), 'Semester Date')
-        self.assertEqual(str(self.test_semester_date._meta.verbose_name_plural), 'Semester Dates')
+        self.assertEqual(str(self.test_semester._meta.verbose_name), 'Semester')
+        self.assertEqual(str(self.test_semester._meta.verbose_name_plural), 'Semesters')
 
     def test_dummy_creation(self):
         # Test create.

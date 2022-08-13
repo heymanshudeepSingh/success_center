@@ -449,8 +449,8 @@ class Semester(models.Model):
     date_modified = models.DateTimeField(auto_now=True)
 
     class Meta:
-        verbose_name = 'Semester Date'
-        verbose_name_plural = 'Semester Dates'
+        verbose_name = 'Semester'
+        verbose_name_plural = 'Semesters'
         ordering = ('-start_date',)
         unique_together = ('name', 'start_date')
 

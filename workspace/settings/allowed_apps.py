@@ -297,7 +297,7 @@ ADMIN_REORDER = (
             'cae_home.WmuClass',
             'cae_home.RoomType',
             'cae_home.Room',
-            'cae_home.SemesterDate',
+            'cae_home.Semester',
         ),
     },
     {
