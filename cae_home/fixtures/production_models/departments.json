@@ -3,7 +3,7 @@
     "model": "cae_home.department",
     "pk": 1,
     "fields": {
-        "code": "N/A",
+        "code": "NA",
         "name": "NA/Unknown",
         "slug": "na-unknown",
         "date_created": "2018-01-01T08:00:00.000Z",
@@ -14,9 +14,9 @@
     "model": "cae_home.department",
     "pk": 2,
     "fields": {
-        "code": "",
-        "name": "Advising",
-        "slug": "advising",
+        "code": "PA",
+        "name": "Parkview Advising",
+        "slug": "parkview-advising",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -69,7 +69,7 @@
     "model": "cae_home.department",
     "pk": 7,
     "fields": {
-        "code": "",
+        "code": "DO",
         "name": "Dean's Office",
         "slug": "deans-office",
         "date_created": "2018-01-01T08:00:00.000Z",
@@ -146,7 +146,7 @@
     "model": "cae_home.department",
     "pk": 14,
     "fields": {
-        "code": "",
+        "code": "PC",
         "name": "Parkview Cafe",
         "slug": "parkview-cafe",
         "date_created": "2018-01-01T08:00:00.000Z",
