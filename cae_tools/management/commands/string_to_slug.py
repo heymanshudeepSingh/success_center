@@ -1,7 +1,6 @@
 """
-Seeder command that initializes project models.
-
-Also attempts to hook into SubProjects within "apps" folder and seed those as well.
+Reads in console input as a single string and converts/displays as slug format.
+Used to quickly check what a slug might look like, if you're unsure for a given string.
 """
 
 # System Imports.
