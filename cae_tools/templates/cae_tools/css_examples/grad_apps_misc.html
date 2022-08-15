@@ -1,4 +1,5 @@
 {% extends 'cae_tools/css_examples/main.html' %}
+{% load cae_home_tags %}
 
 
 {% block title_page_name %}GradApps Misc | CSS Examples | {% endblock title_page_name %}
@@ -32,158 +33,36 @@
 
     <h3>Select Square with Uniform Content</h3>
     <div class="select-square">
-      <div>
-        <p>Square 1</p>
-        <p>This is test content for square 1.</p>
-        <p>More test content for square 1.</p>
-        <p>And more.</p>
+      {% for index in 6|range %}
+        <div>
+          <p>Square {{ index }}</p>
+          <p>This is test content for square {{ index }}.</p>
+          <p>More test content for square {{ index }}.</p>
+          <p>And more.</p>
       </div>
-      <div>
-        <p>Square 2</p>
-        <p>This is test content for square 2.</p>
-        <p>More test content for square 2.</p>
-        <p>And more.</p>
-      </div>
-      <div>
-        <p>Square 3</p>
-        <p>This is test content for square 3.</p>
-        <p>More test content for square 3.</p>
-        <p>And more.</p>
-      </div>
-      <div>
-        <p>Square 4</p>
-        <p>This is test content for square 4.</p>
-        <p>More test content for square 4.</p>
-        <p>And more.</p>
-      </div>
-      <div>
-        <p>Square 5</p>
-        <p>This is test content for square 5.</p>
-        <p>More test content for square 5.</p>
-        <p>And more.</p>
-      </div>
-      <div>
-        <p>Square 6</p>
-        <p>This is test content for square 6.</p>
-        <p>More test content for square 6.</p>
-        <p>And more.</p>
-      </div>
+      {% endfor %}
     </div>
 
     <h3>Select Square with varied content</h3>
     <div class="select-square">
-      <div>
-        <h2>Square 1</h2>
-        <div class="panel">
-          <div class="header">
-            <h3>This is test content for square 1.</h3>
+      {% for index in 6|range %}
+        <div>
+          <h2>Square {{ index }}</h2>
+          <div class="panel">
+            <div class="header">
+              <h3>This is test content for square {{ index }}.</h3>
+            </div>
+            <div class="body">
+              <p>More test content for square {{ index }}.</p>
+              <ul>
+                <li><p>Test li item {{ index }}</p></li>
+              </ul>
+            </div>
           </div>
-          <div class="body">
-            <p>More test content for square 1.</p>
-            <ul>
-              <li><p>One</p></li>
-            </ul>
-          </div>
+
+          <p>{% lorem random %}</p>
         </div>
-
-        <p>{% lorem random %}</p>
-      </div>
-      <div>
-        <h2>Square 2</h2>
-
-        <div class="panel">
-          <div class="header">
-            <h3>This is test content for square 2.</h3>
-          </div>
-          <div class="body">
-            <p>More test content for square 2.</p>
-            <ul>
-              <li><p>One</p></li>
-              <li><p>Two</p></li>
-            </ul>
-          </div>
-        </div>
-
-        <p>{% lorem random %}</p>
-      </div>
-      <div>
-        <h2>Square 3</h2>
-        <div class="panel">
-          <div class="header">
-            <h3>This is test content for square 3.</h3>
-          </div>
-          <div class="body">
-            <p>More test content for square 3.</p>
-            <ul>
-              <li><p>One</p></li>
-              <li><p>Two</p></li>
-              <li><p>Three</p></li>
-            </ul>
-          </div>
-        </div>
-
-        <p>{% lorem random %}</p>
-      </div>
-      <div>
-        <h2>Square 4</h2>
-        <div class="panel">
-          <div class="header">
-            <h3>This is test content for square 4.</h3>
-          </div>
-          <div class="body">
-            <p>More test content for square 4.</p>
-            <ul>
-              <li><p>One</p></li>
-              <li><p>Two</p></li>
-              <li><p>Three</p></li>
-              <li><p>Four</p></li>
-            </ul>
-          </div>
-        </div>
-
-        <p>{% lorem random %}</p>
-      </div>
-      <div>
-        <h2>Square 5</h2>
-        <div class="panel">
-          <div class="header">
-            <h3>This is test content for square 5.</h3>
-          </div>
-          <div class="body">
-            <p>More test content for square 5.</p>
-            <ul>
-              <li><p>One</p></li>
-              <li><p>Two</p></li>
-              <li><p>Three</p></li>
-              <li><p>Four</p></li>
-              <li><p>Five</p></li>
-            </ul>
-          </div>
-        </div>
-
-        <p>{% lorem random %}</p>
-      </div>
-      <div>
-        <h2>Square 6</h2>
-        <div class="panel">
-          <div class="header">
-            <h3>This is test content for square 6.</h3>
-          </div>
-          <div class="body">
-            <p>More test content for square 6.</p>
-        <ul>
-          <li><p>One</p></li>
-          <li><p>Two</p></li>
-          <li><p>Three</p></li>
-          <li><p>Four</p></li>
-          <li><p>Five</p></li>
-          <li><p>Six</p></li>
-        </ul>
-          </div>
-        </div>
-
-        <p>{% lorem random %}</p>
-      </div>
+      {% endfor %}
     </div>
 
   </article>
@@ -209,43 +88,15 @@
 
     <h3>Select Scroll with Uniform Content</h3>
     <p>This should display 6 possible scroll elements.</p>
-    <div class="select-scroll">
-      <div>
-        <p>Box 1</p>
-        <p>This is test content for scroll-box 1.</p>
-        <p>More test content for scroll-box 1.</p>
-        <p>And more.</p>
-      </div>
-      <div>
-        <p>Box 2</p>
-        <p>This is test content for scroll-box 2.</p>
-        <p>More test content for scroll-box 2.</p>
-        <p>And more.</p>
-      </div>
-      <div>
-        <p>Box 3</p>
-        <p>This is test content for scroll-box 3.</p>
-        <p>More test content for scroll-box 3.</p>
-        <p>And more.</p>
-      </div>
-      <div>
-        <p>Box 4</p>
-        <p>This is test content for scroll-box 4.</p>
-        <p>More test content for scroll-box 4.</p>
-        <p>And more.</p>
-      </div>
-      <div>
-        <p>Box 5</p>
-        <p>This is test content for scroll-box 5.</p>
-        <p>More test content for scroll-box 5.</p>
-        <p>And more.</p>
-      </div>
-      <div>
-        <p>Box 6</p>
-        <p>This is test content for scroll-box 6.</p>
-        <p>More test content for scroll-box 6.</p>
-        <p>And more.</p>
-      </div>
+    <div class="select-scroll primary">
+      {% for index in 6|range %}
+        <div>
+          <p>Box {{ index }}</p>
+          <p>This is test content for scroll-box {{ index }}.</p>
+          <p>More test content for scroll-box {{ index }}.</p>
+          <p>And more.</p>
+        </div>
+      {% endfor %}
     </div>
 
     <h3>Select Square with Panel Content</h3>
@@ -253,332 +104,47 @@
       This should display 11 possible scroll elements, with corresponding
       <a href="{% url 'dev:css_panels' %}">panel</a> elements.
     </p>
-    <div class="select-scroll">
-      <div>
-        <p>Box 1</p>
+    <div class="select-scroll primary">
+      {% for index in 11|range %}
+        <div>
+          <p>Box {{ index }}</p>
 
-        <div class="panel">
-          <div class="header">
-            <p>This is test header content for scroll-box 1.</p>
-          </div>
-          <div class="body">
-            <p>This is test body content for scroll-box 1.</p>
-          </div>
-          <div class="footer">
-            <p>This is test footer content for scroll-box 1.</p>
-          </div>
+          <div class="panel">
+            <div class="header">
+              <p>This is test header content for scroll-box {{ index }}.</p>
+            </div>
+            <div class="body">
+              <p>This is test body content for scroll-box {{ index }}.</p>
+            </div>
+            <div class="footer">
+              <p>This is test footer content for scroll-box {{ index }}.</p>
+            </div>
 
-        </div>
-      </div>
-      <div>
-        <p>Box 2</p>
-
-        <div class="panel">
-          <div class="header">
-            <p>This is test header content for scroll-box 2.</p>
-          </div>
-          <div class="body">
-            <p>This is test body content for scroll-box 2.</p>
-          </div>
-          <div class="footer">
-            <p>This is test footer content for scroll-box 2.</p>
           </div>
         </div>
-
-      </div>
-      <div>
-        <p>Box 3</p>
-
-        <div class="panel">
-          <div class="header">
-            <p>This is test header content for scroll-box 3.</p>
-          </div>
-          <div class="body">
-            <p>This is test body content for scroll-box 3.</p>
-          </div>
-          <div class="footer">
-            <p>This is test footer content for scroll-box 3.</p>
-          </div>
-        </div>
-
-      </div>
-      <div>
-        <p>Box 4</p>
-
-        <div class="panel">
-          <div class="header">
-            <p>This is test header content for scroll-box 4.</p>
-          </div>
-          <div class="body">
-            <p>This is test body content for scroll-box 4.</p>
-          </div>
-          <div class="footer">
-            <p>This is test footer content for scroll-box 4.</p>
-          </div>
-        </div>
-
-      </div>
-      <div>
-        <p>Box 5</p>
-
-        <div class="panel">
-          <div class="header">
-            <p>This is test header content for scroll-box 5.</p>
-          </div>
-          <div class="body">
-            <p>This is test body content for scroll-box 5.</p>
-          </div>
-          <div class="footer">
-            <p>This is test footer content for scroll-box 5.</p>
-          </div>
-        </div>
-
-      </div>
-      <div>
-        <p>Box 6</p>
-
-        <div class="panel">
-          <div class="header">
-            <p>This is test header content for scroll-box 6.</p>
-          </div>
-          <div class="body">
-            <p>This is test body content for scroll-box 6.</p>
-          </div>
-          <div class="footer">
-            <p>This is test footer content for scroll-box 6.</p>
-          </div>
-        </div>
-
-      </div>
-      <div>
-        <p>Box 7</p>
-
-        <div class="panel">
-          <div class="header">
-            <p>This is test header content for scroll-box 7.</p>
-          </div>
-          <div class="body">
-            <p>This is test body content for scroll-box 7.</p>
-          </div>
-          <div class="footer">
-            <p>This is test footer content for scroll-box 7.</p>
-          </div>
-        </div>
-
-      </div>
-      <div>
-        <p>Box 8</p>
-
-        <div class="panel">
-          <div class="header">
-            <p>This is test header content for scroll-box 8.</p>
-          </div>
-          <div class="body">
-            <p>This is test body content for scroll-box 8.</p>
-          </div>
-          <div class="footer">
-            <p>This is test footer content for scroll-box 8.</p>
-          </div>
-        </div>
-
-      </div>
-      <div>
-        <p>Box 9</p>
-
-        <div class="panel">
-          <div class="header">
-            <p>This is test header content for scroll-box 9.</p>
-          </div>
-          <div class="body">
-            <p>This is test body content for scroll-box 9.</p>
-          </div>
-          <div class="footer">
-            <p>This is test footer content for scroll-box 9.</p>
-          </div>
-        </div>
-
-      </div>
-      <div>
-        <p>Box 10</p>
-
-        <div class="panel">
-          <div class="header">
-            <p>This is test header content for scroll-box 10.</p>
-          </div>
-          <div class="body">
-            <p>This is test body content for scroll-box 10.</p>
-          </div>
-          <div class="footer">
-            <p>This is test footer content for scroll-box 10.</p>
-          </div>
-        </div>
-
-      </div>
-      <div>
-        <p>Box 11</p>
-
-        <div class="panel">
-          <div class="header">
-            <p>This is test header content for scroll-box 11.</p>
-          </div>
-          <div class="body">
-            <p>This is test body content for scroll-box 11.</p>
-          </div>
-          <div class="footer">
-            <p>This is test footer content for scroll-box 11.</p>
-          </div>
-        </div>
-
-      </div>
+      {% endfor %}
     </div>
 
     <h3>Select Square with Card Content</h3>
     <p>This should display 11 possible scroll elements, with corresponding
       <a href="{% url 'dev:css_cards' %}">card</a> elements.
-    <div class="select-scroll">
-      <div>
-        <p>Box 1</p>
+    </p>
+    <div class="select-scroll primary">
+      {% for index in 11|range %}
+        <div>
+          <p>Box {{ index }}</p>
 
-        <div class="card">
-          <div class="head">
-            <p>This is test header content for scroll-box 1.</p>
+          <div class="card">
+            <div class="head">
+              <p>This is test header content for scroll-box {{ index }}.</p>
+            </div>
+            <div class="body">
+              <p>This is test body content for scroll-box {{ index }}.</p>
+            </div>
           </div>
-          <div class="body">
-            <p>This is test body content for scroll-box 1.</p>
-          </div>
+
         </div>
-
-      </div>
-      <div>
-        <p>Box 2</p>
-
-        <div class="card">
-          <div class="head">
-            <p>This is test header content for scroll-box 2.</p>
-          </div>
-          <div class="body">
-            <p>This is test body content for scroll-box 2.</p>
-          </div>
-        </div>
-
-      </div>
-      <div>
-        <p>Box 3</p>
-
-        <div class="card">
-          <div class="head">
-            <p>This is test header content for scroll-box 3.</p>
-          </div>
-          <div class="body">
-            <p>This is test body content for scroll-box 3.</p>
-          </div>
-        </div>
-
-      </div>
-      <div>
-        <p>Box 4</p>
-
-        <div class="card">
-          <div class="head">
-            <p>This is test header content for scroll-box 4.</p>
-          </div>
-          <div class="body">
-            <p>This is test body content for scroll-box 4.</p>
-          </div>
-        </div>
-
-      </div>
-      <div>
-        <p>Box 5</p>
-
-        <div class="card">
-          <div class="head">
-            <p>This is test header content for scroll-box 5.</p>
-          </div>
-          <div class="body">
-            <p>This is test body content for scroll-box 5.</p>
-          </div>
-        </div>
-
-      </div>
-      <div>
-        <p>Box 6</p>
-
-        <div class="card">
-          <div class="head">
-            <p>This is test header content for scroll-box 6.</p>
-          </div>
-          <div class="body">
-            <p>This is test body content for scroll-box 6.</p>
-          </div>
-        </div>
-
-      </div>
-      <div>
-        <p>Box 7</p>
-
-        <div class="card">
-          <div class="head">
-            <p>This is test header content for scroll-box 7.</p>
-          </div>
-          <div class="body">
-            <p>This is test body content for scroll-box 7.</p>
-          </div>
-        </div>
-
-      </div>
-      <div>
-        <p>Box 8</p>
-
-        <div class="card">
-          <div class="head">
-            <p>This is test header content for scroll-box 8.</p>
-          </div>
-          <div class="body">
-            <p>This is test body content for scroll-box 8.</p>
-          </div>
-        </div>
-
-      </div>
-      <div>
-        <p>Box 9</p>
-
-        <div class="card">
-          <div class="head">
-            <p>This is test header content for scroll-box 9.</p>
-          </div>
-          <div class="body">
-            <p>This is test body content for scroll-box 9.</p>
-          </div>
-        </div>
-
-      </div>
-      <div>
-        <p>Box 10</p>
-
-        <div class="card">
-          <div class="head">
-            <p>This is test header content for scroll-box 10.</p>
-          </div>
-          <div class="body">
-            <p>This is test body content for scroll-box 10.</p>
-          </div>
-        </div>
-
-      </div>
-      <div>
-        <p>Box 11</p>
-
-        <div class="card">
-          <div class="head">
-            <p>This is test header content for scroll-box 11.</p>
-          </div>
-          <div class="body">
-            <p>This is test body content for scroll-box 11.</p>
-          </div>
-        </div>
-
-      </div>
+      {% endfor %}
     </div>
 
   </article>
@@ -604,98 +170,48 @@
 
     <h3>Priority Select with Uniform Content</h3>
     <div class="priority-select">
-      <div>
-        <p>Priority 1</p>
-        <p>This is test content for priority selection display 1.</p>
-        <p>More test content for priority selection display 1.</p>
-        <p>And more.</p>
-      </div>
-      <div>
-        <p>Priority 2</p>
-        <p>This is test content for priority selection display 2.</p>
-        <p>More test content for priority selection display 2.</p>
-        <p>And more.</p>
-      </div>
-      <div>
-        <p>Priority 3</p>
-        <p>This is test content for priority selection display 3.</p>
-        <p>More test content for priority selection display 3.</p>
-        <p>And more.</p>
-      </div>
+      {% for index in 3|range %}
+        <div>
+          <p>Priority {{ index }}</p>
+          <p>This is test content for priority selection display {{ index }}.</p>
+          <p>More test content for priority selection display {{ index }}.</p>
+          <p>And more.</p>
+        </div>
+      {% endfor %}
     </div>
 
     <h3>Priority Select with Panel Content</h3>
     <div class="priority-select">
-      <div>
-        <p>Priority 1</p>
-        <div class="panel">
-          <div class="head">
-            <p>This is test header content for priority selection panel display 1.</p>
-          </div>
-          <div class="body">
-            <p>This is test body content for priority selection panel display 1.</p>
-          </div>
-        </div>
-      </div>
-      <div>
-        <p>Priority 2</p>
-        <div class="panel">
-          <div class="head">
-            <p>This is test header content for priority selection panel display 2.</p>
-          </div>
-          <div class="body">
-            <p>This is test body content for priority selection panel display 2.</p>
+      {% for index in 3|range %}
+        <div>
+          <p>Priority {{ index }}</p>
+          <div class="panel">
+            <div class="head">
+              <p>This is test header content for priority selection panel display {{ index }}.</p>
+            </div>
+            <div class="body">
+              <p>This is test body content for priority selection panel display {{ index }}.</p>
+            </div>
           </div>
         </div>
-      </div>
-      <div>
-        <p>Priority 3</p>
-        <div class="panel">
-          <div class="head">
-            <p>This is test header content for priority selection panel display 3.</p>
-          </div>
-          <div class="body">
-            <p>This is test body content for priority selection panel display 3.</p>
-          </div>
-        </div>
-      </div>
+      {% endfor %}
     </div>
 
     <h3>Priority Select with Card Content</h3>
     <div class="priority-select">
-      <div>
-        <p>Priority 1</p>
-        <div class="card">
-          <div class="head">
-            <p>This is test header content for priority selection card display 1.</p>
-          </div>
-          <div class="body">
-            <p>This is test body content for priority selection card display 1.</p>
-          </div>
-        </div>
-      </div>
-      <div>
-        <p>Priority 2</p>
-        <div class="card">
-          <div class="head">
-            <p>This is test header content for priority selection card display 2.</p>
-          </div>
-          <div class="body">
-            <p>This is test body content for priority selection card display 2.</p>
+      {% for index in 3|range %}
+        <div>
+          <p>Priority {{ index }}</p>
+          <div class="card">
+            <div class="head">
+              <p>This is test header content for priority selection card display {{ index }}.</p>
+            </div>
+            <div class="body">
+              <p>This is test body content for priority selection card display {{ index }}.</p>
+            </div>
           </div>
         </div>
-      </div>
-      <div>
-        <p>Priority 3</p>
-        <div class="card">
-          <div class="head">
-            <p>This is test header content for priority selection card display 3.</p>
-          </div>
-          <div class="body">
-            <p>This is test body content for priority selection card display 3.</p>
-          </div>
-        </div>
-      </div>
+      {% endfor %}
     </div>
 
     <h3>Priority Select with Themes</h3>

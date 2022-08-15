@@ -130,3 +130,8 @@ def is_list(val):
     Allows user to check if the value in template is a list
     """
     return isinstance(val, list) or isinstance(val,tuple)
+
+
+@register.filter(name='range')
+def filter_range(number):
+    return range(1, number + 1)
