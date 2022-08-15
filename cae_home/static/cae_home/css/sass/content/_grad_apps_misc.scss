@@ -40,8 +40,10 @@
 
             width: 100%;
 
+            // Visual Styles.
+            box-shadow: 0 5px 5px 2px rgba(0, 0, 0, 0.1);
+
             // Other Styles.
-            //box-sizing: border-box;
             overflow: hidden;
 
         }
@@ -272,6 +274,7 @@
             // Visual Styles.
             background: #331900;
             list-style-type: none;
+            box-shadow: 0 5px 5px 2px rgba(0, 0, 0, 0.1);
 
             // Other Styles.
             cursor: pointer;
@@ -330,10 +333,18 @@
                     border: 1px solid theme-status($theme, 'default', 'border');
                 }
 
-                // Loop through all possible status types.
-                @each $status, $status-dict in theme-status-dict($theme) {
+            }
 
-                    > li.#{$status} {
+        }
+
+        // Loop through all possible status types.
+        @each $status, $status-dict in theme-status-dict($theme) {
+
+            div.select-square.#{$status} {
+
+                ul.selectsquare-nav {
+
+                    > li {
 
                         // Text Styles.
                         color: theme-status($theme, $status, 'text');
