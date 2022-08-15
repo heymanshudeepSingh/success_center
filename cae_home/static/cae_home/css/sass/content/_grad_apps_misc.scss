@@ -292,7 +292,114 @@
 //===== END SelectSquare Element Block =====//
 //==========================================//
 
+//==========================================//
+//==== START PrioritySelect Element Block ====//
+//==========================================//
 
+.main-content {
+
+    .priority-select {
+
+        .priorityselect-nav {
+
+            // Positioning Styles.
+            @include display-flex;
+            @include flex-direction(row);
+            @include justify-content(space-evenly);
+            @include align-items(center);
+            @include flex(1);
+
+            margin-bottom: 12px;
+            padding: 15px 10px;
+
+            // Other Styles.
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .priorityselect-nav {
+
+            li {
+                // Positioning Styles.
+                @include display-flex;
+                @include flex-direction(column);
+                @include justify-content(center);
+                @include align-items(center);
+                @include flex(1);
+
+                // Text Styles.
+                text-align: center;
+
+                // Visual Styles.
+                border: 1px solid #f2f2f2;
+            }
+
+            p {
+                @include display-flex;
+                @include flex-direction(column);
+                @include justify-content(center);
+                @include align-items(center);
+                @include flex(1);
+
+                height: 50px;
+            }
+
+        }
+
+        .priorityselect-content {
+
+            > div {
+                display: none;
+            }
+
+            > div.selected {
+                @include display-flex;
+                @include flex-direction(column);
+            }
+        }
+
+        .filter-area input[type='radio']:checked + label {
+            background: orange;
+            color: black;
+        }
+
+        .filter-area input {
+            background-color: black;
+        }
+
+        .filter-tab input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        .checkmark {
+            margin-right: 10px;
+            height: 17px;
+            width: 17px;
+            background-color: #eee;
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+
+        .filter-tab:hover input ~ .checkmark {
+            background-color: #ccc;
+        }
+
+        .filter-tab input:checked ~ .checkmark {
+            background-color: #2196f3;
+        }
+    }
+
+}
+//==========================================//
+//===== END PrioritySelect Element Block =====//
+//==========================================//
 
 //================================================================================//
 //================================= Positioning ==================================//

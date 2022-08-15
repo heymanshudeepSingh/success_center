@@ -18,7 +18,8 @@
     <p>
       These are somewhat similar to our
       <a href="{% url 'dev:css_panels' %}#tabbed-panel-examples">Tabbed Panels Element</a> as well as our
-      <a href="{% url 'dev:css_grad_apps_misc' %}#select-scroll-example">Select Scroll Element</a>.
+      <a href="{% url 'dev:css_grad_apps_misc' %}#select-scroll-example">Select Scroll Element</a> and our
+      <a href="{% url 'dev:css_grad_apps_misc' %}#priority-select-example">Priority Select Element</a>.
     </p>
     <br>
     <p>
@@ -194,7 +195,8 @@
     <p>
       These are somewhat similar to our
       <a href="{% url 'dev:css_panels' %}#tabbed-panel-examples">Tabbed Panels Element</a> as well as our
-      <a href="{% url 'dev:css_grad_apps_misc' %}#select-squares-example">Select Squares Element</a>.
+      <a href="{% url 'dev:css_grad_apps_misc' %}#select-squares-example">Select Squares Element</a> and our
+      <a href="{% url 'dev:css_grad_apps_misc' %}#priority-select-example">Priority Select Element</a>.
     </p>
     <br>
     <p>
@@ -579,6 +581,210 @@
       </div>
     </div>
 
+  </article>
+
+  <article id="priority-select-example" class="color">
+    <h2>Priority-Select Elements</h2>
+
+    <p>Clickable priority boxes to show/hide content.</p>
+    <p>
+      These are somewhat similar to our
+      <a href="{% url 'dev:css_panels' %}#tabbed-panel-examples">Tabbed Panels Element</a> as well as our
+      <a href="{% url 'dev:css_grad_apps_misc' %}#select-squares-example">Select Squares Element</a> and our
+      <a href="{% url 'dev:css_grad_apps_misc' %}#select-scroll-example">Select Scroll Element</a>.
+    </p>
+    <br>
+    <p>
+      Each div directly in the class root will be considered a separate priority selection. The first p child in each
+      div will be set as the value displayed in the priority selection display. All other content will be hidden until
+      the given priority is selected by the user.
+    </p>
+
+    <br>
+
+    <h3>Priority Select with Uniform Content</h3>
+    <div class="priority-select">
+      <div>
+        <p>Priority 1</p>
+        <p>This is test content for priority selection display 1.</p>
+        <p>More test content for priority selection display 1.</p>
+        <p>And more.</p>
+      </div>
+      <div>
+        <p>Priority 2</p>
+        <p>This is test content for priority selection display 2.</p>
+        <p>More test content for priority selection display 2.</p>
+        <p>And more.</p>
+      </div>
+      <div>
+        <p>Priority 3</p>
+        <p>This is test content for priority selection display 3.</p>
+        <p>More test content for priority selection display 3.</p>
+        <p>And more.</p>
+      </div>
+    </div>
+
+    <h3>Priority Select with Panel Content</h3>
+    <div class="priority-select">
+      <div>
+        <p>Priority 1</p>
+        <div class="panel">
+          <div class="head">
+            <p>This is test header content for priority selection panel display 1.</p>
+          </div>
+          <div class="body">
+            <p>This is test body content for priority selection panel display 1.</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p>Priority 2</p>
+        <div class="panel">
+          <div class="head">
+            <p>This is test header content for priority selection panel display 2.</p>
+          </div>
+          <div class="body">
+            <p>This is test body content for priority selection panel display 2.</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p>Priority 3</p>
+        <div class="panel">
+          <div class="head">
+            <p>This is test header content for priority selection panel display 3.</p>
+          </div>
+          <div class="body">
+            <p>This is test body content for priority selection panel display 3.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Priority Select with Card Content</h3>
+    <div class="priority-select">
+      <div>
+        <p>Priority 1</p>
+        <div class="card">
+          <div class="head">
+            <p>This is test header content for priority selection card display 1.</p>
+          </div>
+          <div class="body">
+            <p>This is test body content for priority selection card display 1.</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p>Priority 2</p>
+        <div class="card">
+          <div class="head">
+            <p>This is test header content for priority selection card display 2.</p>
+          </div>
+          <div class="body">
+            <p>This is test body content for priority selection card display 2.</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p>Priority 3</p>
+        <div class="card">
+          <div class="head">
+            <p>This is test header content for priority selection card display 3.</p>
+          </div>
+          <div class="body">
+            <p>This is test body content for priority selection card display 3.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Priority Select with Themes</h3>
+    <div class="priority-select">
+      <div>
+        <p>Default</p>
+        <div class="panel">
+          <div class="header">
+            <p>This is test content for default priority selection display.</p>
+          </div>
+          <div class="body">
+            <p>More test content for default priority selection display.</p>
+            <p>And more.</p>
+          </div>
+        </div>
+      </div>
+      <div class="primary">
+        <p>Primary</p>
+        <div class="panel">
+          <div class="header">
+            <p>This is test content for primary priority selection display.</p>
+          </div>
+          <div class="body">
+            <p>More test content for primary priority selection display.</p>
+            <p>And more.</p>
+          </div>
+        </div>
+      </div>
+      <div class="secondary">
+        <p>Secondary</p>
+        <div class="panel">
+          <div class="header">
+            <p>This is test content for secondary priority selection display.</p>
+          </div>
+          <div class="body">
+            <p>More test content for secondary priority selection display.</p>
+            <p>And more.</p>
+          </div>
+        </div>
+      </div>
+      <div class="info">
+        <p>Info</p>
+        <div class="panel">
+          <div class="header">
+            <p>This is test content for info priority selection display.</p>
+          </div>
+            <div class="body">
+              <p>More test content for info priority selection display.</p>
+              <p>And more.</p>
+            </div>
+          </div>
+      </div>
+      <div class="success">
+        <p>Success</p>
+        <div class="panel">
+          <div class="header">
+            <p>This is test content for success priority selection display.</p>
+          </div>
+            <div class="body">
+              <p>More test content for success priority selection display.</p>
+              <p>And more.</p>
+            </div>
+          </div>
+      </div>
+      <div class="warning">
+        <p>Warning</p>
+        <div class="panel">
+          <div class="header">
+            <p>This is test content for warning priority selection display.</p>
+          </div>
+            <div class="body">
+              <p>More test content for warning priority selection display.</p>
+              <p>And more.</p>
+            </div>
+          </div>
+      </div>
+      <div class="error">
+        <p>Error</p>
+        <div class="panel">
+          <div class="header">
+            <p>This is test content for error priority selection display.</p>
+          </div>
+            <div class="body">
+              <p>More test content for error priority selection display.</p>
+              <p>And more.</p>
+            </div>
+          </div>
+      </div>
+    </div>
   </article>
 
 {% endblock content %}
