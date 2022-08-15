@@ -153,7 +153,11 @@
             background-color: theme-status($theme, 'default', 'primary');
             border: 1px solid theme-status($theme, 'default', 'border');
 
-            .body{
+            .body {
+                // Text Styles.
+                color: theme-status($theme, 'default', 'primary');
+
+                // Visual Styles.
                 background-color: theme-status($theme, 'default', 'primary');
                 border: 1px solid theme-status($theme, 'default', 'border');
             }
@@ -176,6 +180,14 @@
 
         }
 
+        div.card.active {
+
+            .body {
+                // Text Styles.
+                color: theme-text($theme, 'content');
+            }
+        }
+
         div.card:hover {
             background-color: theme-status($theme, 'default', 'primary-hover');
             border: 1px solid theme-status($theme, 'default', 'border-hover');
@@ -188,6 +200,11 @@
 
                 background-color: theme-status($theme, $status, 'primary');
                 border: 1px solid theme-status($theme, $status, 'border');
+
+                .body {
+                    // Text Styles.
+                    color: theme-status($theme, 'default', 'primary');
+                }
 
                 a:hover:not(.button) {
                     background-color: theme-status($theme, $status, 'primary');
@@ -209,6 +226,14 @@
                     }
                 }
 
+            }
+
+            div.card.active.#{$status} {
+
+                .body {
+                    // Text Styles.
+                    color: theme-text($theme, 'content');
+                }
             }
 
             div.card.#{$status}:hover {
