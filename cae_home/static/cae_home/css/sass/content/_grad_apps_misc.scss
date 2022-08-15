@@ -13,7 +13,7 @@
 
 .main-content {
 
-    .select-scroll {
+    div.select-scroll {
 
         // Positioning Styles.
         @include display-flex;
@@ -25,7 +25,7 @@
         overflow: hidden;
     }
 
-    .select-scroll {
+    div.select-scroll {
 
         // Outer container that holds both the scroll items and buttons.
         .selectscroll-nav-container {
@@ -126,7 +126,6 @@
                 text-align: center;
 
                 // Visual Styles.
-                background-color: #facc15;
                 // WARNING: Changing border size here will break JS unless you update both.
                 border-top: 1px solid #331900;
                 border-right: 2px solid #331900;
@@ -171,13 +170,58 @@
 //==========================================//
 
 
+//=================================================//
+//==== START "SelectScroll" Theme Colors Block ====//
+//=================================================//
+
+.main-content {
+
+    @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & {
+
+        div.select-scroll {
+
+            .selectscroll-nav-container {
+
+                li {
+                    background-color: theme-status($theme, 'default', 'primary');
+                }
+
+                // Loop through all possible status types.
+                @each $status, $status-dict in theme-status-dict($theme) {
+
+                    li.#{$status} {
+
+                        // Text Styles.
+                        color: theme-status($theme, $status, 'text');
+
+                        // Visual Styles.
+                        background-color: theme-status($theme, $status, 'primary');
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }}
+
+}
+
+//===============================================//
+//==== END "SelectScroll" Theme Colors Block ====//
+//===============================================//
+
+
 //==========================================//
 //==== START SelectSquare Element Block ====//
 //==========================================//
 
 .main-content {
 
-    .select-square {
+    div.select-square {
         @include display-flex;
         @include flex-direction(column);
         @include justify-content(center);
@@ -190,7 +234,7 @@
         padding: 25px;
     }
 
-    .select-square {
+    div.select-square {
 
         // Styles for selection boxes.
         ul.selectsquare-nav {
@@ -248,42 +292,6 @@
             }
         }
 
-        // Styles for selected content.
-        input[type='radio']:checked + label + .tab {
-            display: block;
-        }
-
-        input[type="radio"] {
-            display: none;
-        }
-
-        input[type="radio"]:checked + label {
-            // Text Styles.
-            color: black;
-
-            // Visual Styles.
-            background: #fcc30f;
-
-        }
-
-        .tab {
-            // Positioning Styles.
-            display: none;
-            order: 1;
-
-            width: 100%;
-            padding: 20px;
-
-            // Visual Styles.
-            background: #fff;
-
-        }
-
-        .tab p {
-            text-align: center;
-            padding: 20px;
-
-        }
     }
 
 }
@@ -292,13 +300,65 @@
 //===== END SelectSquare Element Block =====//
 //==========================================//
 
+
+//=================================================//
+//==== START "SelectSquare" Theme Colors Block ====//
+//=================================================//
+
+.main-content {
+
+    @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & {
+
+        div.select-square {
+
+            ul.selectsquare-nav {
+
+                > li {
+                    // Text Styles.
+                    color: theme-text($theme, 'content');
+
+                    // Visual Styles.
+                    background-color: theme-status($theme, 'default', 'primary');
+                    border: 1px solid theme-status($theme, 'default', 'border');
+                }
+
+                // Loop through all possible status types.
+                @each $status, $status-dict in theme-status-dict($theme) {
+
+                    > li.#{$status} {
+
+                        // Text Styles.
+                        color: theme-status($theme, $status, 'text');
+
+                        // Visual Styles.
+                        background-color: theme-status($theme, $status, 'primary');
+                        border: 1px solid theme-status($theme, $status, 'border');
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }}
+
+}
+
+//===============================================//
+//==== END "SelectSquare" Theme Colors Block ====//
+//===============================================//
+
+
 //==========================================//
 //==== START PrioritySelect Element Block ====//
 //==========================================//
 
 .main-content {
 
-    .priority-select {
+    div.priority-select {
 
         .priorityselect-nav {
 
@@ -325,26 +385,30 @@
             li {
                 // Positioning Styles.
                 @include display-flex;
-                @include flex-direction(column);
+                @include flex-direction(row);
                 @include justify-content(center);
                 @include align-items(center);
                 @include flex(1);
 
                 // Text Styles.
                 text-align: center;
+            }
 
-                // Visual Styles.
-                border: 1px solid #f2f2f2;
+            input {
+                padding-left: 10px;
             }
 
             p {
                 @include display-flex;
-                @include flex-direction(column);
+                @include flex-direction(row);
                 @include justify-content(center);
                 @include align-items(center);
                 @include flex(1);
 
+                width: 100%;
                 height: 50px;
+                padding-right: 5px;
+                padding-left: 5px;
             }
 
         }
@@ -360,46 +424,61 @@
                 @include flex-direction(column);
             }
         }
-
-        .filter-area input[type='radio']:checked + label {
-            background: orange;
-            color: black;
-        }
-
-        .filter-area input {
-            background-color: black;
-        }
-
-        .filter-tab input {
-            position: absolute;
-            opacity: 0;
-            cursor: pointer;
-            height: 0;
-            width: 0;
-        }
-
-        .checkmark {
-            margin-right: 10px;
-            height: 17px;
-            width: 17px;
-            background-color: #eee;
-            border-radius: 50%;
-            border: 3px solid white;
-        }
-
-        .filter-tab:hover input ~ .checkmark {
-            background-color: #ccc;
-        }
-
-        .filter-tab input:checked ~ .checkmark {
-            background-color: #2196f3;
-        }
     }
 
 }
 //==========================================//
 //===== END PrioritySelect Element Block =====//
 //==========================================//
+
+
+//===================================================//
+//==== START "PrioritySelect" Theme Colors Block ====//
+//===================================================//
+
+.main-content {
+
+    @each $theme, $theme-dict in $theme-colors {
+    .theme-#{$theme} & {
+
+        div.priority-select {
+
+            .priorityselect-nav {
+
+                li {
+                    background-color: theme-status($theme, 'default', 'primary');
+                    border: 1px solid theme-status($theme, 'default', 'border');
+
+                }
+
+                // Loop through all possible status types.
+                @each $status, $status-dict in theme-status-dict($theme) {
+
+                    li.#{$status} {
+
+                        // Text Styles.
+                        color: theme-status($theme, $status, 'text');
+
+                        // Visual Styles.
+                        background-color: theme-status($theme, $status, 'primary');
+                        border: 1px solid theme-status($theme, $status, 'border');
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }}
+
+}
+
+//=================================================//
+//==== END "PrioritySelect" Theme Colors Block ====//
+//=================================================//
+
 
 //================================================================================//
 //================================= Positioning ==================================//
