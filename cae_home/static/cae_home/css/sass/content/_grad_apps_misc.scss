@@ -80,7 +80,6 @@
                 height: 35px;
 
                 // Visual Styles.
-                background-color: #facc15;
                 // WARNING: Changing border size here will break JS unless you update both.
                 border-top: 1px solid #331900;
                 border-right: 2px solid #331900;
@@ -183,14 +182,22 @@
 
             .selectscroll-nav-container {
 
-                li {
+                li, .arrow {
                     background-color: theme-status($theme, 'default', 'primary');
                 }
 
-                // Loop through all possible status types.
-                @each $status, $status-dict in theme-status-dict($theme) {
+            }
 
-                    li.#{$status} {
+        }
+
+        // Loop through all possible status types.
+        @each $status, $status-dict in theme-status-dict($theme) {
+
+            div.select-scroll.#{$status} {
+
+                .selectscroll-nav-container {
+
+                    li, .arrow {
 
                         // Text Styles.
                         color: theme-status($theme, $status, 'text');
