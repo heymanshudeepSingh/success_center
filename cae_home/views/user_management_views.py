@@ -244,7 +244,7 @@ def user_edit(request):
 
             # Render response for user.
             messages.success(request, 'Successfully updated user {0}.'.format(user))
-            return HttpResponseRedirect(reverse('cae_home:user_edit', args=(user.username,)))
+            return HttpResponseRedirect(reverse('cae_home:user_edit'))
         else:
             # One or more forms failed to validate.
             messages.warning(request, 'Failed to update user info.')
