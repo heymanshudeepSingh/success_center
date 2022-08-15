@@ -21,9 +21,19 @@ $('div.priority-select').each(function() {
     // Loop through all found children.
     $(root_children).each(function() {
 
+        // Get element css to reapply later.
+        let priority_css = $(this).attr('class');
+
         // Create PrioritySelect navigation element.
         let priority_header = $(this).children(':first()').detach();
-        let priority_child = $('<li></li>').append(priority_header);
+        let priority_child = $('<li><input type=radio></li>').append(priority_header);
+        if (first_priority) {
+            // Default first element to be checked.
+            $(priority_child).children('input').prop('checked', true);
+        }
+        if (priority_css != null) {
+            priority_child.addClass(priority_css);
+        }
         priority_name_array.push($(priority_header).text());
 
         // Set onclick priority functionality.
@@ -58,8 +68,11 @@ $('div.priority-select').each(function() {
  */
 window.cae_functions['prioritySelect__toggleSelected'] = function(selected_priority) {
     // Remove 'selected' class from all priorityselect-nav siblings and apply to self.
+    // Also disable radio of any siblings, for user visual selection.
+    $(selected_priority).siblings('.selected').children('input').prop('checked', false);
     $(selected_priority).siblings('.selected').removeClass('selected');
     $(selected_priority).addClass('selected');
+    $(selected_priority).children('input').prop('checked', true);
 
     // Toggle priority-content styles to show/hide.
     let priority_content = $(selected_priority).parent().parent().children('.priorityselect-content');
