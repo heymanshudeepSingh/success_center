@@ -92,7 +92,7 @@
 
     // Header elements that are visually a direct child of the content container.
     @each $header_element in $header_element_list {
-    > #{$header_element}, >article #{$header_element} {
+    > #{$header_element}, > article #{$header_element} {
         padding-top: 10px;
         padding-bottom: 5px;
         margin-top: 10px;
@@ -257,7 +257,16 @@ body.hide-vertical-scroll-bar {
         color: theme-text($theme, 'text');
 
         @each $header_element in $header_element_list {
-        > #{$header_element} {
+        > #{$header_element},
+        .select-square > #{$header_element},
+        .select-square > div > #{$header_element},
+        .select-square > div > div > #{$header_element},
+        .select-scroll > #{$header_element},
+        .select-scroll > div > #{$header_element},
+        .select-scroll > div > div > #{$header_element},
+        .priority-select > #{$header_element},
+        .priority-select > div > #{$header_element},
+        .priority-select > div > div > #{$header_element} {
 
             color: theme-text($theme, 'header');
 
