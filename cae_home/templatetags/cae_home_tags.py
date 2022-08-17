@@ -134,4 +134,19 @@ def is_list(val):
 
 @register.filter(name='range')
 def filter_range(number):
-    return range(1, number + 1)
+    """
+    Effectively the template equivalent of Python's "range" function.
+    Aka, returns a list of numbers, for quick/easy loop iteration.
+
+    Only difference is this version starts at 1 (due to user-display stuff).
+    Then provides number of items equal to the provided number.
+    """
+    return range(1, int(number) + 1)
+
+
+@register.simple_tag
+def define(val=None):
+    """
+    For defining variables within the current template scope.
+    """
+    return val
