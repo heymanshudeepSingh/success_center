@@ -654,15 +654,6 @@ class ApiViewTests(IntegrationTestCase):
         with self.subTest('With partial values'):
             self.assertGetResponse(
                 'cae_tools:api_semester',
-                data={'identifier': 'Fall'},
-                expected_content=[
-                    '"name": null,',
-                    '"start_date": null,',
-                    '"end_date": null',
-                ],
-            )
-            self.assertGetResponse(
-                'cae_tools:api_semester',
                 data={'identifier': '2020'},
                 expected_content=[
                     '"name": null,',
@@ -673,6 +664,11 @@ class ApiViewTests(IntegrationTestCase):
 
         # Get list of all Semester models.
         semester_list = models.Semester.objects.all()
+        # Also get "most recent" semester, when just providing a single semester name ("Spring", "Fall", etc).
+        fall_semester = models.Semester.objects.filter(name='Falls').order_by('-start_date').first()
+        spring_semester = models.Semester.objects.filter(name='Spring').order_by('-start_date').first()
+        summer_1_semester = models.Semester.objects.filter(name='Summer I').order_by('-start_date').first()
+        summer_2_semester = models.Semester.objects.filter(name='Summer II').order_by('-start_date').first()
 
         # For each model, make an API call and verify expected values come back.
         for index in range(len(semester_list)):
@@ -682,16 +678,31 @@ class ApiViewTests(IntegrationTestCase):
 
             semester = semester_list[index]
 
-            # Check each individual Semester as a subtest.
+            # # Check each individual Semester as a subtest.
             with self.subTest('With "{0}" semester'.format(semester)):
+                if semester.name == 'Fall':
+                    semester_start = fall_semester.start_date
+                    semester_end = fall_semester.end_date
+                elif semester.name == 'Spring':
+                    semester_start = spring_semester.start_date
+                    semester_end = spring_semester.end_date
+                elif semester.name == 'Summer I':
+                    semester_start = summer_1_semester.start_date
+                    semester_end = summer_1_semester.end_date
+                elif semester.name == 'Summer II':
+                    semester_start = summer_2_semester.start_date
+                    semester_end = summer_2_semester.end_date
+
                 # Check querying by name.
+                # Note that querying "by name" technically matches multiple Semesters. So we just want to verify
+                # that it returns the "most recent" one.
                 self.assertGetResponse(
                     'cae_tools:api_semester',
                     data={'identifier': str(semester.name).upper()},
                     expected_content=[
                         '"name": "' + str(semester.name) + '",',
-                        '"start_date": "' + str(semester.start_date) + '",',
-                        '"end_date": "' + str(semester.end_date) + '"',
+                        '"start_date": "' + str(semester_start) + '",',
+                        '"end_date": "' + str(semester_end) + '"',
                     ],
                 )
                 self.assertGetResponse(
@@ -699,11 +710,12 @@ class ApiViewTests(IntegrationTestCase):
                     data={'identifier': str(semester.name).lower()},
                     expected_content=[
                         '"name": "' + str(semester.name) + '",',
-                        '"start_date": "' + str(semester.start_date) + '",',
-                        '"end_date": "' + str(semester.end_date) + '"',
+                        '"start_date": "' + str(semester_start) + '",',
+                        '"end_date": "' + str(semester_end) + '"',
                     ],
                 )
                 # Check querying by dates.
+                # Querying by date is more specific, so this should give us a specific, single query, such as past ones.
                 self.assertGetResponse(
                     'cae_tools:api_semester',
                     data={
