@@ -665,7 +665,7 @@ class ApiViewTests(IntegrationTestCase):
         # Get list of all Semester models.
         semester_list = models.Semester.objects.all()
         # Also get "most recent" semester, when just providing a single semester name ("Spring", "Fall", etc).
-        fall_semester = models.Semester.objects.filter(name='Falls').order_by('-start_date').first()
+        fall_semester = models.Semester.objects.filter(name='Fall').order_by('-start_date').first()
         spring_semester = models.Semester.objects.filter(name='Spring').order_by('-start_date').first()
         summer_1_semester = models.Semester.objects.filter(name='Summer I').order_by('-start_date').first()
         summer_2_semester = models.Semester.objects.filter(name='Summer II').order_by('-start_date').first()
