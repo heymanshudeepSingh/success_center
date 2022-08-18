@@ -118,7 +118,7 @@ class AdvisingAuthBackendTests(IntegrationTestCase):
 
     @unittest.skipUnless(run_ldap_tests(), 'Missing criteria for LDAP. Skipping Ldap tests.')
     def test__get_major_department(self):
-        na_department = models.Department.objects.create(name='NA/Unknown', slug='na-unknown')
+        na_department = models.Department.objects.create(code='NA', name='NA/Unknown', slug='na-unknown')
 
         with self.subTest('Department model does not yet exist.'):
             # First, verify that department does not exist.
@@ -127,19 +127,23 @@ class AdvisingAuthBackendTests(IntegrationTestCase):
 
             # Create mock ldap object.
             ldap_major = {
+                'wmuStudentMajor': ['TEST'],
                 'wmuDepartmentName': ['Test Department'],
             }
             returned_department = self.adv_backend._get_major_department(ldap_major)
+            department_model = models.Department.objects.get(code='TEST')
+            self.assertEqual(returned_department, department_model)
             department_model = models.Department.objects.get(name='Test Department')
             self.assertEqual(returned_department, department_model)
 
         with self.subTest('Department model does exist.'):
             # Verify that department now exists.
-            department_model = models.Department.objects.get(name='Test Department')
+            department_model = models.Department.objects.get(name='NA/Unknown')
 
             # Create mock ldap object.
             ldap_major = {
-                'wmuDepartmentName': ['Test Department'],
+                'wmuStudentMajor': ['NA'],
+                'wmuDepartmentName': ['NA/Unknown'],
             }
             self.assertEqual(self.adv_backend._get_major_department(ldap_major), department_model)
 
@@ -149,6 +153,7 @@ class AdvisingAuthBackendTests(IntegrationTestCase):
 
         with self.subTest('"wmuDepartmentName" field is empty for ldap_major.'):
             ldap_major = {
+                'wmuStudentMajor': [],
                 'wmuDepartmentName': [],
             }
             self.assertEqual(self.adv_backend._get_major_department(ldap_major), na_department)

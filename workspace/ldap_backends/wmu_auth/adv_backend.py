@@ -277,17 +277,20 @@ class AdvisingAuthBackend(AbstractLDAPBackend):
         try:
             # Attempt to read ldap value.
             ldap_department = str(ldap_major['wmuDepartmentName'][0]).strip()
+            ldap_code = str(ldap_major['wmuStudentMajor'][0]).strip()
 
             try:
                 # Attempt to get Django model.
                 return models.Department.objects.get(name=ldap_department)
             except models.Department.DoesNotExist:
                 return models.Department.objects.create(
+                    code=ldap_code,
                     name=ldap_department,
                     slug=slugify(ldap_department),
                 )
 
         except (KeyError, IndexError):
+            logger.error('Failed to parse LDAP major/department of "{0}"'.format(ldap_major))
             return models.Department.objects.get(slug='na-unknown')
 
     def _get_major_display_name(self, ldap_major):
