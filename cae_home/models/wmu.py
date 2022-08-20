@@ -21,8 +21,7 @@ class Department(models.Model):
     A university department.
     """
     # Model fields.
-    # TODO: Make code require unique. First we must implement the field and populate it in production.
-    code = CodeField(max_length=MAX_LENGTH, default='')
+    code = CodeField(max_length=MAX_LENGTH, unique=True)
     name = models.CharField(max_length=MAX_LENGTH, unique=True)
 
     # Self-setting/Non-user-editable fields.
