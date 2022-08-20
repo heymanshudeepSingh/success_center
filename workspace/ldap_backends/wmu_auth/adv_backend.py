@@ -286,7 +286,7 @@ class AdvisingAuthBackend(AbstractLDAPBackend):
                 return models.Department.objects.create(
                     code=ldap_code,
                     name=ldap_department,
-                    slug=slugify(ldap_department),
+                    slug=slugify(ldap_code),
                 )
 
         except (KeyError, IndexError):
@@ -341,7 +341,8 @@ class AdvisingAuthBackend(AbstractLDAPBackend):
             # 'wmuProgramCode' field does not exist for entry. Default to student_code value.
             return str(ldap_major['wmuStudentMajor'][0]).strip()
 
-    def _get_degree_level_from_program_code(self, uid, program_code):
+    @staticmethod
+    def _get_degree_level_from_program_code(uid, program_code):
         """
         Attempts to parse degree_level from program_code.
         :param uid: Bronconet corresponding to student.
@@ -350,15 +351,27 @@ class AdvisingAuthBackend(AbstractLDAPBackend):
         """
         # Attempt to get degree level.
         program_split = program_code.split('-')
+        print('program_split: {0}'.format(program_split))
         if len(program_split) == 3:
             # Parse from our preferred format.
             degree_key = program_split[1]
 
+            print('degree_key[:3]: {0}'.format(degree_key[:3]))
+            print('degree_key[:2]: {0}'.format(degree_key[:2]))
+
+            # Handle for 3-letter keys.
             if degree_key[:3] == 'PHD':
                 return models.Major.get_degree_level_as_int('Phd')
-            elif degree_key[:2] == 'MS':
+            elif degree_key[:3] in ['MBA', 'MFA', 'MPA', 'MPH']:
                 return models.Major.get_degree_level_as_int('Masters')
-            elif degree_key[:2] == 'BS':
+            elif degree_key[:3] in ['BBA', 'BFA']:
+                return models.Major.get_degree_level_as_int('Bachelors')
+            elif degree_key[:3] in ['NDA', 'PDP']:
+                return models.Major.get_degree_level_as_int('Associates')
+            # Handle for 2-letter keys.
+            elif degree_key[:2] in ['MA', 'MM', 'MS']:
+                return models.Major.get_degree_level_as_int('Masters')
+            elif degree_key[:2] in ['BS', 'BM']:
                 return models.Major.get_degree_level_as_int('Bachelors')
             elif degree_key[:2] == 'AS':
                 return models.Major.get_degree_level_as_int('Associates')
