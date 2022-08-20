@@ -82,18 +82,18 @@ function main () {
     if [[ "$mysql" == true ]]
     then
     # remove "#" comment from #mysqlclient in requirements.txt so we can install it
-        if grep -q "#mysqlclient" "../requirements.txt";
+        if grep -q "# mysqlclient" "../requirements.txt";
         then
-            sed -i 's/#mysqlclient/mysqlclient/' "../requirements.txt"
+            sed -i 's/# mysqlclient/mysqlclient/' "../requirements.txt"
         fi
     fi
     echo ""
     if [[ "$ldap" == true ]]
     then
     # remove "#" comment from #mysqlclient in requirements.txt so we can install it
-        if grep -q "#ldap3" "../requirements.txt";
+        if grep -q "# ldap3" "../requirements.txt";
         then
-            sed -i 's/#ldap3/ldap3/' "../requirements.txt"
+            sed -i 's/# ldap3/ldap3/' "../requirements.txt"
         fi
     fi
     echo ""
