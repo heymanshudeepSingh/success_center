@@ -10,8 +10,8 @@
         "degree_level": 0,
         "is_active": true,
         "slug": "unk",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -22,26 +22,26 @@
         "student_code": "UNDP",
         "program_code": "P-PDP-UNDP",
         "name": "Undecided",
-        "degree_level": 0,
+        "degree_level": 1,
         "is_active": true,
         "slug": "undp",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2022-08-20T05:09:21.065Z"
     }
 },
 {
     "model": "cae_home.major",
     "pk": 3,
     "fields": {
-        "department": 1,
+        "department": 45,
         "student_code": "UND",
         "program_code": "UND",
         "name": "Undecided - General",
         "degree_level": 0,
         "is_active": true,
         "slug": "und",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2022-08-20T02:33:14.102Z"
     }
 },
 {
@@ -55,8 +55,8 @@
         "degree_level": 1,
         "is_active": true,
         "slug": "prej",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -70,8 +70,8 @@
         "degree_level": 1,
         "is_active": true,
         "slug": "aerp",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -85,8 +85,8 @@
         "degree_level": 2,
         "is_active": true,
         "slug": "aerj",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -100,8 +100,8 @@
         "degree_level": 1,
         "is_active": true,
         "slug": "aspp",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -115,8 +115,8 @@
         "degree_level": 2,
         "is_active": true,
         "slug": "aspj",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -130,8 +130,8 @@
         "degree_level": 3,
         "is_active": true,
         "slug": "aspm",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -145,8 +145,8 @@
         "degree_level": 3,
         "is_active": true,
         "slug": "aspq",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -160,8 +160,8 @@
         "degree_level": 1,
         "is_active": true,
         "slug": "cegp",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -175,8 +175,8 @@
         "degree_level": 2,
         "is_active": true,
         "slug": "cegj",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -190,8 +190,8 @@
         "degree_level": 3,
         "is_active": true,
         "slug": "cenm",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -205,8 +205,8 @@
         "degree_level": 3,
         "is_active": true,
         "slug": "cenq",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -220,8 +220,8 @@
         "degree_level": 1,
         "is_active": true,
         "slug": "cenp",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -235,8 +235,8 @@
         "degree_level": 2,
         "is_active": true,
         "slug": "cenj",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -250,8 +250,8 @@
         "degree_level": 1,
         "is_active": true,
         "slug": "chgp",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -265,8 +265,8 @@
         "degree_level": 2,
         "is_active": true,
         "slug": "chgj",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -280,8 +280,8 @@
         "degree_level": 3,
         "is_active": true,
         "slug": "chgm",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -295,8 +295,8 @@
         "degree_level": 3,
         "is_active": true,
         "slug": "chgq",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -310,8 +310,8 @@
         "degree_level": 1,
         "is_active": true,
         "slug": "civp",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -325,8 +325,8 @@
         "degree_level": 2,
         "is_active": true,
         "slug": "civj",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -340,8 +340,8 @@
         "degree_level": 3,
         "is_active": true,
         "slug": "civm",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -355,8 +355,8 @@
         "degree_level": 3,
         "is_active": true,
         "slug": "civq",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -370,8 +370,8 @@
         "degree_level": 4,
         "is_active": true,
         "slug": "civd",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -385,8 +385,8 @@
         "degree_level": 2,
         "is_active": true,
         "slug": "csgj",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -400,8 +400,8 @@
         "degree_level": 2,
         "is_active": true,
         "slug": "csij",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -415,8 +415,8 @@
         "degree_level": 3,
         "is_active": true,
         "slug": "csgm",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -430,8 +430,8 @@
         "degree_level": 3,
         "is_active": true,
         "slug": "csgq",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -445,8 +445,8 @@
         "degree_level": 4,
         "is_active": true,
         "slug": "csgd",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -460,8 +460,8 @@
         "degree_level": 2,
         "is_active": true,
         "slug": "cstj",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -475,8 +475,8 @@
         "degree_level": 1,
         "is_active": true,
         "slug": "edtp",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -490,8 +490,8 @@
         "degree_level": 2,
         "is_active": true,
         "slug": "edtj",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -505,8 +505,8 @@
         "degree_level": 1,
         "is_active": true,
         "slug": "eenp",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -520,8 +520,8 @@
         "degree_level": 2,
         "is_active": true,
         "slug": "eenj",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -535,8 +535,8 @@
         "degree_level": 3,
         "is_active": true,
         "slug": "eenm",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -550,8 +550,8 @@
         "degree_level": 3,
         "is_active": true,
         "slug": "eenq",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -565,8 +565,8 @@
         "degree_level": 4,
         "is_active": true,
         "slug": "elcd",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -580,8 +580,8 @@
         "degree_level": 3,
         "is_active": true,
         "slug": "ennm",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -595,8 +595,8 @@
         "degree_level": 2,
         "is_active": true,
         "slug": "gprj",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -610,8 +610,8 @@
         "degree_level": 2,
         "is_active": true,
         "slug": "idnj",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -625,8 +625,8 @@
         "degree_level": 1,
         "is_active": true,
         "slug": "ieep",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -640,8 +640,8 @@
         "degree_level": 2,
         "is_active": true,
         "slug": "ieej",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -655,8 +655,8 @@
         "degree_level": 1,
         "is_active": true,
         "slug": "ienp",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -670,8 +670,8 @@
         "degree_level": 2,
         "is_active": true,
         "slug": "ienj",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -685,8 +685,8 @@
         "degree_level": 3,
         "is_active": true,
         "slug": "ienm",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -700,8 +700,8 @@
         "degree_level": 3,
         "is_active": true,
         "slug": "ienq",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -715,8 +715,8 @@
         "degree_level": 4,
         "is_active": true,
         "slug": "iend",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -730,8 +730,8 @@
         "degree_level": 2,
         "is_active": true,
         "slug": "imgj",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -745,8 +745,8 @@
         "degree_level": 1,
         "is_active": true,
         "slug": "megp",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -760,8 +760,8 @@
         "degree_level": 2,
         "is_active": true,
         "slug": "megj",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -775,8 +775,8 @@
         "degree_level": 3,
         "is_active": true,
         "slug": "megm",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -790,8 +790,8 @@
         "degree_level": 3,
         "is_active": true,
         "slug": "megq",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -805,8 +805,8 @@
         "degree_level": 4,
         "is_active": true,
         "slug": "megd",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -820,8 +820,8 @@
         "degree_level": 1,
         "is_active": true,
         "slug": "mfnp",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -835,8 +835,8 @@
         "degree_level": 2,
         "is_active": true,
         "slug": "mfnj",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -850,8 +850,8 @@
         "degree_level": 3,
         "is_active": true,
         "slug": "mnem",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -865,8 +865,8 @@
         "degree_level": 1,
         "is_active": true,
         "slug": "mftp",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -880,8 +880,8 @@
         "degree_level": 2,
         "is_active": true,
         "slug": "mftj",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -895,8 +895,8 @@
         "degree_level": 3,
         "is_active": true,
         "slug": "mfsm",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -910,8 +910,8 @@
         "degree_level": 1,
         "is_active": true,
         "slug": "penp",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -925,8 +925,8 @@
         "degree_level": 2,
         "is_active": true,
         "slug": "penj",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -940,8 +940,8 @@
         "degree_level": 1,
         "is_active": true,
         "slug": "pprp",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -955,8 +955,8 @@
         "degree_level": 2,
         "is_active": true,
         "slug": "pprj",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -970,8 +970,8 @@
         "degree_level": 3,
         "is_active": true,
         "slug": "ppsm",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -985,8 +985,8 @@
         "degree_level": 3,
         "is_active": true,
         "slug": "ppsq",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -1000,8 +1000,8 @@
         "degree_level": 4,
         "is_active": true,
         "slug": "ppsd",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -1015,8 +1015,8 @@
         "degree_level": 2,
         "is_active": true,
         "slug": "pscj",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -1030,8 +1030,8 @@
         "degree_level": 3,
         "is_active": true,
         "slug": "psem",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -1045,8 +1045,8 @@
         "degree_level": 1,
         "is_active": true,
         "slug": "uemp",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
     }
 },
 {
@@ -1060,8 +1060,4283 @@
         "degree_level": 2,
         "is_active": true,
         "slug": "uemj",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2018-01-01T08:00:00Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 72,
+    "fields": {
+        "department": 15,
+        "student_code": "EITM",
+        "program_code": "E-MA-EITM",
+        "name": "Educational&Instructional Tech",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "eitm",
+        "date_created": "2020-01-04T00:07:08.407Z",
+        "date_modified": "2022-08-20T05:09:19.961Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 73,
+    "fields": {
+        "department": 6,
+        "student_code": "ISAM",
+        "program_code": "A-MS-ISAM",
+        "name": "Info Security:Computer Science",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "isam",
+        "date_created": "2020-01-04T00:07:09.321Z",
+        "date_modified": "2020-01-04T00:07:09.321Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 74,
+    "fields": {
+        "department": 16,
+        "student_code": "EAPD",
+        "program_code": "A-PHD-EAPD",
+        "name": "Eng Appl Sci: Applied Sciences",
+        "degree_level": 4,
+        "is_active": true,
+        "slug": "eapd",
+        "date_created": "2020-01-04T00:07:21.713Z",
+        "date_modified": "2020-01-04T00:07:21.713Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 75,
+    "fields": {
+        "department": 17,
+        "student_code": "DSCJ",
+        "program_code": "L-BS-DSCJ",
+        "name": "Data Science",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "dscj",
+        "date_created": "2020-01-04T00:07:23.050Z",
+        "date_modified": "2020-01-04T00:07:23.050Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 76,
+    "fields": {
+        "department": 16,
+        "student_code": "ENGD",
+        "program_code": "A-PHD-ENGD",
+        "name": "Eng Appl Sci: Engineering",
+        "degree_level": 4,
+        "is_active": true,
+        "slug": "engd",
+        "date_created": "2020-01-04T00:07:23.551Z",
+        "date_modified": "2020-01-04T00:07:23.551Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 77,
+    "fields": {
+        "department": 18,
+        "student_code": "ISUP",
+        "program_code": "ISUP",
+        "name": "Pre-Integrated Supply Mgmt",
+        "degree_level": 1,
+        "is_active": true,
+        "slug": "isup",
+        "date_created": "2020-01-04T00:07:55.716Z",
+        "date_modified": "2020-01-04T00:07:55.716Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 78,
+    "fields": {
+        "department": 19,
+        "student_code": "MTCJ",
+        "program_code": "P-BS-MTCJ",
+        "name": "Aviation Maintenance Tech",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "mtcj",
+        "date_created": "2020-01-04T00:08:06.031Z",
+        "date_modified": "2020-01-04T00:08:06.031Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 79,
+    "fields": {
+        "department": 20,
+        "student_code": "ACTJ",
+        "program_code": "B-BBA-ACTJ",
+        "name": "Accountancy",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "actj",
+        "date_created": "2020-01-04T00:08:06.428Z",
+        "date_modified": "2022-08-20T05:09:19.586Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 80,
+    "fields": {
+        "department": 21,
+        "student_code": "PWEC",
+        "program_code": "E-GCP-PWEC",
+        "name": "Prof Workforce Educator",
+        "degree_level": 0,
+        "is_active": true,
+        "slug": "pwec",
+        "date_created": "2020-01-04T00:08:18.641Z",
+        "date_modified": "2020-01-04T00:08:18.641Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 81,
+    "fields": {
+        "department": 18,
+        "student_code": "MBAM",
+        "program_code": "B-MBA-MBAM",
+        "name": "Business Administration",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "mbam",
+        "date_created": "2020-01-04T00:08:41.924Z",
+        "date_modified": "2022-08-20T05:09:20.329Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 82,
+    "fields": {
+        "department": 21,
+        "student_code": "TNSJ",
+        "program_code": "E-BS-TNSJ",
+        "name": "Industrl Tech Ed:NonVocational",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "tnsj",
+        "date_created": "2020-01-04T00:08:57.231Z",
+        "date_modified": "2020-01-04T00:08:57.231Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 83,
+    "fields": {
+        "department": 19,
+        "student_code": "AFSJ",
+        "program_code": "P-BS-AFSJ",
+        "name": "Aviation Flight Science",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "afsj",
+        "date_created": "2020-01-04T00:09:00.556Z",
+        "date_modified": "2020-01-04T00:09:00.556Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 84,
+    "fields": {
+        "department": 17,
+        "student_code": "STAM",
+        "program_code": "L-MS-STAM",
+        "name": "Statistics",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "stam",
+        "date_created": "2020-01-04T00:09:04.569Z",
+        "date_modified": "2020-01-04T00:09:04.569Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 85,
+    "fields": {
+        "department": 22,
+        "student_code": "FVMJ",
+        "program_code": "L-BA-FVMJ",
+        "name": "Film, Video, & Media Studies",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "fvmj",
+        "date_created": "2020-01-04T00:09:05.760Z",
+        "date_modified": "2022-08-20T05:12:40.914Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 86,
+    "fields": {
+        "department": 23,
+        "student_code": "MGTP",
+        "program_code": "MGTP",
+        "name": "Pre-Management",
+        "degree_level": 1,
+        "is_active": true,
+        "slug": "mgtp",
+        "date_created": "2020-01-04T00:09:07.487Z",
+        "date_modified": "2020-01-04T00:09:07.487Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 87,
+    "fields": {
+        "department": 24,
+        "student_code": "ARFJ",
+        "program_code": "F-BFA-ARFJ",
+        "name": "Art:BFA program",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "arfj",
+        "date_created": "2020-01-04T00:09:08.927Z",
+        "date_modified": "2022-08-20T05:09:19.686Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 88,
+    "fields": {
+        "department": 24,
+        "student_code": "APDJ",
+        "program_code": "F-BFA-APDJ",
+        "name": "Product Design",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "apdj",
+        "date_created": "2020-01-04T00:09:13.587Z",
+        "date_modified": "2022-08-20T05:09:19.669Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 89,
+    "fields": {
+        "department": 22,
+        "student_code": "TMLJ",
+        "program_code": "L-BA-TMLJ",
+        "name": "Telecommunications & Info Mgmt",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "tmlj",
+        "date_created": "2020-01-04T00:09:17.013Z",
+        "date_modified": "2022-08-20T05:12:41.294Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 90,
+    "fields": {
+        "department": 25,
+        "student_code": "OCTM",
+        "program_code": "H-MS-OCTM",
+        "name": "Occupational Therapy",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "octm",
+        "date_created": "2020-01-04T00:09:22.516Z",
+        "date_modified": "2020-01-04T00:09:22.516Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 91,
+    "fields": {
+        "department": 26,
+        "student_code": "HOTJ",
+        "program_code": "H-BS-HOTJ",
+        "name": "HSS:Occupational Therapy Prep",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "hotj",
+        "date_created": "2020-01-04T00:09:31.118Z",
+        "date_modified": "2020-01-04T00:09:31.118Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 92,
+    "fields": {
+        "department": 16,
+        "student_code": "GCAJ",
+        "program_code": "A-PDP-GCAJ",
+        "name": "General College Curriculum",
+        "degree_level": 1,
+        "is_active": true,
+        "slug": "gcaj",
+        "date_created": "2020-01-04T00:09:32.772Z",
+        "date_modified": "2022-08-20T05:09:20.150Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 93,
+    "fields": {
+        "department": 27,
+        "student_code": "FINP",
+        "program_code": "FINP",
+        "name": "Pre-Finance",
+        "degree_level": 1,
+        "is_active": true,
+        "slug": "finp",
+        "date_created": "2020-01-04T00:09:34.443Z",
+        "date_modified": "2020-01-04T00:09:34.443Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 94,
+    "fields": {
+        "department": 28,
+        "student_code": "ADVJ",
+        "program_code": "B-BBA-ADVJ",
+        "name": "Advertising & Promotion",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "advj",
+        "date_created": "2020-01-04T00:09:53.944Z",
+        "date_modified": "2022-08-20T05:09:19.601Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 95,
+    "fields": {
+        "department": 29,
+        "student_code": "CHAM",
+        "program_code": "L-MA-CHAM",
+        "name": "Chemistry",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "cham",
+        "date_created": "2020-01-06T17:56:15.870Z",
+        "date_modified": "2020-01-06T17:56:15.870Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 96,
+    "fields": {
+        "department": 30,
+        "student_code": "NDG",
+        "program_code": "O-NDA-NDG",
+        "name": "Graduate Nondegree",
+        "degree_level": 1,
+        "is_active": true,
+        "slug": "ndg",
+        "date_created": "2020-09-16T18:35:51.700Z",
+        "date_modified": "2022-08-20T05:09:20.603Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 97,
+    "fields": {
+        "department": 29,
+        "student_code": "CHLJ",
+        "program_code": "L-BA-CHLJ",
+        "name": "Chemistry",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "chlj",
+        "date_created": "2020-09-21T14:15:12.560Z",
+        "date_modified": "2022-08-20T05:12:40.759Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 98,
+    "fields": {
+        "department": 32,
+        "student_code": "BMLJ",
+        "program_code": "L-BS-BMLJ",
+        "name": "Biomedical Sciences",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "bmlj",
+        "date_created": "2020-09-21T14:53:48.193Z",
+        "date_modified": "2020-09-21T14:53:48.193Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 99,
+    "fields": {
+        "department": 29,
+        "student_code": "BCHJ",
+        "program_code": "L-BS-BCHJ",
+        "name": "Biochemistry",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "bchj",
+        "date_created": "2020-09-21T16:13:09.847Z",
+        "date_modified": "2020-09-21T16:13:09.847Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 100,
+    "fields": {
+        "department": 21,
+        "student_code": "FMEJ",
+        "program_code": "E-BS-FMEJ",
+        "name": "Fash Merch & Des:Merchandising",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "fmej",
+        "date_created": "2020-09-21T17:03:14.281Z",
+        "date_modified": "2020-09-21T17:03:14.281Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 101,
+    "fields": {
+        "department": 33,
+        "student_code": "SOCM",
+        "program_code": "L-MA-SOCM",
+        "name": "Sociology",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "socm",
+        "date_created": "2020-09-21T18:12:35.264Z",
+        "date_modified": "2022-08-20T05:09:20.877Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 102,
+    "fields": {
+        "department": 34,
+        "student_code": "SELP",
+        "program_code": "E-BS-SELJ",
+        "name": "Pre-Sp Ed & El Ed:LD & EI K-12",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "selp",
+        "date_created": "2020-09-22T14:14:35.147Z",
+        "date_modified": "2020-09-22T14:14:35.147Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 103,
+    "fields": {
+        "department": 35,
+        "student_code": "PRPY",
+        "program_code": "L-PDP-PRPY",
+        "name": "Pre-Psychology",
+        "degree_level": 1,
+        "is_active": true,
+        "slug": "prpy",
+        "date_created": "2020-09-22T16:10:23.641Z",
+        "date_modified": "2022-08-20T05:09:20.706Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 104,
+    "fields": {
+        "department": 26,
+        "student_code": "HSVJ",
+        "program_code": "H-BS-HSVJ",
+        "name": "Interdiscip Health Services",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "hsvj",
+        "date_created": "2020-09-22T22:01:37.380Z",
+        "date_modified": "2020-09-22T22:01:37.380Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 105,
+    "fields": {
+        "department": 36,
+        "student_code": "RCMJ",
+        "program_code": "E-BS-RCMJ",
+        "name": "Recreation: Recreation Mgmt",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "rcmj",
+        "date_created": "2020-10-01T19:33:25.976Z",
+        "date_modified": "2020-10-01T19:33:25.976Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 106,
+    "fields": {
+        "department": 19,
+        "student_code": "AMOJ",
+        "program_code": "P-BS-AMOJ",
+        "name": "Aviation Mgmt & Operations",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "amoj",
+        "date_created": "2021-01-21T16:16:06.077Z",
+        "date_modified": "2021-01-21T16:16:06.077Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 107,
+    "fields": {
+        "department": 28,
+        "student_code": "MKTP",
+        "program_code": "MKTP",
+        "name": "Pre-Marketing",
+        "degree_level": 1,
+        "is_active": true,
+        "slug": "mktp",
+        "date_created": "2021-01-22T17:32:31.757Z",
+        "date_modified": "2021-01-22T17:32:31.757Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 108,
+    "fields": {
+        "department": 35,
+        "student_code": "PYOM",
+        "program_code": "L-MA-PYOM",
+        "name": "Psychology: Ind/Org Behvr Mgmt",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "pyom",
+        "date_created": "2021-07-06T15:53:26.186Z",
+        "date_modified": "2022-08-20T05:09:20.774Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 109,
+    "fields": {
+        "department": 37,
+        "student_code": "MATJ",
+        "program_code": "F-BS-MATJ",
+        "name": "Multimedia Arts Tech - Music",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "matj",
+        "date_created": "2021-07-07T14:01:25.410Z",
+        "date_modified": "2021-07-07T14:01:25.410Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 110,
+    "fields": {
+        "department": 38,
+        "student_code": "SPMM",
+        "program_code": "E-MA-SPMM",
+        "name": "Special Educ:Master Teacher",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "spmm",
+        "date_created": "2021-07-07T14:01:45.973Z",
+        "date_modified": "2022-08-20T05:09:20.911Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 111,
+    "fields": {
+        "department": 35,
+        "student_code": "PSBJ",
+        "program_code": "L-BS-PSBJ",
+        "name": "Psychology: Behavioral Science",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "psbj",
+        "date_created": "2021-07-07T15:22:49.066Z",
+        "date_modified": "2021-07-07T15:22:49.066Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 112,
+    "fields": {
+        "department": 24,
+        "student_code": "GDFJ",
+        "program_code": "F-BA-GDFJ",
+        "name": "Graphic Design:BFA program",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "gdfj",
+        "date_created": "2021-07-07T16:53:47.135Z",
+        "date_modified": "2022-08-20T05:12:40.948Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 113,
+    "fields": {
+        "department": 39,
+        "student_code": "CPYD",
+        "program_code": "E-PHD-CPYD",
+        "name": "Counseling Psychology",
+        "degree_level": 4,
+        "is_active": true,
+        "slug": "cpyd",
+        "date_created": "2021-07-07T18:00:38.610Z",
+        "date_modified": "2021-07-07T18:00:38.611Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 114,
+    "fields": {
+        "department": 33,
+        "student_code": "CJSJ",
+        "program_code": "L-BA-CJSJ",
+        "name": "Criminal Justice Studies",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "cjsj",
+        "date_created": "2021-08-04T18:48:05.932Z",
+        "date_modified": "2022-08-20T05:12:40.776Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 115,
+    "fields": {
+        "department": 40,
+        "student_code": "UNSJ",
+        "program_code": "X-BS-UNSJ",
+        "name": "University Studies",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "unsj",
+        "date_created": "2021-08-30T10:45:31.869Z",
+        "date_modified": "2021-08-30T10:45:31.869Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 116,
+    "fields": {
+        "department": 27,
+        "student_code": "FINJ",
+        "program_code": "B-BBA-FINJ",
+        "name": "Finance",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "finj",
+        "date_created": "2021-08-30T10:45:41.344Z",
+        "date_modified": "2022-08-20T05:09:20.098Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 117,
+    "fields": {
+        "department": 31,
+        "student_code": "NDU",
+        "program_code": "O-NDA-NDU",
+        "name": "Undergraduate Nondegree",
+        "degree_level": 1,
+        "is_active": true,
+        "slug": "ndu",
+        "date_created": "2021-08-30T10:45:57.833Z",
+        "date_modified": "2022-08-20T05:09:20.620Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 118,
+    "fields": {
+        "department": 41,
+        "student_code": "PHLJ",
+        "program_code": "L-BS-PHLJ",
+        "name": "Physics",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "phlj",
+        "date_created": "2021-08-30T10:46:22.109Z",
+        "date_modified": "2021-08-30T10:46:22.109Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 119,
+    "fields": {
+        "department": 42,
+        "student_code": "EHDD",
+        "program_code": "E-PHD-EHDD",
+        "name": "Education & Human Development",
+        "degree_level": 4,
+        "is_active": true,
+        "slug": "ehdd",
+        "date_created": "2021-08-30T10:46:22.580Z",
+        "date_modified": "2021-08-30T10:46:22.580Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 120,
+    "fields": {
+        "department": 23,
+        "student_code": "ENTP",
+        "program_code": "ENTP",
+        "name": "Pre-Entrepreneurship",
+        "degree_level": 1,
+        "is_active": true,
+        "slug": "entp",
+        "date_created": "2021-08-30T10:46:22.851Z",
+        "date_modified": "2021-08-30T10:46:22.851Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 121,
+    "fields": {
+        "department": 31,
+        "student_code": "UNV",
+        "program_code": "UNV",
+        "name": "University Curriculum",
+        "degree_level": 0,
+        "is_active": true,
+        "slug": "unv",
+        "date_created": "2021-08-30T10:46:24.690Z",
+        "date_modified": "2021-08-30T10:46:24.690Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 122,
+    "fields": {
+        "department": 35,
+        "student_code": "PSGJ",
+        "program_code": "L-BS-PSGJ",
+        "name": "Psychology: General Psychology",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "psgj",
+        "date_created": "2021-08-30T10:46:25.172Z",
+        "date_modified": "2021-08-30T10:46:25.172Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 123,
+    "fields": {
+        "department": 21,
+        "student_code": "FCSP",
+        "program_code": "FCSP",
+        "name": "Pre-Fam & Consumer Sci Tchr Ed",
+        "degree_level": 1,
+        "is_active": true,
+        "slug": "fcsp",
+        "date_created": "2021-08-30T10:46:25.518Z",
+        "date_modified": "2021-08-30T10:46:25.518Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 124,
+    "fields": {
+        "department": 26,
+        "student_code": "HSSJ",
+        "program_code": "H-BS-HSSJ",
+        "name": "Healthcare Services & Sciences",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "hssj",
+        "date_created": "2021-08-30T10:46:25.852Z",
+        "date_modified": "2021-08-30T10:46:25.852Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 125,
+    "fields": {
+        "department": 27,
+        "student_code": "LAWP",
+        "program_code": "LAWP",
+        "name": "Pre-Business Law",
+        "degree_level": 1,
+        "is_active": true,
+        "slug": "lawp",
+        "date_created": "2021-08-30T10:46:28.039Z",
+        "date_modified": "2021-08-30T10:46:28.039Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 126,
+    "fields": {
+        "department": 43,
+        "student_code": "MTFJ",
+        "program_code": "F-BFA-MTFJ",
+        "name": "Music Theatre Performance:BFA",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "mtfj",
+        "date_created": "2021-08-30T10:46:29.354Z",
+        "date_modified": "2022-08-20T05:09:20.466Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 127,
+    "fields": {
+        "department": 34,
+        "student_code": "SLDP",
+        "program_code": "SLDP",
+        "name": "Pre-Spec Ed LD K-12&El Ed PK-3",
+        "degree_level": 1,
+        "is_active": true,
+        "slug": "sldp",
+        "date_created": "2021-08-30T10:46:31.594Z",
+        "date_modified": "2021-08-30T10:46:31.594Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 128,
+    "fields": {
+        "department": 23,
+        "student_code": "HRMP",
+        "program_code": "HRMP",
+        "name": "Pre-Human Resource Mgmt",
+        "degree_level": 1,
+        "is_active": true,
+        "slug": "hrmp",
+        "date_created": "2021-09-01T01:40:48.216Z",
+        "date_modified": "2021-09-01T01:40:48.216Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 129,
+    "fields": {
+        "department": 44,
+        "student_code": "CMIJ",
+        "program_code": "B-BBA-CMIJ",
+        "name": "Computer Information Systems",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "cmij",
+        "date_created": "2021-09-01T20:10:58.070Z",
+        "date_modified": "2022-08-20T05:09:19.806Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 130,
+    "fields": {
+        "department": 16,
+        "student_code": "ENGP",
+        "program_code": "A-PDP-ENGP",
+        "name": "CEAS-Preparatory",
+        "degree_level": 1,
+        "is_active": true,
+        "slug": "engp",
+        "date_created": "2021-10-01T21:48:46.431Z",
+        "date_modified": "2022-08-20T05:09:20.029Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 131,
+    "fields": {
+        "department": 45,
+        "student_code": "UNCJ",
+        "program_code": "C-BS-UNCJ",
+        "name": "University Studies",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "uncj",
+        "date_created": "2021-12-24T08:00:03.386Z",
+        "date_modified": "2021-12-24T08:00:03.386Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 132,
+    "fields": {
+        "department": 22,
+        "student_code": "CMUJ",
+        "program_code": "L-BA-CMUJ",
+        "name": "Communication Studies",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "cmuj",
+        "date_created": "2021-12-28T08:00:05.239Z",
+        "date_modified": "2022-08-20T05:12:40.793Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 133,
+    "fields": {
+        "department": 28,
+        "student_code": "MKTJ",
+        "program_code": "B-BBA-MKTJ",
+        "name": "Marketing",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "mktj",
+        "date_created": "2022-01-04T08:00:05.633Z",
+        "date_modified": "2022-08-20T05:09:20.415Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 134,
+    "fields": {
+        "department": 45,
+        "student_code": "UNC",
+        "program_code": "UNC",
+        "name": "University Curriculum",
+        "degree_level": 0,
+        "is_active": true,
+        "slug": "unc",
+        "date_created": "2022-01-16T08:00:07.064Z",
+        "date_modified": "2022-01-16T08:00:07.064Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 135,
+    "fields": {
+        "department": 46,
+        "student_code": "GBLJ",
+        "program_code": "L-BA-GBLJ",
+        "name": "Global & International Studies",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "gblj",
+        "date_created": "2022-02-01T08:00:08.504Z",
+        "date_modified": "2022-08-20T05:12:40.931Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 136,
+    "fields": {
+        "department": 44,
+        "student_code": "CYBM",
+        "program_code": "B-MS-CYBM",
+        "name": "Cybersecurity: CIS",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "cybm",
+        "date_created": "2022-05-12T12:23:42.429Z",
+        "date_modified": "2022-05-12T12:23:42.429Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 137,
+    "fields": {
+        "department": 47,
+        "student_code": "CRWM",
+        "program_code": "L-MFA-CRWM",
+        "name": "Creative Writing",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "crwm",
+        "date_created": "2022-07-30T00:26:14.397Z",
+        "date_modified": "2022-08-20T05:09:19.857Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 138,
+    "fields": {
+        "department": 36,
+        "student_code": "PXDJ",
+        "program_code": "E-BS-PXDJ",
+        "name": "Exercise Science",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "pxdj",
+        "date_created": "2022-08-19T00:35:34.669Z",
+        "date_modified": "2022-08-19T00:35:34.669Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 139,
+    "fields": {
+        "department": 38,
+        "student_code": "ECEJ",
+        "program_code": "E-BS-ECEJ",
+        "name": "Early Childhood Prof Educ",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "ecej",
+        "date_created": "2022-08-19T00:35:35.720Z",
+        "date_modified": "2022-08-19T00:35:35.720Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 140,
+    "fields": {
+        "department": 48,
+        "student_code": "NURJ",
+        "program_code": "H-BSN-NURJ",
+        "name": "Nursing",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "nurj",
+        "date_created": "2022-08-19T00:40:22.118Z",
+        "date_modified": "2022-08-19T00:40:22.118Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 141,
+    "fields": {
+        "department": 22,
+        "student_code": "SCLJ",
+        "program_code": "L-BA-SCLJ",
+        "name": "Strategic Com: Ldrshp&Teamwrk",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "sclj",
+        "date_created": "2022-08-19T00:40:23.635Z",
+        "date_modified": "2022-08-20T05:12:41.171Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 142,
+    "fields": {
+        "department": 21,
+        "student_code": "CFDJ",
+        "program_code": "E-BS-CFDJ",
+        "name": "Child & Family Development",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "cfdj",
+        "date_created": "2022-08-19T00:40:27.177Z",
+        "date_modified": "2022-08-19T00:40:27.177Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 143,
+    "fields": {
+        "department": 24,
+        "student_code": "ARTJ",
+        "program_code": "F-BS-ARTJ",
+        "name": "Art:BA program",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "artj",
+        "date_created": "2022-08-19T00:40:40.080Z",
+        "date_modified": "2022-08-19T00:40:40.080Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 144,
+    "fields": {
+        "department": 49,
+        "student_code": "GESD",
+        "program_code": "L-PHD-GESD",
+        "name": "Geosciences",
+        "degree_level": 4,
+        "is_active": true,
+        "slug": "gesd",
+        "date_created": "2022-08-19T00:40:43.617Z",
+        "date_modified": "2022-08-19T00:40:43.617Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 145,
+    "fields": {
+        "department": 28,
+        "student_code": "FMKJ",
+        "program_code": "B-BBA-FMKJ",
+        "name": "Food & Consumer Pkg Goods Mktg",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "fmkj",
+        "date_created": "2022-08-19T00:40:45.185Z",
+        "date_modified": "2022-08-20T05:09:20.115Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 146,
+    "fields": {
+        "department": 50,
+        "student_code": "PSLJ",
+        "program_code": "L-BS-PSLJ",
+        "name": "Political Science",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "pslj",
+        "date_created": "2022-08-19T00:40:49.154Z",
+        "date_modified": "2022-08-19T00:40:49.155Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 147,
+    "fields": {
+        "department": 23,
+        "student_code": "ENTJ",
+        "program_code": "B-BBA-ENTJ",
+        "name": "Entrepreneurship",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "entj",
+        "date_created": "2022-08-19T00:40:51.317Z",
+        "date_modified": "2022-08-20T05:09:20.047Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 148,
+    "fields": {
+        "department": 47,
+        "student_code": "ENCJ",
+        "program_code": "L-BS-ENCJ",
+        "name": "English:Creative Writing",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "encj",
+        "date_created": "2022-08-19T00:40:53.366Z",
+        "date_modified": "2022-08-19T00:40:53.366Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 149,
+    "fields": {
+        "department": 51,
+        "student_code": "PUAM",
+        "program_code": "L-MPA-PUAM",
+        "name": "Public Administration",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "puam",
+        "date_created": "2022-08-19T00:40:58.776Z",
+        "date_modified": "2022-08-20T05:09:20.740Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 150,
+    "fields": {
+        "department": 52,
+        "student_code": "RELJ",
+        "program_code": "L-BS-RELJ",
+        "name": "Religion",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "relj",
+        "date_created": "2022-08-19T00:40:59.331Z",
+        "date_modified": "2022-08-19T00:40:59.331Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 151,
+    "fields": {
+        "department": 34,
+        "student_code": "SLTC",
+        "program_code": "E-GCP-SLTC",
+        "name": "Engl as a Second Lang Tch Cert",
+        "degree_level": 0,
+        "is_active": true,
+        "slug": "sltc",
+        "date_created": "2022-08-19T00:41:09.233Z",
+        "date_modified": "2022-08-19T00:41:09.233Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 152,
+    "fields": {
+        "department": 18,
+        "student_code": "UNBP",
+        "program_code": "UNBP",
+        "name": "Undecided:Pre-Business",
+        "degree_level": 1,
+        "is_active": true,
+        "slug": "unbp",
+        "date_created": "2022-08-19T00:41:16.087Z",
+        "date_modified": "2022-08-19T00:41:16.087Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 153,
+    "fields": {
+        "department": 21,
+        "student_code": "FCSM",
+        "program_code": "E-MA-FCSM",
+        "name": "Family & Consumer Sciences",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "fcsm",
+        "date_created": "2022-08-19T00:41:16.643Z",
+        "date_modified": "2022-08-20T05:09:20.064Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 154,
+    "fields": {
+        "department": 28,
+        "student_code": "SBMJ",
+        "program_code": "B-BBA-SBMJ",
+        "name": "Sales & Business Marketing",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "sbmj",
+        "date_created": "2022-08-19T00:41:17.683Z",
+        "date_modified": "2022-08-20T05:09:20.791Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 155,
+    "fields": {
+        "department": 53,
+        "student_code": "MHSJ",
+        "program_code": "E-BA-MHSJ",
+        "name": "Mathematics:Secondary Educ",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "mhsj",
+        "date_created": "2022-08-19T00:41:24.707Z",
+        "date_modified": "2022-08-20T05:12:41.068Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 156,
+    "fields": {
+        "department": 53,
+        "student_code": "MHTJ",
+        "program_code": "L-BS-MHTJ",
+        "name": "Teaching & Learning Math",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "mhtj",
+        "date_created": "2022-08-19T00:41:40.439Z",
+        "date_modified": "2022-08-19T00:41:40.439Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 157,
+    "fields": {
+        "department": 36,
+        "student_code": "RCSJ",
+        "program_code": "E-BS-RCSJ",
+        "name": "Recreation: Sport Management",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "rcsj",
+        "date_created": "2022-08-19T00:41:42.885Z",
+        "date_modified": "2022-08-19T00:41:42.885Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 158,
+    "fields": {
+        "department": 54,
+        "student_code": "SWKM",
+        "program_code": "H-MSW-SWKM",
+        "name": "Social Work",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "swkm",
+        "date_created": "2022-08-19T00:41:56.314Z",
+        "date_modified": "2022-08-19T00:41:56.314Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 159,
+    "fields": {
+        "department": 44,
+        "student_code": "BUAJ",
+        "program_code": "B-BBA-BUAJ",
+        "name": "Business Analytics",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "buaj",
+        "date_created": "2022-08-19T00:42:09.873Z",
+        "date_modified": "2022-08-20T05:09:19.738Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 160,
+    "fields": {
+        "department": 26,
+        "student_code": "HPAJ",
+        "program_code": "H-BS-HPAJ",
+        "name": "HSS:Physician Assistant Prep",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "hpaj",
+        "date_created": "2022-08-19T00:42:12.327Z",
+        "date_modified": "2022-08-19T00:42:12.327Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 161,
+    "fields": {
+        "department": 22,
+        "student_code": "PURJ",
+        "program_code": "L-BS-PURJ",
+        "name": "Public Relations",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "purj",
+        "date_created": "2022-08-19T00:42:14.276Z",
+        "date_modified": "2022-08-19T00:42:14.276Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 162,
+    "fields": {
+        "department": 55,
+        "student_code": "GGBJ",
+        "program_code": "L-BS-GGBJ",
+        "name": "Geog:Urban,Reg & Env Planning",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "ggbj",
+        "date_created": "2022-08-19T00:42:22.740Z",
+        "date_modified": "2022-08-19T00:42:22.740Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 163,
+    "fields": {
+        "department": 17,
+        "student_code": "STAD",
+        "program_code": "L-PHD-STAD",
+        "name": "Statistics",
+        "degree_level": 4,
+        "is_active": true,
+        "slug": "stad",
+        "date_created": "2022-08-19T00:42:25.288Z",
+        "date_modified": "2022-08-19T00:42:25.288Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 164,
+    "fields": {
+        "department": 35,
+        "student_code": "PYCD",
+        "program_code": "L-PHD-PYCD",
+        "name": "Psychology:Clinical Psychology",
+        "degree_level": 4,
+        "is_active": true,
+        "slug": "pycd",
+        "date_created": "2022-08-19T00:42:29.645Z",
+        "date_modified": "2022-08-19T00:42:29.645Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 165,
+    "fields": {
+        "department": 56,
+        "student_code": "PASM",
+        "program_code": "H-MSM-PASM",
+        "name": "Physician Assistant",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "pasm",
+        "date_created": "2022-08-19T00:42:37.019Z",
+        "date_modified": "2022-08-19T00:42:37.019Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 166,
+    "fields": {
+        "department": 20,
+        "student_code": "ACTM",
+        "program_code": "B-MSA-ACTM",
+        "name": "Accountancy",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "actm",
+        "date_created": "2022-08-19T00:42:40.087Z",
+        "date_modified": "2022-08-19T00:42:40.087Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 167,
+    "fields": {
+        "department": 23,
+        "student_code": "HRMJ",
+        "program_code": "B-BBA-HRMJ",
+        "name": "Human Resource Management",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "hrmj",
+        "date_created": "2022-08-19T00:42:46.581Z",
+        "date_modified": "2022-08-20T05:09:20.192Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 168,
+    "fields": {
+        "department": 22,
+        "student_code": "SCPJ",
+        "program_code": "L-BA-SCPJ",
+        "name": "Strategic Com: PublicRelations",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "scpj",
+        "date_created": "2022-08-19T00:43:18.597Z",
+        "date_modified": "2022-08-20T05:12:41.222Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 169,
+    "fields": {
+        "department": 22,
+        "student_code": "SCMJ",
+        "program_code": "L-BA-SCMJ",
+        "name": "Strategic Com: Media & Tech",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "scmj",
+        "date_created": "2022-08-19T00:43:19.649Z",
+        "date_modified": "2022-08-20T05:12:41.188Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 170,
+    "fields": {
+        "department": 57,
+        "student_code": "SLPM",
+        "program_code": "H-MA-SLPM",
+        "name": "Speech-Language Pathology",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "slpm",
+        "date_created": "2022-08-19T00:43:31.407Z",
+        "date_modified": "2022-08-20T05:09:20.843Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 171,
+    "fields": {
+        "department": 18,
+        "student_code": "ISUJ",
+        "program_code": "B-BBA-ISUJ",
+        "name": "Integrated Supply Management",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "isuj",
+        "date_created": "2022-08-19T00:43:38.839Z",
+        "date_modified": "2022-08-20T05:09:20.278Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 172,
+    "fields": {
+        "department": 15,
+        "student_code": "EMRD",
+        "program_code": "E-PHD-EMRD",
+        "name": "Eval/Measurement & Research",
+        "degree_level": 4,
+        "is_active": true,
+        "slug": "emrd",
+        "date_created": "2022-08-19T00:43:40.373Z",
+        "date_modified": "2022-08-19T00:43:40.373Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 173,
+    "fields": {
+        "department": 41,
+        "student_code": "PHYD",
+        "program_code": "L-PHD-PHYD",
+        "name": "Physics",
+        "degree_level": 4,
+        "is_active": true,
+        "slug": "phyd",
+        "date_created": "2022-08-19T00:43:56.370Z",
+        "date_modified": "2022-08-19T00:43:56.370Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 174,
+    "fields": {
+        "department": 21,
+        "student_code": "NDDJ",
+        "program_code": "E-BS-NDDJ",
+        "name": "Nutrition and Dietetics",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "nddj",
+        "date_created": "2022-08-19T00:44:05.263Z",
+        "date_modified": "2022-08-19T00:44:05.263Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 175,
+    "fields": {
+        "department": 58,
+        "student_code": "PTHD",
+        "program_code": "H-DPT-PTHD",
+        "name": "Physical Therapy",
+        "degree_level": 0,
+        "is_active": true,
+        "slug": "pthd",
+        "date_created": "2022-08-19T00:44:07.707Z",
+        "date_modified": "2022-08-19T00:44:07.707Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 176,
+    "fields": {
+        "department": 18,
+        "student_code": "DMEJ",
+        "program_code": "B-BBA-DMEJ",
+        "name": "Digital Marketing & eCommerce",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "dmej",
+        "date_created": "2022-08-19T00:44:23.000Z",
+        "date_modified": "2022-08-20T05:09:19.891Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 177,
+    "fields": {
+        "department": 54,
+        "student_code": "SWKJ",
+        "program_code": "H-BSW-SWKJ",
+        "name": "Social Work",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "swkj",
+        "date_created": "2022-08-19T00:44:28.778Z",
+        "date_modified": "2022-08-19T00:44:28.778Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 178,
+    "fields": {
+        "department": 22,
+        "student_code": "DMJJ",
+        "program_code": "L-BA-DMJJ",
+        "name": "Digital Media and Journalism",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "dmjj",
+        "date_created": "2022-08-19T00:45:10.121Z",
+        "date_modified": "2022-08-20T05:12:40.828Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 179,
+    "fields": {
+        "department": 33,
+        "student_code": "SOCJ",
+        "program_code": "L-BS-SOCJ",
+        "name": "Sociology",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "socj",
+        "date_created": "2022-08-19T00:45:22.744Z",
+        "date_modified": "2022-08-19T00:45:22.744Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 180,
+    "fields": {
+        "department": 32,
+        "student_code": "BYLJ",
+        "program_code": "L-BA-BYLJ",
+        "name": "Biology",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "bylj",
+        "date_created": "2022-08-19T00:45:56.481Z",
+        "date_modified": "2022-08-20T05:12:40.742Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 181,
+    "fields": {
+        "department": 49,
+        "student_code": "ERLJ",
+        "program_code": "L-BS-ERLJ",
+        "name": "Earth Science",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "erlj",
+        "date_created": "2022-08-19T00:45:59.523Z",
+        "date_modified": "2022-08-19T00:45:59.524Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 182,
+    "fields": {
+        "department": 35,
+        "student_code": "PYBM",
+        "program_code": "L-MA-PYBM",
+        "name": "Psychology:Behavior Analysis",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "pybm",
+        "date_created": "2022-08-19T00:46:02.010Z",
+        "date_modified": "2022-08-20T05:09:20.757Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 183,
+    "fields": {
+        "department": 49,
+        "student_code": "HYGJ",
+        "program_code": "L-BS-HYGJ",
+        "name": "Hydrogeology",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "hygj",
+        "date_created": "2022-08-19T00:46:07.779Z",
+        "date_modified": "2022-08-19T00:46:07.779Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 184,
+    "fields": {
+        "department": 23,
+        "student_code": "MGTJ",
+        "program_code": "B-BBA-MGTJ",
+        "name": "Management",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "mgtj",
+        "date_created": "2022-08-19T00:46:08.315Z",
+        "date_modified": "2022-08-20T05:09:20.381Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 185,
+    "fields": {
+        "department": 19,
+        "student_code": "ATOJ",
+        "program_code": "P-BS-ATOJ",
+        "name": "Aviation Technical Operations",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "atoj",
+        "date_created": "2022-08-19T00:46:40.305Z",
+        "date_modified": "2022-08-19T00:46:40.305Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 186,
+    "fields": {
+        "department": 54,
+        "student_code": "SWCM",
+        "program_code": "H-MSW-SWCM",
+        "name": "Social Work: Clinical SWRK",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "swcm",
+        "date_created": "2022-08-19T00:46:46.589Z",
+        "date_modified": "2022-08-19T00:46:46.589Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 187,
+    "fields": {
+        "department": 37,
+        "student_code": "MCSJ",
+        "program_code": "F-BM-MCSJ",
+        "name": "Music Ed:Choral/General-Sec",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "mcsj",
+        "date_created": "2022-08-19T00:46:47.121Z",
+        "date_modified": "2022-08-20T05:09:20.346Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 188,
+    "fields": {
+        "department": 59,
+        "student_code": "HYSP",
+        "program_code": "HYSP",
+        "name": "Pre-History:Secondary Educ",
+        "degree_level": 1,
+        "is_active": true,
+        "slug": "hysp",
+        "date_created": "2022-08-19T00:46:48.675Z",
+        "date_modified": "2022-08-19T00:46:48.675Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 189,
+    "fields": {
+        "department": 49,
+        "student_code": "GCMJ",
+        "program_code": "L-BS-GCMJ",
+        "name": "Geochemistry",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "gcmj",
+        "date_created": "2022-08-19T00:46:58.505Z",
+        "date_modified": "2022-08-19T00:46:58.505Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 190,
+    "fields": {
+        "department": 25,
+        "student_code": "OCTD",
+        "program_code": "H-OTD-OCTD",
+        "name": "Occupational Therapy",
+        "degree_level": 0,
+        "is_active": true,
+        "slug": "octd",
+        "date_created": "2022-08-19T00:47:21.587Z",
+        "date_modified": "2022-08-19T00:47:21.587Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 191,
+    "fields": {
+        "department": 35,
+        "student_code": "PYCJ",
+        "program_code": "L-BS-PYCJ",
+        "name": "Psychology",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "pycj",
+        "date_created": "2022-08-19T00:47:23.162Z",
+        "date_modified": "2022-08-19T00:47:23.162Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 192,
+    "fields": {
+        "department": 34,
+        "student_code": "TESQ",
+        "program_code": "E-MA-TESQ",
+        "name": "TchngEng Spkrs Othr Lang (Acc)",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "tesq",
+        "date_created": "2022-08-19T00:47:51.468Z",
+        "date_modified": "2022-08-20T05:09:20.996Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 193,
+    "fields": {
+        "department": 38,
+        "student_code": "TEMM",
+        "program_code": "E-MA-TEMM",
+        "name": "Teaching: Elementary Education",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "temm",
+        "date_created": "2022-08-19T00:48:42.664Z",
+        "date_modified": "2022-08-20T05:09:20.962Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 194,
+    "fields": {
+        "department": 59,
+        "student_code": "SLSJ",
+        "program_code": "E-BA-SLSJ",
+        "name": "Social Studies: Secondary Ed",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "slsj",
+        "date_created": "2022-08-19T00:48:53.067Z",
+        "date_modified": "2022-08-20T05:12:41.239Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 195,
+    "fields": {
+        "department": 60,
+        "student_code": "SPMJ",
+        "program_code": "L-BA-SPMJ",
+        "name": "Student Planned Major",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "spmj",
+        "date_created": "2022-08-19T00:48:58.007Z",
+        "date_modified": "2022-08-20T05:12:41.256Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 196,
+    "fields": {
+        "department": 61,
+        "student_code": "FSSJ",
+        "program_code": "L-BS-FSSJ",
+        "name": "Freshwater Sci&Sustainability",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "fssj",
+        "date_created": "2022-08-19T00:49:24.918Z",
+        "date_modified": "2022-08-19T00:49:24.918Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 197,
+    "fields": {
+        "department": 6,
+        "student_code": "CYSJ",
+        "program_code": "A-BS-CYSJ",
+        "name": "Cybersecurity",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "cysj",
+        "date_created": "2022-08-19T00:49:30.807Z",
+        "date_modified": "2022-08-19T00:49:30.807Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 198,
+    "fields": {
+        "department": 39,
+        "student_code": "CEFM",
+        "program_code": "E-MA-CEFM",
+        "name": "Cnslr Ed:Marriage, Cpl & Fam",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "cefm",
+        "date_created": "2022-08-19T00:49:50.645Z",
+        "date_modified": "2022-08-20T05:09:19.755Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 199,
+    "fields": {
+        "department": 53,
+        "student_code": "MHLJ",
+        "program_code": "L-BA-MHLJ",
+        "name": "Mathematics",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "mhlj",
+        "date_created": "2022-08-19T00:49:51.201Z",
+        "date_modified": "2022-08-20T05:12:41.051Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 200,
+    "fields": {
+        "department": 21,
+        "student_code": "FCSJ",
+        "program_code": "E-BS-FCSJ",
+        "name": "Fam & Consumer Sci Tchr Educ",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "fcsj",
+        "date_created": "2022-08-19T00:50:23.438Z",
+        "date_modified": "2022-08-19T00:50:23.438Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 201,
+    "fields": {
+        "department": 37,
+        "student_code": "MUYJ",
+        "program_code": "F-BM-MUYJ",
+        "name": "Music Therapy",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "muyj",
+        "date_created": "2022-08-19T00:50:56.914Z",
+        "date_modified": "2022-08-20T05:09:20.569Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 202,
+    "fields": {
+        "department": 21,
+        "student_code": "FDDJ",
+        "program_code": "E-BS-FDDJ",
+        "name": "Fash Merch&Design:Design & Dev",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "fddj",
+        "date_created": "2022-08-19T00:50:58.417Z",
+        "date_modified": "2022-08-19T00:50:58.418Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 203,
+    "fields": {
+        "department": 49,
+        "student_code": "EVGJ",
+        "program_code": "L-BS-EVGJ",
+        "name": "Environmental Geology",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "evgj",
+        "date_created": "2022-08-19T00:51:11.283Z",
+        "date_modified": "2022-08-19T00:51:11.283Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 204,
+    "fields": {
+        "department": 38,
+        "student_code": "ECEP",
+        "program_code": "ECEP",
+        "name": "Pre-Early Childhood Prof Educ",
+        "degree_level": 1,
+        "is_active": true,
+        "slug": "ecep",
+        "date_created": "2022-08-19T00:51:31.754Z",
+        "date_modified": "2022-08-19T00:51:31.754Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 205,
+    "fields": {
+        "department": 38,
+        "student_code": "ELHD",
+        "program_code": "E-PHD-ELHD",
+        "name": "Educ Ldship:Higher Education",
+        "degree_level": 4,
+        "is_active": true,
+        "slug": "elhd",
+        "date_created": "2022-08-19T00:51:44.718Z",
+        "date_modified": "2022-08-19T00:51:44.718Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 206,
+    "fields": {
+        "department": 48,
+        "student_code": "PRNG",
+        "program_code": "H-PDP-PRNG",
+        "name": "Pre-Nursing",
+        "degree_level": 1,
+        "is_active": true,
+        "slug": "prng",
+        "date_created": "2022-08-19T00:51:52.224Z",
+        "date_modified": "2022-08-20T05:09:20.689Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 207,
+    "fields": {
+        "department": 11,
+        "student_code": "MEAJ",
+        "program_code": "ABSEMCH-MEAJ",
+        "name": "ME: Automotive",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "meaj",
+        "date_created": "2022-08-19T00:52:04.897Z",
+        "date_modified": "2022-08-19T00:52:04.897Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 208,
+    "fields": {
+        "department": 33,
+        "student_code": "CRJJ",
+        "program_code": "L-BS-CRJJ",
+        "name": "Criminal Justice",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "crjj",
+        "date_created": "2022-08-19T00:52:05.400Z",
+        "date_modified": "2022-08-19T00:52:05.400Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 209,
+    "fields": {
+        "department": 37,
+        "student_code": "MSMJ",
+        "program_code": "F-BMA-MSMJ",
+        "name": "Music: B.M.A. Program",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "msmj",
+        "date_created": "2022-08-19T00:52:27.592Z",
+        "date_modified": "2022-08-20T05:09:20.449Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 210,
+    "fields": {
+        "department": 62,
+        "student_code": "AECD",
+        "program_code": "L-PHD-AECD",
+        "name": "Applied Economics",
+        "degree_level": 4,
+        "is_active": true,
+        "slug": "aecd",
+        "date_created": "2022-08-19T00:52:29.580Z",
+        "date_modified": "2022-08-19T00:52:29.580Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 211,
+    "fields": {
+        "department": 29,
+        "student_code": "CHMM",
+        "program_code": "L-MS-CHMM",
+        "name": "Chemistry",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "chmm",
+        "date_created": "2022-08-19T00:52:36.501Z",
+        "date_modified": "2022-08-19T00:52:36.501Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 212,
+    "fields": {
+        "department": 63,
+        "student_code": "DACJ",
+        "program_code": "F-BA-DACJ",
+        "name": "Dance:BA program",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "dacj",
+        "date_created": "2022-08-19T00:52:40.104Z",
+        "date_modified": "2022-08-20T05:12:40.810Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 213,
+    "fields": {
+        "department": 32,
+        "student_code": "BSCD",
+        "program_code": "L-PHD-BSCD",
+        "name": "Biological Sciences",
+        "degree_level": 4,
+        "is_active": true,
+        "slug": "bscd",
+        "date_created": "2022-08-19T00:53:07.885Z",
+        "date_modified": "2022-08-19T00:53:07.886Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 214,
+    "fields": {
+        "department": 17,
+        "student_code": "DSCQ",
+        "program_code": "L-MS-DSCQ",
+        "name": "Data Science (Accelerated)",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "dscq",
+        "date_created": "2022-08-19T00:53:36.226Z",
+        "date_modified": "2022-08-19T00:53:36.226Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 215,
+    "fields": {
+        "department": 17,
+        "student_code": "STAJ",
+        "program_code": "L-BS-STAJ",
+        "name": "Statistics",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "staj",
+        "date_created": "2022-08-19T00:53:46.590Z",
+        "date_modified": "2022-08-19T00:53:46.590Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 216,
+    "fields": {
+        "department": 30,
+        "student_code": "SCP",
+        "program_code": "O-NDA-SCP",
+        "name": "Scope Student",
+        "degree_level": 1,
+        "is_active": true,
+        "slug": "scp",
+        "date_created": "2022-08-19T00:53:50.490Z",
+        "date_modified": "2022-08-20T05:09:20.809Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 217,
+    "fields": {
+        "department": 49,
+        "student_code": "GEPJ",
+        "program_code": "L-BS-GEPJ",
+        "name": "Geophysics",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "gepj",
+        "date_created": "2022-08-19T00:53:56.461Z",
+        "date_modified": "2022-08-19T00:53:56.461Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 218,
+    "fields": {
+        "department": 39,
+        "student_code": "CEMM",
+        "program_code": "E-MA-CEMM",
+        "name": "Cnslr Ed: Clinical Mental Hlth",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "cemm",
+        "date_created": "2022-08-19T00:54:16.554Z",
+        "date_modified": "2022-08-20T05:09:19.772Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 219,
+    "fields": {
+        "department": 62,
+        "student_code": "ECLJ",
+        "program_code": "L-BS-ECLJ",
+        "name": "Economics",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "eclj",
+        "date_created": "2022-08-19T00:54:46.475Z",
+        "date_modified": "2022-08-19T00:54:46.475Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 220,
+    "fields": {
+        "department": 21,
+        "student_code": "NDDP",
+        "program_code": "E-PDP-NDDP",
+        "name": "Pre-Nutrition and Dietetics",
+        "degree_level": 1,
+        "is_active": true,
+        "slug": "nddp",
+        "date_created": "2022-08-19T00:55:21.577Z",
+        "date_modified": "2022-08-20T05:09:20.586Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 221,
+    "fields": {
+        "department": 42,
+        "student_code": "EHDJ",
+        "program_code": "E-BS-EHDJ",
+        "name": "Education & Human Development",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "ehdj",
+        "date_created": "2022-08-19T00:55:35.925Z",
+        "date_modified": "2022-08-19T00:55:35.925Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 222,
+    "fields": {
+        "department": 27,
+        "student_code": "FNPJ",
+        "program_code": "B-BBA-FNPJ",
+        "name": "Personal Financial Planning",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "fnpj",
+        "date_created": "2022-08-19T00:55:39.489Z",
+        "date_modified": "2022-08-20T05:09:20.132Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 223,
+    "fields": {
+        "department": 28,
+        "student_code": "SBMP",
+        "program_code": "SBMP",
+        "name": "Pre-Sales & Business Marketing",
+        "degree_level": 1,
+        "is_active": true,
+        "slug": "sbmp",
+        "date_created": "2022-08-19T00:55:48.828Z",
+        "date_modified": "2022-08-19T00:55:48.828Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 224,
+    "fields": {
+        "department": 21,
+        "student_code": "NDDM",
+        "program_code": "E-MS-NDDM",
+        "name": "Nutrition and Dietetics",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "nddm",
+        "date_created": "2022-08-19T00:55:57.279Z",
+        "date_modified": "2022-08-19T00:55:57.279Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 225,
+    "fields": {
+        "department": 26,
+        "student_code": "PBHJ",
+        "program_code": "H-BS-PBHJ",
+        "name": "Public Health",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "pbhj",
+        "date_created": "2022-08-19T00:56:25.354Z",
+        "date_modified": "2022-08-19T00:56:25.354Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 226,
+    "fields": {
+        "department": 57,
+        "student_code": "SPNJ",
+        "program_code": "H-BS-SPNJ",
+        "name": "Speech Pathology & Audiology",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "spnj",
+        "date_created": "2022-08-19T00:56:46.128Z",
+        "date_modified": "2022-08-19T00:56:46.128Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 227,
+    "fields": {
+        "department": 61,
+        "student_code": "SBOJ",
+        "program_code": "L-BS-SBOJ",
+        "name": "Sustainable Brewing: Operation",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "sboj",
+        "date_created": "2022-08-19T00:57:19.833Z",
+        "date_modified": "2022-08-19T00:57:19.833Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 228,
+    "fields": {
+        "department": 31,
+        "student_code": "GST",
+        "program_code": "O-NDA-GST",
+        "name": "Guest Student-Undergraduate",
+        "degree_level": 1,
+        "is_active": true,
+        "slug": "gst",
+        "date_created": "2022-08-19T00:58:27.086Z",
+        "date_modified": "2022-08-20T05:09:20.167Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 229,
+    "fields": {
+        "department": 54,
+        "student_code": "PRSW",
+        "program_code": "H-PDP-PRSW",
+        "name": "Pre-Social Work",
+        "degree_level": 1,
+        "is_active": true,
+        "slug": "prsw",
+        "date_created": "2022-08-19T00:58:30.070Z",
+        "date_modified": "2022-08-20T05:09:20.723Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 230,
+    "fields": {
+        "department": 42,
+        "student_code": "CER",
+        "program_code": "CER",
+        "name": "Certification",
+        "degree_level": 0,
+        "is_active": true,
+        "slug": "cer",
+        "date_created": "2022-08-19T00:59:27.430Z",
+        "date_modified": "2022-08-19T00:59:27.430Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 231,
+    "fields": {
+        "department": 21,
+        "student_code": "FCSQ",
+        "program_code": "E-MA-FCSQ",
+        "name": "Family&Consmr Sci(Accelerated)",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "fcsq",
+        "date_created": "2022-08-19T01:00:52.680Z",
+        "date_modified": "2022-08-20T05:09:20.081Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 232,
+    "fields": {
+        "department": 32,
+        "student_code": "BYSJ",
+        "program_code": "E-BS-BYSJ",
+        "name": "Biology:Secondary Education",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "bysj",
+        "date_created": "2022-08-19T01:00:53.741Z",
+        "date_modified": "2022-08-19T01:00:53.742Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 233,
+    "fields": {
+        "department": 16,
+        "student_code": "PREG",
+        "program_code": "A-PDP-PREG",
+        "name": "Pre-Engineering",
+        "degree_level": 1,
+        "is_active": true,
+        "slug": "preg",
+        "date_created": "2022-08-19T01:01:27.863Z",
+        "date_modified": "2022-08-20T05:09:20.672Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 234,
+    "fields": {
+        "department": 20,
+        "student_code": "ACTP",
+        "program_code": "ACTP",
+        "name": "Pre-Accountancy",
+        "degree_level": 1,
+        "is_active": true,
+        "slug": "actp",
+        "date_created": "2022-08-19T01:02:00.554Z",
+        "date_modified": "2022-08-19T01:02:00.554Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 235,
+    "fields": {
+        "department": 49,
+        "student_code": "ERMM",
+        "program_code": "L-MS-ERMM",
+        "name": "Earth Science",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "ermm",
+        "date_created": "2022-08-19T01:02:09.520Z",
+        "date_modified": "2022-08-19T01:02:09.520Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 236,
+    "fields": {
+        "department": 27,
+        "student_code": "LAWJ",
+        "program_code": "B-BBA-LAWJ",
+        "name": "Business Law",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "lawj",
+        "date_created": "2022-08-19T01:02:46.373Z",
+        "date_modified": "2022-08-20T05:09:20.295Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 237,
+    "fields": {
+        "department": 55,
+        "student_code": "GGLJ",
+        "program_code": "L-BA-GGLJ",
+        "name": "Geography",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "gglj",
+        "date_created": "2022-08-19T01:03:15.343Z",
+        "date_modified": "2022-08-20T05:12:40.965Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 238,
+    "fields": {
+        "department": 64,
+        "student_code": "FHLJ",
+        "program_code": "L-BA-FHLJ",
+        "name": "French",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "fhlj",
+        "date_created": "2022-08-19T01:03:25.598Z",
+        "date_modified": "2022-08-20T05:12:40.897Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 239,
+    "fields": {
+        "department": 22,
+        "student_code": "OCMJ",
+        "program_code": "L-BS-OCMJ",
+        "name": "Organizational Communication",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "ocmj",
+        "date_created": "2022-08-19T01:03:48.568Z",
+        "date_modified": "2022-08-19T01:03:48.568Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 240,
+    "fields": {
+        "department": 18,
+        "student_code": "DMEP",
+        "program_code": "DMEP",
+        "name": "Pre-Digital Mktg & eCommerce",
+        "degree_level": 1,
+        "is_active": true,
+        "slug": "dmep",
+        "date_created": "2022-08-19T01:03:53.532Z",
+        "date_modified": "2022-08-19T01:03:53.532Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 241,
+    "fields": {
+        "department": 47,
+        "student_code": "ENCD",
+        "program_code": "L-PHD-ENCD",
+        "name": "English:Creative Writing",
+        "degree_level": 4,
+        "is_active": true,
+        "slug": "encd",
+        "date_created": "2022-08-19T01:04:19.036Z",
+        "date_modified": "2022-08-19T01:04:19.037Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 242,
+    "fields": {
+        "department": 25,
+        "student_code": "OCPP",
+        "program_code": "H-PDP-OCPP",
+        "name": "Pre-Occupational Therapy",
+        "degree_level": 1,
+        "is_active": true,
+        "slug": "ocpp",
+        "date_created": "2022-08-19T01:04:42.372Z",
+        "date_modified": "2022-08-20T05:09:20.654Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 243,
+    "fields": {
+        "department": 65,
+        "student_code": "PHPJ",
+        "program_code": "L-BA-PHPJ",
+        "name": "Philosophy:Prof & App Ethics",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "phpj",
+        "date_created": "2022-08-19T01:04:49.297Z",
+        "date_modified": "2022-08-20T05:12:41.085Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 244,
+    "fields": {
+        "department": 62,
+        "student_code": "ECBP",
+        "program_code": "ECBP",
+        "name": "Pre-Economics:Business",
+        "degree_level": 1,
+        "is_active": true,
+        "slug": "ecbp",
+        "date_created": "2022-08-19T01:05:33.735Z",
+        "date_modified": "2022-08-19T01:05:33.735Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 245,
+    "fields": {
+        "department": 62,
+        "student_code": "AECM",
+        "program_code": "L-MA-AECM",
+        "name": "Applied Economics",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "aecm",
+        "date_created": "2022-08-19T01:05:35.239Z",
+        "date_modified": "2022-08-20T05:09:19.618Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 246,
+    "fields": {
+        "department": 57,
+        "student_code": "SLHJ",
+        "program_code": "H-BS-SLHJ",
+        "name": "Speech, Lang & Hearing Science",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "slhj",
+        "date_created": "2022-08-19T01:05:53.503Z",
+        "date_modified": "2022-08-19T01:05:53.503Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 247,
+    "fields": {
+        "department": 37,
+        "student_code": "MUJJ",
+        "program_code": "F-BM-MUJJ",
+        "name": "Music:Jazz Studies",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "mujj",
+        "date_created": "2022-08-19T01:06:03.553Z",
+        "date_modified": "2022-08-20T05:09:20.518Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 248,
+    "fields": {
+        "department": 53,
+        "student_code": "MTHD",
+        "program_code": "L-PHD-MTHD",
+        "name": "Mathematics",
+        "degree_level": 4,
+        "is_active": true,
+        "slug": "mthd",
+        "date_created": "2022-08-19T01:06:33.808Z",
+        "date_modified": "2022-08-19T01:06:33.808Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 249,
+    "fields": {
+        "department": 47,
+        "student_code": "ENSJ",
+        "program_code": "E-BA-ENSJ",
+        "name": "English:Secondary Education",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "ensj",
+        "date_created": "2022-08-19T01:06:39.958Z",
+        "date_modified": "2022-08-20T05:12:40.862Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 250,
+    "fields": {
+        "department": 34,
+        "student_code": "LSTM",
+        "program_code": "E-MA-LSTM",
+        "name": "Literacy Studies",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "lstm",
+        "date_created": "2022-08-19T01:06:57.985Z",
+        "date_modified": "2022-08-20T05:09:20.312Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 251,
+    "fields": {
+        "department": 15,
+        "student_code": "ELEM",
+        "program_code": "E-MA-ELEM",
+        "name": "Educ Ldship:Educ&Global Ldship",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "elem",
+        "date_created": "2022-08-19T01:07:08.265Z",
+        "date_modified": "2022-08-20T05:09:19.977Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 252,
+    "fields": {
+        "department": 59,
+        "student_code": "HYLJ",
+        "program_code": "L-BS-HYLJ",
+        "name": "History",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "hylj",
+        "date_created": "2022-08-19T01:07:26.508Z",
+        "date_modified": "2022-08-19T01:07:26.508Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 253,
+    "fields": {
+        "department": 21,
+        "student_code": "FSCJ",
+        "program_code": "E-BS-FSCJ",
+        "name": "Fam Sci&Human Dev:Chld Dev&Ser",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "fscj",
+        "date_created": "2022-08-19T01:07:28.500Z",
+        "date_modified": "2022-08-19T01:07:28.501Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 254,
+    "fields": {
+        "department": 62,
+        "student_code": "ECNJ",
+        "program_code": "L-BS-ECNJ",
+        "name": "Economics: B.S. Program",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "ecnj",
+        "date_created": "2022-08-19T01:07:56.727Z",
+        "date_modified": "2022-08-19T01:07:56.727Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 255,
+    "fields": {
+        "department": 39,
+        "student_code": "CPYM",
+        "program_code": "E-MA-CPYM",
+        "name": "Counseling Psychology",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "cpym",
+        "date_created": "2022-08-19T01:08:12.434Z",
+        "date_modified": "2022-08-20T05:09:19.840Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 256,
+    "fields": {
+        "department": 28,
+        "student_code": "FMKP",
+        "program_code": "FMKP",
+        "name": "Pre-Food/Csmr Pkg Goods Mktg",
+        "degree_level": 1,
+        "is_active": true,
+        "slug": "fmkp",
+        "date_created": "2022-08-19T01:08:20.468Z",
+        "date_modified": "2022-08-19T01:08:20.468Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 257,
+    "fields": {
+        "department": 66,
+        "student_code": "ANTJ",
+        "program_code": "L-BA-ANTJ",
+        "name": "Anthropology",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "antj",
+        "date_created": "2022-08-19T01:08:42.769Z",
+        "date_modified": "2022-08-20T05:12:40.724Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 258,
+    "fields": {
+        "department": 24,
+        "student_code": "AHIJ",
+        "program_code": "F-BA-AHIJ",
+        "name": "Art History",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "ahij",
+        "date_created": "2022-08-19T01:08:44.333Z",
+        "date_modified": "2022-08-20T05:12:40.710Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 259,
+    "fields": {
+        "department": 15,
+        "student_code": "ELHM",
+        "program_code": "E-MA-ELHM",
+        "name": "Ed Ldship:Higher Ed & Stu Affr",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "elhm",
+        "date_created": "2022-08-19T01:08:46.899Z",
+        "date_modified": "2022-08-20T05:09:19.994Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 260,
+    "fields": {
+        "department": 26,
+        "student_code": "MPHM",
+        "program_code": "H-MPH-MPHM",
+        "name": "Public Health",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "mphm",
+        "date_created": "2022-08-19T01:09:18.298Z",
+        "date_modified": "2022-08-20T05:09:20.432Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 261,
+    "fields": {
+        "department": 53,
+        "student_code": "ACMM",
+        "program_code": "L-MS-ACMM",
+        "name": "Applied & Computational Math",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "acmm",
+        "date_created": "2022-08-19T01:09:30.143Z",
+        "date_modified": "2022-08-19T01:09:30.143Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 262,
+    "fields": {
+        "department": 47,
+        "student_code": "ENLD",
+        "program_code": "L-PHD-ENLD",
+        "name": "English",
+        "degree_level": 4,
+        "is_active": true,
+        "slug": "enld",
+        "date_created": "2022-08-19T01:09:32.635Z",
+        "date_modified": "2022-08-19T01:09:32.635Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 263,
+    "fields": {
+        "department": 31,
+        "student_code": "HSG",
+        "program_code": "O-NDA-HSG",
+        "name": "High School Guest",
+        "degree_level": 1,
+        "is_active": true,
+        "slug": "hsg",
+        "date_created": "2022-08-19T01:09:34.115Z",
+        "date_modified": "2022-08-20T05:09:20.227Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 264,
+    "fields": {
+        "department": 49,
+        "student_code": "GESM",
+        "program_code": "L-MS-GESM",
+        "name": "Geosciences",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "gesm",
+        "date_created": "2022-08-19T01:09:45.325Z",
+        "date_modified": "2022-08-19T01:09:45.325Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 265,
+    "fields": {
+        "department": 39,
+        "student_code": "CEDD",
+        "program_code": "E-PHD-CEDD",
+        "name": "Counselor Education",
+        "degree_level": 4,
+        "is_active": true,
+        "slug": "cedd",
+        "date_created": "2022-08-19T01:09:47.313Z",
+        "date_modified": "2022-08-19T01:09:47.313Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 266,
+    "fields": {
+        "department": 43,
+        "student_code": "TACJ",
+        "program_code": "F-BFA-TACJ",
+        "name": "Theatre: Acting",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "tacj",
+        "date_created": "2022-08-19T01:10:25.960Z",
+        "date_modified": "2022-08-20T05:09:20.928Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 267,
+    "fields": {
+        "department": 21,
+        "student_code": "IDDP",
+        "program_code": "E-PDP-IDDP",
+        "name": "Pre-Interior Design",
+        "degree_level": 1,
+        "is_active": true,
+        "slug": "iddp",
+        "date_created": "2022-08-19T01:10:28.541Z",
+        "date_modified": "2022-08-20T05:09:20.244Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 268,
+    "fields": {
+        "department": 32,
+        "student_code": "BISM",
+        "program_code": "L-MA-BISM",
+        "name": "Biological Sciences",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "bism",
+        "date_created": "2022-08-19T01:10:37.125Z",
+        "date_modified": "2022-08-20T05:09:19.704Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 269,
+    "fields": {
+        "department": 48,
+        "student_code": "NURM",
+        "program_code": "H-MSN-NURM",
+        "name": "Nursing",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "nurm",
+        "date_created": "2022-08-19T01:11:05.521Z",
+        "date_modified": "2022-08-19T01:11:05.521Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 270,
+    "fields": {
+        "department": 33,
+        "student_code": "SOPJ",
+        "program_code": "L-BS-SOPJ",
+        "name": "Sociology:Social Psychology",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "sopj",
+        "date_created": "2022-08-19T01:11:28.020Z",
+        "date_modified": "2022-08-19T01:11:28.020Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 271,
+    "fields": {
+        "department": 53,
+        "student_code": "MAAJ",
+        "program_code": "L-BA-MAAJ",
+        "name": "Applied Mathematics",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "maaj",
+        "date_created": "2022-08-19T01:11:54.399Z",
+        "date_modified": "2022-08-20T05:12:41.034Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 272,
+    "fields": {
+        "department": 44,
+        "student_code": "CMIP",
+        "program_code": "CMIP",
+        "name": "Pre-Computer Info Systems",
+        "degree_level": 1,
+        "is_active": true,
+        "slug": "cmip",
+        "date_created": "2022-08-19T01:12:38.541Z",
+        "date_modified": "2022-08-19T01:12:38.541Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 273,
+    "fields": {
+        "department": 43,
+        "student_code": "TSMJ",
+        "program_code": "F-BFA-TSMJ",
+        "name": "Theatre: Stage Management",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "tsmj",
+        "date_created": "2022-08-19T01:13:30.370Z",
+        "date_modified": "2022-08-20T05:09:21.031Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 274,
+    "fields": {
+        "department": 37,
+        "student_code": "MUIJ",
+        "program_code": "F-BM-MUIJ",
+        "name": "Music Performance:Instrumental",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "muij",
+        "date_created": "2022-08-19T01:13:34.051Z",
+        "date_modified": "2022-08-20T05:09:20.500Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 275,
+    "fields": {
+        "department": 1,
+        "student_code": "SCPD",
+        "program_code": "L-PHD-SCPD",
+        "name": "Science Ed:Physics",
+        "degree_level": 4,
+        "is_active": true,
+        "slug": "scpd",
+        "date_created": "2022-08-19T01:14:06.147Z",
+        "date_modified": "2022-08-19T01:14:06.147Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 276,
+    "fields": {
+        "department": 44,
+        "student_code": "BUAP",
+        "program_code": "BUAP",
+        "name": "Pre-Business Analytics",
+        "degree_level": 1,
+        "is_active": true,
+        "slug": "buap",
+        "date_created": "2022-08-19T01:14:26.182Z",
+        "date_modified": "2022-08-19T01:14:26.182Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 277,
+    "fields": {
+        "department": 21,
+        "student_code": "FSDJ",
+        "program_code": "E-BS-FSDJ",
+        "name": "Family Studies",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "fsdj",
+        "date_created": "2022-08-19T01:15:37.114Z",
+        "date_modified": "2022-08-19T01:15:37.114Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 278,
+    "fields": {
+        "department": 37,
+        "student_code": "MISJ",
+        "program_code": "F-BM-MISJ",
+        "name": "Music Ed:Instrumental-Sec",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "misj",
+        "date_created": "2022-08-19T01:16:03.633Z",
+        "date_modified": "2022-08-20T05:09:20.398Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 279,
+    "fields": {
+        "department": 15,
+        "student_code": "OCLM",
+        "program_code": "E-MA-OCLM",
+        "name": "Organizational Chg Leadership",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "oclm",
+        "date_created": "2022-08-19T01:17:01.813Z",
+        "date_modified": "2022-08-20T05:09:20.637Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 280,
+    "fields": {
+        "department": 41,
+        "student_code": "PHSJ",
+        "program_code": "E-BS-PHSJ",
+        "name": "Physics:Secondary Education",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "phsj",
+        "date_created": "2022-08-19T01:18:52.541Z",
+        "date_modified": "2022-08-19T01:18:52.541Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 281,
+    "fields": {
+        "department": 22,
+        "student_code": "SCIJ",
+        "program_code": "L-BA-SCIJ",
+        "name": "Strategic Com: Div & Inclusion",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "scij",
+        "date_created": "2022-08-19T01:19:41.927Z",
+        "date_modified": "2022-08-20T05:12:41.153Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 282,
+    "fields": {
+        "department": 22,
+        "student_code": "JNLJ",
+        "program_code": "L-BA-JNLJ",
+        "name": "Journalism",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "jnlj",
+        "date_created": "2022-08-19T01:19:42.472Z",
+        "date_modified": "2022-08-20T05:12:41.000Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 283,
+    "fields": {
+        "department": 28,
+        "student_code": "ADVP",
+        "program_code": "ADVP",
+        "name": "Pre-Advertising & Promotion",
+        "degree_level": 1,
+        "is_active": true,
+        "slug": "advp",
+        "date_created": "2022-08-19T01:19:58.202Z",
+        "date_modified": "2022-08-19T01:19:58.202Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 284,
+    "fields": {
+        "department": 38,
+        "student_code": "ELEP",
+        "program_code": "ELEP",
+        "name": "Pre-Elementary Education",
+        "degree_level": 1,
+        "is_active": true,
+        "slug": "elep",
+        "date_created": "2022-08-19T01:20:27.594Z",
+        "date_modified": "2022-08-19T01:20:27.594Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 285,
+    "fields": {
+        "department": 33,
+        "student_code": "SOCD",
+        "program_code": "L-PHD-SOCD",
+        "name": "Sociology",
+        "degree_level": 4,
+        "is_active": true,
+        "slug": "socd",
+        "date_created": "2022-08-19T01:20:31.089Z",
+        "date_modified": "2022-08-19T01:20:31.089Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 286,
+    "fields": {
+        "department": 55,
+        "student_code": "GGYM",
+        "program_code": "L-MS-GGYM",
+        "name": "Geography",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "ggym",
+        "date_created": "2022-08-19T01:21:51.071Z",
+        "date_modified": "2022-08-19T01:21:51.071Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 287,
+    "fields": {
+        "department": 22,
+        "student_code": "IPCJ",
+        "program_code": "L-BA-IPCJ",
+        "name": "Interpersonal Communication",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "ipcj",
+        "date_created": "2022-08-19T01:21:52.171Z",
+        "date_modified": "2022-08-20T05:12:40.982Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 288,
+    "fields": {
+        "department": 29,
+        "student_code": "CHMD",
+        "program_code": "L-PHD-CHMD",
+        "name": "Chemistry",
+        "degree_level": 4,
+        "is_active": true,
+        "slug": "chmd",
+        "date_created": "2022-08-19T01:21:58.703Z",
+        "date_modified": "2022-08-19T01:21:58.703Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 289,
+    "fields": {
+        "department": 21,
+        "student_code": "YCDC",
+        "program_code": "E-GCP-YCDC",
+        "name": "Youth & Community Development",
+        "degree_level": 0,
+        "is_active": true,
+        "slug": "ycdc",
+        "date_created": "2022-08-19T01:22:50.084Z",
+        "date_modified": "2022-08-19T01:22:50.084Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 290,
+    "fields": {
+        "department": 11,
+        "student_code": "MEAP",
+        "program_code": "MEAP",
+        "name": "Pre-ME: Automotive",
+        "degree_level": 1,
+        "is_active": true,
+        "slug": "meap",
+        "date_created": "2022-08-19T01:23:17.688Z",
+        "date_modified": "2022-08-19T01:23:17.688Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 291,
+    "fields": {
+        "department": 50,
+        "student_code": "PPIJ",
+        "program_code": "L-BS-PPIJ",
+        "name": "Polit'l Sci:Int'l Comp Polit",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "ppij",
+        "date_created": "2022-08-19T01:25:20.656Z",
+        "date_modified": "2022-08-19T01:25:20.656Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 292,
+    "fields": {
+        "department": 29,
+        "student_code": "CHCJ",
+        "program_code": "L-BS-CHCJ",
+        "name": "Chemistry: ACS Certified",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "chcj",
+        "date_created": "2022-08-19T01:25:38.398Z",
+        "date_modified": "2022-08-19T01:25:38.398Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 293,
+    "fields": {
+        "department": 55,
+        "student_code": "GGEJ",
+        "program_code": "L-BS-GGEJ",
+        "name": "Geog:Envr Analysis & Res Mgmt",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "ggej",
+        "date_created": "2022-08-19T01:25:58.967Z",
+        "date_modified": "2022-08-19T01:25:58.967Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 294,
+    "fields": {
+        "department": 65,
+        "student_code": "PHIJ",
+        "program_code": "L-BS-PHIJ",
+        "name": "Philosophy",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "phij",
+        "date_created": "2022-08-19T01:26:36.166Z",
+        "date_modified": "2022-08-19T01:26:36.166Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 295,
+    "fields": {
+        "department": 32,
+        "student_code": "BSCQ",
+        "program_code": "L-MS-BSCQ",
+        "name": "Biological Sciences (Acc)",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "bscq",
+        "date_created": "2022-08-19T01:26:58.124Z",
+        "date_modified": "2022-08-19T01:26:58.124Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 296,
+    "fields": {
+        "department": 22,
+        "student_code": "SCPF",
+        "program_code": "L-UCP-SCPF",
+        "name": "Public Relations",
+        "degree_level": 0,
+        "is_active": true,
+        "slug": "scpf",
+        "date_created": "2022-08-19T01:27:22.113Z",
+        "date_modified": "2022-08-19T01:27:22.113Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 297,
+    "fields": {
+        "department": 17,
+        "student_code": "DSCM",
+        "program_code": "L-MS-DSCM",
+        "name": "Data Science",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "dscm",
+        "date_created": "2022-08-19T01:28:34.038Z",
+        "date_modified": "2022-08-19T01:28:34.038Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 298,
+    "fields": {
+        "department": 21,
+        "student_code": "YCDJ",
+        "program_code": "E-BS-YCDJ",
+        "name": "Youth & Community Development",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "ycdj",
+        "date_created": "2022-08-19T01:30:37.658Z",
+        "date_modified": "2022-08-19T01:30:37.658Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 299,
+    "fields": {
+        "department": 57,
+        "student_code": "SLHP",
+        "program_code": "H-PDP-SLHP",
+        "name": "Pre-Speech, Lang & Hearing Sci",
+        "degree_level": 1,
+        "is_active": true,
+        "slug": "slhp",
+        "date_created": "2022-08-19T01:32:52.354Z",
+        "date_modified": "2022-08-20T05:09:20.825Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 300,
+    "fields": {
+        "department": 57,
+        "student_code": "AUDD",
+        "program_code": "H-AUD-AUDD",
+        "name": "Audiology",
+        "degree_level": 0,
+        "is_active": true,
+        "slug": "audd",
+        "date_created": "2022-08-19T01:34:13.206Z",
+        "date_modified": "2022-08-19T01:34:13.206Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 301,
+    "fields": {
+        "department": 38,
+        "student_code": "SPCM",
+        "program_code": "E-MA-SPCM",
+        "name": "Special Educ:Clinical Tchr",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "spcm",
+        "date_created": "2022-08-19T01:35:02.895Z",
+        "date_modified": "2022-08-20T05:09:20.894Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 302,
+    "fields": {
+        "department": 49,
+        "student_code": "GELJ",
+        "program_code": "L-BS-GELJ",
+        "name": "Geology",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "gelj",
+        "date_created": "2022-08-19T01:35:44.831Z",
+        "date_modified": "2022-08-19T01:35:44.831Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 303,
+    "fields": {
+        "department": 55,
+        "student_code": "GGFJ",
+        "program_code": "L-BS-GGFJ",
+        "name": "Geog:Geographic Info Science",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "ggfj",
+        "date_created": "2022-08-19T01:36:12.065Z",
+        "date_modified": "2022-08-19T01:36:12.065Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 304,
+    "fields": {
+        "department": 50,
+        "student_code": "PSCD",
+        "program_code": "L-PHD-PSCD",
+        "name": "Political Science",
+        "degree_level": 4,
+        "is_active": true,
+        "slug": "pscd",
+        "date_created": "2022-08-19T01:36:41.778Z",
+        "date_modified": "2022-08-19T01:36:41.778Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 305,
+    "fields": {
+        "department": 38,
+        "student_code": "EPEP",
+        "program_code": "EPEP",
+        "name": "Pre-Elementary Prof Educ",
+        "degree_level": 1,
+        "is_active": true,
+        "slug": "epep",
+        "date_created": "2022-08-19T01:37:28.877Z",
+        "date_modified": "2022-08-19T01:37:28.877Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 306,
+    "fields": {
+        "department": 38,
+        "student_code": "ELPM",
+        "program_code": "E-MA-ELPM",
+        "name": "Ed Ldship:K12 School Principal",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "elpm",
+        "date_created": "2022-08-19T01:37:45.230Z",
+        "date_modified": "2022-08-20T05:09:20.012Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 307,
+    "fields": {
+        "department": 59,
+        "student_code": "HYSJ",
+        "program_code": "E-BS-HYSJ",
+        "name": "History:Secondary Education",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "hysj",
+        "date_created": "2022-08-19T01:39:40.526Z",
+        "date_modified": "2022-08-19T01:39:40.526Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 308,
+    "fields": {
+        "department": 18,
+        "student_code": "UNBJ",
+        "program_code": "B-BBA-UNBJ",
+        "name": "Undecided:Business",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "unbj",
+        "date_created": "2022-08-19T01:40:45.522Z",
+        "date_modified": "2022-08-20T05:09:21.048Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 309,
+    "fields": {
+        "department": 64,
+        "student_code": "JPNJ",
+        "program_code": "L-BA-JPNJ",
+        "name": "Japanese",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "jpnj",
+        "date_created": "2022-08-19T01:41:46.421Z",
+        "date_modified": "2022-08-20T05:12:41.017Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 310,
+    "fields": {
+        "department": 53,
+        "student_code": "MTHM",
+        "program_code": "L-MA-MTHM",
+        "name": "Mathematics",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "mthm",
+        "date_created": "2022-08-19T01:44:30.783Z",
+        "date_modified": "2022-08-20T05:09:20.483Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 311,
+    "fields": {
+        "department": 50,
+        "student_code": "PPLJ",
+        "program_code": "L-BA-PPLJ",
+        "name": "Political Science:Public Law",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "pplj",
+        "date_created": "2022-08-19T01:46:23.682Z",
+        "date_modified": "2022-08-20T05:12:41.103Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 312,
+    "fields": {
+        "department": 38,
+        "student_code": "TSEM",
+        "program_code": "E-MA-TSEM",
+        "name": "Teaching: Secondary Education",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "tsem",
+        "date_created": "2022-08-19T01:49:54.013Z",
+        "date_modified": "2022-08-20T05:09:21.014Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 313,
+    "fields": {
+        "department": 32,
+        "student_code": "BSCM",
+        "program_code": "L-MS-BSCM",
+        "name": "Biological Sciences",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "bscm",
+        "date_created": "2022-08-19T01:50:47.373Z",
+        "date_modified": "2022-08-19T01:50:47.373Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 314,
+    "fields": {
+        "department": 50,
+        "student_code": "PPPJ",
+        "program_code": "L-BS-PPPJ",
+        "name": "Political Sci:Amer Pub Policy",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "pppj",
+        "date_created": "2022-08-19T01:53:35.237Z",
+        "date_modified": "2022-08-19T01:53:35.237Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 315,
+    "fields": {
+        "department": 22,
+        "student_code": "COMM",
+        "program_code": "L-MA-COMM",
+        "name": "Communication",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "comm",
+        "date_created": "2022-08-19T01:55:54.833Z",
+        "date_modified": "2022-08-20T05:09:19.823Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 316,
+    "fields": {
+        "department": 43,
+        "student_code": "TDTJ",
+        "program_code": "F-BFA-TDTJ",
+        "name": "Theatre:Design/Technical Prod",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "tdtj",
+        "date_created": "2022-08-19T01:57:10.931Z",
+        "date_modified": "2022-08-20T05:09:20.945Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 317,
+    "fields": {
+        "department": 67,
+        "student_code": "IDFP",
+        "program_code": "F-PDP-IDFP",
+        "name": "Pre-Interior Design",
+        "degree_level": 1,
+        "is_active": true,
+        "slug": "idfp",
+        "date_created": "2022-08-19T01:58:33.554Z",
+        "date_modified": "2022-08-20T05:09:20.261Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 318,
+    "fields": {
+        "department": 49,
+        "student_code": "ERSJ",
+        "program_code": "E-BA-ERSJ",
+        "name": "Earth Science:Secondary Educ",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "ersj",
+        "date_created": "2022-08-19T02:00:05.190Z",
+        "date_modified": "2022-08-20T05:12:40.880Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 319,
+    "fields": {
+        "department": 68,
+        "student_code": "HSDQ",
+        "program_code": "L-MA-HSDQ",
+        "name": "Hispanic Studies (Accelerated)",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "hsdq",
+        "date_created": "2022-08-19T02:01:02.357Z",
+        "date_modified": "2022-08-20T05:09:20.209Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 320,
+    "fields": {
+        "department": 36,
+        "student_code": "SMGM",
+        "program_code": "E-MA-SMGM",
+        "name": "Sport Management",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "smgm",
+        "date_created": "2022-08-19T02:01:11.625Z",
+        "date_modified": "2022-08-20T05:09:20.859Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 321,
+    "fields": {
+        "department": 21,
+        "student_code": "BESP",
+        "program_code": "BESP",
+        "name": "Pre-Business Education",
+        "degree_level": 1,
+        "is_active": true,
+        "slug": "besp",
+        "date_created": "2022-08-19T02:01:17.093Z",
+        "date_modified": "2022-08-19T02:01:17.093Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 322,
+    "fields": {
+        "department": 35,
+        "student_code": "PYBD",
+        "program_code": "L-PHD-PYBD",
+        "name": "Psychology:Behavior Analysis",
+        "degree_level": 4,
+        "is_active": true,
+        "slug": "pybd",
+        "date_created": "2022-08-19T02:01:35.183Z",
+        "date_modified": "2022-08-19T02:01:35.183Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 323,
+    "fields": {
+        "department": 21,
+        "student_code": "IDDJ",
+        "program_code": "E-BS-IDDJ",
+        "name": "Interior Design",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "iddj",
+        "date_created": "2022-08-19T02:01:49.509Z",
+        "date_modified": "2022-08-19T02:01:49.509Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 324,
+    "fields": {
+        "department": 69,
+        "student_code": "VRTM",
+        "program_code": "H-MA-VRTM",
+        "name": "Vision Rehabilitation Therapy",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "vrtm",
+        "date_created": "2022-08-19T02:02:05.279Z",
+        "date_modified": "2022-08-20T05:09:21.082Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 325,
+    "fields": {
+        "department": 63,
+        "student_code": "DAFJ",
+        "program_code": "F-BFA-DAFJ",
+        "name": "Dance:BFA program",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "dafj",
+        "date_created": "2022-08-19T02:02:09.741Z",
+        "date_modified": "2022-08-20T05:09:19.874Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 326,
+    "fields": {
+        "department": 68,
+        "student_code": "SPLJ",
+        "program_code": "L-BS-SPLJ",
+        "name": "Spanish",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "splj",
+        "date_created": "2022-08-19T02:04:13.779Z",
+        "date_modified": "2022-08-19T02:04:13.779Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 327,
+    "fields": {
+        "department": 47,
+        "student_code": "RWSJ",
+        "program_code": "L-BA-RWSJ",
+        "name": "ENGL:Rhetoric&Writing Studies",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "rwsj",
+        "date_created": "2022-08-19T02:04:21.341Z",
+        "date_modified": "2022-08-20T05:12:41.136Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 328,
+    "fields": {
+        "department": 62,
+        "student_code": "ECBJ",
+        "program_code": "B-BBA-ECBJ",
+        "name": "Economics:Business",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "ecbj",
+        "date_created": "2022-08-19T02:05:43.411Z",
+        "date_modified": "2022-08-20T05:09:19.926Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 329,
+    "fields": {
+        "department": 59,
+        "student_code": "PUHJ",
+        "program_code": "L-BA-PUHJ",
+        "name": "Public History",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "puhj",
+        "date_created": "2022-08-19T02:06:33.344Z",
+        "date_modified": "2022-08-20T05:12:41.120Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 330,
+    "fields": {
+        "department": 55,
+        "student_code": "TOUJ",
+        "program_code": "L-BA-TOUJ",
+        "name": "Tourism & Travel",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "touj",
+        "date_created": "2022-08-19T02:08:13.178Z",
+        "date_modified": "2022-08-20T05:12:41.309Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 331,
+    "fields": {
+        "department": 19,
+        "student_code": "AVAJ",
+        "program_code": "P-BS-AVAJ",
+        "name": "AVIATION SCIENCE & ADM",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "avaj",
+        "date_created": "2022-08-19T02:09:32.933Z",
+        "date_modified": "2022-08-19T02:09:32.933Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 332,
+    "fields": {
+        "department": 37,
+        "student_code": "MUPM",
+        "program_code": "F-MM-MUPM",
+        "name": "Music Performance",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "mupm",
+        "date_created": "2022-08-19T02:10:40.171Z",
+        "date_modified": "2022-08-20T05:09:20.535Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 333,
+    "fields": {
+        "department": 55,
+        "student_code": "GGCJ",
+        "program_code": "L-BS-GGCJ",
+        "name": "Geography:Climate Science",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "ggcj",
+        "date_created": "2022-08-19T02:12:12.302Z",
+        "date_modified": "2022-08-19T02:12:12.302Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 334,
+    "fields": {
+        "department": 57,
+        "student_code": "AUDZ",
+        "program_code": "H-AUD-AUDZ",
+        "name": "Audiology (Accelerated)",
+        "degree_level": 0,
+        "is_active": true,
+        "slug": "audz",
+        "date_created": "2022-08-19T02:12:20.083Z",
+        "date_modified": "2022-08-19T02:12:20.083Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 335,
+    "fields": {
+        "department": 47,
+        "student_code": "ELLJ",
+        "program_code": "L-BA-ELLJ",
+        "name": "English:Literature & Language",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "ellj",
+        "date_created": "2022-08-19T02:12:58.869Z",
+        "date_modified": "2022-08-20T05:12:40.846Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 336,
+    "fields": {
+        "department": 27,
+        "student_code": "FNPP",
+        "program_code": "FNPP",
+        "name": "Pre-Personal Financial Plng",
+        "degree_level": 1,
+        "is_active": true,
+        "slug": "fnpp",
+        "date_created": "2022-08-19T02:14:28.482Z",
+        "date_modified": "2022-08-19T02:14:28.482Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 337,
+    "fields": {
+        "department": 18,
+        "student_code": "EBMJ",
+        "program_code": "B-BBA-EBMJ",
+        "name": "eBusiness Marketing",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "ebmj",
+        "date_created": "2022-08-19T02:14:32.418Z",
+        "date_modified": "2022-08-20T05:09:19.909Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 338,
+    "fields": {
+        "department": 37,
+        "student_code": "MUVJ",
+        "program_code": "F-BM-MUVJ",
+        "name": "Music Performance:Vocal",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "muvj",
+        "date_created": "2022-08-19T02:15:46.071Z",
+        "date_modified": "2022-08-20T05:09:20.552Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 339,
+    "fields": {
+        "department": 39,
+        "student_code": "CESM",
+        "program_code": "E-MA-CESM",
+        "name": "Cnslr Ed:School Counseling",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "cesm",
+        "date_created": "2022-08-19T02:16:20.738Z",
+        "date_modified": "2022-08-20T05:09:19.789Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 340,
+    "fields": {
+        "department": 53,
+        "student_code": "MEDM",
+        "program_code": "L-MA-MEDM",
+        "name": "Mathematics Education",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "medm",
+        "date_created": "2022-08-19T02:19:11.524Z",
+        "date_modified": "2022-08-20T05:09:20.363Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 341,
+    "fields": {
+        "department": 6,
+        "student_code": "CYAM",
+        "program_code": "A-MS-CYAM",
+        "name": "Cybersecurity:Computer Science",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "cyam",
+        "date_created": "2022-08-19T02:19:55.271Z",
+        "date_modified": "2022-08-19T02:19:55.272Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 342,
+    "fields": {
+        "department": 1,
+        "student_code": "SSTJ",
+        "program_code": "L-BA-SSTJ",
+        "name": "Social Studies",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "sstj",
+        "date_created": "2022-08-19T02:21:00.294Z",
+        "date_modified": "2022-08-20T05:12:41.274Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 343,
+    "fields": {
+        "department": 21,
+        "student_code": "DIDJ",
+        "program_code": "E-BS-DIDJ",
+        "name": "Dietetics",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "didj",
+        "date_created": "2022-08-19T02:21:59.478Z",
+        "date_modified": "2022-08-19T02:21:59.478Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 344,
+    "fields": {
+        "department": 34,
+        "student_code": "TESM",
+        "program_code": "E-MA-TESM",
+        "name": "Tchng Engl Speakers Other Lang",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "tesm",
+        "date_created": "2022-08-19T02:23:45.196Z",
+        "date_modified": "2022-08-20T05:09:20.979Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 345,
+    "fields": {
+        "department": 22,
+        "student_code": "SCOJ",
+        "program_code": "L-BA-SCOJ",
+        "name": "Strategic Communication",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "scoj",
+        "date_created": "2022-08-19T02:26:08.574Z",
+        "date_modified": "2022-08-20T05:12:41.205Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 346,
+    "fields": {
+        "department": 62,
+        "student_code": "AESM",
+        "program_code": "L-MA-AESM",
+        "name": "Appl Econ: Stat & Econometrics",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "aesm",
+        "date_created": "2022-08-19T02:27:23.310Z",
+        "date_modified": "2022-08-20T05:09:19.652Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 347,
+    "fields": {
+        "department": 61,
+        "student_code": "SBRJ",
+        "program_code": "L-BS-SBRJ",
+        "name": "Sustainable Brewing",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "sbrj",
+        "date_created": "2022-08-19T02:28:18.634Z",
+        "date_modified": "2022-08-19T02:28:18.634Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 348,
+    "fields": {
+        "department": 53,
+        "student_code": "MEDD",
+        "program_code": "L-PHD-MEDD",
+        "name": "Mathematics Education",
+        "degree_level": 4,
+        "is_active": true,
+        "slug": "medd",
+        "date_created": "2022-08-19T02:33:54.819Z",
+        "date_modified": "2022-08-19T02:33:54.819Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 349,
+    "fields": {
+        "department": 36,
+        "student_code": "ATDJ",
+        "program_code": "E-BS-ATDJ",
+        "name": "Athletic Training",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "atdj",
+        "date_created": "2022-08-19T02:34:14.200Z",
+        "date_modified": "2022-08-19T02:34:14.200Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 350,
+    "fields": {
+        "department": 29,
+        "student_code": "CHSJ",
+        "program_code": "E-BS-CHSJ",
+        "name": "Chemistry:Secondary Education",
+        "degree_level": 2,
+        "is_active": true,
+        "slug": "chsj",
+        "date_created": "2022-08-19T02:34:25.565Z",
+        "date_modified": "2022-08-19T02:34:25.565Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 351,
+    "fields": {
+        "department": 32,
+        "student_code": "BISQ",
+        "program_code": "L-MA-BISQ",
+        "name": "Biological Sciences (Acc)",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "bisq",
+        "date_created": "2022-08-19T02:35:42.560Z",
+        "date_modified": "2022-08-20T05:09:19.721Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 352,
+    "fields": {
+        "department": 15,
+        "student_code": "EDTM",
+        "program_code": "E-MA-EDTM",
+        "name": "Educational Technology",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "edtm",
+        "date_created": "2022-08-19T02:36:24.580Z",
+        "date_modified": "2022-08-20T05:09:19.943Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 353,
+    "fields": {
+        "department": 49,
+        "student_code": "HYDC",
+        "program_code": "L-GCP-HYDC",
+        "name": "Hydrogeology",
+        "degree_level": 0,
+        "is_active": true,
+        "slug": "hydc",
+        "date_created": "2022-08-19T02:39:29.058Z",
+        "date_modified": "2022-08-19T02:39:29.058Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 354,
+    "fields": {
+        "department": 62,
+        "student_code": "AECQ",
+        "program_code": "L-MA-AECQ",
+        "name": "Applied Economics(Accelerated)",
+        "degree_level": 3,
+        "is_active": true,
+        "slug": "aecq",
+        "date_created": "2022-08-19T02:41:12.756Z",
+        "date_modified": "2022-08-20T05:09:19.635Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 355,
+    "fields": {
+        "department": 60,
+        "student_code": "SCID",
+        "program_code": "L-PHD-SCID",
+        "name": "Science Education",
+        "degree_level": 4,
+        "is_active": true,
+        "slug": "scid",
+        "date_created": "2022-08-19T02:48:02.633Z",
+        "date_modified": "2022-08-19T02:48:02.634Z"
+    }
+},
+{
+    "model": "cae_home.major",
+    "pk": 356,
+    "fields": {
+        "department": 17,
+        "student_code": "ASTC",
+        "program_code": "L-GCP-ASTC",
+        "name": "Applied Statistics",
+        "degree_level": 0,
+        "is_active": true,
+        "slug": "astc",
+        "date_created": "2022-08-19T02:48:07.514Z",
+        "date_modified": "2022-08-19T02:48:07.514Z"
     }
 }
 ]

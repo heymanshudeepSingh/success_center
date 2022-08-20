@@ -5,20 +5,20 @@
     "fields": {
         "code": "NA",
         "name": "NA/Unknown",
-        "slug": "na-unknown",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "slug": "na",
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2022-08-20T05:12:45.591Z"
     }
 },
 {
     "model": "cae_home.department",
     "pk": 2,
     "fields": {
-        "code": "PA",
-        "name": "Parkview Advising",
-        "slug": "parkview-advising",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "code": "EADV",
+        "name": "Advising",
+        "slug": "eadv",
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2022-08-20T05:12:45.085Z"
     }
 },
 {
@@ -27,31 +27,31 @@
     "fields": {
         "code": "CAE",
         "name": "CAE Center",
-        "slug": "cae-center",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "slug": "cae",
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2022-08-20T05:12:44.965Z"
     }
 },
 {
     "model": "cae_home.department",
     "pk": 4,
     "fields": {
-        "code": "",
+        "code": "PSE",
         "name": "Chemical and Paper Engineering",
-        "slug": "chemical-and-paper",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "slug": "pse",
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2022-08-20T05:12:45.762Z"
     }
 },
 {
     "model": "cae_home.department",
     "pk": 5,
     "fields": {
-        "code": "",
+        "code": "CIV",
         "name": "Civil & Construction Engineering",
-        "slug": "civil-and-construction",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "slug": "civ",
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2022-08-20T05:12:44.999Z"
     }
 },
 {
@@ -60,42 +60,42 @@
     "fields": {
         "code": "CS",
         "name": "Computer Science",
-        "slug": "computer-science",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "slug": "cs",
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2022-08-20T05:12:45.051Z"
     }
 },
 {
     "model": "cae_home.department",
     "pk": 7,
     "fields": {
-        "code": "DO",
+        "code": "EDO",
         "name": "Dean's Office",
-        "slug": "deans-office",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "slug": "edo",
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2022-08-20T05:12:45.119Z"
     }
 },
 {
     "model": "cae_home.department",
     "pk": 8,
     "fields": {
-        "code": "ECE",
+        "code": "EE",
         "name": "Electrical and Computer Engineering",
-        "slug": "electrical-and-computer",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "slug": "ee",
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2022-08-20T05:12:45.136Z"
     }
 },
 {
     "model": "cae_home.department",
     "pk": 9,
     "fields": {
-        "code": "EDMM",
+        "code": "MFN",
         "name": "Engineering Design, Manufacturing, and Management Systems",
-        "slug": "engineering-design",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "slug": "mfn",
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2022-08-20T05:12:45.523Z"
     }
 },
 {
@@ -104,9 +104,9 @@
     "fields": {
         "code": "IEE",
         "name": "Industrial and Entrepreneurial Engineering and Engineering Management",
-        "slug": "industrial-and-entrepreneurial",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "slug": "iee",
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2022-08-20T05:12:45.436Z"
     }
 },
 {
@@ -115,42 +115,647 @@
     "fields": {
         "code": "MAE",
         "name": "Mechanical and Aerospace Engineering",
-        "slug": "mechanical-and-aerospace",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "slug": "mae",
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2022-08-20T05:12:45.471Z"
     }
 },
 {
     "model": "cae_home.department",
     "pk": 12,
     "fields": {
-        "code": "",
+        "code": "PCP",
         "name": "Paper, Coating, and Printing Pilot Plant",
-        "slug": "paper-coating-and-printing",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "slug": "pcp",
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2022-08-20T05:12:45.676Z"
     }
 },
 {
     "model": "cae_home.department",
     "pk": 13,
     "fields": {
-        "code": "",
+        "code": "PAE",
         "name": "Paper Technology Foundation",
-        "slug": "paper-technology",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "slug": "pae",
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2022-08-20T05:12:45.642Z"
     }
 },
 {
     "model": "cae_home.department",
     "pk": 14,
     "fields": {
-        "code": "PC",
+        "code": "EPC",
         "name": "Parkview Cafe",
-        "slug": "parkview-cafe",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+        "slug": "epc",
+        "date_created": "2018-01-01T08:00:00Z",
+        "date_modified": "2022-08-20T05:12:45.205Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 15,
+    "fields": {
+        "code": "ELD",
+        "name": "Education Leadership, Research, and Technology",
+        "slug": "eld",
+        "date_created": "2020-01-04T00:07:08.395Z",
+        "date_modified": "2022-08-20T05:12:45.154Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 16,
+    "fields": {
+        "code": "ENGP",
+        "name": "Interdisciplinary-CEAS",
+        "slug": "engp",
+        "date_created": "2020-01-04T00:07:21.702Z",
+        "date_modified": "2022-08-20T05:12:45.188Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 17,
+    "fields": {
+        "code": "STA",
+        "name": "Statistics",
+        "slug": "sta",
+        "date_created": "2020-01-04T00:07:23.042Z",
+        "date_modified": "2022-08-20T05:12:45.916Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 18,
+    "fields": {
+        "code": "MB",
+        "name": "Interdisciplinary-Haworth College of Business",
+        "slug": "mb",
+        "date_created": "2020-01-04T00:07:55.709Z",
+        "date_modified": "2022-08-20T05:12:45.506Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 19,
+    "fields": {
+        "code": "AVA",
+        "name": "College of Aviation",
+        "slug": "ava",
+        "date_created": "2020-01-04T00:08:06.019Z",
+        "date_modified": "2022-08-20T05:12:44.897Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 20,
+    "fields": {
+        "code": "ACT",
+        "name": "Accountancy",
+        "slug": "act",
+        "date_created": "2020-01-04T00:08:06.419Z",
+        "date_modified": "2022-08-20T05:12:44.831Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 21,
+    "fields": {
+        "code": "FCS",
+        "name": "Family and Consumer Sciences",
+        "slug": "fcs",
+        "date_created": "2020-01-04T00:08:18.632Z",
+        "date_modified": "2022-08-20T05:12:45.257Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 22,
+    "fields": {
+        "code": "COM",
+        "name": "School of Communication",
+        "slug": "com",
+        "date_created": "2020-01-04T00:09:05.749Z",
+        "date_modified": "2022-08-20T05:12:45.034Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 23,
+    "fields": {
+        "code": "MG",
+        "name": "Management",
+        "slug": "mg",
+        "date_created": "2020-01-04T00:09:07.477Z",
+        "date_modified": "2022-08-20T05:12:45.540Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 24,
+    "fields": {
+        "code": "ART",
+        "name": "Frostic School of Art",
+        "slug": "art",
+        "date_created": "2020-01-04T00:09:08.916Z",
+        "date_modified": "2022-08-20T05:12:44.863Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 25,
+    "fields": {
+        "code": "OT",
+        "name": "Occupational Therapy",
+        "slug": "ot",
+        "date_created": "2020-01-04T00:09:22.509Z",
+        "date_modified": "2022-08-20T05:12:45.625Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 26,
+    "fields": {
+        "code": "HSS",
+        "name": "School of Interdisciplinary Health Programs",
+        "slug": "hss",
+        "date_created": "2020-01-04T00:09:31.106Z",
+        "date_modified": "2022-08-20T05:12:45.385Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 27,
+    "fields": {
+        "code": "FIN",
+        "name": "Finance and Commercial Law",
+        "slug": "fin",
+        "date_created": "2020-01-04T00:09:34.432Z",
+        "date_modified": "2022-08-20T05:12:45.273Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 28,
+    "fields": {
+        "code": "MKT",
+        "name": "Marketing",
+        "slug": "mkt",
+        "date_created": "2020-01-04T00:09:53.939Z",
+        "date_modified": "2022-08-20T05:12:45.557Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 29,
+    "fields": {
+        "code": "CHM",
+        "name": "Chemistry",
+        "slug": "chm",
+        "date_created": "2020-01-06T17:55:36.293Z",
+        "date_modified": "2022-08-20T05:12:44.982Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 30,
+    "fields": {
+        "code": "GRAD",
+        "name": "Interdisciplinary-GRAD",
+        "slug": "grad",
+        "date_created": "2020-09-16T18:35:51.673Z",
+        "date_modified": "2022-08-20T05:12:45.351Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 31,
+    "fields": {
+        "code": "SCP",
+        "name": "INTO",
+        "slug": "scp",
+        "date_created": "2020-09-17T22:45:38.360Z",
+        "date_modified": "2022-08-20T05:12:45.830Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 32,
+    "fields": {
+        "code": "BBS",
+        "name": "Biological Sciences",
+        "slug": "bbs",
+        "date_created": "2020-09-21T14:53:48.175Z",
+        "date_modified": "2022-08-20T05:12:44.914Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 33,
+    "fields": {
+        "code": "SOC",
+        "name": "Sociology",
+        "slug": "soc",
+        "date_created": "2020-09-21T18:12:35.247Z",
+        "date_modified": "2022-08-20T05:12:45.847Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 34,
+    "fields": {
+        "code": "SOSJ",
+        "name": "Special Education and Literacy Studies",
+        "slug": "sosj",
+        "date_created": "2020-09-22T14:14:35.125Z",
+        "date_modified": "2022-08-20T05:12:45.864Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 35,
+    "fields": {
+        "code": "PHI",
+        "name": "Psychology",
+        "slug": "phi",
+        "date_created": "2020-09-22T16:10:23.623Z",
+        "date_modified": "2022-08-20T05:12:45.694Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 36,
+    "fields": {
+        "code": "HDSJ",
+        "name": "Human Performance and Health Education",
+        "slug": "hdsj",
+        "date_created": "2020-10-01T19:33:25.951Z",
+        "date_modified": "2022-08-20T05:12:45.368Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 37,
+    "fields": {
+        "code": "MUS",
+        "name": "School of Music",
+        "slug": "mus",
+        "date_created": "2021-07-07T14:01:25.393Z",
+        "date_modified": "2022-08-20T05:12:45.574Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 38,
+    "fields": {
+        "code": "TE",
+        "name": "Teaching, Learning and Educational Studies",
+        "slug": "te",
+        "date_created": "2021-07-07T14:01:45.955Z",
+        "date_modified": "2022-08-20T05:12:45.950Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 39,
+    "fields": {
+        "code": "C-P",
+        "name": "Counselor Education and Counseling Psychology",
+        "slug": "c-p",
+        "date_created": "2021-07-07T18:00:38.589Z",
+        "date_modified": "2022-08-20T05:12:44.948Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 40,
+    "fields": {
+        "code": "EUP",
+        "name": "Interdisciplinary-EUP",
+        "slug": "eup",
+        "date_created": "2021-08-30T10:45:31.854Z",
+        "date_modified": "2022-08-20T05:12:45.222Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 41,
+    "fields": {
+        "code": "PHY",
+        "name": "Physics",
+        "slug": "phy",
+        "date_created": "2021-08-30T10:46:22.098Z",
+        "date_modified": "2022-08-20T05:12:45.728Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 42,
+    "fields": {
+        "code": "COE",
+        "name": "Interdisciplinary-COE",
+        "slug": "coe",
+        "date_created": "2021-08-30T10:46:22.573Z",
+        "date_modified": "2022-08-20T05:12:45.017Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 43,
+    "fields": {
+        "code": "THR",
+        "name": "Theatre",
+        "slug": "thr",
+        "date_created": "2021-08-30T10:46:29.347Z",
+        "date_modified": "2022-08-20T05:12:45.967Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 44,
+    "fields": {
+        "code": "BCM",
+        "name": "Business Information Systems",
+        "slug": "bcm",
+        "date_created": "2021-09-01T20:10:58.055Z",
+        "date_modified": "2022-08-20T05:12:44.931Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 45,
+    "fields": {
+        "code": "UNV",
+        "name": "University Curriculum",
+        "slug": "unv",
+        "date_created": "2021-12-24T08:00:03.364Z",
+        "date_modified": "2022-08-20T05:12:45.984Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 46,
+    "fields": {
+        "code": "GBL",
+        "name": "Global and International Studies",
+        "slug": "gbl",
+        "date_created": "2022-02-01T08:00:08.480Z",
+        "date_modified": "2022-08-20T05:12:45.291Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 47,
+    "fields": {
+        "code": "ENG",
+        "name": "English",
+        "slug": "eng",
+        "date_created": "2022-07-30T00:26:14.377Z",
+        "date_modified": "2022-08-20T05:12:45.171Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 48,
+    "fields": {
+        "code": "NUR",
+        "name": "Bronson School of Nursing",
+        "slug": "nur",
+        "date_created": "2022-08-19T00:40:22.101Z",
+        "date_modified": "2022-08-20T05:12:45.608Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 49,
+    "fields": {
+        "code": "GEO",
+        "name": "Geological and Environmental Sciences",
+        "slug": "geo",
+        "date_created": "2022-08-19T00:40:43.599Z",
+        "date_modified": "2022-08-20T05:12:45.308Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 50,
+    "fields": {
+        "code": "PSC",
+        "name": "Political Science",
+        "slug": "psc",
+        "date_created": "2022-08-19T00:40:49.138Z",
+        "date_modified": "2022-08-20T05:12:45.745Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 51,
+    "fields": {
+        "code": "PUAM",
+        "name": "School of Public Affairs and Administration",
+        "slug": "puam",
+        "date_created": "2022-08-19T00:40:58.758Z",
+        "date_modified": "2022-08-20T05:12:45.796Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 52,
+    "fields": {
+        "code": "RELJ",
+        "name": "Comparative Religion",
+        "slug": "relj",
+        "date_created": "2022-08-19T00:40:59.314Z",
+        "date_modified": "2022-08-20T05:12:45.813Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 53,
+    "fields": {
+        "code": "MATH",
+        "name": "Mathematics",
+        "slug": "math",
+        "date_created": "2022-08-19T00:41:24.690Z",
+        "date_modified": "2022-08-20T05:12:45.488Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 54,
+    "fields": {
+        "code": "SWKM",
+        "name": "School Of Social Work",
+        "slug": "swkm",
+        "date_created": "2022-08-19T00:41:56.288Z",
+        "date_modified": "2022-08-20T05:12:45.933Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 55,
+    "fields": {
+        "code": "GGBJ",
+        "name": "Geography,Environment,&Tourism",
+        "slug": "ggbj",
+        "date_created": "2022-08-19T00:42:22.723Z",
+        "date_modified": "2022-08-20T05:12:45.334Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 56,
+    "fields": {
+        "code": "PASM",
+        "name": "Medical Science",
+        "slug": "pasm",
+        "date_created": "2022-08-19T00:42:37.001Z",
+        "date_modified": "2022-08-20T05:12:45.659Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 57,
+    "fields": {
+        "code": "AUD",
+        "name": "Speech,Language,Hearing Sci",
+        "slug": "aud",
+        "date_created": "2022-08-19T00:43:31.390Z",
+        "date_modified": "2022-08-20T05:12:44.880Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 58,
+    "fields": {
+        "code": "PTHD",
+        "name": "Physical Therapy",
+        "slug": "pthd",
+        "date_created": "2022-08-19T00:44:07.690Z",
+        "date_modified": "2022-08-20T05:12:45.779Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 59,
+    "fields": {
+        "code": "HST",
+        "name": "History",
+        "slug": "hst",
+        "date_created": "2022-08-19T00:46:48.657Z",
+        "date_modified": "2022-08-20T05:12:45.402Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 60,
+    "fields": {
+        "code": "SPMJ",
+        "name": "Interdisciplinary",
+        "slug": "spmj",
+        "date_created": "2022-08-19T00:48:57.990Z",
+        "date_modified": "2022-08-20T05:12:45.899Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 61,
+    "fields": {
+        "code": "EVS",
+        "name": "Institute of Environment and Sustain",
+        "slug": "evs",
+        "date_created": "2022-08-19T00:49:24.902Z",
+        "date_modified": "2022-08-20T05:12:45.239Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 62,
+    "fields": {
+        "code": "ECN",
+        "name": "Economics",
+        "slug": "ecn",
+        "date_created": "2022-08-19T00:52:29.545Z",
+        "date_modified": "2022-08-20T05:12:45.102Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 63,
+    "fields": {
+        "code": "DAC",
+        "name": "Dance",
+        "slug": "dac",
+        "date_created": "2022-08-19T00:52:40.087Z",
+        "date_modified": "2022-08-20T05:12:45.068Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 64,
+    "fields": {
+        "code": "LAN",
+        "name": "World Languages and Literatures",
+        "slug": "lan",
+        "date_created": "2022-08-19T01:03:25.581Z",
+        "date_modified": "2022-08-20T05:12:45.454Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 65,
+    "fields": {
+        "code": "PHPJ",
+        "name": "Philosophy",
+        "slug": "phpj",
+        "date_created": "2022-08-19T01:04:49.280Z",
+        "date_modified": "2022-08-20T05:12:45.711Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 66,
+    "fields": {
+        "code": "ANG",
+        "name": "Anthropology",
+        "slug": "ang",
+        "date_created": "2022-08-19T01:08:42.752Z",
+        "date_modified": "2022-08-20T05:12:44.846Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 67,
+    "fields": {
+        "code": "IDFP",
+        "name": "Richmond Institute for Design and Innovation",
+        "slug": "idfp",
+        "date_created": "2022-08-19T01:58:33.536Z",
+        "date_modified": "2022-08-20T05:12:45.419Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 68,
+    "fields": {
+        "code": "SPA",
+        "name": "Spanish",
+        "slug": "spa",
+        "date_created": "2022-08-19T02:01:02.340Z",
+        "date_modified": "2022-08-20T05:12:45.881Z"
+    }
+},
+{
+    "model": "cae_home.department",
+    "pk": 69,
+    "fields": {
+        "code": "VRTM",
+        "name": "Blindness & Low Vision Studies",
+        "slug": "vrtm",
+        "date_created": "2022-08-19T02:02:05.265Z",
+        "date_modified": "2022-08-20T05:12:46.001Z"
     }
 }
 ]
