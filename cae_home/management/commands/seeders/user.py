@@ -85,6 +85,13 @@ def create_users(style=None, display_output=False):
     # Create all default users for testing group logic.
     create_permission_group_users(password=default_password)
 
+    # Loop through again, and set all "developer seed users" to have a default group of CAE Programmer.
+    cae_programmer_group = Group.objects.get(name='CAE Programmer')
+    for username in settings.SEED_USERS:
+        user = models.User.get_or_create_superuser(username, '', default_password)
+        user.groups.add(cae_programmer_group)
+        user.save()
+
     if display_output and style is not None:
         stdout.write('Populated ' + style.SQL_FIELD('User') + ' models.\n')
 
