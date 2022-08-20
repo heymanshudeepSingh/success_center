@@ -46,12 +46,17 @@ $(window).on('load', function() {
                 var that = this;
                 this.$filterTitle.click(function(){
 
+                    if ( ! $(list_filter_element).is(':hidden') ) {
+                        $(this).css('position', 'relative');
+                    } else {
+                        $(this).css('position', 'absolute');
+                    }
+
                     // Check if some ul is collapsed.
                     // Open it before slidetoggle all together.
                     $(list_filter_element).children('ul').each(function(){
                         if ($(this).is(':hidden')) {
                             $(this).slideToggle('fast', 'linear');
-                            console.log('is hidden');
                         }
                     })
 
@@ -96,8 +101,10 @@ $(window).on('load', function() {
 
 
         $(document).ready(function(){
-            $(list_filter_element).each(function(){
+            $(list_filter_element).each(function() {
                 var collapser = new ListFilterCollapse(this);
+                $(this).css('position', 'absolute');
+                $(this).css('right', '25px');
             });
 
             // Close them by default.
