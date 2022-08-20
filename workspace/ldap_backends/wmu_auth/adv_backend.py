@@ -371,7 +371,7 @@ class AdvisingAuthBackend(AbstractLDAPBackend):
             # Handle for 2-letter keys.
             elif degree_key[:2] in ['MA', 'MM', 'MS']:
                 return models.Major.get_degree_level_as_int('Masters')
-            elif degree_key[:2] in ['BS', 'BM']:
+            elif degree_key[:2] in ['BA', 'BS', 'BM']:
                 return models.Major.get_degree_level_as_int('Bachelors')
             elif degree_key[:2] == 'AS':
                 return models.Major.get_degree_level_as_int('Associates')
