@@ -16,7 +16,7 @@ def import_model_fixtures(style):
     create_departments(style, display_output=True)
     create_rooms(style, display_output=True)
     create_majors(style, display_output=True)
-    create_semester_dates(style, display_output=True)
+    create_semesters(style, display_output=True)
 
 
 def create_wmu_classes(style, display_output=False):
@@ -74,9 +74,9 @@ def create_majors(style, display_output=False):
         stdout.write('Imported fixtures for ' + style.SQL_FIELD('Major') + ' models.\n')
 
 
-def create_semester_dates(style, display_output=False):
+def create_semesters(style, display_output=False):
     """
-    Imports fixtures for Semester Date models.
+    Imports fixtures for Semester models.
     """
     # Load preset fixtures.
     call_command('loaddata', 'production_models/semesters')

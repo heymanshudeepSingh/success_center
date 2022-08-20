@@ -133,9 +133,9 @@ def create_majors(style):
 
 def create_semesters(style):
     """
-    Create Semester Date models.
+    Create Semester models.
     """
     # Load preset fixtures.
-    wmu_fixtures.create_semester_dates(style)
+    wmu_fixtures.create_semesters(style)
 
-    stdout.write('Populated ' + style.SQL_FIELD('Semester Date') + ' models.\n')
+    stdout.write('Populated ' + style.SQL_FIELD('Semester') + ' models.\n')

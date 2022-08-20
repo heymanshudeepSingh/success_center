@@ -30,8 +30,8 @@ def generate_model_seeds(style, model_count):
     """
     stdout.write(style.HTTP_NOT_MODIFIED('SEEDING User Model Group.\n'))
     create_site_themes(style)
-    create_groups(style)
-    create_users(style)
+    create_groups(style, display_output=True)
+    create_users(style, display_output=True)
     create_addresses(style, model_count)
     create_wmu_users(style, model_count)
 
@@ -46,12 +46,12 @@ def create_site_themes(style):
     stdout.write('Populated ' + style.SQL_FIELD('Site Theme') + ' models.\n')
 
 
-def create_groups(style=None):
+def create_groups(style=None, display_output=False):
     """
     Creates django "auth_group" models and allocates proper permissions.
     Should be identical to fixture version, so we simply use this as a reference to the function there.
     """
-    return user_fixtures.create_groups(style)
+    return user_fixtures.create_groups(style, display_output=display_output)
 
 
 def create_permission_groups():
@@ -63,7 +63,7 @@ def create_permission_groups():
     return user_fixtures.create_permission_groups()
 
 
-def get_cae_center_permissions():
+def get_cae_center_permissions(style=None):
     """
     Finds all permission models specific to the CAE Center.
     Should be identical to fixture version, so we simply use this as a reference to the function there.

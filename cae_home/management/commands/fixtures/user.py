@@ -40,8 +40,11 @@ def create_site_themes(style, display_output=False):
 def create_groups(style=None, display_output=False):
     """
     Creates django "auth_group" models and allocates proper permissions.
-    Technically not a fixture, but still pretty integral to site running, and has no random data.
+    Technically not 100% a fixture, but still pretty integral to site running, and has no random data.
     """
+    # Load preset fixtures.
+    call_command('loaddata', 'production_models/auth_groups')
+
     # Create base groups.
     group_dict = create_permission_groups(as_dict=True)
 
@@ -152,7 +155,7 @@ def set_cae_group_permissions(group_dict, general_permissions):
     group_dict['cae_admin_ga'].permissions.set(all_permissions)
 
     # Set CAE Admin permissions. Want only the ones directly related to the CAE Center.
-    cae_center_permissions = get_cae_center_permissions()
+    cae_center_permissions = get_cae_center_permissions() + general_permissions
     group_dict['cae_admin'].permissions.set(cae_center_permissions)
 
     # Set CAE Attendant permissions. Want only CAE Center add privileges.
