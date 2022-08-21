@@ -139,26 +139,28 @@ def compare_user_and_wmuuser_models(uid):
         # Previously (above), we tried to set (Login)User is_active value based on the return values of LDAP.
         # However, that had occasional syncing issues, due to main campus LDAP being an unorganized nightmare.
         # Instead, as of summer 2022, we now have manual "set user group" pages for each project.
-        # If the user has a valid group in one or more of the expected projects, we set the (Login)User model as active.
-        # No valid group means they're set to inactive.
+        #
+        # If the (Login)User model has a valid group in one or more of the expected projects, we also set the
+        # (Login)User model as active, so that person can access the respective site(s) they need.
+        # No valid group means the user is set to inactive, so they cannot login to our projects.
+        #
         # Meanwhile, the WmuUser model is_active is set based on either of the LDAP values (CAE or main campus)
         # returning that the user is active.
         user_groups = user_model.groups.all()
         orig_active = user_model.is_active
         orig_staff = user_model.is_staff
         user_model.is_active = False
+        user_model.is_staff = False
         for group in user_groups:
             if group.name in (settings.CAE_ADMIN_GROUPS + ['CAE Programmer']):
                 user_model.is_staff = True
-            else:
-                user_model.is_staff = False
             if group.name in settings.CAE_CENTER_GROUPS:
                 user_model.is_active = True
             if group.name in settings.SUCCESS_CENTER_GROUPS:
                 user_model.is_active = True
             if group.name in settings.GRAD_APPS_GROUPS:
                 user_model.is_active = True
-        # Extra handling for development. Seed users are set to active + staff.
+        # Extra handling for development. Seed users are always set to active + staff.
         if user_model.username in settings.SEED_USERS:
             user_model.is_active = True
             user_model.is_staff = True
@@ -202,6 +204,10 @@ def compare_user_and_wmuuser_models(uid):
 def check_user_group_membership(uid):
     """
     Checks/updates membership of groups for user.
+    Aka, specifically the GroupMember ship model, not the auth Group model (these are separate, but related. The auth
+    Group one is provided by Django, and tracks general site-access permissions. But does NOT record history of "who
+    used to be part of what group, years ago". GroupMembership is custom and specifically tracks history).
+
     Intended to run on model save.
     """
     user = User.objects.get(username=uid)
@@ -233,6 +239,9 @@ def check_user_group_membership(uid):
 def check_all_group_memberships():
     """
     Checks/updates membership of groups for all existing users.
+    Aka, specifically the GroupMember ship model, not the auth Group model (these are separate, but related. The auth
+    Group one is provided by Django, and tracks general site-access permissions. But does NOT record history of "who
+    used to be part of what group, years ago". GroupMembership is custom and specifically tracks history).
     """
     # First, update for active users.
     active_users = User.objects.filter(is_active=True)

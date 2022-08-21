@@ -39,6 +39,15 @@ class UserModelTests(BaseTestCase):
         """
         Tests to ensure user is_active sets as expected.
         """
+        # Before any tests, get and save all users, to verify that they are in the "correct" state after any saving
+        # logic is done.
+        # We need this because saving logic might change over time. If we ever change the save logic, but forget to
+        # update the User model seeding/test-generation logic, then these initial test-user states might not necessarily
+        # reflect the save logic that applies to production. For this test, we *specifially* want to mimic exactly how
+        # the models handle in production, when adding and removing groups.
+        for user in get_user_model().objects.all():
+            user.save()
+
         with self.subTest('Local env seed users'):
             # Loop through all users defined in env settings seed (if any) and verify expected values.
             for username in settings.SEED_USERS:
@@ -56,8 +65,12 @@ class UserModelTests(BaseTestCase):
             cae_building_coordinator_inactive = self.get_user('cae_building_coordinator_inactive')
             cae_attendant = self.get_user('cae_attendant')
             cae_attendant_inactive = self.get_user('cae_attendant_inactive')
+            cae_admin_ga = self.get_user('cae_admin_ga')
+            cae_admin_ga_inactive = self.get_user('cae_admin_ga_inactive')
             cae_admin = self.get_user('cae_admin')
             cae_admin_inactive = self.get_user('cae_admin_inactive')
+            cae_programmer_ga = self.get_user('cae_programmer_ga')
+            cae_programmer_ga_inactive = self.get_user('cae_programmer_ga_inactive')
             cae_programmer = self.get_user('cae_programmer')
             cae_programmer_inactive = self.get_user('cae_programmer_inactive')
 
@@ -68,8 +81,12 @@ class UserModelTests(BaseTestCase):
             self.assertFalse(cae_building_coordinator.is_staff)
             self.assertTrue(cae_attendant.is_active)
             self.assertFalse(cae_attendant.is_staff)
+            self.assertTrue(cae_admin_ga.is_active)
+            self.assertTrue(cae_admin_ga.is_staff)
             self.assertTrue(cae_admin.is_active)
             self.assertFalse(cae_admin.is_staff)
+            self.assertTrue(cae_programmer_ga.is_active)
+            self.assertTrue(cae_programmer_ga.is_staff)
             self.assertTrue(cae_programmer.is_active)
             self.assertTrue(cae_programmer.is_staff)
 
@@ -80,8 +97,12 @@ class UserModelTests(BaseTestCase):
             self.assertFalse(cae_building_coordinator_inactive.is_staff)
             self.assertFalse(cae_attendant_inactive.is_active)
             self.assertFalse(cae_attendant_inactive.is_staff)
+            self.assertFalse(cae_admin_ga_inactive.is_active)
+            self.assertFalse(cae_admin_ga_inactive.is_staff)
             self.assertFalse(cae_admin_inactive.is_active)
             self.assertFalse(cae_admin_inactive.is_staff)
+            self.assertFalse(cae_programmer_ga_inactive.is_active)
+            self.assertFalse(cae_programmer_ga_inactive.is_staff)
             self.assertFalse(cae_programmer_inactive.is_active)
             self.assertFalse(cae_programmer_inactive.is_staff)
 
@@ -123,7 +144,7 @@ class UserModelTests(BaseTestCase):
             self.assertFalse(grad_apps_committee_member_inactive.is_active)
             self.assertFalse(grad_apps_committee_member_inactive.is_staff)
 
-        with self.subTest('Test add/remove group, starting as active'):
+        with self.subTest('Test general add/remove group, starting as active'):
 
             # Double check starting state.
             self.assertTrue(step_admin.is_active)
@@ -151,7 +172,7 @@ class UserModelTests(BaseTestCase):
             self.assertTrue(step_admin.is_active)
             self.assertFalse(step_admin.is_staff)
 
-        with self.subTest('Test add/remove group, starting as inactive'):
+        with self.subTest('Test general add/remove group, starting as inactive'):
             # Double check starting state.
             self.assertFalse(grad_apps_admin_inactive.is_active)
             self.assertFalse(grad_apps_admin_inactive.is_staff)
@@ -177,6 +198,308 @@ class UserModelTests(BaseTestCase):
             # Check updated state.
             self.assertFalse(grad_apps_admin_inactive.is_active)
             self.assertFalse(grad_apps_admin_inactive.is_staff)
+
+        with self.subTest('Test Cae superuser (GA/Director, etc) add/remove group'):
+            # Get relevant user models.
+            cae_director = self.get_user('cae_director')
+            cae_director_inactive = self.get_user('cae_director_inactive')
+            cae_admin_ga = self.get_user('cae_admin_ga')
+            cae_admin_ga_inactive = self.get_user('cae_admin_ga_inactive')
+            cae_programmer_ga = self.get_user('cae_programmer_ga')
+            cae_programmer_ga_inactive = self.get_user('cae_programmer_ga_inactive')
+            cae_programmer = self.get_user('cae_programmer')
+            cae_programmer_inactive = self.get_user('cae_programmer_inactive')
+
+            # Double check active user starting state.
+            self.assertTrue(cae_director.is_active)
+            self.assertTrue(cae_director.is_staff)
+            self.assertTrue(cae_admin_ga.is_active)
+            self.assertTrue(cae_admin_ga.is_staff)
+            self.assertTrue(cae_programmer_ga.is_active)
+            self.assertTrue(cae_programmer_ga.is_staff)
+            self.assertTrue(cae_programmer.is_active)
+            self.assertTrue(cae_programmer.is_staff)
+
+            # Double check inactive user starting state.
+            self.assertFalse(cae_director_inactive.is_active)
+            self.assertFalse(cae_director_inactive.is_staff)
+            self.assertFalse(cae_admin_ga_inactive.is_active)
+            self.assertFalse(cae_admin_ga_inactive.is_staff)
+            self.assertFalse(cae_programmer_ga_inactive.is_active)
+            self.assertFalse(cae_programmer_ga_inactive.is_staff)
+            self.assertFalse(cae_programmer_inactive.is_active)
+            self.assertFalse(cae_programmer_inactive.is_staff)
+
+            with self.subTest('When starting as active'):
+                # Remove all groups.
+                cae_director.groups.clear()
+                cae_director.save()
+                cae_admin_ga.groups.clear()
+                cae_admin_ga.save()
+                cae_programmer_ga.groups.clear()
+                cae_programmer_ga.save()
+                cae_programmer.groups.clear()
+                cae_programmer.save()
+
+                # Refresh models to clear cached data.
+                cae_director = self.get_user('cae_director')
+                cae_admin_ga = self.get_user('cae_admin_ga')
+                cae_programmer_ga = self.get_user('cae_programmer_ga')
+                cae_programmer = self.get_user('cae_programmer')
+
+                # Check updated state.
+                self.assertFalse(cae_director.is_active)
+                self.assertFalse(cae_director.is_staff)
+                self.assertFalse(cae_admin_ga.is_active)
+                self.assertFalse(cae_admin_ga.is_staff)
+                self.assertFalse(cae_programmer_ga.is_active)
+                self.assertFalse(cae_programmer_ga.is_staff)
+                self.assertFalse(cae_programmer.is_active)
+                self.assertFalse(cae_programmer.is_staff)
+
+                # Readd groups.
+                cae_director.groups.add(Group.objects.get(name='CAE Director'))
+                cae_director.save()
+                cae_admin_ga.groups.add(Group.objects.get(name='CAE Admin GA'))
+                cae_admin_ga.save()
+                cae_programmer_ga.groups.add(Group.objects.get(name='CAE Programmer GA'))
+                cae_programmer_ga.save()
+                cae_programmer.groups.add(Group.objects.get(name='CAE Programmer'))
+                cae_programmer.save()
+
+                # Refresh models to clear cached data.
+                cae_director = self.get_user('cae_director')
+                cae_admin_ga = self.get_user('cae_admin_ga')
+                cae_programmer_ga = self.get_user('cae_programmer_ga')
+                cae_programmer = self.get_user('cae_programmer')
+
+                # Check updated state.
+                self.assertTrue(cae_director.is_active)
+                self.assertTrue(cae_director.is_staff)
+                self.assertTrue(cae_admin_ga.is_active)
+                self.assertTrue(cae_admin_ga.is_staff)
+                self.assertTrue(cae_programmer_ga.is_active)
+                self.assertTrue(cae_programmer_ga.is_staff)
+                self.assertTrue(cae_programmer.is_active)
+                self.assertTrue(cae_programmer.is_staff)
+
+            with self.subTest('When starting as inactive'):
+                # Add groups.
+                cae_director_inactive.groups.add(Group.objects.get(name='CAE Director'))
+                cae_director_inactive.save()
+                cae_admin_ga_inactive.groups.add(Group.objects.get(name='CAE Admin GA'))
+                cae_admin_ga_inactive.save()
+                cae_programmer_ga_inactive.groups.add(Group.objects.get(name='CAE Programmer GA'))
+                cae_programmer_ga_inactive.save()
+                cae_programmer_inactive.groups.add(Group.objects.get(name='CAE Programmer'))
+                cae_programmer_inactive.save()
+
+                # Refresh models to clear cached data.
+                cae_director_inactive = self.get_user('cae_director_inactive')
+                cae_admin_ga_inactive = self.get_user('cae_admin_ga_inactive')
+                cae_programmer_ga_inactive = self.get_user('cae_programmer_ga_inactive')
+                cae_programmer_inactive = self.get_user('cae_programmer_inactive')
+
+                # Check updated state.
+                self.assertTrue(cae_director_inactive.is_active)
+                self.assertTrue(cae_director_inactive.is_staff)
+                self.assertTrue(cae_admin_ga_inactive.is_active)
+                self.assertTrue(cae_admin_ga_inactive.is_staff)
+                self.assertTrue(cae_programmer_ga_inactive.is_active)
+                self.assertTrue(cae_programmer_ga_inactive.is_staff)
+                self.assertTrue(cae_programmer_inactive.is_active)
+                self.assertTrue(cae_programmer_inactive.is_staff)
+
+                # Remove all groups.
+                cae_director_inactive.groups.clear()
+                cae_director_inactive.save()
+                cae_admin_ga_inactive.groups.clear()
+                cae_admin_ga_inactive.save()
+                cae_programmer_ga_inactive.groups.clear()
+                cae_programmer_ga_inactive.save()
+                cae_programmer_inactive.groups.clear()
+                cae_programmer_inactive.save()
+
+                # Refresh models to clear cached data.
+                cae_director_inactive = self.get_user('cae_director_inactive')
+                cae_admin_ga_inactive = self.get_user('cae_admin_ga_inactive')
+                cae_programmer_ga_inactive = self.get_user('cae_programmer_ga_inactive')
+                cae_programmer_inactive = self.get_user('cae_programmer_inactive')
+
+                # Check updated state.
+                self.assertFalse(cae_director_inactive.is_active)
+                self.assertFalse(cae_director_inactive.is_staff)
+                self.assertFalse(cae_admin_ga_inactive.is_active)
+                self.assertFalse(cae_admin_ga_inactive.is_staff)
+                self.assertFalse(cae_programmer_ga_inactive.is_active)
+                self.assertFalse(cae_programmer_ga_inactive.is_staff)
+                self.assertFalse(cae_programmer_inactive.is_active)
+                self.assertFalse(cae_programmer_inactive.is_staff)
+
+        with self.subTest('CaeCenter user, when temporarily adding SuccessCtr groups for site debugging'):
+            # Get relevant user models.
+            # Note we only test programmer and programmer GA. It's unlikely other user types would ever need this.
+            cae_programmer_ga = self.get_user('cae_programmer_ga')
+            cae_programmer = self.get_user('cae_programmer')
+
+            # Verify initial user state.
+            self.assertTrue(cae_programmer_ga.is_active)
+            self.assertTrue(cae_programmer_ga.is_staff)
+            self.assertTrue(cae_programmer.is_active)
+            self.assertTrue(cae_programmer.is_staff)
+
+            # Get SuccessCtr groups.
+            successctr_admin_group = Group.objects.get(name='STEP Admin')
+            successctr_employee_group = Group.objects.get(name='STEP Employee')
+
+            with self.subTest('When adding SuccessCtrAdmin'):
+                # Add SuccessCtrAdmin group.
+                cae_programmer_ga.groups.add(successctr_admin_group)
+                cae_programmer_ga.save()
+                cae_programmer.groups.add(successctr_admin_group)
+                cae_programmer.save()
+
+                # Pull fresh group models, to ensure we have the most up-to-date data after running save logic.
+                cae_programmer_ga = self.get_user('cae_programmer_ga')
+                cae_programmer = self.get_user('cae_programmer')
+
+                # Verify expected state. Programmer/GA permissions should take priority, so should be unchanged.
+                self.assertTrue(cae_programmer_ga.is_active)
+                self.assertTrue(cae_programmer_ga.is_staff)
+                self.assertTrue(cae_programmer.is_active)
+                self.assertTrue(cae_programmer.is_staff)
+
+                # Remove SuccessCtrAdmin group.
+                cae_programmer_ga.groups.remove(successctr_admin_group)
+                cae_programmer_ga.save()
+                cae_programmer.groups.remove(successctr_admin_group)
+                cae_programmer.save()
+
+                # Pull fresh group models, to ensure we have the most up-to-date data after running save logic.
+                cae_programmer_ga = self.get_user('cae_programmer_ga')
+                cae_programmer = self.get_user('cae_programmer')
+
+                # Verify expected state. Should be back to original permissions.
+                self.assertTrue(cae_programmer_ga.is_active)
+                self.assertTrue(cae_programmer_ga.is_staff)
+                self.assertTrue(cae_programmer.is_active)
+                self.assertTrue(cae_programmer.is_staff)
+
+            with self.subTest('When adding SuccessCtrEmployee'):
+
+                # Add SuccessCtrEmployee group.
+                cae_programmer_ga.groups.add(successctr_employee_group)
+                cae_programmer_ga.save()
+                cae_programmer.groups.add(successctr_employee_group)
+                cae_programmer.save()
+
+                # Pull fresh group models, to ensure we have the most up-to-date data after running save logic.
+                cae_programmer_ga = self.get_user('cae_programmer_ga')
+                cae_programmer = self.get_user('cae_programmer')
+
+                # Verify expected state. Programmer/GA permissions should take priority, so should be unchanged.
+                self.assertTrue(cae_programmer_ga.is_active)
+                self.assertTrue(cae_programmer_ga.is_staff)
+                self.assertTrue(cae_programmer.is_active)
+                self.assertTrue(cae_programmer.is_staff)
+
+                # Remove SuccessCtrEmployee group.
+                cae_programmer_ga.groups.remove(successctr_employee_group)
+                cae_programmer_ga.save()
+                cae_programmer.groups.remove(successctr_employee_group)
+                cae_programmer.save()
+
+                # Pull fresh group models, to ensure we have the most up-to-date data after running save logic.
+                cae_programmer_ga = self.get_user('cae_programmer_ga')
+                cae_programmer = self.get_user('cae_programmer')
+
+                # Verify expected state. Should be back to original permissions.
+                self.assertTrue(cae_programmer_ga.is_active)
+                self.assertTrue(cae_programmer_ga.is_staff)
+                self.assertTrue(cae_programmer.is_active)
+                self.assertTrue(cae_programmer.is_staff)
+
+        with self.subTest('CaeCenter user, when temporarily adding GradApps groups for site debugging'):
+            # Get relevant user models.
+            # Note we only test programmer and programmer GA. It's unlikely other user types would ever need this.
+            cae_programmer_ga = self.get_user('cae_programmer_ga')
+            cae_programmer = self.get_user('cae_programmer')
+
+            # Verify initial user state.
+            self.assertTrue(cae_programmer_ga.is_active)
+            self.assertTrue(cae_programmer_ga.is_staff)
+            self.assertTrue(cae_programmer.is_active)
+            self.assertTrue(cae_programmer.is_staff)
+
+            # Get GradApps groups.
+            grad_apps_admin_group = Group.objects.get(name='Grad Apps Admin')
+            grad_apps_committee_member_group = Group.objects.get(name='Grad Apps Committee Member')
+
+            with self.subTest('When adding GradAppsAdmin'):
+                # Add GradAppsAdmin group.
+                cae_programmer_ga.groups.add(grad_apps_admin_group)
+                cae_programmer_ga.save()
+                cae_programmer.groups.add(grad_apps_admin_group)
+                cae_programmer.save()
+
+                # Pull fresh group models, to ensure we have the most up-to-date data after running save logic.
+                cae_programmer_ga = self.get_user('cae_programmer_ga')
+                cae_programmer = self.get_user('cae_programmer')
+
+                # Verify expected state. Programmer/GA permissions should take priority, so should be unchanged.
+                self.assertTrue(cae_programmer_ga.is_active)
+                self.assertTrue(cae_programmer_ga.is_staff)
+                self.assertTrue(cae_programmer.is_active)
+                self.assertTrue(cae_programmer.is_staff)
+
+                # Remove GradAppsAdmin group.
+                cae_programmer_ga.groups.remove(grad_apps_admin_group)
+                cae_programmer_ga.save()
+                cae_programmer.groups.remove(grad_apps_admin_group)
+                cae_programmer.save()
+
+                # Pull fresh group models, to ensure we have the most up-to-date data after running save logic.
+                cae_programmer_ga = self.get_user('cae_programmer_ga')
+                cae_programmer = self.get_user('cae_programmer')
+
+                # Verify expected state. Should be back to original permissions.
+                self.assertTrue(cae_programmer_ga.is_active)
+                self.assertTrue(cae_programmer_ga.is_staff)
+                self.assertTrue(cae_programmer.is_active)
+                self.assertTrue(cae_programmer.is_staff)
+
+            with self.subTest('When adding GradAppsCommitteeMember'):
+                # Add GradAppsCommitteeMember group.
+                cae_programmer_ga.groups.add(grad_apps_committee_member_group)
+                cae_programmer_ga.save()
+                cae_programmer.groups.add(grad_apps_committee_member_group)
+                cae_programmer.save()
+
+                # Pull fresh group models, to ensure we have the most up-to-date data after running save logic.
+                cae_programmer_ga = self.get_user('cae_programmer_ga')
+                cae_programmer = self.get_user('cae_programmer')
+
+                # Verify expected state. Programmer/GA permissions should take priority, so should be unchanged.
+                self.assertTrue(cae_programmer_ga.is_active)
+                self.assertTrue(cae_programmer_ga.is_staff)
+                self.assertTrue(cae_programmer.is_active)
+                self.assertTrue(cae_programmer.is_staff)
+
+                # Remove GradAppsCommitteeMember group.
+                cae_programmer_ga.groups.remove(grad_apps_committee_member_group)
+                cae_programmer_ga.save()
+                cae_programmer.groups.remove(grad_apps_committee_member_group)
+                cae_programmer.save()
+
+                # Pull fresh group models, to ensure we have the most up-to-date data after running save logic.
+                cae_programmer_ga = self.get_user('cae_programmer_ga')
+                cae_programmer = self.get_user('cae_programmer')
+
+                # Verify expected state. Should be back to original permissions.
+                self.assertTrue(cae_programmer_ga.is_active)
+                self.assertTrue(cae_programmer_ga.is_staff)
+                self.assertTrue(cae_programmer.is_active)
+                self.assertTrue(cae_programmer.is_staff)
 
 
 # class GroupMembershipModelTests(IntegrationTestCase):
