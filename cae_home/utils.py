@@ -45,7 +45,7 @@ def get_or_create_login_user_model(request, user_id):
 
         # (Login)User model found.
         # Check that we have the proper casing for the id (above query was iexact, aka case-insensitive).
-        user_id = user_id.username
+        user_id = user_model.username
     except User.DoesNotExist:
         # Failed on BroncoNet. Try Winno to be safe. To do this, we must go through the WmuUser model.
         wmu_user = get_or_create_wmu_user_model(request, user_id)
@@ -70,7 +70,7 @@ def get_or_create_login_user_model(request, user_id):
 
                     # (Login)User model found.
                     # Check that we have the proper casing for the id (above query was iexact, aka case-insensitive).
-                    user_id = user_id.username
+                    user_id = user_model.username
                 except User.DoesNotExist:
                     # Failed to get (Login) User model. Does not appear to exist in Django database.
                     user_model = None
@@ -137,7 +137,7 @@ def get_or_create_wmu_user_model(request, user_id):
 
         # (Login)User model found.
         # Check that we have the proper casing for the id (above query was iexact, aka case-insensitive).
-        user_id = user_id.bronco_net
+        user_id = user_model.bronco_net
     except WmuUser.DoesNotExist:
         # Failed on BroncoNet. Try Winno to be safe.
         try:
@@ -145,7 +145,7 @@ def get_or_create_wmu_user_model(request, user_id):
 
             # (Login)User model found.
             # Check that we have the proper casing for the id (above query was iexact, aka case-insensitive).
-            user_id = user_id.winno
+            user_id = user_model.winno
         except WmuUser.DoesNotExist:
             # Failed to get WmuUser model. Does not appear to exist in Django database.
             user_model = None
