@@ -19,8 +19,13 @@ logger = init_logging.get_logger(__name__)
 
 def get_or_create_login_user_model(request, user_id):
     """
-    Attempts to get the "Login User" model with the associated user id.
-    Relies on get_or_create_wmu_user_model() method if Winno is passed as id.
+    Utility helper function, to take user identifier and:
+        * First attempt to find corresponding (Login)User model instance.
+        * On failure, attempts to find corresponding WmuUser model instance.
+        * Then attempts to create/update Django database, to have a current (Login)User and WmuUser model for the user.
+
+    Due to required logic, relies on get_or_create_wmu_user_model() method if Winno is passed as id.
+    Which will then find the "proper" BroncoNet
 
     A "Login User" is the User model associated with Django, to allow someone to login to the site.
     Has a direct, One-to-One connection with a UserIntermediary model.
@@ -33,26 +38,45 @@ def get_or_create_login_user_model(request, user_id):
         return None
 
     # Attempt to get model from django database.
+    user_model = None
     try:
         # First assume identifier is BroncoNet.
-        user_model = User.objects.get(username=user_id)
+        user_model = User.objects.get(username__iexact=user_id)
+
+        # (Login)User model found.
+        # Check that we have the proper casing for the id (above query was iexact, aka case-insensitive).
+        user_id = user_id.username
     except User.DoesNotExist:
         # Failed on BroncoNet. Try Winno to be safe. To do this, we must go through the WmuUser model.
         wmu_user = get_or_create_wmu_user_model(request, user_id)
 
-        # Proceed if WmuUser model value returned.
+        # Proceed if WmuUser model was found.
         if wmu_user is not None and not isinstance(wmu_user, TemplateResponse):
-            # Got valid WmuUser model. Orig value must be a valid Winno.
-            user_id = wmu_user.bronco_net
+            # Found a valid WmuUser model. Orig identifier must be a valid Winno.
+            # If we can, we try a searching Django a second time for the (Login)User model, using the proper BroncoNet.
+            #
+            # On failure OR if the WmuUser model does not have a valid BroncoNet (such as in GradApps logic. WMU doesn't
+            # assign a proper BroncoNet until a student is officially enrolled, rip), then we later attempt an LDAP
+            # query to see if we can find the full, proper data set for the (Login)User model.
+            #
+            # This is all because main campus LDAP sucks, and we were explicitly told to do as few queries on it as
+            # possible, or else we might take the entirety of WMU down, lol.
+            if wmu_user.bronco_net is not None and len(wmu_user.bronco_net.strip()) > 0:
+                user_id = wmu_user.bronco_net
 
-            # Try a second time, with proper BroncoNet.
-            try:
-                user_model = User.objects.get(username=user_id)
-            except User.DoesNotExist:
-                # Failed to get (Login) User model. Does not appear to exist in Django database.
-                user_model = None
+                # Try a second time, with proper BroncoNet.
+                try:
+                    user_model = User.objects.get(username__iexact=user_id)
 
-        # Failed to get equivalent WmuUser as well.
+                    # (Login)User model found.
+                    # Check that we have the proper casing for the id (above query was iexact, aka case-insensitive).
+                    user_id = user_id.username
+                except User.DoesNotExist:
+                    # Failed to get (Login) User model. Does not appear to exist in Django database.
+                    user_model = None
+
+        # Failed to get equivalent (Login)User or WmuUser models.
+        # Either local machine does not have proper LDAP setup, OR provided identifier is invalid.
         else:
             # Check if TemplateResponse object was returned.
             if isinstance(wmu_user, TemplateResponse):
@@ -62,7 +86,8 @@ def get_or_create_login_user_model(request, user_id):
                 # Passed value is likely not a valid BroncoNet or Winno.
                 return None
 
-    # Resort to LDAP if no (Login) User model was found.
+    # If we got this far, then SOME form of user data was found for the given identifier.
+    # Resort to LDAP if no (Login)User model was found by this point.
     if user_model is None:
         # Use LDAP backend.
         from django.conf import settings
@@ -108,11 +133,19 @@ def get_or_create_wmu_user_model(request, user_id):
     # Attempt to get model from django database.
     try:
         # First assume identifier is BroncoNet.
-        user_model = WmuUser.objects.get(bronco_net=user_id)
+        user_model = WmuUser.objects.get(bronco_net__iexact=user_id)
+
+        # (Login)User model found.
+        # Check that we have the proper casing for the id (above query was iexact, aka case-insensitive).
+        user_id = user_id.bronco_net
     except WmuUser.DoesNotExist:
         # Failed on BroncoNet. Try Winno to be safe.
         try:
-            user_model = WmuUser.objects.get(winno=user_id)
+            user_model = WmuUser.objects.get(winno__iexact=user_id)
+
+            # (Login)User model found.
+            # Check that we have the proper casing for the id (above query was iexact, aka case-insensitive).
+            user_id = user_id.winno
         except WmuUser.DoesNotExist:
             # Failed to get WmuUser model. Does not appear to exist in Django database.
             user_model = None
