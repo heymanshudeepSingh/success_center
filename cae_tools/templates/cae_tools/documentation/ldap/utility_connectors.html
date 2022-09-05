@@ -21,62 +21,95 @@
   <br>
 
   <article class="color">
-    <h3>Function Input/Output</h3>
+    <h3>Utility Function Differences</h3>
     <p>
-      Both these functions take in a single argument, of either "BroncoNet" or "Winno". They both then handle all the
-      corresponding LDAP logic (including LDAP not being setup on the local machine) and return values based on one of the
-      four following situations:
+      Both these functions are meant to manage User models in our local Django database. However, they have some
+      key differences:
     </p>
     <ul>
       <li>
         <p>
-          If a user model for the corresponding BroncoNet/Winno already exists in the Django database, then the functions
-          will return the found Django model. No LDAP functionality is called.
+          <span class="highlight primary">get_or_create_login_user_model()</span> - Meant to get/update data for a user
+          to be able to log into our project sites. This includes generating both the
+          <span class="highlight primary">(Login)User model</span> and the
+          <span class="highlight primary">WmuUser model</span>, if either one is not present in our local Django
+          database.
         </p>
-        <br>
+        <p>
+          For example, this should be called to make a new CAE Center user, or make a new Grad Apps Committee Member, or
+          some other user that needs to be able to log in and physically interact with the site.
+        </p>
       </li>
       <li>
         <p>
-          If LDAP connections are setup locally, and valid student data returns for the BroncoNet/Winno, then an
-          equivalent Django model should populate from the data. The functions then return this model.
-        </p>
-        <br>
-      </li>
-      <li>
-        <p>
-          If LDAP connections are setup locally, but no valid student data returns for the BroncoNet/Winno value, then the
-          functions return None.
-        </p>
-        <br>
-      </li>
-      <li>
-        <p>
-          If the user's machine does not have LDAP connections setup (or not properly setup), then it should gracefully
-          return a TemplateResponse object.
+          <span class="highlight primary">get_or_create_wmu_user_model()</span> - Meant to get/update data for a user
+          (often a student) to be referenced in our project logic. But we don't necessarily want/need the user to be
+          able to log in. This will only generate the corresponding
+          <span class="highlight primary">WmuUser model</span>, if not present in our local Django database.
         </p>
         <p>
-          If called from a view, then the view can either display this TemplateResponse object right then, or you can use
-          an if statemnt to check for a TemplateResponse object and handle how you like.
+          For example, this should be called when recording that a student checked out a CAE Center computer room, or
+          when recording that a student used a SuccessCtr tutoring center, or some other logic where we need to
+          reference the student, but not necessarily let them log in.
         </p>
-        <p>
-          There are examples of this handling in cae_home/views/misc_views.py.
-        </p>
-        <br>
       </li>
     </ul>
   </article>
 
-  <br>
+  <article class="color">
+    <h3>Function Input/Output</h3>
+    <p>
+      Both these functions take in a single argument, of either "BroncoNet" or "Winno". They both then handle all the
+      corresponding LDAP logic (including LDAP connections not being setup on the local machine) and then return a
+      value based on one of the four following situations:
+    </p>
+    <ul>
+      <li>
+        <p>
+          <span class="highlight success">Success, User already in Django database</span> - If a user model for the
+          corresponding BroncoNet/Winno already exists in the Django database, then the functions will return the found
+          Django model. No LDAP functionality is called.
+        </p>
+      </li>
+      <li>
+        <p>
+          <span class="highlight info">Success, User not in Django database, but found in LDAP search</span> - If LDAP
+          connections are setup locally, and a valid BroncoNet/Winno is provided, then an
+          equivalent Django model should populate from the pulled LDAP data. The functions then return the newly created
+          Django User model (either (Login)User or WmuUser, depending on which function was called).
+        </p>
+      </li>
+      <li>
+        <p>
+          <span class="highlight error">Failure, Invalid user credentials</span> - If LDAP connections are setup
+          locally, but no valid LDAP student data returns for the BroncoNet/Winno , then no Django data is
+          created/updated. The functions return None.
+        </p>
+      </li>
+      <li>
+        <p>
+          <span class="highlight error">Failure, User not in Django database, and no local LDAP connection setup</span>
+          - If the local machine does not have LDAP connections setup (or not properly setup), then it should gracefully
+          return a TemplateResponse object.
+        </p>
+        <p>
+          If called from a view, then the view can either display this TemplateResponse object right then, or you can
+          use an if statement to check for a TemplateResponse object and handle as desired.
+        </p>
+        <p>
+          There are examples of this handling in cae_home/views/misc_views.py.
+        </p>
+      </li>
+    </ul>
+    <p>
+      It's worth noting that "missing LDAP packages", "missing SimpleLdapLib submodule", and "bad LDAP credentials" will
+      all result in the fourth scenario (aka, invalid/missing LDAP connection). It hasn't been tested yet, but
+      "no internet connection" likely would also fall under this case.
+    </p>
+    <p>
+      Between all of these, it should be able to handle for both development and production, including users that have
+      LDAP connections setup for their machine and users that don't want to touch LDAP at all.
+    </p>
+  </article>
 
-  <p>
-    It's worth noting that "missing LDAP packages", "missing SimpleLdapLib submodule", and "bad LDAP credentials" will
-    all result in the fourth scenario. It hasn't been tested yet, but "no internet connection" likely would as well.
-  </p>
-
-  <br>
-
-  <p>
-    Between all of these, it should be able to handle for both development and production, including users that have
-    LDAP connections setup for their machine and users that don't want to touch LDAP at all.
-  </p>
 {% endblock content %}

@@ -9,6 +9,53 @@
   {{ block.super }}
 
   <h2>Custom Auth Backends</h2>
-  <p>Not Documented yet.</p>
+  <p>
+    Ugh. There's so much to this, and not gonna lie, I (Brandon) haven't touched most of it in actual years. I'll record
+    what I do remember, but someone should probably go line by line and re-figure out exactly what this does. I wish I
+    had time to document it back when I wrote it.
+  </p>
+  <p>
+    The "Auth Backends" are some of the most complicated individual parts of all of our Django projects, due to having
+    to interface with main campus. So there's a lot to it.
+  </p>
+
+  <article class="color">
+    <h3>TLDR Description</h3>
+    <p>There are three total "Custom Auth Backends" provided:</p>
+    <ul>
+      <li><p>CAE Backend</p></li>
+      <li><p>WMU Backend</p></li>
+      <li><p>ADV Backend</p></li>
+    </ul>
+    <p>
+      All of these are located in the folder
+      <span class="code">&lt;project_root&gt;/workspace/ldap_backends/wmu_auth/</span>.
+    </p>
+    <br>
+    <p>
+      All three of these are used, and important in different ways.
+    </p>
+    <p>
+      The <span class="code">CAE Backend</span> is used for interfacing with CAE Center internal credentials. These
+      are maintained separately to main campus credentials, and pretty much exclusively used for internal CAE Center
+      logic.
+    </p>
+    <p>
+      The <span class="code">WMU Backend</span> is used for main connection and authentication with main campus. This
+      is the primary means used to sync data between our Django projects and what main campus maintains.
+    </p>
+    <p>
+      The <span class="code">ADV Backend</span> is used for pulling auxiliary data we need from main campus, such as
+      which students are actively going for which majors. This is required because different credentials have access
+      to different information. It's annoying but there's no way around it, if we want to be able to access all the
+      information we need to maintain the sites we do.
+    </p>
+    <br>
+    <p>
+      Generally speaking, the CAE auth will almost always be called first, to check if the user has CAE Center
+      credentials. Then it will cascade to checking with main campus via the WMU auth. And if anything is found, it will
+      finally cascade to the ADV auth to make sure all the auxiliary user information is up to date.
+    </p>
+  </article>
 
 {% endblock content %}
