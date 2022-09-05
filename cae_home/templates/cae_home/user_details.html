@@ -19,7 +19,7 @@
         <div class="head">
           <p><a href="{% url 'cae_tools:reset_password' %}">Someone forgot their password?</a></p>
           {% if is_cae_admin %}
-            <p><a href="{% url 'cae_home:manage_cae_users' %}">Manage Cae Center Users</a></p>
+            <p><a href="{% url 'cae_home:manage_user_access_groups' %}">Manage User Permissions</a></p>
           {% endif %}
         </div>
       </div>

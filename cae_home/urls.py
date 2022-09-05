@@ -24,11 +24,11 @@ urlpatterns = [
     path('info/software/', views.info_software, name='info_software'),
 
     # User pages.
-    path('user-details/', views.UserDetails.as_view(), name='user_details'),
+    path('user/details/', views.UserDetails.as_view(), name='user_details'),
     path('user/edit/', views.user_edit, name='user_edit'),
     path('user/edit/change_password/', views.change_password, name='user_change_password'),
     path('user/helpful_resources/', views.helpful_resources, name='helpful_resources'),
-    path('user/edit/cae_users/', views.manage_cae_users, name='manage_cae_users'),
+    path('user/edit/groups/', views.manage_user_access_groups, name='manage_user_access_groups'),
 
     # Error page test views.
     path('error/400/', views.test_400_error, name='error_400'),

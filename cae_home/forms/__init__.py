@@ -32,5 +32,8 @@ from .general_forms import (
 
 
 from .user_group_management_forms import (
-    CaeCenterUserForm,
+    CoreUserGroupManagementForm,
+    CaeGroupManagementForm,
+    GradAppsGroupManagementForm,
+    SuccessCtrGroupManagementForm,
 )

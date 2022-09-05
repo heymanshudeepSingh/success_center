@@ -200,6 +200,9 @@ def compare_user_and_wmuuser_models(uid):
             wmu_user_model.save()
         user_intermediary.save()
 
+    # Handle for potential GradApps membership.
+    handle_grad_apps_membership(user_intermediary)
+
 
 def check_user_group_membership(uid):
     """
@@ -260,6 +263,71 @@ def check_all_group_memberships():
     for inactive_group_membership in group_membership_list:
         inactive_group_membership.date_left = timezone.datetime.today()
         inactive_group_membership.save()
+
+
+def handle_grad_apps_membership(user_intermediary):
+    """
+    Extra user logic to run when GradApps project is installed.
+    Ensures that, if a GradApps user is added or removed, their user model should always have the correct setup,
+    so as to not raise errors or lead to "bad"/"unexpected" data states.
+    """
+    # Only proceed if we have a (Login)user model.
+    if not user_intermediary.user:
+        return
+    # Only proceed if GradApps project is installed.
+    if 'grad_applications' not in settings.INSTALLED_CAE_PROJECTS:
+        return
+
+    # Pull user fresh to ensure we have most up-to-date data.
+    user_id = user_intermediary.user.username
+    user = User.objects.get(username=user_id)
+    wmu_user = WmuUser.objects.get(bronco_net=user_id)
+
+    # Check for GradApps project groups.
+    user_groups = user.groups.all()
+    is_grad_member = False
+    for group in user_groups:
+        if group.name in settings.GRAD_APPS_GROUPS:
+            is_grad_member = True
+
+    # Special imports that can't be up top, to avoid circular logic.
+    from apps.Grad_Applications.grad_applications_core import models as grad_apps_models
+    from cae_home.models import Department
+    na_department = Department.objects.get(code='NA')
+    default_department = Department.objects.get(code='EDO')
+
+    # Ensure default committees exist.
+    try:
+        grad_apps_models.Committee.objects.get(department=na_department)
+    except grad_apps_models.Committee.DoesNotExist:
+        grad_apps_models.Committee.objects.create(department=na_department, is_active=True)
+    try:
+        default_committee = grad_apps_models.Committee.objects.get(department=default_department)
+    except grad_apps_models.Committee.DoesNotExist:
+        default_committee = grad_apps_models.Committee.objects.create(department=default_department, is_active=True)
+
+    if is_grad_member:
+        # Handle if is GradApps member.
+        try:
+            # Attempt to grab CommitteeMember.
+            grad_apps_models.CommitteeMember.objects.get(faculty=wmu_user, is_active=True)
+
+        except grad_apps_models.CommitteeMember.DoesNotExist:
+            # CommitteeMember does not exist. Create new one.
+            grad_apps_models.CommitteeMember.objects.create(
+                faculty=wmu_user,
+                committee=default_committee,
+                start_date=timezone.now(),
+                is_active=True,
+            )
+
+    else:
+        # Handle if not GradApps member.
+        # Disable any active CommitteeMember models.
+        committee_member_models = grad_apps_models.CommitteeMember.objects.filter(faculty=wmu_user, is_active=True)
+        for committee_member_model in committee_member_models:
+            committee_member_model.is_active = False
+            committee_member_model.save()
 
 # endregion Model Functions
 

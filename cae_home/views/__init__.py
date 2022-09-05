@@ -20,11 +20,10 @@ from .django_rest_views import DepartmentViewSet
 
 # Form views.
 from .user_management_views import (
-    user_details,
     UserDetails,
     user_edit,
     change_password,
-    manage_cae_users,
+    manage_user_access_groups,
 )
 
 # Login views.

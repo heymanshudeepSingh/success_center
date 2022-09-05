@@ -6,6 +6,7 @@ Form views for CAE Home app.
 from django.contrib import messages
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import Group
 from django.db.models import ObjectDoesNotExist
 from django.http.response import HttpResponseRedirect
@@ -25,17 +26,7 @@ from workspace import logging as init_logging
 logger = init_logging.get_logger(__name__)
 
 
-@login_required
-def user_details(request):
-    current_user = request.user
-    user_profile = current_user.profile
-    return TemplateResponse(request, "cae_home/user_details.html", {
-        "current_user": current_user,
-        "user_profile": user_profile
-    })
-
-
-class UserDetails(TemplateView):
+class UserDetails(TemplateView, LoginRequiredMixin):
     template_name = 'cae_home/user_details.html'
 
     def get_context_data(self, *args, **kwargs):
@@ -66,65 +57,95 @@ class UserDetails(TemplateView):
 
 @login_required
 @group_required(settings.CAE_ADMIN_GROUPS)
-def manage_cae_users(request):
+def manage_user_access_groups(request):
     """
-    For adding/managing new CAE Center users.
+    Page to manage and update user permissions/groups, for general site access.
+
+    Each subproject (GradApps/SuccessCtr/etc) should have their own page to manage the specific permissions/groups
+    that apply to that project.
+
+    But here is a general page that has all of it, so that CAE Center users can easily and quickly troubleshoot problems
+    if they ever come up.
     """
-    # Initialize form.
-    form = forms.CaeCenterUserForm()
+    # Initialize forms.
+    form_list = []
+    # Core form, for entering student data.
+    core_user_form = forms.CoreUserGroupManagementForm()
+    form_list.append(core_user_form)
+    # CAE form, for managing CAE Center groups.
+    cae_management_form = forms.CaeGroupManagementForm()
+    form_list.append(cae_management_form)
+    # GradApps form, for managing GradApps groups.
+    grad_apps_management_form = forms.GradAppsGroupManagementForm()
+    form_list.append(grad_apps_management_form)
+    # STEP form, for managing SuccessCtr groups.
+    success_ctr_management_form = forms.SuccessCtrGroupManagementForm()
+    form_list.append(success_ctr_management_form)
 
     # Handle for user-submitted data.
-    if request.POST:
+    if request.method == 'POST':
+        # Update forms.
+        form_list = []
+        # Core form, for entering student data.
+        core_user_form = forms.CoreUserGroupManagementForm(data=request.POST)
+        core_user_form.name = 'CoreUserForm'
+        form_list.append(core_user_form)
+        # CAE form, for managing CAE Center groups.
+        cae_management_form = forms.CaeGroupManagementForm(data=request.POST)
+        cae_management_form.name = 'CaeManagementForm'
+        form_list.append(cae_management_form)
+        # GradApps form, for managing GradApps groups.
+        grad_apps_management_form = forms.GradAppsGroupManagementForm(data=request.POST)
+        grad_apps_management_form.name = 'GradAppsManagementForm'
+        form_list.append(grad_apps_management_form)
+        # STEP form, for managing SuccessCtr groups.
+        success_ctr_management_form = forms.SuccessCtrGroupManagementForm(data=request.POST)
+        success_ctr_management_form.name = 'SuccessCtrManagementForm'
+        form_list.append(success_ctr_management_form)
 
-        # Update form.
-        form = forms.CaeCenterUserForm(request.POST)
+        # Check that each individual provided forms is valid.
+        valid_forms = True
+        for form in form_list:
 
-        # Validate form.
-        if form.is_valid():
-            # Form is valid. Proceed.
-            user_id = form.cleaned_data['user_id']
-            group_set = form.cleaned_data['groups']
+            # Verify that form is valid.
+            if not form.is_valid():
+                valid_forms = False
 
-            user_id = str(user_id).split(', ')[0]
+            # Get user data.
+            if form.name == 'CoreUserForm' and valid_forms:
+                user = get_or_create_login_user_model(request, request.POST['user_id'])
 
-            # Get user data from provided value.
-            # Note that this acts as a second level of validation, against LDAP.
-            # We get None if LDAP connection is present and user data was invalid.
-            # We get TemplateResponse if LDAP connection is not present, and Django database could not find user.
-            # We get a user model if user was found.
-            user = get_or_create_login_user_model(request, user_id)
-            failed_to_find_user_msg = 'Failed to find user with BroncoNet/Winno of "{0}".'.format(user_id)
-            if user is None:
-                # LDAP connection works but invalid value.
-                messages.warning(request, failed_to_find_user_msg)
-            elif isinstance(user, TemplateResponse):
-                # User does not found in Django database and LDAP not set up.
-                messages.warning(request, failed_to_find_user_msg)
-                messages.error(request, 'LDAP connection does not appear to be set up. Could not check against LDAP.')
-            else:
-                # User found.
-                orig_user_groups = user.groups.all()
+        if valid_forms:
+            # All forms came back as valid. Save.
 
-                # Add all corresponding groups provided in form.
-                group_set = Group.objects.filter(name__in=group_set)
-                for group in group_set:
-                    user.groups.add(group)
-                messages.success(request, 'Updated CAE user groups for {0} {1}.'.format(
-                    user.first_name,
-                    user.last_name,
-                ))
+            # First clear out any existing groups for user.
+            user.groups.clear()
 
-                # Remove groups not in form.
-                for group in orig_user_groups:
-                    if group not in group_set:
-                        user.groups.remove(group)
+            # Get groups provided by forms.
+            cae_groups = request.POST.getlist('cae_groups')
+            grad_apps_groups = request.POST.getlist('grad_apps_groups')
+            success_ctr_groups = request.POST.getlist('success_ctr_groups')
 
-            # Redirect to committee management page.
-            return redirect(reverse('cae_home:manage_cae_users'))
+            # Add groups for each set.
+            for cae_group in cae_groups:
+                user.groups.add(Group.objects.get(name=cae_group))
+            for grad_apps_group in grad_apps_groups:
+                user.groups.add(Group.objects.get(name=grad_apps_group))
+            for success_ctr_group in success_ctr_groups:
+                user.groups.add(Group.objects.get(name=success_ctr_group))
 
-    # Render response.
+            # Save updated state.
+            user.save()
+            messages.success(request, 'Successfully updated permissions for user {0}.'.format(user))
+            return HttpResponseRedirect(reverse('cae_home:user_details'))
+
+        else:
+            # One or more forms failed to validate.
+            messages.warning(request, 'Failed to update user info.')
+
+    # Handle for non-post request.
     return TemplateResponse(request, 'cae_home/manage_cae_users.html', {
-        'form': form,
+        'forms': form_list,
     })
 
 
