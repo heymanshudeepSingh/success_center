@@ -1,3 +1,7 @@
+"""
+Imports view logic for Core "forms" folder.
+Makes project imports to this folder behave like a standard single file.
+"""
 
 
 from .form_widgets import (
@@ -13,9 +17,8 @@ from .form_widgets import (
 )
 
 
-from .forms import (
+from .general_forms import (
     AuthenticationForm,
-    CaeCenterUserForm,
     UserLookupForm,
     UserModelForm,
     ChangePasswordCustomForm,
@@ -25,4 +28,9 @@ from .forms import (
     ProfileModelForm_OnlySiteOptionsGA,
     AddressModelForm,
     RoomModelForm,
+)
+
+
+from .user_group_management_forms import (
+    CaeCenterUserForm,
 )
