@@ -69,7 +69,6 @@ class CoreUserGroupManagementForm(forms.Form):
     def clean_user_id(self):
         # Get submitted form value.
         value = self.cleaned_data['user_id']
-
         value = value.split(', ')[0].strip()
 
         # Attempt to find corresponding (Login)User model, either via BroncoNet or Winno.

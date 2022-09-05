@@ -113,7 +113,7 @@ def manage_user_access_groups(request):
 
             # Get user data.
             if form.name == 'CoreUserForm' and valid_forms:
-                user = get_or_create_login_user_model(request, request.POST['user_id'])
+                user = get_or_create_login_user_model(request, form.cleaned_data['user_id'])
 
         if valid_forms:
             # All forms came back as valid. Save.
@@ -122,9 +122,13 @@ def manage_user_access_groups(request):
             user.groups.clear()
 
             # Get groups provided by forms.
-            cae_groups = request.POST.getlist('cae_groups')
-            grad_apps_groups = request.POST.getlist('grad_apps_groups')
-            success_ctr_groups = request.POST.getlist('success_ctr_groups')
+            for form in form_list:
+                if form.name == 'CaeManagementForm':
+                    cae_groups = form.cleaned_data['cae_groups']
+                elif form.name == 'GradAppsManagementForm':
+                    grad_apps_groups = form.cleaned_data['grad_apps_groups']
+                elif form.name == 'SuccessCtrManagementForm':
+                    success_ctr_groups = form.cleaned_data['success_ctr_groups']
 
             # Add groups for each set.
             for cae_group in cae_groups:
