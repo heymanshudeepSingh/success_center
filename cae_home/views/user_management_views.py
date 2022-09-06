@@ -180,7 +180,6 @@ def user_edit(request):
     form.display_name = 'General Info'
     form.additional_link = 'cae_home:user_change_password'
     form.additional_link_text = "Change Password?"
-    # form.slug = user.username
     form_list.append(form)
 
     form = forms.ProfileModelForm_OnlyPhone(instance=user_profile)
@@ -189,14 +188,31 @@ def user_edit(request):
 
     form = forms.AddressModelForm(instance=address)
     form.display_name = 'Address'
-    # form_list.append(form)
+    # form_list.append(form)    # Don't use address form, for now. Uncomment to add logic back in.
 
+    # Add GA form if CAE Center GA user.
     if 'CAE Admin GA' in user_groups or 'CAE Programmer GA' in user_groups:
         form = forms.ProfileModelForm_OnlySiteOptionsGA(instance=user_profile)
     else:
         form = forms.ProfileModelForm_OnlySiteOptions(instance=user_profile)
     form.display_name = 'Site Settings'
     form_list.append(form)
+
+    # If SuccessCtr is installed, add SuccessCtr Profile form.
+    if 'success_center' in settings.INSTALLED_CAE_PROJECTS:
+        # Import SuccessCtr specific logic.
+        from apps.Success_Center.success_center_core.forms import ProfileModelForm_DefaultLocation
+        from apps.Success_Center.success_center_core import models as success_ctr_models
+
+        # Get corresponding SuccessCtr UserProfile for user.
+        try:
+            success_ctr_profile = success_ctr_models.SuccessCtrProfile.objects.get(profile=user_profile)
+        except success_ctr_models.SuccessCtrProfile.DoesNotExist:
+            success_ctr_profile = success_ctr_models.SuccessCtrProfile.objects.create(profile=user_profile)
+        form = ProfileModelForm_DefaultLocation(instance=success_ctr_profile)
+        form.name = 'SuccessCtrForm'
+        form.display_name = 'Success Center Settings'
+        form_list.append(form)
 
     # Check if request is post.
     if request.method == 'POST':
@@ -219,8 +235,9 @@ def user_edit(request):
         form = forms.AddressModelForm(instance=address, data=request.POST)
         form.name = 'AddressForm'
         form.display_name = 'Address'
-        # form_list.append(form)
+        # form_list.append(form)    # Don't use address form, for now. Uncomment to add logic back in.
 
+        # Add GA form if CAE Center GA user.
         if 'CAE Admin GA' in user_groups or 'CAE Programmer GA' in user_groups:
             form = forms.ProfileModelForm_OnlySiteOptionsGA(instance=user_profile, data=request.POST)
         else:
@@ -228,6 +245,22 @@ def user_edit(request):
         form.name = 'SiteSettingsForm'
         form.display_name = 'Site Settings'
         form_list.append(form)
+
+        # If SuccessCtr is installed, add SuccessCtr Profile form.
+        if 'success_center' in settings.INSTALLED_CAE_PROJECTS:
+            # Import SuccessCtr specific logic.
+            from apps.Success_Center.success_center_core.forms import ProfileModelForm_DefaultLocation
+            from apps.Success_Center.success_center_core import models as success_ctr_models
+
+            # Get corresponding SuccessCtr UserProfile for user.
+            try:
+                success_ctr_profile = success_ctr_models.SuccessCtrProfile.objects.get(profile=user_profile)
+            except success_ctr_models.SuccessCtrProfile.DoesNotExist:
+                success_ctr_profile = success_ctr_models.SuccessCtrProfile.objects.create(profile=user_profile)
+            form = ProfileModelForm_DefaultLocation(instance=success_ctr_profile, data=request.POST)
+            form.name = 'SuccessCtrForm'
+            form.display_name = 'Success Center Settings'
+            form_list.append(form)
 
         # Check that all forms are valid.
         for form in form_list:

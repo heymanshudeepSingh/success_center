@@ -203,6 +203,20 @@ def compare_user_and_wmuuser_models(uid):
     # Handle for potential GradApps membership.
     handle_grad_apps_membership(user_intermediary)
 
+    # Handle if SuccessCtr is installed.
+    if 'success_center' in settings.INSTALLED_CAE_PROJECTS:
+        # SuccessCtr project is present.
+        from apps.Success_Center.success_center_core import models as success_ctr_models
+
+        # Verify that active (Login)User has an associated "SuccessCtr Profile" model.
+        if user_model and user_model.is_active:
+            user_profile = user_intermediary.profile
+            try:
+                success_ctr_models.SuccessCtrProfile.objects.get(profile=user_profile)
+            except success_ctr_models.SuccessCtrProfile.DoesNotExist:
+                # Failed to find profile. Create new one.
+                success_ctr_models.SuccessCtrProfile.objects.create(profile=user_profile)
+
 
 def check_user_group_membership(uid):
     """
