@@ -285,8 +285,8 @@ def handle_grad_apps_membership(user_intermediary):
     Ensures that, if a GradApps user is added or removed, their user model should always have the correct setup,
     so as to not raise errors or lead to "bad"/"unexpected" data states.
     """
-    # Only proceed if we have a (Login)user model.
-    if not user_intermediary.user:
+    # Only proceed if we have a (Login)user AND WmuUser model.
+    if not user_intermediary.user or not user_intermediary.wmu_user:
         return
     # Only proceed if GradApps project is installed.
     if 'grad_applications' not in settings.INSTALLED_CAE_PROJECTS:
@@ -341,6 +341,8 @@ def handle_grad_apps_membership(user_intermediary):
         committee_member_models = grad_apps_models.CommitteeMember.objects.filter(faculty=wmu_user, is_active=True)
         for committee_member_model in committee_member_models:
             committee_member_model.is_active = False
+            if committee_member_model.leave_date is None:
+                committee_member_model.leave_date = timezone.now().date()
             committee_member_model.save()
 
 # endregion Model Functions
