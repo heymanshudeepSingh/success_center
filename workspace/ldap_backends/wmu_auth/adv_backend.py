@@ -427,6 +427,43 @@ class AdvisingAuthBackend(AbstractLDAPBackend):
             logger.auth_warning('{0}: Could not parse degree_level from program_code "{1}".'.format(uid, program_code))
             return models.Major.get_degree_level_as_int('Unknown')
 
+    def import_major_model(self, major_code):
+        """
+
+        """
+        search_base = 'ou=Majors,ou=WMUCourses,o=wmich.edu,dc=wmich,dc=edu'
+        search_filter = '(wmuStudentMajor={0})'.format(major_code)
+        attributes = 'ALL_ATTRIBUTES'
+
+        self.ldap_lib.bind_server(get_info=self.get_info)
+        ldap_major = self.ldap_lib.search(
+            search_base=search_base,
+            search_filter=search_filter,
+            attributes=attributes,
+        )
+        self.ldap_lib.unbind_server()
+
+        # Get major's department.
+        department = self._get_major_department(ldap_major)
+
+        # Get major's program_code.
+        program_code = self._get_major_program_code(ldap_major)
+
+        # Get major's display_name.
+        display_name = self._get_major_display_name(ldap_major)
+
+        # Get major's degree_level.
+        degree_level = self._get_degree_level_from_program_code('N/A-ImportMajors', program_code)
+
+        return models.Major.objects.create(
+            department=department,
+            student_code=major_code,
+            program_code=program_code,
+            name=display_name,
+            degree_level=degree_level,
+            slug=slugify(major_code),
+        )
+
     def deactivate_student_major(self, uid, major):
         """
         Deactivates a single WmuUserMajorRelationship model.
