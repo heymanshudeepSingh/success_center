@@ -6,6 +6,7 @@ Note that, to work, these need the simple_ldap_lib git submodule imported, and t
 
 # System Imports.
 from django.conf import settings
+from django.core.exceptions import ValidationError
 from django.utils import timezone
 from django.utils.text import slugify
 
@@ -281,13 +282,18 @@ class AdvisingAuthBackend(AbstractLDAPBackend):
 
             try:
                 # Attempt to get Django model.
-                return models.Department.objects.get(name=ldap_department)
+                return models.Department.objects.get(slug=slugify(ldap_code))
             except models.Department.DoesNotExist:
-                return models.Department.objects.create(
-                    code=ldap_code,
-                    name=ldap_department,
-                    slug=slugify(ldap_code),
-                )
+                try:
+                    # Attempt to create model using code.
+                    return models.Department.objects.create(
+                        code=ldap_code,
+                        name=ldap_department,
+                        slug=slugify(ldap_code),
+                    )
+                except ValidationError:
+                    # Likely a "name not unique" error. Attempt to use that.
+                    return models.Department.objects.get(name__iexact=ldap_department)
 
         except (KeyError, IndexError):
             logger.error('Failed to parse LDAP major/department of "{0}"'.format(ldap_major))
@@ -443,17 +449,38 @@ class AdvisingAuthBackend(AbstractLDAPBackend):
         )
         self.ldap_lib.unbind_server()
 
+        if ldap_major is None:
+            # Failed to find any values.
+            return
+
         # Get major's department.
-        department = self._get_major_department(ldap_major)
+        try:
+            department = self._get_major_department(ldap_major)
+        except (models.Department.DoesNotExist, TypeError):
+            department = models.Department.objects.get(code='NA')
 
         # Get major's program_code.
-        program_code = self._get_major_program_code(ldap_major)
+        try:
+            program_code = self._get_major_program_code(ldap_major)
+        except:
+            program_code = major_code
 
         # Get major's display_name.
         display_name = self._get_major_display_name(ldap_major)
+        if display_name is None or display_name.strip() == '':
+            display_name = major_code
 
         # Get major's degree_level.
         degree_level = self._get_degree_level_from_program_code('N/A-ImportMajors', program_code)
+
+        # Unhandled codes.
+        # C-PD
+        # C-P
+        # C-PM
+
+        # Skip known bad major codes.
+        if major_code.strip() == 'SELJ':
+            return
 
         return models.Major.objects.create(
             department=department,
