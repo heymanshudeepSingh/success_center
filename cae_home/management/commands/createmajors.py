@@ -71,7 +71,7 @@ class Command(BaseCommand):
 
             # Validate that line is uid. Must be a string comprised of only letters or numbers.
             if not isinstance(orig_id, str):
-                raise ValidationError('Each line should be a string of a single user\'s bronconet or winno.')
+                raise ValidationError('Each line should be a string of major code.')
             elif orig_id.strip() == '':
                 pass    # Empty line. Skip processing.
             elif not re.match(r'[a-zA-Z0-9]+$', orig_id):
