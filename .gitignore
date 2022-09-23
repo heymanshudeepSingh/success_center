@@ -22,6 +22,7 @@ vs/
 vscode/
 workspace/local_env/
 env.py
+*env.py
 
 
 # Do not track python cache files.
