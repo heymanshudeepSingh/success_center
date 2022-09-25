@@ -25,6 +25,7 @@ urlpatterns = [
     path('documentation/css_examples/page_tabbing', views.css_page_tabbing, name='css_page_tabbing'),
     path('documentation/css_examples/panels', views.css_panels, name='css_panels'),
     path('documentation/css_examples/status_messages', views.css_status_messages, name='css_status_messages'),
+    path('documentation/css_examples/side_content_bar', views.css_side_content_bar, name='css_side_content_bar'),
     path('documentation/css_examples/tables', views.css_tables, name='css_tables'),
     path('documentation/css_examples/text_highlighting', views.css_text_highlighting, name='css_text_highlighting'),
     path('documentation/css_examples/grad_apps_misc', views.css_grad_apps_misc, name='css_grad_apps_misc'),

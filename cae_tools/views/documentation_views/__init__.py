@@ -24,6 +24,7 @@ from .css_examples import (
     css_nav,
     css_page_tabbing,
     css_panels,
+    css_side_content_bar,
     css_status_messages,
     css_tables,
     css_text_highlighting,

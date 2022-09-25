@@ -51,7 +51,7 @@ color_blue='\033[1;34m'
 color_cyan='\033[1;36m'
 orig_args=${@}
 args=()
-declare -A kwargs
+#declare -A kwargs
 
 
 #region General Helper Functions

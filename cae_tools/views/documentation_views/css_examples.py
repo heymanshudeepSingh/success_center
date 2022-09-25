@@ -159,6 +159,14 @@ def css_status_messages(request):
     return TemplateResponse(request, 'cae_tools/css_examples/status_messages.html', {})
 
 
+def css_side_content_bar(request):
+    """
+    Displays examples of custom HTML/CSS layout for "side_content_bar" elements.
+    """
+    # Render template to user.
+    return TemplateResponse(request, 'cae_tools/css_examples/side_content_bar.html', {})
+
+
 def css_tables(request):
     """
     Displays examples of custom HTML/CSS layout for "table" elements.

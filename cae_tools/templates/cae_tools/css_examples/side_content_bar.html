@@ -1,0 +1,49 @@
+{% extends 'cae_tools/css_examples/main.html' %}
+
+
+{% block title_page_name %}Side Content Bar | CSS Examples | {% endblock title_page_name %}
+
+
+{% block content %}
+
+  <h1>CSS Examples - Side Content Bar</h1>
+  <p>
+    <b>Side Content Bar has 2 Content bars.</b> Maily used on the left side and on the right side with 2 arrows
+    pointing on the end of the pages.
+  </p>
+    <b>Side Content Bar Left</b>
+    This is a feature specifically to add extra navigation within the current page.
+  <p>
+    <b>Side Content Bar Right</b>
+    This is a feature where we can document things regarding
+    what the person needs to identify what is on the page, like a help message to figure out in short words.
+  </p>
+
+{% endblock content %}
+
+{% block content_bar_left %}
+  <h2>Jump to User</h2>
+  <ul>
+    {% for user in shift_users %}
+      {% if user.first_name and user.last_name %}
+        <li><a href="#{{ user.username }}-shifts">{{ user.last_name }}, {{ user.first_name }}</a></li>
+      {% else %}
+        <li><a href="#{{ user.username }}-shifts">{{ user.username }}</a></li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+{% endblock content_bar_left %}
+
+
+{% block content_bar_right %}
+  <h2>Shift Manager Help</h2>
+  <p>This page is to view all worked shifts at the CAE Center.</p>
+  <br>
+  <p>
+    Using the browser of your choice, use the standard "print page" function to get a nicely formatted PDF view, which
+    can be turned in to the Dean's Office at the end of the pay period.
+  </p>
+{% endblock content_bar_right %}
+
+
+

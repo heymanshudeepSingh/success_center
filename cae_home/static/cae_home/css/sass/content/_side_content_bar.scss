@@ -220,7 +220,7 @@
         }
 
         .arrow-right, .arrow-left {
-            color: theme-background($theme, 'content');
+            color: theme-background($theme, 'highlight');
         }
 
         .arrow-right:hover, .arrow-left:hover {
