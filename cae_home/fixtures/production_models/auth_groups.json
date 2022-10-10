@@ -1,114 +1,161 @@
-[
-{
-    "model": "auth.group",
-    "pk": 1,
-    "fields": {
-        "name": "CAE Director",
-        "permissions": []
+[{
+        "model": "auth.group",
+        "pk": 1,
+        "fields": {
+            "name": "CAE Director",
+            "permissions": []
+        }
+    },
+    {
+        "model": "auth.group",
+        "pk": 2,
+        "fields": {
+            "name": "CAE Building Coordinator",
+            "permissions": []
+        }
+    },
+    {
+        "model": "auth.group",
+        "pk": 3,
+        "fields": {
+            "name": "CAE Admin GA",
+            "permissions": []
+        }
+    },
+    {
+        "model": "auth.group",
+        "pk": 4,
+        "fields": {
+            "name": "CAE Programmer GA",
+            "permissions": []
+        }
+    },
+    {
+        "model": "auth.group",
+        "pk": 5,
+        "fields": {
+            "name": "CAE Admin",
+            "permissions": []
+        }
+    },
+    {
+        "model": "auth.group",
+        "pk": 6,
+        "fields": {
+            "name": "CAE Programmer",
+            "permissions": []
+        }
+    },
+    {
+        "model": "auth.group",
+        "pk": 7,
+        "fields": {
+            "name": "CAE Attendant",
+            "permissions": []
+        }
+    },
+    {
+        "model": "auth.group",
+        "pk": 8,
+        "fields": {
+            "name": "WMU Faculty",
+            "permissions": []
+        }
+    },
+    {
+        "model": "auth.group",
+        "pk": 9,
+        "fields": {
+            "name": "WMU Teacher",
+            "permissions": []
+        }
+    },
+    {
+        "model": "auth.group",
+        "pk": 10,
+        "fields": {
+            "name": "WMU Student",
+            "permissions": []
+        }
+    },
+    {
+        "model": "auth.group",
+        "pk": 11,
+        "fields": {
+            "name": "STEP Admin",
+            "permissions": []
+        }
+    },
+    {
+        "model": "auth.group",
+        "pk": 12,
+        "fields": {
+            "name": "STEP Employee",
+            "permissions": []
+        }
+    },
+    {
+        "model": "auth.group",
+        "pk": 13,
+        "fields": {
+            "name": "Grad Apps Admin",
+            "permissions": []
+        }
+    },
+    {
+        "model": "auth.group",
+        "pk": 14,
+        "fields": {
+            "name": "Grad Apps Committee Member",
+            "permissions": []
+        }
+    },
+    {
+        "model": "auth.group",
+        "pk": 15,
+        "fields": {
+            "name": "STEP Bronco Study Zone",
+            "permissions": []
+        }
+    },
+    {
+        "model": "auth.group",
+        "pk": 16,
+        "fields": {
+            "name": "STEP Statistics Tutoring",
+            "permissions": []
+        }
+    },
+    {
+        "model": "auth.group",
+        "pk": 17,
+        "fields": {
+            "name": "STEP SSC - Eldridge",
+            "permissions": []
+        }
+    },
+    {
+        "model": "auth.group",
+        "pk": 18,
+        "fields": {
+            "name": "STEP SSC - Floyd",
+            "permissions": []
+        }
+    },
+    {
+        "model": "auth.group",
+        "pk": 19,
+        "fields": {
+            "name": "STEP SSC - Event",
+            "permissions": []
+        }
+    },
+    {
+        "model": "auth.group",
+        "pk": 20,
+        "fields": {
+            "name": "STEP All Locations",
+            "permissions": []
+        }
     }
-},
-{
-    "model": "auth.group",
-    "pk": 2,
-    "fields": {
-        "name": "CAE Building Coordinator",
-        "permissions": []
-    }
-},
-{
-    "model": "auth.group",
-    "pk": 3,
-    "fields": {
-        "name": "CAE Admin GA",
-        "permissions": []
-    }
-},
-{
-    "model": "auth.group",
-    "pk": 4,
-    "fields": {
-        "name": "CAE Programmer GA",
-        "permissions": []
-    }
-},
-{
-    "model": "auth.group",
-    "pk": 5,
-    "fields": {
-        "name": "CAE Admin",
-        "permissions": []
-    }
-},
-{
-    "model": "auth.group",
-    "pk": 6,
-    "fields": {
-        "name": "CAE Programmer",
-        "permissions": []
-    }
-},
-{
-    "model": "auth.group",
-    "pk": 7,
-    "fields": {
-        "name": "CAE Attendant",
-        "permissions": []
-    }
-},
-{
-    "model": "auth.group",
-    "pk": 8,
-    "fields": {
-        "name": "WMU Faculty",
-        "permissions": [ ]
-    }
-},
-{
-    "model": "auth.group",
-    "pk": 9,
-    "fields": {
-        "name": "WMU Teacher",
-        "permissions": []
-    }
-},
-{
-    "model": "auth.group",
-    "pk": 10,
-    "fields": {
-        "name": "WMU Student",
-        "permissions": []
-    }
-},
-{
-    "model": "auth.group",
-    "pk": 11,
-    "fields": {
-        "name": "STEP Admin",
-        "permissions": []
-    }
-},
-{
-    "model": "auth.group",
-    "pk": 12,
-    "fields": {
-        "name": "STEP Employee",
-        "permissions": []
-    }
-},
-{
-    "model": "auth.group",
-    "pk": 13,
-    "fields": {
-        "name": "Grad Apps Admin",
-        "permissions": []
-    }
-},
-{
-    "model": "auth.group",
-    "pk": 14,
-    "fields": {
-        "name": "Grad Apps Committee Member",
-        "permissions": []
-    }
-}
 ]
