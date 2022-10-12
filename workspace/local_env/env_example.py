@@ -93,6 +93,11 @@ STATICFILES_DIRS = (
 
 # region Authentication
 
+# blacklist a specific user login
+USER_BLACKLIST = [
+    # add blacklist user_id here
+]
+
 # Set desired authentication backend. Defaults to standard Django auth.
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',    # Listed first so test users do not attempt to validate to LDAP.

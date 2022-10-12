@@ -90,11 +90,14 @@ class AbstractLDAPBackend(ABC):
 
             # Check what format username was provided as.
             user_id = self._parse_username(username)
-
             if user_id is None:
                 logger.auth_warning('{0}: User login failed.'.format(username))
                 return None
-
+            
+            elif user_id["username"] in settings.USER_BLACKLIST:
+                logger.auth_warning('{0}: User login failed.'.format(username))
+                logger.auth_warning('{0}: User in blacklist.'.format(username))
+                return None
             # Check if we should use Django User Model passwords.
             if settings.AUTH_BACKEND_USE_DJANGO_USER_PASSWORDS:
                 # Logic to use Django User Model passwords.
