@@ -500,7 +500,11 @@ class AdvisingAuthBackend(AbstractLDAPBackend):
         # Get associated model objects.
         wmu_user = models.WmuUser.objects.get(bronco_net=uid)
         login_user = wmu_user.userintermediary.user
-        model_relationships = wmu_user.wmuusermajorrelationship_set.filter(wmu_user=wmu_user, major=major)
+
+        # If this fails there is another problem in the DB
+        # The migration script (laravel -> django) adds multiple majors per day a user is logged in
+        # this should guard that only the last active major is found and deactivated
+        model_relationship = wmu_user.wmuusermajorrelationship_set.get(wmu_user=wmu_user, major=major, is_active=True)
 
         # Set deactivation date.
         # If associated (login) User model exists and is inactive, use last login date.
@@ -515,11 +519,10 @@ class AdvisingAuthBackend(AbstractLDAPBackend):
             # WmuUser account is no longer active. Set date based on that.
             deactivation_date = wmu_user.date_modified
 
-        for model_relationship in model_relationships:
-            model_relationship.date_stopped = deactivation_date
+        model_relationship.date_stopped = deactivation_date
 
-            # Set relationship to inactive.
-            model_relationship.is_active = False
+        # Set relationship to inactive.
+        model_relationship.is_active = False
 
-            # Save relationship changes.
-            model_relationship.save()
+        # Save relationship changes.
+        model_relationship.save()
