@@ -507,7 +507,7 @@ class AdvisingAuthBackend(AbstractLDAPBackend):
             # this should guard that only the last active major is found and deactivated
             model_relationship = wmu_user.wmuusermajorrelationship_set.get(wmu_user=wmu_user, major=major, is_active=True)
         except Exception as e:
-            logger.warn(f'FOOOOBAR\n{wmu_user.__dict__}\n\n{major.__dict__}')
+            logger.warn(f'FOOOOBAR\n{wmu_user.__dict__}\n\n{major.__dict__}\n{list(map(lambda x: x.__dict__, wmu_user.wmuusermajorrelationship_set.filter(wmu_user=wmu_user, major=major)))}')
             return
 
         # Set deactivation date.
