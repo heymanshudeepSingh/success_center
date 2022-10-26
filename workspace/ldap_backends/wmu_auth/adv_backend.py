@@ -505,9 +505,13 @@ class AdvisingAuthBackend(AbstractLDAPBackend):
             # If this fails there is another problem in the DB
             # The migration script (laravel -> django) adds multiple majors per day a user is logged in
             # this should guard that only the last active major is found and deactivated
-            model_relationship = wmu_user.wmuusermajorrelationship_set.get(wmu_user=wmu_user, major=major, is_active=True)
-        except Exception as e:
-            logger.warn(f'FOOOOBAR\n{wmu_user.__dict__}\n\n{major.__dict__}\n{list(map(lambda x: x.__dict__, wmu_user.wmuusermajorrelationship_set.filter(wmu_user=wmu_user, major=major)))}')
+            model_relationship = wmu_user.wmuusermajorrelationship_set.get(wmu_user=wmu_user, major=major)
+            # If the model is already deactivated and marked inactive don't do anything
+            if model_relationship.date_stopped is not None and not model_relationship.is_active:
+                return
+        #
+        except wmu_user.DoesNotExist as e:
+            logger.warn(f'{e} {wmu_user.__dict__} {major.__dict__}')
             return
 
         # Set deactivation date.
