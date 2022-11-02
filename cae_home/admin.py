@@ -1,4 +1,4 @@
-i"""
+"""
 Admin view for CAE Home app.
 """
 
