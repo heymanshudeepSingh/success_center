@@ -35,6 +35,7 @@ def create_wmu_classes(style, model_count):
     Create WMU Class models.
     """
     wmu_fixtures.create_wmu_classes(style)
+    '''''
     # Create random data generator.
     faker_factory = Faker()
 
@@ -87,6 +88,7 @@ def create_wmu_classes(style, model_count):
         stdout.write(style.WARNING(
             'Failed to generate {0}/{1} WmuClass seed instances.\n'.format(total_fail_count, model_count)
         ))
+    '''
 
     stdout.write('Populated ' + style.SQL_FIELD('WmuClass') + ' models.\n')
 

@@ -1,4 +1,4 @@
-"""
+i"""
 Admin view for CAE Home app.
 """
 
@@ -1147,7 +1147,7 @@ class WmuClassAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('code', 'title', 'description',),
+            'fields': ('department', 'code', 'title', 'description',),
         }),
         ('Advanced', {
             'classes': ('collapse',),

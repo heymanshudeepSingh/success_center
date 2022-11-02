@@ -3,10 +3,10 @@
     "model": "cae_home.wmuclass",
     "pk": 1,
     "fields": {
-        "code": "CS5310",
-        "title": "Algorithms",
+        "code": "CS 1110",
+        "title": "Computer Science I",
         "department": 6,
-        "slug": "cs5310",
+        "slug": "cs1110",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -15,10 +15,10 @@
     "model": "cae_home.wmuclass",
     "pk": 2,
     "fields": {
-        "code": "CS5800",
-        "title": "Theory Foundations",
+        "code": "CS 1120",
+        "title": "Computer Science II",
         "department": 6,
-        "slug": "cs5800",
+        "slug": "cs1120",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -27,10 +27,10 @@
     "model": "cae_home.wmuclass",
     "pk": 3,
     "fields": {
-        "code": "CS6530",
-        "title": "Data Mining",
+        "code": "CS 1310",
+        "title": "Foundations of Computer Science",
         "department": 6,
-        "slug": "cs6530",
+        "slug": "cs1310",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -39,10 +39,10 @@
     "model": "cae_home.wmuclass",
     "pk": 4,
     "fields": {
-        "code": "ECE4550",
-        "title": "Digital Signals Proc",
-        "department": 8,
-        "slug": "ece4550",
+        "code": "CS 2230",
+        "title": "Computer Organization and Assembly Language",
+        "department": 6,
+        "slug": "cs2230",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -51,10 +51,10 @@
     "model": "cae_home.wmuclass",
     "pk": 5,
     "fields": {
-        "code": "ECE 3300",
-        "title": "Electrical Machinery",
-        "department": 8,
-        "slug": "ece3300",
+        "code": "CS 3240",
+        "title": "System Programming Concepts",
+        "department": 6,
+        "slug": "cs3240",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
@@ -63,10 +63,34 @@
     "model": "cae_home.wmuclass",
     "pk": 6,
     "fields": {
-        "code": "ECE2990",
-        "title": "Cooperative Education",
-        "department": 8,
-        "slug": "ece2990",
+        "code": "CS 3310",
+        "title": "Data and File Structures",
+        "department": 6,
+        "slug": "cs3310",
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+}, 
+{
+    "model": "cae_home.wmuclass",
+    "pk": 7,
+    "fields": {
+        "code": "ECE 2500",
+        "title": "Digital Logic",
+        "department": 6,
+        "slug": "ece2500",
+        "date_created": "2018-01-01T08:00:00.000Z",
+        "date_modified": "2018-01-01T08:00:00.000Z"
+    }
+},
+{
+    "model": "cae_home.wmuclass",
+    "pk": 8,
+    "fields": {
+        "code": "MATH 1220",
+        "title": "Calculus I",
+        "department": 6,
+        "slug": "math1220",
         "date_created": "2018-01-01T08:00:00.000Z",
         "date_modified": "2018-01-01T08:00:00.000Z"
     }
