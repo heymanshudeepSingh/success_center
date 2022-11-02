@@ -401,12 +401,13 @@ class WmuUserMajorRelationship(models.Model):
         :param major: Major model object to check against.
         :return: Boolean indicating if student is actively pursuing major.
         """
-        if WmuUserMajorRelationship.objects.filter(wmu_user=wmu_user, major=major, is_active=True).exists():
-            # Relation exists where "active" field is True. User is actively pursuing major.
-            return True
-        else:
-            # Relation does not exist where active is True. User is not actively pursuing major.
-            return False
+        # Relation exists where "active" field is True. User is actively pursuing major.
+        # Relation does not exist where active is True. User is not actively pursuing major.
+        return WmuUserMajorRelationship.objects.filter(
+            wmu_user=wmu_user,
+            major=major,
+            is_active=True
+        ).exists()
 
 # endregion Model Intermediaries
 

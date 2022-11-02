@@ -238,16 +238,12 @@ class AdvisingAuthBackend(AbstractLDAPBackend):
 
                     # Get major's department.
                     department = self._get_major_department(ldap_major)
-
                     # Get major's program_code.
                     program_code = self._get_major_program_code(ldap_major)
-
                     # Get major's display_name.
                     display_name = self._get_major_display_name(ldap_major)
-
                     # Get major's degree_level.
                     degree_level = self._get_degree_level_from_program_code(uid, program_code)
-
                     try:
                         return models.Major.objects.create(
                             department=department,
@@ -258,7 +254,9 @@ class AdvisingAuthBackend(AbstractLDAPBackend):
                             slug=slugify(student_code),
                         )
                     except Exception as err:
-                        logger.auth_error('{0}: Failed to create major: {1}'.format(uid, err))
+                        logger.auth_warn(
+                            f'{uid}: Failed to create major: {department} {err}'
+                        )
                         return models.Major.objects.get(slug='unk')
 
             else:
