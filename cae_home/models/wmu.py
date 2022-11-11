@@ -233,11 +233,11 @@ class Room(models.Model):
         """
         cae_lab_query = (
             (
-                Q(room_type__slug='classroom')
-                | Q(room_type__slug='computer-classroom')
-                | Q(room_type__slug='department-office')
+                Q(room_type__name__iexact='classroom')
+                | Q(room_type__name__iexact='computer classroom')
+                | Q(room_type__name__iexact='department office')
             )
-            & Q(department__slug='cae-center')
+            & Q(department__name__iexact='cae center')
         )
         return Room.objects.filter(cae_lab_query)
 
