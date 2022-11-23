@@ -58,6 +58,7 @@ class CAEHomeViewTests(IntegrationTestCase):
             ],
         )
 
+
         # # Test authenticated as various users.
         # if 'cae_web_core' in self.installed_app_list:
         #     # Test CAE Web login redirects.

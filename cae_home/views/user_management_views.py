@@ -214,6 +214,21 @@ def user_edit(request):
         form.display_name = 'Success Center Settings'
         form_list.append(form)
 
+    # If GradApps is installed, add GradApps Profile form.
+    if 'grad_apps' in settings.INSTALLED_CAE_PROJECTS:
+        # Import GradApps specific logic.
+        from apps.Grad_Applications.grad_applications_core import models as grad_apps_models
+
+        # Get corresponding GradApps UserProfile for user.
+        try:
+            grad_apps_profile = grad_apps_models.GradApplicationProfile.objects.get(profile=user_profile)
+        except grad_apps_models.GradApplicationProfile.DoesNotExist:
+            grad_apps_profile = grad_apps_models.GradApplicationProfile.objects.create(profile=user_profile)
+        form = ProfileModelForm_DefaultLocation(instance=grad_apps_profile)
+        form.name = 'GradAppsForm'
+        form.display_name = 'Graduate Applications Settings'
+        form_list.append(form)
+        
     # Check if request is post.
     if request.method == 'POST':
         valid_forms = True
@@ -261,7 +276,22 @@ def user_edit(request):
             form.name = 'SuccessCtrForm'
             form.display_name = 'Success Center Settings'
             form_list.append(form)
+        
+        # If GradApps is installed, add GradApps Profile form.
+        if 'grad_apps' in settings.INSTALLED_CAE_PROJECTS:
+            # Import GradApps specific logic.
+            from apps.Grad_Applications.grad_applications_core import models as grad_apps_models
 
+            # Get corresponding GradApps UserProfile for user.
+            try:
+                grad_apps_profile = grad_apps_models.GradApplicationProfile.objects.get(profile=user_profile)
+            except grad_apps_models.GradApplicationProfile.DoesNotExist:
+                grad_apps_profile = grad_apps_models.GradApplicationProfile.objects.create(profile=user_profile)
+            form = ProfileModelForm_DefaultLocation(instance=grad_apps_profile)
+            form.name = 'GradAppsForm'
+            form.display_name = 'Graduate Applications Settings'
+            form_list.append(form)
+            
         # Check that all forms are valid.
         for form in form_list:
             # Validate address form.
