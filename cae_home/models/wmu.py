@@ -417,6 +417,7 @@ class WmuClass(models.Model):
         department = Department.create_dummy_model()
         code = 'D123'
         description = 'Dummy Description'
+        title = "Dummy Title"
 
         # Attempt to get corresponding model instance, if there is one.
         try:
@@ -427,7 +428,8 @@ class WmuClass(models.Model):
                 department=department,
                 code=code,
                 description=description,
-                slug=slugify(code)
+                slug=slugify(code),
+                title=title
             )
 
         # Return "dummy model" instance.
