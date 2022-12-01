@@ -8,7 +8,7 @@ if __name__ == "__main__":
         from django.core.management import execute_from_command_line
     except ImportError:
         # The above import may fail for some other reason. Ensure that the
-        # issue is really that Django is missing to avoid masking other
+        # issue is really xthat Django is missing to avoid masking other
         # exceptions on Python 2.
         try:
             import django
@@ -19,4 +19,6 @@ if __name__ == "__main__":
                 "forget to activate a virtual environment?"
             )
         raise
+    if "makemigrations" in sys.argv and not os.path.exists("DEBUG"):
+        raise ValueError("Dont run makemigrations on server youll break everything!")
     execute_from_command_line(sys.argv)
