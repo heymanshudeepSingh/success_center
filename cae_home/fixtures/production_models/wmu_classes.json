@@ -1,98 +1,375 @@
 [
-{
-    "model": "cae_home.wmuclass",
-    "pk": 1,
-    "fields": {
-        "code": "CS 1110",
-        "title": "Computer Science I",
-        "department": 6,
-        "slug": "cs1110",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
+    {
+        "model": "cae_home.wmuclass",
+        "pk": 1,
+        "fields": {
+            "code": "CS 1110",
+            "title": "Computer Science I",
+            "department": 6,
+            "slug": "cs1110",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cae_home.wmuclass",
+        "pk": 2,
+        "fields": {
+            "code": "CS 1120",
+            "title": "Computer Science II",
+            "department": 6,
+            "slug": "cs1120",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cae_home.wmuclass",
+        "pk": 3,
+        "fields": {
+            "code": "CS 1310",
+            "title": "Foundations of Computer Science",
+            "department": 6,
+            "slug": "cs1310",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cae_home.wmuclass",
+        "pk": 4,
+        "fields": {
+            "code": "CS 2230",
+            "title": "Computer Organization and Assembly Language",
+            "department": 6,
+            "slug": "cs2230",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cae_home.wmuclass",
+        "pk": 5,
+        "fields": {
+            "code": "CS 3240",
+            "title": "System Programming Concepts",
+            "department": 6,
+            "slug": "cs3240",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cae_home.wmuclass",
+        "pk": 6,
+        "fields": {
+            "code": "CS 3310",
+            "title": "Data and File Structures",
+            "department": 6,
+            "slug": "cs3310",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    }, 
+    {
+        "model": "cae_home.wmuclass",
+        "pk": 7,
+        "fields": {
+            "code": "ECE 2500",
+            "title": "Digital Logic",
+            "department": 6,
+            "slug": "ece2500",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cae_home.wmuclass",
+        "pk": 8,
+        "fields": {
+            "code": "MATH 1220",
+            "title": "Calculus I",
+            "department": 6,
+            "slug": "math1220",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cae_home.wmuclass",
+        "pk": 9,
+        "fields": {
+            "code": "AE 3610",
+            "title": "Aerodynamics I",
+            "department": 11,
+            "slug": "ae3610",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cae_home.wmuclass",
+        "pk": 10,
+        "fields": {
+            "code": "AE 3710",
+            "title": "Aerodynamics II",
+            "department": 11,
+            "slug": "ae3710",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cae_home.wmuclass",
+        "pk": 11,
+        "fields": {
+            "code": "AE 4600",
+            "title": "Aircraft Stability and Control ",
+            "department": 11,
+            "slug": "ae4600",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cae_home.wmuclass",
+        "pk": 12,
+        "fields": {
+            "code": "AE 3800",
+            "title": "Flight Vehicle Performance",
+            "department": 11,
+            "slug": "ae3800",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cae_home.wmuclass",
+        "pk": 13,
+        "fields": {
+            "code": "AE 4630",
+            "title": "Aerospace Structural Design",
+            "department": 11,
+            "slug": "ae4630",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cae_home.wmuclass",
+        "pk": 14,
+        "fields": {
+            "code": "AE 4660",
+            "title": "Aerospace Propulsion I",
+            "department": 11,
+            "slug": "ae4660",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    }, 
+    {
+        "model": "cae_home.wmuclass",
+        "pk": 15,
+        "fields": {
+            "code": "AE 4690",
+            "title": "Aircraft Design",
+            "department": 11,
+            "slug": "ae4690",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cae_home.wmuclass",
+        "pk": 16,
+        "fields": {
+            "code": "AE 4760",
+            "title": "Aerospace Propulsion II",
+            "department": 11,
+            "slug": "ae4760",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cae_home.wmuclass",
+        "pk": 17,
+        "fields": {
+            "code": "AE 4700",
+            "title": "Orbital Mechanics",
+            "department": 11,
+            "slug": "ae4700",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cae_home.wmuclass",
+        "pk": 18,
+        "fields": {
+            "code": "IEE 2610",
+            "title": "Engineering Statistics",
+            "department": 10,
+            "slug": "iee2610",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cae_home.wmuclass",
+        "pk": 19,
+        "fields": {
+            "code": "IEE 5010",
+            "title": "Survey of Industrial Engineering Topics",
+            "department": 10,
+            "slug": "iee510",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cae_home.wmuclass",
+        "pk": 21,
+        "fields": {
+            "code": "CHEM 1100+1110",
+            "title": "General Chemistry I + Lab",
+            "department": 10,
+            "slug": "chem1100-1110",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cae_home.wmuclass",
+        "pk": 22,
+        "fields": {
+            "code": "IEE 1020",
+            "title": "Technical Communication",
+            "department": 10,
+            "slug": "iee1020",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cae_home.wmuclass",
+        "pk": 23,
+        "fields": {
+            "code": "EDMM 1420",
+            "title": "Engineering Graphics",
+            "department": 10,
+            "slug": "edmm1420",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    }, 
+    {
+        "model": "cae_home.wmuclass",
+        "pk": 24,
+        "fields": {
+            "code": "CS 1023",
+            "title": "Introduction to Engineering Computing III: Computer Programming",
+            "department": 11,
+            "slug": "cs1023",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cae_home.wmuclass",
+        "pk": 25,
+        "fields": {
+            "code": "MAT 1220",
+            "title": "Calculus I",
+            "department": 11,
+            "slug": "mat1220",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cae_home.wmuclass",
+        "pk": 26,
+        "fields": {
+            "code": "PHYS 1130",
+            "title": "General Physics I",
+            "department": 11,
+            "slug": "phys1130",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cae_home.wmuclass",
+        "pk": 27,
+        "fields": {
+            "code": "IEE-2610",
+            "title": "Engineering Statistics",
+            "department": 11,
+            "slug": "iee-2610",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cae_home.wmuclass",
+        "pk": 28,
+        "fields": {
+            "code": "EDMM 2460",
+            "title": "Introduction to Computer-Aided Design",
+            "department": 11,
+            "slug": "edmm2460",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cae_home.wmuclass",
+        "pk": 29,
+        "fields": {
+            "code": "EDMM 2540",
+            "title": "Introduction to Computer-Aided Design",
+            "department": 11,
+            "slug": "edmm2540",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cae_home.wmuclass",
+        "pk": 30,
+        "fields": {
+            "code": "EDMM 2560",
+            "title": "Properties of Materials",
+            "department": 11,
+            "slug": "edmm2560",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    }, 
+    {
+        "model": "cae_home.wmuclass",
+        "pk": 31,
+        "fields": {
+            "code": "EDMM 2810",
+            "title": "Statics and Strength of Materials",
+            "department": 11,
+            "slug": "edmm2810",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "cae_home.wmuclass",
+        "pk": 32,
+        "fields": {
+            "code": "EDMM 3540",
+            "title": "Metrology",
+            "department": 11,
+            "slug": "edmm3540",
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
     }
-},
-{
-    "model": "cae_home.wmuclass",
-    "pk": 2,
-    "fields": {
-        "code": "CS 1120",
-        "title": "Computer Science II",
-        "department": 6,
-        "slug": "cs1120",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
-    }
-},
-{
-    "model": "cae_home.wmuclass",
-    "pk": 3,
-    "fields": {
-        "code": "CS 1310",
-        "title": "Foundations of Computer Science",
-        "department": 6,
-        "slug": "cs1310",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
-    }
-},
-{
-    "model": "cae_home.wmuclass",
-    "pk": 4,
-    "fields": {
-        "code": "CS 2230",
-        "title": "Computer Organization and Assembly Language",
-        "department": 6,
-        "slug": "cs2230",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
-    }
-},
-{
-    "model": "cae_home.wmuclass",
-    "pk": 5,
-    "fields": {
-        "code": "CS 3240",
-        "title": "System Programming Concepts",
-        "department": 6,
-        "slug": "cs3240",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
-    }
-},
-{
-    "model": "cae_home.wmuclass",
-    "pk": 6,
-    "fields": {
-        "code": "CS 3310",
-        "title": "Data and File Structures",
-        "department": 6,
-        "slug": "cs3310",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
-    }
-}, 
-{
-    "model": "cae_home.wmuclass",
-    "pk": 7,
-    "fields": {
-        "code": "ECE 2500",
-        "title": "Digital Logic",
-        "department": 6,
-        "slug": "ece2500",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
-    }
-},
-{
-    "model": "cae_home.wmuclass",
-    "pk": 8,
-    "fields": {
-        "code": "MATH 1220",
-        "title": "Calculus I",
-        "department": 6,
-        "slug": "math1220",
-        "date_created": "2018-01-01T08:00:00.000Z",
-        "date_modified": "2018-01-01T08:00:00.000Z"
-    }
-}
-]
+    ]
+    
