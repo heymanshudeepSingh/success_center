@@ -19,6 +19,6 @@ if __name__ == "__main__":
                 "forget to activate a virtual environment?"
             )
         raise
-    if "makemigrations" in sys.argv and not os.path.exists("DEBUG"):
-        raise ValueError("Dont run makemigrations on server youll break everything!")
+    # if "makemigrations" in sys.argv and not os.path.exists("DEBUG"):
+    #     raise ValueError("Dont run makemigrations on server youll break everything!")
     execute_from_command_line(sys.argv)
