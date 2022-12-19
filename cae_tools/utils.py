@@ -5,11 +5,11 @@ Utility Functions for Cae Tools.
 # System Imports.
 import logging
 from django.conf import settings
-from django.core.mail import send_mail, send_mass_mail
+from django.core.mail import send_mail, send_mass_mail, EmailMessage, get_connection
 from django.http import Http404
 
 
-def send_single_email(email_to, email_subject, email_message, *args, email_from=None, as_html=False, **kwargs):
+def send_single_email(email_to, email_subject, email_message, *args, email_from=None, as_html=False, cc_to=[], **kwargs):
     """
     Sends a single email, using provided args. Args are validated prior to sending.
 
@@ -22,6 +22,10 @@ def send_single_email(email_to, email_subject, email_message, *args, email_from=
     :param email_from: The "from" address for an email. If not provided, then will default to project "from" address.
     :param as_html: Boolean indicating if email allows html elements.
     """
+    # Connect to the some email server somehow...
+    conn = get_connection()
+    conn.open()
+
     # Check for "email_from" arg.
     if not isinstance(email_from, str) or email_from.strip() == '':
         # Handle for blank "from" email.
@@ -80,15 +84,20 @@ def send_single_email(email_to, email_subject, email_message, *args, email_from=
         # Handle for empty string.
         raise TypeError('Email message cannot be blank.')
 
+    email = EmailMessage(email_subject, email_message, email_from, validated_email_to, bcc=cc_to)
+    if as_html: email.attach_alternative(email_message, "text/html")
+    
+    conn.send_messages([email])
+    conn.close()
     # Send email.
-    send_mail(
-        email_subject,
-        email_message,
-        email_from,
-        validated_email_to,
-        fail_silently=False,
-        html_message=email_message if as_html else None,
-    )
+    # send_mail(
+    #     email_subject,
+    #     email_message,
+    #     email_from,
+    #     validated_email_to,
+    #     fail_silently=False,
+    #     html_message=email_message if as_html else None,
+    # )
 
     logging.info('Sent single email with subject "{0}" to "{1}".'.format(email_subject, validated_email_to))
 
