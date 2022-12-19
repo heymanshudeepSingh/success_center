@@ -22,3 +22,4 @@ if __name__ == "__main__":
     # if "makemigrations" in sys.argv and not os.path.exists("DEBUG"):
     #     raise ValueError("Dont run makemigrations on server youll break everything!")
     execute_from_command_line(sys.argv)
+    
