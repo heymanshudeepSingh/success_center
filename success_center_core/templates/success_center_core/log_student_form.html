@@ -1,0 +1,60 @@
+{% extends 'success_center_core/main.html' %}
+{% load cae_home_tags %}
+
+
+
+{% block title_page_name %}Index | {% endblock title_page_name %}
+
+
+{% block content %}
+  <h1>Student Check In/Out</h1>
+  <div class="panel primary">
+    <div class="head">
+      <p><b>BroncoNet</b>: {{ student.bronco_net|upper }} &nbsp; &nbsp; <b>Winno</b>: {{ student.winno }}</p>
+    </div>
+    <div class="body">
+      <p>
+        {{ student.first_name }} {% if student.middle_name %} {{ student.middle_name }}{% endif %} {{ student.last_name }}
+      </p>
+      <p>{{ student.official_email }}</p>
+    </div>
+    <div class="footer">
+      {% for error in form.non_field_errors %}
+        <div class="alert error">{{ error }}</div>
+      {% endfor %}
+      <form method="POST" action="">
+        {% csrf_token %}
+
+        <div class="hidden">
+          {% include 'cae_home/include/form_inner.html' %}
+        </div>
+
+        <div>
+          {% if not student_usage %}
+            <input class="button warn" type="submit" name="check_in" value="Check In">
+          {% else %}
+            <input class="button warn" type="submit" name="check_out" value="Check Out">
+          {% endif %}
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <h2>Students Currently Checked In:</h2>
+  {% if student_list %}
+    <ul>
+      {% for student in student_list %}
+        <li><p>
+          <a href="{% url 'success_center_core:student_redirect' bronco_net=student.student.bronco_net %}">
+            {{ student.student }}
+          </a>
+          &nbsp; - &nbsp;
+          {% datetime_as_time_passed student.check_in %}
+        </p></li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No students checked in.</p>
+  {% endif %}
+
+{% endblock content %}

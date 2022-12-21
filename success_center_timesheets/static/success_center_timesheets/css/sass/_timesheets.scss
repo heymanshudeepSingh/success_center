@@ -1,0 +1,183 @@
+//========================//
+//==== TimeSheets CSS ====//
+//========================//
+
+// Import statements
+@import '../../../../../../../cae_home/static/cae_home/css/sass/variables/_core';
+
+
+$buttonbgcolor: #fcc30f;
+$buttonborder: 1px solid #d3a103;;
+$fontsize: 18px;
+$radius: 5px;
+
+
+
+@media screen {
+
+
+    #grand_total{
+        text-align: right;
+        padding-right: 20px;
+    }
+    td{
+        border: 1px solid #00000050;
+    }
+    select{
+        color: #000000e0;
+        background-color: rgb(255 255 255 / 75%);
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    input{
+        color: #000000e0;
+        background-color: rgb(255 255 255 / 75%);
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    div.heading-back {
+        display: flex;
+        justify-content: center;
+        position: relative;
+
+        h1 {
+            text-align: center;
+        }
+        a {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+    }
+    .button {
+        &-primary {
+            // Positioning Styles.
+            display: inline-block;
+            margin: 2px;
+            padding: 6px 12px;
+
+            // Text Styles.
+            font-family: "Open Sans","Lato","Source Sans Pro",sans-serif;
+            color: #986516;
+
+            // Visual Styles.
+            background-color: $buttonbgcolor;
+            border: $buttonborder ;
+            border-radius: $radius;
+        }
+
+        &-submit {
+            // Positioning Styles.
+            display: inline-block;
+            margin: 2px;
+            padding: 6px 12px;
+            width: 100%;
+
+            // Text Styles.
+            font-family: "Open Sans","Lato","Source Sans Pro",sans-serif;
+            color: #986516;
+
+            // Visual Styles.
+            background-color: $buttonbgcolor;
+            border: $buttonborder ;
+            border-radius: $radius;
+        }
+    }
+
+
+             div {
+                 .outer-container {
+                     @include display-flex;
+                     @include flex-direction(column);
+                     @include justify-content(center);
+                     width: 100%;
+
+
+
+                 .heading {
+                     @include display-flex;
+                     @include flex-direction(row);
+                     @include justify-content(center);
+                     width: 100%;
+                     border-bottom: 1px solid #ccc;
+                     padding-bottom: 5px;
+                     margin-bottom: 1%;
+                     p {
+                         @include display-flex;
+                         @include flex-direction(row);
+                         @include justify-content(center);
+                         flex-grow: 1;
+                         box-sizing: content-box;
+                         font-family: "Source Sans Pro", "Open Sans", "Lato", sans-serif;
+                         font-weight: bold;
+                         font-size: larger;
+                     }
+                 }
+
+                 .container {
+                     //Positioning Styles.
+                     @include display-flex;
+                     @include flex-direction(row);
+                     @include justify-content(center);
+
+
+                     p {
+                         width:20%;
+                         @include display-flex;
+                         //@include justify-content(center);
+                         @include justify-content(space-around);
+                         flex-grow: 1;
+                     }
+                 }
+             }
+     }
+}
+
+@media print{
+    input,button{
+        display: None;
+    }
+    a{
+        display: None;
+        button{
+            display: None;
+        }
+    }
+    table{
+        width: 100% !important;
+    }
+    th{
+        h4{
+            color: #0a0a0a;
+        }
+    }
+    td{
+        border: 1px solid black;
+        p{
+            color: #0a0a0a;
+        }
+    }
+
+    .mobile-nav-icon{
+        display: None;
+    }
+    .button.primary{
+        display: None;
+    }
+    div.sub-heading{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        //padding-left: 20%;
+        position: relative;
+
+    }
+    img{
+        border: 1px solid black;
+    }
+
+
+}
+
+
+

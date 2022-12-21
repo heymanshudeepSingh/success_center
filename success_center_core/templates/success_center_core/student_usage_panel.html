@@ -1,0 +1,210 @@
+{% extends 'success_center_core/main.html' %}
+{% load static %}
+
+
+{% block extra_scripts %}
+  <style>
+    .approve_all_btn {
+      width: 55% !important;
+      font-size: 14px !important;
+    }
+
+    @media (max-width: 1158px) {
+      .approve_all_btn {
+        font-size: 10px !important;
+      }
+    }
+
+    @media (max-width: 1072px) {
+      .approve_all_btn {
+        font-size: 8px !important;
+      }
+    }
+
+    @media (max-width: 932px) {
+      .approve_all_btn {
+        font-size: 6px !important;
+      }
+    }
+  </style>
+
+  <script src="{% static 'success_center_core/js/sort_student_usage_table.js' %}"></script>
+  <script>
+    function sortListDir(el) {
+      var table = document.getElementById("student-usage-table");
+
+      var col = Array.from(table.querySelectorAll('tr')[0].children).indexOf(el) + 1;
+      var rows = Array.from(table.children[0].getElementsByTagName('tr'));
+      rows = rows.slice(1);
+
+      let qs = `td:nth-child(${col})`;
+      rows = rows.sort((a, b) => {
+        let atd = a.querySelector(qs).textContent.toLowerCase();
+        let btd = b.querySelector(qs).textContent.toLowerCase();
+        return atd < btd ? -1 : (atd > btd) ? 1 : 0;
+      });
+
+      for (e of rows) {
+        table.children[0].appendChild(e);
+      }
+    }
+  </script>
+{% endblock extra_scripts %}
+
+
+{% block title_site_name %}Student Usage Panel{% endblock title_site_name %}
+
+
+{% block content %}
+
+  <h1>Student Usage</h1>
+
+  <div class="panel primary">
+    <div class="header left">
+      <h2>
+        <form method="get">
+          {{ usageFilter.form }}
+          <br>
+          <br>
+          <button class="secondary" type="submit">Search</button>
+          <br>
+        </form>
+      </h2>
+    </div>
+
+    <div class="body">
+
+      <table class="center" id="student-usage-table">
+        <tr>
+          <th onclick="sortListDir(this);" style="cursor: pointer;">Bronco Net ID</th>
+          <th onclick="sortListDir(this);" style="cursor: pointer;">Name</th>
+          <th onclick="sortListDir(this);" style="cursor: pointer;">Location</th>
+          <th onclick="sortListDir(this);" style="cursor: pointer;">Check In</th>
+          <th onclick="sortListDir(this);" style="cursor: pointer;">Check Out</th>
+          <th colspan="1">
+            <button class="primary" style="width: 75%; ">
+
+              <a href="{% url 'success_center_core:student_add' %}" style="text-decoration:none;">
+                Add New Record
+              </a>
+
+            </button>
+          </th>
+          <th colspan="1">
+            <span>Approved</span>
+            <button class="primary approve_all_btn" onclick="submit_form()">
+              Approve All
+            </button>
+          </th>
+        </tr>
+        <form method="post" id="submit_form_id" action="{% url 'success_center_core:student_approve_all' %}">
+          {% csrf_token %}
+          {% for student in students %}
+
+              {% if student.if_data_greater_than_hours or student.check_out == None %}
+                  <tr style="border-style: solid; border-color:red">
+                  <td> &#9733; {{ student.student.bronco_net }}</td>
+                  <td>{{ student.student.first_name }} {{ student.student.last_name }}</td>
+                  <td>{{ student.location.location_name }}</td>
+                  <td>{{ student.check_in }}</td>
+                    {% if  student.check_out == None %}
+                      <td>-</td>
+                    {% endif %}
+              {% else %}
+                 <tr>
+                    <td>{{ student.student.bronco_net }}</td>
+                    <td>{{ student.student.first_name }} {{ student.student.last_name }}</td>
+                    <td>{{ student.location.location_name }}</td>
+                    <td>{{ student.check_in }}</td>
+                    <td>{{ student.check_out }}</td>
+              {% endif %}
+              <td>
+                <a class="button" style="font-size: 0.9rem;"
+                   href="{% url 'success_center_core:student_usage_edit' pk=student.pk %}">
+                  Edit
+                </a>
+              </td>
+              <td>
+                {% if student.approved %}
+                  <div class="d-flex justify-content-center">
+                    <input type="checkbox" checked std_id="{{ student.pk }}" onclick='handleClick_checkbox(this);'>
+                  </div>
+                {% else %}
+                  <div class="d-flex justify-content-center">
+                    <input type="checkbox" name="approve[]" class="checkbox_ids" std_id="{{ student.pk }}"
+                           onclick='handleClick_checkbox(this);'>
+                  </div>
+                {% endif %}
+              </td>
+            </tr>
+            <input type="hidden" name="std_ids" value="{{ student.pk }}">
+          {% endfor %}
+        </form>
+      </table>
+
+      <div class="pagination">
+        <span class="step-links">
+            {% if students.has_previous %}
+              <a class="button primary" href="?page=1">&laquo; first</a>
+              <a class="button primary" href="?page={{ students.previous_page_number }}">previous</a>
+            {% endif %}
+
+          <span class="current">
+                Page {{ students.number }} of {{ students.paginator.num_pages }}.
+            </span>
+
+          {% if students.has_next %}
+            <a class="button primary" href="?page={{ students.next_page_number }}">next</a>
+            <a class="button primary" href="?page={{ students.paginator.num_pages }}">last &raquo;</a>
+          {% endif %}
+        </span>
+      </div>
+    </div>
+
+  </div>
+
+
+<!-- Nihal: Yep I created an API View for the checking and unchecking the multi choice box system -->
+<!-- Please dont be mad, I tried to do my best in just using Django but there was some key issues I was dealing with -->
+<!-- The checkboxes on the student_usage page are mainly front end check boxes, So I was having some issues linking it to the student_info model-->
+<!-- You can check commit 1b3eb14a to see my Django attempt, the Approve All Button works but manually checking boxes does not save the appropriate boolean value (Approved / Not Approved) -->
+<!-- Instead of crazily modifying any of the views I just created my own-->
+
+<!-- Start JS/Ajax Code -->
+  <script>
+    // Retrieve form submit_form_id and store form within a variable called form, Then submit form
+    function submit_form() {
+      var form = document.getElementById("submit_form_id");
+      form.submit();
+    }
+
+    // Note: cb means checbox (True or False)
+    // If checbox is checked then cb = true, if not cb = false
+    function handleClick_checkbox(cb) {
+      let check_value = cb.checked;
+      let std_id = cb.getAttribute("std_id");
+
+      // Create ajax function along with its form type "POST", Throughout this function it will pass out the proper values to the API View: approve_ajax
+      $.ajax({
+        type: 'POST',
+        url: "{% url 'success_center_core:approve_ajax' %}",
+        async: true,
+        data: {
+          std_id: std_id,
+          check_value: check_value,
+          csrfmiddlewaretoken: '{{ csrf_token }}',
+        },
+        // If API is successfuly called then it will refresh the page with the values being properly saved
+        success: function () {
+          document.location.reload()
+        },
+       // If API is not called successfuly then error
+        error: function () {
+          console.log("Error");
+        },
+      });
+
+    }
+  </script>
+
+{% endblock content %}

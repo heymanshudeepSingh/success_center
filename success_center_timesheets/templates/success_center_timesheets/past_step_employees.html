@@ -1,0 +1,47 @@
+{% extends 'success_center_core/main.html' %}
+{% load cae_home_tags %}
+{% load static %}
+{% block extra_styles %}
+   <link rel="stylesheet" type="text/css" href="{% static 'success_center_timesheets/css/base.css' %}">
+{% endblock extra_styles %}
+{% block sub_nav %}
+
+    <li><a href="{% url 'success_center_timesheets:admin_view' %}">Home</a></li>
+    <li><a href= "{% url 'success_center_timesheets:admin_search_timesheets'%}">Search Timesheets</a></li>
+    <li><a href="{% url 'success_center_timesheets:current_employees'%}">Current Employees</a></li>
+    <li> <a href="#">Past Employees</a></li>
+    <li><a href="{% url 'success_center_timesheets:admin_email'%}">Email</a></li>
+
+{% endblock %}
+{% block content %}
+{# <a href="{% url 'success_center_timesheets:admin_view' %}" class="button primary" type="button">Back</a>#}
+ <h1>Past STEP Employees</h1>
+
+  <div class="outer-container">
+  <div class="heading">
+    <p>Employee</p>
+    <p>Deleted Date</p>
+    <p>Restore</p>
+  </div>
+  {% for past_step_employee in past_step_employees %}
+      <div class="container">
+    {% if past_step_employee.groups__groupmembership__date_left %}
+      {% if past_step_employee.first_name %}
+              {% if past_step_employee.last_name %}
+                  <p>{{ past_step_employee.first_name }} {{ past_step_employee.last_name }} </p>
+              {% else %}
+              <p> {{ past_step_employee.first_name }} </p>
+              {% endif %}
+      {% else %}
+        <p>{{ past_step_employee.username }}</p>
+      {% endif %}
+      <p>{{ past_step_employee.groups__groupmembership__date_left }}</p>
+        <p><a href="{% url 'success_center_timesheets:admin_restore_inactive_employee' pk=past_step_employee.pk %}" class="button primary" type="button">Restore</a></p>
+    {% endif %}
+      </div>
+  {% endfor %}
+
+
+  </div>
+{% endblock %}
+

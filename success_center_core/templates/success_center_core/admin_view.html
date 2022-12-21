@@ -1,0 +1,19 @@
+{% extends 'success_center_core/main.html' %}
+{% load cae_home_tags %}
+
+
+{% block title_page_name %}Index | admin{% endblock title_page_name %}
+
+
+{% block content %}
+    <h1>Admin Panel</h1>
+
+    <div class="admin" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+
+      <button id="user_admin_button" class="wmu_button" name="user_admin">User Admin</button>
+      <br>
+      <button id="location_admin_button" class="wmu_button" name="location_admin">Location Admin</button>
+
+    </div>
+
+{% endblock %}

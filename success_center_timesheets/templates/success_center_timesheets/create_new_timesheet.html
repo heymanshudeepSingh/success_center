@@ -1,0 +1,227 @@
+{% load static %}
+{% load cae_home_tags %}
+
+<!doctype html>
+<html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" type="text/css" href="{% static 'success_center_timesheets/css/base.css' %}">
+      <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+      <title> Create New Timesheet | </title>
+    </head>
+
+  <body>
+  <button class="button-primary"><a class="small_text" href="{% url 'success_center_timesheets:timesheets_index' %}">Go Back</a></button>
+
+  <div class="container">
+    <div class="container-head">
+      <p>Create a new Timesheet</p>
+    </div>
+      {% for error in messages %}
+        <div class="alert-error">{{ error }}</div>
+      {% endfor %}
+       <div class="container-body">
+        <form method="POST" action="" enctype="multipart/form-data" {% if as_row %}class="as-row"{% endif %}>
+        {% csrf_token %}
+
+
+          <table>
+            <tr>
+              <th>day</th>
+              <th>date</th>
+              <th>Morning <br> Begin</th>
+              <th>Morning <br> End</th>
+              <th>Afternoon <br> Begin</th>
+              <th>Afternoon <br> End </th>
+              <th>Evening <br> Begin </th>
+              <th>Evening <br> End </th>
+              <th>Total</th>
+
+            </tr>
+          <tbody>
+          <tr>
+            <td>day</td>
+            <td>date</td>
+            <td>{{ form.morning_clock_in_1 }}</td>
+            <td>{{ form.morning_clock_out_1 }}</td>
+            <td>{{ form.afternoon_clock_in_1 }}</td>
+            <td>{{ form.afternoon_clock_out_1 }}</td>
+            <td>{{ form.evening_clock_in_1 }}</td>
+            <td>{{ form.evening_clock_in_1 }}</td>
+            <td>{{ total_for_day_1 }}</td>
+          </tr>
+          <tr>
+            <td>day</td>
+            <td>date</td>
+            <td>{{ form.morning_clock_in_2 }}</td>
+            <td>{{ form.morning_clock_out_2 }}</td>
+            <td>{{ form.afternoon_clock_in_2 }}</td>
+            <td>{{ form.afternoon_clock_out_2 }}</td>
+            <td>{{ form.evening_clock_in_2 }}</td>
+            <td>{{ form.evening_clock_in_2 }}</td>
+            <td>{{ total_for_day_2 }}</td>
+          </tr>
+          <tr>
+            <td>day</td>
+            <td>date</td>
+            <td>{{ form.morning_clock_in_3 }}</td>
+            <td>{{ form.morning_clock_out_3 }}</td>
+            <td>{{ form.afternoon_clock_in_3 }}</td>
+            <td>{{ form.afternoon_clock_out_3 }}</td>
+            <td>{{ form.evening_clock_in_3 }}</td>
+            <td>{{ form.evening_clock_in_3 }}</td>
+            <td>{{ total_for_day_3 }}</td>
+          </tr>
+          <tr>
+            <td>day</td>
+            <td>date</td>
+            <td>{{ form.morning_clock_in_4 }}</td>
+            <td>{{ form.morning_clock_out_4 }}</td>
+            <td>{{ form.afternoon_clock_in_4 }}</td>
+            <td>{{ form.afternoon_clock_out_4 }}</td>
+            <td>{{ form.evening_clock_in_4 }}</td>
+            <td>{{ form.evening_clock_in_4 }}</td>
+            <td>{{ total_for_day_4 }}</td>
+          </tr>
+          <tr>
+            <td>day</td>
+            <td>date</td>
+            <td>{{ form.morning_clock_in_5 }}</td>
+            <td>{{ form.morning_clock_out_5 }}</td>
+            <td>{{ form.afternoon_clock_in_5 }}</td>
+            <td>{{ form.afternoon_clock_out_5 }}</td>
+            <td>{{ form.evening_clock_in_5 }}</td>
+            <td>{{ form.evening_clock_in_5 }}</td>
+            <td>{{ total_for_day_5 }}</td>
+          </tr>
+          <tr>
+            <td>day</td>
+            <td>date</td>
+            <td>{{ form.morning_clock_in_6 }}</td>
+            <td>{{ form.morning_clock_out_6 }}</td>
+            <td>{{ form.afternoon_clock_in_6 }}</td>
+            <td>{{ form.afternoon_clock_out_6 }}</td>
+            <td>{{ form.evening_clock_in_6 }}</td>
+            <td>{{ form.evening_clock_in_6 }}</td>
+            <td>{{ total_for_day_6 }}</td>
+          </tr>
+          <tr>
+            <td>day</td>
+            <td>date</td>
+            <td>{{ form.morning_clock_in_7 }}</td>
+            <td>{{ form.morning_clock_out_7 }}</td>
+            <td>{{ form.afternoon_clock_in_7 }}</td>
+            <td>{{ form.afternoon_clock_out_7 }}</td>
+            <td>{{ form.evening_clock_in_7 }}</td>
+            <td>{{ form.evening_clock_in_7 }}</td>
+            <td>{{ total_for_day_7 }}</td>
+          </tr>
+          <tr>
+            <td>day</td>
+            <td>date</td>
+            <td>{{ form.morning_clock_in_8 }}</td>
+            <td>{{ form.morning_clock_out_8 }}</td>
+            <td>{{ form.afternoon_clock_in_8 }}</td>
+            <td>{{ form.afternoon_clock_out_8 }}</td>
+            <td>{{ form.evening_clock_in_8 }}</td>
+            <td>{{ form.evening_clock_in_8 }}</td>
+            <td>{{ total_for_day_8 }}</td>
+          </tr>
+          <tr>
+            <td>day</td>
+            <td>date</td>
+            <td>{{ form.morning_clock_in_9 }}</td>
+            <td>{{ form.morning_clock_out_9 }}</td>
+            <td>{{ form.afternoon_clock_in_9 }}</td>
+            <td>{{ form.afternoon_clock_out_9 }}</td>
+            <td>{{ form.evening_clock_in_9 }}</td>
+            <td>{{ form.evening_clock_in_9 }}</td>
+            <td>{{ total_for_day_9 }}</td>
+          </tr>
+          <tr>
+            <td>day</td>
+            <td>date</td>
+            <td>{{ form.morning_clock_in_10 }}</td>
+            <td>{{ form.morning_clock_out_10 }}</td>
+            <td>{{ form.afternoon_clock_in_10 }}</td>
+            <td>{{ form.afternoon_clock_out_10 }}</td>
+            <td>{{ form.evening_clock_in_10 }}</td>
+            <td>{{ form.evening_clock_in_10 }}</td>
+            <td>{{ total_for_day_10 }}</td>
+          </tr>
+          <tr>
+            <td>day</td>
+            <td>date</td>
+            <td>{{ form.morning_clock_in_11 }}</td>
+            <td>{{ form.morning_clock_out_11 }}</td>
+            <td>{{ form.afternoon_clock_in_11 }}</td>
+            <td>{{ form.afternoon_clock_out_11 }}</td>
+            <td>{{ form.evening_clock_in_11 }}</td>
+            <td>{{ form.evening_clock_in_11 }}</td>
+            <td>{{ total_for_day_11 }}</td>
+          </tr>
+          <tr>
+            <td>day</td>
+            <td>date</td>
+            <td>{{ form.morning_clock_in_12 }}</td>
+            <td>{{ form.morning_clock_out_12 }}</td>
+            <td>{{ form.afternoon_clock_in_12 }}</td>
+            <td>{{ form.afternoon_clock_out_12 }}</td>
+            <td>{{ form.evening_clock_in_12 }}</td>
+            <td>{{ form.evening_clock_in_12 }}</td>
+            <td>{{ total_for_day_12 }}</td>
+          </tr>
+          <tr>
+            <td>day</td>
+            <td>date</td>
+            <td>{{ form.morning_clock_in_13 }}</td>
+            <td>{{ form.morning_clock_out_13 }}</td>
+            <td>{{ form.afternoon_clock_in_13 }}</td>
+            <td>{{ form.afternoon_clock_out_13 }}</td>
+            <td>{{ form.evening_clock_in_13 }}</td>
+            <td>{{ form.evening_clock_in_13 }}</td>
+            <td>{{ total_for_day_13 }}</td>
+          </tr>
+          <tr>
+            <td>day</td>
+            <td>date</td>
+            <td>{{ form.morning_clock_in_14 }}</td>
+            <td>{{ form.morning_clock_out_14 }}</td>
+            <td>{{ form.afternoon_clock_in_14 }}</td>
+            <td>{{ form.afternoon_clock_out_14 }}</td>
+            <td>{{ form.evening_clock_in_14 }}</td>
+            <td>{{ form.evening_clock_in_14 }}</td>
+            <td>{{ total_for_day_14 }}</td>
+          </tr>
+
+
+
+          </tbody>
+          </table>
+
+{#         <div class="container-body-content">#}
+{#         <p>{{ form.day }}</p> <p>{{ form.date }}</p>#}
+          {% for fields in form.visible_fields %}
+            <p>{{ field.label_tag  }}</p>
+              <p>{{ fields}}</p>
+            {% endfor %}
+{#         <p> {{ form.total }}</p>#}
+{#         </div>#}
+
+          <p class="grand_total">Grand Total: {{ grand_total }}</p>
+          <input type="submit" value="Submit" class="button-submit">
+
+        </form>
+       </div>
+    </div>
+
+{#    <div class="footer">#}
+{#      {% for error in form.non_field_errors %}#}
+{#        <div class="alert error">{{ error }}</div>#}
+{#      {% endfor %}#}
+
+    </div>
+{#    <script src="{% static 'success_center_timesheets/js/timesheets_js.js' %}"></script>#}
+  </body>
+

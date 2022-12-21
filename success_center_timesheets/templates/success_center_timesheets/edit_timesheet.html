@@ -1,0 +1,143 @@
+{% extends 'success_center_core/main.html' %}
+{% load cae_home_tags %}
+{% load static %}
+{% block extra_scripts %}
+  <script src="{% static 'success_center_timesheets/js/timesheets_js.js' %}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/signature_pad/1.5.3/signature_pad.min.js"></script>
+
+{% endblock extra_scripts %}
+
+{% block extra_styles %}
+   <link rel="stylesheet" type="text/css" href="{% static 'success_center_timesheets/css/base.css' %}">
+{% endblock extra_styles %}
+
+{% block sub_nav %}
+{% if 'step-admin' in user.groups.all|slugify  %}
+
+        <li><a href="{% url 'success_center_timesheets:admin_view' %}">Home</a></li>
+        <li><a href= "{% url 'success_center_timesheets:admin_search_timesheets'%}">Search Timesheets</a></li>
+        <li><a href="{% url 'success_center_timesheets:current_employees'%}">Current Employees</a></li>
+        <li> <a href="{% url 'success_center_timesheets:admin_past_employees'%}">Past Employees</a></li>
+        <li><a href="{% url 'success_center_timesheets:admin_email'%}">Email</a></li>
+
+  {% endif %}
+{% endblock sub_nav%}
+
+{% block content %}
+  <div class="heading-back">
+{% if 'step-admin' in user.groups.all|slugify  %}
+    <a href="{% url 'success_center_timesheets:index' %}" class="button primary" type="button">Back</a>
+  {% endif %}
+
+      <h1>Timesheet for {{ employee.first_name }} {{ employee.last_name }} </h1>
+  </div>
+{% if 'step-admin' in user.groups.all|slugify  %}
+    <div class="sub-heading">
+          <h3>{{ pay_period.date_start }} - {{ pay_period.date_end }} </h3>
+          <h3 class="job-code">Fund & Cost Center: {{ employee_data.0.fund_and_cost_center }} | Job Code: {{ employee_data.0.job_code }}</h3>
+    </div>
+  {% endif %}
+  <form method="POST" action="" onsubmit="return handleSubmit()">
+    {% csrf_token %}
+   <table>
+         <thead>
+          <tr>
+          <th><h4>Date</h4></th>
+          <th><h4>Day</h4></th>
+            <th><h4>Morning <br> Begin</h4></th>
+            <th><h4>Morning <br> End</h4></th>
+            <th><h4>Afternoon <br> Begin</h4></th>
+            <th><h4>Afternoon <br> End</h4></th>
+            <th><h4>Evening <br> Begin</h4></th>
+            <th><h4>Evening <br> End</h4></th>
+            <th><h4>Total</h4></th>
+
+          </tr>
+      </thead>
+   <tbody>
+                <tr>
+          <td colspan="9"> Week 1
+          </td>
+                </tr>
+        </tbody>
+
+    {% for form in forms_in_pay_period|slice:":14" %}
+
+      <tbody>
+          <tr>
+          <td><p> {{ form.date }} </p></td>
+          <td><p> {{ form.date|date:"l" }} </p></td>
+            {% for field in form.visible_fields %}
+              {% if field == form.signature %}
+              {% else %}
+              <td><p onchange="CalculateTotal(); ">{{ field.errors }}
+                      {{ field }}
+                      {{ field.help_text }}</p></td>
+              {% endif %}
+            {% endfor %}
+          <td><h5 id={{ form.number }}></h5></td>
+      </tbody>
+
+      {% if form.number == 6 %}
+        <tbody>
+          <tr style>
+            <td>Week One Total:</td>
+            <td colspan="8"><h5 id="week_one_total" style="text-align: right;
+              padding: 20px;"></h5></td>
+          </tr>
+          <tr>
+            <td colspan="9"> Week 2</td>
+          </tr>
+        </tbody>
+      {% endif %}
+
+      {% if form.number == 13 %}
+        <tr>
+          <td>Week Two Total:</td>
+          <td colspan="8"><h5 id="week_two_total" style="text-align: right;
+            padding: 20px;"></h5></td>
+        </tr>
+        <tr>
+          <td>Grand Total:</td>
+          <td colspan="8"><h5 id="grand_total"></h5></td>
+        </tr>
+        <tr><td colspan="9" style="visibility: hidden;"></td></tr>
+     </table>
+      {% endif %}
+    {% endfor %}
+
+
+  {% if existing_signature %}
+    <img src="{{ existing_signature }}" alt="existing_signature" id = "signature-image" style="border: 1px solid black; float: left">
+    <input type="hidden" name="signature" id="signature-input">
+      {% if submit %}
+          <input type="submit" value="Submit" class="button-submit" id="id_submit" onclick="change(); isCanvasBlank();">
+{#      {% else %}#}
+{#          <input type="submit" value="Submit" class="button-submit">#}
+      {% endif %}
+  {% else %}
+    <fieldset>
+    <span id="error"></span>
+      <legend>
+          <h4>Signature</h4>
+      </legend>
+      <div class="row">
+          <div class="small-12 medium-6 columns">
+                <div class="signature-wrapper"><canvas id="signature" class="signature-pad" width="500px"
+                        height="150px"></canvas></div>
+                <button id="clear-signature" class="secondary">Clear</button>
+                <input type="hidden" name="signature" id="signature-input">
+                <input id="id_submit" type="submit" value="Submit!" class="button primary" onclick="change();">
+          </div>
+      </div>
+    </fieldset>
+  {% endif %}
+
+  </form>
+
+    <script>
+
+
+  </script>
+
+{% endblock content %}

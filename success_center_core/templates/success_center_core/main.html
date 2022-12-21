@@ -1,0 +1,16 @@
+{% extends 'cae_home/main.html' %}
+{% load static %}
+
+
+{% block title_site_name %}Success Center{% endblock title_site_name %}
+
+
+{% block header %}
+  {% include 'cae_home/header.html' with app_nav='success_center_core/app_nav.html' %}
+{% endblock header %}
+
+
+{% block extra_styles %}{% endblock extra_styles %}
+
+
+{% block app_main_element_class %}success-center{% endblock app_main_element_class %}

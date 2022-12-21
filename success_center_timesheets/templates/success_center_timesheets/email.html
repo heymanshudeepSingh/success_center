@@ -1,0 +1,22 @@
+{% extends 'success_center_core/main.html' %}
+{% load cae_home_tags %}
+{% load static %}
+
+{% block sub_nav %}
+
+    <li><a href="{% url 'success_center_timesheets:admin_view' %}">Home</a></li>
+    <li><a href= "{% url 'success_center_timesheets:admin_search_timesheets'%}">Search Timesheets</a></li>
+    <li><a href="{% url 'success_center_timesheets:current_employees'%}">Current Employees</a></li>
+    <li><a href="{% url 'success_center_timesheets:admin_past_employees'%}">Past Employees</a></li>
+    <li><a href="{% url 'success_center_timesheets:admin_email'%}">Email</a></li>
+
+{% endblock %}
+
+{# Hide scroll bar bug on chrome #}
+{% block body_extra_classes %}grid hide-vertical-scroll-bar{% endblock body_extra_classes %}">
+{#---------------------------#}
+
+{% block content %}
+  <h1>STEP Email</h1>
+  {% include 'cae_home/include/form.html'  %}
+{% endblock %}

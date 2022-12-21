@@ -1,0 +1,61 @@
+[{
+        "model": "success_center_core.TutorLocations",
+        "pk": 1,
+        "fields": {
+            "location_name": "STEP - Event",
+            "room_number": "variable",
+            "is_active": true,
+            "is_event": false,
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "success_center_core.TutorLocations",
+        "pk": 2,
+        "fields": {
+            "location_name": "Bronco Study Zone",
+            "room_number": "Rood 33",
+            "is_active": true,
+            "is_event": false,
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "success_center_core.TutorLocations",
+        "pk": 3,
+        "fields": {
+            "location_name": "Statistics Tutoring",
+            "room_number": "Rood 22",
+            "is_active": true,
+            "is_event": false,
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "success_center_core.TutorLocations",
+        "pk": 4,
+        "fields": {
+            "location_name": "SSC - Eldridge",
+            "room_number": "p11",
+            "is_active": true,
+            "is_event": false,
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    },
+    {
+        "model": "success_center_core.TutorLocations",
+        "pk": 5,
+        "fields": {
+            "location_name": "SSC - Floyd",
+            "room_number": "Floyd 21",
+            "is_active": true,
+            "is_event": false,
+            "date_created": "2018-01-01T08:00:00.000Z",
+            "date_modified": "2018-01-01T08:00:00.000Z"
+        }
+    }
+]
