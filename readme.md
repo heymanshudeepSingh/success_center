@@ -5,7 +5,7 @@ Recording and management of students that use the STEP program. </br>
 Management of STEP Employees and STEP Centers.
 
 ## Installation
-1. Clone the app into success_center/apps
+1. git submodule update --init --recursive
 2. Run the script located in ./scripts/general/installers/run.sh
 3. Follow the instructions prompted on the screen.
 4. If all tests pass, the program will be installed.
