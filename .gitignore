@@ -60,7 +60,6 @@ package-lock.json
 
 
 # Do not track other projects within the apps folder.
-apps/
 
 
 # Do not track files created from selenium tests.
