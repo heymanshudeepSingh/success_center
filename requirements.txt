@@ -13,7 +13,7 @@ wheel
  # Core Python Packages
  ##
 # Core Django framework.
-Django==4.0.5
+Django==4.1.13
 # Support for websocket connections.
 channels==3.0.5
 channels-redis==3.4.0
