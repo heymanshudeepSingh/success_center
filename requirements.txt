@@ -98,7 +98,7 @@ cffi==1.15.0
 charset-normalizer==2.1.0
 colorama==0.4.5
 constantly==15.1.0
-cryptography==37.0.2
+cryptography==41.0.4
 daphne==3.0.2
 defusedxml==0.7.1
 execnet==1.9.0
